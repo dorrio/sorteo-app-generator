@@ -37,6 +37,7 @@ export async function generateMetadata({
       languages: {
         'es': '/es',
         'en': '/en',
+        'pt': '/pt',
       },
     },
     openGraph: {
@@ -44,7 +45,7 @@ export async function generateMetadata({
       description: t('og_description'),
       url: `${baseUrl}/${locale}`,
       siteName: "Sorteo Pro",
-      locale: locale === 'es' ? 'es_ES' : 'en_US',
+      locale: locale === 'es' ? 'es_ES' : locale === 'pt' ? 'pt_PT' : locale === 'pt' ? 'pt_BR' : 'en_US',
       type: "website",
       images: [
         {

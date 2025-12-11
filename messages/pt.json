@@ -1,0 +1,169 @@
+{
+    "HomePage": {
+        "loading": "Carregando Sorteio Pro...",
+        "customize": "Personalizar",
+        "spinning": "Sorteando...",
+        "start_button": "Iniciar Sorteio",
+        "min_participants_warning": "Adicione pelo menos 2 participantes para iniciar",
+        "participants_title": "Participantes",
+        "footer_text": "Criado para influencers e criadores de conteúdo"
+    },
+    "Metadata": {
+        "title": "Sorteio Pro | Sorteios Premium para Influencers",
+        "description": "A ferramenta definitiva para criar sorteios virais. Feita para criadores de conteúdo e influencers que querem impressionar sua audiência.",
+        "og_title": "Sorteio Pro | Sorteios Premium para Influencers",
+        "og_description": "Crie sorteios épicos com animações cinematográficas"
+    },
+    "LanguageSwitcher": {
+        "switchLanguage": "Mudar idioma"
+    },
+    "ParticipantManager": {
+        "input_mode": {
+            "single": "Individual",
+            "bulk": "Lista",
+            "csv": "CSV"
+        },
+        "single_placeholder": "Nome do participante",
+        "bulk_placeholder": "Cole a lista de nomes (um por linha)",
+        "add_participants_button": "Adicionar {count} participantes",
+        "upload_csv_label": "Enviar arquivo CSV",
+        "clear": "Limpar",
+        "clear_all": "Limpar tudo",
+        "no_participants": "Ainda não há participantes",
+        "no_participants_sub": "Adicione participantes usando os métodos acima",
+        "participants_count": "{count} participantes",
+        "edit_tooltip": "Clique para editar",
+        "edit_action": "Editar",
+        "delete_action": "Excluir",
+        "paste_clipboard": "Colar da área de transferência",
+        "csv_drop_label": "Clique para enviar arquivo CSV ou TXT",
+        "csv_help_text": "A primeira coluna será usada como nome do participante",
+        "duplicates": {
+            "title": "Participantes duplicados",
+            "found_text": "Foram encontrados {count} nome(s) que já existe(m)",
+            "unique_text": "{count} participante(s) único(s) será(ão) adicionado(s)",
+            "add_edited": "Adicionar com nomes editados",
+            "continue_unique": "Continuar sem duplicados ({count})",
+            "cancel": "Cancelar",
+            "status_new": "Duplicado na lista",
+            "status_existing": "Já existe em participantes",
+            "not_applied": "Não aplicado",
+            "applied": "Aplicado",
+            "apply_change": "Aplicar mudança",
+            "edit_placeholder": "Editar nome"
+        }
+    },
+    "VisualEditor": {
+        "title": "Editor Visual",
+        "tabs": {
+            "presets": "Estilos",
+            "colors": "Cores",
+            "text": "Texto",
+            "effects": "Efeitos",
+            "background": "Fundo"
+        },
+        "presets": {
+            "luxury_gold": "Luxury Gold",
+            "luxury_gold_desc": "Elegante e premium",
+            "neon_creator": "Neon Creator",
+            "neon_creator_desc": "Vibrante e gamer",
+            "minimal_elegance": "Minimal Elegance",
+            "minimal_elegance_desc": "Limpo e sofisticado",
+            "rose_gold": "Rose Gold",
+            "rose_gold_desc": "Suave e romântico",
+            "ocean_depth": "Ocean Depth",
+            "ocean_depth_desc": "Fresco e profundo",
+            "forest_mist": "Forest Mist",
+            "forest_mist_desc": "Natural e sereno"
+        },
+        "styles": {
+            "slot_machine": "Caça-níquel",
+            "slot_machine_desc": "Estilo clássico de caça-níquel",
+            "roulette": "Roleta",
+            "roulette_desc": "Nomes girando em círculo",
+            "cascade": "Cascata",
+            "cascade_desc": "Nomes caindo suavemente",
+            "cards": "Cartas",
+            "cards_desc": "Baralho que vira",
+            "matrix": "Matrix",
+            "matrix_desc": "Estilo de código futurista",
+            "grid": "Grade",
+            "grid_desc": "Visual clássico em grade"
+        },
+        "colors": {
+            "primary": "Cor Principal",
+            "secondary": "Cor Secundária",
+            "border_radius": "Raio das bordas"
+        },
+        "text": {
+            "title": "Título do Sorteio",
+            "subtitle": "Subtítulo",
+            "title_placeholder": "SORTEIO",
+            "subtitle_placeholder": "Chegou o momento",
+            "typography": "Tipografia"
+        },
+        "effects": {
+            "style_label": "Estilo do Sorteio",
+            "confetti": "Confete",
+            "confetti_desc": "Chuva de confete ao ganhar",
+            "dynamic_bg": "Fundo Dinâmico",
+            "dynamic_bg_desc": "Partículas animadas no fundo",
+            "participants_view": "Visualização de Participantes",
+            "list_view": "Lista",
+            "bubbles_view": "Bolinhas",
+            "countdown": "Contagem Regressiva",
+            "duration": "Duração do Sorteio"
+        },
+        "background": {
+            "preview": "Pré-visualização",
+            "upload_label": "Enviar imagem",
+            "upload_button": "Clique para enviar uma imagem",
+            "url_label": "Ou cole a URL da imagem",
+            "url_placeholder": "https://exemplo.com/imagem.jpg",
+            "apply": "Aplicar",
+            "opacity": "Opacidade do fundo",
+            "blur": "Desfoque",
+            "remove": "Remover"
+        }
+    },
+    "WinnerCeremony": {
+        "winner_label": "Vencedor",
+        "share_text": "🎉 Parabéns a {name} por ganhar o sorteio! 🏆",
+        "share_title": "Vencedor do Sorteio",
+        "congratulations": "Parabéns! 🎉",
+        "share_button": "Compartilhar",
+        "share_menu": "Compartilhar...",
+        "copied": "Copiado!",
+        "copy_text": "Copiar texto",
+        "new_giveaway": "Novo Sorteio",
+        "close": "Fechar"
+    },
+    "HistoryPanel": {
+        "title": "Histórico",
+        "clear": "Limpar",
+        "empty": "Ainda não há vencedores",
+        "giveaway_number": "Sorteio #{number}"
+    },
+    "Roulette": {
+        "add_participants_warning": "Adicione participantes para iniciar o sorteio",
+        "participants_count": "{count} participantes"
+    },
+    "Countdown": {
+        "go": "JÁ!"
+    },
+    "FloatingBubbles": {
+        "placeholder": "Os participantes aparecerão aqui como bolinhas flutuantes",
+        "count": "{count} participantes"
+    },
+    "SorteoComponents": {
+        "participants_count": "{count} participantes no sorteio",
+        "add_participants_warning": "Adicione participantes para iniciar o sorteio"
+    },
+    "SorteoMatrix": {
+        "winner_selected": "VENCEDOR_SELECIONADO",
+        "verified": "[VERIFICADO] ✓"
+    },
+    "SorteoCards": {
+        "winner_label": "Vencedor!"
+    }
+}

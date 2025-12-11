@@ -24,6 +24,7 @@ export function LanguageSwitcher() {
     const languages = [
         { code: "en", label: "English" },
         { code: "es", label: "Español" },
+        { code: "pt", label: "Português" },
     ]
 
     return (

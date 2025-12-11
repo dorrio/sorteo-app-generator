@@ -86,7 +86,9 @@
             "cards": "Cartas",
             "cards_desc": "Baraja que se voltea",
             "matrix": "Matrix",
-            "matrix_desc": "Estilo código futurista"
+            "matrix_desc": "Estilo código futurista",
+            "grid": "Cuadrícula",
+            "grid_desc": "Vista de cuadrícula clásica"
         },
         "colors": {
             "primary": "Color Principal",

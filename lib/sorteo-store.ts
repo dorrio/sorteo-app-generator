@@ -31,7 +31,7 @@ export interface ThemeConfig {
   backgroundOpacity: number
   backgroundBlur: number
   participantDisplay: "list" | "bubbles"
-  sorteoStyle: "slot-machine" | "roulette" | "cascade" | "cards" | "matrix"
+  sorteoStyle: "slot-machine" | "roulette" | "cascade" | "cards" | "matrix" | "grid"
 }
 
 export interface SorteoState {
@@ -92,7 +92,7 @@ const defaultTheme: ThemeConfig = {
   backgroundOpacity: 30,
   backgroundBlur: 0,
   participantDisplay: "list",
-  sorteoStyle: "slot-machine",
+  sorteoStyle: "grid",
 }
 
 const themePresets: Record<string, Partial<ThemeConfig>> = {

@@ -7,6 +7,8 @@ import { SorteoCascade } from "./sorteo-cascade"
 import { SorteoCards } from "./sorteo-cards"
 import { SorteoMatrix } from "./sorteo-matrix"
 
+import { SorteoGrid } from "./sorteo-grid"
+
 interface SorteoSelectorProps {
   onWinnerSelected: () => void
 }
@@ -24,6 +26,8 @@ export function SorteoSelector({ onWinnerSelected }: SorteoSelectorProps) {
       return <SorteoCards onWinnerSelected={onWinnerSelected} />
     case "matrix":
       return <SorteoMatrix onWinnerSelected={onWinnerSelected} />
+    case "grid":
+      return <SorteoGrid onWinnerSelected={onWinnerSelected} />
     case "slot-machine":
     default:
       return <SlotMachine onWinnerSelected={onWinnerSelected} />

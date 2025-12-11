@@ -86,7 +86,9 @@
             "cards": "Cards",
             "cards_desc": "Flipping deck",
             "matrix": "Matrix",
-            "matrix_desc": "Futuristic code style"
+            "matrix_desc": "Futuristic code style",
+            "grid": "Grid",
+            "grid_desc": "Classic grid view"
         },
         "colors": {
             "primary": "Primary Color",

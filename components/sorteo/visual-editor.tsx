@@ -33,6 +33,7 @@ import {
   Layers3,
   Square,
   Terminal,
+  LayoutGrid,
 } from "lucide-react"
 
 export function VisualEditor() {
@@ -125,6 +126,12 @@ export function VisualEditor() {
       name: t("styles.matrix"),
       description: t("styles.matrix_desc"),
       icon: Terminal,
+    },
+    {
+      id: "grid" as const,
+      name: t("styles.grid"),
+      description: t("styles.grid_desc"),
+      icon: LayoutGrid,
     },
   ]
 

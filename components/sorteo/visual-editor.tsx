@@ -340,17 +340,6 @@ export function VisualEditor() {
                         />
                       </div>
                     </div>
-
-                    <div className="space-y-2">
-                      <Label>{t("colors.border_radius")}</Label>
-                      <Slider
-                        value={[theme.borderRadius]}
-                        onValueChange={([value]) => updateTheme({ borderRadius: value })}
-                        max={24}
-                        step={2}
-                      />
-                      <span className="text-xs text-muted-foreground">{theme.borderRadius}px</span>
-                    </div>
                   </motion.div>
                 )}
 

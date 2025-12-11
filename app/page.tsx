@@ -119,7 +119,7 @@ export default function SorteoApp() {
                 <Trophy className="w-5 h-5 text-background" />
               </div>
               <div>
-                <h1 className="font-display font-bold text-xl tracking-tight">{theme.customTitle}</h1>
+                <div className="font-display font-bold text-xl tracking-tight">{theme.customTitle}</div>
                 <p className="text-xs text-muted-foreground">Pro para Influencers</p>
               </div>
             </motion.div>
@@ -143,12 +143,12 @@ export default function SorteoApp() {
             >
               {/* Title */}
               <div className="text-center space-y-2">
-                <motion.h2
+                <h1
                   className="text-4xl md:text-6xl font-display font-bold tracking-tight"
                   style={{ color: theme.primaryColor }}
                 >
                   {theme.customTitle}
-                </motion.h2>
+                </h1>
                 <p className="text-muted-foreground text-lg">{theme.customSubtitle}</p>
               </div>
 

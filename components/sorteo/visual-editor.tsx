@@ -3,7 +3,7 @@
 import type React from "react"
 import { useTranslations } from "next-intl"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
@@ -158,6 +158,24 @@ export function VisualEditor() {
     updateTheme({ backgroundImage: undefined })
   }
 
+  const panelRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (panelRef.current && !panelRef.current.contains(event.target as Node)) {
+        setIsEditorOpen(false)
+      }
+    }
+
+    if (isEditorOpen) {
+      document.addEventListener("mousedown", handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [isEditorOpen, setIsEditorOpen])
+
   return (
     <AnimatePresence>
       {isEditorOpen && (
@@ -173,6 +191,7 @@ export function VisualEditor() {
 
           {/* Editor panel */}
           <motion.div
+            ref={panelRef}
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}

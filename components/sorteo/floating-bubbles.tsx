@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useTranslations } from "next-intl"
 import { useSorteoStore } from "@/lib/sorteo-store"
 
 interface Bubble {
@@ -17,6 +18,7 @@ interface Bubble {
 
 export function FloatingBubbles() {
   const { participants, theme } = useSorteoStore()
+  const t = useTranslations("FloatingBubbles")
   const [bubbles, setBubbles] = useState<Bubble[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
@@ -70,7 +72,7 @@ export function FloatingBubbles() {
   if (participants.length === 0) {
     return (
       <div className="h-64 flex items-center justify-center text-muted-foreground text-sm">
-        Los participantes aparecerán aquí como burbujas flotantes
+        {t("placeholder")}
       </div>
     )
   }
@@ -173,7 +175,7 @@ export function FloatingBubbles() {
 
       {/* Participant count */}
       <div className="absolute bottom-2 right-3 text-xs text-muted-foreground">
-        {participants.length} participante{participants.length !== 1 ? "s" : ""}
+        {t("count", { count: participants.length })}
       </div>
     </div>
   )

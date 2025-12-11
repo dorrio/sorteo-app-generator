@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useTranslations } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ConfettiEffect } from "./confetti-effect"
@@ -26,6 +27,7 @@ interface WinnerCeremonyProps {
 
 export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
   const { winner, theme, showWinnerCeremony } = useSorteoStore()
+  const t = useTranslations("WinnerCeremony")
   const [showContent, setShowContent] = useState(false)
   const [copied, setCopied] = useState(false)
 
@@ -40,15 +42,15 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
 
   if (!showWinnerCeremony || !winner) return null
 
-  const shareText = `🎉 ¡Felicidades a ${winner.name} por ganar el sorteo! 🏆`
+  const shareText = t("share_text", { name: winner.name })
   const shareUrl = typeof window !== "undefined" ? window.location.href : ""
 
   const shareNative = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "Ganador del Sorteo",
-          text: shareText,
+          title: t("share_title"),
+          text: t("share_text", { name: winner.name }),
           url: shareUrl,
         })
       } catch {
@@ -141,7 +143,7 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
             className="flex items-center gap-2 mb-4"
           >
             <Sparkles className="w-5 h-5" style={{ color: theme.primaryColor }} />
-            <span className="text-xl uppercase tracking-[0.3em] text-muted-foreground font-medium">Ganador</span>
+            <span className="text-xl uppercase tracking-[0.3em] text-muted-foreground font-medium">{t("winner_label")}</span>
             <Sparkles className="w-5 h-5" style={{ color: theme.primaryColor }} />
           </motion.div>
 
@@ -166,7 +168,7 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
             transition={{ delay: 0.8 }}
             className="text-2xl text-muted-foreground mb-12"
           >
-            ¡Felicidades! 🎉
+            {t("congratulations")}
           </motion.p>
 
           {/* Action buttons */}
@@ -187,26 +189,26 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
                   }}
                 >
                   <Share2 className="w-5 h-5" />
-                  Compartir
+                  {t("share_button")}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="center" className="w-48">
                 {hasNativeShare && (
                   <DropdownMenuItem onClick={shareNative} className="gap-2 cursor-pointer">
                     <Share2 className="w-4 h-4" />
-                    Compartir...
+                    {t("share_menu")}
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
                   {copied ? (
                     <>
                       <Check className="w-4 h-4 text-green-500" />
-                      <span className="text-green-500">¡Copiado!</span>
+                      <span className="text-green-500">{t("copied")}</span>
                     </>
                   ) : (
                     <>
                       <Copy className="w-4 h-4" />
-                      Copiar texto
+                      {t("copy_text")}
                     </>
                   )}
                 </DropdownMenuItem>
@@ -231,11 +233,11 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
 
             <Button size="lg" variant="outline" onClick={onNewSorteo} className="gap-2 bg-transparent">
               <RotateCcw className="w-5 h-5" />
-              Nuevo Sorteo
+              {t("new_giveaway")}
             </Button>
 
             <Button size="lg" variant="ghost" onClick={onClose}>
-              Cerrar
+              {t("close")}
             </Button>
           </motion.div>
         </motion.div>

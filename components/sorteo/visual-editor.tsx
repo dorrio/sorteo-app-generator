@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { useTranslations } from "next-intl"
 
 import { useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -36,58 +37,59 @@ import {
 
 export function VisualEditor() {
   const { theme, updateTheme, setPresetTheme, isEditorOpen, setIsEditorOpen } = useSorteoStore()
+  const t = useTranslations("VisualEditor")
   const [activeTab, setActiveTab] = useState<"presets" | "colors" | "text" | "effects" | "background">("presets")
   const [imageUrlInput, setImageUrlInput] = useState("")
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const tabs = [
-    { id: "presets" as const, label: "Estilos", icon: Crown },
-    { id: "colors" as const, label: "Colores", icon: Palette },
-    { id: "text" as const, label: "Texto", icon: Type },
-    { id: "effects" as const, label: "Efectos", icon: Sparkles },
-    { id: "background" as const, label: "Fondo", icon: ImageIcon },
+    { id: "presets" as const, label: t("tabs.presets"), icon: Crown },
+    { id: "colors" as const, label: t("tabs.colors"), icon: Palette },
+    { id: "text" as const, label: t("tabs.text"), icon: Type },
+    { id: "effects" as const, label: t("tabs.effects"), icon: Sparkles },
+    { id: "background" as const, label: t("tabs.background"), icon: ImageIcon },
   ]
 
   const presets = [
     {
       id: "luxury-gold" as const,
-      name: "Luxury Gold",
-      description: "Elegante y premium",
+      name: t("presets.luxury_gold"),
+      description: t("presets.luxury_gold_desc"),
       colors: ["#D4AF37", "#B8860B", "#0A0A0A"],
       icon: Crown,
     },
     {
       id: "neon-creator" as const,
-      name: "Neon Creator",
-      description: "Vibrante y gaming",
+      name: t("presets.neon_creator"),
+      description: t("presets.neon_creator_desc"),
       colors: ["#FF00FF", "#00FFFF", "#0D0221"],
       icon: Zap,
     },
     {
       id: "minimal-elegance" as const,
-      name: "Minimal Elegance",
-      description: "Limpio y sofisticado",
+      name: t("presets.minimal_elegance"),
+      description: t("presets.minimal_elegance_desc"),
       colors: ["#FFFFFF", "#888888", "#000000"],
       icon: Minimize2,
     },
     {
       id: "rose-gold" as const,
-      name: "Rose Gold",
-      description: "Suave y romántico",
+      name: t("presets.rose_gold"),
+      description: t("presets.rose_gold_desc"),
       colors: ["#E8B4B8", "#B76E79", "#1A1215"],
       icon: Heart,
     },
     {
       id: "ocean-depth" as const,
-      name: "Ocean Depth",
-      description: "Fresco y profundo",
+      name: t("presets.ocean_depth"),
+      description: t("presets.ocean_depth_desc"),
       colors: ["#00D9FF", "#0099CC", "#0A1929"],
       icon: Waves,
     },
     {
       id: "forest-mist" as const,
-      name: "Forest Mist",
-      description: "Natural y sereno",
+      name: t("presets.forest_mist"),
+      description: t("presets.forest_mist_desc"),
       colors: ["#90EE90", "#228B22", "#0D1F0D"],
       icon: Leaf,
     },
@@ -96,32 +98,32 @@ export function VisualEditor() {
   const sorteoStyles = [
     {
       id: "slot-machine" as const,
-      name: "Slot Machine",
-      description: "Clásico estilo tragamonedas",
+      name: t("styles.slot_machine"),
+      description: t("styles.slot_machine_desc"),
       icon: Play,
     },
     {
       id: "roulette" as const,
-      name: "Ruleta",
-      description: "Nombres girando en círculo",
+      name: t("styles.roulette"),
+      description: t("styles.roulette_desc"),
       icon: CircleDot,
     },
     {
       id: "cascade" as const,
-      name: "Cascada",
-      description: "Nombres cayendo suavemente",
+      name: t("styles.cascade"),
+      description: t("styles.cascade_desc"),
       icon: Layers3,
     },
     {
       id: "cards" as const,
-      name: "Cartas",
-      description: "Baraja que se voltea",
+      name: t("styles.cards"),
+      description: t("styles.cards_desc"),
       icon: Square,
     },
     {
       id: "matrix" as const,
-      name: "Matrix",
-      description: "Estilo código futurista",
+      name: t("styles.matrix"),
+      description: t("styles.matrix_desc"),
       icon: Terminal,
     },
   ]
@@ -172,7 +174,7 @@ export function VisualEditor() {
           >
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-border">
-              <h2 className="text-lg font-display font-bold">Editor Visual</h2>
+              <h2 className="text-lg font-display font-bold">{t("title")}</h2>
               <Button variant="ghost" size="icon" onClick={() => setIsEditorOpen(false)}>
                 <X className="w-5 h-5" />
               </Button>
@@ -184,9 +186,8 @@ export function VisualEditor() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex-1 min-w-[70px] flex flex-col items-center gap-1 py-3 px-2 text-xs font-medium transition-colors ${
-                    activeTab === tab.id ? "text-primary border-b-2" : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`flex-1 min-w-[70px] flex flex-col items-center gap-1 py-3 px-2 text-xs font-medium transition-colors ${activeTab === tab.id ? "text-primary border-b-2" : "text-muted-foreground hover:text-foreground"
+                    }`}
                   style={activeTab === tab.id ? { borderColor: theme.primaryColor, color: theme.primaryColor } : {}}
                 >
                   <tab.icon className="w-4 h-4" />
@@ -210,9 +211,8 @@ export function VisualEditor() {
                       <button
                         key={preset.id}
                         onClick={() => setPresetTheme(preset.id)}
-                        className={`w-full p-4 rounded-xl border-2 transition-all text-left ${
-                          theme.style === preset.id ? "border-primary" : "border-border hover:border-border/80"
-                        }`}
+                        className={`w-full p-4 rounded-xl border-2 transition-all text-left ${theme.style === preset.id ? "border-primary" : "border-border hover:border-border/80"
+                          }`}
                         style={theme.style === preset.id ? { borderColor: theme.primaryColor } : {}}
                       >
                         <div className="flex items-start gap-3">
@@ -250,7 +250,7 @@ export function VisualEditor() {
                     className="space-y-6"
                   >
                     <div className="space-y-2">
-                      <Label>Color Principal</Label>
+                      <Label>{t("colors.primary")}</Label>
                       <div className="flex gap-2">
                         <Input
                           type="color"
@@ -267,7 +267,7 @@ export function VisualEditor() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Color Secundario</Label>
+                      <Label>{t("colors.secondary")}</Label>
                       <div className="flex gap-2">
                         <Input
                           type="color"
@@ -284,7 +284,7 @@ export function VisualEditor() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Radio de bordes</Label>
+                      <Label>{t("colors.border_radius")}</Label>
                       <Slider
                         value={[theme.borderRadius]}
                         onValueChange={([value]) => updateTheme({ borderRadius: value })}
@@ -305,25 +305,25 @@ export function VisualEditor() {
                     className="space-y-6"
                   >
                     <div className="space-y-2">
-                      <Label>Título del Sorteo</Label>
+                      <Label>{t("text.title")}</Label>
                       <Input
                         value={theme.customTitle}
                         onChange={(e) => updateTheme({ customTitle: e.target.value })}
-                        placeholder="SORTEO"
+                        placeholder={t("text.title_placeholder")}
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Subtítulo</Label>
+                      <Label>{t("text.subtitle")}</Label>
                       <Input
                         value={theme.customSubtitle}
                         onChange={(e) => updateTheme({ customSubtitle: e.target.value })}
-                        placeholder="El momento ha llegado"
+                        placeholder={t("text.subtitle_placeholder")}
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Tipografía</Label>
+                      <Label>{t("text.typography")}</Label>
                       <select
                         value={theme.fontFamily}
                         onChange={(e) => updateTheme({ fontFamily: e.target.value })}
@@ -348,18 +348,17 @@ export function VisualEditor() {
                     <div className="space-y-3">
                       <Label className="flex items-center gap-2">
                         <Play className="w-4 h-4" />
-                        Estilo del Sorteo
+                        {t("effects.style_label")}
                       </Label>
                       <div className="grid grid-cols-1 gap-2">
                         {sorteoStyles.map((style) => (
                           <button
                             key={style.id}
                             onClick={() => updateTheme({ sorteoStyle: style.id })}
-                            className={`w-full p-3 rounded-xl border-2 transition-all text-left flex items-center gap-3 ${
-                              (theme.sorteoStyle ?? "slot-machine") === style.id
-                                ? "border-primary bg-primary/10"
-                                : "border-border hover:border-border/80"
-                            }`}
+                            className={`w-full p-3 rounded-xl border-2 transition-all text-left flex items-center gap-3 ${(theme.sorteoStyle ?? "slot-machine") === style.id
+                              ? "border-primary bg-primary/10"
+                              : "border-border hover:border-border/80"
+                              }`}
                             style={
                               (theme.sorteoStyle ?? "slot-machine") === style.id
                                 ? { borderColor: theme.primaryColor }
@@ -398,8 +397,8 @@ export function VisualEditor() {
 
                     <div className="flex items-center justify-between">
                       <div>
-                        <Label>Confeti</Label>
-                        <p className="text-sm text-muted-foreground">Lluvia de confeti al ganar</p>
+                        <Label>{t("effects.confetti")}</Label>
+                        <p className="text-sm text-muted-foreground">{t("effects.confetti_desc")}</p>
                       </div>
                       <Switch
                         checked={theme.showConfetti}
@@ -409,8 +408,8 @@ export function VisualEditor() {
 
                     <div className="flex items-center justify-between">
                       <div>
-                        <Label>Fondo Dinámico</Label>
-                        <p className="text-sm text-muted-foreground">Partículas animadas de fondo</p>
+                        <Label>{t("effects.dynamic_bg")}</Label>
+                        <p className="text-sm text-muted-foreground">{t("effects.dynamic_bg_desc")}</p>
                       </div>
                       <Switch
                         checked={theme.showDynamicBackground ?? true}
@@ -421,34 +420,32 @@ export function VisualEditor() {
                     <div className="space-y-3">
                       <Label className="flex items-center gap-2">
                         <Layers className="w-4 h-4" />
-                        Vista de Participantes
+                        {t("effects.participants_view")}
                       </Label>
                       <div className="grid grid-cols-2 gap-2">
                         <button
                           onClick={() => updateTheme({ participantDisplay: "list" })}
-                          className={`p-3 rounded-xl border-2 transition-all text-sm font-medium ${
-                            theme.participantDisplay === "list" || !theme.participantDisplay
-                              ? "border-primary bg-primary/10"
-                              : "border-border hover:border-border/80"
-                          }`}
+                          className={`p-3 rounded-xl border-2 transition-all text-sm font-medium ${theme.participantDisplay === "list" || !theme.participantDisplay
+                            ? "border-primary bg-primary/10"
+                            : "border-border hover:border-border/80"
+                            }`}
                           style={
                             theme.participantDisplay === "list" || !theme.participantDisplay
                               ? { borderColor: theme.primaryColor }
                               : {}
                           }
                         >
-                          Lista
+                          {t("effects.list_view")}
                         </button>
                         <button
                           onClick={() => updateTheme({ participantDisplay: "bubbles" })}
-                          className={`p-3 rounded-xl border-2 transition-all text-sm font-medium ${
-                            theme.participantDisplay === "bubbles"
-                              ? "border-primary bg-primary/10"
-                              : "border-border hover:border-border/80"
-                          }`}
+                          className={`p-3 rounded-xl border-2 transition-all text-sm font-medium ${theme.participantDisplay === "bubbles"
+                            ? "border-primary bg-primary/10"
+                            : "border-border hover:border-border/80"
+                            }`}
                           style={theme.participantDisplay === "bubbles" ? { borderColor: theme.primaryColor } : {}}
                         >
-                          Burbujas
+                          {t("effects.bubbles_view")}
                         </button>
                       </div>
                     </div>
@@ -456,7 +453,7 @@ export function VisualEditor() {
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
                         <Clock className="w-4 h-4 text-muted-foreground" />
-                        <Label>Cuenta Regresiva</Label>
+                        <Label>{t("effects.countdown")}</Label>
                       </div>
                       <Slider
                         value={[theme.countdownDuration]}
@@ -469,7 +466,7 @@ export function VisualEditor() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Duración del Sorteo</Label>
+                      <Label>{t("effects.duration")}</Label>
                       <Slider
                         value={[theme.spinDuration]}
                         onValueChange={([value]) => updateTheme({ spinDuration: value })}
@@ -493,7 +490,7 @@ export function VisualEditor() {
                     {/* Current background preview */}
                     {theme.backgroundImage && (
                       <div className="space-y-2">
-                        <Label>Vista previa</Label>
+                        <Label>{t("background.preview")}</Label>
                         <div className="relative rounded-xl overflow-hidden border border-border aspect-video">
                           <img
                             src={theme.backgroundImage || "/placeholder.svg"}
@@ -511,7 +508,7 @@ export function VisualEditor() {
                             onClick={handleRemoveBackground}
                           >
                             <Trash2 className="w-4 h-4 mr-1" />
-                            Eliminar
+                            {t("background.remove")}
                           </Button>
                         </div>
                       </div>
@@ -519,7 +516,7 @@ export function VisualEditor() {
 
                     {/* Upload section */}
                     <div className="space-y-3">
-                      <Label>Subir imagen</Label>
+                      <Label>{t("background.upload_label")}</Label>
                       <input
                         ref={fileInputRef}
                         type="file"
@@ -533,33 +530,33 @@ export function VisualEditor() {
                         onClick={() => fileInputRef.current?.click()}
                       >
                         <Upload className="w-6 h-6" />
-                        <span className="text-sm">Haz clic para subir una imagen</span>
+                        <span className="text-sm">{t("background.upload_button")}</span>
                       </Button>
                     </div>
 
                     {/* URL input */}
                     <div className="space-y-2">
-                      <Label>O pegar URL de imagen</Label>
+                      <Label>{t("background.url_label")}</Label>
                       <div className="flex gap-2">
                         <div className="relative flex-1">
                           <Link className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                           <Input
                             value={imageUrlInput}
                             onChange={(e) => setImageUrlInput(e.target.value)}
-                            placeholder="https://ejemplo.com/imagen.jpg"
+                            placeholder={t("background.url_placeholder")}
                             className="pl-9"
                             onKeyDown={(e) => e.key === "Enter" && handleUrlSubmit()}
                           />
                         </div>
                         <Button onClick={handleUrlSubmit} disabled={!imageUrlInput.trim()}>
-                          Aplicar
+                          {t("background.apply")}
                         </Button>
                       </div>
                     </div>
 
                     {/* Opacity control */}
                     <div className="space-y-2">
-                      <Label>Opacidad del fondo</Label>
+                      <Label>{t("background.opacity")}</Label>
                       <Slider
                         value={[theme.backgroundOpacity ?? 30]}
                         onValueChange={([value]) => updateTheme({ backgroundOpacity: value })}
@@ -572,7 +569,7 @@ export function VisualEditor() {
 
                     {/* Blur control */}
                     <div className="space-y-2">
-                      <Label>Desenfoque</Label>
+                      <Label>{t("background.blur")}</Label>
                       <Slider
                         value={[theme.backgroundBlur ?? 0]}
                         onValueChange={([value]) => updateTheme({ backgroundBlur: value })}

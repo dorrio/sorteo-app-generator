@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { useTranslations } from "next-intl"
 
 import { useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -55,6 +56,7 @@ function DuplicateItem({
     onApply(index, localValue)
     setIsApplied(true)
   }
+  const t = useTranslations("ParticipantManager")
 
   return (
     <div className="space-y-1">
@@ -67,7 +69,7 @@ function DuplicateItem({
               setIsApplied(false)
             }}
             className={`bg-background border-border flex-1 ${isApplied ? "border-green-500/50" : ""}`}
-            placeholder="Editar nombre"
+            placeholder={t("duplicates.edit_placeholder")}
           />
           <Button
             onClick={handleApply}
@@ -75,7 +77,7 @@ function DuplicateItem({
             variant={isApplied ? "default" : "outline"}
             className={`shrink-0 ${isApplied ? "bg-green-600 hover:bg-green-700" : ""}`}
             disabled={!hasChanges && isApplied}
-            title={isApplied ? "Aplicado" : "Aplicar cambio"}
+            title={isApplied ? t("duplicates.applied") : t("duplicates.apply_change")}
           >
             {isApplied ? <Check className="w-4 h-4" /> : <RefreshCw className="w-4 h-4" />}
           </Button>
@@ -83,17 +85,17 @@ function DuplicateItem({
         <button
           onClick={() => onRemove(index)}
           className="p-2 rounded-md hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
-          title="Eliminar"
+          title={t("delete_action")}
         >
           <X className="w-4 h-4" />
         </button>
       </div>
       <div className="flex items-center justify-between">
         <p className="text-xs text-muted-foreground">
-          {dup.isNew ? "Duplicado en la lista" : "Ya existe en participantes"}
+          {dup.isNew ? t("duplicates.status_new") : t("duplicates.status_existing")}
         </p>
-        {hasChanges && <p className="text-xs text-amber-500">Sin aplicar</p>}
-        {isApplied && <p className="text-xs text-green-500">Aplicado</p>}
+        {hasChanges && <p className="text-xs text-amber-500">{t("duplicates.not_applied")}</p>}
+        {isApplied && <p className="text-xs text-green-500">{t("duplicates.applied")}</p>}
       </div>
     </div>
   )
@@ -109,6 +111,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
     clearParticipants,
     theme,
   } = useSorteoStore()
+  const t = useTranslations("ParticipantManager")
   const [inputMode, setInputMode] = useState<InputMode>("single")
   const [singleName, setSingleName] = useState("")
   const [bulkText, setBulkText] = useState("")
@@ -307,10 +310,9 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                   <AlertTriangle className="w-5 h-5 text-amber-500" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">Participantes duplicados</h3>
+                  <h3 className="font-semibold text-foreground">{t("duplicates.title")}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Se encontraron {duplicates.length} nombre{duplicates.length > 1 ? "s" : ""} que ya existe
-                    {duplicates.length > 1 ? "n" : ""}
+                    {t("duplicates.found_text", { count: duplicates.length })}
                   </p>
                 </div>
               </div>
@@ -334,8 +336,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
             {pendingNames.length > 0 && (
               <div className="px-4 pb-2">
                 <p className="text-xs text-muted-foreground">
-                  {pendingNames.length} participante{pendingNames.length > 1 ? "s" : ""} único
-                  {pendingNames.length > 1 ? "s" : ""} se añadirá{pendingNames.length > 1 ? "n" : ""}
+                  {t("duplicates.unique_text", { count: pendingNames.length })}
                 </p>
               </div>
             )}
@@ -348,13 +349,13 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                 className="w-full text-primary-foreground"
               >
                 <Check className="w-4 h-4 mr-2" />
-                Añadir con nombres editados
+                {t("duplicates.add_edited")}
               </Button>
               <Button variant="outline" onClick={handleAddWithoutDuplicates} className="w-full bg-transparent">
-                Continuar sin duplicados ({pendingNames.length})
+                {t("duplicates.continue_unique", { count: pendingNames.length })}
               </Button>
               <Button variant="ghost" onClick={() => resetModalState()} className="w-full text-muted-foreground">
-                Cancelar
+                {t("duplicates.cancel")}
               </Button>
             </div>
           </motion.div>
@@ -371,18 +372,17 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
           {/* Input mode tabs */}
           <div className="flex gap-2 p-1 bg-secondary/50 rounded-lg">
             {[
-              { mode: "single" as InputMode, label: "Individual", icon: Plus },
-              { mode: "bulk" as InputMode, label: "Lista", icon: Copy },
-              { mode: "csv" as InputMode, label: "CSV", icon: FileSpreadsheet },
+              { mode: "single" as InputMode, label: t("input_mode.single"), icon: Plus },
+              { mode: "bulk" as InputMode, label: t("input_mode.bulk"), icon: Copy },
+              { mode: "csv" as InputMode, label: t("input_mode.csv"), icon: FileSpreadsheet },
             ].map(({ mode, label, icon: Icon }) => (
               <button
                 key={mode}
                 onClick={() => setInputMode(mode)}
-                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                  inputMode === mode
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
+                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${inputMode === mode
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+                  }`}
                 style={inputMode === mode ? { backgroundColor: theme.primaryColor } : {}}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -401,7 +401,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                 className="flex gap-2"
               >
                 <Input
-                  placeholder="Nombre del participante"
+                  placeholder={t("single_placeholder")}
                   value={singleName}
                   onChange={(e) => setSingleName(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleAddSingle()}
@@ -427,7 +427,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                 className="space-y-2"
               >
                 <Textarea
-                  placeholder="Pega la lista de nombres (uno por línea)"
+                  placeholder={t("bulk_placeholder")}
                   value={bulkText}
                   onChange={(e) => setBulkText(e.target.value)}
                   className="min-h-[80px] bg-card border-border font-mono text-xs"
@@ -438,7 +438,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                   className="w-full"
                   style={{ backgroundColor: theme.primaryColor }}
                 >
-                  Añadir {bulkText.split("\n").filter((n) => n.trim()).length} participantes
+                  {t("add_participants_button", { count: bulkText.split("\n").filter((n) => n.trim()).length })}
                 </Button>
               </motion.div>
             )}
@@ -462,7 +462,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                   className="w-full border-2 border-dashed border-border rounded-lg p-4 flex flex-col items-center gap-2 hover:border-primary/50 transition-colors"
                 >
                   <Upload className="w-6 h-6 text-muted-foreground" />
-                  <span className="text-xs text-muted-foreground">Subir archivo CSV</span>
+                  <span className="text-xs text-muted-foreground">{t("upload_csv_label")}</span>
                 </button>
               </motion.div>
             )}
@@ -478,7 +478,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                 className="text-destructive hover:text-destructive h-7 text-xs px-2"
               >
                 <Trash2 className="w-3 h-3 mr-1" />
-                Limpiar
+                {t("clear")}
               </Button>
             )}
           </div>
@@ -494,18 +494,17 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
         {/* Input mode tabs */}
         <div className="flex gap-2 p-1 bg-secondary/50 rounded-lg">
           {[
-            { mode: "single" as InputMode, label: "Individual", icon: Plus },
-            { mode: "bulk" as InputMode, label: "Lista", icon: Copy },
-            { mode: "csv" as InputMode, label: "CSV", icon: FileSpreadsheet },
+            { mode: "single" as InputMode, label: t("input_mode.single"), icon: Plus },
+            { mode: "bulk" as InputMode, label: t("input_mode.bulk"), icon: Copy },
+            { mode: "csv" as InputMode, label: t("input_mode.csv"), icon: FileSpreadsheet },
           ].map(({ mode, label, icon: Icon }) => (
             <button
               key={mode}
               onClick={() => setInputMode(mode)}
-              className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                inputMode === mode
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
+              className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${inputMode === mode
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground"
+                }`}
               style={inputMode === mode ? { backgroundColor: theme.primaryColor } : {}}
             >
               <Icon className="w-4 h-4" />
@@ -525,7 +524,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
               className="flex gap-2"
             >
               <Input
-                placeholder="Nombre del participante"
+                placeholder={t("single_placeholder")}
                 value={singleName}
                 onChange={(e) => setSingleName(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleAddSingle()}
@@ -556,7 +555,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                 </Button>
               </div>
               <Textarea
-                placeholder="Pega aquí la lista de nombres (uno por línea)"
+                placeholder={t("bulk_placeholder")}
                 value={bulkText}
                 onChange={(e) => setBulkText(e.target.value)}
                 className="min-h-[150px] bg-card border-border font-mono text-sm"
@@ -566,7 +565,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                 style={{ backgroundColor: theme.primaryColor }}
                 className="w-full text-primary-foreground"
               >
-                Añadir {bulkText.split("\n").filter((n) => n.trim()).length} participantes
+                {t("add_participants_button", { count: bulkText.split("\n").filter((n) => n.trim()).length })}
               </Button>
             </motion.div>
           )}
@@ -584,9 +583,9 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                 className="w-full border-2 border-dashed border-border rounded-lg p-8 flex flex-col items-center gap-3 hover:border-primary/50 transition-colors"
               >
                 <Upload className="w-8 h-8 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">Clic para subir archivo CSV o TXT</span>
+                <span className="text-sm text-muted-foreground">{t("csv_drop_label")}</span>
                 <span className="text-xs text-muted-foreground/70">
-                  La primera columna se usará como nombre del participante
+                  {t("csv_help_text")}
                 </span>
               </button>
             </motion.div>
@@ -598,7 +597,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground flex items-center gap-2">
               <Users className="w-4 h-4" />
-              {participants.length} participantes
+              {t("participants_count", { count: participants.length })}
             </span>
             {participants.length > 0 && (
               <Button
@@ -608,7 +607,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                 className="text-destructive hover:text-destructive"
               >
                 <Trash2 className="w-4 h-4 mr-2" />
-                Limpiar todo
+                {t("clear_all")}
               </Button>
             )}
           </div>
@@ -616,8 +615,8 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
           {participants.length === 0 ? (
             <div className="text-center py-8 text-muted-foreground">
               <Users className="w-12 h-12 mx-auto mb-3 opacity-30" />
-              <p className="text-sm">No hay participantes aún</p>
-              <p className="text-xs mt-1">Añade participantes usando los métodos de arriba</p>
+              <p className="text-sm">{t("no_participants")}</p>
+              <p className="text-xs mt-1">{t("no_participants_sub")}</p>
             </div>
           ) : (
             <div className="max-h-[300px] overflow-y-auto space-y-2 pr-2">
@@ -672,7 +671,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                         <span
                           className="flex-1 truncate cursor-pointer hover:underline decoration-dotted underline-offset-4"
                           onClick={() => startEditing(participant.id, participant.name)}
-                          title="Clic para editar"
+                          title={t("edit_tooltip")}
                         >
                           {participant.name}
                         </span>
@@ -680,14 +679,14 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                           <button
                             onClick={() => startEditing(participant.id, participant.name)}
                             className="p-1.5 rounded hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
-                            title="Editar"
+                            title={t("edit_action")}
                           >
                             <Pencil className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => removeParticipant(participant.id)}
                             className="p-1.5 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
-                            title="Eliminar"
+                            title={t("delete_action")}
                           >
                             <X className="w-3.5 h-3.5" />
                           </button>

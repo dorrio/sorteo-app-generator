@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from "react"
 import { motion } from "framer-motion"
+import { useTranslations } from "next-intl"
 import { useSorteoStore } from "@/lib/sorteo-store"
 
 interface SorteoRouletteProps {
@@ -10,8 +11,9 @@ interface SorteoRouletteProps {
 
 export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
   const { participants, isSpinning, setIsSpinning, setWinner, addToPastWinners, theme } = useSorteoStore()
+  const t = useTranslations("Roulette")
   const [rotation, setRotation] = useState(0)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | null>(null)
 
   const selectRandomWinner = useCallback(() => {
     if (participants.length === 0) return null
@@ -69,7 +71,7 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
         <div className="text-6xl mb-4">🎡</div>
-        <p className="text-muted-foreground text-lg">Añade participantes para iniciar el sorteo</p>
+        <p className="text-muted-foreground text-lg">{t("add_participants_warning")}</p>
       </div>
     )
   }
@@ -182,7 +184,7 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
       </motion.div>
 
       <motion.div className="mt-4 text-center text-muted-foreground" animate={{ opacity: isSpinning ? 0.5 : 1 }}>
-        <span className="text-sm">{participants.length} participantes</span>
+        <span className="text-sm">{t("participants_count", { count: participants.length })}</span>
       </motion.div>
     </div>
   )

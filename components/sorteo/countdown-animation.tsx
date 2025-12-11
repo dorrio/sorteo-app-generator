@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useTranslations } from "next-intl"
 import { useSorteoStore } from "@/lib/sorteo-store"
 
 interface CountdownAnimationProps {
@@ -10,6 +11,7 @@ interface CountdownAnimationProps {
 
 export function CountdownAnimation({ onComplete }: CountdownAnimationProps) {
   const { theme, showCountdown } = useSorteoStore()
+  const t = useTranslations("Countdown")
   const [count, setCount] = useState(theme.countdownDuration)
 
   useEffect(() => {
@@ -85,7 +87,7 @@ export function CountdownAnimation({ onComplete }: CountdownAnimationProps) {
                 className="text-[120px] font-display font-bold tracking-wider"
                 style={{ color: theme.primaryColor }}
               >
-                GO!
+                {t("go")}
               </span>
             </motion.div>
           )}

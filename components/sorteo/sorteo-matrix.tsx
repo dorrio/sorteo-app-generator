@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useTranslations } from "next-intl"
 import { useSorteoStore } from "@/lib/sorteo-store"
 
 interface SorteoMatrixProps {
@@ -18,6 +19,8 @@ interface MatrixColumn {
 
 export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
   const { participants, isSpinning, setIsSpinning, setWinner, addToPastWinners, theme } = useSorteoStore()
+  const t = useTranslations("SorteoMatrix")
+  const tCommon = useTranslations("SorteoComponents")
   const [columns, setColumns] = useState<MatrixColumn[]>([])
   const [finalWinner, setFinalWinner] = useState<string | null>(null)
   const [showWinner, setShowWinner] = useState(false)
@@ -75,7 +78,7 @@ export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
         <div className="text-6xl mb-4">💻</div>
-        <p className="text-muted-foreground text-lg">Añade participantes para iniciar el sorteo</p>
+        <p className="text-muted-foreground text-lg">{tCommon("add_participants_warning")}</p>
       </div>
     )
   }
@@ -157,7 +160,7 @@ export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
                   animate={{ opacity: [0, 1, 1, 0.5, 1] }}
                   transition={{ duration: 0.5 }}
                 >
-                  {">"} GANADOR_SELECCIONADO
+                  {">"} {t("winner_selected")}
                 </motion.div>
                 <motion.div
                   className="text-4xl md:text-5xl font-bold font-mono"
@@ -183,7 +186,7 @@ export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
                 >
-                  [VERIFICADO] ✓
+                  {t("verified")}
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -192,7 +195,7 @@ export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
       </div>
 
       <motion.div className="mt-6 text-center text-muted-foreground" animate={{ opacity: isSpinning ? 0.5 : 1 }}>
-        <span className="text-lg">{participants.length} participantes en el sorteo</span>
+        <span className="text-lg">{tCommon("participants_count", { count: participants.length })}</span>
       </motion.div>
     </div>
   )

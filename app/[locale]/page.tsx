@@ -12,9 +12,12 @@ import { VisualEditor } from "@/components/sorteo/visual-editor"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { FloatingBubbles } from "@/components/sorteo/floating-bubbles"
 import { Button } from "@/components/ui/button"
+import { LanguageSwitcher } from "@/components/language-switcher"
 import { Sparkles, Settings2, Play, Trophy, Loader2 } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 export default function SorteoApp() {
+  const t = useTranslations("HomePage")
   const [mounted, setMounted] = useState(false)
 
   const {
@@ -63,7 +66,7 @@ export default function SorteoApp() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
           <Loader2 className="w-12 h-12 animate-spin mx-auto text-primary" />
-          <p className="text-muted-foreground">Cargando Sorteo Pro...</p>
+          <p className="text-muted-foreground">{t("loading")}</p>
         </div>
       </div>
     )
@@ -120,14 +123,16 @@ export default function SorteoApp() {
               </div>
               <div>
                 <div className="font-display font-bold text-xl tracking-tight">{theme.customTitle}</div>
-                <p className="text-xs text-muted-foreground">Pro para Influencers</p>
               </div>
             </motion.div>
 
-            <Button variant="outline" size="sm" onClick={() => setIsEditorOpen(true)} className="gap-2">
-              <Settings2 className="w-4 h-4" />
-              <span className="hidden sm:inline">Personalizar</span>
-            </Button>
+            <div className="flex items-center gap-2">
+              <LanguageSwitcher />
+              <Button variant="outline" size="sm" onClick={() => setIsEditorOpen(true)} className="gap-2">
+                <Settings2 className="w-4 h-4" />
+                <span className="hidden sm:inline">{t("customize")}</span>
+              </Button>
+            </div>
           </div>
         </header>
 
@@ -172,12 +177,12 @@ export default function SorteoApp() {
                     {isSpinning ? (
                       <>
                         <Sparkles className="w-6 h-6 animate-spin" />
-                        Sorteando...
+                        {t("spinning")}
                       </>
                     ) : (
                       <>
                         <Play className="w-6 h-6" />
-                        Iniciar Sorteo
+                        {t("start_button")}
                       </>
                     )}
                   </Button>
@@ -185,7 +190,7 @@ export default function SorteoApp() {
               </div>
 
               {participants.length < 2 && participants.length > 0 && (
-                <p className="text-center text-sm text-muted-foreground">Añade al menos 2 participantes para iniciar</p>
+                <p className="text-center text-sm text-muted-foreground">{t("min_participants_warning")}</p>
               )}
             </motion.div>
 
@@ -200,7 +205,7 @@ export default function SorteoApp() {
               <div className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-6">
                 <h3 className="font-display font-bold text-lg mb-4 flex items-center gap-2">
                   <Sparkles className="w-5 h-5" style={{ color: theme.primaryColor }} />
-                  Participantes
+                  {t("participants_title")}
                 </h3>
 
                 {participantDisplay === "bubbles" ? <FloatingBubbles /> : <ParticipantManager />}
@@ -223,7 +228,7 @@ export default function SorteoApp() {
         {/* Footer */}
         <footer className="border-t border-border/50 mt-12">
           <div className="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
-            <p>Creado para influencers y creadores de contenido</p>
+            <p>{t("footer_text")}</p>
           </div>
         </footer>
       </div>

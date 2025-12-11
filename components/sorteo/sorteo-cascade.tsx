@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useTranslations } from "next-intl"
 import { useSorteoStore } from "@/lib/sorteo-store"
 
 interface SorteoCascadeProps {
@@ -17,6 +18,7 @@ interface FallingName {
 
 export function SorteoCascade({ onWinnerSelected }: SorteoCascadeProps) {
   const { participants, isSpinning, setIsSpinning, setWinner, addToPastWinners, theme } = useSorteoStore()
+  const tCommon = useTranslations("SorteoComponents")
   const [fallingNames, setFallingNames] = useState<FallingName[]>([])
   const [finalWinner, setFinalWinner] = useState<string | null>(null)
   const [showWinner, setShowWinner] = useState(false)
@@ -85,7 +87,7 @@ export function SorteoCascade({ onWinnerSelected }: SorteoCascadeProps) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
         <div className="text-6xl mb-4">🌊</div>
-        <p className="text-muted-foreground text-lg">Añade participantes para iniciar el sorteo</p>
+        <p className="text-muted-foreground text-lg">{tCommon("add_participants_warning")}</p>
       </div>
     )
   }
@@ -161,7 +163,7 @@ export function SorteoCascade({ onWinnerSelected }: SorteoCascadeProps) {
       </div>
 
       <motion.div className="mt-6 text-center text-muted-foreground" animate={{ opacity: isSpinning ? 0.5 : 1 }}>
-        <span className="text-lg">{participants.length} participantes en el sorteo</span>
+        <span className="text-lg">{tCommon("participants_count", { count: participants.length })}</span>
       </motion.div>
     </div>
   )

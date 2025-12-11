@@ -1,0 +1,167 @@
+{
+    "HomePage": {
+        "loading": "Loading Sorteo Pro...",
+        "customize": "Customize",
+        "spinning": "Spinning...",
+        "start_button": "Start Giveaway",
+        "min_participants_warning": "Add at least 2 participants to start",
+        "participants_title": "Participants",
+        "footer_text": "Created for influencers and content creators"
+    },
+    "Metadata": {
+        "title": "Sorteo Pro | Premium Giveaways for Influencers",
+        "description": "The ultimate tool for viral giveaways. Designed for content creators and influencers who want to impress their audience.",
+        "og_title": "Sorteo Pro | Premium Giveaways for Influencers",
+        "og_description": "Create epic giveaways with cinematic animations"
+    },
+    "LanguageSwitcher": {
+        "switchLanguage": "Switch Language"
+    },
+    "ParticipantManager": {
+        "input_mode": {
+            "single": "Single",
+            "bulk": "List",
+            "csv": "CSV"
+        },
+        "single_placeholder": "Participant name",
+        "bulk_placeholder": "Paste list of names (one per line)",
+        "add_participants_button": "Add {count} participants",
+        "upload_csv_label": "Upload CSV file",
+        "clear": "Clear",
+        "clear_all": "Clear all",
+        "no_participants": "No participants yet",
+        "no_participants_sub": "Add participants using the methods above",
+        "participants_count": "{count} participants",
+        "edit_tooltip": "Click to edit",
+        "edit_action": "Edit",
+        "delete_action": "Delete",
+        "paste_clipboard": "Paste from clipboard",
+        "csv_drop_label": "Click to upload CSV or TXT file",
+        "csv_help_text": "The first column will be used as the participant name",
+        "duplicates": {
+            "title": "Duplicate participants",
+            "found_text": "Found {count} name(s) that already exist(s)",
+            "unique_text": "{count} unique participant(s) will be added",
+            "add_edited": "Add with edited names",
+            "continue_unique": "Continue without duplicates ({count})",
+            "cancel": "Cancel",
+            "status_new": "Duplicate in list",
+            "status_existing": "Already exists in participants",
+            "not_applied": "Not applied",
+            "applied": "Applied",
+            "apply_change": "Apply change",
+            "edit_placeholder": "Edit name"
+        }
+    },
+    "VisualEditor": {
+        "title": "Visual Editor",
+        "tabs": {
+            "presets": "Presets",
+            "colors": "Colors",
+            "text": "Text",
+            "effects": "Effects",
+            "background": "Background"
+        },
+        "presets": {
+            "luxury_gold": "Luxury Gold",
+            "luxury_gold_desc": "Elegant and premium",
+            "neon_creator": "Neon Creator",
+            "neon_creator_desc": "Vibrant and gaming",
+            "minimal_elegance": "Minimal Elegance",
+            "minimal_elegance_desc": "Clean and sophisticated",
+            "rose_gold": "Rose Gold",
+            "rose_gold_desc": "Soft and romantic",
+            "ocean_depth": "Ocean Depth",
+            "ocean_depth_desc": "Fresh and deep",
+            "forest_mist": "Forest Mist",
+            "forest_mist_desc": "Natural and serene"
+        },
+        "styles": {
+            "slot_machine": "Slot Machine",
+            "slot_machine_desc": "Classic slot machine style",
+            "roulette": "Roulette",
+            "roulette_desc": "Names spinning in a circle",
+            "cascade": "Cascade",
+            "cascade_desc": "Names falling gently",
+            "cards": "Cards",
+            "cards_desc": "Flipping deck",
+            "matrix": "Matrix",
+            "matrix_desc": "Futuristic code style"
+        },
+        "colors": {
+            "primary": "Primary Color",
+            "secondary": "Secondary Color",
+            "border_radius": "Border Radius"
+        },
+        "text": {
+            "title": "Giveaway Title",
+            "subtitle": "Subtitle",
+            "title_placeholder": "GIVEAWAY",
+            "subtitle_placeholder": "The moment has arrived",
+            "typography": "Typography"
+        },
+        "effects": {
+            "style_label": "Giveaway Style",
+            "confetti": "Confetti",
+            "confetti_desc": "Confetti rain on win",
+            "dynamic_bg": "Dynamic Background",
+            "dynamic_bg_desc": "Animated background particles",
+            "participants_view": "Participants View",
+            "list_view": "List",
+            "bubbles_view": "Bubbles",
+            "countdown": "Countdown",
+            "duration": "Duration"
+        },
+        "background": {
+            "preview": "Preview",
+            "upload_label": "Upload Image",
+            "upload_button": "Click to upload an image",
+            "url_label": "Or paste image URL",
+            "url_placeholder": "https://example.com/image.jpg",
+            "apply": "Apply",
+            "opacity": "Background Opacity",
+            "blur": "Blur",
+            "remove": "Remove"
+        }
+    },
+    "WinnerCeremony": {
+        "winner_label": "Winner",
+        "share_text": "🎉 Congratulations to {name} for winning the giveaway! 🏆",
+        "share_title": "Giveaway Winner",
+        "congratulations": "Congratulations! 🎉",
+        "share_button": "Share",
+        "share_menu": "Share...",
+        "copied": "Copied!",
+        "copy_text": "Copy text",
+        "new_giveaway": "New Giveaway",
+        "close": "Close"
+    },
+    "HistoryPanel": {
+        "title": "History",
+        "clear": "Clear",
+        "empty": "No winners yet",
+        "giveaway_number": "Giveaway #{number}"
+    },
+    "Roulette": {
+        "add_participants_warning": "Add participants to start the giveaway",
+        "participants_count": "{count} participants"
+    },
+    "Countdown": {
+        "go": "GO!"
+    },
+    "FloatingBubbles": {
+        "placeholder": "Participants will appear here as floating bubbles",
+        "count": "{count} participants"
+    },
+    "SorteoComponents": {
+        "participants_count": "{count} participants in the giveaway",
+        "add_participants_warning": "Add participants to start the giveaway"
+    },
+    "SorteoMatrix": {
+        "winner_selected": "WINNER_SELECTED",
+        "verified": "[VERIFIED] ✓"
+    },
+    "SorteoCards": {
+        "winner_label": "Winner!"
+    }
+}

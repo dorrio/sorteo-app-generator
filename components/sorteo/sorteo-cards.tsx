@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useTranslations } from "next-intl"
 import { useSorteoStore } from "@/lib/sorteo-store"
 
 interface SorteoCardsProps {
@@ -10,6 +11,8 @@ interface SorteoCardsProps {
 
 export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
   const { participants, isSpinning, setIsSpinning, setWinner, addToPastWinners, theme } = useSorteoStore()
+  const t = useTranslations("SorteoCards")
+  const tCommon = useTranslations("SorteoComponents")
   const [shuffledCards, setShuffledCards] = useState<typeof participants>([])
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
   const [isFlipping, setIsFlipping] = useState(false)
@@ -77,7 +80,7 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
         <div className="text-6xl mb-4">🃏</div>
-        <p className="text-muted-foreground text-lg">Añade participantes para iniciar el sorteo</p>
+        <p className="text-muted-foreground text-lg">{tCommon("add_participants_warning")}</p>
       </div>
     )
   }
@@ -135,12 +138,12 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
                 animate={
                   showFinal
                     ? {
-                        textShadow: [
-                          `0 0 10px ${theme.primaryColor}40`,
-                          `0 0 30px ${theme.primaryColor}60`,
-                          `0 0 10px ${theme.primaryColor}40`,
-                        ],
-                      }
+                      textShadow: [
+                        `0 0 10px ${theme.primaryColor}40`,
+                        `0 0 30px ${theme.primaryColor}60`,
+                        `0 0 10px ${theme.primaryColor}40`,
+                      ],
+                    }
                     : {}
                 }
                 transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
@@ -154,7 +157,7 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
                   transition={{ delay: 0.3 }}
                   className="text-sm text-muted-foreground mt-2"
                 >
-                  ¡Ganador!
+                  {t("winner_label")}
                 </motion.p>
               )}
             </div>
@@ -170,7 +173,7 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
       </div>
 
       <motion.div className="mt-8 text-center text-muted-foreground" animate={{ opacity: isSpinning ? 0.5 : 1 }}>
-        <span className="text-lg">{participants.length} participantes en el sorteo</span>
+        <span className="text-lg">{tCommon("participants_count", { count: participants.length })}</span>
       </motion.div>
     </div>
   )

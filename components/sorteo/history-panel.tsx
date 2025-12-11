@@ -1,18 +1,20 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
+import { useTranslations } from "next-intl"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Trophy, Clock, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function HistoryPanel() {
   const { pastWinners, clearHistory, theme } = useSorteoStore()
+  const t = useTranslations("HistoryPanel")
 
   if (pastWinners.length === 0) {
     return (
       <div className="text-center py-8 text-muted-foreground">
         <Trophy className="w-10 h-10 mx-auto mb-3 opacity-30" />
-        <p className="text-sm">Aún no hay ganadores</p>
+        <p className="text-sm">{t("empty")}</p>
       </div>
     )
   }
@@ -22,11 +24,11 @@ export function HistoryPanel() {
       <div className="flex items-center justify-between">
         <h3 className="font-semibold flex items-center gap-2">
           <Clock className="w-4 h-4" />
-          Historial ({pastWinners.length})
+          {t("title")} ({pastWinners.length})
         </h3>
         <Button variant="ghost" size="sm" onClick={clearHistory} className="text-destructive hover:text-destructive">
           <Trash2 className="w-4 h-4 mr-1" />
-          Limpiar
+          {t("clear")}
         </Button>
       </div>
 
@@ -51,7 +53,7 @@ export function HistoryPanel() {
               </div>
               <div className="flex-1">
                 <div className="font-medium">{winner.name}</div>
-                <div className="text-xs text-muted-foreground">Sorteo #{pastWinners.length - index}</div>
+                <div className="text-xs text-muted-foreground">{t("giveaway_number", { number: pastWinners.length - index })}</div>
               </div>
             </motion.div>
           ))}

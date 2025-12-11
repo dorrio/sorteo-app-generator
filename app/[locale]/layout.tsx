@@ -11,6 +11,7 @@ import {
   Poppins
 } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { GoogleTagManager } from "@next/third-parties/google"
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -147,6 +148,7 @@ export default async function RootLayout({
           {children}
         </NextIntlClientProvider>
         <Analytics />
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || ''} />
       </body>
     </html>
   )

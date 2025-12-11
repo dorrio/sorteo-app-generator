@@ -1,0 +1,265 @@
+"use client"
+
+import { useEffect, useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { useSorteoStore } from "@/lib/sorteo-store"
+import { ConfettiEffect } from "./confetti-effect"
+import { Button } from "@/components/ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import {
+  Trophy,
+  Sparkles,
+  Share2,
+  RotateCcw,
+  Copy,
+  Check,
+  Twitter,
+  Facebook,
+  MessageCircle,
+  Instagram,
+} from "lucide-react"
+
+interface WinnerCeremonyProps {
+  onClose: () => void
+  onNewSorteo: () => void
+}
+
+export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
+  const { winner, theme, showWinnerCeremony } = useSorteoStore()
+  const [showContent, setShowContent] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    if (showWinnerCeremony) {
+      const timer = setTimeout(() => setShowContent(true), 300)
+      return () => clearTimeout(timer)
+    } else {
+      setShowContent(false)
+    }
+  }, [showWinnerCeremony])
+
+  if (!showWinnerCeremony || !winner) return null
+
+  const shareText = `🎉 ¡Felicidades a ${winner.name} por ganar el sorteo! 🏆`
+  const shareUrl = typeof window !== "undefined" ? window.location.href : ""
+
+  const shareNative = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Ganador del Sorteo",
+          text: shareText,
+          url: shareUrl,
+        })
+      } catch {
+        // User cancelled
+      }
+    }
+  }
+
+  const copyToClipboard = async () => {
+    await navigator.clipboard.writeText(shareText)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  const shareTwitter = () => {
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`
+    window.open(url, "_blank", "width=550,height=420")
+  }
+
+  const shareFacebook = () => {
+    const url = `https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(shareText)}`
+    window.open(url, "_blank", "width=550,height=420")
+  }
+
+  const shareWhatsApp = () => {
+    const url = `https://wa.me/?text=${encodeURIComponent(shareText)}`
+    window.open(url, "_blank")
+  }
+
+  const shareInstagram = async () => {
+    await navigator.clipboard.writeText(shareText)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+    window.open("https://www.instagram.com/", "_blank")
+  }
+
+  const hasNativeShare = typeof navigator !== "undefined" && !!navigator.share
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-50 flex items-center justify-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        {/* Backdrop */}
+        <motion.div
+          className="absolute inset-0 bg-background/98 backdrop-blur-xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        />
+
+        {/* Confetti */}
+        <ConfettiEffect
+          isActive={showWinnerCeremony && theme.showConfetti}
+          colors={[theme.primaryColor, theme.secondaryColor, "#FFD700", "#FF6B6B", "#4ECDC4"]}
+        />
+
+        {/* Content */}
+        <motion.div
+          className="relative z-10 flex flex-col items-center text-center px-4 max-w-2xl"
+          initial={{ scale: 0.8, opacity: 0, y: 50 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, type: "spring", damping: 15 }}
+        >
+          {/* Trophy icon */}
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ delay: 0.4, type: "spring", damping: 10 }}
+            className="mb-6"
+          >
+            <div
+              className="w-32 h-32 rounded-full flex items-center justify-center"
+              style={{
+                background: `linear-gradient(135deg, ${theme.primaryColor}, ${theme.secondaryColor})`,
+                boxShadow: `0 0 80px ${theme.primaryColor}60`,
+              }}
+            >
+              <Trophy className="w-16 h-16 text-background" />
+            </div>
+          </motion.div>
+
+          {/* Winner label */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="flex items-center gap-2 mb-4"
+          >
+            <Sparkles className="w-5 h-5" style={{ color: theme.primaryColor }} />
+            <span className="text-xl uppercase tracking-[0.3em] text-muted-foreground font-medium">Ganador</span>
+            <Sparkles className="w-5 h-5" style={{ color: theme.primaryColor }} />
+          </motion.div>
+
+          {/* Winner name */}
+          <motion.h1
+            initial={{ scale: 0.5, opacity: 0, filter: "blur(20px)" }}
+            animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+            transition={{ delay: 0.6, type: "spring", damping: 12 }}
+            className="text-5xl md:text-7xl font-display font-bold mb-8"
+            style={{
+              color: theme.primaryColor,
+              textShadow: `0 0 60px ${theme.primaryColor}60`,
+            }}
+          >
+            {winner.name}
+          </motion.h1>
+
+          {/* Celebration text */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="text-2xl text-muted-foreground mb-12"
+          >
+            ¡Felicidades! 🎉
+          </motion.p>
+
+          {/* Action buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1 }}
+            className="flex flex-wrap gap-4 justify-center"
+          >
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  size="lg"
+                  className="gap-2"
+                  style={{
+                    backgroundColor: theme.primaryColor,
+                    color: theme.backgroundColor,
+                  }}
+                >
+                  <Share2 className="w-5 h-5" />
+                  Compartir
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="center" className="w-48">
+                {hasNativeShare && (
+                  <DropdownMenuItem onClick={shareNative} className="gap-2 cursor-pointer">
+                    <Share2 className="w-4 h-4" />
+                    Compartir...
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
+                  {copied ? (
+                    <>
+                      <Check className="w-4 h-4 text-green-500" />
+                      <span className="text-green-500">¡Copiado!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4" />
+                      Copiar texto
+                    </>
+                  )}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={shareTwitter} className="gap-2 cursor-pointer">
+                  <Twitter className="w-4 h-4" />
+                  Twitter / X
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={shareInstagram} className="gap-2 cursor-pointer">
+                  <Instagram className="w-4 h-4" />
+                  Instagram
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={shareFacebook} className="gap-2 cursor-pointer">
+                  <Facebook className="w-4 h-4" />
+                  Facebook
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={shareWhatsApp} className="gap-2 cursor-pointer">
+                  <MessageCircle className="w-4 h-4" />
+                  WhatsApp
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Button size="lg" variant="outline" onClick={onNewSorteo} className="gap-2 bg-transparent">
+              <RotateCcw className="w-5 h-5" />
+              Nuevo Sorteo
+            </Button>
+
+            <Button size="lg" variant="ghost" onClick={onClose}>
+              Cerrar
+            </Button>
+          </motion.div>
+        </motion.div>
+
+        {/* Animated rings */}
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border opacity-20 pointer-events-none"
+          style={{ borderColor: theme.primaryColor }}
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.1, 0.2],
+          }}
+          transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border opacity-10 pointer-events-none"
+          style={{ borderColor: theme.primaryColor }}
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.1, 0.05, 0.1],
+          }}
+          transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, delay: 0.5 }}
+        />
+      </motion.div>
+    </AnimatePresence>
+  )
+}

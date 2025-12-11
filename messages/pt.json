@@ -6,7 +6,8 @@
         "start_button": "Iniciar Sorteio",
         "min_participants_warning": "Adicione pelo menos 2 participantes para iniciar",
         "participants_title": "Participantes",
-        "footer_text": "Criado para influencers e criadores de conteúdo"
+        "footer_text": "Criado para influencers e criadores de conteúdo",
+        "customize_hint": "🎨 Personalizar Sorteio"
     },
     "Metadata": {
         "title": "Sorteio Pro | Sorteios Premium para Influencers",
@@ -93,7 +94,8 @@
         "colors": {
             "primary": "Cor Principal",
             "secondary": "Cor Secundária",
-            "border_radius": "Raio das bordas"
+            "border_radius": "Raio das bordas",
+            "random": "Combinação Aleatória"
         },
         "text": {
             "title": "Título do Sorteio",

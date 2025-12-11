@@ -256,6 +256,57 @@ export function VisualEditor() {
                     exit={{ opacity: 0, y: -10 }}
                     className="space-y-6"
                   >
+                    <Button
+                      onClick={() => {
+                        // Generate random but harmonious colors
+                        // Hue: 0-360
+                        const hue = Math.floor(Math.random() * 360)
+
+                        // Saturation: 60-100% for vibrancy
+                        const sat = 60 + Math.floor(Math.random() * 40)
+
+                        // Lightness: 40-60% for middle ground
+                        const light = 40 + Math.floor(Math.random() * 20)
+
+                        // Primary color
+                        const primary = `hsl(${hue}, ${sat}%, ${light}%)`
+
+                        // Secondary color: Complementary (180deg) or Analogous (30deg)
+                        const isComplementary = Math.random() > 0.5
+                        const secHue = (hue + (isComplementary ? 180 : 30)) % 360
+                        const secondary = `hsl(${secHue}, ${sat}%, ${light + 20}%)` // Lighter for contrast
+
+                        // Convert HSL to Hex for the input (basic approximation or simple assignment)
+                        // Note: For actual hex inputs we might need a converter, but let's try setting HSL directly if supported,
+                        // otherwise we'll wrap a small converter or stick to simple hex gen logic.
+                        // Actually, let's use a simpler hex generator to avoid issues with Input type="color"
+
+                        const hslToHex = (h: number, s: number, l: number) => {
+                          l /= 100;
+                          const a = s * Math.min(l, 1 - l) / 100;
+                          const f = (n: number) => {
+                            const k = (n + h / 30) % 12;
+                            const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+                            return Math.round(255 * color).toString(16).padStart(2, '0');
+                          };
+                          return `#${f(0)}${f(8)}${f(4)}`;
+                        }
+
+                        const primaryHex = hslToHex(hue, sat, light)
+                        const secondaryHex = hslToHex(secHue, sat, light + 20)
+
+                        updateTheme({
+                          primaryColor: primaryHex,
+                          secondaryColor: secondaryHex
+                        })
+                      }}
+                      className="w-full gap-2"
+                      variant="outline"
+                    >
+                      <Sparkles className="w-4 h-4" />
+                      {t("colors.random")}
+                    </Button>
+
                     <div className="space-y-2">
                       <Label>{t("colors.primary")}</Label>
                       <div className="flex gap-2">

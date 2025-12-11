@@ -155,6 +155,21 @@ export default function SorteoApp() {
                   {theme.customTitle}
                 </h1>
                 <p className="text-muted-foreground text-lg">{theme.customSubtitle}</p>
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                  className="inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-full text-sm font-medium transition-all hover:scale-105"
+                  style={{
+                    backgroundColor: `${theme.primaryColor}20`,
+                    color: theme.primaryColor,
+                    border: `1px solid ${theme.primaryColor}40`
+                  }}
+                  onClick={() => setIsEditorOpen(true)}
+                >
+                  <Settings2 className="w-4 h-4" />
+                  {t("customize")}
+                </motion.button>
               </div>
 
               {/* Slot machine */}

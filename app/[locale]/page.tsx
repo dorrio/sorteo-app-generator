@@ -104,7 +104,21 @@ export default function SorteoApp() {
       <ParticleBackground />
 
       {/* Main content */}
-      <div className="relative z-10">
+      <div
+        className="relative z-10"
+        style={{
+          fontFamily:
+            theme.fontFamily === "Inter" ? "var(--font-inter)" :
+              theme.fontFamily === "Space Grotesk" ? "var(--font-display)" :
+                theme.fontFamily === "Roboto" ? "var(--font-roboto)" :
+                  theme.fontFamily === "Montserrat" ? "var(--font-montserrat)" :
+                    theme.fontFamily === "Open Sans" ? "var(--font-open-sans)" :
+                      theme.fontFamily === "Lato" ? "var(--font-lato)" :
+                        theme.fontFamily === "Poppins" ? "var(--font-poppins)" :
+                          theme.fontFamily === "system-ui" ? "system-ui, sans-serif" :
+                            "var(--font-display)"
+        }}
+      >
         {/* Header */}
         <header className="border-b border-border/50 backdrop-blur-sm bg-background/50">
           <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -122,7 +136,7 @@ export default function SorteoApp() {
                 <Trophy className="w-5 h-5 text-background" />
               </div>
               <div>
-                <div className="font-display font-bold text-xl tracking-tight">{theme.customTitle}</div>
+                <div className="font-bold text-xl tracking-tight">{theme.customTitle}</div>
               </div>
             </motion.div>
 
@@ -149,7 +163,7 @@ export default function SorteoApp() {
               {/* Title */}
               <div className="text-center space-y-2">
                 <h1
-                  className="text-4xl md:text-6xl font-display font-bold tracking-tight"
+                  className="text-4xl md:text-6xl font-bold tracking-tight"
                   style={{ color: theme.primaryColor }}
                 >
                   {theme.customTitle}
@@ -182,7 +196,7 @@ export default function SorteoApp() {
                     size="lg"
                     onClick={startSorteo}
                     disabled={participants.length < 2 || isSpinning}
-                    className="h-16 px-12 text-xl font-display font-bold gap-3 rounded-2xl transition-all"
+                    className="h-16 px-12 text-xl font-bold gap-3 rounded-2xl transition-all"
                     style={{
                       backgroundColor: theme.primaryColor,
                       color: theme.backgroundColor,
@@ -218,7 +232,7 @@ export default function SorteoApp() {
             >
               {/* Participants card */}
               <div className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-6">
-                <h3 className="font-display font-bold text-lg mb-4 flex items-center gap-2">
+                <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                   <Sparkles className="w-5 h-5" style={{ color: theme.primaryColor }} />
                   {t("participants_title")}
                 </h3>

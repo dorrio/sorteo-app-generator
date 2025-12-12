@@ -46,6 +46,9 @@ export async function generateMetadata({
     metadataBase: new URL(baseUrl),
     title: t('title'),
     description: t('description'),
+    icons: {
+      icon: '/favicon.ico',
+    },
     keywords: ["sorteo", "giveaway", "influencer", "streamer", "creator", "viral", "concurso", "premios"],
     authors: [{ name: "Sorteo Pro" }],
     alternates: {

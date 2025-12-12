@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ParticleBackground } from "@/components/sorteo/particle-background"
 import { SorteoSelector } from "@/components/sorteo/sorteo-selector"
+import { VerificationModal } from "@/components/sorteo/verification-modal"
 import { CountdownAnimation } from "@/components/sorteo/countdown-animation"
 import { WinnerCeremony } from "@/components/sorteo/winner-ceremony"
 import { ParticipantManager } from "@/components/sorteo/participant-manager"
@@ -13,12 +14,13 @@ import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { FloatingBubbles } from "@/components/sorteo/floating-bubbles"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
-import { Sparkles, Settings2, Play, Trophy, Loader2 } from "lucide-react"
+import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 export default function SorteoApp() {
   const t = useTranslations("HomePage")
   const [mounted, setMounted] = useState(false)
+  const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
 
   const {
     participants,
@@ -142,6 +144,9 @@ export default function SorteoApp() {
 
             <div className="flex items-center gap-2">
               <LanguageSwitcher />
+              <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title="Verificar Sorteo">
+                <ShieldCheck className="w-5 h-5" />
+              </Button>
               <Button variant="outline" size="sm" onClick={() => setIsEditorOpen(true)} className="gap-2">
                 <Settings2 className="w-4 h-4" />
                 <span className="hidden sm:inline">{t("customize")}</span>
@@ -266,6 +271,8 @@ export default function SorteoApp() {
       <CountdownAnimation onComplete={handleCountdownComplete} />
       <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} />
       <VisualEditor />
+      <VerificationModal isOpen={isVerifyModalOpen} onClose={() => setIsVerifyModalOpen(false)} />
     </div>
   )
 }
+

@@ -167,5 +167,23 @@
     },
     "SorteoCards": {
         "winner_label": "¡Ganador!"
+    },
+    "VerificationPage": {
+        "title": "Verificador de Sorteos",
+        "subtitle": "Valida la autenticidad de un sorteo realizado en Sorteo Pro",
+        "input_label": "ID Verificable",
+        "input_placeholder": "Ej: ID-A1B2C3D4-18E...",
+        "verify_button": "Verificar ID",
+        "back_button": "Volver al inicio",
+        "result": {
+            "valid_title": "ID Válido",
+            "invalid_title": "ID No Encontrado",
+            "winner_label": "Ganador",
+            "date_label": "Fecha del Sorteo",
+            "valid_format": "Formato Válido",
+            "local_record": "Registro Local Encontrado",
+            "not_found_message": "Este ID no corresponde a ningún sorteo registrado en este dispositivo.",
+            "invalid_format_message": "El formato del ID no es válido."
+        }
     }
 }

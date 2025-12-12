@@ -28,7 +28,11 @@ const openSans = Open_Sans({ subsets: ["latin"], variable: "--font-open-sans" })
 const lato = Lato({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-lato" })
 const poppins = Poppins({ weight: ["400", "600", "700"], subsets: ["latin"], variable: "--font-poppins" })
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://sorteopro.com'
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL
+  ? process.env.NEXT_PUBLIC_APP_URL
+  : process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'https://sorteopro.com'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

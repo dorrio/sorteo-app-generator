@@ -1,8 +1,12 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://sorteopro.com'
-    const locales = ['en', 'es'];
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL
+        ? process.env.NEXT_PUBLIC_APP_URL
+        : process.env.VERCEL_URL
+            ? `https://${process.env.VERCEL_URL}`
+            : 'https://sorteopro.com'
+    const locales = ['en', 'es', 'pt'];
 
     const entries = locales.map(locale => ({
         url: `${baseUrl}/${locale}`,

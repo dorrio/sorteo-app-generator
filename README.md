@@ -61,7 +61,6 @@ A modern, dynamic, and highly customizable giveaway app generator. Designed to d
 - `/messages`: Translation files (JSON) for i18n.
 - `/public`: Static files and images.
 - `/i18n`: Internationalization configuration.
-- 
 
 ## 📝 License
 

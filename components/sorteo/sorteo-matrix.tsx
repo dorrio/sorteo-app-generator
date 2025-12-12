@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
-import { useSorteoStore } from "@/lib/sorteo-store"
+import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
 
 interface SorteoMatrixProps {
   onWinnerSelected: () => void
@@ -26,16 +26,14 @@ export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
   const [showWinner, setShowWinner] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const selectRandomWinner = useCallback(() => {
-    if (participants.length === 0) return null
-    const randomIndex = Math.floor(Math.random() * participants.length)
-    return participants[randomIndex]
+  const selectWinner = useCallback(() => {
+    return selectSecureWinner(participants)
   }, [participants])
 
   useEffect(() => {
     if (!isSpinning || participants.length === 0) return
 
-    const winner = selectRandomWinner()
+    const winner = selectWinner()
     if (!winner) return
 
     setShowWinner(false)
@@ -67,7 +65,7 @@ export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
     isSpinning,
     participants,
     theme.spinDuration,
-    selectRandomWinner,
+    selectWinner,
     setWinner,
     addToPastWinners,
     setIsSpinning,

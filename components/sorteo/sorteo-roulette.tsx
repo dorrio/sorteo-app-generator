@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from "react"
 import { motion } from "framer-motion"
 import { useTranslations } from "next-intl"
-import { useSorteoStore } from "@/lib/sorteo-store"
+import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
 
 interface SorteoRouletteProps {
   onWinnerSelected: () => void
@@ -15,16 +15,18 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
   const [rotation, setRotation] = useState(0)
   const animationRef = useRef<number | null>(null)
 
-  const selectRandomWinner = useCallback(() => {
-    if (participants.length === 0) return null
-    const randomIndex = Math.floor(Math.random() * participants.length)
-    return { participant: participants[randomIndex], index: randomIndex }
+  const selectWinner = useCallback(() => {
+    const winner = selectSecureWinner(participants)
+    if (!winner) return null
+
+    const index = participants.findIndex(p => p.id === winner.id)
+    return { participant: winner, index }
   }, [participants])
 
   useEffect(() => {
     if (!isSpinning || participants.length === 0) return
 
-    const result = selectRandomWinner()
+    const result = selectWinner()
     if (!result) return
 
     const spinDuration = theme.spinDuration * 1000

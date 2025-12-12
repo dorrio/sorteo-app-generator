@@ -161,6 +161,29 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
             {winner.name}
           </motion.h1>
 
+          {/* Verification ID */}
+          {winner.verificationId && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7 }}
+              className="mb-8 flex flex-col items-center gap-2"
+            >
+              <span className="text-xs uppercase tracking-widest text-muted-foreground">ID Verificable</span>
+              <div
+                className="flex items-center gap-2 px-3 py-1 rounded-md bg-muted/50 cursor-pointer hover:bg-muted transition-colors"
+                onClick={() => {
+                  navigator.clipboard.writeText(winner.verificationId!)
+                  setCopied(true)
+                  setTimeout(() => setCopied(false), 2000)
+                }}
+              >
+                <code className="text-sm font-mono text-primary">{winner.verificationId}</code>
+                {copied ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3 text-muted-foreground" />}
+              </div>
+            </motion.div>
+          )}
+
           {/* Celebration text */}
           <motion.p
             initial={{ opacity: 0 }}

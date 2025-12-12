@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
-import { useSorteoStore } from "@/lib/sorteo-store"
+import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
 
 interface SorteoGridProps {
     onWinnerSelected: () => void
@@ -16,9 +16,11 @@ export function SorteoGrid({ onWinnerSelected }: SorteoGridProps) {
     const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null)
     const [finalWinnerIndex, setFinalWinnerIndex] = useState<number | null>(null)
 
-    const selectRandomWinnerIndex = useCallback(() => {
-        if (participants.length === 0) return null
-        return Math.floor(Math.random() * participants.length)
+    const selectWinner = useCallback(() => {
+        const winner = selectSecureWinner(participants)
+        if (!winner) return null
+        const index = participants.findIndex(p => p.id === winner.id)
+        return { index, participant: winner }
     }, [participants])
 
     useEffect(() => {
@@ -28,39 +30,41 @@ export function SorteoGrid({ onWinnerSelected }: SorteoGridProps) {
         setFinalWinnerIndex(null)
 
         const spinDuration = theme.spinDuration * 1000
-        const intervalTime = 100 // Speed of flickering
         const startTime = Date.now()
+        let interval: NodeJS.Timeout
 
-        const interval = setInterval(() => {
+        // Start random flashing
+        interval = setInterval(() => {
             const elapsed = Date.now() - startTime
 
             if (elapsed >= spinDuration) {
                 clearInterval(interval)
-                const winnerIndex = selectRandomWinnerIndex()
+                const result = selectWinner()
 
-                if (winnerIndex !== null) {
-                    setHighlightedIndex(winnerIndex)
-                    setFinalWinnerIndex(winnerIndex)
-
-                    const winner = participants[winnerIndex]
-                    setWinner(winner)
-                    addToPastWinners(winner)
+                if (result && result.index !== -1) {
+                    setHighlightedIndex(result.index)
+                    setFinalWinnerIndex(result.index)
+                    setWinner(result.participant)
+                    addToPastWinners(result.participant)
                     setIsSpinning(false)
 
-                    setTimeout(() => onWinnerSelected(), 1000)
+                    setTimeout(() => {
+                        onWinnerSelected()
+                    }, 1000)
                 }
             } else {
-                // Random highlight effect
-                setHighlightedIndex(Math.floor(Math.random() * participants.length))
+                // Flash random cell
+                const randomIndex = Math.floor(Math.random() * participants.length)
+                setHighlightedIndex(randomIndex)
             }
-        }, intervalTime)
+        }, 100) // Flash speed
 
         return () => clearInterval(interval)
     }, [
         isSpinning,
         participants,
         theme.spinDuration,
-        selectRandomWinnerIndex,
+        selectWinner,
         setWinner,
         addToPastWinners,
         setIsSpinning,

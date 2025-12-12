@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
-import { useSorteoStore } from "@/lib/sorteo-store"
+import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
 
 interface SlotMachineProps {
   onWinnerSelected: () => void
@@ -17,17 +17,15 @@ export function SlotMachine({ onWinnerSelected }: SlotMachineProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [finalWinner, setFinalWinner] = useState<string | null>(null)
 
-  const selectRandomWinner = useCallback(() => {
-    if (participants.length === 0) return null
-    const randomIndex = Math.floor(Math.random() * participants.length)
-    return participants[randomIndex]
+  const selectWinner = useCallback(() => {
+    return selectSecureWinner(participants)
   }, [participants])
 
   useEffect(() => {
     if (!isSpinning || participants.length === 0) return
 
     // Determine winner at start
-    const winner = selectRandomWinner()
+    const winner = selectWinner()
     if (!winner) return
 
     const spinDuration = theme.spinDuration * 1000
@@ -64,7 +62,7 @@ export function SlotMachine({ onWinnerSelected }: SlotMachineProps) {
     isSpinning,
     participants,
     theme.spinDuration,
-    selectRandomWinner,
+    selectWinner,
     setWinner,
     addToPastWinners,
     setIsSpinning,

@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
-import { useSorteoStore } from "@/lib/sorteo-store"
+import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
 
 interface SorteoCascadeProps {
   onWinnerSelected: () => void
@@ -23,16 +23,14 @@ export function SorteoCascade({ onWinnerSelected }: SorteoCascadeProps) {
   const [finalWinner, setFinalWinner] = useState<string | null>(null)
   const [showWinner, setShowWinner] = useState(false)
 
-  const selectRandomWinner = useCallback(() => {
-    if (participants.length === 0) return null
-    const randomIndex = Math.floor(Math.random() * participants.length)
-    return participants[randomIndex]
+  const selectWinner = useCallback(() => {
+    return selectSecureWinner(participants)
   }, [participants])
 
   useEffect(() => {
     if (!isSpinning || participants.length === 0) return
 
-    const winner = selectRandomWinner()
+    const winner = selectWinner()
     if (!winner) return
 
     const spinDuration = theme.spinDuration * 1000
@@ -68,7 +66,7 @@ export function SorteoCascade({ onWinnerSelected }: SorteoCascadeProps) {
     isSpinning,
     participants,
     theme.spinDuration,
-    selectRandomWinner,
+    selectWinner,
     setWinner,
     addToPastWinners,
     setIsSpinning,

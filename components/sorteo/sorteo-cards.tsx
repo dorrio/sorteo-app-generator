@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
-import { useSorteoStore } from "@/lib/sorteo-store"
+import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
 
 interface SorteoCardsProps {
   onWinnerSelected: () => void
@@ -19,16 +19,14 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
   const [finalWinner, setFinalWinner] = useState<string | null>(null)
   const [showFinal, setShowFinal] = useState(false)
 
-  const selectRandomWinner = useCallback(() => {
-    if (participants.length === 0) return null
-    const randomIndex = Math.floor(Math.random() * participants.length)
-    return participants[randomIndex]
+  const selectWinner = useCallback(() => {
+    return selectSecureWinner(participants)
   }, [participants])
 
   useEffect(() => {
     if (!isSpinning || participants.length === 0) return
 
-    const winner = selectRandomWinner()
+    const winner = selectWinner()
     if (!winner) return
 
     // Shuffle cards
@@ -69,7 +67,7 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
     isSpinning,
     participants,
     theme.spinDuration,
-    selectRandomWinner,
+    selectWinner,
     setWinner,
     addToPastWinners,
     setIsSpinning,

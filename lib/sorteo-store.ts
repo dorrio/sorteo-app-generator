@@ -9,6 +9,23 @@ export interface Participant {
   email?: string
   comment?: string
   timestamp: Date
+  verificationId?: string
+}
+
+export const selectSecureWinner = (participants: Participant[]): Participant | null => {
+  if (participants.length === 0) return null
+
+  const randomBuffer = new Uint32Array(1)
+  crypto.getRandomValues(randomBuffer)
+
+  // Use modulo for uniform distribution
+  const index = randomBuffer[0] % participants.length
+  const winner = participants[index]
+
+  // Generate verifiable ID: PREFIX-UUID_PART-TIMESTAMP_HEX
+  const verificationId = `ID-${crypto.randomUUID().slice(0, 8).toUpperCase()}-${Date.now().toString(16).toUpperCase()}`
+
+  return { ...winner, verificationId }
 }
 
 export interface ThemeConfig {

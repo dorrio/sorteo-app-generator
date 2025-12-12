@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /private/
+
+# Host
+Host: https://sorteo-app-generator.vercel.app
+
+# Sitemaps
+Sitemap: https://sorteo-app-generator.vercel.app/sitemap.xml

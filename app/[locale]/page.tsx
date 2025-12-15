@@ -239,10 +239,10 @@ export default function SorteoApp() {
             >
               {/* Participants card */}
               <div className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-6">
-                <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+                <h2 className="font-bold text-lg mb-4 flex items-center gap-2">
                   <Sparkles className="w-5 h-5" style={{ color: theme.primaryColor }} />
                   {t("participants_title")}
-                </h3>
+                </h2>
 
                 {participantDisplay === "bubbles" ? <FloatingBubbles /> : <ParticipantManager />}
 

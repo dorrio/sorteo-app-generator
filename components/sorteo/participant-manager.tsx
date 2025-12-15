@@ -197,6 +197,7 @@ const ParticipantItem = memo(function ParticipantItem({
             variant="ghost"
             onClick={handleSave}
             className="h-8 w-8 text-green-500 hover:text-green-600"
+            aria-label={t("save_edit")}
           >
             <Check className="w-4 h-4" />
           </Button>
@@ -205,6 +206,7 @@ const ParticipantItem = memo(function ParticipantItem({
             variant="ghost"
             onClick={onCancel}
             className="h-8 w-8 text-destructive hover:text-destructive"
+            aria-label={t("cancel_edit")}
           >
             <X className="w-4 h-4" />
           </Button>
@@ -562,6 +564,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                   size="sm"
                   style={{ backgroundColor: theme.primaryColor }}
                   className="text-primary-foreground h-9"
+                  aria-label={t("add_single")}
                 >
                   <Plus className="w-4 h-4" />
                 </Button>

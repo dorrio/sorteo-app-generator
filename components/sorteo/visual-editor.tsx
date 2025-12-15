@@ -201,7 +201,7 @@ export function VisualEditor() {
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-border">
               <h2 className="text-lg font-display font-bold">{t("title")}</h2>
-              <Button variant="ghost" size="icon" onClick={() => setIsEditorOpen(false)}>
+              <Button variant="ghost" size="icon" onClick={() => setIsEditorOpen(false)} aria-label={t("close_editor")}>
                 <X className="w-5 h-5" />
               </Button>
             </div>

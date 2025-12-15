@@ -2,6 +2,7 @@
     "HomePage": {
         "loading": "Loading Sorteo Pro...",
         "customize": "Customize",
+        "verify_sorteo": "Verify Giveaway",
         "spinning": "Spinning...",
         "start_button": "Start Giveaway",
         "min_participants_warning": "Add at least 2 participants to start",
@@ -59,6 +60,7 @@
     },
     "VisualEditor": {
         "title": "Visual Editor",
+        "close_editor": "Close Editor",
         "tabs": {
             "presets": "Presets",
             "colors": "Colors",

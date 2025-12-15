@@ -10,6 +10,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import {
   Plus,
   Upload,
   Trash2,
@@ -71,24 +76,38 @@ function DuplicateItem({
             className={`bg-background border-border flex-1 ${isApplied ? "border-green-500/50" : ""}`}
             placeholder={t("duplicates.edit_placeholder")}
           />
-          <Button
-            onClick={handleApply}
-            size="icon"
-            variant={isApplied ? "default" : "outline"}
-            className={`shrink-0 ${isApplied ? "bg-green-600 hover:bg-green-700" : ""}`}
-            disabled={!hasChanges && isApplied}
-            title={isApplied ? t("duplicates.applied") : t("duplicates.apply_change")}
-          >
-            {isApplied ? <Check className="w-4 h-4" /> : <RefreshCw className="w-4 h-4" />}
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                onClick={handleApply}
+                size="icon"
+                variant={isApplied ? "default" : "outline"}
+                className={`shrink-0 ${isApplied ? "bg-green-600 hover:bg-green-700" : ""}`}
+                disabled={!hasChanges && isApplied}
+                aria-label={isApplied ? t("duplicates.applied") : t("duplicates.apply_change")}
+              >
+                {isApplied ? <Check className="w-4 h-4" /> : <RefreshCw className="w-4 h-4" />}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{isApplied ? t("duplicates.applied") : t("duplicates.apply_change")}</p>
+            </TooltipContent>
+          </Tooltip>
         </div>
-        <button
-          onClick={() => onRemove(index)}
-          className="p-2 rounded-md hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
-          title={t("delete_action")}
-        >
-          <X className="w-4 h-4" />
-        </button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              onClick={() => onRemove(index)}
+              className="p-2 rounded-md hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
+              aria-label={t("delete_action")}
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{t("delete_action")}</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
       <div className="flex items-center justify-between">
         <p className="text-xs text-muted-foreground">
@@ -530,13 +549,21 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                 onKeyDown={(e) => e.key === "Enter" && handleAddSingle()}
                 className="flex-1 bg-card border-border"
               />
-              <Button
-                onClick={handleAddSingle}
-                style={{ backgroundColor: theme.primaryColor }}
-                className="text-primary-foreground"
-              >
-                <Plus className="w-5 h-5" />
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    onClick={handleAddSingle}
+                    style={{ backgroundColor: theme.primaryColor }}
+                    className="text-primary-foreground"
+                    aria-label={t("add_participants_button", { count: 1 })}
+                  >
+                    <Plus className="w-5 h-5" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{t("add_participants_button", { count: 1 })}</p>
+                </TooltipContent>
+              </Tooltip>
             </motion.div>
           )}
 
@@ -676,20 +703,34 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                           {participant.name}
                         </span>
                         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button
-                            onClick={() => startEditing(participant.id, participant.name)}
-                            className="p-1.5 rounded hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
-                            title={t("edit_action")}
-                          >
-                            <Pencil className="w-3.5 h-3.5" />
-                          </button>
-                          <button
-                            onClick={() => removeParticipant(participant.id)}
-                            className="p-1.5 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
-                            title={t("delete_action")}
-                          >
-                            <X className="w-3.5 h-3.5" />
-                          </button>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <button
+                                onClick={() => startEditing(participant.id, participant.name)}
+                                className="p-1.5 rounded hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
+                                aria-label={t("edit_action")}
+                              >
+                                <Pencil className="w-3.5 h-3.5" />
+                              </button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>{t("edit_action")}</p>
+                            </TooltipContent>
+                          </Tooltip>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <button
+                                onClick={() => removeParticipant(participant.id)}
+                                className="p-1.5 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
+                                aria-label={t("delete_action")}
+                              >
+                                <X className="w-3.5 h-3.5" />
+                              </button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>{t("delete_action")}</p>
+                            </TooltipContent>
+                          </Tooltip>
                         </div>
                       </>
                     )}

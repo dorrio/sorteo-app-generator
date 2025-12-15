@@ -3,9 +3,9 @@
 import type React from "react"
 import { useTranslations } from "next-intl"
 
-import { useState, useRef } from "react"
+import { useState, useRef, memo, useCallback, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { useSorteoStore } from "@/lib/sorteo-store"
+import { useSorteoStore, type Participant, type ThemeConfig } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -120,6 +120,140 @@ function DuplicateItem({
   )
 }
 
+/**
+ * ⚡ Performance Optimization:
+ * ParticipantItem is memoized to prevent unnecessary re-renders of the entire list
+ * when the parent component updates (e.g. typing in the "Add Participant" input).
+ *
+ * Local state (localName) is used for editing to ensure that typing in one item's
+ * edit field does not trigger re-renders for other items in the list.
+ */
+const ParticipantItem = memo(function ParticipantItem({
+  participant,
+  index,
+  isEditing,
+  theme,
+  onStartEdit,
+  onSave,
+  onCancel,
+  onRemove,
+}: {
+  participant: Participant
+  index: number
+  isEditing: boolean
+  theme: ThemeConfig
+  onStartEdit: (id: string) => void
+  onSave: (id: string, newName: string) => void
+  onCancel: () => void
+  onRemove: (id: string) => void
+}) {
+  const t = useTranslations("ParticipantManager")
+  const [localName, setLocalName] = useState(participant.name)
+
+  useEffect(() => {
+    if (isEditing) {
+      setLocalName(participant.name)
+    }
+  }, [isEditing, participant.name])
+
+  const handleSave = () => {
+    if (localName.trim()) {
+      onSave(participant.id, localName.trim())
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") handleSave()
+    if (e.key === "Escape") onCancel()
+  }
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 20 }}
+      transition={{ delay: index * 0.02 }}
+      className="group flex items-center gap-3 p-3 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors"
+    >
+      <span
+        className="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-medium"
+        style={{ color: theme.primaryColor, backgroundColor: `${theme.primaryColor}20` }}
+      >
+        {index + 1}
+      </span>
+
+      {isEditing ? (
+        <div className="flex-1 flex items-center gap-2">
+          <Input
+            value={localName}
+            onChange={(e) => setLocalName(e.target.value)}
+            onKeyDown={handleKeyDown}
+            autoFocus
+            className="flex-1 h-8 bg-background"
+          />
+          <Button
+            size="icon"
+            variant="ghost"
+            onClick={handleSave}
+            className="h-8 w-8 text-green-500 hover:text-green-600"
+          >
+            <Check className="w-4 h-4" />
+          </Button>
+          <Button
+            size="icon"
+            variant="ghost"
+            onClick={onCancel}
+            className="h-8 w-8 text-destructive hover:text-destructive"
+          >
+            <X className="w-4 h-4" />
+          </Button>
+        </div>
+      ) : (
+        <>
+          <span
+            className="flex-1 truncate cursor-pointer hover:underline decoration-dotted underline-offset-4"
+            onClick={() => onStartEdit(participant.id)}
+            title={t("edit_tooltip")}
+          >
+            {participant.name}
+          </span>
+          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => onStartEdit(participant.id)}
+                  className="p-1.5 rounded hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
+                  aria-label={t("edit_action")}
+                >
+                  <Pencil className="w-3.5 h-3.5" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{t("edit_action")}</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => onRemove(participant.id)}
+                  className="p-1.5 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
+                  aria-label={t("delete_action")}
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{t("delete_action")}</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+        </>
+      )}
+    </motion.div>
+  )
+})
+
 export function ParticipantManager({ showOnlyInput = false }: ParticipantManagerProps) {
   const {
     participants,
@@ -135,30 +269,27 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
   const [singleName, setSingleName] = useState("")
   const [bulkText, setBulkText] = useState("")
   const [editingId, setEditingId] = useState<string | null>(null)
-  const [editingName, setEditingName] = useState("")
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const [showDuplicateModal, setShowDuplicateModal] = useState(false)
   const [pendingNames, setPendingNames] = useState<string[]>([])
   const [duplicates, setDuplicates] = useState<DuplicateInfo[]>([])
 
-  const startEditing = (id: string, currentName: string) => {
+  const startEditing = useCallback((id: string) => {
     setEditingId(id)
-    setEditingName(currentName)
-  }
+  }, [])
 
-  const saveEdit = () => {
-    if (editingId && editingName.trim()) {
-      updateParticipant(editingId, editingName.trim())
-    }
-    setEditingId(null)
-    setEditingName("")
-  }
+  const saveEdit = useCallback(
+    (id: string, newName: string) => {
+      updateParticipant(id, newName)
+      setEditingId(null)
+    },
+    [updateParticipant],
+  )
 
-  const cancelEdit = () => {
+  const cancelEdit = useCallback(() => {
     setEditingId(null)
-    setEditingName("")
-  }
+  }, [])
 
   const findDuplicates = (newNames: string[]): { duplicates: DuplicateInfo[]; uniqueNames: string[] } => {
     const existingNames = participants.map((p) => p.name.toLowerCase().trim())
@@ -649,92 +780,17 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
             <div className="max-h-[300px] overflow-y-auto space-y-2 pr-2">
               <AnimatePresence>
                 {participants.map((participant, index) => (
-                  <motion.div
+                  <ParticipantItem
                     key={participant.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    transition={{ delay: index * 0.02 }}
-                    className="group flex items-center gap-3 p-3 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors"
-                  >
-                    <span
-                      className="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-medium"
-                      style={{ color: theme.primaryColor, backgroundColor: `${theme.primaryColor}20` }}
-                    >
-                      {index + 1}
-                    </span>
-
-                    {editingId === participant.id ? (
-                      <div className="flex-1 flex items-center gap-2">
-                        <Input
-                          value={editingName}
-                          onChange={(e) => setEditingName(e.target.value)}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") saveEdit()
-                            if (e.key === "Escape") cancelEdit()
-                          }}
-                          autoFocus
-                          className="flex-1 h-8 bg-background"
-                        />
-                        <Button
-                          size="icon"
-                          variant="ghost"
-                          onClick={saveEdit}
-                          className="h-8 w-8 text-green-500 hover:text-green-600"
-                        >
-                          <Check className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          size="icon"
-                          variant="ghost"
-                          onClick={cancelEdit}
-                          className="h-8 w-8 text-destructive hover:text-destructive"
-                        >
-                          <X className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    ) : (
-                      <>
-                        <span
-                          className="flex-1 truncate cursor-pointer hover:underline decoration-dotted underline-offset-4"
-                          onClick={() => startEditing(participant.id, participant.name)}
-                          title={t("edit_tooltip")}
-                        >
-                          {participant.name}
-                        </span>
-                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <button
-                                onClick={() => startEditing(participant.id, participant.name)}
-                                className="p-1.5 rounded hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
-                                aria-label={t("edit_action")}
-                              >
-                                <Pencil className="w-3.5 h-3.5" />
-                              </button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>{t("edit_action")}</p>
-                            </TooltipContent>
-                          </Tooltip>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <button
-                                onClick={() => removeParticipant(participant.id)}
-                                className="p-1.5 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
-                                aria-label={t("delete_action")}
-                              >
-                                <X className="w-3.5 h-3.5" />
-                              </button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>{t("delete_action")}</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </div>
-                      </>
-                    )}
-                  </motion.div>
+                    participant={participant}
+                    index={index}
+                    isEditing={editingId === participant.id}
+                    theme={theme}
+                    onStartEdit={startEditing}
+                    onSave={saveEdit}
+                    onCancel={cancelEdit}
+                    onRemove={removeParticipant}
+                  />
                 ))}
               </AnimatePresence>
             </div>

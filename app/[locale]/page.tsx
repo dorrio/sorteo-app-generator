@@ -146,10 +146,10 @@ export default function SorteoApp() {
 
             <div className="flex items-center gap-2">
               <LanguageSwitcher />
-              <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title="Verificar Sorteo">
+              <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title="Verificar Sorteo" aria-label={t("verify_sorteo")}>
                 <ShieldCheck className="w-5 h-5" />
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setIsEditorOpen(true)} className="gap-2">
+              <Button variant="outline" size="sm" onClick={() => setIsEditorOpen(true)} className="gap-2" aria-label={t("customize")}>
                 <Settings2 className="w-4 h-4" />
                 <span className="hidden sm:inline">{t("customize")}</span>
               </Button>

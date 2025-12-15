@@ -2,6 +2,7 @@
     "HomePage": {
         "loading": "Carregando Sorteio Pro...",
         "customize": "Personalizar",
+        "verify_sorteo": "Verificar Sorteio",
         "spinning": "Sorteando...",
         "start_button": "Iniciar Sorteio",
         "min_participants_warning": "Adicione pelo menos 2 participantes para iniciar",
@@ -56,6 +57,7 @@
     },
     "VisualEditor": {
         "title": "Editor Visual",
+        "close_editor": "Fechar Editor",
         "tabs": {
             "presets": "Estilos",
             "colors": "Cores",

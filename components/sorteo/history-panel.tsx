@@ -22,10 +22,10 @@ export function HistoryPanel() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold flex items-center gap-2">
+        <h2 className="font-semibold flex items-center gap-2">
           <Clock className="w-4 h-4" />
           {t("title")} ({pastWinners.length})
-        </h3>
+        </h2>
         <Button variant="ghost" size="sm" onClick={clearHistory} className="text-destructive hover:text-destructive">
           <Trash2 className="w-4 h-4 mr-1" />
           {t("clear")}

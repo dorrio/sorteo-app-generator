@@ -19,6 +19,7 @@ import { LanguageSwitcher } from "@/components/language-switcher"
 import { SeoContent } from "@/components/sorteo/seo-content"
 import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck } from "lucide-react"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
 
 export default function SorteoApp() {
   const t = useTranslations("HomePage")

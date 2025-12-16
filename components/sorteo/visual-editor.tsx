@@ -207,10 +207,18 @@ export function VisualEditor() {
             </div>
 
             {/* Tabs */}
-            <div className="flex border-b border-border overflow-x-auto">
+            <div
+              className="flex border-b border-border overflow-x-auto"
+              role="tablist"
+              aria-label={t("title")}
+            >
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
+                  id={`tab-${tab.id}`}
+                  role="tab"
+                  aria-selected={activeTab === tab.id}
+                  aria-controls={`panel-${tab.id}`}
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 min-w-[70px] flex flex-col items-center gap-1 py-3 px-2 text-xs font-medium transition-colors ${activeTab === tab.id ? "text-primary border-b-2" : "text-muted-foreground hover:text-foreground"
                     }`}
@@ -228,6 +236,10 @@ export function VisualEditor() {
                 {activeTab === "presets" && (
                   <motion.div
                     key="presets"
+                    id="panel-presets"
+                    role="tabpanel"
+                    aria-labelledby="tab-presets"
+                    tabIndex={0}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
@@ -270,6 +282,10 @@ export function VisualEditor() {
                 {activeTab === "colors" && (
                   <motion.div
                     key="colors"
+                    id="panel-colors"
+                    role="tabpanel"
+                    aria-labelledby="tab-colors"
+                    tabIndex={0}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
@@ -365,6 +381,10 @@ export function VisualEditor() {
                 {activeTab === "text" && (
                   <motion.div
                     key="text"
+                    id="panel-text"
+                    role="tabpanel"
+                    aria-labelledby="tab-text"
+                    tabIndex={0}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
@@ -411,6 +431,10 @@ export function VisualEditor() {
                 {activeTab === "effects" && (
                   <motion.div
                     key="effects"
+                    id="panel-effects"
+                    role="tabpanel"
+                    aria-labelledby="tab-effects"
+                    tabIndex={0}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
@@ -553,6 +577,10 @@ export function VisualEditor() {
                 {activeTab === "background" && (
                   <motion.div
                     key="background"
+                    id="panel-background"
+                    role="tabpanel"
+                    aria-labelledby="tab-background"
+                    tabIndex={0}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}

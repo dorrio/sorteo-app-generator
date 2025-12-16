@@ -5,3 +5,14 @@
 **Bridge:** Add explicit `aria-label` attributes to these buttons using localized strings. This ensures that even when text is hidden or absent, the button's purpose is clearly communicated in the accessibility tree.
 
 **Signal:** Improved crawlability for interactive elements, better Mobile-First indexing scores (as touch targets are now semantically defined), and WCAG compliance for button naming.
+
+## 2024-12-15 - [Visual Editor]
+
+**Blocker:** The visual editor tabs were implemented using generic buttons and divs, lacking the semantic structure required for screen readers and bots to understand the relationship between the tabs and their content panels. This creates a "Semantic Void" where the visual hierarchy is not reflected in the code structure.
+
+**Bridge:** Refactored the tab interface to use the WAI-ARIA Tab pattern:
+*   Added `role="tablist"` to the container with an appropriate label.
+*   Added `role="tab"`, `aria-selected`, and `aria-controls` to the tab buttons.
+*   Added `role="tabpanel"`, `aria-labelledby`, and `tabIndex="0"` to the content panels.
+
+**Signal:** Improved accessibility for screen reader users who can now navigate the tabs using standard keyboard interactions and understand the context of the content. Search engines can better understand the structure of the editor interface.

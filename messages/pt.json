@@ -190,5 +190,25 @@
             "not_found_message": "Este ID não corresponde a nenhum sorteio registrado neste dispositivo.",
             "invalid_format_message": "O formato do ID é inválido."
         }
+    },
+    "SEOContent": {
+        "what_is_title": "O que é o Sorteio Pro?",
+        "what_is_text": "O Sorteio Pro é a ferramenta definitiva para criar sorteios e concursos virais. Projetada especificamente para influenciadores, criadores de conteúdo e gerentes de comunidade, permite escolher vencedores aleatórios de forma transparente e envolvente.",
+        "features_title": "Principais Recursos",
+        "feature_1_title": "Justo e Transparente",
+        "feature_1_desc": "Usa geração de números aleatórios criptograficamente seguros para garantir justiça.",
+        "feature_2_title": "Altamente Personalizável",
+        "feature_2_desc": "Escolha entre vários temas como Caça-níquel, Roleta ou Matrix para combinar com sua marca.",
+        "feature_3_title": "Aumento de Engajamento",
+        "feature_3_desc": "Animações cinematográficas e efeitos sonoros criam emoção para seu público.",
+        "how_to_title": "Como fazer um sorteio",
+        "step_1": "Insira os nomes dos participantes manualmente ou cole uma lista.",
+        "step_2": "Personalize a aparência usando o editor visual.",
+        "step_3": "Clique em 'Iniciar' e veja a mágica acontecer!",
+        "faq_title": "Perguntas Frequentes",
+        "faq_1_question": "O Sorteio Pro é gratuito?",
+        "faq_1_answer": "Sim, o Sorteio Pro é totalmente gratuito para todos os seus sorteios.",
+        "faq_2_question": "Posso salvar minhas configurações?",
+        "faq_2_answer": "Sim, as configurações do seu tema são salvas localmente no seu navegador."
     }
 }

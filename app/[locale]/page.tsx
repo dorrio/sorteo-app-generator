@@ -16,6 +16,7 @@ import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { FloatingBubbles } from "@/components/sorteo/floating-bubbles"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
+import { SeoContent } from "@/components/sorteo/seo-content"
 import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck } from "lucide-react"
 import { useTranslations } from "next-intl"
 
@@ -261,8 +262,11 @@ export default function SorteoApp() {
           </div>
         </main>
 
+        {/* SEO Content */}
+        <SeoContent />
+
         {/* Footer */}
-        <footer className="border-t border-border/50 mt-12">
+        <footer className="border-t border-border/50">
           <div className="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
             <p>{t("footer_text")}</p>
           </div>

@@ -190,5 +190,25 @@
             "not_found_message": "This ID does not correspond to any giveaway registered on this device.",
             "invalid_format_message": "The ID format is invalid."
         }
+    },
+    "SEOContent": {
+        "what_is_title": "What is Sorteo Pro?",
+        "what_is_text": "Sorteo Pro is the ultimate tool for creating viral giveaways and contests. Designed specifically for influencers, content creators, and community managers, it allows you to pick random winners transparently and engagingly.",
+        "features_title": "Key Features",
+        "feature_1_title": "Fair & Transparent",
+        "feature_1_desc": "Uses cryptographically secure random number generation to ensure fairness.",
+        "feature_2_title": "Highly Customizable",
+        "feature_2_desc": "Choose from multiple themes like Slot Machine, Roulette, or Matrix to match your brand.",
+        "feature_3_title": "Engagement Boost",
+        "feature_3_desc": "Cinematic animations and sound effects create excitement for your audience.",
+        "how_to_title": "How to Run a Giveaway",
+        "step_1": "Enter participant names manually or paste a list.",
+        "step_2": "Customize the look and feel using the visual editor.",
+        "step_3": "Click 'Start' and watch the magic happen!",
+        "faq_title": "Frequently Asked Questions",
+        "faq_1_question": "Is Sorteo Pro free?",
+        "faq_1_answer": "Yes, Sorteo Pro is completely free to use for all your giveaways.",
+        "faq_2_question": "Can I save my settings?",
+        "faq_2_answer": "Yes, your theme settings are saved locally in your browser."
     }
 }

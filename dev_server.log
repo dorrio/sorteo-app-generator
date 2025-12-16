@@ -1,0 +1,40 @@
+
+> my-v0-project@0.1.0 dev
+> next dev
+
+   ▲ Next.js 16.0.7 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://192.168.0.2:3000
+
+ ✓ Starting...
+ ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+ ✓ Ready in 2.8s
+ ○ Compiling /[locale]/alternativa-appsorteos ...
+Error: Route "/[locale]/alternativa-appsorteos" used `params.locale`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (app/[locale]/alternativa-appsorteos/page.tsx:7:52)
+   5 | import Link from 'next/link';
+   6 |
+>  7 | export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+     |                                                    ^
+   8 |   const t = await getTranslations({ locale, namespace: 'Versus' });
+   9 |
+  10 |   return {
+ GET /es/alternativa-appsorteos 200 in 4.7s (compile: 4.1s, proxy.ts: 147ms, render: 461ms)
+Error: Route "/[locale]/alternativa-appsorteos" used `params.locale`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (app/[locale]/alternativa-appsorteos/page.tsx:7:52)
+   5 | import Link from 'next/link';
+   6 |
+>  7 | export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+     |                                                    ^
+   8 |   const t = await getTranslations({ locale, namespace: 'Versus' });
+   9 |
+  10 |   return {
+ GET /es/alternativa-appsorteos 200 in 428ms (compile: 81ms, proxy.ts: 32ms, render: 316ms)
+ ✓ Compiled in 136ms
+ ✓ Compiled in 106ms
+ ✓ Compiled in 73ms
+ ✓ Compiled in 67ms
+ ✓ Compiled in 383ms
+ GET /es/alternativa-appsorteos 200 in 811ms (compile: 201ms, proxy.ts: 194ms, render: 416ms)
+ ✓ Compiled in 90ms
+ GET /es/alternativa-appsorteos 200 in 478ms (compile: 124ms, proxy.ts: 8ms, render: 346ms)

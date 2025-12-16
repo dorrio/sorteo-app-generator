@@ -1,56 +1,67 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useTranslations } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check } from "lucide-react"
+import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 
-export default function VerifyPage() {
+function VerifyContent() {
     const t = useTranslations("VerificationPage")
     const { theme, pastWinners } = useSorteoStore()
-    const [inputId, setInputId] = useState("")
+    const searchParams = useSearchParams()
+    const initialId = searchParams.get("id") || ""
+
+    const [inputId, setInputId] = useState(initialId)
     const [result, setResult] = useState<{
-        valid: boolean
+        status: "valid" | "partial" | "invalid"
         participant?: { name: string; timestamp: Date }
+        date?: Date
         error?: string
     } | null>(null)
 
-    const handleVerify = () => {
-        if (!inputId.trim()) return
+    // Auto-verify if ID is in URL
+    useEffect(() => {
+        if (initialId) {
+             verifyId(initialId)
+        }
+    }, [initialId, pastWinners]) // Added pastWinners to dependency so it reverifies if store loads later
+
+    const verifyId = (idToVerify: string) => {
+        const id = idToVerify.trim().toUpperCase()
+        if (!id) return
 
         // Format: ID-{UUID}-{TIMESTAMP_HEX}
-        // Regex to basic check format 
         const idRegex = /^ID-[A-F0-9]{8}-[A-F0-9]+$/
 
-        if (!idRegex.test(inputId.trim().toUpperCase())) {
+        if (!idRegex.test(id)) {
             setResult({
-                valid: false,
+                status: "invalid",
                 error: t("result.invalid_format_message"),
             })
             return
         }
 
         // Check local storage for match
-        const foundWinner = pastWinners.find((w) => w.verificationId === inputId.trim().toUpperCase())
+        const foundWinner = pastWinners.find((w) => w.verificationId === id)
 
         if (foundWinner) {
             setResult({
-                valid: true,
+                status: "valid",
                 participant: {
                     name: foundWinner.name,
-                    timestamp: foundWinner.timestamp, // In real scenario we might decode from ID too
+                    timestamp: foundWinner.timestamp,
                 },
             })
         } else {
-            // Since we only have client-side storage, if not found here, we can't verify it fully.
-            // We can decode the timestamp from the ID as a partial verification.
+            // Partial Verification Logic
             try {
-                const parts = inputId.trim().split('-')
+                const parts = id.split('-')
                 const timestampHex = parts[2]
                 const timestamp = parseInt(timestampHex, 16)
                 const date = new Date(timestamp)
@@ -60,18 +71,19 @@ export default function VerifyPage() {
                 }
 
                 setResult({
-                    valid: false,
-                    error: t("result.not_found_message"),
-                    // We could show "Format Valid" but "Record Not Found"
+                    status: "partial",
+                    date: date,
                 })
             } catch (e) {
                 setResult({
-                    valid: false,
+                    status: "invalid",
                     error: t("result.invalid_format_message"),
                 })
             }
         }
     }
+
+    const handleVerify = () => verifyId(inputId)
 
     return (
         <div
@@ -157,18 +169,32 @@ export default function VerifyPage() {
                                 exit={{ opacity: 0, height: 0 }}
                                 className="mt-6"
                             >
-                                <Card className={`border-l-4 ${result.valid ? "border-green-500" : "border-red-500"} bg-card/95 backdrop-blur shadow-xl`}>
+                                <Card className={`border-l-4 ${
+                                    result.status === "valid" ? "border-green-500" :
+                                    result.status === "partial" ? "border-yellow-500" : "border-red-500"
+                                } bg-card/95 backdrop-blur shadow-xl`}>
                                     <CardContent className="pt-6">
                                         <div className="flex items-start gap-4">
-                                            <div className={`p-3 rounded-full ${result.valid ? "bg-green-500/20 text-green-500" : "bg-red-500/20 text-red-500"}`}>
-                                                {result.valid ? <Check className="w-6 h-6" /> : <ShieldAlert className="w-6 h-6" />}
+                                            <div className={`p-3 rounded-full ${
+                                                result.status === "valid" ? "bg-green-500/20 text-green-500" :
+                                                result.status === "partial" ? "bg-yellow-500/20 text-yellow-500" : "bg-red-500/20 text-red-500"
+                                            }`}>
+                                                {result.status === "valid" ? <Check className="w-6 h-6" /> :
+                                                 result.status === "partial" ? <ShieldCheck className="w-6 h-6" /> :
+                                                 <ShieldAlert className="w-6 h-6" />}
                                             </div>
                                             <div className="flex-1 space-y-1">
-                                                <h4 className={`font-bold text-lg ${result.valid ? "text-green-500" : "text-red-500"}`}>
-                                                    {result.valid ? t("result.valid_title") : t("result.invalid_title")}
+                                                <h4 className={`font-bold text-lg ${
+                                                    result.status === "valid" ? "text-green-500" :
+                                                    result.status === "partial" ? "text-yellow-500" : "text-red-500"
+                                                }`}>
+                                                    {result.status === "valid" ? t("result.valid_title") :
+                                                     result.status === "partial" ? "Valid Format (External)" :
+                                                     t("result.invalid_title")}
                                                 </h4>
 
-                                                {result.valid && result.participant && (
+                                                {/* FULL MATCH */}
+                                                {result.status === "valid" && result.participant && (
                                                     <div className="mt-4 space-y-3">
                                                         <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30">
                                                             <User className="w-5 h-5 opacity-70" />
@@ -188,16 +214,35 @@ export default function VerifyPage() {
                                                         </div>
                                                         <div className="flex items-center gap-2 text-xs text-green-500 mt-2">
                                                             <ShieldCheck className="w-3 h-3" />
-                                                            {t("result.valid_format")}
-                                                        </div>
-                                                        <div className="flex items-center gap-2 text-xs text-green-500">
-                                                            <ShieldCheck className="w-3 h-3" />
                                                             {t("result.local_record")}
                                                         </div>
                                                     </div>
                                                 )}
 
-                                                {!result.valid && (
+                                                {/* PARTIAL MATCH */}
+                                                {result.status === "partial" && result.date && (
+                                                    <div className="mt-4 space-y-3">
+                                                        <p className="text-sm text-muted-foreground mb-2">
+                                                            This ID has a valid format and was generated on:
+                                                        </p>
+                                                        <div className="flex items-center gap-3 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
+                                                            <Calendar className="w-5 h-5 text-yellow-500" />
+                                                            <div>
+                                                                <p className="text-xs text-muted-foreground uppercase">{t("result.date_label")}</p>
+                                                                <p className="font-medium text-yellow-500">
+                                                                    {result.date.toLocaleString()}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex items-start gap-2 text-xs text-muted-foreground mt-2 bg-muted/50 p-2 rounded">
+                                                            <AlertTriangle className="w-3 h-3 mt-0.5 shrink-0" />
+                                                            <span>Winner details are only available on the device that ran the giveaway.</span>
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {/* INVALID */}
+                                                {result.status === "invalid" && (
                                                     <p className="text-muted-foreground text-sm mt-2">
                                                         {result.error}
                                                     </p>
@@ -212,5 +257,13 @@ export default function VerifyPage() {
                 </motion.div>
             </div>
         </div>
+    )
+}
+
+export default function VerifyPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+            <VerifyContent />
+        </Suspense>
     )
 }

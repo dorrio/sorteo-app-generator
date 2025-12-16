@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ConfettiEffect } from "./confetti-effect"
@@ -40,17 +40,25 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
     }
   }, [showWinnerCeremony])
 
+  const locale = useLocale()
+
   if (!showWinnerCeremony || !winner) return null
 
+  // Viral Optimization: Create a deep link to the verification page
+  const baseUrl = typeof window !== "undefined" ? window.location.origin : ""
+  const shareUrl = winner.verificationId
+    ? `${baseUrl}/${locale}/verify?id=${winner.verificationId}`
+    : typeof window !== "undefined" ? window.location.href : ""
+
+  // Compelling share text
   const shareText = t("share_text", { name: winner.name })
-  const shareUrl = typeof window !== "undefined" ? window.location.href : ""
 
   const shareNative = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
           title: t("share_title"),
-          text: t("share_text", { name: winner.name }),
+          text: shareText,
           url: shareUrl,
         })
       } catch {

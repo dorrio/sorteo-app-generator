@@ -5,9 +5,12 @@ import { useSorteoStore } from "@/lib/sorteo-store"
 
 export function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const { theme } = useSorteoStore()
+  // ⚡ Performance: Select only necessary theme properties to prevent re-renders on unrelated theme changes
+  const showParticles = useSorteoStore((state) => state.theme.showParticles)
+  const showDynamicBackground = useSorteoStore((state) => state.theme.showDynamicBackground)
+  const primaryColor = useSorteoStore((state) => state.theme.primaryColor)
 
-  const isEnabled = theme.showParticles && (theme.showDynamicBackground ?? true)
+  const isEnabled = showParticles && (showDynamicBackground ?? true)
 
   useEffect(() => {
     if (!isEnabled) return
@@ -58,7 +61,7 @@ export function ParticleBackground() {
         : { r: 212, g: 175, b: 55 }
     }
 
-    const rgb = hexToRgb(theme.primaryColor)
+    const rgb = hexToRgb(primaryColor)
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -100,7 +103,7 @@ export function ParticleBackground() {
       window.removeEventListener("resize", resizeCanvas)
       cancelAnimationFrame(animationId)
     }
-  }, [isEnabled, theme.primaryColor])
+  }, [isEnabled, primaryColor])
 
   if (!isEnabled) return null
 

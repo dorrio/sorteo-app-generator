@@ -16,14 +16,3 @@
 *   Added `role="tabpanel"`, `aria-labelledby`, and `tabIndex="0"` to the content panels.
 
 **Signal:** Improved accessibility for screen reader users who can now navigate the tabs using standard keyboard interactions and understand the context of the content. Search engines can better understand the structure of the editor interface.
-
-## 2025-05-18 - [SEO Content Component]
-
-**Blocker:** Key content sections (Features, How-To Steps, FAQs) were implemented using generic `div` containers. This "div soup" fails to communicate the structural relationships of the content to search engines and assistive technologies (e.g., that the FAQ is a list of question/answer pairs, or that features are a list of items).
-
-**Bridge:** Refactored the semantic structure:
-*   **Features & Steps:** Converted generic `div` grids into `ul`/`ol` lists with `li` items.
-*   **FAQ:** Converted the Q&A section into a Description List (`dl`) with `dt` (terms) and `dd` (definitions).
-*   **Landmarks:** Wrapped sections in `<section>` tags with `aria-label`s to create navigable landmarks.
-
-**Signal:** Enhanced understanding for Googlebot (better discrimination of list items and Q&A structures) and improved navigation for screen readers. This directly supports the `FAQPage` schema by mirroring it in the HTML structure.

@@ -15,7 +15,9 @@
         "title": "Sorteio Pro | Sorteios Premium para Influencers",
         "description": "A ferramenta definitiva para criar sorteios virais. Feita para criadores de conteúdo e influencers que querem impressionar sua audiência.",
         "og_title": "Sorteio Pro | Sorteios Premium para Influencers",
-        "og_description": "Crie sorteios épicos com animações cinematográficas"
+        "og_description": "Crie sorteios épicos com animações cinematográficas",
+        "verify_title": "Verificar Resultado do Sorteio | Sorteio Pro",
+        "verify_description": "Valide a autenticidade deste resultado do sorteio usando nosso sistema de verificação criptográfica seguro."
     },
     "LanguageSwitcher": {
         "switchLanguage": "Mudar idioma"
@@ -181,6 +183,7 @@
         "input_placeholder": "Ex: ID-A1B2C3D4-18E...",
         "verify_button": "Verificar ID",
         "back_button": "Voltar ao Início",
+        "create_your_own": "Criar Sorteio Grátis",
         "result": {
             "valid_title": "ID Válido",
             "invalid_title": "ID Não Encontrado",
@@ -247,7 +250,7 @@
         "why_us": {
             "title": "Por que somos melhores que sites parecidos com EasyPromos grátis?",
             "p1": "Muitos criadores procuram 'sites parecidos com EasyPromos grátis' porque as ferramentas tradicionais ficaram muito caras. Sorteio Pro nasceu para quebrar essa barreira.",
-            "p2": "Ao contrário da concorrência, não cobramos pelo sucesso do seu sorteio. Se você tem 10.000 comentários, ótimo! Não penalizamos você por isso.",
+            "p2": "Ao contrário da concorrência, não cobramos pelo sucesso do seu sorteio. Se você tem 10.000 comentários, ótimo! Não penalizamos por isso.",
             "title_2": "O concorrente do AppSorteos que cuida do seu bolso",
             "p3": "Pare de calcular quanto custará seu próximo sorteio. Com Sorteio Pro, seu orçamento é zero."
         },

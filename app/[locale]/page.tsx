@@ -270,12 +270,21 @@ export default function SorteoApp() {
         <footer className="border-t border-border/50">
           <div className="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-muted-foreground flex flex-col items-center gap-2">
             <p>{t("footer_text")}</p>
-            <Link
-              href="/alternativa-appsorteos"
-              className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
-            >
-              {t("footer_versus_link")}
-            </Link>
+            <div className="flex gap-4">
+              <Link
+                href="/verify"
+                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
+              >
+                {t("verify_sorteo")}
+              </Link>
+              <span className="text-muted-foreground/30 text-xs">•</span>
+              <Link
+                href="/alternativa-appsorteos"
+                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
+              >
+                {t("footer_versus_link")}
+              </Link>
+            </div>
           </div>
         </footer>
       </div>

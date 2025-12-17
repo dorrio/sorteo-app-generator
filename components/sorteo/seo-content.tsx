@@ -49,11 +49,30 @@ export function SeoContent() {
     })),
   }
 
+  const softwareLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Sorteo Pro',
+    applicationCategory: 'ProductivityApplication',
+    operatingSystem: 'Web',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    description: t('what_is_text').replace(/<[^>]*>?/gm, ''), // Strip HTML tags for clean description
+    featureList: features.map(f => f.title).join(', '),
+  }
+
   return (
     <section className="w-full py-16 px-4 bg-card/30 backdrop-blur-sm border-t border-border/50">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareLd) }}
       />
       <div className="max-w-5xl mx-auto space-y-16">
 
@@ -61,7 +80,9 @@ export function SeoContent() {
         <div className="space-y-4">
           <h2 className="text-3xl font-bold tracking-tight">{t("what_is_title")}</h2>
           <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
-            {t("what_is_text")}
+            {t.rich("what_is_text", {
+              b: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>
+            })}
           </p>
         </div>
 

@@ -30,8 +30,11 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
   const t = useTranslations("WinnerCeremony")
   const [showContent, setShowContent] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [canShareNative, setCanShareNative] = useState(false)
 
   useEffect(() => {
+    setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
+
     if (showWinnerCeremony) {
       const timer = setTimeout(() => setShowContent(true), 300)
       return () => clearTimeout(timer)
@@ -94,8 +97,6 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
     setTimeout(() => setCopied(false), 2000)
     window.open("https://www.instagram.com/", "_blank")
   }
-
-  const hasNativeShare = typeof navigator !== "undefined" && !!navigator.share
 
   return (
     <AnimatePresence>
@@ -209,58 +210,67 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
             transition={{ delay: 1 }}
             className="flex flex-wrap gap-4 justify-center"
           >
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  size="lg"
-                  className="gap-2"
-                  style={{
-                    backgroundColor: theme.primaryColor,
-                    color: theme.backgroundColor,
-                  }}
-                >
-                  <Share2 className="w-5 h-5" />
-                  {t("share_button")}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="center" className="w-48">
-                {hasNativeShare && (
-                  <DropdownMenuItem onClick={shareNative} className="gap-2 cursor-pointer">
-                    <Share2 className="w-4 h-4" />
-                    {t("share_menu")}
+            {canShareNative ? (
+              <Button
+                size="lg"
+                className="gap-2"
+                onClick={shareNative}
+                style={{
+                  backgroundColor: theme.primaryColor,
+                  color: theme.backgroundColor,
+                }}
+              >
+                <Share2 className="w-5 h-5" />
+                {t("share_button")}
+              </Button>
+            ) : (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    size="lg"
+                    className="gap-2"
+                    style={{
+                      backgroundColor: theme.primaryColor,
+                      color: theme.backgroundColor,
+                    }}
+                  >
+                    <Share2 className="w-5 h-5" />
+                    {t("share_button")}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="center" className="w-48">
+                  <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
+                    {copied ? (
+                      <>
+                        <Check className="w-4 h-4 text-green-500" />
+                        <span className="text-green-500">{t("copied")}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-4 h-4" />
+                        {t("copy_text")}
+                      </>
+                    )}
                   </DropdownMenuItem>
-                )}
-                <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
-                  {copied ? (
-                    <>
-                      <Check className="w-4 h-4 text-green-500" />
-                      <span className="text-green-500">{t("copied")}</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-4 h-4" />
-                      {t("copy_text")}
-                    </>
-                  )}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={shareTwitter} className="gap-2 cursor-pointer">
-                  <Twitter className="w-4 h-4" />
-                  Twitter / X
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={shareInstagram} className="gap-2 cursor-pointer">
-                  <Instagram className="w-4 h-4" />
-                  Instagram
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={shareFacebook} className="gap-2 cursor-pointer">
-                  <Facebook className="w-4 h-4" />
-                  Facebook
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={shareWhatsApp} className="gap-2 cursor-pointer">
-                  <MessageCircle className="w-4 h-4" />
-                  WhatsApp
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  <DropdownMenuItem onClick={shareTwitter} className="gap-2 cursor-pointer">
+                    <Twitter className="w-4 h-4" />
+                    Twitter / X
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={shareInstagram} className="gap-2 cursor-pointer">
+                    <Instagram className="w-4 h-4" />
+                    Instagram
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={shareFacebook} className="gap-2 cursor-pointer">
+                    <Facebook className="w-4 h-4" />
+                    Facebook
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={shareWhatsApp} className="gap-2 cursor-pointer">
+                    <MessageCircle className="w-4 h-4" />
+                    WhatsApp
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
 
             <Button size="lg" variant="outline" onClick={onNewSorteo} className="gap-2 bg-transparent">
               <RotateCcw className="w-5 h-5" />

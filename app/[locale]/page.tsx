@@ -19,6 +19,7 @@ import { LanguageSwitcher } from "@/components/language-switcher"
 import { SeoContent } from "@/components/sorteo/seo-content"
 import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck } from "lucide-react"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
 
 export default function SorteoApp() {
   const t = useTranslations("HomePage")
@@ -267,8 +268,14 @@ export default function SorteoApp() {
 
         {/* Footer */}
         <footer className="border-t border-border/50">
-          <div className="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
+          <div className="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-muted-foreground flex flex-col items-center gap-2">
             <p>{t("footer_text")}</p>
+            <Link
+              href="/alternativa-appsorteos"
+              className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
+            >
+              {t("footer_versus_link")}
+            </Link>
           </div>
         </footer>
       </div>

@@ -8,6 +8,7 @@
         "min_participants_warning": "Add at least 2 participants to start",
         "participants_title": "Participants",
         "footer_text": "Created for influencers and content creators",
+        "footer_versus_link": "AppSorteos Alternative",
         "customize_hint": "🎨 Customize Giveaway"
     },
     "Metadata": {
@@ -210,5 +211,59 @@
         "faq_1_answer": "Yes, Sorteo Pro is completely free to use for all your giveaways.",
         "faq_2_question": "Can I save my settings?",
         "faq_2_answer": "Yes, your theme settings are saved locally in your browser."
+    },
+    "Versus": {
+        "title": "The Best AppSorteos Alternative for Instagram (Free & Unlimited)",
+        "description": "Looking for an AppSorteos alternative? Sorteo Pro allows you to pick Instagram winners for free and without comment limits. 2024 Comparison.",
+        "header_tagline": "2025 Comparison",
+        "header_title_part1": "The Ultimate AppSorteos",
+        "header_title_part2": "Alternative",
+        "header_desc": "We analyze AppSorteos vs Sorteo Pro. Discover why thousands of users are switching.",
+        "table": {
+            "feature": "Feature",
+            "us": "Sorteo Pro",
+            "them": "AppSorteos / EasyPromos",
+            "row_price": "Price",
+            "row_price_us": "100% FREE",
+            "row_price_us_desc": "No subscriptions or tricks",
+            "row_price_them": "Paid / Freemium",
+            "row_price_them_desc": "Expensive for many comments",
+            "row_limits": "Comment Limit",
+            "row_limits_us": "UNLIMITED",
+            "row_limits_us_desc": "Load 10k+ comments",
+            "row_limits_them": "Limited / Paid",
+            "row_limits_them_desc": "Pay extra if over 1k",
+            "row_design": "Design & Animation",
+            "row_design_us": "Cinematic",
+            "row_design_us_desc": "Customizable and viral",
+            "row_design_them": "Basic",
+            "row_design_them_desc": "Static and boring",
+            "row_login": "Login",
+            "row_login_us": "Not Required",
+            "row_login_us_desc": "Start instantly",
+            "row_login_them": "Mandatory",
+            "row_login_them_desc": "Data required"
+        },
+        "why_us": {
+            "title": "Why are we better than free EasyPromos alternatives?",
+            "p1": "Many creators look for 'free EasyPromos alternatives' because traditional tools have become too expensive. Sorteo Pro was born to break that barrier.",
+            "p2": "Unlike the competition, we don't charge for your giveaway's success. If you have 10,000 comments, great! We don't penalize you for it.",
+            "title_2": "The AppSorteos competitor that cares about your wallet",
+            "p3": "Stop calculating how much your next giveaway will cost. With Sorteo Pro, your budget is zero."
+        },
+        "cta": {
+            "title": "Stop paying for giveaways.",
+            "subtitle": "Start for free today.",
+            "button": "Create Free Giveaway"
+        },
+        "faq": {
+            "title": "Frequently Asked Questions",
+            "q1": "Is there a free site like EasyPromos?",
+            "a1": "Yes, **Sorteo Pro** is the most robust free alternative to EasyPromos, offering certified winner selection without the high subscription costs.",
+            "q2": "Is it really free with no limits?",
+            "a2": "Absolutely. You can upload massive lists of participants and run unlimited giveaways without paying anything.",
+            "q3": "Do I need to sign up?",
+            "a3": "No. We respect your privacy and time. Enter and create your giveaway instantly."
+        }
     }
 }

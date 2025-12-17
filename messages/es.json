@@ -8,6 +8,7 @@
         "min_participants_warning": "Añade al menos 2 participantes para iniciar",
         "participants_title": "Participantes",
         "footer_text": "Creado para influencers y creadores de contenido",
+        "footer_versus_link": "Alternativa a AppSorteos",
         "customize_hint": "🎨 Personalizar Sorteo",
         "loading_delay_message": "Esto está tardando un poco más de lo habitual..."
     },
@@ -211,5 +212,59 @@
         "faq_1_answer": "Sí, Sorteo Pro es completamente gratuito para todos tus sorteos.",
         "faq_2_question": "¿Puedo guardar mi configuración?",
         "faq_2_answer": "Sí, la configuración de tu tema se guarda localmente en tu navegador."
+    },
+    "Versus": {
+        "title": "La mejor alternativa a AppSorteos para Instagram (Gratis y Sin Límites)",
+        "description": "Buscas una alternativa a AppSorteos? Sorteo Pro te permite elegir ganadores en Instagram sin pagar y sin límites de comentarios. Comparativa 2024.",
+        "header_tagline": "Comparativa 2025",
+        "header_title_part1": "La Alternativa a AppSorteos",
+        "header_title_part2": "Definitiva",
+        "header_desc": "Analizamos AppSorteos vs Sorteo Pro. Descubre por qué miles de usuarios se están cambiando.",
+        "table": {
+            "feature": "Característica",
+            "us": "Sorteo Pro",
+            "them": "AppSorteos / EasyPromos",
+            "row_price": "Precio",
+            "row_price_us": "100% GRATIS",
+            "row_price_us_desc": "Sin suscripciones ni trucos",
+            "row_price_them": "De Pago / Freemium",
+            "row_price_them_desc": "Costoso para muchos comentarios",
+            "row_limits": "Límite de Comentarios",
+            "row_limits_us": "ILIMITADO",
+            "row_limits_us_desc": "Carga 10k+ comentarios",
+            "row_limits_them": "Limitado / Pago",
+            "row_limits_them_desc": "Pagas extra si superas 1k",
+            "row_design": "Diseño y Animación",
+            "row_design_us": "Cinematográfico",
+            "row_design_us_desc": "Personalizable y viral",
+            "row_design_them": "Básico",
+            "row_design_them_desc": "Estático y aburrido",
+            "row_login": "Registro",
+            "row_login_us": "No Requerido",
+            "row_login_us_desc": "Empieza al instante",
+            "row_login_them": "Obligatorio",
+            "row_login_them_desc": "Te piden datos"
+        },
+        "why_us": {
+            "title": "¿Por qué somos mejores que las páginas parecidas a EasyPromos gratis?",
+            "p1": "Muchos creadores buscan 'páginas parecidas a EasyPromos gratis' porque las herramientas tradicionales se han vuelto demasiado caras. Sorteo Pro nació para romper esa barrera.",
+            "p2": "A diferencia de la competencia, no cobramos por el éxito de tu sorteo. Si tienes 10,000 comentarios, ¡genial! No te penalizamos por ello.",
+            "title_2": "La competencia de AppSorteos que sí cuida tu bolsillo",
+            "p3": "Deja de calcular cuánto te costará tu próximo sorteo. Con Sorteo Pro, tu presupuesto es cero."
+        },
+        "cta": {
+            "title": "Deja de pagar por sorteo.",
+            "subtitle": "Empieza gratis hoy.",
+            "button": "Crear Sorteo Gratis"
+        },
+        "faq": {
+            "title": "Preguntas Frecuentes",
+            "q1": "¿Existe alguna página parecida a EasyPromos gratis?",
+            "a1": "Sí, **Sorteo Pro** es la alternativa gratuita más robusta a EasyPromos, ofreciendo selección de ganadores certificada sin los altos costes de suscripción.",
+            "q2": "¿Es realmente gratis sin límites?",
+            "a2": "Absolutamente. Puedes cargar listas masivas de participantes y realizar sorteos ilimitados sin pagar nada.",
+            "q3": "¿Necesito registrarme?",
+            "a3": "No. Respetamos tu privacidad y tu tiempo. Entra y crea tu sorteo al instante."
+        }
     }
 }

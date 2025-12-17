@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles } from "lucide-react"
+import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2 } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -24,6 +24,7 @@ export function VerifyContent() {
         date?: Date
         error?: string
     } | null>(null)
+    const [showCopied, setShowCopied] = useState(false)
 
     // Auto-verify if ID is in URL
     useEffect(() => {
@@ -84,6 +85,30 @@ export function VerifyContent() {
     }
 
     const handleVerify = () => verifyId(inputId)
+
+    const handleShare = async () => {
+        if (!result) return
+
+        const winnerName = result.participant?.name || "Someone"
+        const shareText = t("share_proof_text", { name: winnerName })
+        const shareUrl = typeof window !== "undefined" ? window.location.href : ""
+
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: t("title"),
+                    text: shareText,
+                    url: shareUrl,
+                })
+            } catch {
+                // User cancelled
+            }
+        } else {
+             await navigator.clipboard.writeText(shareUrl)
+             setShowCopied(true)
+             setTimeout(() => setShowCopied(false), 2000)
+        }
+    }
 
     return (
         <div
@@ -252,8 +277,22 @@ export function VerifyContent() {
 
                                         {/* VIRAL LOOP CTA */}
                                         {(result.status === "valid" || result.status === "partial") && (
-                                            <div className="mt-6 pt-4 border-t border-border/50">
-                                                <Link href="/">
+                                            <div className="mt-6 pt-4 border-t border-border/50 space-y-3">
+                                                <Button
+                                                    className="w-full gap-2 font-bold"
+                                                    size="lg"
+                                                    variant="outline"
+                                                    onClick={handleShare}
+                                                    style={{
+                                                        borderColor: theme.primaryColor,
+                                                        color: theme.primaryColor
+                                                    }}
+                                                >
+                                                    {showCopied ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
+                                                    {showCopied ? t("result.copied") : t("share_button")}
+                                                </Button>
+
+                                                <Link href="/" className="block">
                                                     <Button
                                                         className="w-full gap-2 font-bold"
                                                         size="lg"

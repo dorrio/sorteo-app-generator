@@ -16,3 +16,13 @@
 *   Added `role="tabpanel"`, `aria-labelledby`, and `tabIndex="0"` to the content panels.
 
 **Signal:** Improved accessibility for screen reader users who can now navigate the tabs using standard keyboard interactions and understand the context of the content. Search engines can better understand the structure of the editor interface.
+## 2025-12-17 - [Home Page Content]
+
+**Blocker:** The Features, How-To, and FAQ sections in `SeoContent` were implemented as generic `div` grids. This "Semantic Void" prevented search engines from understanding the list relationships (unordered, ordered, and definition lists) and reduced the accessibility for screen reader users who rely on list navigation.
+
+**Bridge:** Refactored the structure to use semantic HTML:
+*   **Features:** Converted to `<ul>` with `<li>` items.
+*   **How-To:** Converted to `<ol>` with `<li>` items to reflect the ordered nature of instructions.
+*   **FAQ:** Converted to `<dl>` (Description List) with `<dt>` (terms) and `<dd>` (definitions) to explicitly associate questions with answers.
+
+**Signal:** Improved semantic understanding for bots (Step-by-step instructions, Definition pairings), better screen reader navigation (List item counts, shortcuts), and stronger correlation with the injected JSON-LD Schema.

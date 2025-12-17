@@ -89,39 +89,39 @@ export function SeoContent() {
         {/* Features Grid */}
         <div className="space-y-8">
           <h2 className="text-2xl font-bold">{t("features_title")}</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <ul className="grid md:grid-cols-3 gap-8">
             {features.map((feature, idx) => (
-              <motion.div
+              <motion.li
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-colors"
+                className="p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-colors list-none"
               >
                 <div className="mb-4 p-3 bg-primary/10 rounded-xl w-fit">
                   {feature.icon}
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.desc}</p>
-              </motion.div>
+              </motion.li>
             ))}
-          </div>
+          </ul>
         </div>
 
         {/* How To / Steps */}
         <div className="space-y-8">
           <h2 className="text-2xl font-bold">{t("how_to_title")}</h2>
-          <div className="grid md:grid-cols-3 gap-4">
+          <ol className="grid md:grid-cols-3 gap-4">
             {[1, 2, 3].map((step) => (
-              <div key={step} className="flex gap-4 items-start">
+              <li key={step} className="flex gap-4 items-start list-none">
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
                   {step}
                 </div>
                 <p className="text-muted-foreground pt-1">{t(`step_${step}`)}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
 
         {/* FAQ Section */}
@@ -130,14 +130,14 @@ export function SeoContent() {
             <HelpCircle className="w-6 h-6 text-primary" />
             {t("faq_title")}
           </h2>
-          <div className="grid gap-4">
+          <dl className="grid gap-4">
             {faqs.map((faq, idx) => (
               <div key={idx} className="p-6 rounded-2xl bg-card/50 border border-border/50">
-                <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>
-                <p className="text-muted-foreground">{faq.answer}</p>
+                <dt className="font-semibold text-lg mb-2">{faq.question}</dt>
+                <dd className="text-muted-foreground">{faq.answer}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
 
       </div>

@@ -216,6 +216,16 @@
         "faq_2_question": "¿Puedo guardar mi configuración?",
         "faq_2_answer": "Sí, la configuración de tu tema se guarda localmente en tu navegador."
     },
+    "WheelGeo": {
+        "title": "Ruleta Aleatoria de Nombres",
+        "description": "¿Buscas una **Ruleta Aleatoria**? Sorteo Pro incluye una **Ruleta de Nombres** totalmente personalizable, justa y gratuita.",
+        "what_is_wheel": "¿Qué es una Ruleta de Nombres?",
+        "what_is_wheel_answer": "Una **Ruleta de Nombres** es una herramienta digital que elige un ganador al azar girando una rueda virtual. Es utilizada por profesores, influencers y organizadores de eventos para la **selección aleatoria**. Sorteo Pro mejora esta experiencia con efectos cinematográficos.",
+        "features_list": "Características de la Ruleta",
+        "feature_1": "100% Aleatoria y Justa",
+        "feature_2": "Colores y Temas Personalizados",
+        "feature_3": "Sin Anuncios / Sin Registro"
+    },
     "Versus": {
         "title": "La mejor alternativa a AppSorteos para Instagram (Gratis y Sin Límites)",
         "description": "Buscas una alternativa a AppSorteos? Sorteo Pro te permite elegir ganadores en Instagram sin pagar y sin límites de comentarios. Comparativa 2024.",

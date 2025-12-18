@@ -32,10 +32,10 @@ export function HistoryPanel() {
         </Button>
       </div>
 
-      <div className="space-y-2 max-h-[200px] overflow-y-auto">
+      <ul className="space-y-2 max-h-[200px] overflow-y-auto" role="list">
         <AnimatePresence>
           {pastWinners.map((winner, index) => (
-            <motion.div
+            <motion.li
               key={`${winner.id}-${index}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -72,10 +72,10 @@ export function HistoryPanel() {
                   </div>
                 )}
               </div>
-            </motion.div>
+            </motion.li>
           ))}
         </AnimatePresence>
-      </div>
+      </ul>
     </div>
   )
 }

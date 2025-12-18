@@ -27,7 +27,7 @@ export const VersusFAQ = () => {
       "name": item.question,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": item.answer
+        "text": item.answer.replace(/\*\*(.*?)\*\*/g, '$1')
       }
     }))
   };

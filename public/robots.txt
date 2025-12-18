@@ -6,6 +6,10 @@ Allow: /
 User-agent: *
 Disallow: /private/
 
+# GPTBot
+User-agent: GPTBot
+Allow: /
+
 # Host
 Host: https://sorteo-app-generator.vercel.app
 

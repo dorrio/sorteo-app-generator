@@ -17,6 +17,7 @@ import { FloatingBubbles } from "@/components/sorteo/floating-bubbles"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { SeoContent } from "@/components/sorteo/seo-content"
+import { WheelGeo } from "@/components/sorteo/wheel-geo"
 import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
@@ -264,6 +265,7 @@ export default function SorteoApp() {
         </main>
 
         {/* SEO Content */}
+        <WheelGeo />
         <SeoContent />
 
         {/* Footer */}

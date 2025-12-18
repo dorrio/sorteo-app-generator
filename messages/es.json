@@ -185,8 +185,11 @@
         "verify_button": "Verificar ID",
         "back_button": "Volver al inicio",
         "create_your_own": "Crear Sorteo Gratis",
+        "share_button": "Compartir Prueba",
+        "share_proof_text": "✅ Ganador Verificado: ¡{name} ganó el sorteo! Verificado por Sorteo Pro.",
         "result": {
             "valid_title": "ID Válido",
+            "copied": "¡Copiado!",
             "invalid_title": "ID No Encontrado",
             "winner_label": "Ganador",
             "date_label": "Fecha del Sorteo",

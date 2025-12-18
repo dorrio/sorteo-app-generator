@@ -71,7 +71,8 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
   }
 
   const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(shareText)
+    // Viralis Optimization: Copy full text + url
+    await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }

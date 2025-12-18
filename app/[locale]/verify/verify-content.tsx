@@ -104,7 +104,8 @@ export function VerifyContent() {
                 // User cancelled
             }
         } else {
-             await navigator.clipboard.writeText(shareUrl)
+             // Viralis Optimization: Copy full text + url to reduce friction on desktop sharing
+             await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
              setShowCopied(true)
              setTimeout(() => setShowCopied(false), 2000)
         }

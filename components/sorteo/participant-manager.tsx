@@ -168,7 +168,7 @@ const ParticipantItem = memo(function ParticipantItem({
   }
 
   return (
-    <motion.div
+    <motion.li
       layout
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
@@ -252,7 +252,7 @@ const ParticipantItem = memo(function ParticipantItem({
           </div>
         </>
       )}
-    </motion.div>
+    </motion.li>
   )
 })
 
@@ -522,7 +522,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
         <DuplicateModal />
         <div className="space-y-3">
           {/* Input mode tabs */}
-          <div className="flex gap-2 p-1 bg-secondary/50 rounded-lg">
+          <div className="flex gap-2 p-1 bg-secondary/50 rounded-lg" role="tablist" aria-label="Input mode">
             {[
               { mode: "single" as InputMode, label: t("input_mode.single"), icon: Plus },
               { mode: "bulk" as InputMode, label: t("input_mode.bulk"), icon: Copy },
@@ -531,6 +531,10 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
               <button
                 key={mode}
                 onClick={() => setInputMode(mode)}
+                role="tab"
+                aria-selected={inputMode === mode}
+                aria-controls={`panel-${mode}`}
+                id={`tab-${mode}`}
                 className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${inputMode === mode
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground"
@@ -547,6 +551,9 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
             {inputMode === "single" && (
               <motion.div
                 key="single"
+                role="tabpanel"
+                id="panel-single"
+                aria-labelledby="tab-single"
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -5 }}
@@ -574,6 +581,9 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
             {inputMode === "bulk" && (
               <motion.div
                 key="bulk"
+                role="tabpanel"
+                id="panel-bulk"
+                aria-labelledby="tab-bulk"
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -5 }}
@@ -599,6 +609,9 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
             {inputMode === "csv" && (
               <motion.div
                 key="csv"
+                role="tabpanel"
+                id="panel-csv"
+                aria-labelledby="tab-csv"
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -5 }}
@@ -645,7 +658,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
       <DuplicateModal />
       <div className="space-y-6">
         {/* Input mode tabs */}
-        <div className="flex gap-2 p-1 bg-secondary/50 rounded-lg">
+        <div className="flex gap-2 p-1 bg-secondary/50 rounded-lg" role="tablist" aria-label="Input mode">
           {[
             { mode: "single" as InputMode, label: t("input_mode.single"), icon: Plus },
             { mode: "bulk" as InputMode, label: t("input_mode.bulk"), icon: Copy },
@@ -654,6 +667,10 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
             <button
               key={mode}
               onClick={() => setInputMode(mode)}
+              role="tab"
+              aria-selected={inputMode === mode}
+              aria-controls={`panel-main-${mode}`}
+              id={`tab-main-${mode}`}
               className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${inputMode === mode
                 ? "bg-primary text-primary-foreground"
                 : "text-muted-foreground hover:text-foreground"
@@ -671,6 +688,9 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
           {inputMode === "single" && (
             <motion.div
               key="single"
+              role="tabpanel"
+              id="panel-main-single"
+              aria-labelledby="tab-main-single"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -704,6 +724,9 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
           {inputMode === "bulk" && (
             <motion.div
               key="bulk"
+              role="tabpanel"
+              id="panel-main-bulk"
+              aria-labelledby="tab-main-bulk"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -734,6 +757,9 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
           {inputMode === "csv" && (
             <motion.div
               key="csv"
+              role="tabpanel"
+              id="panel-main-csv"
+              aria-labelledby="tab-main-csv"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -780,7 +806,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
               <p className="text-xs mt-1">{t("no_participants_sub")}</p>
             </div>
           ) : (
-            <div className="max-h-[300px] overflow-y-auto space-y-2 pr-2">
+            <ul className="max-h-[300px] overflow-y-auto space-y-2 pr-2" role="list">
               <AnimatePresence>
                 {participants.map((participant, index) => (
                   <ParticipantItem
@@ -796,7 +822,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                   />
                 ))}
               </AnimatePresence>
-            </div>
+            </ul>
           )}
         </div>
       </div>

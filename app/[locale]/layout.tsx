@@ -134,18 +134,22 @@ export default async function RootLayout({
     '@type': 'SoftwareApplication',
     name: 'Sorteo Pro',
     applicationCategory: 'MultimediaApplication',
-    operatingSystem: 'Web',
+    applicationSubCategory: 'Social Media Tool',
+    operatingSystem: 'Web, iOS, Android',
     offers: {
       '@type': 'Offer',
       price: '0',
       priceCurrency: 'EUR',
     },
-    description: 'The ultimate tool for viral giveaways.', // This could also be localized if needed
+    description: 'The ultimate tool for viral giveaways.',
     author: {
       '@type': 'Organization',
       name: 'Sorteo Pro',
+      url: baseUrl
     },
-    inLanguage: locale
+    inLanguage: locale,
+    screenshot: `${baseUrl}/og-image.jpg`,
+    featureList: "Random Winner Picker, Wheel of Names, Instagram Giveaway Tool"
   }
 
   return (

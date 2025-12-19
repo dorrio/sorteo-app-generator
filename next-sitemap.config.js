@@ -5,11 +5,7 @@ module.exports = {
     sitemapSize: 5000,
     priority: 0.7, // Default priority
     changefreq: 'weekly', // Default changefreq
-    alternateRefs: [
-        { href: "https://sorteo-app-generator.vercel.app/en", hreflang: "en" },
-        { href: "https://sorteo-app-generator.vercel.app/es", hreflang: "es" },
-        { href: "https://sorteo-app-generator.vercel.app/pt", hreflang: "pt" },
-    ],
+
     // Apex Strategy: Prioritize Core Landing Pages
     transform: async (config, path) => {
         let priority = config.priority;
@@ -31,12 +27,36 @@ module.exports = {
             changefreq = 'monthly';
         }
 
+        // Logic to correct alternateRefs
+        const locales = ['en', 'es', 'pt'];
+
+        // Find if the current path starts with a locale
+        const currentLocale = locales.find(l => path.startsWith(`/${l}`));
+
+        let alternateRefs = [];
+
+        if (currentLocale) {
+            // Strip locale to get the base path suffix (e.g. /en/foo -> /foo)
+            // If path is exactly /en, suffix is empty string or slash?
+            // path: /en -> replace -> "" (empty)
+            // path: /en/foo -> replace -> /foo
+            let pathSuffix = path.replace(`/${currentLocale}`, '');
+            if (!pathSuffix) pathSuffix = '';
+
+            alternateRefs = locales.map(locale => ({
+                hreflang: locale,
+                // Ensure absolute URL and correct structure
+                href: `${config.siteUrl}/${locale}${pathSuffix}`,
+                hrefIsAbsolute: true
+            }));
+        }
+
         return {
             loc: path,
             changefreq: changefreq,
             priority: priority,
             lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
-            alternateRefs: config.alternateRefs ?? [],
+            alternateRefs: alternateRefs,
         }
     },
     robotsTxtOptions: {

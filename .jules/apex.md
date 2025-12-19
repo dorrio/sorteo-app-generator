@@ -13,3 +13,11 @@
 *   **Schema:** Injected `SoftwareApplication` JSON-LD into `SeoContent.tsx`.
 *   **Component:** Updated `SeoContent` to support rich text rendering for bold tags.
 **GEO Impact:** Direct Answer is now formatted for AI extraction (concise, entity-rich). Schema signals app type explicitly to Google.
+## 2024-05-23 - Versus Page & Architecture
+**Context:** Enhancing the Competitor Alternative page (`/alternativa-appsorteos`) and Global Schema.
+**Gap:** The specific versus page lacked Breadcrumb schema, and the global `SoftwareApplication` schema was basic.
+**Action:**
+*   **Breadcrumb Schema:** Injected `BreadcrumbList` JSON-LD into `app/[locale]/alternativa-appsorteos/page.tsx` to establish hierarchy (Home > AppSorteos Alternative).
+*   **Global Schema:** Enriched `layout.tsx` schema with `applicationSubCategory: "Social Media Tool"`, `screenshot`, and `featureList`.
+*   **Sitemap:** Verified `next-sitemap` prioritizes the versus page (0.9).
+**GEO Impact:** Improved entity understanding for LLMs (Sorteo Pro is a *Social Media Tool* alternative to AppSorteos) and better structure for Google.

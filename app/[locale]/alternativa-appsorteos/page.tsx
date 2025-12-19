@@ -2,7 +2,15 @@ import { ComparisonTable } from '@/components/versus/ComparisonTable';
 import { VersusFAQ } from '@/components/versus/FAQ';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
+import { useLocale } from 'next-intl';
 import Link from 'next/link';
+import { routing } from '@/i18n/routing';
+
+export const dynamic = 'force-static';
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -19,9 +27,31 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default function VersusPage() {
   const t = useTranslations('Versus');
+  const locale = useLocale();
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://sorteo-app-generator.vercel.app";
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": `${baseUrl}/${locale}`
+    }, {
+      "@type": "ListItem",
+      "position": 2,
+      "name": t('header_tagline'),
+      "item": `${baseUrl}/${locale}/alternativa-appsorteos`
+    }]
+  };
 
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       {/* Pattern 2: The SEO Header Injection */}
       <header className="bg-background border-b border-border/50 py-20 px-4 text-center">
         <div className="max-w-4xl mx-auto">

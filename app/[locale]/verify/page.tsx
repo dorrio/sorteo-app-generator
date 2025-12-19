@@ -19,10 +19,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
             url: `${baseUrl}/${locale}/verify`,
             images: [
                 {
-                    url: `${baseUrl}/og-verify.jpg`, // We should ideally create this specific image
+                    url: `${baseUrl}/og-verify.jpg`,
                     width: 1200,
                     height: 630,
-                    alt: "Sorteo Pro Verification",
+                    alt: "Official Sorteo Pro Verification Result",
+                },
+                {
+                    url: `${baseUrl}/og-image.jpg`, // Fallback
+                    width: 1200,
+                    height: 630,
+                    alt: "Sorteo Pro",
                 },
             ],
         },

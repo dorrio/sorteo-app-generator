@@ -138,7 +138,7 @@
     },
     "WinnerCeremony": {
         "winner_label": "Vencedor",
-        "share_text": "🎉 Parabéns a {name} por ganhar o sorteio! 🏆",
+        "share_text": "Acabei de realizar um sorteio com Sorteio Pro e {name} ganhou! 🏆 Crie seu próprio sorteio viral grátis aqui:",
         "share_title": "Vencedor do Sorteio",
         "congratulations": "Parabéns! 🎉",
         "share_button": "Compartilhar",
@@ -185,7 +185,7 @@
         "back_button": "Voltar ao Início",
         "create_your_own": "Criar Sorteio Grátis",
         "share_button": "Compartilhar Prova",
-        "share_proof_text": "✅ Vencedor Verificado: {name} ganhou o sorteio! Verificado por Sorteo Pro.",
+        "share_proof_text": "🔥 Resultado Oficial: {name} é o vencedor! 🏆 Verificado por Sorteio Pro. Quer fazer o seu? Confira aqui:",
         "result": {
             "valid_title": "ID Válido",
             "copied": "Copiado!",
@@ -208,6 +208,11 @@
         "feature_2_desc": "Escolha entre vários temas como Caça-níquel, Roleta ou Matrix para combinar com sua marca.",
         "feature_3_title": "Aumento de Engajamento",
         "feature_3_desc": "Animações cinematográficas e efeitos sonoros criam emoção para seu público.",
+        "features_list": "Recursos da Roleta",
+        "feature_1": "100% Aleatório e Justo",
+        "feature_2": "Cores e Temas Personalizados",
+        "feature_3": "Sem Anúncios / Sem Login",
+        "cta_button": "Testar Modo Roleta Agora",
         "how_to_title": "Como fazer um sorteio",
         "step_1": "Insira os nomes dos participantes manualmente ou cole uma lista.",
         "step_2": "Personalize a aparência usando o editor visual.",
@@ -217,6 +222,17 @@
         "faq_1_answer": "Sim, o Sorteio Pro é totalmente gratuito para todos os seus sorteios.",
         "faq_2_question": "Posso salvar minhas configurações?",
         "faq_2_answer": "Sim, as configurações do seu tema são salvas localmente no seu navegador."
+    },
+    "WheelGeo": {
+        "title": "Roleta de Nomes Aleatória",
+        "description": "Procurando por uma **Roleta de Nomes**? O Sorteio Pro inclui uma **Roleta de Escolha Aleatória** totalmente personalizável, justa e gratuita.",
+        "what_is_wheel": "O que é uma Roleta de Nomes?",
+        "what_is_wheel_answer": "Uma **Roleta de Nomes** é uma ferramenta digital que escolhe um vencedor aleatório girando uma roda virtual. É popularmente usada por professores, influenciadores e organizadores de eventos para **seleção aleatória**. O Sorteio Pro melhora essa experiência com efeitos cinematográficos.",
+        "features_list": "Recursos da Roleta",
+        "feature_1": "100% Aleatório e Justo",
+        "feature_2": "Cores e Temas Personalizados",
+        "feature_3": "Sem Anúncios / Sem Login",
+        "cta_button": "Testar Modo Roleta Agora"
     },
     "Versus": {
         "title": "A melhor alternativa ao AppSorteos para Instagram (Grátis e Sem Limites)",

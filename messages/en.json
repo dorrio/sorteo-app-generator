@@ -138,7 +138,7 @@
     },
     "WinnerCeremony": {
         "winner_label": "Winner",
-        "share_text": "🎉 Congratulations to {name} for winning the giveaway! 🏆",
+        "share_text": "I just hosted a giveaway with Sorteo Pro and {name} won! 🏆 Create your own viral giveaway for free here:",
         "share_title": "Giveaway Winner",
         "congratulations": "Congratulations! 🎉",
         "share_button": "Share",
@@ -185,7 +185,7 @@
         "back_button": "Back to Home",
         "create_your_own": "Create Free Giveaway",
         "share_button": "Share Proof",
-        "share_proof_text": "✅ Verified Winner: {name} won the giveaway! Verified by Sorteo Pro.",
+        "share_proof_text": "🔥 Official Result: {name} is the winner! 🏆 Verified by Sorteo Pro. Want to run your own? Check it out here:",
         "result": {
             "valid_title": "Valid ID",
             "copied": "Copied!",
@@ -226,7 +226,8 @@
         "features_list": "Advanced Wheel Features",
         "feature_1": "100% Random & Fair",
         "feature_2": "Custom Colors & Themes",
-        "feature_3": "No Ads / No Login"
+        "feature_3": "No Ads / No Login",
+        "cta_button": "Try Wheel Mode Now"
     },
     "Versus": {
         "title": "The Best AppSorteos Alternative for Instagram (Free & Unlimited)",

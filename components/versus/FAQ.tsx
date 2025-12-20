@@ -33,23 +33,23 @@ export const VersusFAQ = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto my-12 px-4">
+    <section className="max-w-3xl mx-auto my-12 px-4">
        <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <h2 className="text-3xl font-bold text-center text-foreground mb-8">{t('title')}</h2>
-      <div className="space-y-6">
+      <dl className="space-y-6">
         {faqData.map((item, index) => (
           <div key={index} className="bg-card p-6 rounded-lg shadow-sm border border-border">
-            <h3 className="text-xl font-bold text-foreground mb-2">{item.question}</h3>
+            <dt className="text-xl font-bold text-foreground mb-2">{item.question}</dt>
             {/* Dangerously setting inner HTML to allow bolding from translation strings if needed,
                 though in this specific case simple text would suffice.
                 Using a safe render method is preferred usually. */}
-            <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: item.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }}></p>
+            <dd className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: item.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }}></dd>
           </div>
         ))}
-      </div>
-    </div>
+      </dl>
+    </section>
   );
 };

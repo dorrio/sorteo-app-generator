@@ -138,7 +138,7 @@
     },
     "WinnerCeremony": {
         "winner_label": "Vencedor",
-        "share_text": "🎉 Parabéns a {name} por ganhar o sorteio! 🏆",
+        "share_text": "Acabei de realizar um sorteio com Sorteio Pro e {name} ganhou! 🏆 Crie seu próprio sorteio viral grátis aqui:",
         "share_title": "Vencedor do Sorteio",
         "congratulations": "Parabéns! 🎉",
         "share_button": "Compartilhar",
@@ -185,7 +185,7 @@
         "back_button": "Voltar ao Início",
         "create_your_own": "Criar Sorteio Grátis",
         "share_button": "Compartilhar Prova",
-        "share_proof_text": "✅ Vencedor Verificado: {name} ganhou o sorteio! Verificado por Sorteo Pro.",
+        "share_proof_text": "🔥 Resultado Oficial: {name} é o vencedor! 🏆 Verificado por Sorteio Pro. Quer fazer o seu? Confira aqui:",
         "result": {
             "valid_title": "ID Válido",
             "copied": "Copiado!",

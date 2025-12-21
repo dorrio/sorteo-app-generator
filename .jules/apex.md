@@ -32,3 +32,15 @@
 **GEO Impact:**
 *   **Direct Answer:** The content defines "Wheel of Names" clearly for LLMs.
 *   **UX Alignment:** The "Try It" action proves to the user (and bounce rate metrics) that the page *is* what they are looking for, reducing pogo-sticking (a negative ranking signal).
+
+## 2025-02-21 - Glossary & Schema Authority
+**Context:** Filling semantic voids for technical terms and strengthening entity recognition.
+**Gap:** Competitors defined terms like "RNG" and "Provably Fair" to capture "What is..." queries, but we lacked a dedicated definition section. `pt.json` Direct Answer was also generic and duplicated keys.
+**Action:**
+*   **Glossary Component:** Created `components/sorteo/glossary.tsx` using `<dl>` for semantic definitions of "RNG", "Provably Fair", and "Instagram Comment Picker".
+*   **Schema Injection:** Injected `DefinedTermSet` schema into the Glossary component.
+*   **Refinement:** Updated `layout.tsx` global schema to list features as an array including "Provably Fair RNG".
+*   **Direct Answer (PT):** Rewrote `messages/pt.json` to include bold entities (`<b>Sorteio Pro</b>`, `<b>ferramenta de sorteio gratuita</b>`) matching the EN/ES strategy.
+**GEO Impact:**
+*   **Knowledge Graph:** `DefinedTermSet` schema helps Google associate Sorteo Pro with technical reliability (RNG).
+*   **Long-Tail Ranking:** Optimizing for questions like "Is Sorteo Pro fair?" or "What is an Instagram Comment Picker?".

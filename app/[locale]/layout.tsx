@@ -149,7 +149,13 @@ export default async function RootLayout({
     },
     inLanguage: locale,
     screenshot: `${baseUrl}/og-image.jpg`,
-    featureList: "Random Winner Picker, Wheel of Names, Instagram Giveaway Tool"
+    featureList: [
+      "Random Winner Picker",
+      "Wheel of Names",
+      "Instagram Giveaway Tool",
+      "Instant Verification",
+      "Provably Fair RNG"
+    ]
   }
 
   return (

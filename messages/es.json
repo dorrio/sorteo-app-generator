@@ -230,6 +230,15 @@
         "feature_3": "Sin Anuncios / Sin Registro",
         "cta_button": "Probar Modo Ruleta Ahora"
     },
+    "Glossary": {
+        "title": "Glosario de Sorteos",
+        "term_1": "Generador de Números Aleatorios (RNG)",
+        "def_1": "Un algoritmo que genera una secuencia de números o símbolos que no se pueden predecir. Sorteo Pro utiliza RNG criptográficamente seguro.",
+        "term_2": "Probablemente Justo (Provably Fair)",
+        "def_2": "Un sistema que permite a los jugadores verificar que el resultado de un juego o sorteo se generó correctamente y no fue manipulado.",
+        "term_3": "Selector de Comentarios de Instagram",
+        "def_3": "Herramienta diseñada para elegir un ganador al azar de los comentarios de una publicación de Instagram. Sorteo Pro ofrece una alternativa gratuita a estas herramientas."
+    },
     "Versus": {
         "title": "La mejor alternativa a AppSorteos para Instagram (Gratis y Sin Límites)",
         "description": "Buscas una alternativa a AppSorteos? Sorteo Pro te permite elegir ganadores en Instagram sin pagar y sin límites de comentarios. Comparativa 2024.",

@@ -200,7 +200,7 @@
     },
     "SEOContent": {
         "what_is_title": "O que é o Sorteio Pro?",
-        "what_is_text": "O Sorteio Pro é a ferramenta definitiva para criar sorteios e concursos virais. Projetada especificamente para influenciadores, criadores de conteúdo e gerentes de comunidade, permite escolher vencedores aleatórios de forma transparente e envolvente.",
+        "what_is_text": "O <b>Sorteio Pro</b> é uma <b>ferramenta de sorteio gratuita</b> para influenciadores que permite escolher <b>vencedores aleatórios</b> de listas ilimitadas. Ao contrário das alternativas pagas, oferece <b>seleção criptograficamente segura</b>, animações cinematográficas e <b>verificação instantânea</b> sem necessidade de login.",
         "features_title": "Principais Recursos",
         "feature_1_title": "Justo e Transparente",
         "feature_1_desc": "Usa geração de números aleatórios criptograficamente seguros para garantir justiça.",
@@ -208,11 +208,6 @@
         "feature_2_desc": "Escolha entre vários temas como Caça-níquel, Roleta ou Matrix para combinar com sua marca.",
         "feature_3_title": "Aumento de Engajamento",
         "feature_3_desc": "Animações cinematográficas e efeitos sonoros criam emoção para seu público.",
-        "features_list": "Recursos da Roleta",
-        "feature_1": "100% Aleatório e Justo",
-        "feature_2": "Cores e Temas Personalizados",
-        "feature_3": "Sem Anúncios / Sem Login",
-        "cta_button": "Testar Modo Roleta Agora",
         "how_to_title": "Como fazer um sorteio",
         "step_1": "Insira os nomes dos participantes manualmente ou cole uma lista.",
         "step_2": "Personalize a aparência usando o editor visual.",
@@ -233,6 +228,15 @@
         "feature_2": "Cores e Temas Personalizados",
         "feature_3": "Sem Anúncios / Sem Login",
         "cta_button": "Testar Modo Roleta Agora"
+    },
+    "Glossary": {
+        "title": "Glossário de Sorteios",
+        "term_1": "Gerador de Números Aleatórios (RNG)",
+        "def_1": "Um algoritmo que gera uma sequência de números ou símbolos que não podem ser razoavelmente previstos. O Sorteio Pro usa RNG criptograficamente seguro.",
+        "term_2": "Provavelmente Justo (Provably Fair)",
+        "def_2": "Um sistema que permite aos jogadores verificar se o resultado de um jogo ou sorteio foi gerado corretamente e não foi manipulado.",
+        "term_3": "Seletor de Comentários do Instagram",
+        "def_3": "Ferramenta projetada para escolher um vencedor aleatório nos comentários de uma postagem do Instagram. O Sorteio Pro oferece uma alternativa gratuita a essas ferramentas."
     },
     "Versus": {
         "title": "A melhor alternativa ao AppSorteos para Instagram (Grátis e Sem Limites)",

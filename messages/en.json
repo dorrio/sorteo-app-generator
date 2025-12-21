@@ -229,6 +229,15 @@
         "feature_3": "No Ads / No Login",
         "cta_button": "Try Wheel Mode Now"
     },
+    "Glossary": {
+        "title": "Giveaway Glossary",
+        "term_1": "Random Number Generator (RNG)",
+        "def_1": "An algorithm that generates a sequence of numbers or symbols that cannot be reasonably predicted better than by random chance. Sorteo Pro uses cryptographically secure RNG.",
+        "term_2": "Provably Fair",
+        "def_2": "A system that allows players to verify that the outcome of a game or raffle was generated correctly and was not manipulated by the operator.",
+        "term_3": "Instagram Comment Picker",
+        "def_3": "A tool designed to select a random winner from the comments section of an Instagram post. Sorteo Pro offers a free alternative to these tools."
+    },
     "Versus": {
         "title": "The Best AppSorteos Alternative for Instagram (Free & Unlimited)",
         "description": "Looking for an AppSorteos alternative? Sorteo Pro allows you to pick Instagram winners for free and without comment limits. 2024 Comparison.",

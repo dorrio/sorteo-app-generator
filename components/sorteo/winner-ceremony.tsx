@@ -78,17 +78,20 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
   }
 
   const shareTwitter = () => {
-    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`
+    // Viralis: Append URL to Tweet
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`
     window.open(url, "_blank", "width=550,height=420")
   }
 
   const shareFacebook = () => {
-    const url = `https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(shareText)}`
+    // Viralis: Facebook requires 'u' param for the link
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
     window.open(url, "_blank", "width=550,height=420")
   }
 
   const shareWhatsApp = () => {
-    const url = `https://wa.me/?text=${encodeURIComponent(shareText)}`
+    // Viralis: Append URL to message body
+    const url = `https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`
     window.open(url, "_blank")
   }
 

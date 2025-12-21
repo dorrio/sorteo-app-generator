@@ -26,3 +26,11 @@
 *   **FAQ:** Converted to `<dl>` (Description List) with `<dt>` (terms) and `<dd>` (definitions) to explicitly associate questions with answers.
 
 **Signal:** Improved semantic understanding for bots (Step-by-step instructions, Definition pairings), better screen reader navigation (List item counts, shortcuts), and stronger correlation with the injected JSON-LD Schema.
+
+## 2025-12-18 - [Landing Page]
+
+**Blocker:** The "Visual Abstract" in `WheelGeo` was a large, interactive `div` element acting as a primary Call to Action (CTA) but lacking semantic meaning. This "div button" was invisible to screen readers and keyboard users, and search engines failed to recognize it as a key interaction point.
+
+**Bridge:** Converted the interactive `div` into a semantic `<button>` element with `type="button"` and a localized `aria-label`. This promotes the element from generic layout noise to a functional control in the accessibility tree.
+
+**Signal:** The element is now focusable and clickable via keyboard. Search engines correctly interpret it as an interactive element linked to the "Try Wheel" action, reinforcing the page's primary conversion goal.

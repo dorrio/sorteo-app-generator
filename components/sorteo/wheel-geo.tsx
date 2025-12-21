@@ -101,7 +101,12 @@ export function WheelGeo() {
 
         {/* Right: Visual Abstract (Placeholder or Icon Graphic) */}
         <div className="hidden md:flex justify-center items-center">
-           <div className="relative w-64 h-64 rounded-full border-4 border-primary/20 flex items-center justify-center bg-card/50 backdrop-blur-sm cursor-pointer hover:scale-105 transition-transform" onClick={handleTryWheel}>
+           <button
+             type="button"
+             className="relative w-64 h-64 rounded-full border-4 border-primary/20 flex items-center justify-center bg-card/50 backdrop-blur-sm cursor-pointer hover:scale-105 transition-transform"
+             onClick={handleTryWheel}
+             aria-label={t('cta_button')}
+           >
                 <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -111,7 +116,7 @@ export function WheelGeo() {
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-background/50 rounded-full">
                     <Play className="w-12 h-12 text-primary fill-current" />
                 </div>
-           </div>
+           </button>
         </div>
 
       </div>

@@ -132,32 +132,32 @@ export default function InstagramPickerPage({ params }: { params: Promise<{ loca
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">{t('features_title')}</h2>
-            <div className="grid md:grid-cols-3 gap-8">
+            <ul className="grid md:grid-cols-3 gap-8">
                 {/* Feature 1 */}
-                <div className="p-8 rounded-2xl bg-card border border-border/50 hover:border-purple-500/50 transition-colors group">
+                <li className="p-8 rounded-2xl bg-card border border-border/50 hover:border-purple-500/50 transition-colors group list-none">
                     <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <Users className="w-6 h-6 text-purple-400" />
                     </div>
                     <h3 className="text-xl font-bold mb-3">{t('feature_1_title')}</h3>
                     <p className="text-muted-foreground">{t('feature_1_desc')}</p>
-                </div>
+                </li>
                  {/* Feature 2 */}
-                 <div className="p-8 rounded-2xl bg-card border border-border/50 hover:border-pink-500/50 transition-colors group">
+                 <li className="p-8 rounded-2xl bg-card border border-border/50 hover:border-pink-500/50 transition-colors group list-none">
                     <div className="w-12 h-12 bg-pink-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <Shield className="w-6 h-6 text-pink-400" />
                     </div>
                     <h3 className="text-xl font-bold mb-3">{t('feature_2_title')}</h3>
                     <p className="text-muted-foreground">{t('feature_2_desc')}</p>
-                </div>
+                </li>
                  {/* Feature 3 */}
-                 <div className="p-8 rounded-2xl bg-card border border-border/50 hover:border-orange-500/50 transition-colors group">
+                 <li className="p-8 rounded-2xl bg-card border border-border/50 hover:border-orange-500/50 transition-colors group list-none">
                     <div className="w-12 h-12 bg-orange-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <Check className="w-6 h-6 text-orange-400" />
                     </div>
                     <h3 className="text-xl font-bold mb-3">{t('feature_3_title')}</h3>
                     <p className="text-muted-foreground">{t('feature_3_desc')}</p>
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
       </section>
 
@@ -165,16 +165,16 @@ export default function InstagramPickerPage({ params }: { params: Promise<{ loca
       <section className="py-16 px-4 bg-muted/10">
         <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">{t('how_to_title')}</h2>
-            <div className="space-y-6">
+            <ol className="space-y-6">
                 {[1, 2, 3].map((step) => (
-                    <div key={step} className="flex gap-6 items-start p-6 bg-card rounded-xl border border-border/50">
+                    <li key={step} className="flex gap-6 items-start p-6 bg-card rounded-xl border border-border/50 list-none">
                         <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-purple-900/20">
                             {step}
                         </div>
                         <p className="text-lg pt-1.5">{t(`step_${step}`)}</p>
-                    </div>
+                    </li>
                 ))}
-            </div>
+            </ol>
              <div className="mt-12 text-center">
                 <Link
                     href="/"
@@ -190,14 +190,14 @@ export default function InstagramPickerPage({ params }: { params: Promise<{ loca
        <section className="py-20 px-4">
         <div className="max-w-3xl mx-auto">
              <h2 className="text-3xl font-bold text-center mb-12">{t('faq_title')}</h2>
-             <div className="grid gap-4">
+             <dl className="grid gap-4">
                 {faqs.map((faq, idx) => (
                     <div key={idx} className="p-6 rounded-2xl bg-card/50 border border-border">
                         <dt className="font-semibold text-lg mb-2 text-foreground">{faq.question}</dt>
                         <dd className="text-muted-foreground">{faq.answer}</dd>
                     </div>
                 ))}
-             </div>
+             </dl>
         </div>
        </section>
 

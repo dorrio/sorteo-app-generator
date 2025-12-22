@@ -53,7 +53,7 @@ export async function generateMetadata({
     icons: {
       icon: '/favicon.ico',
     },
-    keywords: ["sorteo", "giveaway", "influencer", "streamer", "creator", "viral", "concurso", "premios"],
+    keywords: ["sorteo", "giveaway", "influencer", "streamer", "creator", "viral", "concurso", "premios", "instagram comment picker", "instagram giveaway", "sorteo instagram gratis", "wheel of names"],
     authors: [{ name: "Sorteo Pro" }],
     alternates: {
       canonical: `/${locale}`,

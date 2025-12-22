@@ -17,7 +17,7 @@ module.exports = {
             changefreq = 'daily';
         }
         // Competitor Alternatives (High Value)
-        else if (path.includes('alternativa-appsorteos')) {
+        else if (path.includes('alternativa-appsorteos') || path.includes('instagram-comment-picker')) {
             priority = 0.9;
             changefreq = 'weekly';
         }

@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2 } from "lucide-react"
+import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
 
@@ -25,6 +26,11 @@ export function VerifyContent() {
         error?: string
     } | null>(null)
     const [showCopied, setShowCopied] = useState(false)
+    const [canShareNative, setCanShareNative] = useState(false)
+
+    useEffect(() => {
+        setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
+    }, [])
 
     // Auto-verify if ID is in URL
     useEffect(() => {
@@ -86,13 +92,15 @@ export function VerifyContent() {
 
     const handleVerify = () => verifyId(inputId)
 
-    const handleShare = async () => {
-        if (!result) return
-
-        const winnerName = result.participant?.name || "Someone"
+    const getShareData = () => {
+        const winnerName = result?.participant?.name || "Someone"
         const shareText = t("share_proof_text", { name: winnerName })
         const shareUrl = typeof window !== "undefined" ? window.location.href : ""
+        return { shareText, shareUrl }
+    }
 
+    const shareNative = async () => {
+        const { shareText, shareUrl } = getShareData()
         if (navigator.share) {
             try {
                 await navigator.share({
@@ -103,12 +111,40 @@ export function VerifyContent() {
             } catch {
                 // User cancelled
             }
-        } else {
-             // Viralis Optimization: Copy full text + url to reduce friction on desktop sharing
-             await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
-             setShowCopied(true)
-             setTimeout(() => setShowCopied(false), 2000)
         }
+    }
+
+    const copyToClipboard = async () => {
+        const { shareText, shareUrl } = getShareData()
+        await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
+        setShowCopied(true)
+        setTimeout(() => setShowCopied(false), 2000)
+    }
+
+    const shareTwitter = () => {
+        const { shareText, shareUrl } = getShareData()
+        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`
+        window.open(url, "_blank", "width=550,height=420")
+    }
+
+    const shareFacebook = () => {
+        const { shareText, shareUrl } = getShareData()
+        const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
+        window.open(url, "_blank", "width=550,height=420")
+    }
+
+    const shareWhatsApp = () => {
+        const { shareText, shareUrl } = getShareData()
+        const url = `https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`
+        window.open(url, "_blank")
+    }
+
+    const shareInstagram = async () => {
+        const { shareText } = getShareData()
+        await navigator.clipboard.writeText(shareText)
+        setShowCopied(true)
+        setTimeout(() => setShowCopied(false), 2000)
+        window.open("https://www.instagram.com/", "_blank")
     }
 
     return (
@@ -279,19 +315,69 @@ export function VerifyContent() {
                                         {/* VIRAL LOOP CTA */}
                                         {(result.status === "valid" || result.status === "partial") && (
                                             <div className="mt-6 pt-4 border-t border-border/50 space-y-3">
-                                                <Button
-                                                    className="w-full gap-2 font-bold"
-                                                    size="lg"
-                                                    variant="outline"
-                                                    onClick={handleShare}
-                                                    style={{
-                                                        borderColor: theme.primaryColor,
-                                                        color: theme.primaryColor
-                                                    }}
-                                                >
-                                                    {showCopied ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
-                                                    {showCopied ? t("result.copied") : t("share_button")}
-                                                </Button>
+                                                {canShareNative ? (
+                                                    <Button
+                                                        className="w-full gap-2 font-bold"
+                                                        size="lg"
+                                                        variant="outline"
+                                                        onClick={shareNative}
+                                                        style={{
+                                                            borderColor: theme.primaryColor,
+                                                            color: theme.primaryColor
+                                                        }}
+                                                    >
+                                                        <Share2 className="w-4 h-4" />
+                                                        {t("share_button")}
+                                                    </Button>
+                                                ) : (
+                                                    <DropdownMenu>
+                                                        <DropdownMenuTrigger asChild>
+                                                            <Button
+                                                                className="w-full gap-2 font-bold"
+                                                                size="lg"
+                                                                variant="outline"
+                                                                style={{
+                                                                    borderColor: theme.primaryColor,
+                                                                    color: theme.primaryColor
+                                                                }}
+                                                            >
+                                                                <Share2 className="w-4 h-4" />
+                                                                {t("share_button")}
+                                                            </Button>
+                                                        </DropdownMenuTrigger>
+                                                        <DropdownMenuContent align="center" className="w-56">
+                                                            <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
+                                                                {showCopied ? (
+                                                                    <>
+                                                                        <Check className="w-4 h-4 text-green-500" />
+                                                                        <span className="text-green-500">{t("result.copied")}</span>
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        <Copy className="w-4 h-4" />
+                                                                        Copy Link
+                                                                    </>
+                                                                )}
+                                                            </DropdownMenuItem>
+                                                            <DropdownMenuItem onClick={shareTwitter} className="gap-2 cursor-pointer">
+                                                                <Twitter className="w-4 h-4" />
+                                                                Twitter / X
+                                                            </DropdownMenuItem>
+                                                            <DropdownMenuItem onClick={shareInstagram} className="gap-2 cursor-pointer">
+                                                                <Instagram className="w-4 h-4" />
+                                                                Instagram
+                                                            </DropdownMenuItem>
+                                                            <DropdownMenuItem onClick={shareFacebook} className="gap-2 cursor-pointer">
+                                                                <Facebook className="w-4 h-4" />
+                                                                Facebook
+                                                            </DropdownMenuItem>
+                                                            <DropdownMenuItem onClick={shareWhatsApp} className="gap-2 cursor-pointer">
+                                                                <MessageCircle className="w-4 h-4" />
+                                                                WhatsApp
+                                                            </DropdownMenuItem>
+                                                        </DropdownMenuContent>
+                                                    </DropdownMenu>
+                                                )}
 
                                                 <Link href="/" className="block">
                                                     <Button

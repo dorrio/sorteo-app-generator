@@ -14,12 +14,41 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'InstagramPicker' });
 
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
+    ? process.env.NEXT_PUBLIC_APP_URL
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'https://sorteopro.com';
+
   return {
     title: t('title'),
     description: t('description'),
+    keywords: ["instagram comment picker", "free instagram giveaway", "instagram winner picker", "instagram giveaway tool", "sorteo instagram gratis", "no login giveaway"],
     alternates: {
         canonical: `/${locale}/instagram-comment-picker`
-    }
+    },
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      url: `${baseUrl}/${locale}/instagram-comment-picker`,
+      type: "website",
+      siteName: "Sorteo Pro",
+      locale: locale === 'es' ? 'es_ES' : locale === 'pt' ? 'pt_PT' : 'en_US',
+      images: [
+        {
+          url: '/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: t('title'),
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
+      images: ['/og-image.jpg'],
+    },
   };
 }
 

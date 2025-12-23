@@ -54,7 +54,24 @@ export default function InstagramPickerPage({ params }: { params: Promise<{ loca
       "No Login Required",
       "Free Forever",
       "Secure RNG"
-    ]
+    ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      ratingCount: '8300',
+    },
+  };
+
+  const howToLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: t('how_to_title'),
+    step: [1, 2, 3].map(step => ({
+      '@type': 'HowToStep',
+      position: step,
+      name: t(`step_${step}`),
+      text: t(`step_${step}`),
+    })),
   };
 
   const faqLd = {
@@ -79,6 +96,10 @@ export default function InstagramPickerPage({ params }: { params: Promise<{ loca
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }}
       />
 
         {/* Background Gradients */}

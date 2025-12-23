@@ -16,8 +16,8 @@
         "description": "A ferramenta definitiva para criar sorteios virais. Feita para criadores de conteúdo e influencers que querem impressionar sua audiência.",
         "og_title": "Sorteio Pro | Sorteios Premium para Influencers",
         "og_description": "Crie sorteios épicos com animações cinematográficas",
-        "verify_title": "Verificar Resultado do Sorteio | Sorteio Pro",
-        "verify_description": "Valide a autenticidade deste resultado do sorteio usando nosso sistema de verificação criptográfica seguro."
+        "verify_title": "🏆 Resultado Oficial do Sorteio | Verificado por Sorteio Pro",
+        "verify_description": "Veja quem ganhou! 100% Autêntico e Verificado por Sorteio Pro. Clique para ver o certificado oficial."
     },
     "LanguageSwitcher": {
         "switchLanguage": "Mudar idioma"
@@ -139,12 +139,12 @@
     "WinnerCeremony": {
         "winner_label": "Vencedor",
         "share_text": "Acabei de realizar um sorteio com Sorteio Pro e {name} ganhou! 🏆 Crie seu próprio sorteio viral grátis aqui:",
-        "share_title": "Vencedor do Sorteio",
+        "share_title": "Temos um Vencedor! 🏆",
         "congratulations": "Parabéns! 🎉",
-        "share_button": "Compartilhar",
+        "share_button": "Compartilhar Resultado",
         "share_menu": "Compartilhar...",
         "copied": "Copiado!",
-        "copy_text": "Copiar texto",
+        "copy_text": "Copiar Link",
         "new_giveaway": "Novo Sorteio",
         "close": "Fechar"
     },
@@ -177,8 +177,8 @@
         "winner_label": "Vencedor!"
     },
     "VerificationPage": {
-        "title": "Verificador de Sorteios",
-        "subtitle": "Valide a autenticidade de um sorteio realizado no Sorteio Pro",
+        "title": "🏆 Resultado Oficial do Sorteio",
+        "subtitle": "Certificado de Autenticidade - Verificado por Sorteio Pro",
         "input_label": "ID Verificável",
         "input_placeholder": "Ex: ID-A1B2C3D4-18E...",
         "verify_button": "Verificar ID",

@@ -34,3 +34,11 @@
 **Bridge:** Converted the interactive `div` into a semantic `<button>` element with `type="button"` and a localized `aria-label`. This promotes the element from generic layout noise to a functional control in the accessibility tree.
 
 **Signal:** The element is now focusable and clickable via keyboard. Search engines correctly interpret it as an interactive element linked to the "Try Wheel" action, reinforcing the page's primary conversion goal.
+
+## 2025-12-19 - [Instagram Landing Page & SEO Content]
+
+**Blocker:** Feature lists and "How To" steps in `InstagramPickerPage`, `SeoContent`, and `WheelGeo` utilize CSS classes like `list-none` (or `grid`/`flex` layouts) which can inadvertently strip list semantics in certain screen readers (notably VoiceOver on Safari). This creates a "Semantic Void" where a visual list is perceived as a flattened stream of text by assistive technology and bots.
+
+**Bridge:** Explicitly added `role="list"` to the `<ul>` and `<ol>` containers. This ARIA attribute restores the semantic list structure in the accessibility tree, ensuring that the elements are correctly announced as lists with a specific number of items, regardless of their visual styling.
+
+**Signal:** Improved structural understanding for search engines (reinforcing the "List" nature of features and steps) and critical accessibility fix for Apple ecosystem users/bots, directly impacting the "Technical Quality" score.

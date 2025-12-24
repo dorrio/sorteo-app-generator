@@ -76,7 +76,7 @@ export function WheelGeo() {
               <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
                 {t('features_list')}
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-3" role="list">
                 {features.map((feature, idx) => (
                   <li key={idx} className="flex items-center gap-3 text-foreground/90">
                     <div className="p-1.5 rounded-full bg-primary/20 text-primary">

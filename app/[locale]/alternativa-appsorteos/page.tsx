@@ -46,11 +46,35 @@ export default function VersusPage() {
     }]
   };
 
+  const softwareApplicationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Sorteo Pro - Free AppSorteos Alternative",
+    "applicationCategory": "SocialNetworkingApplication",
+    "operatingSystem": "Web, iOS, Android",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": t('description'),
+    "featureList": [
+      "Unlimited Comments",
+      "No Login Required",
+      "Free Forever",
+      "Fair RNG"
+    ]
+  };
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationJsonLd) }}
       />
       {/* Pattern 2: The SEO Header Injection */}
       <header className="bg-background border-b border-border/50 py-20 px-4 text-center">
@@ -75,6 +99,18 @@ export default function VersusPage() {
       {/* Persuasion Layer */}
       <section className="py-16 px-4 bg-muted/30">
         <div className="max-w-3xl mx-auto text-center">
+            {/* Direct Answer Block (GEO) */}
+            <div className="mb-16 bg-card/50 border border-primary/20 rounded-2xl p-8 shadow-sm">
+                <h2 className="text-2xl font-bold text-foreground mb-4">
+                   {t('why_us.direct_answer_title')}
+                </h2>
+                <div className="prose prose-invert prose-lg max-w-none text-muted-foreground leading-relaxed">
+                     {t.rich('why_us.direct_answer_text', {
+                        strong: (chunks) => <strong className="text-primary font-semibold">{chunks}</strong>
+                    })}
+                </div>
+            </div>
+
             <h2 className="text-3xl font-bold text-foreground mb-6">
                 {t('why_us.title')}
             </h2>

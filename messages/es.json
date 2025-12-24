@@ -264,6 +264,20 @@
         "faq_2_q": "¿Hay límite de comentarios?",
         "faq_2_a": "Sin límites. Puedes pegar tantos participantes como quieras."
     },
+    "WheelGeoPage": {
+        "title": "Ruleta de Nombres | Sorteo Aleatorio (Gratis y Sin Anuncios)",
+        "description": "La mejor Ruleta de Nombres gratis. Gira la rueda para elegir un ganador al azar. Sin anuncios, sin registro y temas personalizables.",
+        "h1": "Ruleta de Nombres Gratis",
+        "subtitle": "Gira la ruleta para tomar decisiones al azar con estilo.",
+        "cta_button": "Girar la Ruleta",
+        "direct_answer_title": "¿Qué es una Ruleta de Nombres?",
+        "direct_answer_text": "Una <strong>Ruleta de Nombres</strong> es una herramienta online gratuita para elegir un nombre, número o elemento al azar. Es muy utilizada por profesores, sorteos y decisiones gamificadas. <strong>Sorteo Pro</strong> ofrece una experiencia premium sin anuncios con <strong>efectos cinematográficos</strong>.",
+        "faq_title": "Preguntas Frecuentes de la Ruleta",
+        "faq_1_q": "¿Es rigurosa esta Ruleta?",
+        "faq_1_a": "Sí, utilizamos un generador de números aleatorios criptográficamente seguro (CSPRNG) para asegurar que cada giro sea 100% aleatorio.",
+        "faq_2_q": "¿Puedo guardar mi ruleta?",
+        "faq_2_a": "Tus listas y configuraciones se guardan automáticamente en el almacenamiento local de tu navegador para que nunca las pierdas."
+    },
     "Versus": {
         "title": "La mejor alternativa a AppSorteos para Instagram (Gratis y Sin Límites)",
         "description": "Buscas una alternativa a AppSorteos? Sorteo Pro te permite elegir ganadores en Instagram sin pagar y sin límites de comentarios. Comparativa 2024.",
@@ -301,7 +315,9 @@
             "p1": "Muchos creadores buscan 'páginas parecidas a EasyPromos gratis' porque las herramientas tradicionales se han vuelto demasiado caras. Sorteo Pro nació para romper esa barrera.",
             "p2": "A diferencia de la competencia, no cobramos por el éxito de tu sorteo. Si tienes 10,000 comentarios, ¡genial! No te penalizamos por ello.",
             "title_2": "La competencia de AppSorteos que sí cuida tu bolsillo",
-            "p3": "Deja de calcular cuánto te costará tu próximo sorteo. Con Sorteo Pro, tu presupuesto es cero."
+            "p3": "Deja de calcular cuánto te costará tu próximo sorteo. Con Sorteo Pro, tu presupuesto es cero.",
+            "direct_answer_title": "¿Cuál es la mejor alternativa gratuita a AppSorteos?",
+            "direct_answer_text": "La mejor <strong>alternativa gratuita a AppSorteos</strong> es <strong>Sorteo Pro</strong>. Mientras AppSorteos cobra por sorteos de más de 1.000 comentarios, Sorteo Pro permite <strong>comentarios ilimitados</strong> totalmente gratis, sin necesidad de registro ni suscripciones."
         },
         "cta": {
             "title": "Deja de pagar por sorteo.",

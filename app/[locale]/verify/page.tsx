@@ -3,26 +3,44 @@ import { Metadata } from "next"
 import { getTranslations } from "next-intl/server"
 import { VerifyContent } from "./verify-content"
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+type Props = {
+    params: Promise<{ locale: string }>
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
     const { locale } = await params
+    const { id, name } = await searchParams
     const t = await getTranslations({ locale, namespace: "Metadata" })
 
     // Fallback URL if env is missing
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://sorteopro.com"
 
+    // Viral Optimization: Dynamic Metadata
+    const winnerName = typeof name === "string" ? name : null
+    const verificationId = typeof id === "string" ? id : null
+
+    const title = winnerName
+        ? `🏆 ${winnerName} is the Winner! | Verified by Sorteo Pro`
+        : t("verify_title")
+
+    const description = verificationId
+        ? `Official result for verification ID: ${verificationId}. Click to view certificate.`
+        : t("verify_description")
+
     return {
-        title: t("verify_title"),
-        description: t("verify_description"),
+        title: title,
+        description: description,
         openGraph: {
-            title: t("verify_title"),
-            description: t("verify_description"),
+            title: title,
+            description: description,
             url: `${baseUrl}/${locale}/verify`,
             images: [
                 {
                     url: `${baseUrl}/og-verify.jpg`,
                     width: 1200,
                     height: 630,
-                    alt: "Official Sorteo Pro Verification Result",
+                    alt: winnerName ? `${winnerName} - Official Winner` : "Official Sorteo Pro Verification Result",
                 },
                 {
                     url: `${baseUrl}/og-image.jpg`, // Fallback
@@ -34,8 +52,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         },
         twitter: {
             card: "summary_large_image",
-            title: t("verify_title"),
-            description: t("verify_description"),
+            title: title,
+            description: description,
         },
     }
 }

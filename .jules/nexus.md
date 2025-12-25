@@ -42,3 +42,10 @@
 **Bridge:** Explicitly added `role="list"` to the `<ul>` and `<ol>` containers. This ARIA attribute restores the semantic list structure in the accessibility tree, ensuring that the elements are correctly announced as lists with a specific number of items, regardless of their visual styling.
 
 **Signal:** Improved structural understanding for search engines (reinforcing the "List" nature of features and steps) and critical accessibility fix for Apple ecosystem users/bots, directly impacting the "Technical Quality" score.
+## 2025-12-20 - [SEO Content Component]
+
+**Blocker:** The Features and How-To lists in `SeoContent` utilize `list-none` and grid layouts, which strips list semantics for some screen readers, reverting them to plain text streams.
+
+**Bridge:** Applied `role="list"` to the `<ul>` and `<ol>` containers to enforce semantic list structure in the accessibility tree.
+
+**Signal:** Restores proper list item counting and navigation for assistive technology and improves structural clarity for search bots.

@@ -44,3 +44,15 @@
 **GEO Impact:**
 *   **Knowledge Graph:** `DefinedTermSet` schema helps Google associate Sorteo Pro with technical reliability (RNG).
 *   **Long-Tail Ranking:** Optimizing for questions like "Is Sorteo Pro fair?" or "What is an Instagram Comment Picker?".
+
+## 2025-02-21 - Versus Page Authority & Global Schema
+**Context:** Establishing "Sorteo Pro" as the definitive free alternative to AppSorteos and consolidating schema authority.
+**Gap:** The high-value page `/alternativa-appsorteos` lacked a "Direct Answer" block (zero-click result) and specific `SoftwareApplication` features. The Home page had duplicate schema injections (Layout vs SeoContent).
+**Action:**
+*   **Global Schema:** Moved `aggregateRating` (4.9 stars) to the global `layout.tsx` so *every* page (including Versus) displays stars in SERPs.
+*   **Schema Cleanup:** Removed redundant `SoftwareApplication` injection from `seo-content.tsx`.
+*   **GEO Strategy:** Injected a dedicated "Direct Answer" block into `app/[locale]/alternativa-appsorteos/page.tsx` defining Sorteo Pro as the "best free alternative".
+*   **Localization:** Added optimized translation keys for the Direct Answer in EN, ES, and PT.
+**GEO Impact:**
+*   **Zero-Click Dominance:** We now explicitly answer "What is the best free alternative to AppSorteos?" with entity-rich text.
+*   **CTR Boost:** All pages now benefit from `AggregateRating` schema.

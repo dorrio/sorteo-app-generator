@@ -49,26 +49,6 @@ export function SeoContent() {
     })),
   }
 
-  const softwareLd = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: 'Sorteo Pro',
-    applicationCategory: 'ProductivityApplication',
-    operatingSystem: 'Web',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
-    },
-    description: t('what_is_text').replace(/<[^>]*>?/gm, ''), // Strip HTML tags for clean description
-    featureList: features.map(f => f.title).join(', '),
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      ratingCount: '12500',
-    },
-  }
-
   const howToLd = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
@@ -86,10 +66,6 @@ export function SeoContent() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareLd) }}
       />
       <script
         type="application/ld+json"

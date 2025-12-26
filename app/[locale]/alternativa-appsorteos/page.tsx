@@ -5,6 +5,7 @@ import { getTranslations } from 'next-intl/server';
 import { useLocale } from 'next-intl';
 import Link from 'next/link';
 import { routing } from '@/i18n/routing';
+import { HelpCircle } from 'lucide-react';
 
 export const dynamic = 'force-static';
 
@@ -67,8 +68,25 @@ export default function VersusPage() {
         </div>
       </header>
 
+      {/* Direct Answer Block (GEO) */}
+      <section className="bg-background relative z-20 -mt-10 mb-16 px-4">
+        <div className="max-w-3xl mx-auto bg-card border border-border/50 rounded-2xl p-8 shadow-xl">
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                <span className="bg-primary/20 p-2 rounded-lg">
+                    <HelpCircle className="w-5 h-5 text-primary" />
+                </span>
+                {t('direct_answer_title')}
+            </h2>
+            <div className="prose prose-invert prose-lg max-w-none text-muted-foreground leading-relaxed">
+                {t.rich('direct_answer_text', {
+                    strong: (chunks) => <strong className="text-foreground font-semibold bg-primary/10 px-1 rounded">{chunks}</strong>
+                })}
+            </div>
+        </div>
+      </section>
+
       {/* Pattern 1: The Comparison Table */}
-      <section className="bg-background -mt-10 relative z-10">
+      <section className="bg-background relative z-10">
         <ComparisonTable />
       </section>
 

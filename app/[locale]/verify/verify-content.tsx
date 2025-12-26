@@ -93,9 +93,18 @@ export function VerifyContent() {
     const handleVerify = () => verifyId(inputId)
 
     const getShareData = () => {
-        const winnerName = result?.participant?.name || "Someone"
+        const winnerName = result?.participant?.name || searchParams.get("name") || "Someone"
         const shareText = t("share_proof_text", { name: winnerName })
-        const shareUrl = typeof window !== "undefined" ? window.location.href : ""
+
+        let shareUrl = typeof window !== "undefined" ? window.location.href : ""
+
+        // Ensure name is in URL for viral metadata if not already there
+        if (typeof window !== "undefined" && !shareUrl.includes("name=") && winnerName !== "Someone") {
+            const url = new URL(shareUrl)
+            url.searchParams.set("name", winnerName)
+            shareUrl = url.toString()
+        }
+
         return { shareText, shareUrl }
     }
 

@@ -50,7 +50,7 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
   // Viral Optimization: Create a deep link to the verification page
   const baseUrl = typeof window !== "undefined" ? window.location.origin : ""
   const shareUrl = winner.verificationId
-    ? `${baseUrl}/${locale}/verify?id=${winner.verificationId}`
+    ? `${baseUrl}/${locale}/verify?id=${winner.verificationId}&name=${encodeURIComponent(winner.name)}`
     : typeof window !== "undefined" ? window.location.href : ""
 
   // Compelling share text

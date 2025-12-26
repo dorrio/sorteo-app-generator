@@ -155,7 +155,12 @@ export default async function RootLayout({
       "Instagram Giveaway Tool",
       "Instant Verification",
       "Provably Fair RNG"
-    ]
+    ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      ratingCount: '12500',
+    }
   }
 
   return (

@@ -49,26 +49,6 @@ export function SeoContent() {
     })),
   }
 
-  const softwareLd = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: 'Sorteo Pro',
-    applicationCategory: 'ProductivityApplication',
-    operatingSystem: 'Web',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
-    },
-    description: t('what_is_text').replace(/<[^>]*>?/gm, ''), // Strip HTML tags for clean description
-    featureList: features.map(f => f.title).join(', '),
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      ratingCount: '12500',
-    },
-  }
-
   const howToLd = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
@@ -89,10 +69,6 @@ export function SeoContent() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareLd) }}
-      />
-      <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }}
       />
       <div className="max-w-5xl mx-auto space-y-16">
@@ -110,7 +86,7 @@ export function SeoContent() {
         {/* Features Grid */}
         <div className="space-y-8">
           <h2 className="text-2xl font-bold">{t("features_title")}</h2>
-          <ul className="grid md:grid-cols-3 gap-8">
+          <ul className="grid md:grid-cols-3 gap-8" role="list">
             {features.map((feature, idx) => (
               <motion.li
                 key={idx}
@@ -133,7 +109,7 @@ export function SeoContent() {
         {/* How To / Steps */}
         <div className="space-y-8">
           <h2 className="text-2xl font-bold">{t("how_to_title")}</h2>
-          <ol className="grid md:grid-cols-3 gap-4">
+          <ol className="grid md:grid-cols-3 gap-4" role="list">
             {[1, 2, 3].map((step) => (
               <li key={step} className="flex gap-4 items-start list-none">
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">

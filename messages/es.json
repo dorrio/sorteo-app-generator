@@ -201,7 +201,7 @@
     },
     "SEOContent": {
         "what_is_title": "¿Qué es Sorteo Pro?",
-        "what_is_text": "<b>Sorteo Pro</b> es una <b>herramienta de sorteos gratuita</b> para influencers que te permite elegir <b>ganadores al azar</b> de listas ilimitadas. A diferencia de las alternativas de pago, ofrece <b>selección criptográficamente segura</b>, animaciones cinematográficas y <b>verificación instantánea</b> sin necesidad de registro.",
+        "what_is_text": "<b>Sorteo Pro</b> es una <b>herramienta de sorteos gratuita</b> para influencers que te permite elegir <b>ganadores al azar</b> de listas ilimitadas para tus concursos de <b>Instagram</b> o <b>Ruleta de Nombres</b>. A diferencia de las alternativas de pago, ofrece <b>selección criptográficamente segura</b>, animaciones cinematográficas y <b>verificación instantánea</b> sin necesidad de registro.",
         "features_title": "Características Principales",
         "feature_1_title": "Justo y Transparente",
         "feature_1_desc": "Utiliza generación de números aleatorios criptográficamente seguros para garantizar la equidad.",
@@ -211,7 +211,7 @@
         "feature_3_desc": "Las animaciones cinematográficas y los efectos de sonido crean emoción para tu audiencia.",
         "how_to_title": "Cómo realizar un sorteo",
         "step_1": "Introduce los nombres de los participantes manualmente o pega una lista.",
-        "step_2": "Personaliza la apariencia usando el editor visual.",
+        "step_2": "Personalize a apariencia usando el editor visual.",
         "step_3": "¡Haz clic en 'Iniciar' y mira cómo sucede la magia!",
         "faq_title": "Preguntas Frecuentes",
         "faq_1_question": "¿Es Sorteo Pro gratis?",
@@ -221,13 +221,15 @@
     },
     "WheelGeo": {
         "title": "Ruleta Aleatoria de Nombres",
-        "description": "¿Buscas una **Ruleta Aleatoria**? Sorteo Pro incluye una **Ruleta de Nombres** totalmente personalizable, justa y gratuita.",
+        "description": "¿Buscas una <b>Ruleta Aleatoria</b>? Sorteo Pro incluye una <b>Ruleta de Nombres</b> totalmente personalizable, justa y gratuita.",
         "what_is_wheel": "¿Qué es una Ruleta de Nombres?",
-        "what_is_wheel_answer": "Una **Ruleta de Nombres** es una herramienta digital que elige un ganador al azar girando una rueda virtual. Es utilizada por profesores, influencers y organizadores de eventos para la **selección aleatoria**. Sorteo Pro mejora esta experiencia con efectos cinematográficos.",
+        "what_is_wheel_answer": "Una <b>Ruleta de Nombres</b> es una herramienta digital que elige un ganador al azar girando una rueda virtual. Es utilizada por profesores, influencers y organizadores de eventos para la <b>selección aleatoria</b>. Sorteo Pro mejora esta experiencia con efectos cinematográficos.",
         "features_list": "Características de la Ruleta",
         "feature_1": "100% Aleatoria y Justa",
         "feature_2": "Colores y Temas Personalizados",
         "feature_3": "Sin Anuncios / Sin Registro",
+        "feature_4": "Efectos de Sonido y Animación",
+        "feature_5": "Verificación de Resultados Instantánea",
         "cta_button": "Probar Modo Ruleta Ahora"
     },
     "Glossary": {
@@ -314,7 +316,7 @@
             "title": "Preguntas Frecuentes",
             "q1": "¿Existe alguna página parecida a EasyPromos gratis?",
             "a1": "Sí, **Sorteo Pro** es la alternativa gratuita más robusta a EasyPromos, ofreciendo selección de ganadores certificada sin los altos costes de suscripción.",
-            "q2": "¿Es realmente gratis sin límites?",
+            "q2": "És realmente gratis sin límites?",
             "a2": "Absolutamente. Puedes cargar listas masivas de participantes y realizar sorteos ilimitados sin pagar nada.",
             "q3": "¿Necesito registrarme?",
             "a3": "No. Respetamos tu privacidad y tu tiempo. Entra y crea tu sorteo al instante."

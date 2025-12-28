@@ -16,7 +16,7 @@
         "description": "The ultimate tool for viral giveaways. Designed for content creators and influencers who want to impress their audience.",
         "og_title": "Sorteo Pro | Premium Giveaways for Influencers",
         "og_description": "Create epic giveaways with cinematic animations",
-        "verify_title": "🏆 Official Giveaway Result | Verified by Sorteo Pro",
+        "verify_title": "🏆 OFFICIAL WINNER ANNOUNCEMENT | Verified by Sorteo Pro",
         "verify_description": "Check who won! 100% Authentic and Verified by Sorteo Pro. Click to see the official certificate."
     },
     "LanguageSwitcher": {
@@ -185,7 +185,7 @@
         "back_button": "Back to Home",
         "create_your_own": "Create Free Giveaway",
         "share_button": "Share Proof",
-        "share_proof_text": "🔥 Official Result: {name} is the winner! 🏆 Verified by Sorteo Pro. Want to run your own? Check it out here:",
+        "share_proof_text": "*OFFICIAL RESULT* 🏆\n\n**{name}** won the giveaway!\n\n✅ Verified by Sorteo Pro.\n\nSee the certificate here 👇",
         "result": {
             "valid_title": "Valid ID",
             "copied": "Copied!",

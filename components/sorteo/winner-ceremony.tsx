@@ -183,17 +183,19 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
               className="mb-8 flex flex-col items-center gap-2"
             >
               <span className="text-xs uppercase tracking-widest text-muted-foreground">ID Verificable</span>
-              <div
-                className="flex items-center gap-2 px-3 py-1 rounded-md bg-muted/50 cursor-pointer hover:bg-muted transition-colors"
+              <button
+                type="button"
+                className="flex items-center gap-2 px-3 py-1 rounded-md bg-muted/50 cursor-pointer hover:bg-muted transition-colors border-none outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 onClick={() => {
                   navigator.clipboard.writeText(winner.verificationId!)
                   setCopied(true)
                   setTimeout(() => setCopied(false), 2000)
                 }}
+                aria-label={t("copy_text") + " " + winner.verificationId}
               >
                 <code className="text-sm font-mono text-primary">{winner.verificationId}</code>
                 {copied ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3 text-muted-foreground" />}
-              </div>
+              </button>
             </motion.div>
           )}
 

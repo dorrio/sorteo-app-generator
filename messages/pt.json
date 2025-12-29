@@ -185,7 +185,7 @@
         "back_button": "Voltar ao Início",
         "create_your_own": "Criar Sorteio Grátis",
         "share_button": "Compartilhar Prova",
-        "share_proof_text": "🔥 Resultado Oficial: {name} é o vencedor! 🏆 Verificado por Sorteio Pro. Quer fazer o seu? Confira aqui:",
+        "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n**{name}** ganhou o sorteio!\n\n✅ Verificado por Sorteio Pro.\n\nVeja o certificado aqui 👇",
         "result": {
             "valid_title": "ID Válido",
             "copied": "Copiado!",
@@ -246,7 +246,7 @@
         "h1": "Sorteador de Comentários do Instagram Grátis",
         "subtitle": "A maneira mais justa e fácil de escolher vencedores para seus sorteios no Instagram.",
         "direct_answer_title": "O que é um Sorteador de Comentários do Instagram?",
-        "direct_answer_text": "Um **Sorteador de Comentários do Instagram** é uma ferramenta que seleciona automaticamente um vencedor aleatório dos comentários de um post. Diferente de outras ferramentas que cobram por muitos comentários, o **Sorteo Pro** é 100% gratuito e suporta **comentários ilimitados**.",
+        "direct_answer_text": "Um <strong>Sorteador de Comentários do Instagram</strong> é uma ferramenta que seleciona automaticamente um vencedor aleatório dos comentários de um post. Diferente de outras ferramentas que cobram por muitos comentários, o <strong>Sorteo Pro</strong> é 100% gratuito e suporta <strong>comentários ilimitados</strong>.",
         "features_title": "Por que usar nosso Sorteador?",
         "feature_1_title": "100% Grátis e Ilimitado",
         "feature_1_desc": "Sem taxas ocultas. Tenha 100 ou 100.000 comentários, é grátis.",
@@ -263,7 +263,8 @@
         "faq_1_q": "Este sorteador é realmente grátis?",
         "faq_1_a": "Sim! Acreditamos que criadores não devem pagar para presentear sua comunidade.",
         "faq_2_q": "Existe limite de comentários?",
-        "faq_2_a": "Sem limites. Você pode colar quantos participantes quiser."
+        "faq_2_a": "Sem limites. Você pode colar quantos participantes quiser.",
+        "secure_rng": "RNG Seguro"
     },
     "Versus": {
         "title": "A melhor alternativa ao AppSorteos para Instagram (Grátis e Sem Limites)",
@@ -314,7 +315,7 @@
         "faq": {
             "title": "Perguntas Frequentes",
             "q1": "Existe algum site parecido com EasyPromos grátis?",
-            "a1": "Sim, **Sorteo Pro** é a alternativa gratuita mais robusta ao EasyPromos, oferecendo seleção de vencedores certificada sem os altos custos de assinatura.",
+            "a1": "Sim, <strong>Sorteo Pro</strong> é a alternativa gratuita mais robusta ao EasyPromos, oferecendo seleção de vencedores certificada sem os altos custos de assinatura.",
             "q2": "É realmente grátis sem limites?",
             "a2": "Absolutamente. Você pode carregar listas massivas de participantes e realizar sorteios ilimitados sem pagar nada.",
             "q3": "Preciso me cadastrar?",

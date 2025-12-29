@@ -49,3 +49,11 @@
 **Bridge:** Applied `role="list"` to the `<ul>` and `<ol>` containers to enforce semantic list structure in the accessibility tree.
 
 **Signal:** Restores proper list item counting and navigation for assistive technology and improves structural clarity for search bots.
+
+## 2025-12-21 - [Glossary]
+
+**Blocker:** The Glossary component was using a generic `div` grid structure with `h3` for terms. This "Semantic Void" failed to explicitly communicate the term-definition relationship to search engines and assistive technology, treating it as just a collection of boxes.
+
+**Bridge:** Refactored the component to use a semantic `<dl>` (Description List) with `<dt>` (Definition Term) and `<dd>` (Definition Description).
+
+**Signal:** Provides a strong signal to Google (and screen readers) that this content is a Glossary, directly reinforcing the "DefinedTermSet" schema and improving the likelihood of appearing in Rich Snippets or Direct Answers.

@@ -17,7 +17,7 @@
         "description": "La herramienta definitiva para crear sorteos virales. Diseñada para creadores de contenido e influencers que quieren impresionar a su audiencia.",
         "og_title": "Sorteo Pro | Sorteos Premium para Influencers",
         "og_description": "Crea sorteos épicos con animaciones cinematográficas",
-        "verify_title": "🏆 Resultado Oficial del Sorteo | Verificado por Sorteo Pro",
+        "verify_title": "🏆 ANUNCIO DE GANADOR OFICIAL | Verificado por Sorteo Pro",
         "verify_description": "¡Mira quién ganó! 100% Auténtico y Verificado por Sorteo Pro. Clic para ver el certificado oficial."
     },
     "LanguageSwitcher": {
@@ -186,7 +186,7 @@
         "back_button": "Volver al inicio",
         "create_your_own": "Crear Sorteo Gratis",
         "share_button": "Compartir Prueba",
-        "share_proof_text": "🔥 Resultado Oficial: ¡{name} es el ganador! 🏆 Verificado por Sorteo Pro. ¿Quieres hacer uno? Mira aquí:",
+        "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n¡**{name}** ganó el sorteo!\n\n✅ Verificado por Sorteo Pro.\n\nMira el certificado aquí 👇",
         "result": {
             "valid_title": "ID Válido",
             "copied": "¡Copiado!",
@@ -247,7 +247,7 @@
         "h1": "Selector de Comentarios de Instagram Gratis",
         "subtitle": "La forma más justa y fácil de elegir ganadores para tus sorteos de Instagram.",
         "direct_answer_title": "¿Qué es un Selector de Comentarios de Instagram?",
-        "direct_answer_text": "Un **Selector de Comentarios de Instagram** es una herramienta que elige automáticamente un ganador al azar de los comentarios de un post. A diferencia de otras herramientas que cobran por muchos comentarios, **Sorteo Pro** es 100% gratis y soporta **comentarios ilimitados**.",
+        "direct_answer_text": "Un <strong>Selector de Comentarios de Instagram</strong> es una herramienta que elige automáticamente un ganador al azar de los comentarios de un post. A diferencia de otras herramientas que cobran por muchos comentarios, <strong>Sorteo Pro</strong> es 100% gratis y soporta <strong>comentarios ilimitados</strong>.",
         "features_title": "¿Por qué usar nuestro Selector?",
         "feature_1_title": "100% Gratis e Ilimitado",
         "feature_1_desc": "Sin tarifas ocultas. Tengas 100 o 100.000 comentarios, es gratis.",
@@ -264,7 +264,8 @@
         "faq_1_q": "¿Es realmente gratis este selector?",
         "faq_1_a": "¡Sí! Creemos que los creadores no deberían pagar por regalar cosas a su comunidad.",
         "faq_2_q": "¿Hay límite de comentarios?",
-        "faq_2_a": "Sin límites. Puedes pegar tantos participantes como quieras."
+        "faq_2_a": "Sin límites. Puedes pegar tantos participantes como quieras.",
+        "secure_rng": "RNG Seguro"
     },
     "Versus": {
         "title": "La mejor alternativa a AppSorteos para Instagram (Gratis y Sin Límites)",

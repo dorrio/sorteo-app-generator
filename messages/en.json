@@ -16,8 +16,12 @@
         "description": "The ultimate tool for viral giveaways. Designed for content creators and influencers who want to impress their audience.",
         "og_title": "Sorteo Pro | Premium Giveaways for Influencers",
         "og_description": "Create epic giveaways with cinematic animations",
-        "verify_title": "🏆 Official Giveaway Result | Verified by Sorteo Pro",
+        "verify_title": "🏆 OFFICIAL WINNER ANNOUNCEMENT | Verified by Sorteo Pro",
         "verify_description": "Check who won! 100% Authentic and Verified by Sorteo Pro. Click to see the official certificate."
+    },
+    "WheelPage": {
+        "title": "Wheel of Names | Random Picker Wheel (Free & No Ads)",
+        "description": "Spin the Wheel of Names to pick a random winner. Free, customizable, and fair. The best random picker wheel for teachers, raffles, and giveaways."
     },
     "LanguageSwitcher": {
         "switchLanguage": "Switch Language"
@@ -138,7 +142,7 @@
     },
     "WinnerCeremony": {
         "winner_label": "Winner",
-        "share_text": "I just hosted a giveaway with Sorteo Pro and {name} won! 🏆 Create your own viral giveaway for free here:",
+        "share_text": "🔥 I just picked a winner with Sorteo Pro!\n\n🏆 Winner: *{name}*\n\n✅ Verified Result:",
         "share_title": "We have a Winner! 🏆",
         "congratulations": "Congratulations! 🎉",
         "share_button": "Share Result",
@@ -185,7 +189,7 @@
         "back_button": "Back to Home",
         "create_your_own": "Create Free Giveaway",
         "share_button": "Share Proof",
-        "share_proof_text": "🔥 Official Result: {name} is the winner! 🏆 Verified by Sorteo Pro. Want to run your own? Check it out here:",
+        "share_proof_text": "*OFFICIAL RESULT* 🏆\n\n**{name}** won the giveaway!\n\n✅ Verified by Sorteo Pro.\n\nSee the certificate here 👇",
         "result": {
             "valid_title": "Valid ID",
             "copied": "Copied!",
@@ -246,7 +250,7 @@
         "h1": "Free Instagram Comment Picker",
         "subtitle": "The fairest and easiest way to pick winners for your Instagram Giveaways.",
         "direct_answer_title": "What is an Instagram Comment Picker?",
-        "direct_answer_text": "An **Instagram Comment Picker** is a tool that automatically selects a random winner from the comments of an Instagram post. Unlike other tools that charge for high comment counts, **Sorteo Pro** is 100% free and supports **unlimited comments**.",
+        "direct_answer_text": "An <strong>Instagram Comment Picker</strong> is a tool that automatically selects a random winner from the comments of an Instagram post. Unlike other tools that charge for high comment counts, <strong>Sorteo Pro</strong> is 100% free and supports <strong>unlimited comments</strong>.",
         "features_title": "Why use our Instagram Picker?",
         "feature_1_title": "100% Free & Unlimited",
         "feature_1_desc": "No hidden fees. Whether you have 100 or 100,000 comments, it's free.",
@@ -263,7 +267,8 @@
         "faq_1_q": "Is this Instagram Picker really free?",
         "faq_1_a": "Yes! We believe creators shouldn't pay to give back to their community.",
         "faq_2_q": "Is there a limit on comments?",
-        "faq_2_a": "No limits. You can paste as many participants as you want."
+        "faq_2_a": "No limits. You can paste as many participants as you want.",
+        "secure_rng": "Secure RNG"
     },
     "Versus": {
         "title": "The Best AppSorteos Alternative for Instagram (Free & Unlimited)",
@@ -314,7 +319,7 @@
         "faq": {
             "title": "Frequently Asked Questions",
             "q1": "Is there a free site like EasyPromos?",
-            "a1": "Yes, **Sorteo Pro** is the most robust free alternative to EasyPromos, offering certified winner selection without the high subscription costs.",
+            "a1": "Yes, <strong>Sorteo Pro</strong> is the most robust free alternative to EasyPromos, offering certified winner selection without the high subscription costs.",
             "q2": "Is it really free with no limits?",
             "a2": "Absolutely. You can upload massive lists of participants and run unlimited giveaways without paying anything.",
             "q3": "Do I need to sign up?",

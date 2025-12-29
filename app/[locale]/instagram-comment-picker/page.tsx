@@ -79,10 +79,10 @@ export default function InstagramPickerPage({ params }: { params: Promise<{ loca
     },
     description: t('description'),
     featureList: [
-      "Unlimited Comments",
-      "No Login Required",
-      "Free Forever",
-      "Secure RNG"
+      t('feature_1_title'),
+      t('feature_2_title'),
+      t('feature_3_title'),
+      t('secure_rng')
     ],
     aggregateRating: {
       '@type': 'AggregateRating',

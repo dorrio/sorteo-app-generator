@@ -44,19 +44,19 @@ export function Glossary() {
            <h2 className="text-2xl font-bold tracking-tight">{t("title")}</h2>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <dl className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
            {terms.map((item, idx) => (
              <div key={idx} className="p-5 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-colors">
-                <h3 className="font-bold text-lg mb-2 flex items-center gap-2">
+                <dt className="font-bold text-lg mb-2 flex items-center gap-2">
                    <CheckCircle2 className="w-4 h-4 text-primary/60" />
                    {item.term}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                </dt>
+                <dd className="text-sm text-muted-foreground leading-relaxed">
                    {item.definition}
-                </p>
+                </dd>
              </div>
            ))}
-        </div>
+        </dl>
       </div>
     </section>
   )

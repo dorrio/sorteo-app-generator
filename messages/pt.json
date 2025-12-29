@@ -16,8 +16,8 @@
         "description": "A ferramenta definitiva para criar sorteios virais. Feita para criadores de conteúdo e influencers que querem impressionar sua audiência.",
         "og_title": "Sorteio Pro | Sorteios Premium para Influencers",
         "og_description": "Crie sorteios épicos com animações cinematográficas",
-        "verify_title": "🏆 ANÚNCIO DE VENCEDOR OFICIAL | Verificado por Sorteio Pro",
-        "verify_description": "Veja quem ganhou! 100% Autêntico e Verificado por Sorteio Pro. Clique para ver o certificado oficial."
+        "verify_title": "🏆 Resultado Oficial do Sorteio | Verificado por Sorteio Pro",
+        "verify_description": "Veja quem ganhou! 100% Auténtico e Verificado por Sorteio Pro. Clique para ver o certificado oficial."
     },
     "LanguageSwitcher": {
         "switchLanguage": "Mudar idioma"
@@ -200,7 +200,7 @@
     },
     "SEOContent": {
         "what_is_title": "O que é o Sorteio Pro?",
-        "what_is_text": "O <b>Sorteio Pro</b> é uma <b>ferramenta de sorteio gratuita</b> para influenciadores que permite escolher <b>vencedores aleatórios</b> de listas ilimitadas. Ao contrário das alternativas pagas, oferece <b>seleção criptograficamente segura</b>, animações cinematográficas e <b>verificação instantânea</b> sem necessidade de login.",
+        "what_is_text": "O <b>Sorteio Pro</b> é uma <b>ferramenta de sorteio gratuita</b> para influenciadores que permite escolher <b>vencedores aleatórios</b> de listas ilimitadas para seus concursos do <b>Instagram</b> ou <b>Roleta de Nomes</b>. Ao contrário das alternativas pagas, oferece <b>seleção criptograficamente segura</b>, animações cinematográficas e <b>verificação instantânea</b> sem necessidade de login.",
         "features_title": "Principais Recursos",
         "feature_1_title": "Justo e Transparente",
         "feature_1_desc": "Usa geração de números aleatórios criptograficamente seguros para garantir justiça.",
@@ -220,18 +220,20 @@
     },
     "WheelGeo": {
         "title": "Roleta de Nomes Aleatória",
-        "description": "Procurando por uma <strong>Roleta de Nomes</strong>? O Sorteio Pro inclui uma <strong>Roleta de Escolha Aleatória</strong> totalmente personalizável, justa e gratuita.",
+        "description": "Procurando por uma <b>Roleta de Nomes</b>? O Sorteio Pro inclui uma <b>Roleta de Escolha Aleatória</b> totalmente personalizável, justa e gratuita.",
         "what_is_wheel": "O que é uma Roleta de Nomes?",
-        "what_is_wheel_answer": "Uma <strong>Roleta de Nomes</strong> é uma ferramenta digital que escolhe um vencedor aleatório girando uma roda virtual. É popularmente usada por professores, influenciadores e organizadores de eventos para <strong>seleção aleatória</strong>. O Sorteio Pro melhora essa experiência com efeitos cinematográficos.",
+        "what_is_wheel_answer": "Uma <b>Roleta de Nomes</b> é uma ferramenta digital que escolhe um vencedor aleatório girando uma roda virtual. É popularmente usada por professores, influenciadores e organizadores de eventos para a <b>seleção aleatória</b>. O Sorteio Pro melhora essa experiência com efeitos cinematográficos.",
         "features_list": "Recursos da Roleta",
         "feature_1": "100% Aleatório e Justo",
         "feature_2": "Cores e Temas Personalizados",
         "feature_3": "Sem Anúncios / Sem Login",
+        "feature_4": "Efeitos Sonoros e Animação",
+        "feature_5": "Verificação Instantânea de Resultados",
         "cta_button": "Testar Modo Roleta Agora"
     },
     "Glossary": {
         "title": "Glossário de Sorteios",
-        "term_1": "Gerador de Números Aleatórios (RNG)",
+        "term_1": "Gerador de Números Aleatorios (RNG)",
         "def_1": "Um algoritmo que gera uma sequência de números ou símbolos que não podem ser razoavelmente previstos. O Sorteio Pro usa RNG criptograficamente seguro.",
         "term_2": "Provavelmente Justo (Provably Fair)",
         "def_2": "Um sistema que permite aos jogadores verificar se o resultado de um jogo ou sorteio foi gerado corretamente e não foi manipulado.",
@@ -251,7 +253,7 @@
         "feature_2_title": "Sem Login",
         "feature_2_desc": "Não pedimos sua senha do Instagram ou permissões. Basta colar a lista.",
         "feature_3_title": "Justo e Seguro",
-        "feature_3_desc": "Usamos algoritmos criptográficos para garantir que o vencedor seja realmente aleatório.",
+        "feature_3_desc": "Usamos algoritmos criptográficos para garantir que o vencedor seja realmente aleatorio.",
         "how_to_title": "Como escolher um vencedor dos comentários do Instagram",
         "step_1": "Exporte seus comentários (usando qualquer ferramenta gratuita).",
         "step_2": "Copie e cole a lista de usuários no Sorteo Pro.",

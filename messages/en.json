@@ -204,7 +204,7 @@
     },
     "SEOContent": {
         "what_is_title": "What is Sorteo Pro?",
-        "what_is_text": "<b>Sorteo Pro</b> is a <b>free giveaway tool</b> for influencers that allows you to pick <b>random winners</b> from unlimited lists. Unlike paid alternatives, it offers <b>cryptographically secure selection</b>, cinematic animations, and <b>instant verification</b> without requiring login.",
+        "what_is_text": "<b>Sorteo Pro</b> is a <b>free giveaway tool</b> for influencers that allows you to pick <b>random winners</b> from unlimited lists for your <b>Instagram</b> or <b>Wheel of Names</b> contests. Unlike paid alternatives, it offers <b>cryptographically secure selection</b>, cinematic animations, and <b>instant verification</b> without requiring login.",
         "features_title": "Key Features",
         "feature_1_title": "Fair & Transparent",
         "feature_1_desc": "Uses cryptographically secure random number generation to ensure fairness.",
@@ -224,13 +224,15 @@
     },
     "WheelGeo": {
         "title": "Wheel of Names & Random Picker",
-        "description": "Looking for a <strong>Wheel of Names</strong>? Sorteo Pro includes a fully customizable <strong>Random Name Picker Wheel</strong> that is fair, free, and fun.",
+        "description": "Looking for a <b>Wheel of Names</b>? Sorteo Pro includes a fully customizable <b>Random Name Picker Wheel</b> that is fair, free, and fun.",
         "what_is_wheel": "What is a Wheel of Names?",
-        "what_is_wheel_answer": "A <strong>Wheel of Names</strong> is a digital tool that picks a random winner by spinning a virtual wheel. It is popularly used by teachers, influencers, and event organizers for <strong>random selection</strong>. Sorteo Pro upgrades this experience with cinematic effects.",
+        "what_is_wheel_answer": "A <b>Wheel of Names</b> is a digital tool that picks a random winner by spinning a virtual wheel. It is popularly used by teachers, influencers, and event organizers for <b>random selection</b>. Sorteo Pro upgrades this experience with cinematic effects.",
         "features_list": "Advanced Wheel Features",
         "feature_1": "100% Random & Fair",
         "feature_2": "Custom Colors & Themes",
         "feature_3": "No Ads / No Login",
+        "feature_4": "Sound Effects & Animation",
+        "feature_5": "Instant Result Verification",
         "cta_button": "Try Wheel Mode Now"
     },
     "Glossary": {

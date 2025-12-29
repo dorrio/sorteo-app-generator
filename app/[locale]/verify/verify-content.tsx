@@ -144,7 +144,8 @@ export function VerifyContent() {
 
     const shareWhatsApp = () => {
         const { shareText, shareUrl } = getShareData()
-        const url = `https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`
+        const fullText = `${shareText}\n\n${shareUrl}`
+        const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(fullText)}`
         window.open(url, "_blank")
     }
 
@@ -174,12 +175,12 @@ export function VerifyContent() {
             />
 
             <div className="w-full max-w-md z-10">
-                <Link href="/">
-                    <Button variant="ghost" className="mb-8 hover:bg-white/10" style={{ color: theme.textColor }}>
+                <Button variant="ghost" className="mb-8 hover:bg-white/10" style={{ color: theme.textColor }} asChild>
+                    <Link href="/">
                         <ArrowLeft className="mr-2 h-4 w-4" />
                         {t("back_button")}
-                    </Button>
-                </Link>
+                    </Link>
+                </Button>
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -388,19 +389,20 @@ export function VerifyContent() {
                                                     </DropdownMenu>
                                                 )}
 
-                                                <Link href="/" className="block">
-                                                    <Button
-                                                        className="w-full gap-2 font-bold"
-                                                        size="lg"
-                                                        style={{
-                                                            backgroundColor: theme.primaryColor,
-                                                            color: theme.backgroundColor
-                                                        }}
-                                                    >
+                                                <Button
+                                                    asChild
+                                                    className="w-full gap-2 font-bold"
+                                                    size="lg"
+                                                    style={{
+                                                        backgroundColor: theme.primaryColor,
+                                                        color: theme.backgroundColor
+                                                    }}
+                                                >
+                                                    <Link href="/">
                                                         <Sparkles className="w-4 h-4" />
                                                         {t("create_your_own")}
-                                                    </Button>
-                                                </Link>
+                                                    </Link>
+                                                </Button>
                                             </div>
                                         )}
                                     </CardContent>

@@ -16,7 +16,7 @@
         "description": "A ferramenta definitiva para criar sorteios virais. Feita para criadores de conteúdo e influencers que querem impressionar sua audiência.",
         "og_title": "Sorteio Pro | Sorteios Premium para Influencers",
         "og_description": "Crie sorteios épicos com animações cinematográficas",
-        "verify_title": "🏆 Resultado Oficial do Sorteio | Verificado por Sorteio Pro",
+        "verify_title": "🏆 ANÚNCIO DE VENCEDOR OFICIAL | Verificado por Sorteio Pro",
         "verify_description": "Veja quem ganhou! 100% Autêntico e Verificado por Sorteio Pro. Clique para ver o certificado oficial."
     },
     "LanguageSwitcher": {
@@ -185,7 +185,7 @@
         "back_button": "Voltar ao Início",
         "create_your_own": "Criar Sorteio Grátis",
         "share_button": "Compartilhar Prova",
-        "share_proof_text": "🔥 Resultado Oficial: {name} é o vencedor! 🏆 Verificado por Sorteio Pro. Quer fazer o seu? Confira aqui:",
+        "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n**{name}** ganhou o sorteio!\n\n✅ Verificado por Sorteio Pro.\n\nVeja o certificado aqui 👇",
         "result": {
             "valid_title": "ID Válido",
             "copied": "Copiado!",

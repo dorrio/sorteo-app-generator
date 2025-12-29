@@ -19,6 +19,10 @@
         "verify_title": "🏆 OFFICIAL WINNER ANNOUNCEMENT | Verified by Sorteo Pro",
         "verify_description": "Check who won! 100% Authentic and Verified by Sorteo Pro. Click to see the official certificate."
     },
+    "WheelPage": {
+        "title": "Wheel of Names | Random Picker Wheel (Free & No Ads)",
+        "description": "Spin the Wheel of Names to pick a random winner. Free, customizable, and fair. The best random picker wheel for teachers, raffles, and giveaways."
+    },
     "LanguageSwitcher": {
         "switchLanguage": "Switch Language"
     },
@@ -138,7 +142,7 @@
     },
     "WinnerCeremony": {
         "winner_label": "Winner",
-        "share_text": "I just hosted a giveaway with Sorteo Pro and {name} won! 🏆 Create your own viral giveaway for free here:",
+        "share_text": "🔥 I just picked a winner with Sorteo Pro!\n\n🏆 Winner: *{name}*\n\n✅ Verified Result:",
         "share_title": "We have a Winner! 🏆",
         "congratulations": "Congratulations! 🎉",
         "share_button": "Share Result",

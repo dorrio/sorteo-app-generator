@@ -56,3 +56,17 @@
 **GEO Impact:**
 *   **Zero-Click Dominance:** We now explicitly answer "What is the best free alternative to AppSorteos?" with entity-rich text.
 *   **CTR Boost:** All pages now benefit from `AggregateRating` schema.
+
+## 2025-02-24 - Wheel of Names Landing Page
+**Context:** Creating a dedicated landing page for the high-volume keyword "Wheel of Names".
+**Gap:** The memory indicated a strategy for `app/[locale]/wheel-of-names/page.tsx`, but the route did not exist. Users searching for "Wheel of Names" were directed to the generic home page.
+**Action:**
+*   **Architecture:** Created `app/[locale]/wheel-of-names/page.tsx` as a static route (`force-static`).
+*   **Refactor:** Extracted the core app logic from `app/[locale]/page.tsx` to `components/sorteo/main-app.tsx` to allow reuse.
+*   **State Injection:** The new page initializes the `MainApp` with `initialStyle="roulette"`, ensuring the user sees the wheel immediately.
+*   **Content Optimization:** Implemented `seoMode="wheel"` to prioritize the "Direct Answer" for wheels and hide generic giveaway content, preventing keyword cannibalization.
+*   **Metadata:** Added specific Title/Description tags for EN, ES, and PT targeting "Random Picker Wheel".
+*   **Sitemap:** Updated `next-sitemap.config.js` to assign 0.9 priority to the new route.
+**GEO Impact:**
+*   **Single Source of Truth:** We now have a dedicated URL that explicitly answers "Wheel of Names" intent with a matching tool interface.
+*   **Crawlability:** The new route is prioritized in the sitemap.

@@ -45,6 +45,19 @@
 *   **Knowledge Graph:** `DefinedTermSet` schema helps Google associate Sorteo Pro with technical reliability (RNG).
 *   **Long-Tail Ranking:** Optimizing for questions like "Is Sorteo Pro fair?" or "What is an Instagram Comment Picker?".
 
+## 2025-12-24 - Strategic Expansion (Wheel of Names & Versus)
+**Context:** Executing a high-value GEO strike on "Wheel of Names" and reinforcing the "AppSorteos Alternative" positioning.
+**Gap:**
+*   **Wheel of Names:** We relied on a homepage component (`WheelGeo`) for this massive keyword, lacking a dedicated URL (`/wheel-of-names`) with specific metadata and `SoftwareApplication` schema.
+*   **Versus Page:** The `/alternativa-appsorteos` page lacked a "Direct Answer" block explicitly defining *why* it's the best alternative, and missed `SoftwareApplication` schema.
+**Action:**
+*   **New Landing Page:** Created `app/[locale]/wheel-of-names/page.tsx` with targeted `h1`, `GameApplication` schema, and a dedicated Direct Answer block.
+*   **Versus Optimization:** Injected `SoftwareApplication` schema into `/alternativa-appsorteos` and added a "Direct Answer" block ("What is the best free alternative...").
+*   **Sitemap:** Prioritized `/wheel-of-names` at 0.9 in `next-sitemap.config.js`.
+*   **Localization:** Updated `en.json`, `es.json`, `pt.json` with robust, entity-rich definitions for both pages.
+**GEO Impact:**
+*   **Authority:** The new Wheel page now signals a dedicated "Tool" entity to search engines, distinct from the main "Giveaway" tool.
+*   **Answer Engine:** Both pages now provide direct, bolded answers to common user questions ("What is a Wheel?", "Best free alternative?"), increasing the chance of being cited by AI.
 ## 2025-02-21 - Versus Page Authority & Global Schema
 **Context:** Establishing "Sorteo Pro" as the definitive free alternative to AppSorteos and consolidating schema authority.
 **Gap:** The high-value page `/alternativa-appsorteos` lacked a "Direct Answer" block (zero-click result) and specific `SoftwareApplication` features. The Home page had duplicate schema injections (Layout vs SeoContent).

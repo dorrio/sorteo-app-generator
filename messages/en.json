@@ -270,6 +270,20 @@
         "faq_2_a": "No limits. You can paste as many participants as you want.",
         "secure_rng": "Secure RNG"
     },
+    "WheelGeoPage": {
+        "title": "Wheel of Names | Random Name Picker (Free & Ad-Free)",
+        "description": "The best free Wheel of Names. Spin the wheel to pick a random winner. No ads, no login, and fully customizable themes.",
+        "h1": "Free Wheel of Names",
+        "subtitle": "Spin the wheel to make random decisions in style.",
+        "cta_button": "Spin the Wheel",
+        "direct_answer_title": "What is a Wheel of Names?",
+        "direct_answer_text": "A <strong>Wheel of Names</strong> is a free online tool to pick a random name, number, or item. It is widely used by teachers for classrooms, raffles, and gamified decisions. <strong>Sorteo Pro</strong> offers a premium, ad-free experience with <strong>cinematic effects</strong>.",
+        "faq_title": "Wheel of Names FAQ",
+        "faq_1_q": "Is this Wheel of Names rigorous?",
+        "faq_1_a": "Yes, we use a cryptographically secure random number generator (CSPRNG) to ensure every spin is 100% random and unbiased.",
+        "faq_2_q": "Can I save my wheel?",
+        "faq_2_a": "Your lists and settings are automatically saved in your browser's local storage so you never lose them."
+    },
     "Versus": {
         "title": "The Best AppSorteos Alternative for Instagram (Free & Unlimited)",
         "description": "Looking for an AppSorteos alternative? Sorteo Pro allows you to pick Instagram winners for free and without comment limits. 2024 Comparison.",
@@ -309,7 +323,9 @@
             "p1": "Many creators look for 'free EasyPromos alternatives' because traditional tools have become too expensive. Sorteo Pro was born to break that barrier.",
             "p2": "Unlike the competition, we don't charge for your giveaway's success. If you have 10,000 comments, great! We don't penalize you for it.",
             "title_2": "The AppSorteos competitor that cares about your wallet",
-            "p3": "Stop calculating how much your next giveaway will cost. With Sorteo Pro, your budget is zero."
+            "p3": "Stop calculating how much your next giveaway will cost. With Sorteo Pro, your budget is zero.",
+            "direct_answer_title": "What is the best free AppSorteos alternative?",
+            "direct_answer_text": "The best <strong>free alternative to AppSorteos</strong> is <strong>Sorteo Pro</strong>. While AppSorteos charges for giveaways with more than 1,000 comments, Sorteo Pro allows <strong>unlimited comments</strong> completely free, without requiring login or subscriptions."
         },
         "cta": {
             "title": "Stop paying for giveaways.",

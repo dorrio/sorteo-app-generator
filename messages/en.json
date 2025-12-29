@@ -142,7 +142,7 @@
     },
     "WinnerCeremony": {
         "winner_label": "Winner",
-        "share_text": "I just hosted a giveaway with Sorteo Pro and {name} won! 🏆 Create your own viral giveaway for free here:",
+        "share_text": "🔥 I just picked a winner with Sorteo Pro!\n\n🏆 Winner: *{name}*\n\n✅ Verified Result:",
         "share_title": "We have a Winner! 🏆",
         "congratulations": "Congratulations! 🎉",
         "share_button": "Share Result",
@@ -189,7 +189,7 @@
         "back_button": "Back to Home",
         "create_your_own": "Create Free Giveaway",
         "share_button": "Share Proof",
-        "share_proof_text": "🔥 Official Result: {name} is the winner! 🏆 Verified by Sorteo Pro. Want to run your own? Check it out here:",
+        "share_proof_text": "🔥 Official Result: *{name}* is the winner! 🏆\n\n✅ Verified by Sorteo Pro.\n\nSee the proof here:",
         "result": {
             "valid_title": "Valid ID",
             "copied": "Copied!",

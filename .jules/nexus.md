@@ -57,3 +57,19 @@
 **Bridge:** Refactored the component to use a semantic `<dl>` (Description List) with `<dt>` (Definition Term) and `<dd>` (Definition Description).
 
 **Signal:** Provides a strong signal to Google (and screen readers) that this content is a Glossary, directly reinforcing the "DefinedTermSet" schema and improving the likelihood of appearing in Rich Snippets or Direct Answers.
+
+## 2025-12-22 - [Participant Manager]
+
+**Blocker:** The participant input fields (Single Name and Bulk List) in  relied solely on placeholders for visual labeling. This created a "Semantic Void" where screen readers and bots would encounter "Edit text" controls without context (WCAG 3.3.2 failure), as placeholders are not robust accessible names.
+
+**Bridge:** Added explicit  attributes to the  and  components, using the existing localized placeholder strings (, ) as the accessible names.
+
+**Signal:** Ensures that the core functionality of the app (adding participants) is fully accessible to screen reader users and correctly understood by search engines indexing the form structure.
+
+## 2025-12-22 - [Participant Manager]
+
+**Blocker:** The participant input fields (Single Name and Bulk List) in `ParticipantManager` relied solely on placeholders for visual labeling. This created a "Semantic Void" where screen readers and bots would encounter "Edit text" controls without context (WCAG 3.3.2 failure), as placeholders are not robust accessible names.
+
+**Bridge:** Added explicit `aria-label` attributes to the `Input` and `Textarea` components, using the existing localized placeholder strings (`t("single_placeholder")`, `t("bulk_placeholder")`) as the accessible names.
+
+**Signal:** Ensures that the core functionality of the app (adding participants) is fully accessible to screen reader users and correctly understood by search engines indexing the form structure.

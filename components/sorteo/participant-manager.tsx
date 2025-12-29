@@ -561,6 +561,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
               >
                 <Input
                   placeholder={t("single_placeholder")}
+                  aria-label={t("single_placeholder")}
                   value={singleName}
                   onChange={(e) => setSingleName(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleAddSingle()}
@@ -698,6 +699,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
             >
               <Input
                 placeholder={t("single_placeholder")}
+                aria-label={t("single_placeholder")}
                 value={singleName}
                 onChange={(e) => setSingleName(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleAddSingle()}
@@ -740,6 +742,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
               </div>
               <Textarea
                 placeholder={t("bulk_placeholder")}
+                  aria-label={t("bulk_placeholder")}
                 value={bulkText}
                 onChange={(e) => setBulkText(e.target.value)}
                 className="min-h-[150px] bg-card border-border font-mono text-sm"

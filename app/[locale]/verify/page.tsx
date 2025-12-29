@@ -33,11 +33,11 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     const verificationId = typeof id === "string" ? id : null
 
     const title = winnerName
-        ? `🔥 Winner: ${winnerName}! 🏆 Verified by Sorteo Pro`
+        ? `🏆 WINNER ANNOUNCEMENT: ${winnerName} | Verified by Sorteo Pro`
         : t("verify_title")
 
     const description = verificationId
-        ? `✅ Official Verification ID: ${verificationId}. ${t("verify_description")}`
+        ? `✅ Official Result for ID: ${verificationId}. Click to verify the winner certificate.`
         : t("verify_description")
 
     return {

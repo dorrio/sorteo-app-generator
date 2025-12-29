@@ -221,9 +221,9 @@
     },
     "WheelGeo": {
         "title": "Ruleta Aleatoria de Nombres",
-        "description": "¿Buscas una **Ruleta Aleatoria**? Sorteo Pro incluye una **Ruleta de Nombres** totalmente personalizable, justa y gratuita.",
+        "description": "¿Buscas una <strong>Ruleta Aleatoria</strong>? Sorteo Pro incluye una <strong>Ruleta de Nombres</strong> totalmente personalizable, justa y gratuita.",
         "what_is_wheel": "¿Qué es una Ruleta de Nombres?",
-        "what_is_wheel_answer": "Una **Ruleta de Nombres** es una herramienta digital que elige un ganador al azar girando una rueda virtual. Es utilizada por profesores, influencers y organizadores de eventos para la **selección aleatoria**. Sorteo Pro mejora esta experiencia con efectos cinematográficos.",
+        "what_is_wheel_answer": "Una <strong>Ruleta de Nombres</strong> es una herramienta digital que elige un ganador al azar girando una rueda virtual. Es utilizada por profesores, influencers y organizadores de eventos para la <strong>selección aleatoria</strong>. Sorteo Pro mejora esta experiencia con efectos cinematográficos.",
         "features_list": "Características de la Ruleta",
         "feature_1": "100% Aleatoria y Justa",
         "feature_2": "Colores y Temas Personalizados",
@@ -245,7 +245,7 @@
         "h1": "Selector de Comentarios de Instagram Gratis",
         "subtitle": "La forma más justa y fácil de elegir ganadores para tus sorteos de Instagram.",
         "direct_answer_title": "¿Qué es un Selector de Comentarios de Instagram?",
-        "direct_answer_text": "Un **Selector de Comentarios de Instagram** es una herramienta que elige automáticamente un ganador al azar de los comentarios de un post. A diferencia de otras herramientas que cobran por muchos comentarios, **Sorteo Pro** es 100% gratis y soporta **comentarios ilimitados**.",
+        "direct_answer_text": "Un <strong>Selector de Comentarios de Instagram</strong> es una herramienta que elige automáticamente un ganador al azar de los comentarios de un post. A diferencia de otras herramientas que cobran por muchos comentarios, <strong>Sorteo Pro</strong> es 100% gratis y soporta <strong>comentarios ilimitados</strong>.",
         "features_title": "¿Por qué usar nuestro Selector?",
         "feature_1_title": "100% Gratis e Ilimitado",
         "feature_1_desc": "Sin tarifas ocultas. Tengas 100 o 100.000 comentarios, es gratis.",
@@ -262,7 +262,8 @@
         "faq_1_q": "¿Es realmente gratis este selector?",
         "faq_1_a": "¡Sí! Creemos que los creadores no deberían pagar por regalar cosas a su comunidad.",
         "faq_2_q": "¿Hay límite de comentarios?",
-        "faq_2_a": "Sin límites. Puedes pegar tantos participantes como quieras."
+        "faq_2_a": "Sin límites. Puedes pegar tantos participantes como quieras.",
+        "secure_rng": "RNG Seguro"
     },
     "Versus": {
         "title": "La mejor alternativa a AppSorteos para Instagram (Gratis y Sin Límites)",
@@ -313,7 +314,7 @@
         "faq": {
             "title": "Preguntas Frecuentes",
             "q1": "¿Existe alguna página parecida a EasyPromos gratis?",
-            "a1": "Sí, **Sorteo Pro** es la alternativa gratuita más robusta a EasyPromos, ofreciendo selección de ganadores certificada sin los altos costes de suscripción.",
+            "a1": "Sí, <strong>Sorteo Pro</strong> es la alternativa gratuita más robusta a EasyPromos, ofreciendo selección de ganadores certificada sin los altos costes de suscripción.",
             "q2": "¿Es realmente gratis sin límites?",
             "a2": "Absolutamente. Puedes cargar listas masivas de participantes y realizar sorteos ilimitados sin pagar nada.",
             "q3": "¿Necesito registrarme?",

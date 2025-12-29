@@ -224,9 +224,9 @@
     },
     "WheelGeo": {
         "title": "Wheel of Names & Random Picker",
-        "description": "Looking for a **Wheel of Names**? Sorteo Pro includes a fully customizable **Random Name Picker Wheel** that is fair, free, and fun.",
+        "description": "Looking for a <strong>Wheel of Names</strong>? Sorteo Pro includes a fully customizable <strong>Random Name Picker Wheel</strong> that is fair, free, and fun.",
         "what_is_wheel": "What is a Wheel of Names?",
-        "what_is_wheel_answer": "A **Wheel of Names** is a digital tool that picks a random winner by spinning a virtual wheel. It is popularly used by teachers, influencers, and event organizers for **random selection**. Sorteo Pro upgrades this experience with cinematic effects.",
+        "what_is_wheel_answer": "A <strong>Wheel of Names</strong> is a digital tool that picks a random winner by spinning a virtual wheel. It is popularly used by teachers, influencers, and event organizers for <strong>random selection</strong>. Sorteo Pro upgrades this experience with cinematic effects.",
         "features_list": "Advanced Wheel Features",
         "feature_1": "100% Random & Fair",
         "feature_2": "Custom Colors & Themes",
@@ -248,7 +248,7 @@
         "h1": "Free Instagram Comment Picker",
         "subtitle": "The fairest and easiest way to pick winners for your Instagram Giveaways.",
         "direct_answer_title": "What is an Instagram Comment Picker?",
-        "direct_answer_text": "An **Instagram Comment Picker** is a tool that automatically selects a random winner from the comments of an Instagram post. Unlike other tools that charge for high comment counts, **Sorteo Pro** is 100% free and supports **unlimited comments**.",
+        "direct_answer_text": "An <strong>Instagram Comment Picker</strong> is a tool that automatically selects a random winner from the comments of an Instagram post. Unlike other tools that charge for high comment counts, <strong>Sorteo Pro</strong> is 100% free and supports <strong>unlimited comments</strong>.",
         "features_title": "Why use our Instagram Picker?",
         "feature_1_title": "100% Free & Unlimited",
         "feature_1_desc": "No hidden fees. Whether you have 100 or 100,000 comments, it's free.",
@@ -265,7 +265,8 @@
         "faq_1_q": "Is this Instagram Picker really free?",
         "faq_1_a": "Yes! We believe creators shouldn't pay to give back to their community.",
         "faq_2_q": "Is there a limit on comments?",
-        "faq_2_a": "No limits. You can paste as many participants as you want."
+        "faq_2_a": "No limits. You can paste as many participants as you want.",
+        "secure_rng": "Secure RNG"
     },
     "Versus": {
         "title": "The Best AppSorteos Alternative for Instagram (Free & Unlimited)",
@@ -316,7 +317,7 @@
         "faq": {
             "title": "Frequently Asked Questions",
             "q1": "Is there a free site like EasyPromos?",
-            "a1": "Yes, **Sorteo Pro** is the most robust free alternative to EasyPromos, offering certified winner selection without the high subscription costs.",
+            "a1": "Yes, <strong>Sorteo Pro</strong> is the most robust free alternative to EasyPromos, offering certified winner selection without the high subscription costs.",
             "q2": "Is it really free with no limits?",
             "a2": "Absolutely. You can upload massive lists of participants and run unlimited giveaways without paying anything.",
             "q3": "Do I need to sign up?",

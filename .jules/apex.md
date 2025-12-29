@@ -57,6 +57,16 @@
 *   **Zero-Click Dominance:** We now explicitly answer "What is the best free alternative to AppSorteos?" with entity-rich text.
 *   **CTR Boost:** All pages now benefit from `AggregateRating` schema.
 
+## 2025-02-21 - Instagram Picker Localization & Schema
+**Context:** Optimizing the "Instagram Comment Picker" landing page (`/instagram-comment-picker`) for correct localization and rich snippets.
+**Gap:** The "Direct Answer" section displayed literal asterisks (e.g., `**text**`) because `next-intl` was not configured to parse Markdown. The `SoftwareApplication` schema feature list was hardcoded in English, ignoring the user's locale.
+**Action:**
+*   **Localization Fix:** Replaced Markdown bold syntax (`**`) with semantic `<strong` tags in `messages/*.json` to ensure `t.rich` renders bold text correctly.
+*   **Schema Enhancement:** Updated `InstagramPickerPage` schema to use localized translation keys (`t('feature_1_title')`) for the feature list.
+*   **Verification:** Validated Sitemap logic for `alternateRefs` to ensure correct locale signaling.
+**GEO Impact:**
+*   **Crawlability:** Correct HTML structure in "Direct Answer" blocks improves extraction by search engines.
+*   **Relevance:** Localized schema ensures Portuguese/Spanish users see features in their native language in rich snippets.
 ## 2025-02-24 - Wheel of Names Landing Page
 **Context:** Creating a dedicated landing page for the high-volume keyword "Wheel of Names".
 **Gap:** The memory indicated a strategy for `app/[locale]/wheel-of-names/page.tsx`, but the route did not exist. Users searching for "Wheel of Names" were directed to the generic home page.

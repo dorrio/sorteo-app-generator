@@ -144,7 +144,9 @@ export function VerifyContent() {
 
     const shareWhatsApp = () => {
         const { shareText, shareUrl } = getShareData()
-        const fullText = `${shareText}\n\n${shareUrl}`
+        // WhatsApp works best when text and URL are combined in the text parameter
+        // Using api.whatsapp.com ensures cross-device compatibility
+        const fullText = `${shareText} ${shareUrl}`
         const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(fullText)}`
         window.open(url, "_blank")
     }
@@ -391,11 +393,12 @@ export function VerifyContent() {
 
                                                 <Button
                                                     asChild
-                                                    className="w-full gap-2 font-bold"
+                                                    className="w-full gap-2 font-bold shadow-lg hover:scale-[1.02] transition-transform"
                                                     size="lg"
                                                     style={{
                                                         backgroundColor: theme.primaryColor,
-                                                        color: theme.backgroundColor
+                                                        color: theme.backgroundColor,
+                                                        boxShadow: `0 4px 15px ${theme.primaryColor}30`
                                                     }}
                                                 >
                                                     <Link href="/">

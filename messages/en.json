@@ -187,9 +187,9 @@
         "input_placeholder": "Ex: ID-A1B2C3D4-18E...",
         "verify_button": "Verify ID",
         "back_button": "Back to Home",
-        "create_your_own": "Create Free Giveaway",
+        "create_your_own": "🚀 Create Free Giveaway",
         "share_button": "Share Proof",
-        "share_proof_text": "*OFFICIAL RESULT* 🏆\n\n**{name}** won the giveaway!\n\n✅ Verified by Sorteo Pro.\n\nSee the certificate here 👇",
+        "share_proof_text": "*OFFICIAL RESULT* 🏆\n\n**{name}** won the giveaway!\n\n✅ Verified by Sorteo Pro.\n\nSee the certificate & create your own here 👇",
         "result": {
             "valid_title": "Valid ID",
             "copied": "Copied!",

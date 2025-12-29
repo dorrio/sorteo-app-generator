@@ -16,8 +16,12 @@
         "description": "The ultimate tool for viral giveaways. Designed for content creators and influencers who want to impress their audience.",
         "og_title": "Sorteo Pro | Premium Giveaways for Influencers",
         "og_description": "Create epic giveaways with cinematic animations",
-        "verify_title": "Verify Giveaway Result | Sorteo Pro",
-        "verify_description": "Validate the authenticity of this giveaway result using our secure cryptographic verification system."
+        "verify_title": "🏆 OFFICIAL WINNER ANNOUNCEMENT | Verified by Sorteo Pro",
+        "verify_description": "Check who won! 100% Authentic and Verified by Sorteo Pro. Click to see the official certificate."
+    },
+    "WheelPage": {
+        "title": "Wheel of Names | Random Picker Wheel (Free & No Ads)",
+        "description": "Spin the Wheel of Names to pick a random winner. Free, customizable, and fair. The best random picker wheel for teachers, raffles, and giveaways."
     },
     "LanguageSwitcher": {
         "switchLanguage": "Switch Language"
@@ -138,13 +142,13 @@
     },
     "WinnerCeremony": {
         "winner_label": "Winner",
-        "share_text": "I just hosted a giveaway with Sorteo Pro and {name} won! 🏆 Create your own viral giveaway for free here:",
-        "share_title": "Giveaway Winner",
+        "share_text": "🔥 I just picked a winner with Sorteo Pro!\n\n🏆 Winner: *{name}*\n\n✅ Verified Result:",
+        "share_title": "We have a Winner! 🏆",
         "congratulations": "Congratulations! 🎉",
-        "share_button": "Share",
+        "share_button": "Share Result",
         "share_menu": "Share...",
         "copied": "Copied!",
-        "copy_text": "Copy text",
+        "copy_text": "Copy Link",
         "new_giveaway": "New Giveaway",
         "close": "Close"
     },
@@ -177,15 +181,15 @@
         "winner_label": "Winner!"
     },
     "VerificationPage": {
-        "title": "Giveaway Verifier",
-        "subtitle": "Validate the authenticity of a giveaway run on Sorteo Pro",
+        "title": "🏆 Official Giveaway Result",
+        "subtitle": "Authenticity Certificate - Verified by Sorteo Pro",
         "input_label": "Verifiable ID",
         "input_placeholder": "Ex: ID-A1B2C3D4-18E...",
         "verify_button": "Verify ID",
         "back_button": "Back to Home",
         "create_your_own": "Create Free Giveaway",
         "share_button": "Share Proof",
-        "share_proof_text": "🔥 Official Result: {name} is the winner! 🏆 Verified by Sorteo Pro. Want to run your own? Check it out here:",
+        "share_proof_text": "*OFFICIAL RESULT* 🏆\n\n**{name}** won the giveaway!\n\n✅ Verified by Sorteo Pro.\n\nSee the certificate here 👇",
         "result": {
             "valid_title": "Valid ID",
             "copied": "Copied!",
@@ -200,7 +204,7 @@
     },
     "SEOContent": {
         "what_is_title": "What is Sorteo Pro?",
-        "what_is_text": "<b>Sorteo Pro</b> is a <b>free giveaway tool</b> for influencers that allows you to pick <b>random winners</b> from unlimited lists. Unlike paid alternatives, it offers <b>cryptographically secure selection</b>, cinematic animations, and <b>instant verification</b> without requiring login.",
+        "what_is_text": "<b>Sorteo Pro</b> is a <b>free giveaway tool</b> for influencers that allows you to pick <b>random winners</b> from unlimited lists for your <b>Instagram</b> or <b>Wheel of Names</b> contests. Unlike paid alternatives, it offers <b>cryptographically secure selection</b>, cinematic animations, and <b>instant verification</b> without requiring login.",
         "features_title": "Key Features",
         "feature_1_title": "Fair & Transparent",
         "feature_1_desc": "Uses cryptographically secure random number generation to ensure fairness.",
@@ -220,13 +224,15 @@
     },
     "WheelGeo": {
         "title": "Wheel of Names & Random Picker",
-        "description": "Looking for a **Wheel of Names**? Sorteo Pro includes a fully customizable **Random Name Picker Wheel** that is fair, free, and fun.",
+        "description": "Looking for a <b>Wheel of Names</b>? Sorteo Pro includes a fully customizable <b>Random Name Picker Wheel</b> that is fair, free, and fun.",
         "what_is_wheel": "What is a Wheel of Names?",
-        "what_is_wheel_answer": "A **Wheel of Names** is a digital tool that picks a random winner by spinning a virtual wheel. It is popularly used by teachers, influencers, and event organizers for **random selection**. Sorteo Pro upgrades this experience with cinematic effects.",
+        "what_is_wheel_answer": "A <b>Wheel of Names</b> is a digital tool that picks a random winner by spinning a virtual wheel. It is popularly used by teachers, influencers, and event organizers for <b>random selection</b>. Sorteo Pro upgrades this experience with cinematic effects.",
         "features_list": "Advanced Wheel Features",
         "feature_1": "100% Random & Fair",
         "feature_2": "Custom Colors & Themes",
         "feature_3": "No Ads / No Login",
+        "feature_4": "Sound Effects & Animation",
+        "feature_5": "Instant Result Verification",
         "cta_button": "Try Wheel Mode Now"
     },
     "Glossary": {
@@ -244,7 +250,7 @@
         "h1": "Free Instagram Comment Picker",
         "subtitle": "The fairest and easiest way to pick winners for your Instagram Giveaways.",
         "direct_answer_title": "What is an Instagram Comment Picker?",
-        "direct_answer_text": "An **Instagram Comment Picker** is a tool that automatically selects a random winner from the comments of an Instagram post. Unlike other tools that charge for high comment counts, **Sorteo Pro** is 100% free and supports **unlimited comments**.",
+        "direct_answer_text": "An <strong>Instagram Comment Picker</strong> is a tool that automatically selects a random winner from the comments of an Instagram post. Unlike other tools that charge for high comment counts, <strong>Sorteo Pro</strong> is 100% free and supports <strong>unlimited comments</strong>.",
         "features_title": "Why use our Instagram Picker?",
         "feature_1_title": "100% Free & Unlimited",
         "feature_1_desc": "No hidden fees. Whether you have 100 or 100,000 comments, it's free.",
@@ -261,7 +267,8 @@
         "faq_1_q": "Is this Instagram Picker really free?",
         "faq_1_a": "Yes! We believe creators shouldn't pay to give back to their community.",
         "faq_2_q": "Is there a limit on comments?",
-        "faq_2_a": "No limits. You can paste as many participants as you want."
+        "faq_2_a": "No limits. You can paste as many participants as you want.",
+        "secure_rng": "Secure RNG"
     },
     "WheelGeoPage": {
         "title": "Wheel of Names | Random Name Picker (Free & Ad-Free)",
@@ -284,6 +291,8 @@
         "header_title_part1": "The Ultimate AppSorteos",
         "header_title_part2": "Alternative",
         "header_desc": "We analyze AppSorteos vs Sorteo Pro. Discover why thousands of users are switching.",
+        "direct_answer_title": "What is the best free alternative to AppSorteos?",
+        "direct_answer_text": "<strong>Sorteo Pro</strong> is the best <strong>free AppSorteos alternative</strong> for 2025. Unlike competitors that charge for high comment volumes, Sorteo Pro offers <strong>unlimited comments</strong>, <strong>no login requirements</strong>, and a verified certificate of validity, all for free.",
         "table": {
             "feature": "Feature",
             "us": "Sorteo Pro",
@@ -326,7 +335,7 @@
         "faq": {
             "title": "Frequently Asked Questions",
             "q1": "Is there a free site like EasyPromos?",
-            "a1": "Yes, **Sorteo Pro** is the most robust free alternative to EasyPromos, offering certified winner selection without the high subscription costs.",
+            "a1": "Yes, <strong>Sorteo Pro</strong> is the most robust free alternative to EasyPromos, offering certified winner selection without the high subscription costs.",
             "q2": "Is it really free with no limits?",
             "a2": "Absolutely. You can upload massive lists of participants and run unlimited giveaways without paying anything.",
             "q3": "Do I need to sign up?",

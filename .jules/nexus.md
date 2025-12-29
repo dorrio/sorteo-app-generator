@@ -34,3 +34,42 @@
 **Bridge:** Converted the interactive `div` into a semantic `<button>` element with `type="button"` and a localized `aria-label`. This promotes the element from generic layout noise to a functional control in the accessibility tree.
 
 **Signal:** The element is now focusable and clickable via keyboard. Search engines correctly interpret it as an interactive element linked to the "Try Wheel" action, reinforcing the page's primary conversion goal.
+
+## 2025-12-19 - [Instagram Landing Page & SEO Content]
+
+**Blocker:** Feature lists and "How To" steps in `InstagramPickerPage`, `SeoContent`, and `WheelGeo` utilize CSS classes like `list-none` (or `grid`/`flex` layouts) which can inadvertently strip list semantics in certain screen readers (notably VoiceOver on Safari). This creates a "Semantic Void" where a visual list is perceived as a flattened stream of text by assistive technology and bots.
+
+**Bridge:** Explicitly added `role="list"` to the `<ul>` and `<ol>` containers. This ARIA attribute restores the semantic list structure in the accessibility tree, ensuring that the elements are correctly announced as lists with a specific number of items, regardless of their visual styling.
+
+**Signal:** Improved structural understanding for search engines (reinforcing the "List" nature of features and steps) and critical accessibility fix for Apple ecosystem users/bots, directly impacting the "Technical Quality" score.
+## 2025-12-20 - [SEO Content Component]
+
+**Blocker:** The Features and How-To lists in `SeoContent` utilize `list-none` and grid layouts, which strips list semantics for some screen readers, reverting them to plain text streams.
+
+**Bridge:** Applied `role="list"` to the `<ul>` and `<ol>` containers to enforce semantic list structure in the accessibility tree.
+
+**Signal:** Restores proper list item counting and navigation for assistive technology and improves structural clarity for search bots.
+
+## 2025-12-21 - [Glossary]
+
+**Blocker:** The Glossary component was using a generic `div` grid structure with `h3` for terms. This "Semantic Void" failed to explicitly communicate the term-definition relationship to search engines and assistive technology, treating it as just a collection of boxes.
+
+**Bridge:** Refactored the component to use a semantic `<dl>` (Description List) with `<dt>` (Definition Term) and `<dd>` (Definition Description).
+
+**Signal:** Provides a strong signal to Google (and screen readers) that this content is a Glossary, directly reinforcing the "DefinedTermSet" schema and improving the likelihood of appearing in Rich Snippets or Direct Answers.
+
+## 2025-12-22 - [Participant Manager]
+
+**Blocker:** The participant input fields (Single Name and Bulk List) in  relied solely on placeholders for visual labeling. This created a "Semantic Void" where screen readers and bots would encounter "Edit text" controls without context (WCAG 3.3.2 failure), as placeholders are not robust accessible names.
+
+**Bridge:** Added explicit  attributes to the  and  components, using the existing localized placeholder strings (, ) as the accessible names.
+
+**Signal:** Ensures that the core functionality of the app (adding participants) is fully accessible to screen reader users and correctly understood by search engines indexing the form structure.
+
+## 2025-12-22 - [Participant Manager]
+
+**Blocker:** The participant input fields (Single Name and Bulk List) in `ParticipantManager` relied solely on placeholders for visual labeling. This created a "Semantic Void" where screen readers and bots would encounter "Edit text" controls without context (WCAG 3.3.2 failure), as placeholders are not robust accessible names.
+
+**Bridge:** Added explicit `aria-label` attributes to the `Input` and `Textarea` components, using the existing localized placeholder strings (`t("single_placeholder")`, `t("bulk_placeholder")`) as the accessible names.
+
+**Signal:** Ensures that the core functionality of the app (adding participants) is fully accessible to screen reader users and correctly understood by search engines indexing the form structure.

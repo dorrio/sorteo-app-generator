@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
-import { Disc, Palette, ShieldCheck, Play } from "lucide-react"
+import { Disc, Palette, ShieldCheck, Play, Music, CheckCircle } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 
@@ -27,6 +27,14 @@ export function WheelGeo() {
     {
       icon: <Disc className="w-5 h-5 text-primary" />,
       text: t("feature_3"),
+    },
+    {
+        icon: <Music className="w-5 h-5 text-primary" />,
+        text: t("feature_4"),
+    },
+    {
+        icon: <CheckCircle className="w-5 h-5 text-primary" />,
+        text: t("feature_5"),
     },
   ]
 
@@ -76,7 +84,7 @@ export function WheelGeo() {
               <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
                 {t('features_list')}
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-3" role="list">
                 {features.map((feature, idx) => (
                   <li key={idx} className="flex items-center gap-3 text-foreground/90">
                     <div className="p-1.5 rounded-full bg-primary/20 text-primary">

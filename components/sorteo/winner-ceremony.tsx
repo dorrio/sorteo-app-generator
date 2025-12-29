@@ -50,7 +50,7 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
   // Viral Optimization: Create a deep link to the verification page
   const baseUrl = typeof window !== "undefined" ? window.location.origin : ""
   const shareUrl = winner.verificationId
-    ? `${baseUrl}/${locale}/verify?id=${winner.verificationId}`
+    ? `${baseUrl}/${locale}/verify?id=${winner.verificationId}&name=${encodeURIComponent(winner.name)}`
     : typeof window !== "undefined" ? window.location.href : ""
 
   // Compelling share text
@@ -90,8 +90,9 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
   }
 
   const shareWhatsApp = () => {
-    // Viralis: Append URL to message body
-    const url = `https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`
+    // Viralis: Use api.whatsapp.com for better cross-device support (desktop/mobile)
+    // Append URL at the end
+    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
     window.open(url, "_blank")
   }
 
@@ -183,17 +184,19 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
               className="mb-8 flex flex-col items-center gap-2"
             >
               <span className="text-xs uppercase tracking-widest text-muted-foreground">ID Verificable</span>
-              <div
-                className="flex items-center gap-2 px-3 py-1 rounded-md bg-muted/50 cursor-pointer hover:bg-muted transition-colors"
+              <button
+                type="button"
+                className="flex items-center gap-2 px-3 py-1 rounded-md bg-muted/50 cursor-pointer hover:bg-muted transition-colors border-none outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 onClick={() => {
                   navigator.clipboard.writeText(winner.verificationId!)
                   setCopied(true)
                   setTimeout(() => setCopied(false), 2000)
                 }}
+                aria-label={t("copy_text") + " " + winner.verificationId}
               >
                 <code className="text-sm font-mono text-primary">{winner.verificationId}</code>
                 {copied ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3 text-muted-foreground" />}
-              </div>
+              </button>
             </motion.div>
           )}
 

@@ -58,3 +58,38 @@
 **GEO Impact:**
 *   **Authority:** The new Wheel page now signals a dedicated "Tool" entity to search engines, distinct from the main "Giveaway" tool.
 *   **Answer Engine:** Both pages now provide direct, bolded answers to common user questions ("What is a Wheel?", "Best free alternative?"), increasing the chance of being cited by AI.
+## 2025-02-21 - Versus Page Authority & Global Schema
+**Context:** Establishing "Sorteo Pro" as the definitive free alternative to AppSorteos and consolidating schema authority.
+**Gap:** The high-value page `/alternativa-appsorteos` lacked a "Direct Answer" block (zero-click result) and specific `SoftwareApplication` features. The Home page had duplicate schema injections (Layout vs SeoContent).
+**Action:**
+*   **Global Schema:** Moved `aggregateRating` (4.9 stars) to the global `layout.tsx` so *every* page (including Versus) displays stars in SERPs.
+*   **Schema Cleanup:** Removed redundant `SoftwareApplication` injection from `seo-content.tsx`.
+*   **GEO Strategy:** Injected a dedicated "Direct Answer" block into `app/[locale]/alternativa-appsorteos/page.tsx` defining Sorteo Pro as the "best free alternative".
+*   **Localization:** Added optimized translation keys for the Direct Answer in EN, ES, and PT.
+**GEO Impact:**
+*   **Zero-Click Dominance:** We now explicitly answer "What is the best free alternative to AppSorteos?" with entity-rich text.
+*   **CTR Boost:** All pages now benefit from `AggregateRating` schema.
+
+## 2025-02-21 - Instagram Picker Localization & Schema
+**Context:** Optimizing the "Instagram Comment Picker" landing page (`/instagram-comment-picker`) for correct localization and rich snippets.
+**Gap:** The "Direct Answer" section displayed literal asterisks (e.g., `**text**`) because `next-intl` was not configured to parse Markdown. The `SoftwareApplication` schema feature list was hardcoded in English, ignoring the user's locale.
+**Action:**
+*   **Localization Fix:** Replaced Markdown bold syntax (`**`) with semantic `<strong` tags in `messages/*.json` to ensure `t.rich` renders bold text correctly.
+*   **Schema Enhancement:** Updated `InstagramPickerPage` schema to use localized translation keys (`t('feature_1_title')`) for the feature list.
+*   **Verification:** Validated Sitemap logic for `alternateRefs` to ensure correct locale signaling.
+**GEO Impact:**
+*   **Crawlability:** Correct HTML structure in "Direct Answer" blocks improves extraction by search engines.
+*   **Relevance:** Localized schema ensures Portuguese/Spanish users see features in their native language in rich snippets.
+## 2025-02-24 - Wheel of Names Landing Page
+**Context:** Creating a dedicated landing page for the high-volume keyword "Wheel of Names".
+**Gap:** The memory indicated a strategy for `app/[locale]/wheel-of-names/page.tsx`, but the route did not exist. Users searching for "Wheel of Names" were directed to the generic home page.
+**Action:**
+*   **Architecture:** Created `app/[locale]/wheel-of-names/page.tsx` as a static route (`force-static`).
+*   **Refactor:** Extracted the core app logic from `app/[locale]/page.tsx` to `components/sorteo/main-app.tsx` to allow reuse.
+*   **State Injection:** The new page initializes the `MainApp` with `initialStyle="roulette"`, ensuring the user sees the wheel immediately.
+*   **Content Optimization:** Implemented `seoMode="wheel"` to prioritize the "Direct Answer" for wheels and hide generic giveaway content, preventing keyword cannibalization.
+*   **Metadata:** Added specific Title/Description tags for EN, ES, and PT targeting "Random Picker Wheel".
+*   **Sitemap:** Updated `next-sitemap.config.js` to assign 0.9 priority to the new route.
+**GEO Impact:**
+*   **Single Source of Truth:** We now have a dedicated URL that explicitly answers "Wheel of Names" intent with a matching tool interface.
+*   **Crawlability:** The new route is prioritized in the sitemap.

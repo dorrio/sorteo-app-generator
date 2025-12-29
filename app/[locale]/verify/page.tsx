@@ -13,19 +13,31 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     const { id, name } = await searchParams
     const t = await getTranslations({ locale, namespace: "Metadata" })
 
-    // Fallback URL if env is missing
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://sorteopro.com"
+    // Fallback URL logic:
+    // 1. NEXT_PUBLIC_APP_URL (Explicit override)
+    // 2. VERCEL_PROJECT_PRODUCTION_URL (Vercel Prod)
+    // 3. VERCEL_URL (Vercel Preview - needs https://)
+    // 4. Default to sorteopro.com
+    let baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://sorteopro.com"
+
+    if (!process.env.NEXT_PUBLIC_APP_URL) {
+        if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+            baseUrl = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+        } else if (process.env.VERCEL_URL) {
+            baseUrl = `https://${process.env.VERCEL_URL}`
+        }
+    }
 
     // Viral Optimization: Dynamic Metadata
     const winnerName = typeof name === "string" ? name : null
     const verificationId = typeof id === "string" ? id : null
 
     const title = winnerName
-        ? `🏆 ${winnerName} is the Winner! | Verified by Sorteo Pro`
+        ? `🔥 Winner: ${winnerName}! 🏆 Verified by Sorteo Pro`
         : t("verify_title")
 
     const description = verificationId
-        ? `Official result for verification ID: ${verificationId}. Click to view certificate.`
+        ? `✅ Official Verification ID: ${verificationId}. ${t("verify_description")}`
         : t("verify_description")
 
     return {

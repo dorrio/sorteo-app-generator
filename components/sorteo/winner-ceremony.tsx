@@ -90,8 +90,9 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
   }
 
   const shareWhatsApp = () => {
-    // Viralis: Append URL to message body
-    const url = `https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`
+    // Viralis: Use api.whatsapp.com for better cross-device support (desktop/mobile)
+    // Append URL at the end
+    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
     window.open(url, "_blank")
   }
 

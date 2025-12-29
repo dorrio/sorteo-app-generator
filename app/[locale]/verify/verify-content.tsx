@@ -144,7 +144,7 @@ export function VerifyContent() {
 
     const shareWhatsApp = () => {
         const { shareText, shareUrl } = getShareData()
-        const url = `https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`
+        const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
         window.open(url, "_blank")
     }
 

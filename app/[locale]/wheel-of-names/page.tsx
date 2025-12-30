@@ -54,6 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default function WheelOfNamesPage() {
   const t = useTranslations('WheelGeoPage');
+  const tSchema = useTranslations('Schema');
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -68,10 +69,10 @@ export default function WheelOfNamesPage() {
     },
     description: t('description'),
     featureList: [
-      "Customizable Wheel",
-      "Random Result",
-      "No Ads",
-      "Free Forever"
+      tSchema('wheel_features.customizable'),
+      tSchema('wheel_features.random'),
+      tSchema('wheel_features.no_ads'),
+      tSchema('wheel_features.free')
     ]
   };
 

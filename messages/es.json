@@ -194,9 +194,9 @@
         "input_placeholder": "Ej: ID-A1B2C3D4-18E...",
         "verify_button": "Verificar ID",
         "back_button": "Volver al inicio",
-        "create_your_own": "Crear Sorteo Gratis",
+        "create_your_own": "🚀 Crear Sorteo Gratis",
         "share_button": "Compartir Prueba",
-        "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n¡**{name}** ganó el sorteo!\n\n✅ Verificado por Sorteo Pro.\n\nMira el certificado aquí 👇",
+        "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n¡**{name}** ganó el sorteo!\n\n✅ Verificado por Sorteo Pro.\n\nMira el certificado y crea el tuyo aquí 👇",
         "result": {
             "valid_title": "ID Válido",
             "copied": "¡Copiado!",
@@ -347,6 +347,27 @@
             "a2": "Absolutamente. Puedes cargar listas masivas de participantes y realizar sorteos ilimitados sin pagar nada.",
             "q3": "¿Necesito registrarme?",
             "a3": "No. Respetamos tu privacidad y tu tiempo. Entra y crea tu sorteo al instante."
+        }
+    },
+    "Schema": {
+        "global_features": {
+            "random_picker": "Selector de Ganadores Aleatorio",
+            "wheel": "Ruleta de Nombres",
+            "insta_tool": "Herramienta de Sorteos para Instagram",
+            "verification": "Verificación Instantánea",
+            "rng": "RNG Probablemente Justo"
+        },
+        "wheel_features": {
+            "customizable": "Ruleta Personalizable",
+            "random": "Resultado Aleatorio",
+            "no_ads": "Sin Anuncios",
+            "free": "Gratis Siempre"
+        },
+        "versus_features": {
+            "unlimited": "Comentarios Ilimitados",
+            "no_login": "Sin Registro",
+            "free": "Gratis Siempre",
+            "fair_rng": "RNG Justo"
         }
     }
 }

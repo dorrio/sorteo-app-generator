@@ -19,6 +19,16 @@
         "verify_title": "🏆 Resultado Oficial do Sorteio | Verificado por Sorteio Pro",
         "verify_description": "Veja quem ganhou! 100% Auténtico e Verificado por Sorteio Pro. Clique para ver o certificado oficial."
     },
+    "GlobalSchema": {
+        "applicationCategory": "MultimediaApplication",
+        "applicationSubCategory": "Ferramenta de Redes Sociais",
+        "description": "A ferramenta definitiva para sorteios virais.",
+        "feature_1": "Seletor de Vencedores Aleatórios",
+        "feature_2": "Roleta de Nombres",
+        "feature_3": "Ferramenta de Sorteio do Instagram",
+        "feature_4": "Verificação Instantânea",
+        "feature_5": "RNG Provavelmente Justo"
+    },
     "LanguageSwitcher": {
         "switchLanguage": "Mudar idioma"
     },

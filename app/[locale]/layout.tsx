@@ -128,21 +128,21 @@ export default async function RootLayout({
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
-  const tSchema = await getTranslations({ locale, namespace: 'Schema' });
+  const t = await getTranslations({ locale, namespace: 'GlobalSchema' });
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'Sorteo Pro',
-    applicationCategory: 'MultimediaApplication',
-    applicationSubCategory: 'Social Media Tool',
+    applicationCategory: t('applicationCategory'),
+    applicationSubCategory: t('applicationSubCategory'),
     operatingSystem: 'Web, iOS, Android',
     offers: {
       '@type': 'Offer',
       price: '0',
       priceCurrency: 'EUR',
     },
-    description: 'The ultimate tool for viral giveaways.',
+    description: t('description'),
     author: {
       '@type': 'Organization',
       name: 'Sorteo Pro',
@@ -151,11 +151,11 @@ export default async function RootLayout({
     inLanguage: locale,
     screenshot: `${baseUrl}/og-image.jpg`,
     featureList: [
-      tSchema('global_features.random_picker'),
-      tSchema('global_features.wheel'),
-      tSchema('global_features.insta_tool'),
-      tSchema('global_features.verification'),
-      tSchema('global_features.rng')
+      t('feature_1'),
+      t('feature_2'),
+      t('feature_3'),
+      t('feature_4'),
+      t('feature_5')
     ],
     aggregateRating: {
       '@type': 'AggregateRating',

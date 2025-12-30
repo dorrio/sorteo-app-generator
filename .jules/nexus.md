@@ -73,3 +73,11 @@
 **Bridge:** Added explicit `aria-label` attributes to the `Input` and `Textarea` components, using the existing localized placeholder strings (`t("single_placeholder")`, `t("bulk_placeholder")`) as the accessible names.
 
 **Signal:** Ensures that the core functionality of the app (adding participants) is fully accessible to screen reader users and correctly understood by search engines indexing the form structure.
+
+## 2025-12-30 - [Global Layout]
+
+**Blocker:** The `SoftwareApplication` JSON-LD schema injected in `app/[locale]/layout.tsx` contained hardcoded English strings for `featureList` and `description`. This created a "Semantic Void" where localized versions of the site (e.g., `/es`, `/pt`) sent English metadata signals to Googlebot, reducing relevance in local SERPs and creating a mismatch between visible content and structured data.
+
+**Bridge:** Localized the schema injection by implementing a new `GlobalSchema` namespace in `messages/*.json` and replacing hardcoded strings with `t()` calls via `next-intl`'s `getTranslations`.
+
+**Signal:** Ensures that Rich Snippets (e.g., "Feature List" in Knowledge Graph) match the user's search language, improving CTR and sending a strong "Native Speaker" signal to international crawlers.

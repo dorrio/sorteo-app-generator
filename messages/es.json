@@ -20,6 +20,16 @@
         "verify_title": "🏆 ANUNCIO DE GANADOR OFICIAL | Verificado por Sorteo Pro",
         "verify_description": "¡Mira quién ganó! 100% Auténtico y Verificado por Sorteo Pro. Clic para ver el certificado oficial."
     },
+    "GlobalSchema": {
+        "applicationCategory": "MultimediaApplication",
+        "applicationSubCategory": "Herramienta de Redes Sociales",
+        "description": "La herramienta definitiva para sorteos virales.",
+        "feature_1": "Selector de Ganadores Aleatorios",
+        "feature_2": "Ruleta de Nombres",
+        "feature_3": "Herramienta de Sorteos de Instagram",
+        "feature_4": "Verificación Instantánea",
+        "feature_5": "RNG Probablemente Justo"
+    },
     "LanguageSwitcher": {
         "switchLanguage": "Cambiar idioma"
     },

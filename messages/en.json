@@ -19,6 +19,16 @@
         "verify_title": "🏆 OFFICIAL WINNER ANNOUNCEMENT | Verified by Sorteo Pro",
         "verify_description": "Check who won! 100% Authentic and Verified by Sorteo Pro. Click to see the official certificate."
     },
+    "GlobalSchema": {
+        "applicationCategory": "MultimediaApplication",
+        "applicationSubCategory": "Social Media Tool",
+        "description": "The ultimate tool for viral giveaways.",
+        "feature_1": "Random Winner Picker",
+        "feature_2": "Wheel of Names",
+        "feature_3": "Instagram Giveaway Tool",
+        "feature_4": "Instant Verification",
+        "feature_5": "Provably Fair RNG"
+    },
     "WheelPage": {
         "title": "Wheel of Names | Random Picker Wheel (Free & No Ads)",
         "description": "Spin the Wheel of Names to pick a random winner. Free, customizable, and fair. The best random picker wheel for teachers, raffles, and giveaways."

@@ -128,6 +128,7 @@ export default async function RootLayout({
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
+  const tSchema = await getTranslations({ locale, namespace: 'Schema' });
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -150,11 +151,11 @@ export default async function RootLayout({
     inLanguage: locale,
     screenshot: `${baseUrl}/og-image.jpg`,
     featureList: [
-      "Random Winner Picker",
-      "Wheel of Names",
-      "Instagram Giveaway Tool",
-      "Instant Verification",
-      "Provably Fair RNG"
+      tSchema('global_features.random_picker'),
+      tSchema('global_features.wheel'),
+      tSchema('global_features.insta_tool'),
+      tSchema('global_features.verification'),
+      tSchema('global_features.rng')
     ],
     aggregateRating: {
       '@type': 'AggregateRating',

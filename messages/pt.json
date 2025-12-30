@@ -337,5 +337,26 @@
             "q3": "Preciso me cadastrar?",
             "a3": "Não. Respeitamos sua privacidade e seu tempo. Entre e crie seu sorteio instantaneamente."
         }
+    },
+    "Schema": {
+        "global_features": {
+            "random_picker": "Seletor de Vencedor Aleatório",
+            "wheel": "Roleta de Nomes",
+            "insta_tool": "Ferramenta de Sorteio para Instagram",
+            "verification": "Verificação Instantânea",
+            "rng": "RNG Probavelmente Justo"
+        },
+        "wheel_features": {
+            "customizable": "Roleta Personalizável",
+            "random": "Resultado Aleatório",
+            "no_ads": "Sem Anúncios",
+            "free": "Grátis para Sempre"
+        },
+        "versus_features": {
+            "unlimited": "Comentários Ilimitados",
+            "no_login": "Sem Login",
+            "free": "Grátis para Sempre",
+            "fair_rng": "RNG Justo"
+        }
     }
 }

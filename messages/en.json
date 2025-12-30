@@ -341,5 +341,26 @@
             "q3": "Do I need to sign up?",
             "a3": "No. We respect your privacy and time. Enter and create your giveaway instantly."
         }
+    },
+    "Schema": {
+        "global_features": {
+            "random_picker": "Random Winner Picker",
+            "wheel": "Wheel of Names",
+            "insta_tool": "Instagram Giveaway Tool",
+            "verification": "Instant Verification",
+            "rng": "Provably Fair RNG"
+        },
+        "wheel_features": {
+            "customizable": "Customizable Wheel",
+            "random": "Random Result",
+            "no_ads": "No Ads",
+            "free": "Free Forever"
+        },
+        "versus_features": {
+            "unlimited": "Unlimited Comments",
+            "no_login": "No Login Required",
+            "free": "Free Forever",
+            "fair_rng": "Fair RNG"
+        }
     }
 }

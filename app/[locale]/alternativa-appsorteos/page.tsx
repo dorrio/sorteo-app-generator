@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default function VersusPage() {
   const t = useTranslations('Versus');
+  const tSchema = useTranslations('Schema');
   const locale = useLocale();
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://sorteo-app-generator.vercel.app";
 
@@ -60,10 +61,10 @@ export default function VersusPage() {
     },
     "description": t('description'),
     "featureList": [
-      "Unlimited Comments",
-      "No Login Required",
-      "Free Forever",
-      "Fair RNG"
+      tSchema('versus_features.unlimited'),
+      tSchema('versus_features.no_login'),
+      tSchema('versus_features.free'),
+      tSchema('versus_features.fair_rng')
     ]
   };
 

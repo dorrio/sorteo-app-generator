@@ -184,9 +184,9 @@
         "input_placeholder": "Ej: ID-A1B2C3D4-18E...",
         "verify_button": "Verificar ID",
         "back_button": "Volver al inicio",
-        "create_your_own": "Crear Sorteo Gratis",
+        "create_your_own": "🚀 Crear Sorteo Gratis",
         "share_button": "Compartir Prueba",
-        "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n¡**{name}** ganó el sorteo!\n\n✅ Verificado por Sorteo Pro.\n\nMira el certificado aquí 👇",
+        "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n¡**{name}** ganó el sorteo!\n\n✅ Verificado por Sorteo Pro.\n\nMira el certificado y crea el tuyo aquí 👇",
         "result": {
             "valid_title": "ID Válido",
             "copied": "¡Copiado!",

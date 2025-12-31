@@ -9,6 +9,7 @@
         "participants_title": "Participantes",
         "footer_text": "Criado para influencers e criadores de conteúdo",
         "footer_versus_link": "Alternativa ao AppSorteos",
+        "footer_glossary": "Glossário",
         "customize_hint": "🎨 Personalizar Sorteio"
     },
     "Metadata": {
@@ -289,6 +290,18 @@
         "faq_1_a": "Sim, usamos um gerador de números aleatórios criptograficamente seguro (CSPRNG) para garantir que cada giro seja 100% aleatório.",
         "faq_2_q": "Posso salvar minha roleta?",
         "faq_2_a": "Suas listas e configurações são salvas automaticamente no armazenamento local do seu navegador para que você nunca as perca."
+    },
+    "GlossaryPage": {
+        "title": "Glossário de Sorteios e Azar | Sorteo Pro",
+        "description": "Glossário completo de termos relacionados a sorteios, geração de números aleatórios e concursos em redes sociais.",
+        "tagline": "Base de Conhecimento",
+        "h1": "Glossário de Sorteios",
+        "subtitle": "Tudo o que você precisa saber sobre sorteios justos e tecnologia de seleção aleatória.",
+        "term_wheel": "Roleta de Nomes",
+        "def_wheel": "Um seletor aleatório visual que imita uma roda giratória física. Ele divide o círculo em segmentos que representam os participantes e gira para selecionar um aleatoriamente.",
+        "learn_more": "Testar esta ferramenta",
+        "cta_title": "Pronto para um sorteio justo?",
+        "cta_button": "Criar Sorteio"
     },
     "Versus": {
         "title": "A melhor alternativa ao AppSorteos para Instagram (Grátis e Sem Limites)",

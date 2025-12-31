@@ -333,6 +333,13 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               >
                 {t("footer_versus_link")}
               </Link>
+              <span className="text-muted-foreground/30 text-xs">•</span>
+              <Link
+                href="/glossary"
+                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
+              >
+                {t("footer_glossary")}
+              </Link>
             </div>
           </div>
         </footer>

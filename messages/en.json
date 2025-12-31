@@ -9,6 +9,7 @@
         "participants_title": "Participants",
         "footer_text": "Created for influencers and content creators",
         "footer_versus_link": "AppSorteos Alternative",
+        "footer_glossary": "Glossary",
         "customize_hint": "🎨 Customize Giveaway"
     },
     "Metadata": {
@@ -293,6 +294,18 @@
         "faq_1_a": "Yes, we use a cryptographically secure random number generator (CSPRNG) to ensure every spin is 100% random and unbiased.",
         "faq_2_q": "Can I save my wheel?",
         "faq_2_a": "Your lists and settings are automatically saved in your browser's local storage so you never lose them."
+    },
+    "GlossaryPage": {
+        "title": "Giveaway & Random Picker Glossary | Sorteo Pro",
+        "description": "Comprehensive glossary of terms related to giveaways, random number generation, and social media contests. Understand how Sorteo Pro ensures fairness.",
+        "tagline": "Knowledge Base",
+        "h1": "Giveaway Glossary",
+        "subtitle": "Everything you need to know about fair giveaways and random selection technology.",
+        "term_wheel": "Wheel of Names",
+        "def_wheel": "A visual random selector that mimics a physical spinning wheel. It divides the circle into segments representing participants and spins to select one at random.",
+        "learn_more": "Try this tool",
+        "cta_title": "Ready to run a fair giveaway?",
+        "cta_button": "Start Giveaway"
     },
     "Versus": {
         "title": "The Best AppSorteos Alternative for Instagram (Free & Unlimited)",

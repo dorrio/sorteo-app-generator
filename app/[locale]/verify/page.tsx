@@ -40,6 +40,26 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
         ? `✅ Official Result for ID: ${verificationId}. Click to verify the winner certificate.`
         : t("verify_description")
 
+    // Extract date from ID if possible (Format: ID-UUID-TIMESTAMP_HEX)
+    let dateStr = new Date().toISOString().split('T')[0]
+    if (verificationId && verificationId.startsWith("ID-")) {
+        try {
+            const parts = verificationId.split('-')
+            if (parts.length >= 3) {
+                const timestamp = parseInt(parts[2], 16)
+                if (!isNaN(timestamp)) {
+                    dateStr = new Date(timestamp).toISOString().split('T')[0]
+                }
+            }
+        } catch (e) {
+            // Fallback to today
+        }
+    }
+
+    const ogImageUrl = new URL(`${baseUrl}/api/og`)
+    if (winnerName) ogImageUrl.searchParams.set("name", winnerName)
+    ogImageUrl.searchParams.set("date", dateStr)
+
     return {
         title: title,
         description: description,
@@ -49,7 +69,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
             url: `${baseUrl}/${locale}/verify`,
             images: [
                 {
-                    url: `${baseUrl}/og-verify.jpg`,
+                    url: ogImageUrl.toString(),
                     width: 1200,
                     height: 630,
                     alt: winnerName ? `${winnerName} - Official Winner` : "Official Sorteo Pro Verification Result",

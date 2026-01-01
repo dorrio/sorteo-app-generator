@@ -16,8 +16,8 @@ module.exports = {
             priority = 1.0;
             changefreq = 'daily';
         }
-        // Competitor Alternatives (High Value)
-        else if (path.includes('alternativa-appsorteos') || path.includes('instagram-comment-picker') || path.includes('wheel-of-names')) {
+        // Competitor Alternatives & Semantic Hubs (High Value)
+        else if (path.includes('alternativa-appsorteos') || path.includes('instagram-comment-picker') || path.includes('wheel-of-names') || path.includes('glossary')) {
             priority = 0.9;
             changefreq = 'weekly';
         }

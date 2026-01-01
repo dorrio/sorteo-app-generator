@@ -6,20 +6,11 @@ import { Book, CheckCircle2 } from "lucide-react"
 export function Glossary() {
   const t = useTranslations("Glossary")
 
-  const terms = [
-    {
-      term: t("term_1"),
-      definition: t("def_1"),
-    },
-    {
-      term: t("term_2"),
-      definition: t("def_2"),
-    },
-    {
-      term: t("term_3"),
-      definition: t("def_3"),
-    },
-  ]
+  // Dynamically load terms 1-6
+  const terms = [1, 2, 3, 4, 5, 6].map(i => ({
+    term: t(`term_${i}`),
+    definition: t(`def_${i}`),
+  }))
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -41,7 +32,7 @@ export function Glossary() {
       <div className="max-w-5xl mx-auto space-y-8">
         <div className="flex items-center gap-2 mb-6">
            <Book className="w-6 h-6 text-primary" />
-           <h2 className="text-2xl font-bold tracking-tight">{t("title")}</h2>
+           <h2 className="text-2xl font-bold tracking-tight">{t("section_title")}</h2>
         </div>
 
         <dl className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

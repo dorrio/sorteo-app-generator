@@ -246,13 +246,21 @@
         "cta_button": "Try Wheel Mode Now"
     },
     "Glossary": {
-        "title": "Giveaway Glossary",
+        "title": "Giveaway & Viral Marketing Glossary",
+        "section_title": "Key Definitions",
+        "intro_text": "Welcome to the <strong>Sorteo Pro Glossary</strong>. Here you will find authoritative definitions for key terms related to <strong>Giveaways</strong>, <strong>Viral Marketing</strong>, and <strong>Provably Fair Technology</strong>. Use this resource to understand the mechanics behind transparent and successful contests.",
         "term_1": "Random Number Generator (RNG)",
         "def_1": "An algorithm that generates a sequence of numbers or symbols that cannot be reasonably predicted better than by random chance. Sorteo Pro uses cryptographically secure RNG.",
         "term_2": "Provably Fair",
         "def_2": "A system that allows players to verify that the outcome of a game or raffle was generated correctly and was not manipulated by the operator.",
         "term_3": "Instagram Comment Picker",
-        "def_3": "A tool designed to select a random winner from the comments section of an Instagram post. Sorteo Pro offers a free alternative to these tools."
+        "def_3": "A tool designed to select a random winner from the comments section of an Instagram post. Sorteo Pro offers a free alternative to these tools.",
+        "term_4": "Viral Loop",
+        "def_4": "A marketing mechanism where users are encouraged to share content (like a giveaway result) with others, creating a self-reinforcing cycle of growth.",
+        "term_5": "CSPRNG",
+        "def_5": "Cryptographically Secure Pseudo-Random Number Generator. The gold standard for fairness, ensuring that results cannot be predicted or reverse-engineered.",
+        "term_6": "Call to Action (CTA)",
+        "def_6": "A prompt on a website that tells the user to take some specified action. In Sorteo Pro, 'Start Giveaway' is the primary CTA."
     },
     "InstagramPicker": {
         "title": "Free Instagram Comment Picker | Unlimited & No Login",

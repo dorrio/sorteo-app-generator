@@ -242,13 +242,21 @@
         "cta_button": "Testar Modo Roleta Agora"
     },
     "Glossary": {
-        "title": "Glossário de Sorteios",
+        "title": "Glossário de Sorteios e Marketing Viral",
+        "section_title": "Definições Chave",
+        "intro_text": "Bem-vindo ao <strong>Glossário do Sorteio Pro</strong>. Aqui você encontrará definições autorizadas para termos chave relacionados a <strong>Sorteios</strong>, <strong>Marketing Viral</strong> e <strong>Tecnologia Provavelmente Justa</strong>. Use este recurso para entender a mecânica por trás de concursos transparentes e bem-sucedidos.",
         "term_1": "Gerador de Números Aleatorios (RNG)",
         "def_1": "Um algoritmo que gera uma sequência de números ou símbolos que não podem ser razoavelmente previstos. O Sorteio Pro usa RNG criptograficamente seguro.",
         "term_2": "Provavelmente Justo (Provably Fair)",
         "def_2": "Um sistema que permite aos jogadores verificar se o resultado de um jogo ou sorteio foi gerado corretamente e não foi manipulado.",
         "term_3": "Seletor de Comentários do Instagram",
-        "def_3": "Ferramenta projetada para escolher um vencedor aleatório nos comentários de uma postagem do Instagram. O Sorteio Pro oferece uma alternativa gratuita a essas ferramentas."
+        "def_3": "Ferramenta projetada para escolher um vencedor aleatório nos comentários de uma postagem do Instagram. O Sorteio Pro oferece uma alternativa gratuita a essas ferramentas.",
+        "term_4": "Loop Viral (Viral Loop)",
+        "def_4": "Um mecanismo de marketing onde os usuários são incentivados a compartilhar conteúdo (como o resultado de um sorteio) com outros, criando um ciclo de crescimento auto-reforçado.",
+        "term_5": "CSPRNG",
+        "def_5": "Gerador de Números Pseudoaleatórios Criptograficamente Seguro. O padrão ouro para justiça, garantindo que os resultados não podem ser previstos ou manipulados.",
+        "term_6": "Call to Action (CTA)",
+        "def_6": "Uma mensagem em um site que diz ao usuário para realizar uma ação específica. No Sorteio Pro, 'Iniciar Sorteio' é o CTA principal."
     },
     "InstagramPicker": {
         "title": "Sorteador de Comentários do Instagram Grátis | Ilimitado",

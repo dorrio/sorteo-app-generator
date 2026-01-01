@@ -93,3 +93,15 @@
 **GEO Impact:**
 *   **Single Source of Truth:** We now have a dedicated URL that explicitly answers "Wheel of Names" intent with a matching tool interface.
 *   **Crawlability:** The new route is prioritized in the sitemap.
+
+## 2025-02-25 - Glossary & Internal Knowledge Graph
+**Context:** Establishing topical authority and defining industry terms for "Direct Answer" dominance.
+**Gap:** While we have a `Glossary` component on the homepage, there is no dedicated URL (`/glossary`) to rank for "Giveaway Glossary" or serve as a hub for definition schema.
+**Action:**
+*   **Architecture:** Created `app/[locale]/glossary/page.tsx` as a static hub.
+*   **Schema:** Injected `DefinedTermSet` and `FAQPage` schema.
+*   **Interlinking:** The Glossary links back to specific tools (e.g., "Wheel of Names" definition links to `/wheel-of-names`), creating a semantic content web.
+*   **Sitemap:** Prioritized `/glossary` at 0.9.
+**GEO Impact:**
+*   **Entity Definition:** Explicitly defining "RNG", "Provably Fair", and "Comment Picker" helps LLMs understand our expertise.
+*   **Crawl Depth:** Provides a text-rich entry point for bots to discover all tools.

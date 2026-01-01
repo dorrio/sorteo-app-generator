@@ -40,6 +40,15 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
         ? `✅ Official Result for ID: ${verificationId}. Click to verify the winner certificate.`
         : t("verify_description")
 
+    // Generate dynamic OG image URL
+    // We append a timestamp to prevent caching if the name changes for some reason,
+    // but primarily we need 'name' and 'date'
+    const ogParams = new URLSearchParams()
+    if (winnerName) ogParams.set("name", winnerName)
+    // We could add date here if we had it, but name is the most important "Viral Hook"
+
+    const ogImageUrl = `${baseUrl}/api/og?${ogParams.toString()}`
+
     return {
         title: title,
         description: description,
@@ -49,16 +58,10 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
             url: `${baseUrl}/${locale}/verify`,
             images: [
                 {
-                    url: `${baseUrl}/og-verify.jpg`,
+                    url: ogImageUrl,
                     width: 1200,
                     height: 630,
                     alt: winnerName ? `${winnerName} - Official Winner` : "Official Sorteo Pro Verification Result",
-                },
-                {
-                    url: `${baseUrl}/og-image.jpg`, // Fallback
-                    width: 1200,
-                    height: 630,
-                    alt: "Sorteo Pro",
                 },
             ],
         },
@@ -66,6 +69,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
             card: "summary_large_image",
             title: title,
             description: description,
+            images: [ogImageUrl], // Twitter also needs the dynamic image
         },
     }
 }

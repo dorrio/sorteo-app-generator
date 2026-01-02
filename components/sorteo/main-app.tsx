@@ -19,13 +19,14 @@ import { LanguageSwitcher } from "@/components/language-switcher"
 import { SeoContent } from "@/components/sorteo/seo-content"
 import { WheelGeo } from "@/components/sorteo/wheel-geo"
 import { Glossary } from "@/components/sorteo/glossary"
+import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel';
+    seoMode?: 'home' | 'wheel' | 'instagram';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
@@ -301,9 +302,15 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         {/* SEO Content Conditional Rendering */}
         {seoMode === 'wheel' ? (
-             /* Wheel Mode: Prioritize WheelGeo, Hide generic SEO content to avoid cannibalization */
+             /* Wheel Mode: Prioritize WheelGeo */
              <>
                 <WheelGeo />
+                <Glossary />
+             </>
+        ) : seoMode === 'instagram' ? (
+             /* Instagram Mode: Show Instagram specific content */
+             <>
+                <InstagramGeo />
                 <Glossary />
              </>
         ) : (
@@ -319,12 +326,26 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         <footer className="border-t border-border/50">
           <div className="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-muted-foreground flex flex-col items-center gap-2">
             <p>{t("footer_text")}</p>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/verify"
                 className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
               >
                 {t("verify_sorteo")}
+              </Link>
+              <span className="text-muted-foreground/30 text-xs">•</span>
+              <Link
+                href="/wheel-of-names"
+                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
+              >
+                Wheel of Names
+              </Link>
+              <span className="text-muted-foreground/30 text-xs">•</span>
+              <Link
+                href="/instagram-comment-picker"
+                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
+              >
+                Instagram Picker
               </Link>
               <span className="text-muted-foreground/30 text-xs">•</span>
               <Link

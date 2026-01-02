@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
@@ -14,6 +14,7 @@ import { useSearchParams } from "next/navigation"
 
 export function VerifyContent() {
     const t = useTranslations("VerificationPage")
+    const locale = useLocale()
     const { theme, pastWinners } = useSorteoStore()
     const searchParams = useSearchParams()
     const initialId = searchParams.get("id") || ""
@@ -37,7 +38,7 @@ export function VerifyContent() {
         if (initialId) {
              verifyId(initialId)
         }
-    }, [initialId, pastWinners]) // Added pastWinners to dependency so it reverifies if store loads later
+    }, [initialId, pastWinners])
 
     const verifyId = (idToVerify: string) => {
         const id = idToVerify.trim().toUpperCase()
@@ -92,24 +93,19 @@ export function VerifyContent() {
 
     const handleVerify = () => verifyId(inputId)
 
-    const getShareData = () => {
-        const winnerName = result?.participant?.name || searchParams.get("name") || "Someone"
-        const shareText = t("share_proof_text", { name: winnerName })
+    // Construct Share Data
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://sorteopro.com"
+    const winnerName = result?.participant?.name || searchParams.get("name") || "Someone"
+    // Use inputId as the verified ID source when result is present
+    const shareUrl = `${baseUrl}/${locale}/verify?id=${inputId}&name=${encodeURIComponent(winnerName)}`
+    const shareText = t("share_proof_text", { name: winnerName })
 
-        let shareUrl = typeof window !== "undefined" ? window.location.href : ""
-
-        // Ensure name is in URL for viral metadata if not already there
-        if (typeof window !== "undefined" && !shareUrl.includes("name=") && winnerName !== "Someone") {
-            const url = new URL(shareUrl)
-            url.searchParams.set("name", winnerName)
-            shareUrl = url.toString()
-        }
-
-        return { shareText, shareUrl }
-    }
+    // Pre-calculate intent URLs for semantic <a> tags
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
 
     const shareNative = async () => {
-        const { shareText, shareUrl } = getShareData()
         if (navigator.share) {
             try {
                 await navigator.share({
@@ -124,35 +120,12 @@ export function VerifyContent() {
     }
 
     const copyToClipboard = async () => {
-        const { shareText, shareUrl } = getShareData()
         await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
         setShowCopied(true)
         setTimeout(() => setShowCopied(false), 2000)
     }
 
-    const shareTwitter = () => {
-        const { shareText, shareUrl } = getShareData()
-        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`
-        window.open(url, "_blank", "width=550,height=420")
-    }
-
-    const shareFacebook = () => {
-        const { shareText, shareUrl } = getShareData()
-        const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
-        window.open(url, "_blank", "width=550,height=420")
-    }
-
-    const shareWhatsApp = () => {
-        const { shareText, shareUrl } = getShareData()
-        // WhatsApp works best when text and URL are combined in the text parameter
-        // Using api.whatsapp.com ensures cross-device compatibility
-        const fullText = `${shareText} ${shareUrl}`
-        const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(fullText)}`
-        window.open(url, "_blank")
-    }
-
     const shareInstagram = async () => {
-        const { shareText } = getShareData()
         await navigator.clipboard.writeText(shareText)
         setShowCopied(true)
         setTimeout(() => setShowCopied(false), 2000)
@@ -371,21 +344,50 @@ export function VerifyContent() {
                                                                     </>
                                                                 )}
                                                             </DropdownMenuItem>
-                                                            <DropdownMenuItem onClick={shareTwitter} className="gap-2 cursor-pointer">
-                                                                <Twitter className="w-4 h-4" />
-                                                                Twitter / X
+
+                                                            {/* Semantic Links for Social Sharing */}
+                                                            <DropdownMenuItem asChild>
+                                                                <a
+                                                                    href={twitterUrl}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="gap-2 cursor-pointer flex w-full items-center"
+                                                                    aria-label="Share on Twitter"
+                                                                >
+                                                                    <Twitter className="w-4 h-4" />
+                                                                    Twitter / X
+                                                                </a>
                                                             </DropdownMenuItem>
+
                                                             <DropdownMenuItem onClick={shareInstagram} className="gap-2 cursor-pointer">
                                                                 <Instagram className="w-4 h-4" />
                                                                 Instagram
                                                             </DropdownMenuItem>
-                                                            <DropdownMenuItem onClick={shareFacebook} className="gap-2 cursor-pointer">
-                                                                <Facebook className="w-4 h-4" />
-                                                                Facebook
+
+                                                            <DropdownMenuItem asChild>
+                                                                <a
+                                                                    href={facebookUrl}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="gap-2 cursor-pointer flex w-full items-center"
+                                                                    aria-label="Share on Facebook"
+                                                                >
+                                                                    <Facebook className="w-4 h-4" />
+                                                                    Facebook
+                                                                </a>
                                                             </DropdownMenuItem>
-                                                            <DropdownMenuItem onClick={shareWhatsApp} className="gap-2 cursor-pointer">
-                                                                <MessageCircle className="w-4 h-4" />
-                                                                WhatsApp
+
+                                                            <DropdownMenuItem asChild>
+                                                                <a
+                                                                    href={whatsappUrl}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="gap-2 cursor-pointer flex w-full items-center"
+                                                                    aria-label="Share on WhatsApp"
+                                                                >
+                                                                    <MessageCircle className="w-4 h-4" />
+                                                                    WhatsApp
+                                                                </a>
                                                             </DropdownMenuItem>
                                                         </DropdownMenuContent>
                                                     </DropdownMenu>

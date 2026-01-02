@@ -60,14 +60,6 @@
 
 ## 2025-12-22 - [Participant Manager]
 
-**Blocker:** The participant input fields (Single Name and Bulk List) in  relied solely on placeholders for visual labeling. This created a "Semantic Void" where screen readers and bots would encounter "Edit text" controls without context (WCAG 3.3.2 failure), as placeholders are not robust accessible names.
-
-**Bridge:** Added explicit  attributes to the  and  components, using the existing localized placeholder strings (, ) as the accessible names.
-
-**Signal:** Ensures that the core functionality of the app (adding participants) is fully accessible to screen reader users and correctly understood by search engines indexing the form structure.
-
-## 2025-12-22 - [Participant Manager]
-
 **Blocker:** The participant input fields (Single Name and Bulk List) in `ParticipantManager` relied solely on placeholders for visual labeling. This created a "Semantic Void" where screen readers and bots would encounter "Edit text" controls without context (WCAG 3.3.2 failure), as placeholders are not robust accessible names.
 
 **Bridge:** Added explicit `aria-label` attributes to the `Input` and `Textarea` components, using the existing localized placeholder strings (`t("single_placeholder")`, `t("bulk_placeholder")`) as the accessible names.
@@ -81,3 +73,11 @@
 **Bridge:** Localized the schema injection by implementing a new `GlobalSchema` namespace in `messages/*.json` and replacing hardcoded strings with `t()` calls via `next-intl`'s `getTranslations`.
 
 **Signal:** Ensures that Rich Snippets (e.g., "Feature List" in Knowledge Graph) match the user's search language, improving CTR and sending a strong "Native Speaker" signal to international crawlers.
+
+## 2025-12-30 - [Verify Page]
+
+**Blocker:** The social sharing buttons on the `/verify` result page were implemented as `DropdownMenuItem` `div`s with `onClick` handlers. This created a "Semantic Void" where search engines could not detect the outbound links to Twitter, Facebook, and WhatsApp, losing valuable entity association signals (Link Juice) and preventing users from using native browser features like "Open in new tab".
+
+**Bridge:** Refactored the DropdownMenu to use semantic `<a>` tags via the `asChild` prop for Twitter, Facebook, and WhatsApp. Pre-calculated the intent URLs during render to ensure they are available in the initial HTML payload.
+
+**Signal:** Googlebot can now follow the outbound social links (improving Entity Recognition and Trust), and the page gains full WCAG compliance for link behavior.

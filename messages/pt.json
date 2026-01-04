@@ -361,6 +361,27 @@
             "a3": "Não. Respeitamos sua privacidade e seu tempo. Entre e crie seu sorteio instantaneamente."
         }
     },
+    "RngGeo": {
+        "direct_answer_title": "O que é um Gerador de Números Aleatórios?",
+        "direct_answer_text": "Um <strong>Gerador de Números Aleatórios (RNG)</strong> é uma ferramenta que produz um número ou sequência de números que não podem ser previstos. O Sorteio Pro usa um algoritmo <strong>criptograficamente seguro</strong> para garantir que cada número seja 100% justo e imparcial.",
+        "cta_button": "Gerar Número Aleatório",
+        "feature_1_title": "Aleatoriedade Real",
+        "feature_1_desc": "Impulsionado por algoritmos seguros para evitar viés.",
+        "feature_2_title": "Sem Limites",
+        "feature_2_desc": "Gere quantos números precisar gratuitamente.",
+        "feature_3_title": "Resultados Instantâneos",
+        "feature_3_desc": "Obtenha seus números aleatórios em milissegundos.",
+        "feature_4_title": "Compatível com Celular",
+        "feature_4_desc": "Funciona perfeitamente em qualquer dispositivo."
+    },
+    "RngPage": {
+        "title": "Gerador de Números Aleatórios | RNG Grátis e Seguro",
+        "description": "Gere números aleatórios instantaneamente com o Sorteio Pro. Gerador de números gratuito, seguro e personalizável para jogos, loterias e uso científico.",
+        "faq_1_q": "Este RNG é realmente aleatório?",
+        "faq_1_a": "Sim, usamos um gerador de números pseudoaleatórios criptograficamente seguro (CSPRNG), que é o padrão da indústria para justiça.",
+        "faq_2_q": "Existe limite de quantos números posso gerar?",
+        "faq_2_a": "Não, você pode gerar números aleatórios ilimitados gratuitamente."
+    },
     "Schema": {
         "global_features": {
             "random_picker": "Seletor de Vencedor Aleatório",

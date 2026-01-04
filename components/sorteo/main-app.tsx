@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { SeoContent } from "@/components/sorteo/seo-content"
 import { WheelGeo } from "@/components/sorteo/wheel-geo"
+import { RngGeo } from "@/components/sorteo/rng-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck } from "lucide-react"
@@ -26,7 +27,7 @@ import { Link } from "@/i18n/routing"
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
@@ -313,7 +314,13 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                 <InstagramGeo />
                 <Glossary />
              </>
-        ) : (
+        ) : seoMode === 'rng' ? (
+            /* RNG Mode: Show Random Number Generator content */
+            <>
+               <RngGeo />
+               <Glossary />
+            </>
+       ) : (
             /* Home Mode: Show everything */
             <>
                 <WheelGeo />
@@ -346,6 +353,13 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                 className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
               >
                 Instagram Picker
+              </Link>
+              <span className="text-muted-foreground/30 text-xs">•</span>
+              <Link
+                href="/random-number-generator"
+                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
+              >
+                RNG
               </Link>
               <span className="text-muted-foreground/30 text-xs">•</span>
               <Link

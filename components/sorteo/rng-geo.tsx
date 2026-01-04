@@ -44,39 +44,39 @@ export function RngGeo() {
           </div>
 
           {/* Features Grid */}
-          <div className="grid md:grid-cols-2 gap-8 mt-12">
-            <div className="space-y-4">
+          <ul className="grid md:grid-cols-2 gap-8 mt-12" role="list">
+            <li className="space-y-4">
               <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
                 <Lock className="w-5 h-5" />
                 {t("feature_1_title")}
               </h3>
               <p className="text-muted-foreground">{t("feature_1_desc")}</p>
-            </div>
+            </li>
 
-            <div className="space-y-4">
+            <li className="space-y-4">
               <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
                 <Zap className="w-5 h-5" />
                 {t("feature_2_title")}
               </h3>
               <p className="text-muted-foreground">{t("feature_2_desc")}</p>
-            </div>
+            </li>
 
-            <div className="space-y-4">
+            <li className="space-y-4">
               <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
                 <RefreshCw className="w-5 h-5" />
                 {t("feature_3_title")}
               </h3>
               <p className="text-muted-foreground">{t("feature_3_desc")}</p>
-            </div>
+            </li>
 
-            <div className="space-y-4">
+            <li className="space-y-4">
               <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
                 <Smartphone className="w-5 h-5" />
                 {t("feature_4_title")}
               </h3>
               <p className="text-muted-foreground">{t("feature_4_desc")}</p>
-            </div>
-          </div>
+            </li>
+          </ul>
         </motion.div>
       </div>
 

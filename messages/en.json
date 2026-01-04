@@ -365,6 +365,27 @@
             "a3": "No. We respect your privacy and time. Enter and create your giveaway instantly."
         }
     },
+    "RngGeo": {
+        "direct_answer_title": "What is a Random Number Generator?",
+        "direct_answer_text": "A <strong>Random Number Generator (RNG)</strong> is a tool that produces a number or sequence of numbers that cannot be reasonably predicted. Sorteo Pro uses a <strong>cryptographically secure</strong> algorithm to ensure every number is 100% fair and unbiased.",
+        "cta_button": "Generate Random Number",
+        "feature_1_title": "True Randomness",
+        "feature_1_desc": "Powered by secure algorithms to prevent bias.",
+        "feature_2_title": "No Limits",
+        "feature_2_desc": "Generate as many numbers as you need for free.",
+        "feature_3_title": "Instant Results",
+        "feature_3_desc": "Get your random numbers in milliseconds.",
+        "feature_4_title": "Mobile Friendly",
+        "feature_4_desc": "Works perfectly on any device."
+    },
+    "RngPage": {
+        "title": "Random Number Generator | Free & Secure RNG",
+        "description": "Generate random numbers instantly with Sorteo Pro. Free, secure, and customizable random number generator for games, lotteries, and scientific use.",
+        "faq_1_q": "Is this RNG truly random?",
+        "faq_1_a": "Yes, we use a cryptographically secure pseudo-random number generator (CSPRNG) which is the industry standard for fairness.",
+        "faq_2_q": "Is there a limit to how many numbers I can generate?",
+        "faq_2_a": "No, you can generate unlimited random numbers for free."
+    },
     "Schema": {
         "global_features": {
             "random_picker": "Random Winner Picker",

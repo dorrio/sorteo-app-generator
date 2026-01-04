@@ -20,7 +20,7 @@ import { SeoContent } from "@/components/sorteo/seo-content"
 import { WheelGeo } from "@/components/sorteo/wheel-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
-import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck } from "lucide-react"
+import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck, Share2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
 
@@ -104,6 +104,23 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     setWinner(null)
   }
 
+  const shareTool = async () => {
+      if (typeof navigator !== "undefined" && navigator.share) {
+          try {
+              await navigator.share({
+                  title: "Sorteo Pro",
+                  text: "Check out Sorteo Pro - The best free giveaway tool!",
+                  url: window.location.origin
+              })
+          } catch (e) {
+              // ignore
+          }
+      } else {
+          // fallback or ignore
+          window.open(`https://twitter.com/intent/tweet?text=Check out Sorteo Pro&url=${window.location.origin}`, '_blank')
+      }
+  }
+
   if (!mounted || !hasHydrated) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -185,6 +202,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
             <div className="flex items-center gap-2">
               <LanguageSwitcher />
+
+              {/* Viralis: Added Share Button in Header */}
+               <Button variant="ghost" size="icon" onClick={shareTool} title="Share Tool" aria-label="Share">
+                <Share2 className="w-5 h-5" />
+              </Button>
+
               <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title="Verificar Sorteo" aria-label={t("verify_sorteo")}>
                 <ShieldCheck className="w-5 h-5" />
               </Button>

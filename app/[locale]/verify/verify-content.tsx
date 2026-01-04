@@ -28,10 +28,23 @@ export function VerifyContent() {
     } | null>(null)
     const [showCopied, setShowCopied] = useState(false)
     const [canShareNative, setCanShareNative] = useState(false)
+    const [isStickyVisible, setIsStickyVisible] = useState(false)
 
     useEffect(() => {
         setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
-    }, [])
+
+        // Show sticky CTA on scroll if result is visible
+        const handleScroll = () => {
+            if (result && window.scrollY > 300) {
+                setIsStickyVisible(true)
+            } else {
+                setIsStickyVisible(false)
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [result])
 
     // Auto-verify if ID is in URL
     useEffect(() => {
@@ -134,7 +147,7 @@ export function VerifyContent() {
 
     return (
         <div
-            className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden"
+            className="min-h-screen flex flex-col items-center justify-center p-4 pb-24 relative overflow-hidden"
             style={{
                 backgroundColor: theme.backgroundColor,
                 color: theme.textColor,
@@ -297,7 +310,7 @@ export function VerifyContent() {
                                             </div>
                                         </div>
 
-                                        {/* VIRAL LOOP CTA */}
+                                        {/* VIRAL LOOP CTA - MAIN */}
                                         {(result.status === "valid" || result.status === "partial") && (
                                             <div className="mt-6 pt-4 border-t border-border/50 space-y-3">
                                                 {canShareNative ? (
@@ -417,6 +430,34 @@ export function VerifyContent() {
                     </AnimatePresence>
                 </motion.div>
             </div>
+
+            {/* Viralis: Sticky CTA for Mobile */}
+            <AnimatePresence>
+                {isStickyVisible && (
+                    <motion.div
+                        initial={{ y: 100 }}
+                        animate={{ y: 0 }}
+                        exit={{ y: 100 }}
+                        className="fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur border-t border-border z-50 flex gap-2 shadow-2xl"
+                        style={{ borderTopColor: `${theme.primaryColor}40` }}
+                    >
+                         <Button
+                            asChild
+                            className="flex-1 font-bold shadow-lg"
+                            size="lg"
+                            style={{
+                                backgroundColor: theme.primaryColor,
+                                color: theme.backgroundColor
+                            }}
+                        >
+                            <Link href="/">
+                                <Sparkles className="w-4 h-4 mr-2" />
+                                {t("create_your_own")}
+                            </Link>
+                        </Button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     )
 }

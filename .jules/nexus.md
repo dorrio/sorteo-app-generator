@@ -81,3 +81,11 @@
 **Bridge:** Refactored the DropdownMenu to use semantic `<a>` tags via the `asChild` prop for Twitter, Facebook, and WhatsApp. Pre-calculated the intent URLs during render to ensure they are available in the initial HTML payload.
 
 **Signal:** Googlebot can now follow the outbound social links (improving Entity Recognition and Trust), and the page gains full WCAG compliance for link behavior.
+
+## 2025-12-31 - [Wheel of Names Schema]
+
+**Blocker:** The `FAQPage` JSON-LD schema injected by `WheelGeo` contained raw HTML tags (e.g., `<b>`) in the `acceptedAnswer.text` field. This "Dirty Data" violated Schema.org best practices (which prefer plain text) and risked causing Google to ignore the snippet or display it with broken formatting in search results. The previous sanitization logic (`replace(/\*\*(.*?)\*\*/g, '$1')`) targeted Markdown but failed to handle the HTML tags returned by the translation engine.
+
+**Bridge:** Updated the schema generation logic to use a robust regular expression (`/<[^>]*>?/gm`) that effectively strips all HTML tags from the injected text, ensuring a clean string output.
+
+**Signal:** Provides high-quality, valid structured data to Google, significantly increasing the probability of winning the "What is a Wheel of Names?" Featured Snippet and improving the overall trust signal of the page.

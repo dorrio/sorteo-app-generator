@@ -49,7 +49,7 @@ export function WheelGeo() {
         name: t('what_is_wheel'),
         acceptedAnswer: {
           '@type': 'Answer',
-          text: t('what_is_wheel_answer').replace(/\*\*(.*?)\*\*/g, '$1'), // Strip markdown for schema
+          text: t('what_is_wheel_answer').replace(/<[^>]*>?/gm, ''), // Strip HTML tags for schema
         },
       }
     ]

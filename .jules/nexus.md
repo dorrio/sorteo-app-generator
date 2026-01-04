@@ -89,3 +89,11 @@
 **Bridge:** Updated the schema generation logic to use a robust regular expression (`/<[^>]*>?/gm`) that effectively strips all HTML tags from the injected text, ensuring a clean string output.
 
 **Signal:** Provides high-quality, valid structured data to Google, significantly increasing the probability of winning the "What is a Wheel of Names?" Featured Snippet and improving the overall trust signal of the page.
+
+## 2026-01-01 - [RNG Landing Page]
+
+**Blocker:** The features grid in `RngGeo` was implemented using a generic `div` grid structure. This "Semantic Void" meant that search engines and assistive technology perceived the features as disconnected content blocks rather than a related list of attributes.
+
+**Bridge:** Refactored the features grid to use a semantic `<ul>` (Unordered List) with `<li>` (List Items). Explicitly added `role="list"` to the container to prevent list semantics from being stripped by the `grid` CSS layout in some browsers/screen readers.
+
+**Signal:** Provides a clear structural signal to Googlebot that these elements are a list of features, improving the understanding of the page's content hierarchy and enhancing navigation for screen reader users.

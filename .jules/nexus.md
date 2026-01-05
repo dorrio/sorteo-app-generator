@@ -1,3 +1,10 @@
+## 2026-01-02 - [Winner Ceremony]
+
+**Blocker:** The social sharing actions in the `WinnerCeremony` modal were implemented as `DropdownMenuItem` `div`s with `onClick` handlers. This "Link Juice Killer" meant search engines (Googlebot) could not crawl or index the outbound social links to Twitter, Facebook, and WhatsApp, missing an opportunity for entity association and "Shareability" signals. It also prevented users from using native browser behaviors like "Open in new tab".
+
+**Bridge:** Refactored the items to use the `asChild` prop on `DropdownMenuItem`, rendering semantic `<a>` tags with `href` attributes containing pre-calculated intent URLs.
+
+**Signal:** Converts "dead" interactive elements into crawlable, semantic links, improving the page's connectivity graph and ensuring full accessibility for users (and bots) who rely on standard link behavior.
 ## 2024-05-23 - [Home Page & Visual Editor]
 
 **Blocker:** Icon-only buttons (Customize, Verify, Close) lack `aria-label` or rely on `title` (which is not reliable for all screen readers/touch devices). On mobile, the "Customize" button text is hidden via `display: none` (`hidden` class), rendering it empty to assistive tech. These controls are "Semantic Voids" - visually apparent but invisible or confusing to bots and screen readers.

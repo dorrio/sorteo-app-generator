@@ -382,6 +382,29 @@
         "faq_2_q": "Existe limite de quantos números posso gerar?",
         "faq_2_a": "Não, você pode gerar números aleatórios ilimitados gratuitamente."
     },
+    "ListRandomizerPage": {
+        "title": "Aleatorizar Lista | Gerador de Listas Aleatórias (Grátis)",
+        "description": "O melhor aleatorizador de listas grátis. Misture uma lista de itens, escolha um vencedor aleatório ou embaralhe nomes instantaneamente. Seguro, justo e sem anúncios.",
+        "h1": "Aleatorizar Lista Grátis",
+        "subtitle": "Embaralhe listas e escolha itens aleatórios instantaneamente.",
+        "faq_1_q": "Como funciona o Aleatorizador de Listas?",
+        "faq_1_a": "Usamos um algoritmo de embaralhamento Fisher-Yates impulsionado por números aleatórios criptograficamente seguros para garantir uma ordem verdadeiramente aleatória.",
+        "faq_2_q": "Posso aleatorizar nomes para um sorteio?",
+        "faq_2_a": "Sim! Basta colar sua lista de nomes e a ferramenta escolherá um vencedor ou embaralhe toda a lista."
+    },
+    "ListRandomizerGeo": {
+        "direct_answer_title": "O que é um Aleatorizador de Listas?",
+        "direct_answer_text": "Um <strong>Aleatorizador de Listas</strong> é uma ferramenta que pega uma lista de itens (nomes, números ou opções) e os reorganiza em uma <strong>ordem completamente aleatória</strong>. É essencial para sorteios, formação de equipes e tomada de decisões imparciais. <strong>Sorteo Pro</strong> oferece um aleatorizador seguro e gratuito com resultados instantâneos.",
+        "cta_button": "Aleatorizar Lista Agora",
+        "feature_1_title": "Embaralhamento Realmente Aleatório",
+        "feature_1_desc": "Usa algoritmos seguros para garantir que não haja viés.",
+        "feature_2_title": "Escolha Um ou Vários",
+        "feature_2_desc": "Selecione um único vencedor ou embaralhe todo o grupo.",
+        "feature_3_title": "Entrada em Massa",
+        "feature_3_desc": "Cole milhares de itens instantaneamente.",
+        "feature_4_title": "Verificação Visual",
+        "feature_4_desc": "Veja a aleatorização acontecer em tempo real."
+    },
     "Schema": {
         "global_features": {
             "random_picker": "Seletor de Vencedor Aleatório",

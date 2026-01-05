@@ -386,6 +386,29 @@
         "faq_2_q": "Is there a limit to how many numbers I can generate?",
         "faq_2_a": "No, you can generate unlimited random numbers for free."
     },
+    "ListRandomizerPage": {
+        "title": "List Randomizer | Random Choice Generator (Free)",
+        "description": "The best free List Randomizer. Randomize a list of items, pick a random winner, or shuffle names instantly. Secure, fair, and no ads.",
+        "h1": "Free List Randomizer",
+        "subtitle": "Shuffle lists and pick random items instantly.",
+        "faq_1_q": "How does the List Randomizer work?",
+        "faq_1_a": "We use a Fisher-Yates shuffle algorithm powered by cryptographically secure random numbers to ensure a truly random order.",
+        "faq_2_q": "Can I randomize names for a raffle?",
+        "faq_2_a": "Yes! Just paste your list of names, and the tool will pick a winner or shuffle the entire list."
+    },
+    "ListRandomizerGeo": {
+        "direct_answer_title": "What is a List Randomizer?",
+        "direct_answer_text": "A <strong>List Randomizer</strong> is a tool that takes a list of items (names, numbers, or options) and rearranges them into a completely <strong>random order</strong>. It is essential for giveaways, team sorting, and unbiased decision making. <strong>Sorteo Pro</strong> offers a free, secure list randomizer with instant results.",
+        "cta_button": "Randomize List Now",
+        "feature_1_title": "Truly Random Shuffle",
+        "feature_1_desc": "Uses secure algorithms to ensure no bias in the order.",
+        "feature_2_title": "Pick One or Many",
+        "feature_2_desc": "Select a single winner or shuffle the whole group.",
+        "feature_3_title": "Bulk Input",
+        "feature_3_desc": "Paste thousands of items instantly.",
+        "feature_4_title": "Visual Verification",
+        "feature_4_desc": "See the randomization happen in real-time."
+    },
     "Schema": {
         "global_features": {
             "random_picker": "Random Winner Picker",

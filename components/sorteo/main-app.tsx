@@ -19,6 +19,7 @@ import { LanguageSwitcher } from "@/components/language-switcher"
 import { SeoContent } from "@/components/sorteo/seo-content"
 import { WheelGeo } from "@/components/sorteo/wheel-geo"
 import { RngGeo } from "@/components/sorteo/rng-geo"
+import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck, Share2 } from "lucide-react"
@@ -27,7 +28,7 @@ import { Link } from "@/i18n/routing"
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
@@ -343,6 +344,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                <RngGeo />
                <Glossary />
             </>
+       ) : seoMode === 'list-randomizer' ? (
+            /* List Randomizer Mode: Show List Randomizer content */
+            <>
+                <ListRandomizerGeo />
+                <Glossary />
+            </>
        ) : (
             /* Home Mode: Show everything */
             <>
@@ -383,6 +390,13 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                 className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
               >
                 RNG
+              </Link>
+              <span className="text-muted-foreground/30 text-xs">•</span>
+              <Link
+                href="/list-randomizer"
+                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
+              >
+                List Randomizer
               </Link>
               <span className="text-muted-foreground/30 text-xs">•</span>
               <Link

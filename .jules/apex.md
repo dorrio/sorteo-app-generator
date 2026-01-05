@@ -105,3 +105,16 @@
 **GEO Impact:**
 *   **Entity Definition:** Explicitly defining "RNG", "Provably Fair", and "Comment Picker" helps LLMs understand our expertise.
 *   **Crawl Depth:** Provides a text-rich entry point for bots to discover all tools.
+
+## 2025-02-27 - List Randomizer Strategy
+**Context:** Capturing the high-volume "List Randomizer" keyword (~100k volume).
+**Gap:** While the main application *is* a list randomizer, it lacked a dedicated landing page targeting this specific intent. Users searching for "List Randomizer" or "Shuffle List" would not find a specific "Tool" entity.
+**Action:**
+*   **New Landing Page:** Created `app/[locale]/list-randomizer/page.tsx` utilizing `MainApp` with `grid` style.
+*   **GEO Content:** Developed `ListRandomizerGeo` component with a "Direct Answer" block defining the term and a CTA to "Randomize List Now".
+*   **Schema:** Injected `SoftwareApplication` (Utility) and `FAQPage` schema.
+*   **Localization:** Added optimized content for EN, ES, and PT.
+*   **Sitemap:** Prioritized `/list-randomizer` at 0.9.
+**GEO Impact:**
+*   **Search Intent Match:** Explicitly satisfies the user intent for "shuffling a list" without forcing them to "Create a Giveaway".
+*   **Direct Answer:** Provides a clear definition for AI engines to cite.

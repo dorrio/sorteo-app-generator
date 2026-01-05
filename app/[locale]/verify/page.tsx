@@ -49,13 +49,20 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 
     const ogImageUrl = `${baseUrl}/api/og?${ogParams.toString()}`
 
+    // Viralis Fix: Ensure og:url includes query params to prevent social cache collisions
+    // If we don't include params, FB/Twitter will treat all winners as the same page
+    const canonicalParams = new URLSearchParams()
+    if (verificationId) canonicalParams.set("id", verificationId)
+    if (winnerName) canonicalParams.set("name", winnerName)
+    const canonicalUrl = `${baseUrl}/${locale}/verify${canonicalParams.toString() ? `?${canonicalParams.toString()}` : ""}`
+
     return {
         title: title,
         description: description,
         openGraph: {
             title: title,
             description: description,
-            url: `${baseUrl}/${locale}/verify`,
+            url: canonicalUrl,
             images: [
                 {
                     url: ogImageUrl,

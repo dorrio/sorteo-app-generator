@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { ConfettiEffect } from "@/components/sorteo/confetti-effect"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -29,13 +30,22 @@ export function VerifyContent() {
     const [showCopied, setShowCopied] = useState(false)
     const [canShareNative, setCanShareNative] = useState(false)
     const [isStickyVisible, setIsStickyVisible] = useState(false)
+    const [showConfetti, setShowConfetti] = useState(false)
+
+    useEffect(() => {
+        if (result?.status === "valid") {
+            setShowConfetti(true)
+            const timer = setTimeout(() => setShowConfetti(false), 5000)
+            return () => clearTimeout(timer)
+        }
+    }, [result])
 
     useEffect(() => {
         setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
 
         // Show sticky CTA on scroll if result is visible
         const handleScroll = () => {
-            if (result && window.scrollY > 300) {
+            if (result && window.scrollY > 150) {
                 setIsStickyVisible(true)
             } else {
                 setIsStickyVisible(false)
@@ -160,6 +170,11 @@ export function VerifyContent() {
                 style={{
                     background: `radial-gradient(circle at 50% 50%, ${theme.primaryColor}20 0%, transparent 70%)`,
                 }}
+            />
+
+            <ConfettiEffect
+                isActive={showConfetti}
+                colors={[theme.primaryColor, theme.secondaryColor, "#FFD700", "#FF6B6B", "#4ECDC4"]}
             />
 
             <div className="w-full max-w-md z-10">

@@ -56,6 +56,13 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
   // Compelling share text
   const shareText = t("share_text", { name: winner.name })
 
+  // Pre-calculate Social URLs for SEO (Link Juice) & Accessibility
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`
+  // Facebook requires 'u' param
+  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
+  // WhatsApp: Use api.whatsapp.com for better cross-device support
+  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
+
   const shareNative = async () => {
     if (navigator.share) {
       try {
@@ -75,25 +82,6 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
     await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
-  }
-
-  const shareTwitter = () => {
-    // Viralis: Append URL to Tweet
-    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`
-    window.open(url, "_blank", "width=550,height=420")
-  }
-
-  const shareFacebook = () => {
-    // Viralis: Facebook requires 'u' param for the link
-    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
-    window.open(url, "_blank", "width=550,height=420")
-  }
-
-  const shareWhatsApp = () => {
-    // Viralis: Use api.whatsapp.com for better cross-device support (desktop/mobile)
-    // Append URL at the end
-    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
-    window.open(url, "_blank")
   }
 
   const shareInstagram = async () => {
@@ -259,22 +247,34 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
                       </>
                     )}
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={shareTwitter} className="gap-2 cursor-pointer">
-                    <Twitter className="w-4 h-4" />
-                    Twitter / X
+
+                  {/* Semantic Fix: Real links for bots and users */}
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <a href={twitterUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">
+                      <Twitter className="w-4 h-4" />
+                      Twitter / X
+                    </a>
                   </DropdownMenuItem>
+
                   <DropdownMenuItem onClick={shareInstagram} className="gap-2 cursor-pointer">
                     <Instagram className="w-4 h-4" />
                     Instagram
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={shareFacebook} className="gap-2 cursor-pointer">
-                    <Facebook className="w-4 h-4" />
-                    Facebook
+
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+                      <Facebook className="w-4 h-4" />
+                      Facebook
+                    </a>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={shareWhatsApp} className="gap-2 cursor-pointer">
-                    <MessageCircle className="w-4 h-4" />
-                    WhatsApp
+
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
+                      <MessageCircle className="w-4 h-4" />
+                      WhatsApp
+                    </a>
                   </DropdownMenuItem>
+
                 </DropdownMenuContent>
               </DropdownMenu>
             )}

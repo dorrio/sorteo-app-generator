@@ -97,17 +97,20 @@ export function VerificationModal({ isOpen, onClose }: VerificationModalProps) {
 
                 <div className="space-y-4 py-2">
                     <div className="space-y-2">
-                        <label className="text-sm font-medium ml-1">
+                        <label htmlFor="verification-id" className="text-sm font-medium ml-1">
                             {t("input_label")}
                         </label>
                         <div className="relative">
                             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                             <Input
+                                id="verification-id"
                                 placeholder={t("input_placeholder")}
                                 className="pl-9"
                                 value={inputId}
                                 onChange={(e) => setInputId(e.target.value.toUpperCase())}
                                 onKeyDown={(e) => e.key === 'Enter' && handleVerify()}
+                                aria-invalid={result ? !result.valid : undefined}
+                                aria-describedby={result && !result.valid ? "verification-error" : undefined}
                             />
                         </div>
                     </div>
@@ -160,7 +163,7 @@ export function VerificationModal({ isOpen, onClose }: VerificationModalProps) {
                                                 )}
 
                                                 {!result.valid && (
-                                                    <p className="text-muted-foreground text-xs mt-1">
+                                                    <p id="verification-error" className="text-muted-foreground text-xs mt-1">
                                                         {result.error}
                                                     </p>
                                                 )}

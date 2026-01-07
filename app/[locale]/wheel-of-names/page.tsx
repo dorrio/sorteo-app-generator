@@ -76,32 +76,11 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
     ]
   };
 
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: t('faq_1_q'),
-        acceptedAnswer: { '@type': 'Answer', text: t('faq_1_a') }
-      },
-      {
-        '@type': 'Question',
-        name: t('faq_2_q'),
-        acceptedAnswer: { '@type': 'Answer', text: t('faq_2_a') }
-      }
-    ]
-  };
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
       <MainApp initialStyle="roulette" seoMode="wheel" />
     </>

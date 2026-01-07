@@ -2,12 +2,13 @@
 
 import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
-import { Disc, Palette, ShieldCheck, Play, Music, CheckCircle } from "lucide-react"
+import { Disc, Palette, ShieldCheck, Play, Music, CheckCircle, HelpCircle } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 
 export function WheelGeo() {
   const t = useTranslations("WheelGeo")
+  const tFaq = useTranslations("WheelGeoPage")
   const { updateTheme } = useSorteoStore()
 
   const handleTryWheel = () => {
@@ -38,21 +39,35 @@ export function WheelGeo() {
     },
   ]
 
+  // Consolidate all FAQs into one list
+  const faqs = [
+    {
+      question: t('what_is_wheel'),
+      answer: t('what_is_wheel_answer'),
+    },
+    {
+      question: tFaq('faq_1_q'),
+      answer: tFaq('faq_1_a'),
+    },
+    {
+      question: tFaq('faq_2_q'),
+      answer: tFaq('faq_2_a'),
+    },
+  ]
+
   // Schema for "Direct Answer" optimization
   // Using FAQPage schema specifically for the "What is..." question
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: t('what_is_wheel'),
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: t('what_is_wheel_answer').replace(/<[^>]*>?/gm, ''), // Strip HTML tags for schema
-        },
-      }
-    ]
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer.replace(/<[^>]*>?/gm, ''), // Strip HTML tags for schema
+      },
+    }))
   }
 
   return (
@@ -61,7 +76,7 @@ export function WheelGeo() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-start">
 
         {/* Left: Content & SEO Text */}
         <div className="space-y-6">
@@ -105,10 +120,32 @@ export function WheelGeo() {
                   </Button>
               </div>
            </div>
+
+           {/* Added Visible FAQ Section (Anti-Cloaking) */}
+           <div className="pt-8 border-t border-primary/10">
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                 <HelpCircle className="w-5 h-5 text-primary" />
+                 FAQ
+              </h3>
+              <dl className="grid gap-6">
+                 {/* Skip the first one as it is the "What is" section above, or repeat it?
+                     Standard practice is to not repeat if it's already a main heading.
+                     However, for schema consistency, we included it.
+                     Let's only render the *additional* FAQs here to avoid visual redundancy,
+                     but keep them in Schema.
+                 */}
+                 {faqs.slice(1).map((faq, idx) => (
+                     <div key={idx} className="space-y-2">
+                         <dt className="font-bold text-base text-foreground">{faq.question}</dt>
+                         <dd className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</dd>
+                     </div>
+                 ))}
+              </dl>
+           </div>
         </div>
 
         {/* Right: Visual Abstract (Placeholder or Icon Graphic) */}
-        <div className="hidden md:flex justify-center items-center">
+        <div className="hidden md:flex justify-center items-center sticky top-24">
            <button
              type="button"
              className="relative w-64 h-64 rounded-full border-4 border-primary/20 flex items-center justify-center bg-card/50 backdrop-blur-sm cursor-pointer hover:scale-105 transition-transform"

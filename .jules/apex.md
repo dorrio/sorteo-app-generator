@@ -118,3 +118,14 @@
 **GEO Impact:**
 *   **Search Intent Match:** Explicitly satisfies the user intent for "shuffling a list" without forcing them to "Create a Giveaway".
 *   **Direct Answer:** Provides a clear definition for AI engines to cite.
+
+## 2025-02-28 - Schema Synchronization & Anti-Cloaking
+**Context:** Auditing Schema.org implementation and ensuring strict alignment with visible content.
+**Gap:** The pages `RngPage`, `ListRandomizerPage`, and `WheelOfNamesPage` were injecting `FAQPage` schema (valid questions) but failed to render the answers visibly in their respective "Geo" components. This created a "Cloaking" risk (hidden content for bots) and violated Google's Structured Data guidelines.
+**Action:**
+*   **Refactor:** Updated `RngGeo`, `ListRandomizerGeo`, and `WheelGeo` to explicitly render an FAQ section using the same translation keys as the schema.
+*   **Synchronization:** Moved the `FAQPage` schema injection from the page component directly into the Geo component to ensure tight coupling between data and UI.
+*   **Depth:** Added visible, semantic `<dl>` (Definition Lists) for FAQs to increase content depth and relevance.
+**GEO Impact:**
+*   **Trust:** Eliminates the risk of manual penalty for hidden structured data.
+*   **Ranking:** "Direct Answer" quality is improved by having visible, matching text that validates the schema.

@@ -3,12 +3,13 @@
 import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Shuffle, List, Zap, Eye } from "lucide-react"
+import { ArrowRight, Shuffle, List, Zap, Eye, HelpCircle } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 
 export function ListRandomizerGeo() {
   const t = useTranslations("ListRandomizerGeo")
-  const { updateTheme, setIsEditorOpen } = useSorteoStore()
+  const tFaq = useTranslations("ListRandomizerPage")
+  const { updateTheme } = useSorteoStore()
 
   const handleTryIt = () => {
     updateTheme({ sorteoStyle: 'grid' })
@@ -18,8 +19,36 @@ export function ListRandomizerGeo() {
     }
   }
 
+  const faqs = [
+    {
+      question: tFaq("faq_1_q"),
+      answer: tFaq("faq_1_a"),
+    },
+    {
+      question: tFaq("faq_2_q"),
+      answer: tFaq("faq_2_a"),
+    },
+  ]
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  }
+
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="max-w-4xl mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -44,7 +73,7 @@ export function ListRandomizerGeo() {
           </div>
 
           {/* Features Grid */}
-          <ul className="grid md:grid-cols-2 gap-8 mt-12" role="list">
+          <ul className="grid md:grid-cols-2 gap-8 mt-12 mb-16" role="list">
             <li className="space-y-4">
               <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
                 <Shuffle className="w-5 h-5" />
@@ -77,6 +106,23 @@ export function ListRandomizerGeo() {
               <p className="text-muted-foreground">{t("feature_4_desc")}</p>
             </li>
           </ul>
+
+          {/* Visible FAQ Section (Anti-Cloaking) */}
+          <div className="pt-10 border-t border-primary/10">
+             <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
+                <HelpCircle className="w-6 h-6 text-primary" />
+                FAQ
+             </h3>
+             <dl className="grid gap-6">
+                {faqs.map((faq, idx) => (
+                    <div key={idx} className="space-y-2">
+                        <dt className="font-bold text-lg text-foreground">{faq.question}</dt>
+                        <dd className="text-muted-foreground leading-relaxed">{faq.answer}</dd>
+                    </div>
+                ))}
+             </dl>
+          </div>
+
         </motion.div>
       </div>
 

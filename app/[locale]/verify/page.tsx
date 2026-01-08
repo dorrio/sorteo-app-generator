@@ -32,6 +32,26 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     const winnerName = typeof name === "string" ? name : null
     const verificationId = typeof id === "string" ? id : null
 
+    // Parse date from verification ID for metadata
+    let dateStr: string | null = null
+    if (verificationId) {
+        try {
+            // Format: ID-{UUID}-{TIMESTAMP_HEX}
+            const parts = verificationId.split('-')
+            if (parts.length >= 3) {
+                // The timestamp is always the last part
+                const timestampHex = parts[parts.length - 1]
+                const timestamp = parseInt(timestampHex, 16)
+                const date = new Date(timestamp)
+                if (!isNaN(date.getTime())) {
+                    dateStr = date.toISOString()
+                }
+            }
+        } catch (e) {
+            // Ignore parsing errors for metadata
+        }
+    }
+
     const title = winnerName
         ? `🏆 WINNER ANNOUNCEMENT: ${winnerName} | Verified by Sorteo Pro`
         : t("verify_title")
@@ -45,7 +65,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     // but primarily we need 'name' and 'date'
     const ogParams = new URLSearchParams()
     if (winnerName) ogParams.set("name", winnerName)
-    // We could add date here if we had it, but name is the most important "Viral Hook"
+    if (dateStr) ogParams.set("date", dateStr)
 
     const ogImageUrl = `${baseUrl}/api/og?${ogParams.toString()}`
 

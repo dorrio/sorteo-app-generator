@@ -108,7 +108,7 @@ export async function GET(request: Request) {
                 SORTEO PRO
               </div>
               <div style={{ width: 1, height: 20, backgroundColor: '#444', margin: '0 10px' }}></div>
-              <div style={{ fontSize: 20, color: '#666' }}>
+              <div style={{ fontSize: 22, color: '#e5e5e5', fontWeight: 'bold' }}>
                 {dateStr}
               </div>
             </div>

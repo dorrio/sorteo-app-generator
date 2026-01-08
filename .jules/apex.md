@@ -129,3 +129,14 @@
 **GEO Impact:**
 *   **Trust:** Eliminates the risk of manual penalty for hidden structured data.
 *   **Ranking:** "Direct Answer" quality is improved by having visible, matching text that validates the schema.
+
+## 2025-03-01 - Breadcrumb Architecture
+**Context:** Fixing site structure gaps to improve hierarchy understanding for Google.
+**Gap:** Key tool pages (`/wheel-of-names`, `/list-randomizer`, `/random-number-generator`, `/instagram-comment-picker`) were "orphan islands" in the schema, lacking `BreadcrumbList` to link them back to the Home entity.
+**Action:**
+*   **Schema Injection:** Injected `BreadcrumbList` JSON-LD into all 4 major tool pages.
+*   **Hierarchy:** Defined the structure as `Home` -> `Tool Name`, reinforcing the relationship between the brand and the utility.
+*   **Robustness:** Used dynamic `baseUrl` calculation to ensure correct absolute URLs across environments (Vercel/Prod).
+**GEO Impact:**
+*   **Site Structure:** Google now understands that "Wheel of Names" is a sub-feature of "Sorteo Pro".
+*   **Rich Snippets:** Eligible for Breadcrumb display in SERPs, increasing CTR.

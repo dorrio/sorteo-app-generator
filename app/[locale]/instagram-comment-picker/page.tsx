@@ -54,8 +54,14 @@ export default async function InstagramPickerPage({ params }: { params: Promise<
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'InstagramPicker' });
 
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
+    ? process.env.NEXT_PUBLIC_APP_URL
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'https://sorteopro.com';
+
   // Schema Injection is preserved for SEO
-  const jsonLd = {
+  const softwareAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'Instagram Comment Picker by Sorteo Pro',
@@ -80,11 +86,27 @@ export default async function InstagramPickerPage({ params }: { params: Promise<
     },
   };
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Sorteo Pro",
+      "item": `${baseUrl}/${locale}`
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": t('h1'),
+      "item": `${baseUrl}/${locale}/instagram-comment-picker`
+    }]
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp initialStyle="list" seoMode="instagram" />
     </>

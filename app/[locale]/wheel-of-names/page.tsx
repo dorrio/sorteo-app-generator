@@ -56,7 +56,13 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
   const t = await getTranslations({ locale, namespace: 'WheelGeoPage' });
   const tSchema = await getTranslations({ locale, namespace: 'Schema' });
 
-  const jsonLd = {
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
+    ? process.env.NEXT_PUBLIC_APP_URL
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'https://sorteopro.com';
+
+  const softwareAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'Wheel of Names by Sorteo Pro',
@@ -76,11 +82,27 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
     ]
   };
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Sorteo Pro",
+      "item": `${baseUrl}/${locale}`
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": t('h1'),
+      "item": `${baseUrl}/${locale}/wheel-of-names`
+    }]
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp initialStyle="roulette" seoMode="wheel" />
     </>

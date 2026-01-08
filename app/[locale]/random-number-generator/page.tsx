@@ -56,7 +56,13 @@ export default async function RngPage({ params }: { params: Promise<{ locale: st
   const t = await getTranslations({ locale, namespace: 'RngPage' });
   const tGeo = await getTranslations({ locale, namespace: 'RngGeo' });
 
-  const jsonLd = {
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
+    ? process.env.NEXT_PUBLIC_APP_URL
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'https://sorteopro.com';
+
+  const softwareAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'Random Number Generator by Sorteo Pro',
@@ -76,11 +82,27 @@ export default async function RngPage({ params }: { params: Promise<{ locale: st
     ]
   };
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Sorteo Pro",
+      "item": `${baseUrl}/${locale}`
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "RNG",
+      "item": `${baseUrl}/${locale}/random-number-generator`
+    }]
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp initialStyle="slot_machine" seoMode="rng" />
     </>

@@ -22,6 +22,7 @@ import { RngGeo } from "@/components/sorteo/rng-geo"
 import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
+import { ShareButton } from "@/components/ui/share-button"
 import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck, Share2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
@@ -33,6 +34,8 @@ interface MainAppProps {
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const t = useTranslations("HomePage")
+  const tMeta = useTranslations("Metadata")
+  const tWinner = useTranslations("WinnerCeremony")
   const [mounted, setMounted] = useState(false)
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
 
@@ -106,21 +109,42 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     setWinner(null)
   }
 
-  const shareTool = async () => {
-      if (typeof navigator !== "undefined" && navigator.share) {
-          try {
-              await navigator.share({
-                  title: "Sorteo Pro",
-                  text: "Check out Sorteo Pro - The best free giveaway tool!",
-                  url: window.location.origin
-              })
-          } catch (e) {
-              // ignore
-          }
-      } else {
-          // fallback or ignore
-          window.open(`https://twitter.com/intent/tweet?text=Check out Sorteo Pro&url=${window.location.origin}`, '_blank')
+  // Determine share content based on seoMode
+  const getShareContent = () => {
+      // Default / Home
+      let shareTitle = tMeta('title')
+      let shareText = "Check out Sorteo Pro - The best free giveaway tool!"
+
+      if (seoMode === 'wheel') {
+          shareTitle = "Wheel of Names | Sorteo Pro"
+          shareText = "Check out this free Wheel of Names tool! No ads and unlimited entries."
+      } else if (seoMode === 'instagram') {
+          shareTitle = "Instagram Comment Picker | Sorteo Pro"
+          shareText = "Pick a random winner from Instagram comments for free!"
+      } else if (seoMode === 'rng') {
+          shareTitle = "Random Number Generator | Sorteo Pro"
+          shareText = "Generate secure random numbers instantly."
+      } else if (seoMode === 'list-randomizer') {
+          shareTitle = "List Randomizer | Sorteo Pro"
+          shareText = "Randomize lists and pick winners easily."
       }
+
+      return {
+          title: shareTitle,
+          text: shareText,
+          url: typeof window !== "undefined" ? window.location.href : ""
+      }
+  }
+
+  const shareContent = getShareContent()
+
+  // Translations for ShareButton
+  // We'll reuse existing keys or provide defaults
+  const shareTranslations = {
+      share: tWinner('share_menu'),
+      copy: tWinner('copy_text'),
+      copied: tWinner('copied'),
+      shareOn: "Share on"
   }
 
   if (!mounted || !hasHydrated) {
@@ -206,9 +230,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               <LanguageSwitcher />
 
               {/* Viralis: Added Share Button in Header */}
-               <Button variant="ghost" size="icon" onClick={shareTool} title="Share Tool" aria-label="Share">
-                <Share2 className="w-5 h-5" />
-              </Button>
+              <ShareButton
+                  title={shareContent.title}
+                  text={shareContent.text}
+                  url={shareContent.url}
+                  translations={shareTranslations}
+              />
 
               <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title="Verificar Sorteo" aria-label={t("verify_sorteo")}>
                 <ShieldCheck className="w-5 h-5" />

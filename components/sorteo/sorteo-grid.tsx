@@ -82,13 +82,13 @@ export function SorteoGrid({ onWinnerSelected }: SorteoGridProps) {
 
     return (
         <div className="w-full max-w-6xl mx-auto p-4">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" role="list">
                 {participants.map((participant, index) => {
                     const isHighlighted = highlightedIndex === index
                     const isWinner = finalWinnerIndex === index
 
                     return (
-                        <motion.div
+                        <motion.li
                             key={participant.id}
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{
@@ -121,10 +121,10 @@ export function SorteoGrid({ onWinnerSelected }: SorteoGridProps) {
                                     <span className="text-xl">🏆</span>
                                 </motion.div>
                             )}
-                        </motion.div>
+                        </motion.li>
                     )
                 })}
-            </div>
+            </ul>
         </div>
     )
 }

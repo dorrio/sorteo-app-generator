@@ -140,3 +140,16 @@
 **GEO Impact:**
 *   **Site Structure:** Google now understands that "Wheel of Names" is a sub-feature of "Sorteo Pro".
 *   **Rich Snippets:** Eligible for Breadcrumb display in SERPs, increasing CTR.
+
+## 2025-03-02 - Glossary Expansion & Brand Schema
+**Context:** Filling the gap in semantic definitions and reinforcing brand identity for the Knowledge Graph.
+**Gap:**
+*   The Glossary was missing high-value terms "List Randomizer" and "Wheel of Names" (which now have dedicated pages).
+*   The global layout lacked `Organization` and `WebSite` schema, relying only on `SoftwareApplication`.
+**Action:**
+*   **Glossary Expansion:** Added "List Randomizer" and "Wheel of Names" to `messages/*.json` and updated `components/sorteo/glossary.tsx` to render them.
+*   **Interlinking:** Updated `app/[locale]/glossary/page.tsx` to link these terms to their respective landing pages (`/list-randomizer`, `/wheel-of-names`).
+*   **Brand Entity:** Injected `Organization` (defining "Sorteo Pro" as the brand) and `WebSite` (defining the site) schema into `app/[locale]/layout.tsx`.
+**GEO Impact:**
+*   **Entity Authority:** Google now sees "Sorteo Pro" as a distinct Organization with a defined WebSite.
+*   **Topical Depth:** The Glossary now covers all core tools, strengthening the semantic web between definitions and tools.

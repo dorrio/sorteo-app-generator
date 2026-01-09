@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
-import { BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle } from 'lucide-react';
+import { BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered } from 'lucide-react';
 
 export const dynamic = 'force-static';
 
@@ -57,9 +57,16 @@ export default function GlossaryPage() {
       link: "/instagram-comment-picker"
     },
     {
+        id: "list-randomizer",
+        term: tGlossary('term_4'),
+        def: tGlossary('def_4'),
+        icon: <ListOrdered className="w-6 h-6 text-primary" />,
+        link: "/list-randomizer"
+    },
+    {
         id: "wheel",
-        term: t('term_wheel'),
-        def: t('def_wheel'),
+        term: tGlossary('term_5'),
+        def: tGlossary('def_5'),
         icon: <HelpCircle className="w-6 h-6 text-primary" />,
         link: "/wheel-of-names"
     }

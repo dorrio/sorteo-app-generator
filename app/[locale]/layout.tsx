@@ -130,39 +130,66 @@ export default async function RootLayout({
   const messages = await getMessages();
   const t = await getTranslations({ locale, namespace: 'GlobalSchema' });
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: 'Sorteo Pro',
-    applicationCategory: t('applicationCategory'),
-    applicationSubCategory: t('applicationSubCategory'),
-    operatingSystem: 'Web, iOS, Android',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'EUR',
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'Sorteo Pro',
+      applicationCategory: t('applicationCategory'),
+      applicationSubCategory: t('applicationSubCategory'),
+      operatingSystem: 'Web, iOS, Android',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'EUR',
+      },
+      description: t('description'),
+      author: {
+        '@type': 'Organization',
+        name: 'Sorteo Pro',
+        url: baseUrl
+      },
+      inLanguage: locale,
+      screenshot: `${baseUrl}/og-image.jpg`,
+      featureList: [
+        t('feature_1'),
+        t('feature_2'),
+        t('feature_3'),
+        t('feature_4'),
+        t('feature_5')
+      ],
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        ratingCount: '12500',
+      }
     },
-    description: t('description'),
-    author: {
+    {
+      '@context': 'https://schema.org',
       '@type': 'Organization',
       name: 'Sorteo Pro',
-      url: baseUrl
+      url: baseUrl,
+      logo: `${baseUrl}/favicon.ico`,
+      sameAs: [
+        'https://github.com/sorteopro',
+        'https://twitter.com/sorteopro'
+      ]
     },
-    inLanguage: locale,
-    screenshot: `${baseUrl}/og-image.jpg`,
-    featureList: [
-      t('feature_1'),
-      t('feature_2'),
-      t('feature_3'),
-      t('feature_4'),
-      t('feature_5')
-    ],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      ratingCount: '12500',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Sorteo Pro',
+      url: baseUrl,
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `${baseUrl}/?q={search_term_string}`
+        },
+        'query-input': 'required name=search_term_string'
+      }
     }
-  }
+  ]
 
   return (
     <html lang={locale} className="dark" suppressHydrationWarning>

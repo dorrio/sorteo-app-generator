@@ -249,7 +249,11 @@
         "term_2": "Provavelmente Justo (Provably Fair)",
         "def_2": "Um sistema que permite aos jogadores verificar se o resultado de um jogo ou sorteio foi gerado corretamente e não foi manipulado.",
         "term_3": "Seletor de Comentários do Instagram",
-        "def_3": "Ferramenta projetada para escolher um vencedor aleatório nos comentários de uma postagem do Instagram. O Sorteio Pro oferece uma alternativa gratuita a essas ferramentas."
+        "def_3": "Ferramenta projetada para escolher um vencedor aleatório nos comentários de uma postagem do Instagram. O Sorteio Pro oferece uma alternativa gratuita a essas ferramentas.",
+        "term_4": "Aleatorizador de Listas",
+        "def_4": "Uma ferramenta que reorganiza uma lista de itens em uma ordem completamente aleatória usando algoritmos criptográficos. Essencial para decidir turnos ou formar equipes.",
+        "term_5": "Roleta de Nomes",
+        "def_5": "Um seletor aleatório visual que imita uma roda giratória física. Divide o círculo em segmentos que representam os participantes e gira para selecionar um aleatoriamente."
     },
     "InstagramPicker": {
         "title": "Sorteador de Comentários do Instagram Grátis | Ilimitado",

@@ -253,7 +253,11 @@
         "term_2": "Provably Fair",
         "def_2": "A system that allows players to verify that the outcome of a game or raffle was generated correctly and was not manipulated by the operator.",
         "term_3": "Instagram Comment Picker",
-        "def_3": "A tool designed to select a random winner from the comments section of an Instagram post. Sorteo Pro offers a free alternative to these tools."
+        "def_3": "A tool designed to select a random winner from the comments section of an Instagram post. Sorteo Pro offers a free alternative to these tools.",
+        "term_4": "List Randomizer",
+        "def_4": "A tool that shuffles a list of items into a completely random order using cryptographic algorithms. Essential for deciding turn orders or pairing teams.",
+        "term_5": "Wheel of Names",
+        "def_5": "A visual random selector that mimics a physical spinning wheel. It divides the circle into segments representing participants and spins to select one at random."
     },
     "InstagramPicker": {
         "title": "Free Instagram Comment Picker | Unlimited & No Login",

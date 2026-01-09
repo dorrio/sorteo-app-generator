@@ -456,9 +456,25 @@ export function VerifyContent() {
                         className="fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur border-t border-border z-50 flex gap-2 shadow-2xl"
                         style={{ borderTopColor: `${theme.primaryColor}40` }}
                     >
-                         <Button
+                        {canShareNative && (
+                            <Button
+                                className="flex-1 font-bold shadow-lg"
+                                size="lg"
+                                variant="outline"
+                                onClick={shareNative}
+                                style={{
+                                    borderColor: theme.primaryColor,
+                                    color: theme.primaryColor
+                                }}
+                            >
+                                <Share2 className="w-4 h-4 mr-2" />
+                                {t("share_button")}
+                            </Button>
+                        )}
+
+                        <Button
                             asChild
-                            className="flex-1 font-bold shadow-lg"
+                            className="flex-[2] font-bold shadow-lg"
                             size="lg"
                             style={{
                                 backgroundColor: theme.primaryColor,

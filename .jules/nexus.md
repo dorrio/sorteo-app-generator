@@ -104,3 +104,11 @@
 **Bridge:** Refactored the features grid to use a semantic `<ul>` (Unordered List) with `<li>` (List Items). Explicitly added `role="list"` to the container to prevent list semantics from being stripped by the `grid` CSS layout in some browsers/screen readers.
 
 **Signal:** Provides a clear structural signal to Googlebot that these elements are a list of features, improving the understanding of the page's content hierarchy and enhancing navigation for screen reader users.
+
+## 2026-01-03 - [Versus Page]
+
+**Blocker:** The "Versus" comparison page (`/alternativa-appsorteos`) was implemented as a standalone structure (`<main>`) that did not include the global `SiteFooter`. This created a "Navigation Trap" (Semantic Void) where search engine crawlers hitting this page would reach a dead end without internal links to other key site sections (Glossary, Wheel, RNG). It also prevented PageRank flow from this high-potential landing page to the rest of the site domain.
+
+**Bridge:** Extracted the footer implementation from the monolithic `MainApp` component into a reusable `SiteFooter` component. Integrated `SiteFooter` into both `MainApp` and the `VersusPage` structure.
+
+**Signal:** Restores the internal linking graph, ensuring that "Link Juice" flows from the Versus landing page to other tools, and eliminates the orphan page risk.

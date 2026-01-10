@@ -153,3 +153,18 @@
 **GEO Impact:**
 *   **Entity Authority:** Google now sees "Sorteo Pro" as a distinct Organization with a defined WebSite.
 *   **Topical Depth:** The Glossary now covers all core tools, strengthening the semantic web between definitions and tools.
+
+## 2025-03-03 - Wheel of Names How-To & Trust Authority
+**Context:** Targeting the high-intent "How to make a wheel of names" query and reinforcing E-E-A-T.
+**Gap:**
+*   The "Wheel of Names" page had high-quality "Direct Answer" text but lacked step-by-step instructions (`HowTo` schema) which are critical for "How-to" queries.
+*   The page claimed "Secure RNG" but did not link to the technical definition in the Glossary to prove it.
+*   A localization error in Portuguese used the Spanish word "Nombres" instead of "Nomes".
+**Action:**
+*   **Schema Injection:** Added `HowTo` JSON-LD schema to `components/sorteo/wheel-geo.tsx`.
+*   **Content:** Implemented a visible "How To" section with 4 clear steps in EN, ES, and PT.
+*   **Trust Signal:** Added a visible link to the Glossary entry for "Secure RNG" directly below the features list.
+*   **Localization:** Fixed the "Roleta de Nombres" typo in Portuguese.
+**GEO Impact:**
+*   **Rich Results:** The page is now eligible for "How To" rich snippets in SERPs.
+*   **Authority:** Linking to the "Secure RNG" definition bridges the gap between marketing claims and technical verification.

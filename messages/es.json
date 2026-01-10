@@ -241,7 +241,13 @@
         "feature_3": "Sin Anuncios / Sin Registro",
         "feature_4": "Efectos de Sonido y Animación",
         "feature_5": "Verificación de Resultados Instantánea",
-        "cta_button": "Probar Modo Ruleta Ahora"
+        "cta_button": "Probar Modo Ruleta Ahora",
+        "how_to_title": "Cómo crear una Ruleta de Nombres",
+        "how_to_step_1": "Introduce los nombres manualmente o pega una lista desde Excel/Texto.",
+        "how_to_step_2": "Personaliza los colores, duración y efectos de sonido en el 'Editor Visual'.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para girar la ruleta y elegir un ganador.",
+        "how_to_step_4": "Comparte el Certificado de Validez oficial con tu audiencia.",
+        "trust_link_text": "Aprende sobre nuestro RNG Seguro"
     },
     "Glossary": {
         "title": "Glosario de Sorteos",

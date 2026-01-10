@@ -244,7 +244,13 @@
         "feature_3": "No Ads / No Login",
         "feature_4": "Sound Effects & Animation",
         "feature_5": "Instant Result Verification",
-        "cta_button": "Try Wheel Mode Now"
+        "cta_button": "Try Wheel Mode Now",
+        "how_to_title": "How to create a Wheel of Names",
+        "how_to_step_1": "Enter the names of participants manually or paste a list from Excel/Text.",
+        "how_to_step_2": "Customize the wheel colors, spin duration, and sound effects in the 'Visual Editor'.",
+        "how_to_step_3": "Click 'Start Giveaway' to spin the wheel and pick a random winner.",
+        "how_to_step_4": "Share the official Certificate of Validity with your audience.",
+        "trust_link_text": "Learn about our Secure RNG"
     },
     "Glossary": {
         "title": "Giveaway Glossary",

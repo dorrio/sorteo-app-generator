@@ -240,7 +240,13 @@
         "feature_3": "Sem Anúncios / Sem Login",
         "feature_4": "Efeitos Sonoros e Animação",
         "feature_5": "Verificação Instantânea de Resultados",
-        "cta_button": "Testar Modo Roleta Agora"
+        "cta_button": "Testar Modo Roleta Agora",
+        "how_to_title": "Como criar uma Roleta de Nomes",
+        "how_to_step_1": "Insira os nomes manualmente ou cole uma lista do Excel/Texto.",
+        "how_to_step_2": "Personalize as cores, duração e efeitos sonoros no 'Editor Visual'.",
+        "how_to_step_3": "Clique em 'Iniciar Sorteio' para girar a roleta e escolher um vencedor.",
+        "how_to_step_4": "Compartilhe o Certificado de Validade oficial com seu público.",
+        "trust_link_text": "Saiba mais sobre nosso RNG Seguro"
     },
     "Glossary": {
         "title": "Glossário de Sorteios",

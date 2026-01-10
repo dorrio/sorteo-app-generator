@@ -23,6 +23,7 @@ import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
+import { SiteFooter } from "@/components/sorteo/site-footer"
 import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck, Share2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
@@ -387,61 +388,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         )}
 
         {/* Footer */}
-        <footer className="border-t border-border/50">
-          <div className="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-muted-foreground flex flex-col items-center gap-2">
-            <p>{t("footer_text")}</p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/verify"
-                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
-              >
-                {t("verify_sorteo")}
-              </Link>
-              <span className="text-muted-foreground/30 text-xs">•</span>
-              <Link
-                href="/wheel-of-names"
-                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
-              >
-                Wheel of Names
-              </Link>
-              <span className="text-muted-foreground/30 text-xs">•</span>
-              <Link
-                href="/instagram-comment-picker"
-                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
-              >
-                Instagram Picker
-              </Link>
-              <span className="text-muted-foreground/30 text-xs">•</span>
-              <Link
-                href="/random-number-generator"
-                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
-              >
-                RNG
-              </Link>
-              <span className="text-muted-foreground/30 text-xs">•</span>
-              <Link
-                href="/list-randomizer"
-                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
-              >
-                List Randomizer
-              </Link>
-              <span className="text-muted-foreground/30 text-xs">•</span>
-              <Link
-                href="/alternativa-appsorteos"
-                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
-              >
-                {t("footer_versus_link")}
-              </Link>
-              <span className="text-muted-foreground/30 text-xs">•</span>
-              <Link
-                href="/glossary"
-                className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
-              >
-                {t("footer_glossary")}
-              </Link>
-            </div>
-          </div>
-        </footer>
+        <SiteFooter />
       </div>
 
       {/* Overlays */}

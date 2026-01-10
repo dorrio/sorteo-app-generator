@@ -1,5 +1,6 @@
 import { ComparisonTable } from '@/components/versus/ComparisonTable';
 import { VersusFAQ } from '@/components/versus/FAQ';
+import { SiteFooter } from '@/components/sorteo/site-footer';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { useLocale } from 'next-intl';
@@ -167,6 +168,9 @@ export default function VersusPage() {
       <section className="py-16 bg-background">
         <VersusFAQ />
       </section>
+
+      {/* Footer */}
+      <SiteFooter />
     </main>
   );
 }

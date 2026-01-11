@@ -8,6 +8,12 @@
         "min_participants_warning": "Adicione pelo menos 2 participantes para iniciar",
         "participants_title": "Participantes",
         "footer_text": "Criado para influencers e criadores de conteúdo",
+        "footer_nav_label": "Navegação do rodapé",
+        "footer_link_verify": "Verificar Sorteio",
+        "footer_link_wheel": "Roleta de Nomes",
+        "footer_link_instagram": "Sorteio Instagram",
+        "footer_link_rng": "Gerador de Números",
+        "footer_link_list": "Aleatorizar Lista",
         "footer_versus_link": "Alternativa ao AppSorteos",
         "footer_glossary": "Glossário",
         "customize_hint": "🎨 Personalizar Sorteio"

@@ -8,6 +8,12 @@
         "min_participants_warning": "Add at least 2 participants to start",
         "participants_title": "Participants",
         "footer_text": "Created for influencers and content creators",
+        "footer_nav_label": "Footer Navigation",
+        "footer_link_verify": "Verify Giveaway",
+        "footer_link_wheel": "Wheel of Names",
+        "footer_link_instagram": "Instagram Picker",
+        "footer_link_rng": "Random Number Generator",
+        "footer_link_list": "List Randomizer",
         "footer_versus_link": "AppSorteos Alternative",
         "footer_glossary": "Glossary",
         "customize_hint": "🎨 Customize Giveaway"

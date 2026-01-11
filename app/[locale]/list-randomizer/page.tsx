@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t('title'),
     description: t('description'),
-    keywords: ["list randomizer", "list shuffler", "randomize list", "random picker", "shuffle names", "aleatorizar lista", "barajar lista", "embaralhar lista"],
+    keywords: ["list randomizer", "list shuffler", "randomize list", "random picker", "shuffle names", "aleatorizar lista", "barajar lista", "embaralhar lista", "random team generator", "team maker", "split into teams", "generador de equipos aleatorios", "creador de equipos", "gerador de times aleatorios"],
     alternates: {
       canonical: `/${locale}/list-randomizer`
     },
@@ -64,7 +64,7 @@ export default async function ListRandomizerPage({ params }: { params: Promise<{
   const softwareAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: 'List Randomizer by Sorteo Pro',
+    name: 'List Randomizer & Team Generator by Sorteo Pro',
     applicationCategory: 'UtilityApplication',
     operatingSystem: 'Web, iOS, Android',
     offers: {

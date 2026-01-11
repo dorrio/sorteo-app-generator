@@ -2,7 +2,7 @@
     "HomePage": {
         "loading": "Cargando Sorteo Pro...",
         "customize": "Personalizar",
-        "verify_sorteo": "Verificar Sorteo",
+        "verify_sorteo": "Verificar Sorteio",
         "spinning": "Sorteando...",
         "start_button": "Iniciar Sorteo",
         "min_participants_warning": "Añade al menos 2 participantes para iniciar",
@@ -125,7 +125,7 @@
             "typography": "Tipografía"
         },
         "effects": {
-            "style_label": "Estilo del Sorteo",
+            "style_label": "Estilo del Sorteio",
             "confetti": "Confetti",
             "confetti_desc": "Lluvia de confeti al ganar",
             "dynamic_bg": "Fondo Dinámico",
@@ -394,23 +394,23 @@
         "faq_2_a": "No, puedes generar números aleatorios ilimitados de forma gratuita."
     },
     "ListRandomizerPage": {
-        "title": "Aleatorizar Lista | Generador de Listas Aleatorias (Gratis)",
-        "description": "El mejor aleatorizador de listas gratis. Mezcla una lista de elementos, elige un ganador al azar o baraja nombres al instante. Seguro, justo y sin anuncios.",
-        "h1": "Aleatorizar Lista Gratis",
-        "subtitle": "Baraja listas y elige elementos al azar al instante.",
+        "title": "Aleatorizar Lista | Generador de Equipos Aleatorios",
+        "description": "El mejor aleatorizador de listas gratis y generador de equipos. Mezcla una lista, elige un ganador o crea grupos al azar. Seguro, justo y sin anuncios.",
+        "h1": "Aleatorizar Lista y Crear Equipos",
+        "subtitle": "Baraja listas, crea equipos y elige elementos al azar.",
         "faq_1_q": "¿Cómo funciona el Aleatorizador de Listas?",
         "faq_1_a": "Utilizamos un algoritmo de barajado Fisher-Yates impulsado por números aleatorios criptográficamente seguros para garantizar un orden verdaderamente aleatorio.",
         "faq_2_q": "¿Puedo aleatorizar nombres para un sorteo?",
         "faq_2_a": "¡Sí! Solo pega tu lista de nombres y la herramienta elegirá un ganador o barajará toda la lista."
     },
     "ListRandomizerGeo": {
-        "direct_answer_title": "¿Qué es un Aleatorizador de Listas?",
-        "direct_answer_text": "Un <strong>Aleatorizador de Listas</strong> es una herramienta que toma una lista de elementos (nombres, números u opciones) y los reorganiza en un <strong>orden completamente aleatorio</strong>. Es esencial para sorteos, formación de equipos y toma de decisiones imparciales. <strong>Sorteo Pro</strong> ofrece un aleatorizador seguro y gratuito con resultados instantáneos.",
-        "cta_button": "Aleatorizar Lista Ahora",
+        "direct_answer_title": "¿Qué es un Aleatorizador de Listas y Equipos?",
+        "direct_answer_text": "Un <strong>Aleatorizador de Listas</strong> es una herramienta que toma una lista de elementos (nombres, números u opciones) y los reorganiza en un <strong>orden completamente aleatorio</strong>. Es esencial para sorteos, <strong>generar equipos aleatorios</strong> y toma de decisiones imparciales. <strong>Sorteo Pro</strong> ofrece un aleatorizador seguro y gratuito con resultados instantáneos.",
+        "cta_button": "Aleatorizar Lista y Equipos",
         "feature_1_title": "Barajado Realmente Aleatorio",
         "feature_1_desc": "Usa algoritmos seguros para asegurar que no haya sesgos.",
-        "feature_2_title": "Elige Uno o Varios",
-        "feature_2_desc": "Selecciona un solo ganador o baraja todo el grupo.",
+        "feature_2_title": "Generador de Equipos",
+        "feature_2_desc": "Perfecto para dividir grupos en equipos o parejas al azar.",
         "feature_3_title": "Entrada Masiva",
         "feature_3_desc": "Pega miles de elementos al instante.",
         "feature_4_title": "Verificación Visual",

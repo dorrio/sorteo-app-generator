@@ -72,17 +72,40 @@ export default function GlossaryPage() {
     }
   ];
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'DefinedTermSet',
-    name: t('title'),
-    description: t('description'),
-    definedTerm: terms.map(term => ({
-        '@type': 'DefinedTerm',
-        name: term.term,
-        description: term.def
-    }))
-  };
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: t('title'),
+      description: t('description'),
+      url: 'https://sorteopro.com/glossary',
+      mainEntity: {
+        '@type': 'DefinedTermSet',
+        name: t('title'),
+        description: t('description'),
+        definedTerm: terms.map(term => ({
+            '@type': 'DefinedTerm',
+            name: term.term,
+            description: term.def
+        }))
+      }
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Sorteo Pro",
+        "item": "https://sorteopro.com"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": t('h1'),
+        "item": "https://sorteopro.com/glossary"
+      }]
+    }
+  ];
 
   return (
     <main className="min-h-screen bg-background text-foreground">

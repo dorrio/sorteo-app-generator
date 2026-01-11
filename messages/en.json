@@ -173,7 +173,9 @@
         "title": "History",
         "clear": "Clear",
         "empty": "No winners yet",
-        "giveaway_number": "Giveaway #{number}"
+        "giveaway_number": "Giveaway #{number}",
+        "copy_id": "Copy ID",
+        "copied": "Copied!"
     },
     "Roulette": {
         "add_participants_warning": "Add participants to start the giveaway",

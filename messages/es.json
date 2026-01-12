@@ -170,7 +170,9 @@
         "title": "Historial",
         "clear": "Limpiar",
         "empty": "Aún no hay ganadores",
-        "giveaway_number": "Sorteo #{number}"
+        "giveaway_number": "Sorteo #{number}",
+        "copy_id": "Copiar ID",
+        "copied": "¡Copiado!"
     },
     "Roulette": {
         "add_participants_warning": "Añade participantes para iniciar el sorteo",

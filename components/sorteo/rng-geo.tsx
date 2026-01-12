@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Lock, Zap, RefreshCw, Smartphone, HelpCircle } from "lucide-react"
+import { ArrowRight, Lock, Zap, RefreshCw, Smartphone, HelpCircle, CheckCircle } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 
 export function RngGeo() {
@@ -30,18 +30,38 @@ export function RngGeo() {
     },
   ]
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map(faq => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  }
+  const howToSteps = [
+    { name: t('how_to_step_1') },
+    { name: t('how_to_step_2') },
+    { name: t('how_to_step_3') },
+    { name: t('how_to_step_4') },
+  ]
+
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(faq => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
+        },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: t('how_to_title'),
+      step: howToSteps.map((step, idx) => ({
+        '@type': 'HowToStep',
+        position: idx + 1,
+        name: step.name,
+        text: step.name
+      }))
+    }
+  ]
 
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
@@ -106,6 +126,24 @@ export function RngGeo() {
               <p className="text-muted-foreground">{t("feature_4_desc")}</p>
             </li>
           </ul>
+
+          {/* How To Section (New) */}
+          <div className="mb-16 border-t border-primary/10 pt-10">
+              <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
+                 <CheckCircle className="w-6 h-6 text-primary" />
+                 {t('how_to_title')}
+              </h3>
+              <ol className="relative border-l border-primary/20 ml-3 space-y-8">
+                 {howToSteps.map((step, idx) => (
+                     <li key={idx} className="ml-8">
+                        <span className="absolute flex items-center justify-center w-8 h-8 bg-primary/10 rounded-full -left-4 ring-4 ring-background text-sm font-bold text-primary">
+                            {idx + 1}
+                        </span>
+                        <p className="text-lg text-foreground/90 font-medium">{step.name}</p>
+                     </li>
+                 ))}
+              </ol>
+           </div>
 
           {/* Visible FAQ Section (Anti-Cloaking) */}
           <div className="pt-10 border-t border-primary/10">

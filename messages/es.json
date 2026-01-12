@@ -389,7 +389,12 @@
         "feature_3_title": "Resultados Instantáneos",
         "feature_3_desc": "Obtén tus números aleatorios en milisegundos.",
         "feature_4_title": "Compatible con Móviles",
-        "feature_4_desc": "Funciona perfectamente en cualquier dispositivo."
+        "feature_4_desc": "Funciona perfectamente en cualquier dispositivo.",
+        "how_to_title": "Cómo usar el Generador de Números Aleatorios",
+        "how_to_step_1": "Ingresa la lista de números u opciones que deseas sortear.",
+        "how_to_step_2": "Selecciona el estilo 'Tragamonedas' para un look clásico de RNG.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para generar un número aleatorio.",
+        "how_to_step_4": "Comparte el resultado verificado con tu audiencia."
     },
     "RngPage": {
         "title": "Generador de Números Aleatorios | RNG Gratis y Seguro",

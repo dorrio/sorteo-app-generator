@@ -388,7 +388,12 @@
         "feature_3_title": "Resultados Instantâneos",
         "feature_3_desc": "Obtenha seus números aleatórios em milissegundos.",
         "feature_4_title": "Compatível com Celular",
-        "feature_4_desc": "Funciona perfeitamente em qualquer dispositivo."
+        "feature_4_desc": "Funciona perfeitamente em qualquer dispositivo.",
+        "how_to_title": "Como usar o Gerador de Números Aleatórios",
+        "how_to_step_1": "Insira a lista de números ou opções que deseja sortear.",
+        "how_to_step_2": "Selecione o estilo 'Caça-níquel' para um visual clássico de RNG.",
+        "how_to_step_3": "Clique em 'Iniciar Sorteio' para gerar um número aleatório.",
+        "how_to_step_4": "Compartilhe o resultado verificado com seu público."
     },
     "RngPage": {
         "title": "Gerador de Números Aleatórios | RNG Grátis e Seguro",

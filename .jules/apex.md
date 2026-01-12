@@ -168,3 +168,14 @@
 **GEO Impact:**
 *   **Rich Results:** The page is now eligible for "How To" rich snippets in SERPs.
 *   **Authority:** Linking to the "Secure RNG" definition bridges the gap between marketing claims and technical verification.
+
+## 2025-03-03 - RNG Direct Answer & How-To
+**Context:** Targeting "Random Number Generator" intent and fixing a gap in schema depth compared to "Wheel of Names".
+**Gap:** `RngPage` had basic `FAQPage` schema but lacked visible "How To" instructions and `HowTo` schema, missing a critical rich snippet opportunity.
+**Action:**
+*   **Schema Injection:** Injected `HowTo` JSON-LD schema into `components/sorteo/rng-geo.tsx`.
+*   **Content:** Implemented a visible "How To" section with 4 clear steps in EN, ES, and PT.
+*   **Localization:** Added optimized translation keys for the "How To" section.
+**GEO Impact:**
+*   **Rich Snippets:** Eligible for "How To" rich snippets in SERPs.
+*   **User Experience:** Provides clear instructions for users (and bots) on how to use the tool as a number picker.

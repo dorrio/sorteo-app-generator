@@ -392,7 +392,12 @@
         "feature_3_title": "Instant Results",
         "feature_3_desc": "Get your random numbers in milliseconds.",
         "feature_4_title": "Mobile Friendly",
-        "feature_4_desc": "Works perfectly on any device."
+        "feature_4_desc": "Works perfectly on any device.",
+        "how_to_title": "How to use the Random Number Generator",
+        "how_to_step_1": "Enter the list of numbers or options you want to randomize.",
+        "how_to_step_2": "Select the 'Slot Machine' style for a classic RNG look.",
+        "how_to_step_3": "Click 'Start Giveaway' to generate a random number.",
+        "how_to_step_4": "Share the verified result with your audience."
     },
     "RngPage": {
         "title": "Random Number Generator | Free & Secure RNG",

@@ -88,7 +88,6 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
     await navigator.clipboard.writeText(shareText)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
-    window.open("https://www.instagram.com/", "_blank")
   }
 
   return (
@@ -256,9 +255,17 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
                     </a>
                   </DropdownMenuItem>
 
-                  <DropdownMenuItem onClick={shareInstagram} className="gap-2 cursor-pointer">
-                    <Instagram className="w-4 h-4" />
-                    Instagram
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <a
+                      href="https://www.instagram.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={shareInstagram}
+                      aria-label="Share on Instagram"
+                    >
+                      <Instagram className="w-4 h-4" />
+                      Instagram
+                    </a>
                   </DropdownMenuItem>
 
                   <DropdownMenuItem asChild className="gap-2 cursor-pointer">

@@ -73,7 +73,6 @@ export function ShareButton({
       await navigator.clipboard.writeText(text + " " + url)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
-      window.open("https://www.instagram.com/", "_blank")
   }
 
   // Pre-calculate Social URLs
@@ -141,9 +140,17 @@ export function ShareButton({
            </a>
         </DropdownMenuItem>
 
-         <DropdownMenuItem onClick={shareInstagram} className="gap-2 cursor-pointer">
-            <Instagram className="w-4 h-4" />
-            Instagram
+         <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={shareInstagram}
+              aria-label={translations.shareOn ? `${translations.shareOn} Instagram` : "Share on Instagram"}
+            >
+              <Instagram className="w-4 h-4" />
+              Instagram
+            </a>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

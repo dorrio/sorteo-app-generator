@@ -321,7 +321,7 @@
         "subtitle": "Everything you need to know about fair giveaways and random selection technology.",
         "term_wheel": "Wheel of Names",
         "def_wheel": "A visual random selector that mimics a physical spinning wheel. It divides the circle into segments representing participants and spins to select one at random.",
-        "learn_more": "Try this tool",
+        "learn_more": "Try {tool}",
         "cta_title": "Ready to run a fair giveaway?",
         "cta_button": "Start Giveaway"
     },

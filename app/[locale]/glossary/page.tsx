@@ -148,7 +148,7 @@ export default function GlossaryPage() {
                             </p>
                             {item.link && (
                                 <Link href={item.link} className="inline-flex items-center text-primary hover:underline font-medium mt-2">
-                                    {t('learn_more')} →
+                                    {t('learn_more', { tool: item.term })} →
                                 </Link>
                             )}
                         </div>

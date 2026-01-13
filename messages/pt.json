@@ -426,7 +426,12 @@
         "feature_3_title": "Entrada em Massa",
         "feature_3_desc": "Cole milhares de itens instantaneamente.",
         "feature_4_title": "Verificação Visual",
-        "feature_4_desc": "Veja a aleatorização acontecer em tempo real."
+        "feature_4_desc": "Veja a aleatorização acontecer em tempo real.",
+        "how_to_title": "Como aleatorizar uma lista",
+        "how_to_step_1": "Insira a lista de nomes, itens ou números que deseja embaralhar.",
+        "how_to_step_2": "Escolha a visualização 'Grade' ou 'Lista' no Editor Visual.",
+        "how_to_step_3": "Clique em 'Iniciar Sorteio' para aleatorizar a ordem instantaneamente.",
+        "how_to_step_4": "Use o resultado para formar equipes, atribuir tarefas ou escolher um vencedor."
     },
     "Schema": {
         "global_features": {

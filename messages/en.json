@@ -430,7 +430,12 @@
         "feature_3_title": "Bulk Input",
         "feature_3_desc": "Paste thousands of items instantly.",
         "feature_4_title": "Visual Verification",
-        "feature_4_desc": "See the randomization happen in real-time."
+        "feature_4_desc": "See the randomization happen in real-time.",
+        "how_to_title": "How to randomize a list",
+        "how_to_step_1": "Enter the list of names, items, or numbers you want to shuffle.",
+        "how_to_step_2": "Choose the 'Grid' or 'List' view from the Visual Editor.",
+        "how_to_step_3": "Click 'Start Giveaway' to randomize the order instantly.",
+        "how_to_step_4": "Use the result to form teams, assign tasks, or pick a winner."
     },
     "Schema": {
         "global_features": {

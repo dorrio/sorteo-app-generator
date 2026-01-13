@@ -437,6 +437,20 @@
         "how_to_step_3": "Click 'Start Giveaway' to randomize the order instantly.",
         "how_to_step_4": "Use the result to form teams, assign tasks, or pick a winner."
     },
+    "ShareContent": {
+        "home_title": "Sorteo Pro | Premium Giveaways for Influencers",
+        "home_text": "🔥 I just found Sorteo Pro - The best free giveaway tool! No ads and unlimited entries. 👇",
+        "wheel_title": "Wheel of Names | Sorteo Pro",
+        "wheel_text": "🎡 Spin the Wheel! I found this amazing free Wheel of Names tool. No ads & unlimited entries! Try it here 👇",
+        "instagram_title": "Instagram Comment Picker | Sorteo Pro",
+        "instagram_text": "📸 Picking a winner for my Instagram giveaway? I use this free tool with unlimited comments! 👇",
+        "rng_title": "Random Number Generator | Sorteo Pro",
+        "rng_text": "7️⃣ Need a random number? This secure RNG tool is free and instant. Check it out 👇",
+        "list_title": "List Randomizer | Sorteo Pro",
+        "list_text": "📋 I just randomized a list with Sorteo Pro. Perfect for teams and raffles! Free & Secure. 👇",
+        "cta_share": "Share Tool",
+        "cta_start": "Start Giveaway"
+    },
     "Schema": {
         "global_features": {
             "random_picker": "Random Winner Picker",

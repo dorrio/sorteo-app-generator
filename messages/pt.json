@@ -317,7 +317,7 @@
         "subtitle": "Tudo o que você precisa saber sobre sorteios justos e tecnologia de seleção aleatória.",
         "term_wheel": "Roleta de Nomes",
         "def_wheel": "Um seletor aleatório visual que imita uma roda giratória física. Ele divide o círculo em segmentos que representam os participantes e gira para selecionar um aleatoriamente.",
-        "learn_more": "Testar esta ferramenta",
+        "learn_more": "Testar {tool}",
         "cta_title": "Pronto para um sorteio justo?",
         "cta_button": "Criar Sorteio"
     },

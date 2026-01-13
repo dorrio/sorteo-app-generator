@@ -427,7 +427,12 @@
         "feature_3_title": "Entrada Masiva",
         "feature_3_desc": "Pega miles de elementos al instante.",
         "feature_4_title": "Verificación Visual",
-        "feature_4_desc": "Mira cómo ocurre la aleatorización en tiempo real."
+        "feature_4_desc": "Mira cómo ocurre la aleatorización en tiempo real.",
+        "how_to_title": "Cómo aleatorizar una lista",
+        "how_to_step_1": "Ingresa la lista de nombres, elementos o números que deseas barajar.",
+        "how_to_step_2": "Elige la vista 'Cuadrícula' o 'Lista' desde el Editor Visual.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para aleatorizar el orden al instante.",
+        "how_to_step_4": "Usa el resultado para formar equipos, asignar tareas o elegir un ganador."
     },
     "Schema": {
         "global_features": {

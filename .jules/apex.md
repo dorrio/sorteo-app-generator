@@ -179,3 +179,17 @@
 **GEO Impact:**
 *   **Rich Snippets:** Eligible for "How To" rich snippets in SERPs.
 *   **User Experience:** Provides clear instructions for users (and bots) on how to use the tool as a number picker.
+
+## 2025-03-04 - List Randomizer How-To & Schema Depth
+**Context:** Elevating the "List Randomizer" page to match the semantic depth of "Wheel" and "RNG" pages.
+**Gap:**
+*   `ListRandomizerGeo` had strong "Direct Answer" content but completely lacked "How To" instructions and Schema, a key signal for utility tools.
+*   Users searching "How to randomize a list" would not find a structured answer.
+**Action:**
+*   **Schema Injection:** Injected `HowTo` JSON-LD schema into `components/sorteo/list-randomizer-geo.tsx`.
+*   **Content:** Implemented a visible "How To" section with 4 clear steps in EN, ES, and PT.
+*   **Localization:** Added optimized translation keys for the "How To" steps.
+*   **Anti-Cloaking:** Ensured the Schema content strictly matches the visible UI text.
+**GEO Impact:**
+*   **Rich Snippets:** Now eligible for "How To" rich results in Google.
+*   **User Intent:** Explicitly guides users through the randomization process, reducing bounce rate.

@@ -20,6 +20,7 @@ import { SeoContent } from "@/components/sorteo/seo-content"
 import { WheelGeo } from "@/components/sorteo/wheel-geo"
 import { RngGeo } from "@/components/sorteo/rng-geo"
 import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
+import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
@@ -31,11 +32,12 @@ import { Link } from "@/i18n/routing"
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const t = useTranslations("HomePage")
+  const tYesNo = useTranslations("YesNoPage")
   const tMeta = useTranslations("Metadata")
   const tWinner = useTranslations("WinnerCeremony")
   const tShare = useTranslations("ShareContent")
@@ -61,24 +63,33 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   useEffect(() => {
     setMounted(true)
     if (initialStyle) {
-        // Defer theme update to ensure hydration doesn't mismatch
-        // or just set it. Since useSorteoStore is persisted, we might override user preference.
-        // For a landing page, overriding is expected.
-        updateTheme({ sorteoStyle: initialStyle as any })
+        const update: any = { sorteoStyle: initialStyle }
+        if (seoMode === 'yes-no') {
+            update.customTitle = tYesNo('h1')
+            update.customSubtitle = tYesNo('description')
+        }
+        updateTheme(update)
     }
-  }, [initialStyle, updateTheme])
+  }, [initialStyle, updateTheme, seoMode])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
   useEffect(() => {
       if (initialStyle === 'roulette' && mounted && hasHydrated && participants.length === 0) {
-          addParticipants([
-              { name: "Option 1" },
-              { name: "Option 2" },
-              { name: "Option 3" },
-              { name: "Option 4" },
-              { name: "Option 5" }
-          ])
+          if (seoMode === 'yes-no') {
+              addParticipants([
+                  { name: tYesNo('option_yes') },
+                  { name: tYesNo('option_no') }
+              ])
+          } else {
+              addParticipants([
+                  { name: "Option 1" },
+                  { name: "Option 2" },
+                  { name: "Option 3" },
+                  { name: "Option 4" },
+                  { name: "Option 5" }
+              ])
+          }
       }
       // We only run this when mounted/hydrated changes to true, or initialStyle changes
       // We include participants.length in dependency to know if it's 0, but we should be careful not to loop.
@@ -87,7 +98,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
       // But for a landing page, maybe it's okay?
       // Actually, if user clears list, participants becomes 0, and this re-adds them. That's annoying.
       // We should use a ref to track if we've auto-populated.
-  }, [mounted, hasHydrated, initialStyle]) // Removed participants.length from dependency to avoid re-populating on clear
+  }, [mounted, hasHydrated, initialStyle, seoMode]) // Removed participants.length from dependency to avoid re-populating on clear
 
   const startSorteo = () => {
     if (participants.length < 2) return
@@ -128,8 +139,11 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareTitle = tShare('rng_title')
           shareText = tShare('rng_text')
       } else if (seoMode === 'list-randomizer') {
-          shareTitle = tShare('list_title')
-          shareText = tShare('list_text')
+          shareTitle = "List Randomizer | Sorteo Pro"
+          shareText = "Randomize lists and pick winners easily."
+      } else if (seoMode === 'yes-no') {
+          shareTitle = "Yes or No Wheel | Sorteo Pro"
+          shareText = "Spin the wheel and decide! Yes or No?"
       }
 
       return {
@@ -384,6 +398,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             /* List Randomizer Mode: Show List Randomizer content */
             <>
                 <ListRandomizerGeo />
+                <Glossary />
+            </>
+       ) : seoMode === 'yes-no' ? (
+            /* Yes/No Mode */
+            <>
+                <YesNoGeo />
                 <Glossary />
             </>
        ) : (

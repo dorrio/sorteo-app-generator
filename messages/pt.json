@@ -14,6 +14,7 @@
         "footer_link_instagram": "Sorteio Instagram",
         "footer_link_rng": "Gerador de Números",
         "footer_link_list": "Aleatorizar Lista",
+        "footer_link_yesno": "Roleta Sim ou Não",
         "footer_versus_link": "Alternativa ao AppSorteos",
         "footer_glossary": "Glossário",
         "customize_hint": "🎨 Personalizar Sorteio"
@@ -267,7 +268,9 @@
         "term_4": "Aleatorizador de Listas",
         "def_4": "Uma ferramenta que reorganiza uma lista de itens em uma ordem completamente aleatória usando algoritmos criptográficos. Essencial para decidir turnos ou formar equipes.",
         "term_5": "Roleta de Nomes",
-        "def_5": "Um seletor aleatório visual que imita uma roda giratória física. Divide o círculo em segmentos que representam os participantes e gira para selecionar um aleatoriamente."
+        "def_5": "Um seletor aleatório visual que imita uma roda giratória física. Divide o círculo em segmentos que representam os participantes e gira para selecionar um aleatoriamente.",
+        "term_6": "Roleta Sim ou Não",
+        "def_6": "Uma ferramenta de tomada de decisão que seleciona aleatoriamente entre 'Sim' e 'Não' com probabilidade igual, semelhante a jogar uma moeda."
     },
     "InstagramPicker": {
         "title": "Sorteador de Comentários do Instagram Grátis | Ilimitado",
@@ -417,7 +420,7 @@
     },
     "ListRandomizerGeo": {
         "direct_answer_title": "O que é um Aleatorizador de Listas e Equipes?",
-        "direct_answer_text": "Um <strong>Aleatorizador de Listas</strong> é uma ferramenta que pega uma lista de itens (nomes, números ou opções) e os reorganiza em uma <strong>ordem completamente aleatória</strong>. É essencial para sorteios, <strong>geração de equipes aleatórias</strong> e tomada de decisões imparciais. <strong>Sorteo Pro</strong> oferece um aleatorizador seguro e gratuito com resultados instantâneos.",
+        "direct_answer_text": "Um <strong>Aleatorizador de Listas</strong> é uma ferramenta que pega uma lista de itens (nomes, números ou opções) e os reorganiza em uma <strong>ordem completamente aleatória</strong>. É essencial para sorteios, <strong>geração de equipes aleatórias</strong> e tomada de decisões imparciais. <strong>Sorteo Pro</strong> oferece um aleatorizador seguro e gratuito com resultados instantáneos.",
         "cta_button": "Aleatorizar Lista e Equipes",
         "feature_1_title": "Embaralhamento Realmente Aleatório",
         "feature_1_desc": "Usa algoritmos seguros para garantir que não haja viés.",
@@ -432,6 +435,35 @@
         "how_to_step_2": "Escolha a visualização 'Grade' ou 'Lista' no Editor Visual.",
         "how_to_step_3": "Clique em 'Iniciar Sorteio' para aleatorizar a ordem instantaneamente.",
         "how_to_step_4": "Use o resultado para formar equipes, atribuir tarefas ou escolher um vencedor."
+    },
+    "YesNoPage": {
+        "title": "Roleta Sim ou Não | Decisões Aleatórias",
+        "description": "Gire a Roleta Sim ou Não para tomar uma decisão aleatória. Uma forma divertida, justa e gratuita de decidir. Como jogar uma moeda.",
+        "h1": "Roleta Sim ou Não",
+        "option_yes": "SIM",
+        "option_no": "NÃO"
+    },
+    "YesNoGeo": {
+        "title": "Roleta Sim ou Não",
+        "what_is_title": "O que é uma Roleta Sim ou Não?",
+        "what_is_answer": "Uma <b>Roleta Sim ou Não</b> é uma ferramenta simples para tomar decisões. Funciona como jogar uma moeda, mas com uma roda visual. <b>Sorteo Pro</b> oferece uma chance justa de 50/50 em cada giro usando RNG seguro.",
+        "features_list": "Recursos da Roleta",
+        "feature_1": "Sim/Não Simples",
+        "feature_2": "Sem Anúncios",
+        "feature_3": "RNG Seguro",
+        "feature_4": "Personalizável",
+        "feature_5": "Resultado Instantâneo",
+        "cta_button": "Girar para Decidir",
+        "trust_link_text": "Saiba sobre nossa Aleatoriedade",
+        "how_to_title": "Como usar a Roleta Sim ou Não",
+        "how_to_step_1": "A roleta já está configurada com as opções 'SIM' e 'NÃO'.",
+        "how_to_step_2": "Clique em 'Iniciar Sorteio' para girar a roda.",
+        "how_to_step_3": "Aguarde a roda parar em uma resposta aleatória.",
+        "how_to_step_4": "Compartilhe o resultado se quiser!",
+        "faq_1_q": "A Roleta Sim ou Não é justa?",
+        "faq_1_a": "Sim, ela usa um gerador de números aleatórios criptograficamente seguro para garantir uma probabilidade real de 50/50.",
+        "faq_2_q": "Posso adicionar 'Talvez'?",
+        "faq_2_a": "Sim! Clique em 'Personalizar' para adicionar mais opções como 'Talvez' ou 'Pergunte de novo'."
     },
     "ShareContent": {
         "home_title": "Sorteio Pro | Sorteios Premium para Influencers",

@@ -193,3 +193,17 @@
 **GEO Impact:**
 *   **Rich Snippets:** Now eligible for "How To" rich results in Google.
 *   **User Intent:** Explicitly guides users through the randomization process, reducing bounce rate.
+
+## 2025-03-05 - Yes or No Wheel Landing Page
+**Context:** Targeting the high-intent keyword "Yes or No Wheel" / "Flip a Coin".
+**Gap:** Users searching for a quick decision tool ("Yes or No") were landing on the generic wheel or not finding a dedicated page.
+**Action:**
+*   **New Landing Page:** Created `app/[locale]/yes-or-no-wheel/page.tsx` utilizing `MainApp` with `roulette` style and `seoMode="yes-no"`.
+*   **Feature:** Updated `MainApp` to pre-populate "YES" and "NO" options automatically when accessing this route.
+*   **GEO Content:** Developed `YesNoGeo` component with "Direct Answer" defining the tool as a "fair 50/50 decision maker" (Virtual Coin Flip).
+*   **Schema:** Injected `SoftwareApplication` (GameApplication) and `FAQPage` schema.
+*   **Sitemap:** Prioritized `/yes-or-no-wheel` at 0.9.
+*   **Localization:** Added optimized content for EN, ES, and PT.
+**GEO Impact:**
+*   **Search Intent Match:** Explicitly satisfies the user intent for "Yes or No" decision making.
+*   **Direct Answer:** Defines the tool clearly for AI engines.

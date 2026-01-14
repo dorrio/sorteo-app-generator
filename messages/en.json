@@ -14,6 +14,7 @@
         "footer_link_instagram": "Instagram Picker",
         "footer_link_rng": "Random Number Generator",
         "footer_link_list": "List Randomizer",
+        "footer_link_yesno": "Yes or No Wheel",
         "footer_versus_link": "AppSorteos Alternative",
         "footer_glossary": "Glossary",
         "customize_hint": "🎨 Customize Giveaway"
@@ -271,7 +272,9 @@
         "term_4": "List Randomizer",
         "def_4": "A tool that shuffles a list of items into a completely random order using cryptographic algorithms. Essential for deciding turn orders or pairing teams.",
         "term_5": "Wheel of Names",
-        "def_5": "A visual random selector that mimics a physical spinning wheel. It divides the circle into segments representing participants and spins to select one at random."
+        "def_5": "A visual random selector that mimics a physical spinning wheel. It divides the circle into segments representing participants and spins to select one at random.",
+        "term_6": "Yes or No Wheel",
+        "def_6": "A decision-making tool that randomly selects between 'Yes' and 'No' with equal probability, similar to flipping a coin."
     },
     "InstagramPicker": {
         "title": "Free Instagram Comment Picker | Unlimited & No Login",
@@ -436,6 +439,35 @@
         "how_to_step_2": "Choose the 'Grid' or 'List' view from the Visual Editor.",
         "how_to_step_3": "Click 'Start Giveaway' to randomize the order instantly.",
         "how_to_step_4": "Use the result to form teams, assign tasks, or pick a winner."
+    },
+    "YesNoPage": {
+        "title": "Yes or No Wheel | Random Decision Maker",
+        "description": "Spin the Yes or No Wheel to make a random decision. Free, fair, and fun way to decide. Flip a coin style wheel.",
+        "h1": "Yes or No Wheel",
+        "option_yes": "YES",
+        "option_no": "NO"
+    },
+    "YesNoGeo": {
+        "title": "Yes or No Wheel",
+        "what_is_title": "What is a Yes or No Wheel?",
+        "what_is_answer": "A <b>Yes or No Wheel</b> is a simple random decision tool. It works like flipping a coin but with a visual spinning wheel. <b>Sorteo Pro</b> provides a fair, 50/50 chance for every spin using secure RNG.",
+        "features_list": "Wheel Features",
+        "feature_1": "Simple Yes/No",
+        "feature_2": "No Ads",
+        "feature_3": "Secure RNG",
+        "feature_4": "Customizable",
+        "feature_5": "Instant Result",
+        "cta_button": "Spin for Answer",
+        "trust_link_text": "Learn about our Randomness",
+        "how_to_title": "How to use the Yes or No Wheel",
+        "how_to_step_1": "The wheel is already set up with 'YES' and 'NO' options.",
+        "how_to_step_2": "Click 'Start Giveaway' to spin the wheel.",
+        "how_to_step_3": "Wait for the wheel to stop on a random answer.",
+        "how_to_step_4": "Share the result if you like!",
+        "faq_1_q": "Is the Yes or No Wheel fair?",
+        "faq_1_a": "Yes, it uses a cryptographically secure random number generator to ensure a true 50/50 probability.",
+        "faq_2_q": "Can I add 'Maybe'?",
+        "faq_2_a": "Yes! Click 'Customize' to add more options like 'Maybe' or 'Ask again'."
     },
     "ShareContent": {
         "home_title": "Sorteo Pro | Premium Giveaways for Influencers",

@@ -27,6 +27,10 @@ export function Glossary() {
       term: t("term_5"),
       definition: t("def_5"),
     },
+    {
+      term: t("term_6"),
+      definition: t("def_6"),
+    },
   ]
 
   const jsonLd = {

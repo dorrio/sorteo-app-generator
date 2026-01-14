@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: locale === 'es' ? 'es_ES' : locale === 'pt' ? 'pt_PT' : 'en_US',
       images: [
         {
-          url: '/og-image.jpg',
+          url: `${baseUrl}/api/og?type=instagram`,
           width: 1200,
           height: 630,
           alt: t('title'),
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: 'summary_large_image',
       title: t('title'),
       description: t('description'),
-      images: ['/og-image.jpg'],
+      images: [`${baseUrl}/api/og?type=instagram`],
     },
   };
 }

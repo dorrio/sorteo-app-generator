@@ -25,6 +25,7 @@ import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
 import { SiteFooter } from "@/components/sorteo/site-footer"
+import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck, Share2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
@@ -39,6 +40,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const tYesNo = useTranslations("YesNoPage")
   const tMeta = useTranslations("Metadata")
   const tWinner = useTranslations("WinnerCeremony")
+  const tShare = useTranslations("ShareContent")
   const [mounted, setMounted] = useState(false)
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
 
@@ -124,18 +126,18 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   // Determine share content based on seoMode
   const getShareContent = () => {
       // Default / Home
-      let shareTitle = tMeta('title')
-      let shareText = "Check out Sorteo Pro - The best free giveaway tool!"
+      let shareTitle = tShare('home_title')
+      let shareText = tShare('home_text')
 
       if (seoMode === 'wheel') {
-          shareTitle = "Wheel of Names | Sorteo Pro"
-          shareText = "Check out this free Wheel of Names tool! No ads and unlimited entries."
+          shareTitle = tShare('wheel_title')
+          shareText = tShare('wheel_text')
       } else if (seoMode === 'instagram') {
-          shareTitle = "Instagram Comment Picker | Sorteo Pro"
-          shareText = "Pick a random winner from Instagram comments for free!"
+          shareTitle = tShare('instagram_title')
+          shareText = tShare('instagram_text')
       } else if (seoMode === 'rng') {
-          shareTitle = "Random Number Generator | Sorteo Pro"
-          shareText = "Generate secure random numbers instantly."
+          shareTitle = tShare('rng_title')
+          shareText = tShare('rng_text')
       } else if (seoMode === 'list-randomizer') {
           shareTitle = "List Randomizer | Sorteo Pro"
           shareText = "Randomize lists and pick winners easily."
@@ -160,6 +162,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
       copy: tWinner('copy_text'),
       copied: tWinner('copied'),
       shareOn: "Share on"
+  }
+
+  const stickyTranslations = {
+      share_cta: tShare('cta_share'),
+      start_cta: tShare('cta_start'),
+      share_button: shareTranslations
   }
 
   if (!mounted || !hasHydrated) {
@@ -416,6 +424,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
       <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} />
       <VisualEditor />
       <VerificationModal isOpen={isVerifyModalOpen} onClose={() => setIsVerifyModalOpen(false)} />
+      <StickyShareFooter shareContent={shareContent} translations={stickyTranslations} />
     </div>
   )
 }

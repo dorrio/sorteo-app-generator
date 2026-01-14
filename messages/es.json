@@ -466,6 +466,20 @@
         "faq_2_q": "¿Puedo añadir 'Quizás'?",
         "faq_2_a": "¡Sí! Haz clic en 'Personalizar' para añadir más opciones como 'Quizás' o 'Preguntar de nuevo'."
     },
+    "ShareContent": {
+        "home_title": "Sorteo Pro | Sorteos Premium para Influencers",
+        "home_text": "🔥 ¡Acabo de descubrir Sorteo Pro! La mejor herramienta gratis para sorteos. Sin anuncios. 👇",
+        "wheel_title": "Ruleta de Nombres | Sorteo Pro",
+        "wheel_text": "🎡 ¡Gira la Ruleta! Encontré esta Ruleta de Nombres gratis y sin anuncios. ¡Pruébala aquí! 👇",
+        "instagram_title": "Sorteo Instagram | Sorteo Pro",
+        "instagram_text": "📸 ¿Buscas ganador en Instagram? Yo uso esta herramienta gratis con comentarios ilimitados. 👇",
+        "rng_title": "Generador de Números | Sorteo Pro",
+        "rng_text": "7️⃣ ¿Necesitas un número al azar? Este RNG seguro es gratis e instantáneo. Mira esto 👇",
+        "list_title": "Aleatorizar Lista | Sorteo Pro",
+        "list_text": "📋 Acabo de organizar una lista con Sorteo Pro. ¡Ideal para equipos y sorteos! Gratis y Seguro. 👇",
+        "cta_share": "Compartir",
+        "cta_start": "Empezar"
+    },
     "Schema": {
         "global_features": {
             "random_picker": "Selector de Ganadores Aleatorio",

@@ -250,7 +250,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         </header>
 
         {/* Main grid */}
-        <main className="max-w-7xl mx-auto px-4 py-8">
+        <main id="sorteo-section" className="max-w-7xl mx-auto px-4 py-8">
           <div className="grid lg:grid-cols-[1fr,400px] gap-8">
             {/* Sorteo area */}
             <motion.div

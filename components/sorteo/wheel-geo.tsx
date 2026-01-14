@@ -14,7 +14,6 @@ export function WheelGeo() {
 
   const handleTryWheel = () => {
     updateTheme({ sorteoStyle: "roulette" })
-    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const features = [
@@ -142,11 +141,14 @@ export function WheelGeo() {
 
               <div className="pt-4">
                   <Button
+                    asChild
                     onClick={handleTryWheel}
                     className="gap-2 font-bold text-lg h-12 px-6 rounded-full shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
                   >
-                    <Play className="w-5 h-5 fill-current" />
-                    {t('cta_button')}
+                    <a href="#sorteo-section">
+                      <Play className="w-5 h-5 fill-current" />
+                      {t('cta_button')}
+                    </a>
                   </Button>
               </div>
            </div>
@@ -189,8 +191,8 @@ export function WheelGeo() {
 
         {/* Right: Visual Abstract (Placeholder or Icon Graphic) */}
         <div className="hidden md:flex justify-center items-center sticky top-24">
-           <button
-             type="button"
+           <a
+             href="#sorteo-section"
              className="relative w-64 h-64 rounded-full border-4 border-primary/20 flex items-center justify-center bg-card/50 backdrop-blur-sm cursor-pointer hover:scale-105 transition-transform"
              onClick={handleTryWheel}
              aria-label={t('cta_button')}
@@ -204,7 +206,7 @@ export function WheelGeo() {
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-background/50 rounded-full">
                     <Play className="w-12 h-12 text-primary fill-current" />
                 </div>
-           </button>
+           </a>
         </div>
 
       </div>

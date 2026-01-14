@@ -50,6 +50,13 @@ export function SiteFooter() {
           </Link>
           <span className="text-muted-foreground/30 text-xs" aria-hidden="true">•</span>
           <Link
+            href="/yes-or-no-wheel"
+            className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
+          >
+            {t("footer_link_yesno")}
+          </Link>
+          <span className="text-muted-foreground/30 text-xs" aria-hidden="true">•</span>
+          <Link
             href="/alternativa-appsorteos"
             className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
           >

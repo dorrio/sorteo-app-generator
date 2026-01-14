@@ -13,10 +13,6 @@ export function RngGeo() {
 
   const handleTryIt = () => {
     updateTheme({ sorteoStyle: 'slot-machine' })
-    const element = document.getElementById('sorteo-section')
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
   }
 
   const faqs = [
@@ -87,8 +83,10 @@ export function RngGeo() {
                 dangerouslySetInnerHTML={{ __html: t.raw("direct_answer_text") }}
               />
             </div>
-            <Button onClick={handleTryIt} size="lg" className="mt-4 gap-2 text-lg font-bold shadow-lg shadow-primary/20">
-              {t("cta_button")} <ArrowRight className="w-5 h-5" />
+            <Button asChild size="lg" className="mt-4 gap-2 text-lg font-bold shadow-lg shadow-primary/20" onClick={handleTryIt}>
+              <a href="#sorteo-section">
+                {t("cta_button")} <ArrowRight className="w-5 h-5" />
+              </a>
             </Button>
           </div>
 

@@ -112,3 +112,14 @@
 **Bridge:** Extracted the footer implementation from the monolithic `MainApp` component into a reusable `SiteFooter` component. Integrated `SiteFooter` into both `MainApp` and the `VersusPage` structure.
 
 **Signal:** Restores the internal linking graph, ensuring that "Link Juice" flows from the Versus landing page to other tools, and eliminates the orphan page risk.
+
+## 2026-01-04 - [Tool Landing Pages]
+
+**Blocker:** The "Try It" CTAs in `RngGeo`, `ListRandomizerGeo`, and `WheelGeo` were implemented as buttons with JavaScript `onClick` handlers that programmatically scrolled to the main section using `document.getElementById`. This created a "Semantic Void" where search engines saw a generic button instead of a navigational link to the tool, missing a critical internal linking signal. Additionally, the target ID `sorteo-section` was missing from the DOM, making the buttons functionally broken for scrolling.
+
+**Bridge:**
+1. Added `id="sorteo-section"` to the `<main>` element in `MainApp`.
+2. Refactored the CTA buttons to use semantic `<a>` tags with `href="#sorteo-section"` (using `Button asChild` where appropriate).
+3. Enabled native smooth scrolling via `html { scroll-behavior: smooth; }` in CSS, removing the dependency on JavaScript for navigation while preserving the state update logic in `onClick`.
+
+**Signal:** Converts generic interactions into crawlable internal links, reinforcing the relationship between the SEO landing content and the functional tool. Enhances accessibility by providing standard link behavior and ensuring keyboard navigability.

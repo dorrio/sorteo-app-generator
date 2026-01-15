@@ -343,15 +343,18 @@ export function VisualEditor() {
                     </Button>
 
                     <div className="space-y-2">
-                      <Label>{t("colors.primary")}</Label>
+                      <Label htmlFor="primary-color-text">{t("colors.primary")}</Label>
                       <div className="flex gap-2">
                         <Input
+                          id="primary-color-picker"
                           type="color"
                           value={theme.primaryColor}
                           onChange={(e) => updateTheme({ primaryColor: e.target.value })}
                           className="w-14 h-10 p-1 cursor-pointer"
+                          aria-label={`${t("colors.primary")} Picker`}
                         />
                         <Input
+                          id="primary-color-text"
                           value={theme.primaryColor}
                           onChange={(e) => updateTheme({ primaryColor: e.target.value })}
                           className="flex-1 font-mono uppercase"
@@ -360,15 +363,18 @@ export function VisualEditor() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>{t("colors.secondary")}</Label>
+                      <Label htmlFor="secondary-color-text">{t("colors.secondary")}</Label>
                       <div className="flex gap-2">
                         <Input
+                          id="secondary-color-picker"
                           type="color"
                           value={theme.secondaryColor}
                           onChange={(e) => updateTheme({ secondaryColor: e.target.value })}
                           className="w-14 h-10 p-1 cursor-pointer"
+                          aria-label={`${t("colors.secondary")} Picker`}
                         />
                         <Input
+                          id="secondary-color-text"
                           value={theme.secondaryColor}
                           onChange={(e) => updateTheme({ secondaryColor: e.target.value })}
                           className="flex-1 font-mono uppercase"
@@ -391,8 +397,9 @@ export function VisualEditor() {
                     className="space-y-6"
                   >
                     <div className="space-y-2">
-                      <Label>{t("text.title")}</Label>
+                      <Label htmlFor="custom-title-input">{t("text.title")}</Label>
                       <Input
+                        id="custom-title-input"
                         value={theme.customTitle}
                         onChange={(e) => updateTheme({ customTitle: e.target.value })}
                         placeholder={t("text.title_placeholder")}
@@ -400,8 +407,9 @@ export function VisualEditor() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>{t("text.subtitle")}</Label>
+                      <Label htmlFor="custom-subtitle-input">{t("text.subtitle")}</Label>
                       <Input
+                        id="custom-subtitle-input"
                         value={theme.customSubtitle}
                         onChange={(e) => updateTheme({ customSubtitle: e.target.value })}
                         placeholder={t("text.subtitle_placeholder")}
@@ -409,8 +417,9 @@ export function VisualEditor() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>{t("text.typography")}</Label>
+                      <Label htmlFor="typography-select">{t("text.typography")}</Label>
                       <select
+                        id="typography-select"
                         value={theme.fontFamily}
                         onChange={(e) => updateTheme({ fontFamily: e.target.value })}
                         className="w-full h-10 px-3 rounded-md bg-input border border-border"
@@ -492,10 +501,11 @@ export function VisualEditor() {
 
                     <div className="flex items-center justify-between">
                       <div>
-                        <Label>{t("effects.confetti")}</Label>
+                        <Label htmlFor="confetti-switch">{t("effects.confetti")}</Label>
                         <p className="text-sm text-muted-foreground">{t("effects.confetti_desc")}</p>
                       </div>
                       <Switch
+                        id="confetti-switch"
                         checked={theme.showConfetti}
                         onCheckedChange={(checked) => updateTheme({ showConfetti: checked })}
                       />
@@ -503,10 +513,11 @@ export function VisualEditor() {
 
                     <div className="flex items-center justify-between">
                       <div>
-                        <Label>{t("effects.dynamic_bg")}</Label>
+                        <Label htmlFor="dynamic-bg-switch">{t("effects.dynamic_bg")}</Label>
                         <p className="text-sm text-muted-foreground">{t("effects.dynamic_bg_desc")}</p>
                       </div>
                       <Switch
+                        id="dynamic-bg-switch"
                         checked={theme.showDynamicBackground ?? true}
                         onCheckedChange={(checked) => updateTheme({ showDynamicBackground: checked })}
                       />
@@ -548,9 +559,10 @@ export function VisualEditor() {
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
                         <Clock className="w-4 h-4 text-muted-foreground" />
-                        <Label>{t("effects.countdown")}</Label>
+                        <Label id="countdown-label">{t("effects.countdown")}</Label>
                       </div>
                       <Slider
+                        aria-labelledby="countdown-label"
                         value={[theme.countdownDuration]}
                         onValueChange={([value]) => updateTheme({ countdownDuration: value })}
                         min={3}
@@ -561,8 +573,9 @@ export function VisualEditor() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>{t("effects.duration")}</Label>
+                      <Label id="duration-label">{t("effects.duration")}</Label>
                       <Slider
+                        aria-labelledby="duration-label"
                         value={[theme.spinDuration]}
                         onValueChange={([value]) => updateTheme({ spinDuration: value })}
                         min={2}
@@ -635,11 +648,12 @@ export function VisualEditor() {
 
                     {/* URL input */}
                     <div className="space-y-2">
-                      <Label>{t("background.url_label")}</Label>
+                      <Label htmlFor="bg-url-input">{t("background.url_label")}</Label>
                       <div className="flex gap-2">
                         <div className="relative flex-1">
                           <Link className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                           <Input
+                            id="bg-url-input"
                             value={imageUrlInput}
                             onChange={(e) => setImageUrlInput(e.target.value)}
                             placeholder={t("background.url_placeholder")}
@@ -655,8 +669,9 @@ export function VisualEditor() {
 
                     {/* Opacity control */}
                     <div className="space-y-2">
-                      <Label>{t("background.opacity")}</Label>
+                      <Label id="bg-opacity-label">{t("background.opacity")}</Label>
                       <Slider
+                        aria-labelledby="bg-opacity-label"
                         value={[theme.backgroundOpacity ?? 30]}
                         onValueChange={([value]) => updateTheme({ backgroundOpacity: value })}
                         min={10}
@@ -668,8 +683,9 @@ export function VisualEditor() {
 
                     {/* Blur control */}
                     <div className="space-y-2">
-                      <Label>{t("background.blur")}</Label>
+                      <Label id="bg-blur-label">{t("background.blur")}</Label>
                       <Slider
+                        aria-labelledby="bg-blur-label"
                         value={[theme.backgroundBlur ?? 0]}
                         onValueChange={([value]) => updateTheme({ backgroundBlur: value })}
                         min={0}

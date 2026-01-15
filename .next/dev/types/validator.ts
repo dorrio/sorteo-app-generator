@@ -119,6 +119,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../../app/[locale]/yes-or-no-wheel/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/[locale]/yes-or-no-wheel">> = Specific
+  const handler = {} as typeof import("../../../app/[locale]/yes-or-no-wheel/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../../app/api/og/route.tsx
 {
   type __IsExpected<Specific extends RouteHandlerConfig<"/api/og">> = Specific

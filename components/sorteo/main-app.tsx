@@ -21,6 +21,7 @@ import { WheelGeo } from "@/components/sorteo/wheel-geo"
 import { RngGeo } from "@/components/sorteo/rng-geo"
 import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
 import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
+import { LetterGeo } from "@/components/sorteo/letter-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
@@ -32,12 +33,13 @@ import { Link } from "@/i18n/routing"
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
+  const tLetter = useTranslations("LetterGeneratorPage")
   const tMeta = useTranslations("Metadata")
   const tWinner = useTranslations("WinnerCeremony")
   const tShare = useTranslations("ShareContent")
@@ -67,6 +69,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         if (seoMode === 'yes-no') {
             update.customTitle = tYesNo('h1')
             update.customSubtitle = tYesNo('description')
+        } else if (seoMode === 'letter') {
+            update.customTitle = tLetter('h1')
+            update.customSubtitle = tLetter('subtitle')
         }
         updateTheme(update)
     }
@@ -75,12 +80,15 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
   useEffect(() => {
-      if (initialStyle === 'roulette' && mounted && hasHydrated && participants.length === 0) {
+      if ((initialStyle === 'roulette' || initialStyle === 'slot') && mounted && hasHydrated && participants.length === 0) {
           if (seoMode === 'yes-no') {
               addParticipants([
                   { name: tYesNo('option_yes') },
                   { name: tYesNo('option_no') }
               ])
+          } else if (seoMode === 'letter') {
+              const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
+              addParticipants(alphabet.map(l => ({ name: l })))
           } else {
               addParticipants([
                   { name: "Option 1" },
@@ -144,6 +152,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
       } else if (seoMode === 'yes-no') {
           shareTitle = "Yes or No Wheel | Sorteo Pro"
           shareText = "Spin the wheel and decide! Yes or No?"
+      } else if (seoMode === 'letter') {
+          shareTitle = "Random Letter Generator | Sorteo Pro"
+          shareText = "I just picked a random letter! A-Z Generator. 👇"
       }
 
       return {
@@ -404,6 +415,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             /* Yes/No Mode */
             <>
                 <YesNoGeo />
+                <Glossary />
+            </>
+       ) : seoMode === 'letter' ? (
+            /* Letter Mode */
+            <>
+                <LetterGeo />
                 <Glossary />
             </>
        ) : (

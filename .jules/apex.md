@@ -207,3 +207,17 @@
 **GEO Impact:**
 *   **Search Intent Match:** Explicitly satisfies the user intent for "Yes or No" decision making.
 *   **Direct Answer:** Defines the tool clearly for AI engines.
+
+## 2025-03-05 - Random Letter Generator
+**Context:** Targeting the "Random Letter Generator" / "Scattergories" keyword cluster (~50k volume).
+**Gap:** Users searching for "Pick a random letter" or "Scattergories helper" had to manually enter A-Z into the generic wheel.
+**Action:**
+*   **New Landing Page:** Created `app/[locale]/random-letter-generator/page.tsx` utilizing `MainApp` with `roulette` style and `seoMode="letter"`.
+*   **Feature:** Updated `MainApp` to auto-populate the participants with the alphabet (A-Z) when this mode is active.
+*   **GEO Content:** Developed `LetterGeo` component with "Direct Answer" and "How To" schema.
+*   **Schema:** Injected `SoftwareApplication` (GameApplication), `HowTo`, and `FAQPage` schema.
+*   **Sitemap:** Prioritized `/random-letter-generator` at 0.9.
+*   **Localization:** Added optimized content for EN, ES, and PT (Scattergories/Adedonha/Stop support).
+**GEO Impact:**
+*   **User Experience:** One-click solution for letter generation.
+*   **Niche Dominance:** Captures a high-intent gaming audience.

@@ -500,5 +500,34 @@
             "free": "Gratis Siempre",
             "fair_rng": "RNG Justo"
         }
+    },
+    "LetterGeneratorPage": {
+        "title": "Generador de Letras Aleatorias | Letra al Azar (A-Z)",
+        "description": "Genera una letra aleatoria de la A a la Z al instante. Ideal para juegos como Stop, Basta o Scattergories. Gratis y sin anuncios.",
+        "h1": "Generador de Letras Aleatorias",
+        "subtitle": "Gira para elegir una letra del alfabeto al azar."
+    },
+    "LetterGeo": {
+        "direct_answer_title": "¿Qué es un Generador de Letras Aleatorias?",
+        "direct_answer_text": "Un <strong>Generador de Letras Aleatorias</strong> es una herramienta que elige una letra del alfabeto (A-Z) puramente al azar. Se utiliza comúnmente para juegos educativos, juegos de palabras como <strong>Stop</strong> o <strong>Basta</strong>, y ejercicios de escritura. <strong>Sorteo Pro</strong> garantiza una aleatoriedad real.",
+        "cta_button": "Elegir Letra",
+        "feature_1_title": "Alfabeto Completo",
+        "feature_1_desc": "Incluye todas las letras del abecedario.",
+        "feature_2_title": "Justo y Aleatorio",
+        "feature_2_desc": "Probabilidad igual para cada letra.",
+        "feature_3_title": "Listo para Jugar",
+        "feature_3_desc": "Perfecto para Stop, Basta o Tutti Frutti.",
+        "feature_4_title": "Giro Instantáneo",
+        "feature_4_desc": "Sin esperas, sin anuncios.",
+        "how_to_title": "Cómo generar una letra aleatoria",
+        "how_to_step_1": "El generador viene precargado con las letras de la A a la Z.",
+        "how_to_step_2": "Haz clic en 'Iniciar Sorteo' para girar.",
+        "how_to_step_3": "Espera a que se seleccione la letra aleatoria.",
+        "how_to_step_4": "¡Usa la letra para tu juego!",
+        "faq_title": "Preguntas Frecuentes sobre Letras",
+        "faq_1_q": "¿Es realmente aleatorio?",
+        "faq_1_a": "Sí, usamos un generador de números aleatorios seguro para elegir la letra.",
+        "faq_2_q": "¿Puedo quitar letras difíciles?",
+        "faq_2_a": "Sí, haz clic en 'Personalizar' para editar la lista y eliminar letras como 'W' o 'K'."
     }
 }

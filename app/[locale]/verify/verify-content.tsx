@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy } from "lucide-react"
+import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ConfettiEffect } from "@/components/sorteo/confetti-effect"
 import { Button } from "@/components/ui/button"
@@ -153,6 +153,44 @@ export function VerifyContent() {
         setShowCopied(true)
         setTimeout(() => setShowCopied(false), 2000)
         window.open("https://www.instagram.com/", "_blank")
+    }
+
+    const handleDownload = async () => {
+        if (!winnerName) return
+
+        // Construct OG Image URL
+        const ogParams = new URLSearchParams()
+        ogParams.set("name", winnerName)
+
+        // Logic to extract date from result
+        let dateToUse = new Date()
+        if (result?.participant?.timestamp) {
+            dateToUse = new Date(result.participant.timestamp)
+        } else if (result?.date) {
+            dateToUse = new Date(result.date)
+        }
+        ogParams.set("date", dateToUse.toISOString())
+
+        const imageUrl = `/api/og?${ogParams.toString()}`
+
+        try {
+            const response = await fetch(imageUrl)
+            const blob = await response.blob()
+            const blobUrl = window.URL.createObjectURL(blob)
+            const link = document.createElement('a')
+            link.href = blobUrl
+            // Filename: Certificate-{Name}-{Date}.png
+            const cleanName = winnerName.replace(/[^a-z0-9]/gi, '_').toLowerCase()
+            const dateStr = dateToUse.toISOString().split('T')[0]
+            link.download = `Certificate-${cleanName}-${dateStr}.png`
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+            window.URL.revokeObjectURL(blobUrl)
+        } catch (e) {
+            // Fallback: just open in new tab
+            window.open(imageUrl, '_blank')
+        }
     }
 
     return (
@@ -328,37 +366,38 @@ export function VerifyContent() {
                                         {/* VIRAL LOOP CTA - MAIN */}
                                         {(result.status === "valid" || result.status === "partial") && (
                                             <div className="mt-6 pt-4 border-t border-border/50 space-y-3">
-                                                {canShareNative ? (
-                                                    <Button
-                                                        className="w-full gap-2 font-bold"
-                                                        size="lg"
-                                                        variant="outline"
-                                                        onClick={shareNative}
-                                                        style={{
-                                                            borderColor: theme.primaryColor,
-                                                            color: theme.primaryColor
-                                                        }}
-                                                    >
-                                                        <Share2 className="w-4 h-4" />
-                                                        {t("share_button")}
-                                                    </Button>
-                                                ) : (
-                                                    <DropdownMenu>
-                                                        <DropdownMenuTrigger asChild>
-                                                            <Button
-                                                                className="w-full gap-2 font-bold"
-                                                                size="lg"
-                                                                variant="outline"
-                                                                style={{
-                                                                    borderColor: theme.primaryColor,
-                                                                    color: theme.primaryColor
-                                                                }}
-                                                            >
-                                                                <Share2 className="w-4 h-4" />
-                                                                {t("share_button")}
-                                                            </Button>
-                                                        </DropdownMenuTrigger>
-                                                        <DropdownMenuContent align="center" className="w-56">
+                                                <div className="flex gap-2">
+                                                    {canShareNative ? (
+                                                        <Button
+                                                            className="flex-1 gap-2 font-bold"
+                                                            size="lg"
+                                                            variant="outline"
+                                                            onClick={shareNative}
+                                                            style={{
+                                                                borderColor: theme.primaryColor,
+                                                                color: theme.primaryColor
+                                                            }}
+                                                        >
+                                                            <Share2 className="w-4 h-4" />
+                                                            {t("share_button")}
+                                                        </Button>
+                                                    ) : (
+                                                        <DropdownMenu>
+                                                            <DropdownMenuTrigger asChild>
+                                                                <Button
+                                                                    className="flex-1 gap-2 font-bold"
+                                                                    size="lg"
+                                                                    variant="outline"
+                                                                    style={{
+                                                                        borderColor: theme.primaryColor,
+                                                                        color: theme.primaryColor
+                                                                    }}
+                                                                >
+                                                                    <Share2 className="w-4 h-4" />
+                                                                    {t("share_button")}
+                                                                </Button>
+                                                            </DropdownMenuTrigger>
+                                                            <DropdownMenuContent align="center" className="w-56">
                                                             <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
                                                                 {showCopied ? (
                                                                     <>
@@ -405,21 +444,37 @@ export function VerifyContent() {
                                                                 </a>
                                                             </DropdownMenuItem>
 
-                                                            <DropdownMenuItem asChild>
-                                                                <a
-                                                                    href={whatsappUrl}
-                                                                    target="_blank"
-                                                                    rel="noopener noreferrer"
-                                                                    className="gap-2 cursor-pointer flex w-full items-center"
-                                                                    aria-label="Share on WhatsApp"
-                                                                >
-                                                                    <MessageCircle className="w-4 h-4" />
-                                                                    WhatsApp
-                                                                </a>
-                                                            </DropdownMenuItem>
-                                                        </DropdownMenuContent>
-                                                    </DropdownMenu>
-                                                )}
+                                                                <DropdownMenuItem asChild>
+                                                                    <a
+                                                                        href={whatsappUrl}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="gap-2 cursor-pointer flex w-full items-center"
+                                                                        aria-label="Share on WhatsApp"
+                                                                    >
+                                                                        <MessageCircle className="w-4 h-4" />
+                                                                        WhatsApp
+                                                                    </a>
+                                                                </DropdownMenuItem>
+                                                            </DropdownMenuContent>
+                                                        </DropdownMenu>
+                                                    )}
+
+                                                    {/* Download Certificate Button */}
+                                                    <Button
+                                                        className="flex-1 gap-2 font-bold"
+                                                        size="lg"
+                                                        variant="outline"
+                                                        onClick={handleDownload}
+                                                        style={{
+                                                            borderColor: theme.primaryColor,
+                                                            color: theme.primaryColor
+                                                        }}
+                                                    >
+                                                        <Download className="w-4 h-4" />
+                                                        {t("download_certificate")}
+                                                    </Button>
+                                                </div>
 
                                                 <Button
                                                     asChild

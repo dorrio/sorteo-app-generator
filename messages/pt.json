@@ -206,6 +206,7 @@
         "back_button": "Voltar ao Início",
         "create_your_own": "🚀 Criar Sorteio Grátis",
         "share_button": "Compartilhar Prova",
+        "download_certificate": "Baixar Certificado",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou o sorteio!\n\n✅ Verificado por Sorteio Pro.\n\nVeja o certificado e crie o seu aqui 👇",
         "result": {
             "valid_title": "ID Válido",
@@ -530,5 +531,34 @@
             "free": "Grátis para Sempre",
             "fair_rng": "RNG Justo"
         }
+    },
+    "LetterGeneratorPage": {
+        "title": "Gerador de Letras Aleatórias | Sorteio de Letras (A-Z)",
+        "description": "Gere uma letra aleatória de A a Z instantaneamente. Perfeito para jogos como Adedonha, Stop ou Scattergories. Grátis.",
+        "h1": "Gerador de Letras Aleatórias",
+        "subtitle": "Gire para escolher uma letra do alfabeto aleatoriamente."
+    },
+    "LetterGeo": {
+        "direct_answer_title": "O que é um Gerador de Letras Aleatórias?",
+        "direct_answer_text": "Um <strong>Gerador de Letras Aleatórias</strong> é uma ferramenta que escolhe uma letra do alfabeto (A-Z) puramente ao acaso. É comumente usado para jogos educativos, jogos de palavras como <strong>Adedonha</strong> ou <strong>Stop</strong>. O <strong>Sorteo Pro</strong> garante aleatoriedade real.",
+        "cta_button": "Escolher Letra",
+        "feature_1_title": "Alfabeto Completo",
+        "feature_1_desc": "Inclui todas as letras do alfabeto.",
+        "feature_2_title": "Justo e Aleatório",
+        "feature_2_desc": "Probabilidade igual para cada letra.",
+        "feature_3_title": "Pronto para Jogar",
+        "feature_3_desc": "Perfeito para Adedonha ou Stop.",
+        "feature_4_title": "Giro Instantâneo",
+        "feature_4_desc": "Sem espera, sem anúncios.",
+        "how_to_title": "Como gerar uma letra aleatória",
+        "how_to_step_1": "O gerador já vem com as letras de A a Z.",
+        "how_to_step_2": "Clique em 'Iniciar Sorteio' para girar.",
+        "how_to_step_3": "Aguarde a seleção da letra aleatória.",
+        "how_to_step_4": "Use a letra para o seu jogo!",
+        "faq_title": "Perguntas Frequentes",
+        "faq_1_q": "É realmente aleatório?",
+        "faq_1_a": "Sim, usamos um gerador seguro para escolher a letra.",
+        "faq_2_q": "Posso remover letras?",
+        "faq_2_a": "Sim, clique em 'Personalizar' para editar a lista e remover letras difíceis se desejar."
     }
 }

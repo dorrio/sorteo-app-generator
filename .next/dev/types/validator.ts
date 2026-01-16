@@ -92,6 +92,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../../app/[locale]/random-letter-generator/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/[locale]/random-letter-generator">> = Specific
+  const handler = {} as typeof import("../../../app/[locale]/random-letter-generator/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../../app/[locale]/random-number-generator/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/[locale]/random-number-generator">> = Specific
@@ -114,6 +123,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/[locale]/wheel-of-names">> = Specific
   const handler = {} as typeof import("../../../app/[locale]/wheel-of-names/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/[locale]/yes-or-no-wheel/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/[locale]/yes-or-no-wheel">> = Specific
+  const handler = {} as typeof import("../../../app/[locale]/yes-or-no-wheel/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

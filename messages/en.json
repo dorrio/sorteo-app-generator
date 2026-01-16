@@ -15,6 +15,7 @@
         "footer_link_rng": "Random Number Generator",
         "footer_link_list": "List Randomizer",
         "footer_link_yesno": "Yes or No Wheel",
+        "footer_link_letter": "Random Letter Generator",
         "footer_versus_link": "AppSorteos Alternative",
         "footer_glossary": "Glossary",
         "customize_hint": "🎨 Customize Giveaway"
@@ -274,7 +275,9 @@
         "term_5": "Wheel of Names",
         "def_5": "A visual random selector that mimics a physical spinning wheel. It divides the circle into segments representing participants and spins to select one at random.",
         "term_6": "Yes or No Wheel",
-        "def_6": "A decision-making tool that randomly selects between 'Yes' and 'No' with equal probability, similar to flipping a coin."
+        "def_6": "A decision-making tool that randomly selects between 'Yes' and 'No' with equal probability, similar to flipping a coin.",
+        "term_7": "Random Letter Generator",
+        "def_7": "A digital tool that picks a letter from the alphabet (A-Z) at random. Useful for word games, teaching phonics, and initialisms."
     },
     "InstagramPicker": {
         "title": "Free Instagram Comment Picker | Unlimited & No Login",
@@ -468,6 +471,34 @@
         "faq_1_a": "Yes, it uses a cryptographically secure random number generator to ensure a true 50/50 probability.",
         "faq_2_q": "Can I add 'Maybe'?",
         "faq_2_a": "Yes! Click 'Customize' to add more options like 'Maybe' or 'Ask again'."
+    },
+    "LetterGeoPage": {
+        "title": "Random Letter Generator | Alphabet Picker",
+        "description": "Pick a random letter from the alphabet instantly. Free, ad-free, and perfect for classroom games (Categories, Scattergories).",
+        "h1": "Random Letter Generator",
+        "subtitle": "Spin to pick a random letter from A to Z.",
+        "faq_1_q": "Is the letter selection truly random?",
+        "faq_1_a": "Yes, we use a secure random number generator to ensure every letter has an equal chance of being selected.",
+        "faq_2_q": "Can I remove letters that have been picked?",
+        "faq_2_a": "Yes! Just toggle the 'Remove winner' option in settings if you want unique letters each time."
+    },
+    "LetterGeo": {
+        "direct_answer_title": "What is a Random Letter Generator?",
+        "direct_answer_text": "A <strong>Random Letter Generator</strong> is a tool that selects a letter from the alphabet (A-Z) completely by chance. It is widely used for games like <strong>Scattergories</strong>, teaching phonics, or initializing creative writing prompts. <strong>Sorteo Pro</strong> offers a fair, visual way to pick letters instantly.",
+        "cta_button": "Spin for Letter",
+        "feature_1_title": "A-Z Selection",
+        "feature_1_desc": "Includes all 26 letters of the English alphabet.",
+        "feature_2_title": "Instant Result",
+        "feature_2_desc": "Get a random letter in seconds.",
+        "feature_3_title": "Fairness Guaranteed",
+        "feature_3_desc": "Every letter has an equal 1/26 probability.",
+        "feature_4_title": "Mobile Ready",
+        "feature_4_desc": "Perfect for playing games on the go.",
+        "how_to_title": "How to generate a random letter",
+        "how_to_step_1": "The generator is pre-loaded with letters A-Z.",
+        "how_to_step_2": "Select your preferred visual style (Wheel or Cards).",
+        "how_to_step_3": "Click 'Start Giveaway' to pick a letter.",
+        "how_to_step_4": "Use the letter for your game or activity!"
     },
     "ShareContent": {
         "home_title": "Sorteo Pro | Premium Giveaways for Influencers",

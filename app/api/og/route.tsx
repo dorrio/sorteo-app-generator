@@ -225,6 +225,16 @@ export async function GET(request: Request) {
                 <line x1="3" x2="3.01" y1="18" y2="18"/>
             </svg>
         );
+    } else if (type === 'letter') {
+        title = "Random Letter Generator";
+        subtitle = "A-Z Random Picker • Alphabet Wheel";
+        bgGradient = "radial-gradient(circle at center, #be123c 0%, #4c0519 100%)"; // Rose/Dark
+        accentColor = "#fb7185"; // Rose 400
+        icon = (
+             <div style={{ display: 'flex', gap: '5px', fontSize: 100, fontWeight: 900, color: accentColor, fontFamily: 'serif' }}>
+                <span>A</span><span style={{opacity:0.5}}>B</span><span style={{opacity:0.25}}>C</span>
+            </div>
+        );
     }
 
     return new ImageResponse(

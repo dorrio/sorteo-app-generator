@@ -15,6 +15,7 @@
         "footer_link_rng": "Generador de Números",
         "footer_link_list": "Aleatorizar Lista",
         "footer_link_yesno": "Ruleta Sí o No",
+        "footer_link_letter": "Generador de Letras",
         "footer_versus_link": "Alternativa a AppSorteos",
         "footer_glossary": "Glosario",
         "customize_hint": "🎨 Personalizar Sorteo",
@@ -271,7 +272,9 @@
         "term_5": "Ruleta de Nombres",
         "def_5": "Un selector aleatorio visual que imita una rueda giratoria física. Divide el círculo en segmentos que representan a los participantes y gira para seleccionar uno al azar.",
         "term_6": "Ruleta Sí o No",
-        "def_6": "Una herramienta de toma de decisiones que selecciona aleatoriamente entre 'Sí' y 'No' con igual probabilidad, similar a lanzar una moneda."
+        "def_6": "Una herramienta de toma de decisiones que selecciona aleatoriamente entre 'Sí' y 'No' con igual probabilidad, similar a lanzar una moneda.",
+        "term_7": "Generador de Letras Aleatorias",
+        "def_7": "Una herramienta digital que elige una letra del alfabeto (A-Z) al azar. Útil para juegos de palabras, enseñar fonética y siglas."
     },
     "InstagramPicker": {
         "title": "Selector de Comentarios de Instagram Gratis | Ilimitado",
@@ -465,6 +468,34 @@
         "faq_1_a": "Sí, utiliza un generador de números aleatorios criptográficamente seguro para garantizar una probabilidad real del 50/50.",
         "faq_2_q": "¿Puedo añadir 'Quizás'?",
         "faq_2_a": "¡Sí! Haz clic en 'Personalizar' para añadir más opciones como 'Quizás' o 'Preguntar de nuevo'."
+    },
+    "LetterGeoPage": {
+        "title": "Generador de Letras Aleatorias | ABC Picker",
+        "description": "Elige una letra del alfabeto al azar al instante. Gratis, sin anuncios y perfecto para juegos como Stop o Basta.",
+        "h1": "Generador de Letras Aleatorias",
+        "subtitle": "Gira para elegir una letra al azar de la A a la Z.",
+        "faq_1_q": "¿Es la selección de letras realmente aleatoria?",
+        "faq_1_a": "Sí, utilizamos un generador de números aleatorios seguro para garantizar que cada letra tenga la misma probabilidad de ser seleccionada.",
+        "faq_2_q": "¿Puedo eliminar las letras que ya salieron?",
+        "faq_2_a": "¡Sí! Simplemente activa la opción 'Eliminar ganador' en la configuración si deseas letras únicas cada vez."
+    },
+    "LetterGeo": {
+        "direct_answer_title": "¿Qué es un Generador de Letras Aleatorias?",
+        "direct_answer_text": "Un <strong>Generador de Letras Aleatorias</strong> es una herramienta que selecciona una letra del alfabeto (A-Z) completamente al azar. Es muy utilizado para juegos como <strong>Stop, Basta o Scattergories</strong>, enseñar fonética o iniciar ejercicios de escritura creativa. <strong>Sorteo Pro</strong> ofrece una forma justa y visual de elegir letras al instante.",
+        "cta_button": "Girar por una Letra",
+        "feature_1_title": "Selección A-Z",
+        "feature_1_desc": "Incluye las 27 letras del alfabeto español.",
+        "feature_2_title": "Resultado Instantáneo",
+        "feature_2_desc": "Obtén una letra al azar en segundos.",
+        "feature_3_title": "Garantía de Justicia",
+        "feature_3_desc": "Cada letra tiene la misma probabilidad de salir.",
+        "feature_4_title": "Listo para Móvil",
+        "feature_4_desc": "Perfecto para jugar en cualquier lugar.",
+        "how_to_title": "Cómo generar una letra al azar",
+        "how_to_step_1": "El generador está precargado con las letras A-Z.",
+        "how_to_step_2": "Selecciona tu estilo visual preferido (Ruleta o Cartas).",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para elegir una letra.",
+        "how_to_step_4": "¡Usa la letra para tu juego o actividad!"
     },
     "ShareContent": {
         "home_title": "Sorteo Pro | Sorteos Premium para Influencers",

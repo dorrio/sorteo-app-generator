@@ -39,7 +39,11 @@ interface MainAppProps {
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
+<<<<<<< HEAD
+  const tLetter = useTranslations("LetterGeoPage")
+=======
   const tLetter = useTranslations("LetterGeneratorPage")
+>>>>>>> main
   const tMeta = useTranslations("Metadata")
   const tWinner = useTranslations("WinnerCeremony")
   const tShare = useTranslations("ShareContent")
@@ -87,8 +91,14 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                   { name: tYesNo('option_no') }
               ])
           } else if (seoMode === 'letter') {
+<<<<<<< HEAD
+              // Add A-Z for letter generator
+              const alphabet = Array.from({ length: 26 }, (_, i) => ({ name: String.fromCharCode(65 + i) }));
+              addParticipants(alphabet)
+=======
               const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
               addParticipants(alphabet.map(l => ({ name: l })))
+>>>>>>> main
           } else {
               addParticipants([
                   { name: "Option 1" },
@@ -154,7 +164,11 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareText = "Spin the wheel and decide! Yes or No?"
       } else if (seoMode === 'letter') {
           shareTitle = "Random Letter Generator | Sorteo Pro"
+<<<<<<< HEAD
+          shareText = "Pick a random letter from the alphabet!"
+=======
           shareText = "I just picked a random letter! A-Z Generator. 👇"
+>>>>>>> main
       }
 
       return {

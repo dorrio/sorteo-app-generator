@@ -1,1 +1,0 @@
-## 2025-02-01 - [ParticipantManager] **Issue:** Ghost Buttons (icon-only save/cancel/add) lacked accessible names. **Fix:** Added 'aria-label' with new translation keys ('save_edit', 'cancel_edit', 'add_single'). **Lesson:** Always check 'showOnlyInput' or conditional rendering blocks for hidden ghost buttons.

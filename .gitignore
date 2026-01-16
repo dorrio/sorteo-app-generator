@@ -37,10 +37,7 @@ server.log
 next-env.d.ts
 
 # IDEs
-.vscode/*
-!.vscode/settings.json
-!.vscode/extensions.json
-!.vscode/launch.json
+.vscode/
 .idea/
 
 # project specific

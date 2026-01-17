@@ -28,7 +28,9 @@ export function VerifyContent() {
         error?: string
     } | null>(null)
     const [showCopied, setShowCopied] = useState(false)
-    const [canShareNative, setCanShareNative] = useState(false)
+    // Initialize to true (Mobile/Lite) to minimize server HTML size and avoid Mobile CLS.
+    // Desktop will hydrate and switch to Dropdown (Heavy) if needed.
+    const [canShareNative, setCanShareNative] = useState(true)
     const [isStickyVisible, setIsStickyVisible] = useState(false)
     const [showConfetti, setShowConfetti] = useState(false)
 

@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
 import { Shield, Wand2, Zap, HelpCircle } from "lucide-react"
+import { Link } from "@/i18n/routing"
 
 export function SeoContent() {
   const t = useTranslations("SEOContent")
@@ -78,7 +79,11 @@ export function SeoContent() {
           <h2 className="text-3xl font-bold tracking-tight">{t("what_is_title")}</h2>
           <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
             {t.rich("what_is_text", {
-              b: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>
+              b: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
+              wheel: (chunks) => <Link href="/wheel-of-names" className="font-semibold text-primary hover:underline">{chunks}</Link>,
+              insta: (chunks) => <Link href="/instagram-comment-picker" className="font-semibold text-primary hover:underline">{chunks}</Link>,
+              rng: (chunks) => <Link href="/random-number-generator" className="font-semibold text-primary hover:underline">{chunks}</Link>,
+              verify: (chunks) => <Link href="/verify" className="font-semibold text-primary hover:underline">{chunks}</Link>,
             })}
           </p>
         </div>

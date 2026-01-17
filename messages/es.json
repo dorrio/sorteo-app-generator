@@ -2,7 +2,7 @@
     "HomePage": {
         "loading": "Cargando Sorteo Pro...",
         "customize": "Personalizar",
-        "verify_sorteo": "Verificar Sorteio",
+        "verify_sorteo": "Verificar Sorteo",
         "spinning": "Sorteando...",
         "start_button": "Iniciar Sorteo",
         "min_participants_warning": "Añade al menos 2 participantes para iniciar",
@@ -223,7 +223,7 @@
     },
     "SEOContent": {
         "what_is_title": "¿Qué es Sorteo Pro?",
-        "what_is_text": "<b>Sorteo Pro</b> es la herramienta definitiva para <b>sorteos gratis</b>. Permite elegir <b>ganadores al azar</b> de listas ilimitadas para concursos de <b>Instagram</b>, <b>YouTube</b> y <b>TikTok</b>. Con <b>RNG criptográficamente seguro</b>, <b>Ruleta de Nombres</b> y <b>verificación instantánea</b>, es la alternativa segura y sin registro a los servicios de pago.",
+        "what_is_text": "<b>Sorteo Pro</b> es la herramienta definitiva para <b>sorteos gratis</b>. Permite elegir <b>ganadores al azar</b> de listas ilimitadas para concursos de <insta>Instagram</insta>, <b>YouTube</b> y <b>TikTok</b>. Con <rng>RNG criptográficamente seguro</rng>, <wheel>Ruleta de Nombres</wheel> y <verify>verificación instantánea</verify>, es la alternativa segura y sin registro a los servicios de pago.",
         "features_title": "Características Principales",
         "feature_1_title": "Justo y Transparente",
         "feature_1_desc": "Utiliza generación de números aleatorios criptográficamente seguros para garantizar la equidad.",
@@ -369,7 +369,7 @@
             "p2": "A diferencia de la competencia, no cobramos por el éxito de tu sorteo. Si tienes 10,000 comentarios, ¡genial! No te penalizamos por ello.",
             "title_2": "La competencia de AppSorteos que sí cuida tu bolsillo",
             "p3": "Deja de calcular cuánto te costará tu próximo sorteo. Con Sorteo Pro, tu presupuesto es cero.",
-            "direct_answer_title": "¿Cuál es la mejor alternativa gratuita a AppSorteos?",
+            "direct_answer_title": "La Alternativa a AppSorteos",
             "direct_answer_text": "La mejor <strong>alternativa gratuita a AppSorteos</strong> es <strong>Sorteo Pro</strong>. Mientras AppSorteos cobra por sorteos de más de 1.000 comentarios, Sorteo Pro permite <strong>comentarios ilimitados</strong> totalmente gratis, sin necesidad de registro ni suscripciones."
         },
         "cta": {
@@ -544,7 +544,7 @@
         "direct_answer_text": "Un <strong>Generador de Letras Aleatorias</strong> es una herramienta que elige una letra del alfabeto (A-Z) puramente al azar. Se utiliza comúnmente para juegos educativos, juegos de palabras como <strong>Stop</strong> o <strong>Basta</strong>, y ejercicios de escritura. <strong>Sorteo Pro</strong> garantiza una aleatoriedad real.",
         "cta_button": "Elegir Letra",
         "feature_1_title": "Alfabeto Completo",
-        "feature_1_desc": "Incluye todas las letras del abecedario.",
+        "feature_1_desc": "Incluye todas las letras del alfabeto.",
         "feature_2_title": "Justo y Aleatorio",
         "feature_2_desc": "Probabilidad igual para cada letra.",
         "feature_3_title": "Listo para Jugar",

@@ -326,6 +326,8 @@
         "tagline": "Knowledge Base",
         "h1": "Giveaway Glossary",
         "subtitle": "Everything you need to know about fair giveaways and random selection technology.",
+        "direct_answer_title": "What is a Giveaway Glossary?",
+        "direct_answer_text": "A <strong>Giveaway Glossary</strong> is a collection of definitions for technical terms used in online contests, such as <strong>RNG</strong>, <strong>Provably Fair</strong>, and <strong>Seed</strong>. It helps users understand the technology behind fair random selection and ensures transparency in digital raffles.",
         "term_wheel": "Wheel of Names",
         "def_wheel": "A visual random selector that mimics a physical spinning wheel. It divides the circle into segments representing participants and spins to select one at random.",
         "learn_more": "Try {tool}",
@@ -541,28 +543,5 @@
         "description": "Generate a random letter from A to Z instantly. Free, fair, and perfect for games like Scattergories. No ads.",
         "h1": "Random Letter Generator",
         "subtitle": "Spin to pick a random letter from the alphabet."
-    },
-    "LetterGeo": {
-        "direct_answer_title": "What is a Random Letter Generator?",
-        "direct_answer_text": "A <strong>Random Letter Generator</strong> is a tool that picks a letter from the English alphabet (A-Z) purely by chance. It is commonly used for educational games, word games like <strong>Scattergories</strong>, and creative writing prompts. <strong>Sorteo Pro</strong> ensures true randomness.",
-        "cta_button": "Pick a Letter",
-        "feature_1_title": "A-Z Alphabet",
-        "feature_1_desc": "Includes all 26 letters of the English alphabet.",
-        "feature_2_title": "Fair & Random",
-        "feature_2_desc": "Equal probability for every letter.",
-        "feature_3_title": "Game Ready",
-        "feature_3_desc": "Perfect for Scattergories or Stop.",
-        "feature_4_title": "Instant Spin",
-        "feature_4_desc": "No waiting, no ads.",
-        "how_to_title": "How to generate a random letter",
-        "how_to_step_1": "The generator is pre-loaded with letters A to Z.",
-        "how_to_step_2": "Click 'Start Giveaway' to spin the wheel or slots.",
-        "how_to_step_3": "Wait for the random letter to be selected.",
-        "how_to_step_4": "Use the letter for your game or activity!",
-        "faq_title": "Random Letter FAQ",
-        "faq_1_q": "Is it truly random?",
-        "faq_1_a": "Yes, we use a secure random number generator to pick the letter.",
-        "faq_2_q": "Can I remove letters?",
-        "faq_2_a": "Yes, click 'Customize' to edit the list and remove letters like 'Q' or 'X' if desired."
     }
 }

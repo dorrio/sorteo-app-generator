@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
-import { BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered } from 'lucide-react';
+import { BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered, GraduationCap } from 'lucide-react';
 
 export const dynamic = 'force-static';
 
@@ -40,7 +40,7 @@ export default function GlossaryPage() {
       term: tGlossary('term_1'),
       def: tGlossary('def_1'),
       icon: <Dice5 className="w-6 h-6 text-primary" />,
-      link: null
+      link: "/random-number-generator"
     },
     {
       id: "provably-fair",
@@ -72,8 +72,8 @@ export default function GlossaryPage() {
     }
   ];
 
-  const jsonLd = [
-    {
+  // Schema: CollectionPage + DefinedTermSet
+  const collectionSchema = {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: t('title'),
@@ -89,8 +89,10 @@ export default function GlossaryPage() {
             description: term.def
         }))
       }
-    },
-    {
+  };
+
+  // Schema: BreadcrumbList
+  const breadcrumbSchema = {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       "itemListElement": [{
@@ -104,14 +106,28 @@ export default function GlossaryPage() {
         "name": t('h1'),
         "item": "https://sorteopro.com/glossary"
       }]
-    }
-  ];
+  };
+
+  // Schema: FAQPage (New Pattern)
+  // Converting definitions into Questions for AI
+  const faqSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: terms.map(term => ({
+          '@type': 'Question',
+          name: `What is a ${term.term}?`,
+          acceptedAnswer: {
+              '@type': 'Answer',
+              text: term.def
+          }
+      }))
+  };
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([collectionSchema, breadcrumbSchema, faqSchema]) }}
       />
 
       <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-blue-900/10 to-transparent -z-10" />
@@ -129,6 +145,19 @@ export default function GlossaryPage() {
                 {t('subtitle')}
              </p>
         </div>
+      </section>
+
+      {/* New: Direct Answer Block (GEO) */}
+      <section className="py-8 px-4 max-w-3xl mx-auto -mt-6">
+         <div className="bg-card/50 border border-primary/20 rounded-2xl p-8 shadow-sm">
+             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                 <GraduationCap className="w-6 h-6 text-primary" />
+                 {t('direct_answer_title')}
+             </h2>
+             <div className="prose prose-invert max-w-none text-muted-foreground leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: t.raw('direct_answer_text') }}
+             />
+         </div>
       </section>
 
       <section className="py-12 px-4 max-w-4xl mx-auto">

@@ -1,0 +1,118 @@
+   ▲ Next.js 16.0.7 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://192.168.0.2:3000
+
+ ✓ Starting...
+ ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+ ✓ Ready in 1832ms
+ ○ Compiling /[locale] ...
+ ⨯ ./components/sorteo/letter-geo.tsx:4:1
+Parsing ecmascript source code failed
+[0m [90m 2 |[39m
+ [90m 3 |[39m [36mimport[39m { useTranslations } [36mfrom[39m [32m"next-intl"[39m
+[31m[1m>[22m[39m[90m 4 |[39m [33m<<[39m[33m<<[39m[33m<<[39m[33m<[39m [33mHEAD[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 5 |[39m [36mimport[39m { motion } [36mfrom[39m [32m"framer-motion"[39m
+ [90m 6 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m 7 |[39m [36mimport[39m { [33mArrowRight[39m[33m,[39m [33mType[39m[33m,[39m [33mZap[39m[33m,[39m [33mRefreshCw[39m[33m,[39m [33mSmartphone[39m[33m,[39m [33mHelpCircle[39m[33m,[39m [33mCheckCircle[39m } [36mfrom[39m [32m"lucide-react"[39m[0m
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./components/sorteo/letter-geo.tsx [Client Component Browser]
+    ./components/sorteo/main-app.tsx [Client Component Browser]
+    ./app/[locale]/page.tsx [Client Component Browser]
+    ./app/[locale]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/sorteo/letter-geo.tsx [Client Component SSR]
+    ./components/sorteo/main-app.tsx [Client Component SSR]
+    ./app/[locale]/page.tsx [Client Component SSR]
+    ./app/[locale]/page.tsx [Server Component]
+
+
+
+./components/sorteo/letter-geo.tsx:172:1
+Parsing ecmascript source code failed
+[0m [90m 170 |[39m       [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m 171 |[39m     [33m<[39m[33m/[39m[33msection[39m[33m>[39m
+[31m[1m>[22m[39m[90m 172 |[39m [33m===[39m[33m===[39m[33m=[39m
+ [90m     |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 173 |[39m [36mimport[39m { [33mCheck[39m[33m,[39m [33mShield[39m[33m,[39m [33mGamepad2[39m[33m,[39m [33mZap[39m[33m,[39m [33mHelpCircle[39m[33m,[39m [33mType[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m 174 |[39m
+ [90m 175 |[39m [36mexport[39m [36mfunction[39m [33mLetterGeo[39m() {[0m
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./components/sorteo/letter-geo.tsx [Client Component Browser]
+    ./components/sorteo/main-app.tsx [Client Component Browser]
+    ./app/[locale]/page.tsx [Client Component Browser]
+    ./app/[locale]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/sorteo/letter-geo.tsx [Client Component SSR]
+    ./components/sorteo/main-app.tsx [Client Component SSR]
+    ./app/[locale]/page.tsx [Client Component SSR]
+    ./app/[locale]/page.tsx [Server Component]
+
+
+ GET /en 500 in 7.6s (compile: 7.4s, proxy.ts: 9ms, render: 179ms)
+ ⨯ ./components/sorteo/letter-geo.tsx:4:1
+Parsing ecmascript source code failed
+[0m [90m 2 |[39m
+ [90m 3 |[39m [36mimport[39m { useTranslations } [36mfrom[39m [32m"next-intl"[39m
+[31m[1m>[22m[39m[90m 4 |[39m [33m<<[39m[33m<<[39m[33m<<[39m[33m<[39m [33mHEAD[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 5 |[39m [36mimport[39m { motion } [36mfrom[39m [32m"framer-motion"[39m
+ [90m 6 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m 7 |[39m [36mimport[39m { [33mArrowRight[39m[33m,[39m [33mType[39m[33m,[39m [33mZap[39m[33m,[39m [33mRefreshCw[39m[33m,[39m [33mSmartphone[39m[33m,[39m [33mHelpCircle[39m[33m,[39m [33mCheckCircle[39m } [36mfrom[39m [32m"lucide-react"[39m[0m
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./components/sorteo/letter-geo.tsx [Client Component Browser]
+    ./components/sorteo/main-app.tsx [Client Component Browser]
+    ./app/[locale]/page.tsx [Client Component Browser]
+    ./app/[locale]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/sorteo/letter-geo.tsx [Client Component SSR]
+    ./components/sorteo/main-app.tsx [Client Component SSR]
+    ./app/[locale]/page.tsx [Client Component SSR]
+    ./app/[locale]/page.tsx [Server Component]
+
+
+
+./components/sorteo/letter-geo.tsx:172:1
+Parsing ecmascript source code failed
+[0m [90m 170 |[39m       [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m 171 |[39m     [33m<[39m[33m/[39m[33msection[39m[33m>[39m
+[31m[1m>[22m[39m[90m 172 |[39m [33m===[39m[33m===[39m[33m=[39m
+ [90m     |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 173 |[39m [36mimport[39m { [33mCheck[39m[33m,[39m [33mShield[39m[33m,[39m [33mGamepad2[39m[33m,[39m [33mZap[39m[33m,[39m [33mHelpCircle[39m[33m,[39m [33mType[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m 174 |[39m
+ [90m 175 |[39m [36mexport[39m [36mfunction[39m [33mLetterGeo[39m() {[0m
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./components/sorteo/letter-geo.tsx [Client Component Browser]
+    ./components/sorteo/main-app.tsx [Client Component Browser]
+    ./app/[locale]/page.tsx [Client Component Browser]
+    ./app/[locale]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/sorteo/letter-geo.tsx [Client Component SSR]
+    ./components/sorteo/main-app.tsx [Client Component SSR]
+    ./app/[locale]/page.tsx [Client Component SSR]
+    ./app/[locale]/page.tsx [Server Component]
+
+
+ GET /en 500 in 44ms (compile: 26ms, proxy.ts: 4ms, render: 14ms)
+ ✓ Compiled in 120ms
+[?25h

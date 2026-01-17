@@ -1,0 +1,826 @@
+{
+  "role": "WebArea",
+  "name": "",
+  "children": [
+    {
+      "role": "button",
+      "name": "previous",
+      "disabled": true
+    },
+    {
+      "role": "text",
+      "name": "1"
+    },
+    {
+      "role": "text",
+      "name": "/"
+    },
+    {
+      "role": "text",
+      "name": "1"
+    },
+    {
+      "role": "button",
+      "name": "next",
+      "disabled": true
+    },
+    {
+      "role": "link",
+      "name": "Next.js 16.0.7 (stale) Turbopack"
+    },
+    {
+      "role": "dialog",
+      "name": "Build Error",
+      "description": "Parsing ecmascript source code failed",
+      "focused": true,
+      "modal": true,
+      "children": [
+        {
+          "role": "text",
+          "name": "Build Error"
+        },
+        {
+          "role": "button",
+          "name": "Copy Error Info",
+          "description": "Copy Error Info"
+        },
+        {
+          "role": "button",
+          "name": "No related documentation found",
+          "description": "No related documentation found",
+          "disabled": true
+        },
+        {
+          "role": "link",
+          "name": "Learn more about enabling Node.js inspector for server code with Chrome DevTools",
+          "description": "Learn more about enabling Node.js inspector for server code with Chrome DevTools"
+        },
+        {
+          "role": "text",
+          "name": "Parsing ecmascript source code failed"
+        },
+        {
+          "role": "text",
+          "name": "./components/sorteo/letter-geo.tsx (172:1)"
+        },
+        {
+          "role": "button",
+          "name": "Open in editor"
+        },
+        {
+          "role": "text",
+          "name": "Parsing"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "ecmascript"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "source"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "code"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "failed"
+        },
+        {
+          "role": "text",
+          "name": "\n"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "170"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "|"
+        },
+        {
+          "role": "text",
+          "name": "       "
+        },
+        {
+          "role": "text",
+          "name": "<"
+        },
+        {
+          "role": "text",
+          "name": "/"
+        },
+        {
+          "role": "text",
+          "name": "div"
+        },
+        {
+          "role": "text",
+          "name": ">"
+        },
+        {
+          "role": "text",
+          "name": "\n "
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "171"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "|"
+        },
+        {
+          "role": "text",
+          "name": "     "
+        },
+        {
+          "role": "text",
+          "name": "<"
+        },
+        {
+          "role": "text",
+          "name": "/"
+        },
+        {
+          "role": "text",
+          "name": "section"
+        },
+        {
+          "role": "text",
+          "name": ">"
+        },
+        {
+          "role": "text",
+          "name": "\n"
+        },
+        {
+          "role": "text",
+          "name": ">"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "172"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "|"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "==="
+        },
+        {
+          "role": "text",
+          "name": "==="
+        },
+        {
+          "role": "text",
+          "name": "="
+        },
+        {
+          "role": "text",
+          "name": "\n "
+        },
+        {
+          "role": "text",
+          "name": "     "
+        },
+        {
+          "role": "text",
+          "name": "|"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "^"
+        },
+        {
+          "role": "text",
+          "name": "^"
+        },
+        {
+          "role": "text",
+          "name": "^"
+        },
+        {
+          "role": "text",
+          "name": "^"
+        },
+        {
+          "role": "text",
+          "name": "^"
+        },
+        {
+          "role": "text",
+          "name": "^"
+        },
+        {
+          "role": "text",
+          "name": "^"
+        },
+        {
+          "role": "text",
+          "name": "\n "
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "173"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "|"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "import"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "{"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Check"
+        },
+        {
+          "role": "text",
+          "name": ","
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Shield"
+        },
+        {
+          "role": "text",
+          "name": ","
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Gamepad2"
+        },
+        {
+          "role": "text",
+          "name": ","
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Zap"
+        },
+        {
+          "role": "text",
+          "name": ","
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "HelpCircle"
+        },
+        {
+          "role": "text",
+          "name": ","
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Type"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "}"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "from"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "\"lucide-react\""
+        },
+        {
+          "role": "text",
+          "name": "\n "
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "174"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "|"
+        },
+        {
+          "role": "text",
+          "name": "\n "
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "175"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "|"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "export"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "function"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "LetterGeo"
+        },
+        {
+          "role": "text",
+          "name": "()"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "{"
+        },
+        {
+          "role": "text",
+          "name": "\n\n"
+        },
+        {
+          "role": "text",
+          "name": "Merge"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "conflict"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "marker"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "encountered."
+        },
+        {
+          "role": "text",
+          "name": "\n\n"
+        },
+        {
+          "role": "text",
+          "name": "Import"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "traces:"
+        },
+        {
+          "role": "text",
+          "name": "\n  "
+        },
+        {
+          "role": "text",
+          "name": "Client"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Component"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Browser:"
+        },
+        {
+          "role": "text",
+          "name": "\n    "
+        },
+        {
+          "role": "text",
+          "name": "./components/sorteo/letter-geo.tsx"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "[Client"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Component"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Browser]"
+        },
+        {
+          "role": "text",
+          "name": "\n    "
+        },
+        {
+          "role": "text",
+          "name": "./components/sorteo/main-app.tsx"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "[Client"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Component"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Browser]"
+        },
+        {
+          "role": "text",
+          "name": "\n    "
+        },
+        {
+          "role": "text",
+          "name": "./app/[locale]/page.tsx"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "[Client"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Component"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Browser]"
+        },
+        {
+          "role": "text",
+          "name": "\n    "
+        },
+        {
+          "role": "text",
+          "name": "./app/[locale]/page.tsx"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "[Server"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Component]"
+        },
+        {
+          "role": "text",
+          "name": "\n\n  "
+        },
+        {
+          "role": "text",
+          "name": "Client"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Component"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "SSR:"
+        },
+        {
+          "role": "text",
+          "name": "\n    "
+        },
+        {
+          "role": "text",
+          "name": "./components/sorteo/letter-geo.tsx"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "[Client"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Component"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "SSR]"
+        },
+        {
+          "role": "text",
+          "name": "\n    "
+        },
+        {
+          "role": "text",
+          "name": "./components/sorteo/main-app.tsx"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "[Client"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Component"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "SSR]"
+        },
+        {
+          "role": "text",
+          "name": "\n    "
+        },
+        {
+          "role": "text",
+          "name": "./app/[locale]/page.tsx"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "[Client"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Component"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "SSR]"
+        },
+        {
+          "role": "text",
+          "name": "\n    "
+        },
+        {
+          "role": "text",
+          "name": "./app/[locale]/page.tsx"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "[Server"
+        },
+        {
+          "role": "text",
+          "name": " "
+        },
+        {
+          "role": "text",
+          "name": "Component]"
+        }
+      ]
+    },
+    {
+      "role": "button",
+      "name": "Open Next.js Dev Tools",
+      "haspopup": "menu"
+    },
+    {
+      "role": "button",
+      "name": "Open issues overlay"
+    }
+  ]
+}

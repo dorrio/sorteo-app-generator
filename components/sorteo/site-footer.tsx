@@ -8,7 +8,7 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-border/50 w-full bg-background z-10 relative">
-      <div className="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-muted-foreground flex flex-col items-center gap-2">
+      <div className="max-w-7xl mx-auto px-4 pt-6 pb-28 md:pb-6 text-center text-sm text-muted-foreground flex flex-col items-center gap-2">
         <p>{t("footer_text")}</p>
         <nav
           className="flex flex-wrap justify-center gap-4"

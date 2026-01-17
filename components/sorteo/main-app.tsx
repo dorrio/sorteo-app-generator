@@ -57,10 +57,14 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     showWinnerCeremony,
     setShowWinnerCeremony,
     setWinner,
+    isEditorOpen,
     setIsEditorOpen,
     hasHydrated,
     updateTheme
   } = useSorteoStore()
+
+  // Calculated state for inert
+  const isOverlayOpen = isVerifyModalOpen || showWinnerCeremony || isEditorOpen || showCountdown
 
   useEffect(() => {
     setMounted(true)
@@ -226,6 +230,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
       {/* Main content */}
       <div
         className="relative z-10"
+        inert={isOverlayOpen ? "true" : undefined}
         style={{
           fontFamily:
             theme.fontFamily === "Inter" ? "var(--font-inter)" :
@@ -434,6 +439,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         {/* Footer */}
         <SiteFooter />
+        <StickyShareFooter shareContent={shareContent} translations={stickyTranslations} />
       </div>
 
       {/* Overlays */}
@@ -441,7 +447,6 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
       <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} />
       <VisualEditor />
       <VerificationModal isOpen={isVerifyModalOpen} onClose={() => setIsVerifyModalOpen(false)} />
-      <StickyShareFooter shareContent={shareContent} translations={stickyTranslations} />
     </div>
   )
 }

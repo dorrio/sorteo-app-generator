@@ -242,6 +242,18 @@ export async function GET(request: Request) {
                 <line x1="3" x2="3.01" y1="18" y2="18"/>
             </svg>
         );
+    } else if (type === 'yes-no') {
+        title = "Yes or No Wheel";
+        subtitle = "Spin for Answer • 50/50 Chance";
+        bgGradient = "radial-gradient(circle at center, #172554 0%, #020617 100%)"; // Blue Dark
+        accentColor = "#60a5fa"; // Blue 400
+        icon = (
+             <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke={accentColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <path d="M12 17h.01"/>
+            </svg>
+        );
     } else if (type === 'letter') {
         title = "Random Letter Generator";
         subtitle = "A-Z Random Picker • Alphabet Wheel";

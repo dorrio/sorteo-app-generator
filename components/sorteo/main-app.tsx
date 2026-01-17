@@ -151,14 +151,14 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareTitle = tShare('rng_title')
           shareText = tShare('rng_text')
       } else if (seoMode === 'list-randomizer') {
-          shareTitle = "List Randomizer | Sorteo Pro"
-          shareText = "Randomize lists and pick winners easily."
+          shareTitle = tShare('list_title')
+          shareText = tShare('list_text')
       } else if (seoMode === 'yes-no') {
-          shareTitle = "Yes or No Wheel | Sorteo Pro"
-          shareText = "Spin the wheel and decide! Yes or No?"
+          shareTitle = tShare('yes_no_title')
+          shareText = tShare('yes_no_text')
       } else if (seoMode === 'letter') {
-          shareTitle = "Random Letter Generator | Sorteo Pro"
-          shareText = "I just picked a random letter! A-Z Generator. 👇"
+          shareTitle = tShare('letter_title')
+          shareText = tShare('letter_text')
       }
 
       return {

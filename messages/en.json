@@ -226,7 +226,7 @@
     },
     "SEOContent": {
         "what_is_title": "What is Sorteo Pro?",
-        "what_is_text": "<b>Sorteo Pro</b> is the ultimate <b>free giveaway tool</b> for influencers and brands. It allows you to select <b>random winners</b> from unlimited lists for <b>Instagram</b>, <b>YouTube</b>, and <b>TikTok</b> contests. Featuring a <b>cryptographically secure RNG</b>, <b>Wheel of Names</b>, and <b>instant certificate verification</b>, it is the secure, no-login alternative to paid services.",
+        "what_is_text": "<b>Sorteo Pro</b> is the ultimate <b>free giveaway tool</b> for influencers and brands. It allows you to select <b>random winners</b> from unlimited lists for <insta>Instagram</insta>, <b>YouTube</b>, and <b>TikTok</b> contests. Featuring a <rng>cryptographically secure RNG</rng>, <wheel>Wheel of Names</wheel>, and <verify>instant certificate verification</verify>, it is the secure, no-login alternative to paid services.",
         "features_title": "Key Features",
         "feature_1_title": "Fair & Transparent",
         "feature_1_desc": "Uses cryptographically secure random number generation to ensure fairness.",

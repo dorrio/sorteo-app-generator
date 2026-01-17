@@ -478,7 +478,7 @@ export function VerifyContent() {
 
                                                 <Button
                                                     asChild
-                                                    className="w-full gap-2 font-bold shadow-lg hover:scale-[1.02] transition-transform"
+                                                    className="w-full gap-2 font-bold shadow-lg hover:scale-[1.02] transition-transform animate-pulse"
                                                     size="lg"
                                                     style={{
                                                         backgroundColor: theme.primaryColor,

@@ -230,7 +230,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
       {/* Main content */}
       <div
         className="relative z-10"
-        inert={isOverlayOpen ? "true" : undefined}
+        inert={isOverlayOpen ? true : undefined}
         style={{
           fontFamily:
             theme.fontFamily === "Inter" ? "var(--font-inter)" :

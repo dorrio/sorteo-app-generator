@@ -71,6 +71,13 @@ export function SiteFooter() {
           </Link>
           <span className="text-muted-foreground/30 text-xs" aria-hidden="true">•</span>
           <Link
+            href="/alternativa-wheel-of-names"
+            className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
+          >
+            {t("footer_versus_wheel_link")}
+          </Link>
+          <span className="text-muted-foreground/30 text-xs" aria-hidden="true">•</span>
+          <Link
             href="/glossary"
             className="text-muted-foreground/60 hover:text-primary transition-colors text-xs"
           >

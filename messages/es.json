@@ -421,7 +421,9 @@
         "faq_1_q": "¿Cómo funciona el Aleatorizador de Listas?",
         "faq_1_a": "Utilizamos un algoritmo de barajado Fisher-Yates impulsado por números aleatorios criptográficamente seguros para garantizar un orden verdaderamente aleatorio.",
         "faq_2_q": "¿Puedo aleatorizar nombres para un sorteo?",
-        "faq_2_a": "¡Sí! Solo pega tu lista de nombres y la herramienta elegirá un ganador o barajará toda la lista."
+        "faq_2_a": "¡Sí! Solo pega tu lista de nombres y la herramienta elegirá un ganador o barajará toda la lista.",
+        "faq_3_q": "¿Qué es un Generador de Equipos Aleatorios?",
+        "faq_3_a": "Un <strong>Generador de Equipos Aleatorios</strong> es una herramienta que divide una lista de nombres en grupos o equipos iguales. <strong>Sorteo Pro</strong> te permite barajar nombres y luego agruparlos al instante."
     },
     "ListRandomizerGeo": {
         "direct_answer_title": "¿Qué es un Aleatorizador de Listas y Equipos?",
@@ -469,6 +471,64 @@
         "faq_1_a": "Sí, utiliza un generador de números aleatorios criptográficamente seguro para garantizar una probabilidad real del 50/50.",
         "faq_2_q": "¿Puedo añadir 'Quizás'?",
         "faq_2_a": "¡Sí! Haz clic en 'Personalizar' para añadir más opciones como 'Quizás' o 'Preguntar de nuevo'."
+    },
+    "VersusWheel": {
+        "title": "Sorteo Pro vs Wheel of Names | Mejor Alternativa Gratis",
+        "description": "¿Buscas una alternativa a Wheel of Names? Sorteo Pro ofrece una mejor experiencia: sin anuncios, efectos de cine y verificación. Comparativa 2025.",
+        "header_tagline": "Comparativa 2025",
+        "header_title_part1": "La Alternativa Definitiva a",
+        "header_title_part2": "Wheel of Names",
+        "header_desc": "Analizamos Wheel of Names vs Sorteo Pro. Descubre por qué los usuarios se cambian a la experiencia premium sin anuncios.",
+        "direct_answer_title": "¿Cuál es la mejor alternativa a Wheel of Names?",
+        "direct_answer_text": "<strong>Sorteo Pro</strong> es la mejor <strong>alternativa gratuita a Wheel of Names</strong>. Mientras que Wheel of Names está llena de anuncios y tiene un diseño básico, Sorteo Pro es <strong>100% sin anuncios</strong>, cuenta con <strong>temas cinematográficos</strong> y proporciona un <strong>Certificado de Validez</strong> oficial.",
+        "table": {
+            "feature": "Característica",
+            "us": "Sorteo Pro",
+            "them": "Wheel of Names",
+            "row_price": "Precio",
+            "row_price_us": "100% GRATIS",
+            "row_price_us_desc": "Sin anuncios, sin suscripciones",
+            "row_price_them": "Gratis (Con Anuncios)",
+            "row_price_them_desc": "Contiene anuncios visuales",
+            "row_limits": "Rendimiento",
+            "row_limits_us": "Alto Rendimiento",
+            "row_limits_us_desc": "Soporta 10k+ nombres",
+            "row_limits_them": "Limitado",
+            "row_limits_them_desc": "Lento con muchos nombres",
+            "row_design": "Visuales",
+            "row_design_us": "Cinematográfico",
+            "row_design_us_desc": "Moderno e Inmersivo",
+            "row_design_them": "Básico",
+            "row_design_them_desc": "Estilo web anticuado",
+            "row_login": "Registro",
+            "row_login_us": "No Requerido",
+            "row_login_us_desc": "Auto-guardado en navegador",
+            "row_login_them": "Requerido para Guardar",
+            "row_login_them_desc": "Debes crear cuenta"
+        },
+        "why_us": {
+            "title": "¿Por qué cambiar de Wheel of Names?",
+            "p1": "Wheel of Names es un clásico, pero está atrapado en el pasado. Está lleno de anuncios y ralentiza tu ordenador cuando tienes demasiados nombres.",
+            "p2": "Sorteo Pro está construido para 2025. Usamos la última tecnología web para asegurar giros fluidos, incluso con miles de participantes, y nunca mostramos anuncios.",
+            "title_2": "La Elección Profesional para Streamers",
+            "p3": "Si eres streamer o creador de contenido, no puedes permitirte mostrar herramientas de baja calidad con anuncios en tu transmisión. Sorteo Pro se ve profesional y premium.",
+            "direct_answer_title": "¿Por qué Sorteo Pro es mejor que Wheel of Names?",
+            "direct_answer_text": "Sorteo Pro es mejor que <strong>Wheel of Names</strong> porque ofrece una <strong>experiencia premium sin anuncios</strong> con visuales modernos. También incluye <strong>verificación instantánea</strong> para probar la imparcialidad a tu audiencia, algo que le falta a Wheel of Names."
+        },
+        "cta": {
+            "title": "Mejora tus sorteos.",
+            "subtitle": "Cámbiate a Sorteo Pro hoy.",
+            "button": "Girar la Mejor Ruleta"
+        },
+        "faq": {
+            "title": "Preguntas Frecuentes",
+            "q1": "¿Es Sorteo Pro realmente gratis sin anuncios?",
+            "a1": "Sí, a diferencia de Wheel of Names, <strong>Sorteo Pro</strong> no muestra ningún banner publicitario ni ventanas emergentes.",
+            "q2": "¿Puedo importar mis listas de Wheel of Names?",
+            "a2": "¡Sí! Puedes copiar tu lista de Wheel of Names (o Excel) y pegarla directamente en Sorteo Pro.",
+            "q3": "¿Es tan aleatorio como Wheel of Names?",
+            "a3": "Es incluso mejor. Utilizamos un RNG criptográficamente seguro que es verificable, asegurando 100% de imparcialidad."
+        }
     },
     "LetterGeoPage": {
         "title": "Generador de Letras Aleatorias | ABC Picker",

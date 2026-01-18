@@ -1,7 +1,11 @@
 import { useTranslations } from 'next-intl';
 
-export const VersusFAQ = () => {
-  const t = useTranslations('Versus.faq');
+interface VersusFAQProps {
+  namespace?: string;
+}
+
+export const VersusFAQ = ({ namespace = 'Versus.faq' }: VersusFAQProps) => {
+  const t = useTranslations(namespace);
 
   const faqData = [
     {

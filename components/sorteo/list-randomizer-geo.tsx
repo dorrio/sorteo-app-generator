@@ -24,6 +24,10 @@ export function ListRandomizerGeo() {
       question: tFaq("faq_2_q"),
       answer: tFaq("faq_2_a"),
     },
+    {
+      question: tFaq("faq_3_q"),
+      answer: tFaq("faq_3_a"),
+    },
   ]
 
   const howToSteps = [

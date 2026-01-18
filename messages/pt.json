@@ -17,6 +17,7 @@
         "footer_link_yesno": "Roleta Sim ou Não",
         "footer_link_letter": "Gerador de Letras",
         "footer_versus_link": "Alternativa ao AppSorteos",
+        "footer_versus_wheel_link": "Alternativa ao Wheel of Names",
         "footer_glossary": "Glossário",
         "customize_hint": "🎨 Personalizar Sorteio"
     },
@@ -420,7 +421,9 @@
         "faq_1_q": "Como funciona o Aleatorizador de Listas?",
         "faq_1_a": "Usamos um algoritmo de embaralhamento Fisher-Yates impulsionado por números aleatórios criptograficamente seguros para garantir uma ordem verdadeiramente aleatória.",
         "faq_2_q": "Posso aleatorizar nomes para um sorteio?",
-        "faq_2_a": "Sim! Basta colar sua lista de nomes e a ferramenta escolherá um vencedor ou embaralhe toda a lista."
+        "faq_2_a": "Sim! Basta colar sua lista de nomes e a ferramenta escolherá um vencedor ou embaralhe toda a lista.",
+        "faq_3_q": "O que é um Gerador de Equipes Aleatórias?",
+        "faq_3_a": "Um <strong>Gerador de Equipes Aleatórias</strong> é uma ferramenta que divide uma lista de nomes em grupos ou equipes iguais. O <strong>Sorteo Pro</strong> permite embaralhar nomes e agrupá-los instantaneamente."
     },
     "ListRandomizerGeo": {
         "direct_answer_title": "O que é um Aleatorizador de Listas e Equipes?",
@@ -468,6 +471,64 @@
         "faq_1_a": "Sim, ela usa um gerador de números aleatórios criptograficamente seguro para garantir uma probabilidade real de 50/50.",
         "faq_2_q": "Posso adicionar 'Talvez'?",
         "faq_2_a": "Sim! Clique em 'Personalizar' para adicionar mais opções como 'Talvez' ou 'Pergunte de novo'."
+    },
+    "VersusWheel": {
+        "title": "Sorteo Pro vs Wheel of Names | Melhor Alternativa Grátis",
+        "description": "Procurando uma alternativa ao Wheel of Names? O Sorteo Pro oferece uma experiência melhor: sem anúncios, efeitos cinematográficos e verificação. Comparativo 2025.",
+        "header_tagline": "Comparativo 2025",
+        "header_title_part1": "A Alternativa Definitiva ao",
+        "header_title_part2": "Wheel of Names",
+        "header_desc": "Analisamos Wheel of Names vs Sorteo Pro. Veja por que os usuários estão mudando para a experiência premium sem anúncios.",
+        "direct_answer_title": "Qual é a melhor alternativa ao Wheel of Names?",
+        "direct_answer_text": "O <strong>Sorteo Pro</strong> é a melhor <strong>alternativa gratuita ao Wheel of Names</strong>. Enquanto o Wheel of Names está cheio de anúncios e tem um design básico, o Sorteo Pro é <strong>100% sem anúncios</strong>, possui <strong>temas cinematográficos</strong> e fornece um <strong>Certificado de Validade</strong> oficial.",
+        "table": {
+            "feature": "Recurso",
+            "us": "Sorteo Pro",
+            "them": "Wheel of Names",
+            "row_price": "Preço",
+            "row_price_us": "100% GRÁTIS",
+            "row_price_us_desc": "Sem anúncios, sem assinaturas",
+            "row_price_them": "Grátis (Com Anúncios)",
+            "row_price_them_desc": "Contém anúncios visuais",
+            "row_limits": "Desempenho",
+            "row_limits_us": "Alto Desempenho",
+            "row_limits_us_desc": "Suporta 10k+ nomes",
+            "row_limits_them": "Limitado",
+            "row_limits_them_desc": "Lento com muitos nomes",
+            "row_design": "Visuais",
+            "row_design_us": "Cinematográfico",
+            "row_design_us_desc": "Moderno e Imersivo",
+            "row_design_them": "Básico",
+            "row_design_them_desc": "Estilo web antigo",
+            "row_login": "Login",
+            "row_login_us": "Não Exigido",
+            "row_login_us_desc": "Salva no navegador",
+            "row_login_them": "Exigido para Salvar",
+            "row_login_them_desc": "Deve criar conta"
+        },
+        "why_us": {
+            "title": "Por que mudar do Wheel of Names?",
+            "p1": "O Wheel of Names é um clássico, mas está preso no passado. É cheio de anúncios e deixa seu computador lento quando você tem muitos nomes.",
+            "p2": "O Sorteo Pro foi construído para 2025. Usamos a tecnologia web mais recente para garantir giros suaves, mesmo com milhares de participantes, e nunca mostramos anúncios.",
+            "title_2": "A Escolha Profissional para Streamers",
+            "p3": "Se você é streamer ou criador de conteúdo, não pode se dar ao luxo de mostrar ferramentas de baixa qualidade com anúncios em sua transmissão. O Sorteo Pro parece profissional e premium.",
+            "direct_answer_title": "Por que o Sorteo Pro é melhor que o Wheel of Names?",
+            "direct_answer_text": "O Sorteo Pro é melhor que o <strong>Wheel of Names</strong> porque oferece uma <strong>experiência premium sem anúncios</strong> com visuais modernos. Também inclui <strong>verificação instantânea</strong> para provar a imparcialidade ao seu público, algo que falta ao Wheel of Names."
+        },
+        "cta": {
+            "title": "Melhore seus sorteios.",
+            "subtitle": "Mude para o Sorteo Pro hoje.",
+            "button": "Girar a Melhor Roleta"
+        },
+        "faq": {
+            "title": "Perguntas Frequentes",
+            "q1": "O Sorteo Pro é realmente grátis sem anúncios?",
+            "a1": "Sim, ao contrário do Wheel of Names, o <strong>Sorteo Pro</strong> não exibe nenhum banner publicitário ou pop-up.",
+            "q2": "Posso importar minhas listas do Wheel of Names?",
+            "a2": "Sim! Você pode copiar sua lista do Wheel of Names (ou Excel) e colá-la diretamente no Sorteo Pro.",
+            "q3": "É tão aleatório quanto o Wheel of Names?",
+            "a3": "É ainda melhor. Usamos um RNG criptograficamente seguro que é verificável, garantindo 100% de imparcialidade."
+        }
     },
     "LetterGeoPage": {
         "title": "Gerador de Letras Aleatórias | ABC Picker",
@@ -541,28 +602,5 @@
         "description": "Gere uma letra aleatória de A a Z instantaneamente. Perfeito para jogos como Adedonha, Stop ou Scattergories. Grátis.",
         "h1": "Gerador de Letras Aleatórias",
         "subtitle": "Gire para escolher uma letra do alfabeto aleatoriamente."
-    },
-    "LetterGeo": {
-        "direct_answer_title": "O que é um Gerador de Letras Aleatórias?",
-        "direct_answer_text": "Um <strong>Gerador de Letras Aleatórias</strong> é uma ferramenta que escolhe uma letra do alfabeto (A-Z) puramente ao acaso. É comumente usado para jogos educativos, jogos de palavras como <strong>Adedonha</strong> ou <strong>Stop</strong>. O <strong>Sorteo Pro</strong> garante aleatoriedade real.",
-        "cta_button": "Escolher Letra",
-        "feature_1_title": "Alfabeto Completo",
-        "feature_1_desc": "Inclui todas as letras do alfabeto.",
-        "feature_2_title": "Justo e Aleatório",
-        "feature_2_desc": "Probabilidade igual para cada letra.",
-        "feature_3_title": "Pronto para Jogar",
-        "feature_3_desc": "Perfeito para Adedonha ou Stop.",
-        "feature_4_title": "Giro Instantâneo",
-        "feature_4_desc": "Sem espera, sem anúncios.",
-        "how_to_title": "Como gerar uma letra aleatória",
-        "how_to_step_1": "O gerador já vem com as letras de A a Z.",
-        "how_to_step_2": "Clique em 'Iniciar Sorteio' para girar.",
-        "how_to_step_3": "Aguarde a seleção da letra aleatória.",
-        "how_to_step_4": "Use a letra para o seu jogo!",
-        "faq_title": "Perguntas Frequentes",
-        "faq_1_q": "É realmente aleatório?",
-        "faq_1_a": "Sim, usamos um gerador seguro para escolher a letra.",
-        "faq_2_q": "Posso remover letras?",
-        "faq_2_a": "Sim, clique em 'Personalizar' para editar a lista e remover letras difíceis se desejar."
     }
 }

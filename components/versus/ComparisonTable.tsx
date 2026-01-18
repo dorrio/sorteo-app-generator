@@ -55,8 +55,12 @@ const ComparisonRow = ({
   );
 };
 
-export const ComparisonTable = () => {
-  const t = useTranslations('Versus.table');
+interface ComparisonTableProps {
+  namespace?: string;
+}
+
+export const ComparisonTable = ({ namespace = 'Versus.table' }: ComparisonTableProps) => {
+  const t = useTranslations(namespace);
 
   return (
     <div

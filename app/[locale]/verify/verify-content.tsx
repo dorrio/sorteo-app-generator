@@ -19,6 +19,7 @@ export function VerifyContent() {
     const { theme, pastWinners } = useSorteoStore()
     const searchParams = useSearchParams()
     const initialId = searchParams.get("id") || ""
+    const type = searchParams.get("type")
 
     const [inputId, setInputId] = useState(initialId)
     const [result, setResult] = useState<{
@@ -194,6 +195,15 @@ export function VerifyContent() {
             window.open(imageUrl, '_blank')
         }
     }
+
+    // Viralis: Dynamic return URL to close the viral loop contextually
+    let returnUrl = "/"
+    if (type === 'wheel') returnUrl = "/wheel-of-names"
+    else if (type === 'instagram') returnUrl = "/instagram-comment-picker"
+    else if (type === 'rng') returnUrl = "/random-number-generator"
+    else if (type === 'list-randomizer') returnUrl = "/list-randomizer"
+    else if (type === 'yes-no') returnUrl = "/yes-or-no-wheel"
+    else if (type === 'letter') returnUrl = "/random-letter-generator"
 
     return (
         <div
@@ -488,7 +498,7 @@ export function VerifyContent() {
                                                         boxShadow: `0 4px 15px ${theme.primaryColor}30`
                                                     }}
                                                 >
-                                                    <Link href="/">
+                                                    <Link href={returnUrl}>
                                                         <Sparkles className="w-4 h-4" />
                                                         {t("create_your_own")}
                                                     </Link>
@@ -538,7 +548,7 @@ export function VerifyContent() {
                                 color: theme.backgroundColor
                             }}
                         >
-                            <Link href="/">
+                            <Link href={returnUrl}>
                                 <Sparkles className="w-4 h-4 mr-2" />
                                 {t("create_your_own")}
                             </Link>

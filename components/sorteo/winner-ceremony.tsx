@@ -23,9 +23,10 @@ import {
 interface WinnerCeremonyProps {
   onClose: () => void
   onNewSorteo: () => void
+  seoMode?: string
 }
 
-export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
+export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremonyProps) {
   const { winner, theme, showWinnerCeremony } = useSorteoStore()
   const t = useTranslations("WinnerCeremony")
   const [showContent, setShowContent] = useState(false)
@@ -49,9 +50,14 @@ export function WinnerCeremony({ onClose, onNewSorteo }: WinnerCeremonyProps) {
 
   // Viral Optimization: Create a deep link to the verification page
   const baseUrl = typeof window !== "undefined" ? window.location.origin : ""
-  const shareUrl = winner.verificationId
+  let shareUrl = winner.verificationId
     ? `${baseUrl}/${locale}/verify?id=${winner.verificationId}&name=${encodeURIComponent(winner.name)}`
     : typeof window !== "undefined" ? window.location.href : ""
+
+  // Viralis: Append tool type context to maintain the loop
+  if (winner.verificationId && seoMode && seoMode !== 'home') {
+      shareUrl += `&type=${seoMode}`
+  }
 
   // Compelling share text
   const shareText = t("share_text", { name: winner.name })

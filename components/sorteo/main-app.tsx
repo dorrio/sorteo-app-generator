@@ -444,7 +444,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
       {/* Overlays */}
       <CountdownAnimation onComplete={handleCountdownComplete} />
-      <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} />
+      <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} seoMode={seoMode} />
       <VisualEditor />
       <VerificationModal isOpen={isVerifyModalOpen} onClose={() => setIsVerifyModalOpen(false)} />
     </div>

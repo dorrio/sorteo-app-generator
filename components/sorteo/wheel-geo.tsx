@@ -197,6 +197,7 @@ export function WheelGeo() {
              onClick={handleTryWheel}
              aria-label={t('cta_button')}
            >
+                <span className="sr-only">{t('cta_button')}</span>
                 <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}

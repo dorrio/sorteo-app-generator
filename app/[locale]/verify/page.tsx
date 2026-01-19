@@ -10,7 +10,7 @@ type Props = {
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
     const { locale } = await params
-    const { id, name } = await searchParams
+    const { id, name, type } = await searchParams
     const t = await getTranslations({ locale, namespace: "Metadata" })
 
     // Fallback URL logic:
@@ -66,6 +66,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     const ogParams = new URLSearchParams()
     if (winnerName) ogParams.set("name", winnerName)
     if (dateStr) ogParams.set("date", dateStr)
+    if (typeof type === "string" && type) ogParams.set("type", type)
 
     const ogImageUrl = `${baseUrl}/api/og?${ogParams.toString()}`
 

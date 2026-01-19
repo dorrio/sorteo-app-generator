@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Shuffle, List, Zap, Eye, HelpCircle, CheckCircle } from "lucide-react"
+import { ArrowRight, Shuffle, List, Zap, Eye, HelpCircle, CheckCircle, GraduationCap, Users, Gamepad2 } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 
 export function ListRandomizerGeo() {
@@ -128,6 +128,28 @@ export function ListRandomizerGeo() {
               <p className="text-muted-foreground">{t("feature_4_desc")}</p>
             </li>
           </ul>
+
+          {/* Popular Uses Section (New) */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold mb-8 text-center">{t("uses_title")}</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+                <div className="bg-background/40 p-6 rounded-2xl border border-primary/10 hover:border-primary/30 transition-colors">
+                    <GraduationCap className="w-8 h-8 text-primary mb-4" />
+                    <h4 className="font-bold text-lg mb-2">{t("use_1_title")}</h4>
+                    <p className="text-sm text-muted-foreground">{t("use_1_desc")}</p>
+                </div>
+                <div className="bg-background/40 p-6 rounded-2xl border border-primary/10 hover:border-primary/30 transition-colors">
+                    <Users className="w-8 h-8 text-primary mb-4" />
+                    <h4 className="font-bold text-lg mb-2">{t("use_2_title")}</h4>
+                    <p className="text-sm text-muted-foreground">{t("use_2_desc")}</p>
+                </div>
+                 <div className="bg-background/40 p-6 rounded-2xl border border-primary/10 hover:border-primary/30 transition-colors">
+                    <Gamepad2 className="w-8 h-8 text-primary mb-4" />
+                    <h4 className="font-bold text-lg mb-2">{t("use_3_title")}</h4>
+                    <p className="text-sm text-muted-foreground">{t("use_3_desc")}</p>
+                </div>
+            </div>
+          </div>
 
           {/* How To Section (New) */}
           <div className="mb-16 border-t border-primary/10 pt-10">

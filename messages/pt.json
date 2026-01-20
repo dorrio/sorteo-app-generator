@@ -408,6 +408,8 @@
     "RngPage": {
         "title": "Gerador de Números Aleatórios | RNG Grátis e Seguro",
         "description": "Gere números aleatórios instantaneamente com o Sorteio Pro. Gerador de números gratuito, seguro e personalizável para jogos, loterias e uso científico.",
+        "h1": "Gerador de Números Aleatórios",
+        "subtitle": "Gere números aleatórios instantaneamente usando um algoritmo seguro.",
         "faq_1_q": "Este RNG é realmente aleatório?",
         "faq_1_a": "Sim, usamos um gerador de números pseudoaleatórios criptograficamente seguro (CSPRNG), que é o padrão da indústria para justiça.",
         "faq_2_q": "Existe limite de quantos números posso gerar?",

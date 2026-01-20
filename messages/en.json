@@ -414,6 +414,8 @@
     "RngPage": {
         "title": "Random Number Generator | Free & Secure RNG",
         "description": "Generate random numbers instantly with Sorteo Pro. Free, secure, and customizable random number generator for games, lotteries, and scientific use.",
+        "h1": "Random Number Generator",
+        "subtitle": "Generate random numbers instantly using a secure algorithm.",
         "faq_1_q": "Is this RNG truly random?",
         "faq_1_a": "Yes, we use a cryptographically secure pseudo-random number generator (CSPRNG) which is the industry standard for fairness.",
         "faq_2_q": "Is there a limit to how many numbers I can generate?",

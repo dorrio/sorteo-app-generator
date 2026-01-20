@@ -40,6 +40,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
   const tLetter = useTranslations("LetterGeneratorPage")
+  const tRng = useTranslations("RngPage")
+  const tList = useTranslations("ListRandomizerPage")
+  const tInstagram = useTranslations("InstagramPicker")
+  const tWheel = useTranslations("WheelGeoPage")
   const tMeta = useTranslations("Metadata")
   const tWinner = useTranslations("WinnerCeremony")
   const tShare = useTranslations("ShareContent")
@@ -76,6 +80,18 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         } else if (seoMode === 'letter') {
             update.customTitle = tLetter('h1')
             update.customSubtitle = tLetter('subtitle')
+        } else if (seoMode === 'rng') {
+            update.customTitle = tRng('h1')
+            update.customSubtitle = tRng('subtitle')
+        } else if (seoMode === 'list-randomizer') {
+            update.customTitle = tList('h1')
+            update.customSubtitle = tList('subtitle')
+        } else if (seoMode === 'instagram') {
+            update.customTitle = tInstagram('h1')
+            update.customSubtitle = tInstagram('subtitle')
+        } else if (seoMode === 'wheel') {
+            update.customTitle = tWheel('h1')
+            update.customSubtitle = tWheel('subtitle')
         }
         updateTheme(update)
     }
@@ -84,7 +100,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
   useEffect(() => {
-      if ((initialStyle === 'roulette' || initialStyle === 'slot') && mounted && hasHydrated && participants.length === 0) {
+      if (initialStyle && mounted && hasHydrated && participants.length === 0) {
           if (seoMode === 'yes-no') {
               addParticipants([
                   { name: tYesNo('option_yes') },
@@ -93,6 +109,19 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           } else if (seoMode === 'letter') {
               const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
               addParticipants(alphabet.map(l => ({ name: l })))
+          } else if (seoMode === 'rng') {
+              const numbers = Array.from({ length: 10 }, (_, i) => ({ name: (i + 1).toString() }))
+              addParticipants(numbers)
+          } else if (seoMode === 'list-randomizer') {
+              addParticipants([
+                  { name: "Team A" },
+                  { name: "Team B" },
+                  { name: "Team C" },
+                  { name: "Team D" },
+                  { name: "Team E" }
+              ])
+          } else if (seoMode === 'instagram') {
+              // Intentionally left empty or specific instruction could be added
           } else {
               addParticipants([
                   { name: "Option 1" },

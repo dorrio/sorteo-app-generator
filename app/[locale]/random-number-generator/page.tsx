@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t('title'),
     description: t('description'),
-    keywords: ["random number generator", "RNG", "number picker", "randomizer", "generador de numeros", "numero aleatorio", "gerador de numeros"],
+    keywords: ["random number generator", "RNG", "number picker", "randomizer", "generador de numeros", "numero aleatorio", "gerador de numeros", "dice roller", "roll a dice", "online dice"],
     alternates: {
       canonical: `/${locale}/random-number-generator`
     },

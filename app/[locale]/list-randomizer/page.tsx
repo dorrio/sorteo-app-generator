@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t('title'),
     description: t('description'),
-    keywords: ["list randomizer", "list shuffler", "randomize list", "random picker", "shuffle names", "aleatorizar lista", "barajar lista", "embaralhar lista", "random team generator", "team maker", "split into teams", "generador de equipos aleatorios", "creador de equipos", "gerador de times aleatorios", "scrum randomizer", "student grouper", "random order generator", "team splitter", "pair generator"],
+    keywords: ["list randomizer", "list shuffler", "randomize list", "random picker", "shuffle names", "aleatorizar lista", "barajar lista", "embaralhar lista", "random team generator", "team maker", "split into teams", "generador de equipos aleatorios", "creador de equipos", "gerador de times aleatorios", "scrum randomizer", "student grouper", "random order generator", "team splitter", "pair generator", "secret santa generator", "tournament bracket generator", "random pairing"],
     alternates: {
       canonical: `/${locale}/list-randomizer`
     },

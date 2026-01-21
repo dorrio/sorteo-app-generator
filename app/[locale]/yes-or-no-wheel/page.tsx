@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t('title'),
     description: t('description'),
-    keywords: ["yes or no wheel", "yes no picker", "decision wheel", "spin the wheel yes or no", "ruleta si o no", "roleta sim ou nao", "decision maker"],
+    keywords: ["yes or no wheel", "yes no picker", "decision wheel", "spin the wheel yes or no", "ruleta si o no", "roleta sim ou nao", "decision maker", "flip a coin", "heads or tails", "cara o cruz", "flip coin online"],
     alternates: {
       canonical: `/${locale}/yes-or-no-wheel`
     },

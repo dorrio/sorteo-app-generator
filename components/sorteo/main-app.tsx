@@ -40,6 +40,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
   const tLetter = useTranslations("LetterGeneratorPage")
+  const tRng = useTranslations("RngPage")
+  const tList = useTranslations("ListRandomizerPage")
+  const tInsta = useTranslations("InstagramPicker")
+  const tWheel = useTranslations("WheelGeoPage")
   const tMeta = useTranslations("Metadata")
   const tWinner = useTranslations("WinnerCeremony")
   const tShare = useTranslations("ShareContent")
@@ -76,6 +80,18 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         } else if (seoMode === 'letter') {
             update.customTitle = tLetter('h1')
             update.customSubtitle = tLetter('subtitle')
+        } else if (seoMode === 'rng') {
+            update.customTitle = tRng('h1')
+            update.customSubtitle = tRng('subtitle')
+        } else if (seoMode === 'list-randomizer') {
+            update.customTitle = tList('h1')
+            update.customSubtitle = tList('subtitle')
+        } else if (seoMode === 'instagram') {
+            update.customTitle = tInsta('h1')
+            update.customSubtitle = tInsta('subtitle')
+        } else if (seoMode === 'wheel') {
+            update.customTitle = tWheel('h1')
+            update.customSubtitle = tWheel('subtitle')
         }
         updateTheme(update)
     }

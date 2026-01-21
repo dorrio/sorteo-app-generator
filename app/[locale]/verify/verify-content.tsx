@@ -174,6 +174,10 @@ export function VerifyContent() {
         }
         ogParams.set("date", dateToUse.toISOString())
 
+        if (typeof type === "string") {
+            ogParams.set("type", type)
+        }
+
         const imageUrl = `/api/og?${ogParams.toString()}`
 
         try {

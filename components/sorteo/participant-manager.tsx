@@ -97,6 +97,7 @@ function DuplicateItem({
         <Tooltip>
           <TooltipTrigger asChild>
             <button
+              type="button"
               onClick={() => onRemove(index)}
               className="p-2 rounded-md hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
               aria-label={t("delete_action")}
@@ -213,17 +214,20 @@ const ParticipantItem = memo(function ParticipantItem({
         </div>
       ) : (
         <>
-          <span
-            className="flex-1 truncate cursor-pointer hover:underline decoration-dotted underline-offset-4"
+          <button
+            type="button"
+            className="flex-1 truncate cursor-pointer hover:underline decoration-dotted underline-offset-4 text-left bg-transparent border-none p-0 font-inherit"
             onClick={() => onStartEdit(participant.id)}
             title={t("edit_tooltip")}
+            aria-label={`${t("edit_action")} ${participant.name}`}
           >
             {participant.name}
-          </span>
+          </button>
           <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
             <Tooltip>
               <TooltipTrigger asChild>
                 <button
+                  type="button"
                   onClick={() => onStartEdit(participant.id)}
                   className="p-1.5 rounded hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
                   aria-label={t("edit_action")}
@@ -238,6 +242,7 @@ const ParticipantItem = memo(function ParticipantItem({
             <Tooltip>
               <TooltipTrigger asChild>
                 <button
+                  type="button"
                   onClick={() => onRemove(participant.id)}
                   className="p-1.5 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
                   aria-label={t("delete_action")}
@@ -529,6 +534,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
               { mode: "csv" as InputMode, label: t("input_mode.csv"), icon: FileSpreadsheet },
             ].map(({ mode, label, icon: Icon }) => (
               <button
+                type="button"
                 key={mode}
                 onClick={() => setInputMode(mode)}
                 role="tab"
@@ -625,6 +631,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                   className="hidden"
                 />
                 <button
+                  type="button"
                   onClick={() => fileInputRef.current?.click()}
                   className="w-full border-2 border-dashed border-border rounded-lg p-4 flex flex-col items-center gap-2 hover:border-primary/50 transition-colors"
                 >
@@ -666,6 +673,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
             { mode: "csv" as InputMode, label: t("input_mode.csv"), icon: FileSpreadsheet },
           ].map(({ mode, label, icon: Icon }) => (
             <button
+              type="button"
               key={mode}
               onClick={() => setInputMode(mode)}
               role="tab"
@@ -769,6 +777,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
             >
               <input ref={fileInputRef} type="file" accept=".csv,.txt" onChange={handleCSVUpload} className="hidden" />
               <button
+                type="button"
                 onClick={() => fileInputRef.current?.click()}
                 className="w-full border-2 border-dashed border-border rounded-lg p-8 flex flex-col items-center gap-3 hover:border-primary/50 transition-colors"
               >

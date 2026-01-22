@@ -123,7 +123,13 @@ export function VerifyContent() {
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://sorteopro.com"
     const winnerName = result?.participant?.name || searchParams.get("name") || "Someone"
     // Use inputId as the verified ID source when result is present
-    const shareUrl = `${baseUrl}/${locale}/verify?id=${inputId}&name=${encodeURIComponent(winnerName)}`
+    let shareUrl = `${baseUrl}/${locale}/verify?id=${inputId}&name=${encodeURIComponent(winnerName)}`
+
+    // Viralis Fix: Persist tool context in shared link
+    if (type) {
+        shareUrl += `&type=${encodeURIComponent(type)}`
+    }
+
     const shareText = t("share_proof_text", { name: winnerName })
 
     // Pre-calculate intent URLs for semantic <a> tags

@@ -17,7 +17,7 @@ module.exports = {
             changefreq = 'daily';
         }
         // Competitor Alternatives (High Value) & Semantic Hubs (Glossary)
-        else if (path.includes('alternativa-') || path.includes('instagram-comment-picker') || path.includes('wheel-of-names') || path.includes('glossary') || path.includes('random-number-generator') || path.includes('list-randomizer') || path.includes('yes-or-no-wheel') || path.includes('random-letter-generator')) {
+        else if (path.includes('alternativa-') || path.includes('instagram-comment-picker') || path.includes('wheel-of-names') || path.includes('glossary') || path.includes('random-number-generator') || path.includes('list-randomizer') || path.includes('yes-or-no-wheel') || path.includes('random-letter-generator') || path.includes('versus')) {
             priority = 0.9;
             changefreq = 'weekly';
         }

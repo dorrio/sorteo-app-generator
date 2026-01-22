@@ -307,11 +307,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         <main id="sorteo-section" className="max-w-7xl mx-auto px-4 py-8">
           <div className="grid lg:grid-cols-[1fr,400px] gap-8">
             {/* Sorteo area */}
-            <motion.div
+            <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="space-y-8"
+              aria-label="Main Tool Area"
             >
               {/* Title */}
               <div className="text-center space-y-2">
@@ -374,10 +375,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               {participants.length < 2 && participants.length > 0 && (
                 <p className="text-center text-sm text-muted-foreground">{t("min_participants_warning")}</p>
               )}
-            </motion.div>
+            </motion.section>
 
             {/* Sidebar */}
-            <motion.div
+            <motion.aside
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
@@ -403,7 +404,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               <div className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-6">
                 <HistoryPanel />
               </div>
-            </motion.div>
+            </motion.aside>
           </div>
         </main>
 

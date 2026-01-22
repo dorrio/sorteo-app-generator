@@ -1,7 +1,7 @@
 "use client"
 
 import { useLocale, useTranslations } from "next-intl"
-import { usePathname, useRouter } from "@/i18n/routing"
+import { usePathname, Link } from "@/i18n/routing"
 import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
@@ -13,13 +13,8 @@ import { Languages } from "lucide-react"
 
 export function LanguageSwitcher() {
     const locale = useLocale()
-    const router = useRouter()
     const pathname = usePathname()
     const t = useTranslations("LanguageSwitcher")
-
-    const handleLocaleChange = (newLocale: string) => {
-        router.replace(pathname, { locale: newLocale })
-    }
 
     const languages = [
         { code: "en", label: "English" },
@@ -39,10 +34,12 @@ export function LanguageSwitcher() {
                 {languages.map((lang) => (
                     <DropdownMenuItem
                         key={lang.code}
-                        onClick={() => handleLocaleChange(lang.code)}
+                        asChild
                         className={locale === lang.code ? "bg-accent" : ""}
                     >
-                        {lang.label}
+                        <Link href={pathname} locale={lang.code}>
+                            {lang.label}
+                        </Link>
                     </DropdownMenuItem>
                 ))}
             </DropdownMenuContent>

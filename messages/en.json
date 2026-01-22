@@ -617,5 +617,83 @@
         "description": "Generate a random letter from A to Z instantly. Free, fair, and perfect for games like Scattergories. No ads.",
         "h1": "Random Letter Generator",
         "subtitle": "Spin to pick a random letter from the alphabet."
+    },
+    "VersusHubPage": {
+        "title": "Sorteo Pro Alternatives & Comparisons",
+        "description": "Compare Sorteo Pro with other giveaway tools. Discover why Sorteo Pro is the best free alternative to Wheel of Names, AppSorteos, and more.",
+        "tagline": "Battle Arena",
+        "h1": "Sorteo Pro vs The World",
+        "subtitle": "Unbiased comparisons to help you choose the best tool for your giveaways.",
+        "direct_answer_title": "Why choose Sorteo Pro?",
+        "direct_answer_text": "<strong>Sorteo Pro</strong> stands out as the only <strong>100% free</strong> giveaway platform that offers <strong>cinematic animations</strong>, <strong>instant verification certificates</strong>, and <strong>unlimited participants</strong> without requiring user registration or showing intrusive ads.",
+        "comparisons_title": "Detailed Comparisons",
+        "comp_1_title": "Sorteo Pro vs Wheel of Names",
+        "comp_1_desc": "The battle of the wheels. See why our ad-free, cinematic wheel is the new standard for streamers.",
+        "comp_2_title": "Sorteo Pro vs AppSorteos",
+        "comp_2_desc": "Need an Instagram comment picker? Don't pay for limits. See the free alternative.",
+        "read_comparison": "Read Comparison",
+        "why_switch_title": "Why creators are switching",
+        "feature_1_title": "No Ads",
+        "feature_1_desc": "Your streams deserve a clean, professional look.",
+        "feature_2_title": "Verified",
+        "feature_2_desc": "Prove to your audience that the result is fair.",
+        "feature_3_title": "Premium",
+        "feature_3_desc": "Cinematic 3D effects that impress everyone."
+    },
+    "VersusWheel": {
+        "title": "Sorteo Pro vs Wheel of Names | Best Free Alternative (No Ads)",
+        "description": "Looking for a Wheel of Names alternative? Sorteo Pro offers a better experience: No ads, cinematic effects, and instant verification. 2025 Comparison.",
+        "header_tagline": "2025 Comparison",
+        "header_title_part1": "The Ultimate Wheel of Names",
+        "header_title_part2": "Alternative",
+        "header_desc": "We analyze Wheel of Names vs Sorteo Pro. See why users are switching to the premium, ad-free experience.",
+        "direct_answer_title": "What is the best alternative to Wheel of Names?",
+        "direct_answer_text": "<strong>Sorteo Pro</strong> is the best <strong>free Wheel of Names alternative</strong>. While Wheel of Names is cluttered with ads and has a basic design, Sorteo Pro is <strong>100% ad-free</strong>, features <strong>cinematic themes</strong>, and provides an official <strong>Certificate of Validity</strong>.",
+        "table": {
+            "feature": "Feature",
+            "us": "Sorteo Pro",
+            "them": "Wheel of Names",
+            "row_price": "Price",
+            "row_price_us": "100% FREE",
+            "row_price_us_desc": "No ads, no subscriptions",
+            "row_price_them": "Free (Ad-Supported)",
+            "row_price_them_desc": "Contains display ads",
+            "row_limits": "Performance",
+            "row_limits_us": "High Performance",
+            "row_limits_us_desc": "Handles 10k+ names",
+            "row_limits_them": "Limited",
+            "row_limits_them_desc": "Lags with many names",
+            "row_design": "Visuals",
+            "row_design_us": "Cinematic",
+            "row_design_us_desc": "Modern & Immersive",
+            "row_design_them": "Basic",
+            "row_design_them_desc": "Outdated web style",
+            "row_login": "Login",
+            "row_login_us": "Not Required",
+            "row_login_us_desc": "Auto-save to browser",
+            "row_login_them": "Required to Save",
+            "row_login_them_desc": "Must create account"
+        },
+        "why_us": {
+            "title": "Why switch from Wheel of Names?",
+            "p1": "Wheel of Names is a classic, but it's stuck in the past. It's full of ads and slows down your computer when you have too many names.",
+            "p2": "Sorteo Pro is built for 2025. We use the latest web technology to ensure smooth spins, even with thousands of participants, and we never show ads.",
+            "title_2": "The Professional Choice for Streamers",
+            "p3": "If you are a streamer or content creator, you can't afford to show low-quality tools with ads on your stream. Sorteo Pro looks professional and premium.",
+            "direct_answer_title": "Why is Sorteo Pro better than Wheel of Names?",
+            "direct_answer_text": "Sorteo Pro is better than <strong>Wheel of Names</strong> because it offers a <strong>premium, ad-free experience</strong> with modern visuals. It also includes <strong>instant verification</strong> to prove fairness to your audience, something Wheel of Names lacks."
+        },
+        "cta": {
+            "button": "Spin the Better Wheel"
+        },
+        "faq": {
+            "title": "Frequently Asked Questions",
+            "q1": "Is Sorteo Pro really free with no ads?",
+            "a1": "Yes, unlike Wheel of Names, <strong>Sorteo Pro</strong> does not display any banner ads or pop-ups.",
+            "q2": "Can I import my lists from Wheel of Names?",
+            "a2": "Yes! You can copy your list from Wheel of Names (or Excel) and paste it directly into Sorteo Pro.",
+            "q3": "Is it as random as Wheel of Names?",
+            "a3": "It's even better. We use a cryptographically secure RNG that is verifiable, ensuring 100% fairness."
+        }
     }
 }

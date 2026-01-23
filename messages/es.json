@@ -427,7 +427,7 @@
     },
     "ListRandomizerGeo": {
         "direct_answer_title": "¿Qué es un Aleatorizador de Listas y Equipos?",
-        "direct_answer_text": "Un <strong>Aleatorizador de Listas</strong> es una herramienta que toma una lista de elementos (nombres, números u opciones) y los reorganiza en un <strong>orden completamente aleatorio</strong>. Es esencial para sorteos, <strong>generar equipos aleatorios</strong> y toma de decisiones imparciales. <strong>Sorteo Pro</strong> ofrece un aleatorizador seguro y gratuito con resultados instantáneos.",
+        "direct_answer_text": "Un <tool>Aleatorizador de Listas</tool> es una herramienta que toma una lista de elementos (nombres, números u opciones) y los reorganiza en un <strong>orden completamente aleatorio</strong>. Es esencial para sorteos, <strong>generar equipos aleatorios</strong> y toma de decisiones imparciales. <brand>Sorteo Pro</brand> ofrece un aleatorizador seguro y gratuito con resultados instantáneos.",
         "cta_button": "Aleatorizar Lista y Equipos",
         "feature_1_title": "Barajado Realmente Aleatorio",
         "feature_1_desc": "Usa algoritmos seguros para asegurar que no haya sesgos.",

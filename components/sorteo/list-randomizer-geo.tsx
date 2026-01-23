@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Shuffle, List, Zap, Eye, HelpCircle, CheckCircle, GraduationCap, Users, Gamepad2 } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { Link } from "@/i18n/routing"
 
 export function ListRandomizerGeo() {
   const t = useTranslations("ListRandomizerGeo")
@@ -82,10 +83,13 @@ export function ListRandomizerGeo() {
               {t("direct_answer_title")}
             </h2>
             <div className="prose prose-invert max-w-none">
-              <p
-                className="text-lg text-muted-foreground leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: t.raw("direct_answer_text") }}
-              />
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                {t.rich("direct_answer_text", {
+                  strong: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
+                  tool: (chunks) => <Link href="/list-randomizer" className="font-semibold text-primary hover:underline">{chunks}</Link>,
+                  brand: (chunks) => <Link href="/" className="font-semibold text-primary hover:underline">{chunks}</Link>
+                })}
+              </p>
             </div>
             <Button asChild size="lg" className="mt-4 gap-2 text-lg font-bold shadow-lg shadow-primary/20" onClick={handleTryIt}>
               <a href="#sorteo-section">

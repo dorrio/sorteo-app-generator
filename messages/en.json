@@ -435,7 +435,7 @@
     },
     "ListRandomizerGeo": {
         "direct_answer_title": "What is a List Randomizer & Team Generator?",
-        "direct_answer_text": "A <strong>List Randomizer</strong> is a tool that reshuffles a list of items into a completely random order. It is the perfect tool for <strong>Secret Santa</strong> assignments, generating <strong>Tournament Brackets</strong>, splitting teams, or determining speaking order in <strong>Scrum meetings</strong>. <strong>Sorteo Pro</strong> uses the Fisher-Yates shuffle algorithm to ensure mathematically perfect randomness.",
+        "direct_answer_text": "A <tool>List Randomizer</tool> is a tool that reshuffles a list of items into a completely random order. It is the perfect tool for <strong>Secret Santa</strong> assignments, generating <strong>Tournament Brackets</strong>, splitting teams, or determining speaking order in <strong>Scrum meetings</strong>. <brand>Sorteo Pro</brand> uses the Fisher-Yates shuffle algorithm to ensure mathematically perfect randomness.",
         "cta_button": "Randomize List & Teams",
         "feature_1_title": "Truly Random Shuffle",
         "feature_1_desc": "Uses the Fisher-Yates algorithm for unbiased ordering.",

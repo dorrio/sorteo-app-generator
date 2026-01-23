@@ -30,6 +30,7 @@ import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck, Share2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
+import { useSearchParams } from "next/navigation"
 
 interface MainAppProps {
     initialStyle?: string;
@@ -37,6 +38,7 @@ interface MainAppProps {
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
+  const searchParams = useSearchParams()
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
   const tLetter = useTranslations("LetterGeneratorPage")
@@ -93,9 +95,17 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             update.customTitle = tWheel('h1')
             update.customSubtitle = tWheel('subtitle')
         }
+
+        // Viralis: Apply template overrides if present (Context Injection)
+        const templateTitle = searchParams.get('template_title')
+        const templateColor = searchParams.get('template_color')
+
+        if (templateTitle) update.customTitle = templateTitle
+        if (templateColor) update.primaryColor = templateColor
+
         updateTheme(update)
     }
-  }, [initialStyle, updateTheme, seoMode])
+  }, [initialStyle, updateTheme, seoMode, searchParams])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)

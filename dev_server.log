@@ -1,5 +1,5 @@
 
-> my-v0-project@0.1.0 dev
+> my-v0-project@0.1.0 dev /app
 > next dev
 
    ▲ Next.js 16.0.7 (Turbopack)
@@ -13,9 +13,10 @@ You can learn more, including how to opt-out if you'd not like to participate in
 https://nextjs.org/telemetry
 
  ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
- ✓ Ready in 1826ms
+ ✓ Ready in 2.2s
  ○ Compiling /[locale]/verify ...
- GET /en/verify?id=ID-12345678-ABC&name=Jules&type=wheel 200 in 7.8s (compile: 6.5s, proxy.ts: 148ms, render: 1088ms)
-Expected style "zIndex: 10px" to be unitless
- GET /api/og?type=wheel&name=Jules 200 in 2.9s
+ GET /en/verify?id=ID-12345678-18F12345678&title=MyViralGiveaway&color=%23FF00FF&type=wheel 200 in 8.7s (compile: 7.4s, proxy.ts: 158ms, render: 1223ms)
+ GET /en/verify?id=ID-12345678-18F12345678&title=MyViralGiveaway&color=%23FF00FF&type=wheel 200 in 252ms (compile: 39ms, proxy.ts: 16ms, render: 198ms)
+ GET /en/wheel-of-names?template_title=MyViralGiveaway&template_color=%23FF00FF 200 in 4.1s (compile: 3.9s, proxy.ts: 17ms, render: 94ms)
+ ELIFECYCLE  Command failed.
 [?25h

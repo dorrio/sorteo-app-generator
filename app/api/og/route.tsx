@@ -10,6 +10,7 @@ export async function GET(request: Request) {
     const type = searchParams.get('type'); // 'wheel' | 'list' | 'rng' | 'instagram' | undefined
     const name = searchParams.get('name')?.slice(0, 50);
     const dateParam = searchParams.get('date');
+    const customTitle = searchParams.get('title')?.slice(0, 60);
 
     // --- THEME CONFIGURATION ---
     // Default: Golden Ticket (Generic)
@@ -224,6 +225,22 @@ export async function GET(request: Request) {
                                 textTransform: 'uppercase',
                             }}>Official Verified Result</span>
                         </div>
+
+                        {/* Viral Context: Custom Giveaway Title */}
+                        {customTitle && (
+                            <div style={{
+                                fontSize: 24,
+                                fontWeight: 600,
+                                color: theme.subTextColor,
+                                marginBottom: 10,
+                                textAlign: 'center',
+                                textTransform: 'uppercase',
+                                letterSpacing: '3px',
+                                maxWidth: '900px',
+                            }}>
+                                {customTitle}
+                            </div>
+                        )}
 
                         {/* The Winner Name */}
                         <div style={{

@@ -76,7 +76,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         const update: any = { sorteoStyle: initialStyle }
         if (seoMode === 'yes-no') {
             update.customTitle = tYesNo('h1')
-            update.customSubtitle = tYesNo('description')
+            update.customSubtitle = tYesNo('subtitle')
         } else if (seoMode === 'letter') {
             update.customTitle = tLetter('h1')
             update.customSubtitle = tLetter('subtitle')

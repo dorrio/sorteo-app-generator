@@ -462,6 +462,7 @@
         "title": "Yes or No Wheel | Random Decision Maker",
         "description": "Spin the Yes or No Wheel to make a random decision. Free, fair, and fun way to decide. Flip a coin style wheel.",
         "h1": "Yes or No Wheel",
+        "subtitle": "Spin the wheel to make a random Yes or No decision.",
         "option_yes": "YES",
         "option_no": "NO"
     },

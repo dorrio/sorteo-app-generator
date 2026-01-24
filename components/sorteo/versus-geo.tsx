@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Check, X, ArrowRight, Zap, ShieldCheck, Palette, Monitor } from "lucide-react"
+import { Check, X, ArrowRight, Zap, ShieldCheck, Palette, Monitor, HelpCircle } from "lucide-react"
 
 export function VersusGeo() {
   const t = useTranslations("VersusWheel")
@@ -13,8 +13,40 @@ export function VersusGeo() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  const faqs = [
+    {
+      question: t("faq.q1"),
+      answer: t.raw("faq.a1"),
+    },
+    {
+      question: t("faq.q2"),
+      answer: t.raw("faq.a2"),
+    },
+    {
+      question: t("faq.q3"),
+      answer: t.raw("faq.a3"),
+    },
+  ]
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer.replace(/<[^>]*>?/gm, ''),
+      },
+    })),
+  }
+
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="max-w-5xl mx-auto px-4 relative z-10">
 
         {/* Comparison Table */}
@@ -133,6 +165,25 @@ export function VersusGeo() {
                     </Button>
                  </div>
             </div>
+        </div>
+
+        {/* Visible FAQ Section (Anti-Cloaking) */}
+        <div className="max-w-3xl mx-auto border-t border-primary/10 pt-16">
+           <h3 className="text-2xl font-bold mb-10 flex items-center justify-center gap-2">
+              <HelpCircle className="w-6 h-6 text-primary" />
+              {t('faq.title')}
+           </h3>
+           <dl className="grid gap-6">
+              {faqs.map((faq, idx) => (
+                  <div key={idx} className="space-y-2 p-6 rounded-2xl bg-card/20 border border-primary/10">
+                      <dt className="font-bold text-lg text-foreground">{faq.question}</dt>
+                      <dd
+                        className="text-muted-foreground leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: faq.answer }}
+                      />
+                  </div>
+              ))}
+           </dl>
         </div>
 
       </div>

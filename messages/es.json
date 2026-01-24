@@ -245,7 +245,7 @@
         "title": "Ruleta Aleatoria de Nombres",
         "description": "¿Buscas una <b>Ruleta Aleatoria</b>? Sorteo Pro incluye una <b>Ruleta de Nombres</b> totalmente personalizable, justa y gratuita.",
         "what_is_wheel": "¿Qué es una Ruleta de Nombres?",
-        "what_is_wheel_answer": "Una <b>Ruleta de Nombres</b> es una herramienta digital que elige un ganador al azar girando una rueda virtual. Es utilizada por profesores, influencers y organizadores de eventos para la <b>selección aleatoria</b>. Sorteo Pro mejora esta experiencia con efectos cinematográficos.",
+        "what_is_wheel_answer": "Una <b>Ruleta de Nombres</b> es una herramienta digital que elige un ganador al azar girando una rueda virtual. Es utilizada por profesores, influencers y organizadores de eventos para la <rng>selección aleatoria</rng>. Sorteo Pro mejora esta experiencia con efectos cinematográficos.",
         "features_list": "Características de la Ruleta",
         "feature_1": "100% Aleatoria y Justa",
         "feature_2": "Colores y Temas Personalizados",

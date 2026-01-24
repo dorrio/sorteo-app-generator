@@ -112,7 +112,8 @@ export function WheelGeo() {
 
            <p className="text-lg text-muted-foreground leading-relaxed">
              {t.rich("what_is_wheel_answer", {
-                b: (chunks) => <strong className="text-foreground font-semibold">{chunks}</strong>
+                b: (chunks) => <strong className="text-foreground font-semibold">{chunks}</strong>,
+                rng: (chunks) => <Link href="/random-number-generator" className="font-semibold text-primary hover:underline">{chunks}</Link>
              })}
            </p>
 
@@ -195,7 +196,6 @@ export function WheelGeo() {
              href="#sorteo-section"
              className="relative w-64 h-64 rounded-full border-4 border-primary/20 flex items-center justify-center bg-card/50 backdrop-blur-sm cursor-pointer hover:scale-105 transition-transform"
              onClick={handleTryWheel}
-             aria-label={t('cta_button')}
            >
                 <span className="sr-only">{t('cta_button')}</span>
                 <motion.div

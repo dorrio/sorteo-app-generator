@@ -1,4 +1,5 @@
 import type React from "react"
+import { Suspense } from "react"
 import type { Metadata, Viewport } from "next"
 import {
   Inter,
@@ -202,7 +203,9 @@ export default async function RootLayout({
           {children}
         </NextIntlClientProvider>
         <Analytics />
-        <SpeedInsights />
+        <Suspense fallback={null}>
+          <SpeedInsights />
+        </Suspense>
 
         {/* Manual GTM Implementation */}
         <Script id="google-tag-manager" strategy="afterInteractive">

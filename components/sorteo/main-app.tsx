@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useState, Suspense } from "react"
+import { useCallback, useEffect, useState, Suspense, useRef } from "react"
 import { motion } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ParticleBackground } from "@/components/sorteo/particle-background"
@@ -88,8 +88,24 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     updateTheme
   } = useSorteoStore()
 
+  const contentRef = useRef<HTMLDivElement>(null)
+
   // Calculated state for inert
   const isOverlayOpen = isVerifyModalOpen || showWinnerCeremony || isEditorOpen || showCountdown
+
+  useEffect(() => {
+    if (contentRef.current) {
+      if (isOverlayOpen) {
+        contentRef.current.setAttribute('inert', '')
+        // @ts-ignore
+        contentRef.current.inert = true
+      } else {
+        contentRef.current.removeAttribute('inert')
+        // @ts-ignore
+        contentRef.current.inert = false
+      }
+    }
+  }, [isOverlayOpen])
 
   useEffect(() => {
     setMounted(true)
@@ -271,8 +287,8 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
       {/* Main content */}
       <div
+        ref={contentRef}
         className="relative z-10"
-        inert={isOverlayOpen ? true : undefined}
         style={{
           fontFamily:
             theme.fontFamily === "Inter" ? "var(--font-inter)" :

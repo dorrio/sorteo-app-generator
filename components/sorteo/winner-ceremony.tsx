@@ -18,6 +18,7 @@ import {
   Facebook,
   MessageCircle,
   Instagram,
+  Download,
 } from "lucide-react"
 
 interface WinnerCeremonyProps {
@@ -102,6 +103,66 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     await navigator.clipboard.writeText(shareText)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  const handleDownload = async () => {
+    if (!winner) return
+
+    // Construct OG Image URL
+    const ogParams = new URLSearchParams()
+    ogParams.set("name", winner.name)
+
+    // Logic to extract date from ID or use current
+    // Verification ID: ID-{UUID}-{TIMESTAMP_HEX}
+    let dateToUse = new Date()
+    if (winner.verificationId) {
+      try {
+        const parts = winner.verificationId.split('-')
+        if (parts.length >= 3) {
+          const timestampHex = parts[parts.length - 1]
+          const timestamp = parseInt(timestampHex, 16)
+          const d = new Date(timestamp)
+          if (!isNaN(d.getTime())) {
+            dateToUse = d
+          }
+        }
+      } catch (e) {
+        // fallback to current
+      }
+    }
+    ogParams.set("date", dateToUse.toISOString())
+
+    // Viralis: Apply branding context to the image
+    if (seoMode && seoMode !== 'home') {
+      ogParams.set("type", seoMode)
+    }
+    if (theme.customTitle) {
+      ogParams.set("title", theme.customTitle)
+    }
+    if (theme.primaryColor) {
+      ogParams.set("color", theme.primaryColor)
+    }
+
+    const imageUrl = `/api/og?${ogParams.toString()}`
+
+    try {
+      const response = await fetch(imageUrl)
+      const blob = await response.blob()
+      const blobUrl = window.URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = blobUrl
+      // Filename: Certificate-{Name}-{Date}.png
+      const cleanName = winner.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()
+      const dateStr = dateToUse.toISOString().split('T')[0]
+      link.download = `Certificate-${cleanName}-${dateStr}.png`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      window.URL.revokeObjectURL(blobUrl)
+    } catch (e) {
+      // Fallback: just open in new tab
+      window.open(imageUrl, '_blank')
+    }
   }
 
   return (
@@ -247,6 +308,11 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="center" className="w-48">
+                  <DropdownMenuItem onClick={handleDownload} className="gap-2 cursor-pointer">
+                    <Download className="w-4 h-4" />
+                    {t("download_certificate")}
+                  </DropdownMenuItem>
+
                   <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
                     {copied ? (
                       <>

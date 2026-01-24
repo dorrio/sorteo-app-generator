@@ -1,19 +1,16 @@
 "use client"
 
 import { useCallback, useEffect, useState, Suspense, useRef } from "react"
+import dynamic from "next/dynamic"
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ParticleBackground } from "@/components/sorteo/particle-background"
 import { SorteoSelector } from "@/components/sorteo/sorteo-selector"
 import { AppSkeleton } from "@/components/sorteo/skeletons"
 import { SmartLoader } from "@/components/ui/smart-loader"
-import { VerificationModal } from "@/components/sorteo/verification-modal"
-import { CountdownAnimation } from "@/components/sorteo/countdown-animation"
-import { WinnerCeremony } from "@/components/sorteo/winner-ceremony"
 import { ParticipantManager } from "@/components/sorteo/participant-manager"
-import { VisualEditor } from "@/components/sorteo/visual-editor"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
-import { FloatingBubbles } from "@/components/sorteo/floating-bubbles"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { SeoContent } from "@/components/sorteo/seo-content"
@@ -31,6 +28,27 @@ import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck, Share2 } from 
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
+
+const VisualEditor = dynamic(
+  () => import("@/components/sorteo/visual-editor").then((mod) => mod.VisualEditor),
+  { ssr: false }
+)
+const VerificationModal = dynamic(
+  () => import("@/components/sorteo/verification-modal").then((mod) => mod.VerificationModal),
+  { ssr: false }
+)
+const WinnerCeremony = dynamic(
+  () => import("@/components/sorteo/winner-ceremony").then((mod) => mod.WinnerCeremony),
+  { ssr: false }
+)
+const CountdownAnimation = dynamic(
+  () => import("@/components/sorteo/countdown-animation").then((mod) => mod.CountdownAnimation),
+  { ssr: false }
+)
+const FloatingBubbles = dynamic(
+  () => import("@/components/sorteo/floating-bubbles").then((mod) => mod.FloatingBubbles),
+  { ssr: false }
+)
 
 function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => void }) {
   const searchParams = useSearchParams()
@@ -262,14 +280,20 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
       {/* Background image */}
       {theme.backgroundImage && (
-        <div
-          className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${theme.backgroundImage})`,
-            opacity: bgOpacity / 100,
-            filter: `blur(${bgBlur}px)`,
-          }}
-        />
+        <div className="fixed inset-0 z-0">
+          <Image
+            src={theme.backgroundImage}
+            alt="Custom Background"
+            fill
+            priority
+            className="object-cover"
+            unoptimized
+            style={{
+              opacity: bgOpacity / 100,
+              filter: `blur(${bgBlur}px)`,
+            }}
+          />
+        </div>
       )}
 
       {theme.backgroundImage && (

@@ -447,6 +447,7 @@
         "title": "Ruleta Sí o No | Tomar Decisiones al Azar",
         "description": "Gira la Ruleta de Sí o No para tomar una decisión aleatoria. Una forma divertida, justa y gratuita de decidir. Como lanzar una moneda.",
         "h1": "Ruleta Sí o No",
+        "subtitle": "Gira la ruleta para tomar una decisión de Sí o No.",
         "option_yes": "SÍ",
         "option_no": "NO"
     },

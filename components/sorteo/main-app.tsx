@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState, Suspense } from "react"
 import { motion } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ParticleBackground } from "@/components/sorteo/particle-background"
@@ -32,13 +32,32 @@ import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
 
+function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => void }) {
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    // Viralis: Apply template overrides if present (Context Injection)
+    const templateTitle = searchParams.get('template_title')
+    const templateColor = searchParams.get('template_color')
+
+    const update: any = {}
+    if (templateTitle) update.customTitle = templateTitle
+    if (templateColor) update.primaryColor = templateColor
+
+    if (Object.keys(update).length > 0) {
+      updateTheme(update)
+    }
+  }, [searchParams, updateTheme])
+
+  return null
+}
+
 interface MainAppProps {
     initialStyle?: string;
     seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
-  const searchParams = useSearchParams()
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
   const tLetter = useTranslations("LetterGeneratorPage")
@@ -96,16 +115,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             update.customSubtitle = tWheel('subtitle')
         }
 
-        // Viralis: Apply template overrides if present (Context Injection)
-        const templateTitle = searchParams.get('template_title')
-        const templateColor = searchParams.get('template_color')
-
-        if (templateTitle) update.customTitle = templateTitle
-        if (templateColor) update.primaryColor = templateColor
-
         updateTheme(update)
     }
-  }, [initialStyle, updateTheme, seoMode, searchParams])
+  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tInsta, tWheel])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
@@ -228,6 +240,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
+      <Suspense fallback={null}>
+        <ThemeParamsHandler updateTheme={updateTheme} />
+      </Suspense>
+
       {/* Background image */}
       {theme.backgroundImage && (
         <div

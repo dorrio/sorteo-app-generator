@@ -20,6 +20,8 @@ export function VerifyContent() {
     const searchParams = useSearchParams()
     const initialId = searchParams.get("id") || ""
     const type = searchParams.get("type")
+    const title = searchParams.get("title")
+    const color = searchParams.get("color")
 
     const [inputId, setInputId] = useState(initialId)
     const [result, setResult] = useState<{
@@ -210,6 +212,14 @@ export function VerifyContent() {
     else if (type === 'list-randomizer') returnUrl = "/list-randomizer"
     else if (type === 'yes-no') returnUrl = "/yes-or-no-wheel"
     else if (type === 'letter') returnUrl = "/random-letter-generator"
+
+    // Viralis: Pass the template context to the new tool
+    if (returnUrl !== "/" && (title || color)) {
+        const params = new URLSearchParams()
+        if (title) params.set("template_title", title)
+        if (color) params.set("template_color", color)
+        returnUrl += `?${params.toString()}`
+    }
 
     return (
         <div

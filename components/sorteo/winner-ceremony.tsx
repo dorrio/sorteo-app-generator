@@ -59,6 +59,14 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
       shareUrl += `&type=${seoMode}`
   }
 
+  // Viralis: Append custom context (Title & Color) to make the share more specific
+  if (winner.verificationId && theme.customTitle) {
+      shareUrl += `&title=${encodeURIComponent(theme.customTitle)}`
+  }
+  if (winner.verificationId && theme.primaryColor) {
+      shareUrl += `&color=${encodeURIComponent(theme.primaryColor)}`
+  }
+
   // Compelling share text
   const shareText = t("share_text", { name: winner.name })
 

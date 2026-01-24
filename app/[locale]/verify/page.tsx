@@ -10,7 +10,7 @@ type Props = {
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
     const { locale } = await params
-    const { id, name, type } = await searchParams
+    const { id, name, type, title: titleParam, color: colorParam } = await searchParams
     const t = await getTranslations({ locale, namespace: "Metadata" })
 
     // Fallback URL logic:
@@ -31,6 +31,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     // Viral Optimization: Dynamic Metadata
     const winnerName = typeof name === "string" ? name : null
     const verificationId = typeof id === "string" ? id : null
+    const customTitle = typeof titleParam === "string" ? titleParam : null
 
     // Parse date from verification ID for metadata
     let dateStr: string | null = null
@@ -52,9 +53,14 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
         }
     }
 
-    const title = winnerName
-        ? `🏆 WINNER ANNOUNCEMENT: ${winnerName} | Verified by Sorteo Pro`
-        : t("verify_title")
+    let title = t("verify_title")
+    if (winnerName) {
+        if (customTitle) {
+            title = `🏆 ${winnerName} won ${customTitle} | Verified by Sorteo Pro`
+        } else {
+            title = `🏆 WINNER ANNOUNCEMENT: ${winnerName} | Verified by Sorteo Pro`
+        }
+    }
 
     const description = verificationId
         ? `✅ Official Result for ID: ${verificationId}. Click to verify the winner certificate.`
@@ -67,6 +73,8 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     if (winnerName) ogParams.set("name", winnerName)
     if (dateStr) ogParams.set("date", dateStr)
     if (typeof type === "string" && type) ogParams.set("type", type)
+    if (customTitle) ogParams.set("title", customTitle)
+    if (typeof colorParam === "string" && colorParam) ogParams.set("color", colorParam)
 
     const ogImageUrl = `${baseUrl}/api/og?${ogParams.toString()}`
 

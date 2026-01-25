@@ -245,7 +245,7 @@
         "title": "Roleta de Nomes Aleatória",
         "description": "Procurando por uma <b>Roleta de Nomes</b>? O Sorteio Pro inclui uma <b>Roleta de Escolha Aleatória</b> totalmente personalizável, justa e gratuita.",
         "what_is_wheel": "O que é uma Roleta de Nomes?",
-        "what_is_wheel_answer": "Uma <b>Roleta de Nomes</b> é uma ferramenta digital que escolhe um vencedor aleatório girando uma roda virtual. É popularmente usada por professores, influenciadores e organizadores de eventos para a <b>seleção aleatória</b>. O Sorteio Pro melhora essa experiência com efeitos cinematográficos.",
+        "what_is_wheel_answer": "Uma <b>Roleta de Nomes</b> é uma ferramenta digital que escolhe um vencedor aleatório girando uma roda virtual. É popularmente usada por professores, influenciadores e organizadores de eventos para a <rng>seleção aleatória</rng>. O Sorteio Pro melhora essa experiência com efeitos cinematográficos.",
         "features_list": "Recursos da Roleta",
         "feature_1": "100% Aleatório e Justo",
         "feature_2": "Cores e Temas Personalizados",

@@ -204,6 +204,7 @@ export default async function RootLayout({
         </NextIntlClientProvider>
         <Analytics />
         <Suspense fallback={null}>
+          {/* Vercel Speed Insights */}
           <SpeedInsights />
         </Suspense>
 

@@ -182,6 +182,11 @@ export function VerifyContent() {
         }
         ogParams.set("date", dateToUse.toISOString())
 
+        // Viralis: Apply branding context to the image
+        if (type) ogParams.set("type", type)
+        if (title) ogParams.set("title", title)
+        if (color) ogParams.set("color", color)
+
         const imageUrl = `/api/og?${ogParams.toString()}`
 
         try {

@@ -479,43 +479,43 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
              /* Wheel Mode: Prioritize WheelGeo */
              <>
                 <WheelGeo />
-                <Glossary />
+                <Glossary seoMode={seoMode} />
              </>
         ) : seoMode === 'instagram' ? (
              /* Instagram Mode: Show Instagram specific content */
              <>
                 <InstagramGeo />
-                <Glossary />
+                <Glossary seoMode={seoMode} />
              </>
         ) : seoMode === 'rng' ? (
             /* RNG Mode: Show Random Number Generator content */
             <>
                <RngGeo />
-               <Glossary />
+               <Glossary seoMode={seoMode} />
             </>
        ) : seoMode === 'list-randomizer' ? (
             /* List Randomizer Mode: Show List Randomizer content */
             <>
                 <ListRandomizerGeo />
-                <Glossary />
+                <Glossary seoMode={seoMode} />
             </>
        ) : seoMode === 'yes-no' ? (
             /* Yes/No Mode */
             <>
                 <YesNoGeo />
-                <Glossary />
+                <Glossary seoMode={seoMode} />
             </>
        ) : seoMode === 'letter' ? (
             /* Letter Mode */
             <>
                 <LetterGeo />
-                <Glossary />
+                <Glossary seoMode={seoMode} />
             </>
        ) : (
             /* Home Mode: Show everything */
             <>
                 <WheelGeo />
-                <Glossary />
+                <Glossary seoMode={seoMode} />
                 <SeoContent />
             </>
         )}

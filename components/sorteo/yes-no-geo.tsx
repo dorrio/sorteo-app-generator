@@ -129,7 +129,7 @@ export function YesNoGeo() {
 
               {/* Trust Signal */}
               <div className="pt-2">
-                 <Link href="/glossary" className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5">
+                 <Link href="/glossary#rng" className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5">
                     <BookOpen className="w-3.5 h-3.5" />
                     {t('trust_link_text')}
                  </Link>

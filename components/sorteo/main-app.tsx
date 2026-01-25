@@ -5,7 +5,6 @@ import dynamic from "next/dynamic"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
-import { ParticleBackground } from "@/components/sorteo/particle-background"
 import { SorteoSelector } from "@/components/sorteo/sorteo-selector"
 import { AppSkeleton } from "@/components/sorteo/skeletons"
 import { SmartLoader } from "@/components/ui/smart-loader"
@@ -28,6 +27,11 @@ import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck, Share2 } from 
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
+
+const ParticleBackground = dynamic(
+  () => import("@/components/sorteo/particle-background").then((mod) => mod.ParticleBackground),
+  { ssr: false }
+)
 
 const VisualEditor = dynamic(
   () => import("@/components/sorteo/visual-editor").then((mod) => mod.VisualEditor),

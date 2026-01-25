@@ -203,10 +203,7 @@ export default async function RootLayout({
           {children}
         </NextIntlClientProvider>
         <Analytics />
-        <Suspense fallback={null}>
-          {/* Vercel Speed Insights */}
-          <SpeedInsights />
-        </Suspense>
+        <SpeedInsights />
 
         <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || 'GTM-TVTR2LQC'} />
       </body>

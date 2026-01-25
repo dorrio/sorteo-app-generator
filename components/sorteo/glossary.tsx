@@ -101,7 +101,7 @@ export function Glossary({ seoMode }: GlossaryProps) {
 
         <dl className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
            {filteredTerms.map((item, idx) => (
-             <div key={idx} className="p-5 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-colors">
+             <div key={idx} id={item.id} className="p-5 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-colors">
                 <dt className="font-bold text-lg mb-2 flex items-center gap-2">
                    <CheckCircle2 className="w-4 h-4 text-primary/60" />
                    {item.term}

@@ -216,31 +216,59 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
       // Default / Home
       let shareTitle = tShare('home_title')
       let shareText = tShare('home_text')
+      let defaultTitle = "Sorteo Pro"
 
       if (seoMode === 'wheel') {
           shareTitle = tShare('wheel_title')
           shareText = tShare('wheel_text')
+          defaultTitle = tWheel('h1')
       } else if (seoMode === 'instagram') {
           shareTitle = tShare('instagram_title')
           shareText = tShare('instagram_text')
+          defaultTitle = tInsta('h1')
       } else if (seoMode === 'rng') {
           shareTitle = tShare('rng_title')
           shareText = tShare('rng_text')
+          defaultTitle = tRng('h1')
       } else if (seoMode === 'list-randomizer') {
           shareTitle = tShare('list_title')
           shareText = tShare('list_text')
+          defaultTitle = tList('h1')
       } else if (seoMode === 'yes-no') {
           shareTitle = tShare('yes_no_title')
           shareText = tShare('yes_no_text')
+          defaultTitle = tYesNo('h1')
       } else if (seoMode === 'letter') {
           shareTitle = tShare('letter_title')
           shareText = tShare('letter_text')
+          defaultTitle = tLetter('h1')
+      }
+
+      // Viralis: Check for custom title to enhance share context
+      let url = typeof window !== "undefined" ? window.location.href : ""
+
+      const isCustomTitle = theme.customTitle && theme.customTitle !== defaultTitle
+
+      if (isCustomTitle && typeof window !== "undefined") {
+          // Use the viral hook with custom title
+          shareText = tShare('custom_share_text', { title: theme.customTitle })
+
+          try {
+              const urlObj = new URL(window.location.href)
+              urlObj.searchParams.set('template_title', theme.customTitle)
+              if (theme.primaryColor) {
+                  urlObj.searchParams.set('template_color', theme.primaryColor)
+              }
+              url = urlObj.toString()
+          } catch (e) {
+              // Fallback to current url if parsing fails
+          }
       }
 
       return {
           title: shareTitle,
           text: shareText,
-          url: typeof window !== "undefined" ? window.location.href : ""
+          url: url
       }
   }
 

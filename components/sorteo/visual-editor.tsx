@@ -4,6 +4,7 @@ import type React from "react"
 import { useTranslations } from "next-intl"
 
 import { useState, useRef, useEffect } from "react"
+import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
@@ -604,10 +605,12 @@ export function VisualEditor() {
                       <div className="space-y-2">
                         <Label>{t("background.preview")}</Label>
                         <div className="relative rounded-xl overflow-hidden border border-border aspect-video">
-                          <img
+                          <Image
                             src={theme.backgroundImage || "/placeholder.svg"}
                             alt="Background preview"
-                            className="w-full h-full object-cover"
+                            fill
+                            unoptimized
+                            className="object-cover"
                             style={{
                               opacity: (theme.backgroundOpacity ?? 30) / 100,
                               filter: `blur(${theme.backgroundBlur ?? 0}px)`,

@@ -4,9 +4,14 @@ import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Check, X, ArrowRight, Zap, ShieldCheck, Palette, Monitor, HelpCircle } from "lucide-react"
+import { Link } from "@/i18n/routing"
 
-export function VersusGeo() {
-  const t = useTranslations("VersusWheel")
+interface VersusGeoProps {
+  namespace?: string;
+}
+
+export function VersusGeo({ namespace = "VersusWheel" }: VersusGeoProps) {
+  const t = useTranslations(namespace)
 
   const handleTryIt = () => {
     // Scroll to top
@@ -127,6 +132,21 @@ export function VersusGeo() {
                             <div className="text-xs opacity-70 mt-1">{t('table.row_login_them_desc')}</div>
                         </td>
                     </tr>
+                    <tr>
+                         <td className="p-4 font-medium">{t('table.row_limits')}</td>
+                        <td className="p-4 bg-primary/5 text-center border-x border-primary/10">
+                            <div className="font-bold text-green-400 flex items-center justify-center gap-2">
+                                <Check className="w-5 h-5" /> {t('table.row_limits_us')}
+                            </div>
+                            <div className="text-xs text-muted-foreground mt-1">{t('table.row_limits_us_desc')}</div>
+                        </td>
+                        <td className="p-4 text-center text-muted-foreground">
+                            <div className="font-medium flex items-center justify-center gap-2">
+                                {t('table.row_limits_them')}
+                            </div>
+                            <div className="text-xs opacity-70 mt-1">{t('table.row_limits_them_desc')}</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
           </div>
@@ -155,7 +175,13 @@ export function VersusGeo() {
                     {t('direct_answer_title')}
                  </h3>
                  <div className="bg-background/50 p-6 rounded-xl border-l-4 border-primary">
-                    <p className="text-lg italic text-muted-foreground" dangerouslySetInnerHTML={{ __html: t.raw('direct_answer_text') }} />
+                    <p className="text-lg italic text-muted-foreground">
+                        {t.rich('direct_answer_text', {
+                            strong: (chunks) => <strong className="font-semibold text-primary">{chunks}</strong>,
+                            brand: (chunks) => <Link href="/" className="font-bold text-primary hover:underline">{chunks}</Link>,
+                            tool: (chunks) => <span className="font-semibold text-primary">{chunks}</span>
+                        })}
+                    </p>
                  </div>
                  <div className="mt-8 flex justify-center">
                     <Button asChild size="lg" className="gap-2 text-lg font-bold shadow-lg shadow-primary/20 w-full md:w-auto" onClick={handleTryIt}>

@@ -45,6 +45,12 @@ export default function VersusHubPage() {
       title: t('comp_2_title'),
       desc: t('comp_2_desc'),
       link: "/alternativa-appsorteos" // Existing route
+    },
+    {
+      id: "random-vs-sorteo",
+      title: t('comp_3_title'),
+      desc: t('comp_3_desc'),
+      link: "/versus/random-org-vs-sorteo-pro"
     }
   ];
 

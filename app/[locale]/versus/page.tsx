@@ -103,9 +103,14 @@ export default function VersusHubPage() {
                  <Trophy className="w-6 h-6 text-primary" />
                  {t('direct_answer_title')}
              </h2>
-             <div className="prose prose-invert max-w-none text-muted-foreground leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: t.raw('direct_answer_text') }}
-             />
+             <div className="prose prose-invert max-w-none text-muted-foreground leading-relaxed">
+                <p>
+                  {t.rich('direct_answer_text', {
+                    brand: (chunks) => <Link href="/" className="font-bold text-primary hover:underline">{chunks}</Link>,
+                    strong: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>
+                  })}
+                </p>
+             </div>
          </div>
       </section>
 

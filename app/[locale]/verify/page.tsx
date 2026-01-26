@@ -83,6 +83,11 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     const canonicalParams = new URLSearchParams()
     if (verificationId) canonicalParams.set("id", verificationId)
     if (winnerName) canonicalParams.set("name", winnerName)
+    // Viralis: Persist context in canonical URL
+    if (typeof type === "string" && type) canonicalParams.set("type", type)
+    if (customTitle) canonicalParams.set("title", customTitle)
+    if (typeof colorParam === "string" && colorParam) canonicalParams.set("color", colorParam)
+
     const canonicalUrl = `${baseUrl}/${locale}/verify${canonicalParams.toString() ? `?${canonicalParams.toString()}` : ""}`
 
     return {

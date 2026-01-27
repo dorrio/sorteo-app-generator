@@ -362,21 +362,26 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         <header className="border-b border-border/50 backdrop-blur-sm bg-background/50">
           <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
             <motion.div
-              className="flex items-center gap-3"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
             >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center"
-                style={{
-                  background: `linear-gradient(135deg, ${theme.primaryColor}, ${theme.secondaryColor})`,
-                }}
+              <Link
+                href="/"
+                className="flex items-center gap-3"
+                aria-label="Sorteo Pro Home"
               >
-                <Trophy className="w-5 h-5 text-background" />
-              </div>
-              <div>
-                <div className="font-bold text-xl tracking-tight">{theme.customTitle}</div>
-              </div>
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{
+                    background: `linear-gradient(135deg, ${theme.primaryColor}, ${theme.secondaryColor})`,
+                  }}
+                >
+                  <Trophy className="w-5 h-5 text-background" />
+                </div>
+                <div>
+                  <div className="font-bold text-xl tracking-tight">{theme.customTitle}</div>
+                </div>
+              </Link>
             </motion.div>
 
             <div className="flex items-center gap-2">

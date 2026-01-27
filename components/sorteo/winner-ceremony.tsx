@@ -279,6 +279,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
             transition={{ delay: 1 }}
             className="flex flex-wrap gap-4 justify-center"
           >
+            {/* Primary Share Action */}
             {canShareNative ? (
               <Button
                 size="lg"
@@ -308,11 +309,6 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="center" className="w-48">
-                  <DropdownMenuItem onClick={handleDownload} className="gap-2 cursor-pointer">
-                    <Download className="w-4 h-4" />
-                    {t("download_certificate")}
-                  </DropdownMenuItem>
-
                   <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
                     {copied ? (
                       <>
@@ -365,6 +361,17 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
+
+            {/* Viralis: Exposed Download Certificate Button (Visible on Mobile & Desktop) */}
+            <Button
+              size="lg"
+              variant="secondary"
+              onClick={handleDownload}
+              className="gap-2"
+            >
+              <Download className="w-5 h-5" />
+              {t("download_certificate")}
+            </Button>
 
             <Button size="lg" variant="outline" onClick={onNewSorteo} className="gap-2 bg-transparent">
               <RotateCcw className="w-5 h-5" />

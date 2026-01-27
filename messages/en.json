@@ -459,6 +459,34 @@
         "use_3_title": "Games, Tournaments & Secret Santa",
         "use_3_desc": "Generate random brackets for tournaments or pairs for Secret Santa gift exchanges."
     },
+    "SecretSantaPage": {
+        "title": "Secret Santa Generator | Free & No Login",
+        "description": "The best free Secret Santa Generator. Shuffle names and assign gift exchanges instantly. No email required, no login, just paste names and shuffle.",
+        "h1": "Free Secret Santa Generator",
+        "subtitle": "Shuffle names and assign Secret Santa pairs instantly.",
+        "faq_1_q": "How do I use this for Secret Santa?",
+        "faq_1_a": "Simply paste the list of participants. The result will show a shuffled list. The order determines the gifting: Person 1 gifts to Person 2, Person 2 to Person 3, and the last person gifts to Person 1.",
+        "faq_2_q": "Do I need emails?",
+        "faq_2_a": "No! This is a simple, no-login tool. Perfect for when you are all together or want to do it quickly via screen share."
+    },
+    "SecretSantaGeo": {
+        "direct_answer_title": "What is a Secret Santa Generator?",
+        "direct_answer_text": "A <tool>Secret Santa Generator</tool> is a tool that randomly assigns a person to whom they must give a gift. <brand>Sorteo Pro</brand> uses a secure shuffling algorithm to ensure assignments are random and fair, without needing emails or sign-ups.",
+        "cta_button": "Start Secret Santa",
+        "feature_1_title": "Instant Pairs",
+        "feature_1_desc": "Generate random assignments in seconds.",
+        "feature_2_title": "No Login / No Email",
+        "feature_2_desc": "Respects privacy. No spam.",
+        "feature_3_title": "Mobile Friendly",
+        "feature_3_desc": "Works on any phone.",
+        "feature_4_title": "100% Free",
+        "feature_4_desc": "Unlimited participants.",
+        "how_to_title": "How to organize Secret Santa",
+        "how_to_step_1": "Enter the names of all participants.",
+        "how_to_step_2": "Click 'Start Giveaway' to shuffle the list.",
+        "how_to_step_3": "Follow the circle: Top name gifts to the next one down.",
+        "how_to_step_4": "Share the result screenshot with the group!"
+    },
     "YesNoPage": {
         "title": "Yes or No Wheel | Random Decision Maker",
         "description": "Spin the Yes or No Wheel to make a random decision. Free, fair, and fun way to decide. Flip a coin style wheel.",
@@ -648,6 +676,8 @@
         "yes_no_text": "Spin the wheel and decide! Yes or No? 🎡 Free & Fair. 👇",
         "letter_title": "Random Letter Generator | Sorteo Pro",
         "letter_text": "I just picked a random letter! A-Z Generator. 🔤 Free & Fair. 👇",
+        "secret_santa_title": "Secret Santa Generator | Sorteo Pro",
+        "secret_santa_text": "🎁 I just created the Secret Santa pairings! Check it out here. Free & Secure. 👇",
         "custom_share_text": "🔥 Join my giveaway: *{title}*! Created with Sorteo Pro. Free & Unlimited. 👇",
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway"

@@ -5,7 +5,7 @@ import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
 
 interface GlossaryProps {
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter';
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa';
 }
 
 export function Glossary({ seoMode }: GlossaryProps) {
@@ -47,6 +47,11 @@ export function Glossary({ seoMode }: GlossaryProps) {
       term: t("term_7"),
       definition: t("def_7"),
     },
+    {
+      id: "secret-santa",
+      term: t("term_8"),
+      definition: t("def_8"),
+    },
   ]
 
   // Filter terms based on seoMode (Apex Optimization: Relevance)
@@ -62,6 +67,7 @@ export function Glossary({ seoMode }: GlossaryProps) {
       if (seoMode === 'list-randomizer' && term.id === 'list') return true;
       if (seoMode === 'yes-no' && term.id === 'yes-no') return true;
       if (seoMode === 'letter' && term.id === 'letter') return true;
+      if (seoMode === 'secret-santa' && term.id === 'secret-santa') return true;
 
       return false;
   });

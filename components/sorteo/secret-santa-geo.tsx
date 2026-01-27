@@ -13,7 +13,7 @@ export function SecretSantaGeo() {
   const { updateTheme } = useSorteoStore()
 
   const handleTryIt = () => {
-    updateTheme({ sorteoStyle: 'list' }) // Secret Santa works best with List
+    updateTheme({ sorteoStyle: 'grid' }) // Secret Santa works best with Grid (List is not a valid style type)
   }
 
   const faqs = [

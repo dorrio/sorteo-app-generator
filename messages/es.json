@@ -276,7 +276,9 @@
         "term_6": "Ruleta Sí o No",
         "def_6": "Una herramienta de toma de decisiones que selecciona aleatoriamente entre 'Sí' y 'No' con igual probabilidad, similar a lanzar una moneda.",
         "term_7": "Generador de Letras Aleatorias",
-        "def_7": "Una herramienta digital que elige una letra del alfabeto (A-Z) al azar. Útil para juegos de palabras, enseñar fonética y siglas."
+        "def_7": "Una herramienta digital que elige una letra del alfabeto (A-Z) al azar. Útil para juegos de palabras, enseñar fonética y siglas.",
+        "term_8": "Amigo Invisible",
+        "def_8": "Una tradición navideña en la que a los miembros de un grupo se les asigna aleatoriamente una persona a quien deben hacer un regalo. La identidad del regalador debe permanecer en secreto."
     },
     "InstagramPicker": {
         "title": "Selector de Comentarios de Instagram Gratis | Ilimitado",

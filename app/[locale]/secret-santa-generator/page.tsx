@@ -103,7 +103,7 @@ export default async function SecretSantaPage({ params }: { params: Promise<{ lo
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp initialStyle="list" seoMode="secret-santa" />
+      <MainApp initialStyle="grid" seoMode="secret-santa" />
     </>
   );
 }

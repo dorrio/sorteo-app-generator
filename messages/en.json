@@ -280,7 +280,9 @@
         "term_6": "Yes or No Wheel",
         "def_6": "A decision-making tool that randomly selects between 'Yes' and 'No' with equal probability, similar to flipping a coin.",
         "term_7": "Random Letter Generator",
-        "def_7": "A digital tool that picks a letter from the alphabet (A-Z) at random. Useful for word games, teaching phonics, and initialisms."
+        "def_7": "A digital tool that picks a letter from the alphabet (A-Z) at random. Useful for word games, teaching phonics, and initialisms.",
+        "term_8": "Secret Santa",
+        "def_8": "A Western Christmas tradition in which members of a group or community are randomly assigned a person to whom they give a gift. The identity of the gift giver is to remain a secret and should not be revealed."
     },
     "InstagramPicker": {
         "title": "Free Instagram Comment Picker | Unlimited & No Login",

@@ -7,7 +7,6 @@ import { motion } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { SorteoSelector } from "@/components/sorteo/sorteo-selector"
 import { AppSkeleton } from "@/components/sorteo/skeletons"
-import { SmartLoader } from "@/components/ui/smart-loader"
 import { ParticipantManager } from "@/components/sorteo/participant-manager"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { Button } from "@/components/ui/button"
@@ -16,6 +15,7 @@ import { SeoContent } from "@/components/sorteo/seo-content"
 import { WheelGeo } from "@/components/sorteo/wheel-geo"
 import { RngGeo } from "@/components/sorteo/rng-geo"
 import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
+import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo"
 import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
 import { LetterGeo } from "@/components/sorteo/letter-geo"
 import { Glossary } from "@/components/sorteo/glossary"
@@ -76,7 +76,7 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => voi
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
@@ -85,6 +85,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const tLetter = useTranslations("LetterGeneratorPage")
   const tRng = useTranslations("RngPage")
   const tList = useTranslations("ListRandomizerPage")
+  const tSecret = useTranslations("SecretSantaPage")
   const tInsta = useTranslations("InstagramPicker")
   const tWheel = useTranslations("WheelGeoPage") 
   const tMeta = useTranslations("Metadata")
@@ -145,6 +146,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         } else if (seoMode === 'list-randomizer') {
             update.customTitle = tList('h1')
             update.customSubtitle = tList('subtitle')
+        } else if (seoMode === 'secret-santa') {
+            update.customTitle = tSecret('h1')
+            update.customSubtitle = tSecret('subtitle')
         } else if (seoMode === 'instagram') {
             update.customTitle = tInsta('h1')
             update.customSubtitle = tInsta('subtitle')
@@ -155,7 +159,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         updateTheme(update)
     }
-  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tInsta, tWheel])
+  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tInsta, tWheel])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
@@ -234,6 +238,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareTitle = tShare('list_title')
           shareText = tShare('list_text')
           defaultTitle = tList('h1')
+      } else if (seoMode === 'secret-santa') {
+          shareTitle = tShare('secret_santa_title')
+          shareText = tShare('secret_santa_text')
+          defaultTitle = tSecret('h1')
       } else if (seoMode === 'yes-no') {
           shareTitle = tShare('yes_no_title')
           shareText = tShare('yes_no_text')
@@ -355,21 +363,26 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         <header className="border-b border-border/50 backdrop-blur-sm bg-background/50">
           <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
             <motion.div
-              className="flex items-center gap-3"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
             >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center"
-                style={{
-                  background: `linear-gradient(135deg, ${theme.primaryColor}, ${theme.secondaryColor})`,
-                }}
+              <Link
+                href="/"
+                className="flex items-center gap-3"
+                aria-label="Sorteo Pro Home"
               >
-                <Trophy className="w-5 h-5 text-background" />
-              </div>
-              <div>
-                <div className="font-bold text-xl tracking-tight">{theme.customTitle}</div>
-              </div>
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{
+                    background: `linear-gradient(135deg, ${theme.primaryColor}, ${theme.secondaryColor})`,
+                  }}
+                >
+                  <Trophy className="w-5 h-5 text-background" />
+                </div>
+                <div>
+                  <div className="font-bold text-xl tracking-tight">{theme.customTitle}</div>
+                </div>
+              </Link>
             </motion.div>
 
             <div className="flex items-center gap-2">
@@ -522,6 +535,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             /* List Randomizer Mode: Show List Randomizer content */
             <>
                 <ListRandomizerGeo />
+                <Glossary seoMode={seoMode} />
+            </>
+       ) : seoMode === 'secret-santa' ? (
+            /* Secret Santa Mode */
+            <>
+                <SecretSantaGeo />
                 <Glossary seoMode={seoMode} />
             </>
        ) : seoMode === 'yes-no' ? (

@@ -40,4 +40,14 @@ next-env.d.ts
 .vscode/
 .idea/
 
-# project specific
+ Caché y logs generales
+*.log
+.eslintcache
+.turbo/
+# Archivos de sistema adicionales
+Thumbs.db
+.Spotlight-V100
+.Trashes
+# Si usas herramientas de test
+/test-results/
+/playwright-report/

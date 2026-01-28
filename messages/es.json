@@ -600,6 +600,34 @@
         "faq_2_q": "¿Puedo eliminar las letras que ya salieron?",
         "faq_2_a": "¡Sí! Simplemente activa la opción 'Eliminar ganador' en la configuración si deseas letras únicas cada vez."
     },
+    "SecretSantaPage": {
+        "title": "Generador de Amigo Invisible | Organizador Gratis y Sin Anuncios",
+        "description": "El mejor Generador de Amigo Invisible gratis. Organiza el intercambio de regalos de tu oficina o familia al instante. Sin registro, sin emails. Solo comparte el enlace.",
+        "h1": "Generador de Amigo Invisible",
+        "subtitle": "Organiza tu intercambio de regalos en segundos.",
+        "faq_1_q": "¿Cómo funciona el Generador de Amigo Invisible?",
+        "faq_1_a": "Introduce los nombres de los participantes y nuestro algoritmo seguro los barajará para asignar un destinatario de regalo único a cada persona.",
+        "faq_2_q": "¿Necesito correos electrónicos?",
+        "faq_2_a": "¡No! Sorteo Pro respeta tu privacidad. No necesitas emails. Simplemente genera las parejas y comparte el resultado."
+    },
+    "SecretSantaGeo": {
+        "direct_answer_title": "¿Qué es un Generador de Amigo Invisible?",
+        "direct_answer_text": "Un <tool>Generador de Amigo Invisible</tool> es una herramienta que asigna aleatoriamente quién regala a quién dentro de un grupo, asegurando que nadie se toque a sí mismo. Es la forma moderna de organizar el <strong>Amigo Invisible</strong> sin usar papelitos. <brand>Sorteo Pro</brand> hace este proceso instantáneo y justo.",
+        "cta_button": "Generar Parejas",
+        "feature_1_title": "Emparejamiento Instantáneo",
+        "feature_1_desc": "Genera parejas justas en milisegundos.",
+        "feature_2_title": "Sin Emails",
+        "feature_2_desc": "Respetamos la privacidad. Sin spam.",
+        "feature_3_title": "Compartir Resultado",
+        "feature_3_desc": "Descarga un certificado o comparte el enlace.",
+        "feature_4_title": "Cualquier Tamaño de Grupo",
+        "feature_4_desc": "Perfecto para familias u oficinas grandes.",
+        "how_to_title": "Cómo organizar un Amigo Invisible",
+        "how_to_step_1": "Introduce los nombres de todos los participantes.",
+        "how_to_step_2": "Selecciona la vista 'Cuadrícula' o 'Lista'.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para barajar y asignar parejas.",
+        "how_to_step_4": "¡Comparte los resultados con el grupo!"
+    },
     "LetterGeo": {
         "direct_answer_title": "¿Qué es un Generador de Letras Aleatorias?",
         "direct_answer_text": "Un <strong>Generador de Letras Aleatorias</strong> es una herramienta que selecciona una letra del alfabeto (A-Z) completamente al azar. Es muy utilizado para juegos como <strong>Stop, Basta o Scattergories</strong>, enseñar fonética o iniciar ejercicios de escritura creativa. <strong>Sorteo Pro</strong> ofrece una forma justa y visual de elegir letras al instante.",
@@ -633,6 +661,8 @@
         "yes_no_text": "¡Gira la ruleta y decide! ¿Sí o No? 🎡 Gratis y Justo. 👇",
         "letter_title": "Generador de Letras | Sorteo Pro",
         "letter_text": "¡Acabo de elegir una letra al azar! Generador A-Z. 🔤 Gratis. 👇",
+        "secret_santa_title": "Generador de Amigo Invisible | Sorteo Pro",
+        "secret_santa_text": "🎁 ¡Acabo de organizar el Amigo Invisible con Sorteo Pro! Gratis y Sin Login. 👇",
         "custom_share_text": "🔥 Participa en mi sorteo: *{title}*! Creado con Sorteo Pro. Gratis e Ilimitado. 👇",
         "cta_share": "Compartir",
         "cta_start": "Empezar"

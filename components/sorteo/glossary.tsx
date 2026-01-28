@@ -5,7 +5,7 @@ import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
 
 interface GlossaryProps {
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter';
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa';
 }
 
 export function Glossary({ seoMode }: GlossaryProps) {
@@ -62,6 +62,8 @@ export function Glossary({ seoMode }: GlossaryProps) {
       if (seoMode === 'list-randomizer' && term.id === 'list') return true;
       if (seoMode === 'yes-no' && term.id === 'yes-no') return true;
       if (seoMode === 'letter' && term.id === 'letter') return true;
+      // Secret Santa uses list shuffling
+      if (seoMode === 'secret-santa' && term.id === 'list') return true;
 
       return false;
   });

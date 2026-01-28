@@ -542,6 +542,34 @@
         "faq_2_q": "Posso remover as letras que já saíram?",
         "faq_2_a": "Sim! Basta ativar a opção 'Remover vencedor' nas configurações se quiser letras únicas a cada vez."
     },
+    "SecretSantaPage": {
+        "title": "Gerador de Amigo Secreto | Organizador Grátis e Sem Anúncios",
+        "description": "O melhor Gerador de Amigo Secreto grátis. Organize o sorteio de presentes do escritório ou da família instantaneamente. Sem login, sem emails. Basta compartilhar o link.",
+        "h1": "Gerador de Amigo Secreto",
+        "subtitle": "Organize seu amigo secreto em segundos.",
+        "faq_1_q": "Como funciona o Gerador de Amigo Secreto?",
+        "faq_1_a": "Insira os nomes dos participantes e nosso algoritmo seguro os embaralhará para atribuir um presenteado único para cada pessoa.",
+        "faq_2_q": "Preciso de emails?",
+        "faq_2_a": "Não! O Sorteio Pro respeita sua privacidade. Não precisamos de emails. Basta gerar os pares e compartilhar o resultado."
+    },
+    "SecretSantaGeo": {
+        "direct_answer_title": "O que é um Gerador de Amigo Secreto?",
+        "direct_answer_text": "Um <tool>Gerador de Amigo Secreto</tool> é uma ferramenta que atribui aleatoriamente quem presenteia quem dentro de um grupo, garantindo que ninguém tire a si mesmo. É a maneira moderna de organizar o <strong>Amigo Secreto</strong> ou <strong>Amigo Oculto</strong> sem usar papéis. O <brand>Sorteio Pro</brand> torna esse processo instantâneo e justo.",
+        "cta_button": "Gerar Pares",
+        "feature_1_title": "Sorteio Instantâneo",
+        "feature_1_desc": "Gere pares justos em milissegundos.",
+        "feature_2_title": "Sem Emails",
+        "feature_2_desc": "Respeitamos a privacidade. Sem spam.",
+        "feature_3_title": "Compartilhar Resultado",
+        "feature_3_desc": "Baixe um certificado ou compartilhe o link.",
+        "feature_4_title": "Qualquer Tamanho de Grupo",
+        "feature_4_desc": "Perfeito para famílias ou grandes escritórios.",
+        "how_to_title": "Como organizar um Amigo Secreto",
+        "how_to_step_1": "Insira os nomes de todos os participantes.",
+        "how_to_step_2": "Selecione a visualização 'Grade' ou 'Lista'.",
+        "how_to_step_3": "Clique em 'Iniciar Sorteio' para embaralhar e atribuir pares.",
+        "how_to_step_4": "Compartilhe os resultados com o grupo!"
+    },
     "LetterGeo": {
         "direct_answer_title": "O que é um Gerador de Letras Aleatórias?",
         "direct_answer_text": "Um <strong>Gerador de Letras Aleatórias</strong> é uma ferramenta que seleciona uma letra do alfabeto (A-Z) completamente ao acaso. É muito usado para jogos como <strong>Stop, Adedonha</strong>, ensinar fonética ou iniciar exercícios de escrita criativa. O <strong>Sorteo Pro</strong> oferece uma forma justa e visual de escolher letras instantaneamente.",
@@ -575,6 +603,8 @@
         "yes_no_text": "Gire a roleta e decida! Sim ou Não? 🎡 Grátis e Justo. 👇",
         "letter_title": "Gerador de Letras | Sorteio Pro",
         "letter_text": "Acabei de escolher uma letra aleatória! Gerador A-Z. 🔤 Grátis. 👇",
+        "secret_santa_title": "Gerador de Amigo Secreto | Sorteio Pro",
+        "secret_santa_text": "🎁 Acabei de organizar o Amigo Secreto com o Sorteio Pro! Grátis e Sem Login. 👇",
         "custom_share_text": "🔥 Participe do meu sorteio: *{title}*! Criado com Sorteo Pro. Grátis e Ilimitado. 👇",
         "cta_share": "Compartilhar",
         "cta_start": "Começar"

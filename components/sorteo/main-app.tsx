@@ -18,6 +18,7 @@ import { RngGeo } from "@/components/sorteo/rng-geo"
 import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
 import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
 import { LetterGeo } from "@/components/sorteo/letter-geo"
+import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
@@ -76,13 +77,14 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => voi
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
   const tLetter = useTranslations("LetterGeneratorPage")
+  const tSecretSanta = useTranslations("SecretSantaPage")
   const tRng = useTranslations("RngPage")
   const tList = useTranslations("ListRandomizerPage")
   const tInsta = useTranslations("InstagramPicker")
@@ -139,6 +141,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         } else if (seoMode === 'letter') {
             update.customTitle = tLetter('h1')
             update.customSubtitle = tLetter('subtitle')
+        } else if (seoMode === 'secret-santa') {
+            update.customTitle = tSecretSanta('h1')
+            update.customSubtitle = tSecretSanta('subtitle')
         } else if (seoMode === 'rng') {
             update.customTitle = tRng('h1')
             update.customSubtitle = tRng('subtitle')
@@ -169,6 +174,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           } else if (seoMode === 'letter') {
               const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
               addParticipants(alphabet.map(l => ({ name: l })))
+          } else if (seoMode === 'secret-santa') {
+             // Maybe add demo names? Or leave empty for them to add.
+             // Leaving empty is fine for list based tools usually.
           } else {
               addParticipants([
                   { name: "Option 1" },
@@ -242,6 +250,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareTitle = tShare('letter_title')
           shareText = tShare('letter_text')
           defaultTitle = tLetter('h1')
+      } else if (seoMode === 'secret-santa') {
+          shareTitle = tSecretSanta('title')
+          shareText = tShare('secret_santa_text')
+          defaultTitle = tSecretSanta('h1')
       }
 
       // Viralis: Check for custom title to enhance share context
@@ -541,6 +553,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             /* Letter Mode */
             <>
                 <LetterGeo />
+                <Glossary seoMode={seoMode} />
+            </>
+       ) : seoMode === 'secret-santa' ? (
+            /* Secret Santa Mode */
+            <>
+                <SecretSantaGeo />
                 <Glossary seoMode={seoMode} />
             </>
        ) : (

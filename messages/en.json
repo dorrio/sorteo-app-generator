@@ -615,6 +615,34 @@
         "faq_2_q": "Can I remove letters that have been picked?",
         "faq_2_a": "Yes! Just toggle the 'Remove winner' option in settings if you want unique letters each time."
     },
+    "SecretSantaPage": {
+        "title": "Secret Santa Generator | Free & Ad-Free Organizer",
+        "description": "The best free Secret Santa Generator. Organize your office or family gift exchange instantly. No login, no emails required. Just share the link.",
+        "h1": "Secret Santa Generator",
+        "subtitle": "Organize your gift exchange in seconds.",
+        "faq_1_q": "How does the Secret Santa Generator work?",
+        "faq_1_a": "Enter the names of participants, and our secure algorithm shuffles them to assign a unique gift recipient to each person.",
+        "faq_2_q": "Do I need email addresses?",
+        "faq_2_a": "No! Sorteo Pro is privacy-focused. You don't need emails. Just generate the pairs and share the result."
+    },
+    "SecretSantaGeo": {
+        "direct_answer_title": "What is a Secret Santa Generator?",
+        "direct_answer_text": "A <tool>Secret Santa Generator</tool> is a tool that randomly assigns gift givers to recipients within a group, ensuring no one draws their own name. It is the modern way to organize <strong>Amigo Invisible</strong> or <strong>Kris Kringle</strong> exchanges without using paper slips. <brand>Sorteo Pro</brand> makes this process instant and fair.",
+        "cta_button": "Generate Pairs",
+        "feature_1_title": "Instant Matching",
+        "feature_1_desc": "Generate fair pairs in milliseconds.",
+        "feature_2_title": "No Emails Needed",
+        "feature_2_desc": "Respects privacy. No spam.",
+        "feature_3_title": "Share Result",
+        "feature_3_desc": "Download a certificate or share the link.",
+        "feature_4_title": "Any Group Size",
+        "feature_4_desc": "Perfect for families or large offices.",
+        "how_to_title": "How to organize a Secret Santa",
+        "how_to_step_1": "Enter the names of all participants.",
+        "how_to_step_2": "Select 'Grid' or 'List' view.",
+        "how_to_step_3": "Click 'Start Giveaway' to shuffle and assign pairs.",
+        "how_to_step_4": "Share the results with the group!"
+    },
     "LetterGeo": {
         "direct_answer_title": "What is a Random Letter Generator?",
         "direct_answer_text": "A <strong>Random Letter Generator</strong> is a tool that selects a letter from the alphabet (A-Z) completely by chance. It is widely used for games like <strong>Scattergories</strong>, teaching phonics, or initializing creative writing prompts. <strong>Sorteo Pro</strong> offers a fair, visual way to pick letters instantly.",
@@ -648,6 +676,8 @@
         "yes_no_text": "Spin the wheel and decide! Yes or No? 🎡 Free & Fair. 👇",
         "letter_title": "Random Letter Generator | Sorteo Pro",
         "letter_text": "I just picked a random letter! A-Z Generator. 🔤 Free & Fair. 👇",
+        "secret_santa_title": "Secret Santa Generator | Sorteo Pro",
+        "secret_santa_text": "🎁 I just organized our Secret Santa with Sorteo Pro! Free & No Login. 👇",
         "custom_share_text": "🔥 Join my giveaway: *{title}*! Created with Sorteo Pro. Free & Unlimited. 👇",
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway"

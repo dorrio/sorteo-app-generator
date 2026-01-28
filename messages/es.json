@@ -276,7 +276,9 @@
         "term_6": "Ruleta Sí o No",
         "def_6": "Una herramienta de toma de decisiones que selecciona aleatoriamente entre 'Sí' y 'No' con igual probabilidad, similar a lanzar una moneda.",
         "term_7": "Generador de Letras Aleatorias",
-        "def_7": "Una herramienta digital que elige una letra del alfabeto (A-Z) al azar. Útil para juegos de palabras, enseñar fonética y siglas."
+        "def_7": "Una herramienta digital que elige una letra del alfabeto (A-Z) al azar. Útil para juegos de palabras, enseñar fonética y siglas.",
+        "term_8": "Amigo Invisible",
+        "def_8": "Una tradición navideña en la que a los miembros de un grupo se les asigna aleatoriamente una persona a quien deben hacer un regalo. La identidad del regalador debe permanecer en secreto."
     },
     "InstagramPicker": {
         "title": "Selector de Comentarios de Instagram Gratis | Ilimitado",
@@ -443,6 +445,34 @@
         "how_to_step_2": "Elige la vista 'Cuadrícula' o 'Lista' desde el Editor Visual.",
         "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para aleatorizar el orden al instante.",
         "how_to_step_4": "Usa el resultado para formar equipos, asignar tareas o elegir un ganador."
+    },
+    "SecretSantaPage": {
+        "title": "Amigo Invisible Online | Generador Gratis y Sin Registro",
+        "description": "El mejor Generador de Amigo Invisible gratis. Sortea nombres y asigna regalos al instante. Sin email, sin registro, solo pega nombres y mezcla.",
+        "h1": "Generador de Amigo Invisible Gratis",
+        "subtitle": "Mezcla nombres y asigna parejas de Amigo Invisible al instante.",
+        "faq_1_q": "¿Cómo uso esto para el Amigo Invisible?",
+        "faq_1_a": "Simplemente pega la lista de participantes. El resultado mostrará una lista barajada. El orden determina el regalo: La persona 1 regala a la 2, la 2 a la 3, y la última a la 1.",
+        "faq_2_q": "¿Necesito correos electrónicos?",
+        "faq_2_a": "¡No! Esta es una herramienta simple sin registro. Perfecta para hacerlo rápido compartiendo pantalla o enviando una captura."
+    },
+    "SecretSantaGeo": {
+        "direct_answer_title": "¿Qué es un Generador de Amigo Invisible?",
+        "direct_answer_text": "Un <tool>Generador de Amigo Invisible</tool> (o Amigo Secreto) es una herramienta que asigna aleatoriamente a quién debes hacer un regalo. <brand>Sorteo Pro</brand> utiliza un algoritmo de barajado seguro para garantizar que las asignaciones sean justas, sin necesidad de emails ni registros.",
+        "cta_button": "Iniciar Amigo Invisible",
+        "feature_1_title": "Parejas Instantáneas",
+        "feature_1_desc": "Genera asignaciones en segundos.",
+        "feature_2_title": "Sin Registro / Sin Email",
+        "feature_2_desc": "Respeta tu privacidad. Sin spam.",
+        "feature_3_title": "Compatible con Móviles",
+        "feature_3_desc": "Funciona en cualquier teléfono.",
+        "feature_4_title": "100% Gratis",
+        "feature_4_desc": "Participantes ilimitados.",
+        "how_to_title": "Cómo organizar el Amigo Invisible",
+        "how_to_step_1": "Ingresa los nombres de todos los participantes.",
+        "how_to_step_2": "Haz clic en 'Iniciar Sorteo' para mezclar la lista.",
+        "how_to_step_3": "Sigue el círculo: El primer nombre regala al siguiente.",
+        "how_to_step_4": "¡Comparte la captura del resultado con el grupo!"
     },
     "YesNoPage": {
         "title": "Ruleta Sí o No | Tomar Decisiones al Azar",
@@ -633,6 +663,8 @@
         "yes_no_text": "¡Gira la ruleta y decide! ¿Sí o No? 🎡 Gratis y Justo. 👇",
         "letter_title": "Generador de Letras | Sorteo Pro",
         "letter_text": "¡Acabo de elegir una letra al azar! Generador A-Z. 🔤 Gratis. 👇",
+        "secret_santa_title": "Amigo Invisible Online | Sorteo Pro",
+        "secret_santa_text": "🎁 ¡Ya tengo las parejas del Amigo Invisible! Mira el resultado aquí. Gratis y Seguro. 👇",
         "custom_share_text": "🔥 Participa en mi sorteo: *{title}*! Creado con Sorteo Pro. Gratis e Ilimitado. 👇",
         "cta_share": "Compartir",
         "cta_start": "Empezar"

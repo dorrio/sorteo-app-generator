@@ -276,7 +276,9 @@
         "term_6": "Roleta Sim ou Não",
         "def_6": "Uma ferramenta de tomada de decisão que seleciona aleatoriamente entre 'Sim' e 'Não' com probabilidade igual, semelhante a jogar uma moeda.",
         "term_7": "Gerador de Letras Aleatórias",
-        "def_7": "Uma ferramenta digital que escolhe uma letra do alfabeto (A-Z) aleatoriamente. Útil para jogos de palavras, ensino de fonética e siglas."
+        "def_7": "Uma ferramenta digital que escolhe uma letra do alfabeto (A-Z) aleatoriamente. Útil para jogos de palavras, ensino de fonética e siglas.",
+        "term_8": "Amigo Secreto",
+        "def_8": "Uma tradição natalina em que os membros de um grupo recebem aleatoriamente a designação de uma pessoa para quem devem dar um presente. A identidade do doador deve permanecer em segredo."
     },
     "InstagramPicker": {
         "title": "Sorteador de Comentários do Instagram Grátis | Ilimitado",
@@ -444,6 +446,34 @@
         "how_to_step_3": "Clique em 'Iniciar Sorteio' para aleatorizar a ordem instantaneamente.",
         "how_to_step_4": "Use o resultado para formar equipes, atribuir tarefas ou escolher um vencedor."
     },
+    "SecretSantaPage": {
+        "title": "Amigo Secreto Online | Gerador Grátis e Sem Cadastro",
+        "description": "O melhor Gerador de Amigo Secreto grátis. Sorteie nomes e atribua presentes instantaneamente. Sem email, sem cadastro, apenas cole os nomes.",
+        "h1": "Gerador de Amigo Secreto Grátis",
+        "subtitle": "Embaralhe nomes e atribua pares de Amigo Secreto instantaneamente.",
+        "faq_1_q": "Como uso isso para o Amigo Secreto?",
+        "faq_1_a": "Simplesmente cole a lista de participantes. O resultado mostrará uma lista embaralhada. A ordem determina o presente: Pessoa 1 presenteia Pessoa 2, Pessoa 2 a Pessoa 3, e a última presenteia a 1.",
+        "faq_2_q": "Preciso de emails?",
+        "faq_2_a": "Não! Esta é uma ferramenta simples sem login. Perfeita para fazer rápido compartilhando a tela ou enviando um print."
+    },
+    "SecretSantaGeo": {
+        "direct_answer_title": "O que é um Gerador de Amigo Secreto?",
+        "direct_answer_text": "Um <tool>Gerador de Amigo Secreto</tool> é uma ferramenta que atribui aleatoriamente a quem você deve dar um presente. <brand>Sorteo Pro</brand> usa um algoritmo de embaralhamento seguro para garantir que as atribuições sejam justas, sem precisar de emails ou cadastros.",
+        "cta_button": "Iniciar Amigo Secreto",
+        "feature_1_title": "Pares Instantâneos",
+        "feature_1_desc": "Gere atribuições em segundos.",
+        "feature_2_title": "Sem Login / Sem Email",
+        "feature_2_desc": "Respeita sua privacidade. Sem spam.",
+        "feature_3_title": "Compatível com Celular",
+        "feature_3_desc": "Funciona em qualquer dispositivo.",
+        "feature_4_title": "100% Grátis",
+        "feature_4_desc": "Participantes ilimitados.",
+        "how_to_title": "Como organizar o Amigo Secreto",
+        "how_to_step_1": "Insira os nomes de todos os participantes.",
+        "how_to_step_2": "Clique em 'Iniciar Sorteio' para embaralhar a lista.",
+        "how_to_step_3": "Siga o círculo: O primeiro nome presenteia o próximo.",
+        "how_to_step_4": "Compartilhe o resultado com o grupo!"
+    },
     "YesNoPage": {
         "title": "Roleta Sim ou Não | Decisões Aleatórias",
         "description": "Gire a Roleta Sim ou Não para tomar uma decisão aleatória. Uma forma divertida, justa e gratuita de decidir. Como jogar uma moeda.",
@@ -575,6 +605,8 @@
         "yes_no_text": "Gire a roleta e decida! Sim ou Não? 🎡 Grátis e Justo. 👇",
         "letter_title": "Gerador de Letras | Sorteio Pro",
         "letter_text": "Acabei de escolher uma letra aleatória! Gerador A-Z. 🔤 Grátis. 👇",
+        "secret_santa_title": "Amigo Secreto Online | Sorteo Pro",
+        "secret_santa_text": "🎁 Já sorteei o Amigo Secreto! Confira o resultado aqui. Grátis e Seguro. 👇",
         "custom_share_text": "🔥 Participe do meu sorteio: *{title}*! Criado com Sorteo Pro. Grátis e Ilimitado. 👇",
         "cta_share": "Compartilhar",
         "cta_start": "Começar"

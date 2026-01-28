@@ -23,7 +23,7 @@ import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
 import { SiteFooter } from "@/components/sorteo/site-footer"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
-import { Sparkles, Settings2, Play, Trophy, Loader2, ShieldCheck, Share2 } from "lucide-react"
+import { Sparkles, Settings2, Play, Trophy, ShieldCheck, Share2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
@@ -290,14 +290,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   }
 
   if (!mounted || !hasHydrated) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <Loader2 className="w-12 h-12 animate-spin mx-auto text-primary" />
-          <p className="text-muted-foreground">{t("loading")}</p>
-        </div>
-      </div>
-    )
+    return <AppSkeleton />
   }
 
   const bgOpacity = theme.backgroundOpacity ?? 30

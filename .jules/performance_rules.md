@@ -11,6 +11,7 @@
 *   **Inert Handling:** Use imperative `ref.current.inert = true` for overlays to ensure accessibility without hydration mismatches.
 *   **Dynamic Imports:** Use `next/dynamic` with `ssr: false` for heavy interactive components (e.g., `Confetti`, `VisualEditor`).
 *   **Image Optimization:** Use `next/image` with `unoptimized` for user-generated content (Blob URLs) while maintaining layout stability with `fill`.
+*   **Skeleton Loading:** Use Skeletons instead of spinners during hydration to match SSR layout and improve perceived performance.
 
 ## ❌ BAD PATTERNS (Avoid This)
 *   **Sync Imports:** Importing heavy widgets directly in the main bundle.

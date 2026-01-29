@@ -734,5 +734,36 @@
         "feature_2_desc": "Prove to your audience that the result is fair.",
         "feature_3_title": "Premium",
         "feature_3_desc": "Cinematic 3D effects that impress everyone."
+    },
+    "TeamGeneratorPage": {
+        "title": "Random Team Generator | Free Group Maker & Splitter",
+        "description": "The best free Random Team Generator. Split lists into equal groups, create random pairs, or assign teams instantly. No login, no ads.",
+        "h1": "Random Team Generator",
+        "subtitle": "Split lists into random teams or groups instantly."
+    },
+    "TeamGeo": {
+        "direct_answer_title": "What is a Random Team Generator?",
+        "direct_answer_text": "A <tool>Random Team Generator</tool> is a tool that divides a list of participants into random groups or teams. It is essential for teachers creating <strong>study groups</strong>, coaches making <strong>fair sports teams</strong>, or managers assigning <strong>breakout rooms</strong>. <brand>Sorteo Pro</brand> ensures fair and unbiased grouping.",
+        "cta_button": "Generate Teams",
+        "feature_1_title": "Fair Grouping",
+        "feature_1_desc": "Creates balanced teams randomly.",
+        "feature_2_title": "Custom Team Sizes",
+        "feature_2_desc": "Split by number of teams or people per team.",
+        "feature_3_title": "Visual Grid",
+        "feature_3_desc": "See everyone assigned to their colors.",
+        "feature_4_title": "Export Results",
+        "feature_4_desc": "Copy or share the teams instantly.",
+        "how_to_title": "How to generate random teams",
+        "how_to_step_1": "Enter the list of all names or participants.",
+        "how_to_step_2": "The tool automatically splits them into the default number of teams.",
+        "how_to_step_3": "Click 'Customize' to change the number of teams.",
+        "how_to_step_4": "Click 'Start Giveaway' to reshuffle if needed.",
+        "uses_title": "Best Use Cases",
+        "use_1_title": "Classroom Groups",
+        "use_1_desc": "Create fair project groups for students in seconds.",
+        "use_2_title": "Sports & Games",
+        "use_2_desc": "Make random teams for soccer, basketball, or board games.",
+        "use_3_title": "Office Icebreakers",
+        "use_3_desc": "Split colleagues into breakout groups for workshops."
     }
 }

@@ -158,7 +158,8 @@
     },
     "WinnerCeremony": {
         "winner_label": "Vencedor",
-        "share_text": "Acabei de realizar um sorteio com Sorteio Pro e *{name}* ganhou! 🏆 Crie seu próprio sorteio viral grátis aqui: 👇",
+        "share_text": "Acabei de realizar um sorteio com Sorteo Pro e *{name}* ganhou! 🏆 Crie seu próprio sorteio viral grátis aqui: 👇",
+        "share_text_custom": "🔥 Acabei de sortear um vencedor para *{title}*!\n\n🏆 Vencedor: *{name}*\n\n✅ Resultado verificado e crie o seu aqui: 👇",
         "share_title": "Temos um Vencedor! 🏆",
         "congratulations": "Parabéns! 🎉",
         "share_button": "Compartilhar Resultado",
@@ -220,7 +221,8 @@
             "local_record": "Registro Local Encontrado",
             "not_found_message": "Este ID não corresponde a nenhum sorteio registrado neste dispositivo.",
             "invalid_format_message": "O formato do ID é inválido."
-        }
+        },
+        "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nVeja o certificado e crie o seu aqui 👇"
     },
     "SEOContent": {
         "what_is_title": "O que é o Sorteio Pro?",

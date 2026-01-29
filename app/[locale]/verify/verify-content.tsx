@@ -132,7 +132,10 @@ export function VerifyContent() {
         shareUrl += `&type=${encodeURIComponent(type)}`
     }
 
-    const shareText = t("share_proof_text", { name: winnerName })
+    let shareText = t("share_proof_text", { name: winnerName })
+    if (title) {
+        shareText = t("share_proof_text_custom", { name: winnerName, title: title })
+    }
 
     // Pre-calculate intent URLs for semantic <a> tags
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`

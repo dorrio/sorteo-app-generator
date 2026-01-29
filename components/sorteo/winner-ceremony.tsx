@@ -69,7 +69,10 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   }
 
   // Compelling share text
-  const shareText = t("share_text", { name: winner.name })
+  let shareText = t("share_text", { name: winner.name })
+  if (theme.customTitle) {
+      shareText = t("share_text_custom", { name: winner.name, title: theme.customTitle })
+  }
 
   // Pre-calculate Social URLs for SEO (Link Juice) & Accessibility
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`

@@ -159,6 +159,7 @@
     "WinnerCeremony": {
         "winner_label": "Ganador",
         "share_text": "¡Acabo de realizar un sorteo con Sorteo Pro y *{name}* ha ganado! 🏆 Resultado verificado y crea el tuyo aquí: 👇",
+        "share_text_custom": "🔥 ¡Acabo de elegir un ganador para *{title}*!\n\n🏆 Ganador: *{name}*\n\n✅ Resultado verificado y crea el tuyo aquí: 👇",
         "share_title": "¡Tenemos Ganador! 🏆",
         "congratulations": "¡Felicidades! 🎉",
         "share_button": "Compartir Resultado",
@@ -210,6 +211,7 @@
         "share_button": "Compartir Prueba",
         "download_certificate": "Descargar Certificado",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* es el GANADOR!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
+        "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* ganó *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "result": {
             "valid_title": "ID Válido",
             "copied": "¡Copiado!",

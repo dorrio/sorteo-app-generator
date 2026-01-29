@@ -427,11 +427,6 @@ export function VisualEditor() {
                       >
                         <option value="Space Grotesk">Space Grotesk</option>
                         <option value="Inter">Inter</option>
-                        <option value="Roboto">Roboto</option>
-                        <option value="Montserrat">Montserrat</option>
-                        <option value="Open Sans">Open Sans</option>
-                        <option value="Lato">Lato</option>
-                        <option value="Poppins">Poppins</option>
                         <option value="system-ui">System UI</option>
                       </select>
                     </div>

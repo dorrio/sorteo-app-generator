@@ -4,12 +4,7 @@ import type { Metadata, Viewport } from "next"
 import {
   Inter,
   Space_Grotesk,
-  Geist_Mono,
-  Roboto,
-  Montserrat,
-  Open_Sans,
-  Lato,
-  Poppins
+  Geist_Mono
 } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -23,11 +18,6 @@ import "../globals.css"
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-display" })
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
-const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], variable: "--font-roboto" })
-const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat" })
-const openSans = Open_Sans({ subsets: ["latin"], variable: "--font-open-sans" })
-const lato = Lato({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-lato" })
-const poppins = Poppins({ weight: ["400", "600", "700"], subsets: ["latin"], variable: "--font-poppins" })
 
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL
   ? process.env.NEXT_PUBLIC_APP_URL
@@ -194,7 +184,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className="dark" suppressHydrationWarning>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} ${geistMono.variable} ${roboto.variable} ${montserrat.variable} ${openSans.variable} ${lato.variable} ${poppins.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${geistMono.variable} font-sans antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

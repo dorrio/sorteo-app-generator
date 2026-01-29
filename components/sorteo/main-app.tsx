@@ -359,11 +359,11 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           fontFamily:
             theme.fontFamily === "Inter" ? "var(--font-inter)" :
               theme.fontFamily === "Space Grotesk" ? "var(--font-display)" :
-                theme.fontFamily === "Roboto" ? "var(--font-roboto)" :
-                  theme.fontFamily === "Montserrat" ? "var(--font-montserrat)" :
-                    theme.fontFamily === "Open Sans" ? "var(--font-open-sans)" :
-                      theme.fontFamily === "Lato" ? "var(--font-lato)" :
-                        theme.fontFamily === "Poppins" ? "var(--font-poppins)" :
+                theme.fontFamily === "Roboto" ? "system-ui, sans-serif" :
+                  theme.fontFamily === "Montserrat" ? "system-ui, sans-serif" :
+                    theme.fontFamily === "Open Sans" ? "system-ui, sans-serif" :
+                      theme.fontFamily === "Lato" ? "system-ui, sans-serif" :
+                        theme.fontFamily === "Poppins" ? "system-ui, sans-serif" :
                           theme.fontFamily === "system-ui" ? "system-ui, sans-serif" :
                             "var(--font-display)"
         }}

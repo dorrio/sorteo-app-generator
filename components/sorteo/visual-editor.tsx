@@ -246,10 +246,13 @@ export function VisualEditor() {
                     exit={{ opacity: 0, y: -10 }}
                     className="space-y-3"
                   >
-                    {presets.map((preset) => (
-                      <button
-                        key={preset.id}
-                        onClick={() => setPresetTheme(preset.id)}
+                    <div role="radiogroup" aria-label={t("tabs.presets")} className="space-y-3">
+                      {presets.map((preset) => (
+                        <button
+                          key={preset.id}
+                          role="radio"
+                          aria-checked={theme.style === preset.id}
+                          onClick={() => setPresetTheme(preset.id)}
                         className={`w-full p-4 rounded-xl border-2 transition-all text-left ${theme.style === preset.id ? "border-primary" : "border-border hover:border-border/80"
                           }`}
                         style={theme.style === preset.id ? { borderColor: theme.primaryColor } : {}}
@@ -273,10 +276,11 @@ export function VisualEditor() {
                               className="w-8 h-8 rounded-full border border-border/50"
                               style={{ backgroundColor: color }}
                             />
-                          ))}
-                        </div>
-                      </button>
-                    ))}
+                            ))}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
                   </motion.div>
                 )}
 
@@ -446,14 +450,16 @@ export function VisualEditor() {
                     className="space-y-6"
                   >
                     <div className="space-y-3">
-                      <Label className="flex items-center gap-2">
+                      <Label className="flex items-center gap-2" id="style-label">
                         <Play className="w-4 h-4" />
                         {t("effects.style_label")}
                       </Label>
-                      <div className="grid grid-cols-1 gap-2">
+                      <div className="grid grid-cols-1 gap-2" role="radiogroup" aria-labelledby="style-label">
                         {sorteoStyles.map((style) => (
                           <button
                             key={style.id}
+                            role="radio"
+                            aria-checked={(theme.sorteoStyle ?? "slot-machine") === style.id}
                             onClick={() => updateTheme({ sorteoStyle: style.id })}
                             className={`w-full p-3 rounded-xl border-2 transition-all text-left flex items-center gap-3 ${(theme.sorteoStyle ?? "slot-machine") === style.id
                               ? "border-primary bg-primary/10"
@@ -520,12 +526,14 @@ export function VisualEditor() {
                     </div>
 
                     <div className="space-y-3">
-                      <Label className="flex items-center gap-2">
+                      <Label className="flex items-center gap-2" id="view-label">
                         <Layers className="w-4 h-4" />
                         {t("effects.participants_view")}
                       </Label>
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-2 gap-2" role="radiogroup" aria-labelledby="view-label">
                         <button
+                          role="radio"
+                          aria-checked={theme.participantDisplay === "list" || !theme.participantDisplay}
                           onClick={() => updateTheme({ participantDisplay: "list" })}
                           className={`p-3 rounded-xl border-2 transition-all text-sm font-medium ${theme.participantDisplay === "list" || !theme.participantDisplay
                             ? "border-primary bg-primary/10"
@@ -540,6 +548,8 @@ export function VisualEditor() {
                           {t("effects.list_view")}
                         </button>
                         <button
+                          role="radio"
+                          aria-checked={theme.participantDisplay === "bubbles"}
                           onClick={() => updateTheme({ participantDisplay: "bubbles" })}
                           className={`p-3 rounded-xl border-2 transition-all text-sm font-medium ${theme.participantDisplay === "bubbles"
                             ? "border-primary bg-primary/10"

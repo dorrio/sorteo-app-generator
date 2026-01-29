@@ -9,3 +9,8 @@
 **Blocker:** "Popular Uses" section in List Randomizer was a collection of generic `div`s, hiding the relationship between items from crawlers.
 **Bridge:** Converted the grid container to a `ul` with `role="list"` and items to `li`.
 **Signal:** Improved semantic landmarks (Priority 3), reinforcing the relationship between the use cases for the List Randomizer tool.
+
+## 2024-05-24 - VisualEditor/SelectionControls
+**Blocker:** Visual Editor selection states (Presets, Styles, Views) were visual-only (border colors), making them "Semantic Voids" for screen readers and bots, as they relied solely on CSS classes for state indication.
+**Bridge:** Implemented `role="radiogroup"` on containers and `role="radio"` with `aria-checked` attributes on individual buttons.
+**Signal:** Improved WCAG compliance by exposing state to assistive technologies and search bots, ensuring the interactive structure is machine-readable.

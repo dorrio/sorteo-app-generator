@@ -11,6 +11,7 @@ export async function GET(request: Request) {
     const name = searchParams.get('name')?.slice(0, 50);
     const dateParam = searchParams.get('date');
     const customTitle = searchParams.get('title')?.slice(0, 60);
+    const customColor = searchParams.get('color');
 
     // --- THEME CONFIGURATION ---
     // Default: Golden Ticket (Generic)
@@ -160,6 +161,19 @@ export async function GET(request: Request) {
                 </div>
             )
         };
+    }
+
+    // VIRALIS: Apply custom color override if present
+    if (customColor) {
+        theme.accentColor = customColor;
+        // Generate a lighter version for subtext (simple approach)
+        theme.subTextColor = customColor + "CC"; // 80% opacity hex
+
+        // Update gradient if it's not the Instagram gradient
+        if (type !== 'instagram') {
+             // Dark gradient with custom color hint
+             theme.bgGradient = `radial-gradient(circle at center, ${customColor}40 0%, #000000 100%)`;
+        }
     }
 
     // --- MODE SELECTION ---
@@ -379,7 +393,7 @@ export async function GET(request: Request) {
                     backgroundClip: 'text',
                     color: 'transparent',
                 }}>
-                    {theme.title}
+                    {customTitle || theme.title}
                 </h1>
 
                 {/* Subtitle */}

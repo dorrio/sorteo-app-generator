@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function YesNoPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'YesNoPage' });
-  const tSchema = await getTranslations({ locale, namespace: 'Schema' });
+  const tGeo = await getTranslations({ locale, namespace: 'YesNoGeo' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -74,10 +74,10 @@ export default async function YesNoPage({ params }: { params: Promise<{ locale: 
     },
     description: t('description'),
     featureList: [
-      tSchema('wheel_features.customizable'),
-      tSchema('wheel_features.random'),
-      tSchema('wheel_features.no_ads'),
-      tSchema('wheel_features.free')
+      tGeo('feature_1'),
+      tGeo('feature_2'),
+      tGeo('feature_3'),
+      tGeo('feature_4')
     ]
   };
 

@@ -76,7 +76,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 export default async function WheelOfNamesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'WheelGeoPage' });
-  const tSchema = await getTranslations({ locale, namespace: 'Schema' });
+  const tGeo = await getTranslations({ locale, namespace: 'WheelGeo' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -97,10 +97,10 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
     },
     description: t('description'),
     featureList: [
-      tSchema('wheel_features.customizable'),
-      tSchema('wheel_features.random'),
-      tSchema('wheel_features.no_ads'),
-      tSchema('wheel_features.free')
+      tGeo('feature_1'),
+      tGeo('feature_2'),
+      tGeo('feature_3'),
+      tGeo('feature_4')
     ]
   };
 

@@ -4,3 +4,8 @@
 **Gap:** Competitors (Elfster, DrawNames) have dedicated "Secret Santa" landing pages. Sorteo Pro only targets this via "List Randomizer" keywords, missing high-intent traffic.
 **Action:** Creating dedicated `/secret-santa-generator` landing page with `SecretSantaGeo` component and specialized Schema.
 **GEO Impact:** Optimized for "How to organize a Secret Santa" and "Free Secret Santa Generator" queries with Direct Answer blocks.
+
+## 2025-05-25 - [Strategy/Cluster Content]
+**Gap:** Competitors have dedicated "Random Team Generator" pages ranking for specific "Group Maker" and "Team Splitter" keywords.
+**Action:** Created dedicated `/team-generator` landing page with `TeamGeo` component, specialized Schema, and targeted Metadata.
+**GEO Impact:** Optimized for "How to generate random teams" and "Free Team Maker" queries with Direct Answer blocks.

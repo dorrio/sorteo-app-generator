@@ -719,5 +719,36 @@
             "q3": "Funciona no celular?",
             "a3": "Sim, o Sorteio Pro é totalmente responsivo e funciona perfeitamente em todos os dispositivos móveis e tablets."
         }
+    },
+    "TeamGeneratorPage": {
+        "title": "Gerador de Equipes Aleatórias | Criar Grupos Grátis",
+        "description": "O melhor Gerador de Equipes Aleatórias grátis. Divida listas em grupos iguais, crie pares ou atribua equipes instantaneamente. Sem login, sem anúncios.",
+        "h1": "Gerador de Equipes Aleatórias",
+        "subtitle": "Divida listas em equipes ou grupos aleatórios instantaneamente."
+    },
+    "TeamGeo": {
+        "direct_answer_title": "O que é um Gerador de Equipes Aleatórias?",
+        "direct_answer_text": "Um <tool>Gerador de Equipes Aleatórias</tool> é uma ferramenta que divide uma lista de participantes em grupos ou equipes aleatórias. É essencial para professores criando <strong>grupos de estudo</strong>, treinadores fazendo <strong>times justos</strong> ou gerentes atribuindo <strong>grupos de trabalho</strong>. <brand>Sorteo Pro</brand> garante um agrupamento justo e imparcial.",
+        "cta_button": "Gerar Equipes",
+        "feature_1_title": "Agrupamento Justo",
+        "feature_1_desc": "Cria equipes equilibradas aleatoriamente.",
+        "feature_2_title": "Tamanhos Personalizados",
+        "feature_2_desc": "Divida por número de equipes ou pessoas por equipe.",
+        "feature_3_title": "Grade Visual",
+        "feature_3_desc": "Veja todos atribuídos às suas cores.",
+        "feature_4_title": "Exportar Resultados",
+        "feature_4_desc": "Copie ou compartilhe as equipes instantaneamente.",
+        "how_to_title": "Como gerar equipes aleatórias",
+        "how_to_step_1": "Insira a lista de todos os nomes ou participantes.",
+        "how_to_step_2": "A ferramenta os divide automaticamente no número padrão de equipes.",
+        "how_to_step_3": "Clique em 'Personalizar' para mudar o número de equipes.",
+        "how_to_step_4": "Clique em 'Iniciar Sorteio' para embaralhar novamente se necessário.",
+        "uses_title": "Melhores Usos",
+        "use_1_title": "Grupos de Sala de Aula",
+        "use_1_desc": "Crie grupos de projeto justos para estudantes em segundos.",
+        "use_2_title": "Esportes e Jogos",
+        "use_2_desc": "Faça times aleatórios para futebol, basquete ou jogos de tabuleiro.",
+        "use_3_title": "Dinâmicas de Escritório",
+        "use_3_desc": "Divida colegas em grupos para workshops."
     }
 }

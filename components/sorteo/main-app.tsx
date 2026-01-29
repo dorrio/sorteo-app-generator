@@ -16,6 +16,7 @@ import { WheelGeo } from "@/components/sorteo/wheel-geo"
 import { RngGeo } from "@/components/sorteo/rng-geo"
 import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
 import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo"
+import { TeamGeo } from "@/components/sorteo/team-geo"
 import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
 import { LetterGeo } from "@/components/sorteo/letter-geo"
 import { Glossary } from "@/components/sorteo/glossary"
@@ -76,7 +77,7 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => voi
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
@@ -86,6 +87,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const tRng = useTranslations("RngPage")
   const tList = useTranslations("ListRandomizerPage")
   const tSecret = useTranslations("SecretSantaPage")
+  const tTeam = useTranslations("TeamGeneratorPage")
   const tInsta = useTranslations("InstagramPicker")
   const tWheel = useTranslations("WheelGeoPage") 
   const tMeta = useTranslations("Metadata")
@@ -149,6 +151,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         } else if (seoMode === 'secret-santa') {
             update.customTitle = tSecret('h1')
             update.customSubtitle = tSecret('subtitle')
+        } else if (seoMode === 'team') {
+            update.customTitle = tTeam('h1')
+            update.customSubtitle = tTeam('subtitle')
         } else if (seoMode === 'instagram') {
             update.customTitle = tInsta('h1')
             update.customSubtitle = tInsta('subtitle')
@@ -159,7 +164,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         updateTheme(update)
     }
-  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tInsta, tWheel])
+  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
@@ -238,6 +243,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareTitle = tShare('list_title')
           shareText = tShare('list_text')
           defaultTitle = tList('h1')
+      } else if (seoMode === 'team') {
+          shareTitle = tShare('list_title') // Reuse list share text as it mentions teams
+          shareText = tShare('list_text')
+          defaultTitle = tTeam('h1')
       } else if (seoMode === 'secret-santa') {
           shareTitle = tShare('secret_santa_title')
           shareText = tShare('secret_santa_text')
@@ -542,6 +551,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             <>
                 <SecretSantaGeo />
                 <Glossary seoMode={seoMode} />
+            </>
+       ) : seoMode === 'team' ? (
+            /* Team Mode */
+            <>
+                <TeamGeo />
+                <Glossary seoMode="list-randomizer" />
             </>
        ) : seoMode === 'yes-no' ? (
             /* Yes/No Mode */

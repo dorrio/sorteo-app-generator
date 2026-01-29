@@ -78,7 +78,7 @@ export default async function LetterGeneratorPage({ params }: { params: Promise<
       tGeo('feature_1_title'),
       tGeo('feature_2_title'),
       tGeo('feature_3_title'),
-      "Secure RNG"
+      tGeo('feature_4_title')
     ],
     aggregateRating: {
       '@type': 'AggregateRating',

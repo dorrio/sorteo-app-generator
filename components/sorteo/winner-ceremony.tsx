@@ -175,6 +175,10 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="ceremony-title"
+        aria-describedby="ceremony-winner"
       >
         {/* Backdrop */}
         <motion.div
@@ -222,12 +226,13 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
             className="flex items-center gap-2 mb-4"
           >
             <Sparkles className="w-5 h-5" style={{ color: theme.primaryColor }} />
-            <span className="text-xl uppercase tracking-[0.3em] text-muted-foreground font-medium">{t("winner_label")}</span>
+            <span id="ceremony-title" className="text-xl uppercase tracking-[0.3em] text-muted-foreground font-medium">{t("winner_label")}</span>
             <Sparkles className="w-5 h-5" style={{ color: theme.primaryColor }} />
           </motion.div>
 
           {/* Winner name */}
           <motion.h1
+            id="ceremony-winner"
             initial={{ scale: 0.5, opacity: 0, filter: "blur(20px)" }}
             animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
             transition={{ delay: 0.6, type: "spring", damping: 12 }}

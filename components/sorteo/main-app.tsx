@@ -19,6 +19,7 @@ import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo"
 import { TeamGeo } from "@/components/sorteo/team-geo"
 import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
 import { LetterGeo } from "@/components/sorteo/letter-geo"
+import { DiceGeo } from "@/components/sorteo/dice-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
@@ -77,13 +78,14 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => voi
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
   const tLetter = useTranslations("LetterGeneratorPage")
+  const tDice = useTranslations("DicePage")
   const tRng = useTranslations("RngPage")
   const tList = useTranslations("ListRandomizerPage")
   const tSecret = useTranslations("SecretSantaPage")
@@ -154,6 +156,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         } else if (seoMode === 'team') {
             update.customTitle = tTeam('h1')
             update.customSubtitle = tTeam('subtitle')
+        } else if (seoMode === 'dice') {
+            update.customTitle = tDice('h1')
+            update.customSubtitle = tDice('subtitle')
         } else if (seoMode === 'instagram') {
             update.customTitle = tInsta('h1')
             update.customSubtitle = tInsta('subtitle')
@@ -169,7 +174,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
   useEffect(() => {
-      if ((initialStyle === 'roulette' || initialStyle === 'slot') && mounted && hasHydrated && participants.length === 0) {
+      if ((initialStyle === 'roulette' || initialStyle === 'slot' || (seoMode === 'dice' && initialStyle === 'grid')) && mounted && hasHydrated && participants.length === 0) {
           if (seoMode === 'yes-no') {
               addParticipants([
                   { name: tYesNo('option_yes') },
@@ -178,6 +183,8 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           } else if (seoMode === 'letter') {
               const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
               addParticipants(alphabet.map(l => ({ name: l })))
+          } else if (seoMode === 'dice') {
+              addParticipants(["1", "2", "3", "4", "5", "6"].map(n => ({ name: n })))
           } else {
               addParticipants([
                   { name: "Option 1" },
@@ -259,6 +266,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareTitle = tShare('letter_title')
           shareText = tShare('letter_text')
           defaultTitle = tLetter('h1')
+      } else if (seoMode === 'dice') {
+          shareTitle = tShare('dice_title')
+          shareText = tShare('dice_text')
+          defaultTitle = tDice('h1')
       }
 
       // Viralis: Check for custom title to enhance share context
@@ -569,6 +580,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             <>
                 <LetterGeo />
                 <Glossary seoMode={seoMode} />
+            </>
+       ) : seoMode === 'dice' ? (
+            /* Dice Mode */
+            <>
+                <DiceGeo />
+                <Glossary seoMode="rng" />
             </>
        ) : (
             /* Home Mode: Show everything */

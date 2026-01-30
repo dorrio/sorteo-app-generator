@@ -17,6 +17,7 @@
         "footer_link_yesno": "Ruleta Sí o No",
         "footer_link_letter": "Generador de Letras",
         "footer_versus_link": "Alternativa a AppSorteos",
+        "footer_versus_wheel_link": "Alternativa a Wheel of Names",
         "footer_glossary": "Glosario",
         "customize_hint": "🎨 Personalizar Sorteo",
         "loading_delay_message": "Esto está tardando un poco más de lo habitual..."
@@ -670,6 +671,8 @@
         "letter_text": "¡Acabo de elegir una letra al azar! Generador A-Z. 🔤 Gratis. 👇",
         "secret_santa_title": "Amigo Invisible Online | Sorteo Pro",
         "secret_santa_text": "🎁 ¡Ya tengo las parejas del Amigo Invisible! Mira el resultado aquí. Gratis y Seguro. 👇",
+        "dice_title": "Lanzar Dados Online | Sorteo Pro",
+        "dice_text": "🎲 ¡Lanza los dados! Encontré este lanzador de dados online gratis. Justo e Instantáneo. Pruébalo aquí 👇",
         "custom_share_text": "🔥 Participa en mi sorteo: *{title}*! Creado con Sorteo Pro. Gratis e Ilimitado. 👇",
         "cta_share": "Compartir",
         "cta_start": "Empezar"

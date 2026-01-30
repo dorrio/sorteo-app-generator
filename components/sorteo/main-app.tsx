@@ -317,8 +317,40 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
       share_button: shareTranslations
   }
 
-  if (!mounted || !hasHydrated) {
-    return <AppSkeleton />
+  // Server-Side Rendering (SSR) & Initial Client Render
+  // If not hydrated, we use the SEO mode to set the correct Title/Subtitle for bots
+  let displayTitle = theme.customTitle
+  let displaySubtitle = theme.customSubtitle
+
+  if (!hasHydrated) {
+    if (seoMode === 'wheel') {
+        displayTitle = tWheel('h1')
+        displaySubtitle = tWheel('subtitle')
+    } else if (seoMode === 'instagram') {
+        displayTitle = tInsta('h1')
+        displaySubtitle = tInsta('subtitle')
+    } else if (seoMode === 'rng') {
+        displayTitle = tRng('h1')
+        displaySubtitle = tRng('subtitle')
+    } else if (seoMode === 'list-randomizer') {
+        displayTitle = tList('h1')
+        displaySubtitle = tList('subtitle')
+    } else if (seoMode === 'team') {
+        displayTitle = tTeam('h1')
+        displaySubtitle = tTeam('subtitle')
+    } else if (seoMode === 'secret-santa') {
+        displayTitle = tSecret('h1')
+        displaySubtitle = tSecret('subtitle')
+    } else if (seoMode === 'yes-no') {
+        displayTitle = tYesNo('h1')
+        displaySubtitle = tYesNo('subtitle')
+    } else if (seoMode === 'letter') {
+        displayTitle = tLetter('h1')
+        displaySubtitle = tLetter('subtitle')
+    } else if (seoMode === 'dice') {
+        displayTitle = tDice('h1')
+        displaySubtitle = tDice('subtitle')
+    }
   }
 
   const bgOpacity = theme.backgroundOpacity ?? 30
@@ -400,7 +432,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                   <Trophy className="w-5 h-5 text-background" />
                 </div>
                 <div>
-                  <div className="font-bold text-xl tracking-tight">{theme.customTitle}</div>
+                  <div className="font-bold text-xl tracking-tight">{displayTitle}</div>
                 </div>
               </Link>
             </motion.div>
@@ -444,9 +476,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                   className="text-4xl md:text-6xl font-bold tracking-tight"
                   style={{ color: theme.primaryColor }}
                 >
-                  {theme.customTitle}
+                  {displayTitle}
                 </h1>
-                <p className="text-muted-foreground text-lg">{theme.customSubtitle}</p>
+                <p className="text-muted-foreground text-lg">{displaySubtitle}</p>
                 <motion.button
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

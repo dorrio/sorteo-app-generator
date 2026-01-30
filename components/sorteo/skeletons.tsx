@@ -1,5 +1,27 @@
 import { Skeleton } from "@/components/ui/skeleton"
 
+export function ParticipantListSkeleton() {
+    return (
+        <div className="space-y-3 pt-2">
+            {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="flex items-center gap-3">
+                    <Skeleton className="w-8 h-8 rounded-full" />
+                    <Skeleton className="h-4 flex-1 rounded-md" />
+                </div>
+            ))}
+        </div>
+    )
+}
+
+export function HistoryListSkeleton() {
+    return (
+        <div className="space-y-3 pt-2">
+            <Skeleton className="h-12 w-full rounded-md" />
+            <Skeleton className="h-12 w-full rounded-md" />
+        </div>
+    )
+}
+
 export function AppSkeleton() {
     return (
         <div className="min-h-screen bg-background relative overflow-hidden flex flex-col">
@@ -44,23 +66,13 @@ export function AppSkeleton() {
                         {/* Participants Card */}
                         <div className="h-[400px] border border-border rounded-2xl p-6 space-y-4">
                             <Skeleton className="h-7 w-40 rounded-md" />
-                            <div className="space-y-3 pt-2">
-                                {[1, 2, 3, 4, 5].map((i) => (
-                                    <div key={i} className="flex items-center gap-3">
-                                        <Skeleton className="w-8 h-8 rounded-full" />
-                                        <Skeleton className="h-4 flex-1 rounded-md" />
-                                    </div>
-                                ))}
-                            </div>
+                            <ParticipantListSkeleton />
                         </div>
 
                         {/* History Card */}
                         <div className="h-[200px] border border-border rounded-2xl p-6 space-y-4">
                             <Skeleton className="h-7 w-32 rounded-md" />
-                            <div className="space-y-3 pt-2">
-                                <Skeleton className="h-12 w-full rounded-md" />
-                                <Skeleton className="h-12 w-full rounded-md" />
-                            </div>
+                            <HistoryListSkeleton />
                         </div>
                     </div>
                 </div>

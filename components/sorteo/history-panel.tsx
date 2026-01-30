@@ -4,6 +4,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useSorteoStore, type Participant } from "@/lib/sorteo-store"
+import { HistoryListSkeleton } from "@/components/sorteo/skeletons"
 import { Trophy, Clock, Trash2, Check, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -79,7 +80,12 @@ function HistoryItem({
 }
 
 export function HistoryPanel() {
-  const { pastWinners, clearHistory, theme } = useSorteoStore()
+  const { pastWinners, clearHistory, theme, hasHydrated } = useSorteoStore()
+
+  if (!hasHydrated) {
+    return <HistoryListSkeleton />
+  }
+
   const t = useTranslations("HistoryPanel")
 
   if (pastWinners.length === 0) {

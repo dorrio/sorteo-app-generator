@@ -12,6 +12,7 @@
 *   **Dynamic Imports:** Use `next/dynamic` with `ssr: false` for heavy interactive components (e.g., `Confetti`, `VisualEditor`).
 *   **Image Optimization:** Use `next/image` with `unoptimized` for user-generated content (Blob URLs) while maintaining layout stability with `fill`.
 *   **Skeleton Loading:** Use Skeletons instead of spinners during hydration to match SSR layout and improve perceived performance.
+*   **Granular Skeletons:** Use component-level skeletons (e.g., `ParticipantListSkeleton`) instead of page-level blocking skeletons to enable SSR of static content.
 
 ## ❌ BAD PATTERNS (Avoid This)
 *   **Sync Imports:** Importing heavy widgets directly in the main bundle.

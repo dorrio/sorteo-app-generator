@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl"
 import { useState, useRef, memo, useCallback, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore, type Participant, type ThemeConfig } from "@/lib/sorteo-store"
+import { ParticipantListSkeleton } from "@/components/sorteo/skeletons"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -270,7 +271,13 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
     updateParticipant,
     clearParticipants,
     theme,
+    hasHydrated,
   } = useSorteoStore()
+
+  if (!hasHydrated) {
+    return <ParticipantListSkeleton />
+  }
+
   const t = useTranslations("ParticipantManager")
   const [inputMode, setInputMode] = useState<InputMode>("single")
   const [singleName, setSingleName] = useState("")

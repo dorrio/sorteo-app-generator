@@ -613,6 +613,34 @@
         "cta_share": "Compartilhar",
         "cta_start": "Começar"
     },
+    "DicePage": {
+        "title": "Rolar Dados Online | Dado Virtual",
+        "description": "O melhor rolador de dados online grátis. Role um dado (D6), D20 ou vários dados instantaneamente. Sem anúncios e RNG justo.",
+        "h1": "Rolar Dados Online",
+        "subtitle": "Role dados virtuais instantaneamente para jogos e decisões.",
+        "faq_1_q": "Este dado virtual é justo?",
+        "faq_1_a": "Sim, usamos um gerador de números aleatórios seguro para garantir que cada rolagem seja completamente aleatória, como um dado físico.",
+        "faq_2_q": "Posso rolar vários dados?",
+        "faq_2_a": "Sim! Você pode adicionar quantos dados quiser adicionando os números 1-6 várias vezes."
+    },
+    "DiceGeo": {
+        "direct_answer_title": "O que é um Dado Virtual?",
+        "direct_answer_text": "Um <tool>Dado Virtual</tool> é uma ferramenta digital que simula o lançamento de dados físicos. É perfeito para jogos de tabuleiro como <strong>Monopoly</strong>, <strong>RPG</strong> ou para substituir dados perdidos. <brand>Sorteo Pro</brand> garante um resultado justo.",
+        "cta_button": "Rolar Dado",
+        "feature_1_title": "Justo e Aleatório",
+        "feature_1_desc": "Usa RNG seguro para resultados imparciais.",
+        "feature_2_title": "Animação 3D",
+        "feature_2_desc": "Efeito visual satisfatório.",
+        "feature_3_title": "Múltiplos Dados",
+        "feature_3_desc": "Role 1, 2 ou mais dados de uma vez.",
+        "feature_4_title": "Mobile",
+        "feature_4_desc": "Role dados no seu celular onde estiver.",
+        "how_to_title": "Como rolar um dado online",
+        "how_to_step_1": "O rolador vem pré-carregado com números de 1 a 6.",
+        "how_to_step_2": "Escolha a visualização 'Grade' ou 'Cartas'.",
+        "how_to_step_3": "Clique em 'Iniciar Sorteio' para rolar.",
+        "how_to_step_4": "O número selecionado é o seu resultado!"
+    },
     "Schema": {
         "global_features": {
             "random_picker": "Seletor de Vencedor Aleatório",

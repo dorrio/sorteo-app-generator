@@ -9,3 +9,8 @@
 **Gap:** Competitors have dedicated "Random Team Generator" pages ranking for specific "Group Maker" and "Team Splitter" keywords.
 **Action:** Created dedicated `/team-generator` landing page with `TeamGeo` component, specialized Schema, and targeted Metadata.
 **GEO Impact:** Optimized for "How to generate random teams" and "Free Team Maker" queries with Direct Answer blocks.
+
+## 2025-05-26 - [Strategy/Cluster Content]
+**Gap:** Competitors (Random.org, Google) have dedicated "Dice Roller" pages. We only covered this via generic RNG, missing high-volume "Roll a Die" keywords.
+**Action:** Created dedicated `/dice-roller` landing page with `DiceGeo` component, specialized Schema, and targeted Metadata.
+**GEO Impact:** Optimized for "Online Dice Roller" and "Virtual Dice" queries with Direct Answer blocks.

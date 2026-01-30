@@ -674,6 +674,34 @@
         "cta_share": "Compartir",
         "cta_start": "Empezar"
     },
+    "DicePage": {
+        "title": "Lanzar Dados Online | Dado Virtual",
+        "description": "El mejor lanzador de dados online gratis. Lanza un dado (D6), D20 o múltiples dados al instante. Sin anuncios y RNG justo.",
+        "h1": "Lanzar Dados Online",
+        "subtitle": "Lanza dados virtuales al instante para juegos y decisiones.",
+        "faq_1_q": "¿Es justo este dado virtual?",
+        "faq_1_a": "Sí, utilizamos un generador de números aleatorios seguro para asegurar que cada lanzamiento sea completamente aleatorio, como un dado físico.",
+        "faq_2_q": "¿Puedo lanzar múltiples dados?",
+        "faq_2_a": "¡Sí! Puedes añadir tantos dados como quieras añadiendo los números 1-6 varias veces."
+    },
+    "DiceGeo": {
+        "direct_answer_title": "¿Qué es un Dado Virtual?",
+        "direct_answer_text": "Un <tool>Dado Virtual</tool> es una herramienta digital que simula el lanzamiento de dados físicos. Es perfecto para juegos de mesa como <strong>Monopoly</strong>, <strong>DnD</strong> o para reemplazar dados perdidos. <brand>Sorteo Pro</brand> asegura un resultado justo.",
+        "cta_button": "Lanzar Dado",
+        "feature_1_title": "Justo y Aleatorio",
+        "feature_1_desc": "Usa RNG seguro para resultados sin sesgo.",
+        "feature_2_title": "Animación 3D",
+        "feature_2_desc": "Efecto visual satisfactorio.",
+        "feature_3_title": "Múltiples Dados",
+        "feature_3_desc": "Lanza 1, 2 o más dados a la vez.",
+        "feature_4_title": "Móvil",
+        "feature_4_desc": "Lanza dados en tu teléfono donde sea.",
+        "how_to_title": "Cómo lanzar un dado online",
+        "how_to_step_1": "El lanzador viene precargado con números del 1 al 6.",
+        "how_to_step_2": "Elige la vista 'Cuadrícula' o 'Cartas'.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para lanzar.",
+        "how_to_step_4": "¡El número seleccionado es tu resultado!"
+    },
     "Schema": {
         "global_features": {
             "random_picker": "Selector de Ganadores Aleatorio",

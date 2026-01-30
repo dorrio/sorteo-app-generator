@@ -663,7 +663,12 @@
         "how_to_step_1": "The generator is pre-loaded with letters A-Z.",
         "how_to_step_2": "Select your preferred visual style (Wheel or Cards).",
         "how_to_step_3": "Click 'Start Giveaway' to pick a letter.",
-        "how_to_step_4": "Use the letter for your game or activity!"
+        "how_to_step_4": "Use the letter for your game or activity!",
+        "faq_title": "Random Letter Generator FAQ",
+        "faq_1_q": "Is the letter selection truly random?",
+        "faq_1_a": "Yes, we use a secure random number generator to ensure every letter has an equal chance of being selected.",
+        "faq_2_q": "Can I remove letters that have been picked?",
+        "faq_2_a": "Yes! Just toggle the 'Remove winner' option in settings if you want unique letters each time."
     },
     "ShareContent": {
         "home_title": "Sorteo Pro | Premium Giveaways for Influencers",

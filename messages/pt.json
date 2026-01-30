@@ -413,6 +413,8 @@
     "RngPage": {
         "title": "Gerador de Números Aleatórios | RNG Grátis e Seguro",
         "description": "Gere números aleatórios instantaneamente com o Sorteio Pro. Gerador de números gratuito, seguro e personalizável para jogos, loterias e uso científico.",
+        "h1": "Gerador de Números Aleatórios",
+        "subtitle": "Gere números aleatórios ou jogue dados instantaneamente.",
         "faq_1_q": "Este RNG é realmente aleatório?",
         "faq_1_a": "Sim, usamos um gerador de números pseudoaleatórios criptograficamente seguro (CSPRNG), que é o padrão da indústria para justiça.",
         "faq_2_q": "Existe limite de quantos números posso gerar?",
@@ -446,7 +448,14 @@
         "how_to_step_1": "Insira a lista de nomes, itens ou números que deseja embaralhar.",
         "how_to_step_2": "Escolha a visualização 'Grade' ou 'Lista' no Editor Visual.",
         "how_to_step_3": "Clique em 'Iniciar Sorteio' para aleatorizar a ordem instantaneamente.",
-        "how_to_step_4": "Use o resultado para formar equipes, atribuir tarefas ou escolher um vencedor."
+        "how_to_step_4": "Use o resultado para formar equipes, atribuir tarefas ou escolher um vencedor.",
+        "uses_title": "Usos Populares",
+        "use_1_title": "Para Professores",
+        "use_1_desc": "Divida os alunos em grupos de projetos justos e aleatórios sem viés.",
+        "use_2_title": "Equipes Ágeis e Scrum",
+        "use_2_desc": "Aleatorize a ordem de fala nas reuniões diárias.",
+        "use_3_title": "Jogos e Torneios",
+        "use_3_desc": "Gere chaves aleatórias para torneios ou pares para o Amigo Secreto."
     },
     "SecretSantaPage": {
         "title": "Amigo Secreto Online | Gerador Grátis e Sem Cadastro",
@@ -590,7 +599,12 @@
         "how_to_step_1": "O gerador vem pré-carregado com as letras A-Z.",
         "how_to_step_2": "Escolha seu estilo visual preferido (Roleta ou Cartas).",
         "how_to_step_3": "Clique em 'Iniciar Sorteio' para escolher uma letra.",
-        "how_to_step_4": "Use a letra para seu jogo ou atividade!"
+        "how_to_step_4": "Use a letra para seu jogo ou atividade!",
+        "faq_title": "Perguntas Frequentes sobre Letras",
+        "faq_1_q": "A seleção de letras é realmente aleatória?",
+        "faq_1_a": "Sim, usamos um gerador de números aleatórios seguro para garantir que cada letra tenha a mesma chance de ser escolhida.",
+        "faq_2_q": "Posso remover as letras que já saíram?",
+        "faq_2_a": "Sim! Basta ativar a opção 'Remover vencedor' nas configurações se quiser letras únicas a cada vez."
     },
     "ShareContent": {
         "home_title": "Sorteio Pro | Sorteios Premium para Influencers",

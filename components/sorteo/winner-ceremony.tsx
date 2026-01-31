@@ -19,6 +19,9 @@ import {
   MessageCircle,
   Instagram,
   Download,
+  Linkedin,
+  Send,
+  Loader2
 } from "lucide-react"
 
 interface WinnerCeremonyProps {
@@ -33,6 +36,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const [showContent, setShowContent] = useState(false)
   const [copied, setCopied] = useState(false)
   const [canShareNative, setCanShareNative] = useState(false)
+  const [isSharing, setIsSharing] = useState(false)
 
   useEffect(() => {
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
@@ -80,18 +84,90 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
   // WhatsApp: Use api.whatsapp.com for better cross-device support
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
+  // LinkedIn
+  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`
+  // Telegram
+  const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
+
+
+  const getCertificateUrl = () => {
+      if (!winner) return ""
+
+      const ogParams = new URLSearchParams()
+      ogParams.set("name", winner.name)
+
+      let dateToUse = new Date()
+      if (winner.verificationId) {
+        try {
+          const parts = winner.verificationId.split('-')
+          if (parts.length >= 3) {
+            const timestampHex = parts[parts.length - 1]
+            const timestamp = parseInt(timestampHex, 16)
+            const d = new Date(timestamp)
+            if (!isNaN(d.getTime())) {
+              dateToUse = d
+            }
+          }
+        } catch (e) {
+          // fallback
+        }
+      }
+      ogParams.set("date", dateToUse.toISOString())
+
+      if (seoMode && seoMode !== 'home') {
+        ogParams.set("type", seoMode)
+      }
+      if (theme.customTitle) {
+        ogParams.set("title", theme.customTitle)
+      }
+      if (theme.primaryColor) {
+        ogParams.set("color", theme.primaryColor)
+      }
+
+      return { url: `/api/og?${ogParams.toString()}`, date: dateToUse }
+  }
 
   const shareNative = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: t("share_title"),
-          text: shareText,
-          url: shareUrl,
-        })
-      } catch {
-        // User cancelled
-      }
+    if (!navigator.share) return
+
+    setIsSharing(true)
+    try {
+        const { url } = getCertificateUrl()
+        if (!url) throw new Error("No URL")
+
+        // Try to fetch blob for rich sharing
+        const response = await fetch(url)
+        const blob = await response.blob()
+        const file = new File([blob], 'winner-certificate.png', { type: 'image/png' })
+
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+                files: [file],
+                title: t("share_title"),
+                text: shareText,
+                url: shareUrl,
+            })
+        } else {
+            // Fallback if file sharing not supported
+            await navigator.share({
+                title: t("share_title"),
+                text: shareText,
+                url: shareUrl,
+            })
+        }
+    } catch (e) {
+        // Fallback on error
+        try {
+             await navigator.share({
+                title: t("share_title"),
+                text: shareText,
+                url: shareUrl,
+            })
+        } catch (e2) {
+            // Cancelled
+        }
+    } finally {
+        setIsSharing(false)
     }
   }
 
@@ -111,60 +187,24 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const handleDownload = async () => {
     if (!winner) return
 
-    // Construct OG Image URL
-    const ogParams = new URLSearchParams()
-    ogParams.set("name", winner.name)
-
-    // Logic to extract date from ID or use current
-    // Verification ID: ID-{UUID}-{TIMESTAMP_HEX}
-    let dateToUse = new Date()
-    if (winner.verificationId) {
-      try {
-        const parts = winner.verificationId.split('-')
-        if (parts.length >= 3) {
-          const timestampHex = parts[parts.length - 1]
-          const timestamp = parseInt(timestampHex, 16)
-          const d = new Date(timestamp)
-          if (!isNaN(d.getTime())) {
-            dateToUse = d
-          }
-        }
-      } catch (e) {
-        // fallback to current
-      }
-    }
-    ogParams.set("date", dateToUse.toISOString())
-
-    // Viralis: Apply branding context to the image
-    if (seoMode && seoMode !== 'home') {
-      ogParams.set("type", seoMode)
-    }
-    if (theme.customTitle) {
-      ogParams.set("title", theme.customTitle)
-    }
-    if (theme.primaryColor) {
-      ogParams.set("color", theme.primaryColor)
-    }
-
-    const imageUrl = `/api/og?${ogParams.toString()}`
+    const { url, date } = getCertificateUrl()
+    if (!url) return
 
     try {
-      const response = await fetch(imageUrl)
+      const response = await fetch(url)
       const blob = await response.blob()
       const blobUrl = window.URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = blobUrl
-      // Filename: Certificate-{Name}-{Date}.png
       const cleanName = winner.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()
-      const dateStr = dateToUse.toISOString().split('T')[0]
+      const dateStr = date.toISOString().split('T')[0]
       link.download = `Certificate-${cleanName}-${dateStr}.png`
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
       window.URL.revokeObjectURL(blobUrl)
     } catch (e) {
-      // Fallback: just open in new tab
-      window.open(imageUrl, '_blank')
+      window.open(url, '_blank')
     }
   }
 
@@ -293,12 +333,13 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                 size="lg"
                 className="gap-2"
                 onClick={shareNative}
+                disabled={isSharing}
                 style={{
                   backgroundColor: theme.primaryColor,
                   color: theme.backgroundColor,
                 }}
               >
-                <Share2 className="w-5 h-5" />
+                {isSharing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Share2 className="w-5 h-5" />}
                 {t("share_button")}
               </Button>
             ) : (
@@ -340,6 +381,13 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                   </DropdownMenuItem>
 
                   <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+                      <Linkedin className="w-4 h-4" />
+                      LinkedIn
+                    </a>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
                     <a
                       href="https://www.instagram.com/"
                       target="_blank"
@@ -363,6 +411,13 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                     <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
                       <MessageCircle className="w-4 h-4" />
                       WhatsApp
+                    </a>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Telegram">
+                      <Send className="w-4 h-4" />
+                      Telegram
                     </a>
                   </DropdownMenuItem>
 

@@ -463,7 +463,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                   text={shareContent.text}
                   url={shareContent.url}
                   translations={shareTranslations}
-              />
+              >
+                  <Share2 className="w-5 h-5" />
+                  <span className="hidden md:inline ml-2 text-sm font-medium">{tShare('cta_share')}</span>
+              </ShareButton>
 
               <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title="Verificar Sorteo" aria-label={t("verify_sorteo")}>
                 <ShieldCheck className="w-5 h-5" />

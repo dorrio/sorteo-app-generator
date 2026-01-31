@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download } from "lucide-react"
+import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download, Linkedin, Send, Loader2 } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ConfettiEffect } from "@/components/sorteo/confetti-effect"
 import { Button } from "@/components/ui/button"
@@ -36,6 +36,7 @@ export function VerifyContent() {
     const [canShareNative, setCanShareNative] = useState(true)
     const [isStickyVisible, setIsStickyVisible] = useState(false)
     const [showConfetti, setShowConfetti] = useState(false)
+    const [isSharing, setIsSharing] = useState(false)
 
     useEffect(() => {
         if (result?.status === "valid") {
@@ -141,36 +142,12 @@ export function VerifyContent() {
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`
     const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
+    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`
+    const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
 
-    const shareNative = async () => {
-        if (navigator.share) {
-            try {
-                await navigator.share({
-                    title: t("title"),
-                    text: shareText,
-                    url: shareUrl,
-                })
-            } catch {
-                // User cancelled
-            }
-        }
-    }
 
-    const copyToClipboard = async () => {
-        await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
-        setShowCopied(true)
-        setTimeout(() => setShowCopied(false), 2000)
-    }
-
-    const shareInstagram = async () => {
-        await navigator.clipboard.writeText(shareText)
-        setShowCopied(true)
-        setTimeout(() => setShowCopied(false), 2000)
-        window.open("https://www.instagram.com/", "_blank")
-    }
-
-    const handleDownload = async () => {
-        if (!winnerName) return
+    const getCertificateUrl = () => {
+        if (!winnerName) return { url: "", date: new Date() }
 
         // Construct OG Image URL
         const ogParams = new URLSearchParams()
@@ -190,17 +167,80 @@ export function VerifyContent() {
         if (title) ogParams.set("title", title)
         if (color) ogParams.set("color", color)
 
-        const imageUrl = `/api/og?${ogParams.toString()}`
+        return { url: `/api/og?${ogParams.toString()}`, date: dateToUse }
+    }
+
+
+    const shareNative = async () => {
+        if (!navigator.share) return
+
+        setIsSharing(true)
+        try {
+            const { url } = getCertificateUrl()
+            if (!url) throw new Error("No URL")
+
+            // Try to fetch blob for rich sharing
+            const response = await fetch(url)
+            const blob = await response.blob()
+            const file = new File([blob], 'winner-certificate.png', { type: 'image/png' })
+
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                 await navigator.share({
+                    files: [file],
+                    title: t("title"),
+                    text: shareText,
+                    url: shareUrl,
+                })
+            } else {
+                 // Fallback
+                 await navigator.share({
+                    title: t("title"),
+                    text: shareText,
+                    url: shareUrl,
+                })
+            }
+        } catch {
+             // User cancelled or error
+             try {
+                await navigator.share({
+                    title: t("title"),
+                    text: shareText,
+                    url: shareUrl,
+                })
+             } catch (e2) {
+                 // Cancelled
+             }
+        } finally {
+            setIsSharing(false)
+        }
+    }
+
+    const copyToClipboard = async () => {
+        await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
+        setShowCopied(true)
+        setTimeout(() => setShowCopied(false), 2000)
+    }
+
+    const shareInstagram = async () => {
+        await navigator.clipboard.writeText(shareText)
+        setShowCopied(true)
+        setTimeout(() => setShowCopied(false), 2000)
+        window.open("https://www.instagram.com/", "_blank")
+    }
+
+    const handleDownload = async () => {
+        const { url, date } = getCertificateUrl()
+        if (!url) return
 
         try {
-            const response = await fetch(imageUrl)
+            const response = await fetch(url)
             const blob = await response.blob()
             const blobUrl = window.URL.createObjectURL(blob)
             const link = document.createElement('a')
             link.href = blobUrl
             // Filename: Certificate-{Name}-{Date}.png
             const cleanName = winnerName.replace(/[^a-z0-9]/gi, '_').toLowerCase()
-            const dateStr = dateToUse.toISOString().split('T')[0]
+            const dateStr = date.toISOString().split('T')[0]
             link.download = `Certificate-${cleanName}-${dateStr}.png`
             document.body.appendChild(link)
             link.click()
@@ -208,7 +248,7 @@ export function VerifyContent() {
             window.URL.revokeObjectURL(blobUrl)
         } catch (e) {
             // Fallback: just open in new tab
-            window.open(imageUrl, '_blank')
+            window.open(url, '_blank')
         }
     }
 
@@ -409,12 +449,13 @@ export function VerifyContent() {
                                                             size="lg"
                                                             variant="outline"
                                                             onClick={shareNative}
+                                                            disabled={isSharing}
                                                             style={{
                                                                 borderColor: theme.primaryColor,
                                                                 color: theme.primaryColor
                                                             }}
                                                         >
-                                                            <Share2 className="w-4 h-4" />
+                                                            {isSharing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Share2 className="w-4 h-4" />}
                                                             {t("share_button")}
                                                         </Button>
                                                     ) : (
@@ -462,6 +503,13 @@ export function VerifyContent() {
                                                                 </a>
                                                             </DropdownMenuItem>
 
+                                                            <DropdownMenuItem asChild>
+                                                                <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" className="gap-2 cursor-pointer flex w-full items-center">
+                                                                    <Linkedin className="w-4 h-4" />
+                                                                    LinkedIn
+                                                                </a>
+                                                            </DropdownMenuItem>
+
                                                             <DropdownMenuItem onClick={shareInstagram} className="gap-2 cursor-pointer">
                                                                 <Instagram className="w-4 h-4" />
                                                                 Instagram
@@ -490,6 +538,13 @@ export function VerifyContent() {
                                                                     >
                                                                         <MessageCircle className="w-4 h-4" />
                                                                         WhatsApp
+                                                                    </a>
+                                                                </DropdownMenuItem>
+
+                                                                <DropdownMenuItem asChild>
+                                                                    <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Telegram" className="gap-2 cursor-pointer flex w-full items-center">
+                                                                        <Send className="w-4 h-4" />
+                                                                        Telegram
                                                                     </a>
                                                                 </DropdownMenuItem>
                                                             </DropdownMenuContent>
@@ -553,12 +608,13 @@ export function VerifyContent() {
                                 size="lg"
                                 variant="outline"
                                 onClick={shareNative}
+                                disabled={isSharing}
                                 style={{
                                     borderColor: theme.primaryColor,
                                     color: theme.primaryColor
                                 }}
                             >
-                                <Share2 className="w-4 h-4 mr-2" />
+                                {isSharing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Share2 className="w-4 h-4 mr-2" />}
                                 {t("share_button")}
                             </Button>
                         )}

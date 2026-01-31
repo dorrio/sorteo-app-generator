@@ -14,3 +14,8 @@
 **Gap:** Competitors (Random.org, Google) have dedicated "Dice Roller" pages. We only covered this via generic RNG, missing high-volume "Roll a Die" keywords.
 **Action:** Created dedicated `/dice-roller` landing page with `DiceGeo` component, specialized Schema, and targeted Metadata.
 **GEO Impact:** Optimized for "Online Dice Roller" and "Virtual Dice" queries with Direct Answer blocks.
+
+## 2025-05-27 - [Strategy/Cluster Content]
+**Gap:** Competitors (Random.org, JustFlipACoin) have dedicated "Coin Flip" pages. We lacked a dedicated URL for this high-volume binary RNG.
+**Action:** Created dedicated `/coin-flip` landing page with `CoinGeo` component, specialized Schema, and targeted Metadata.
+**GEO Impact:** Optimized for "Flip a Coin", "Heads or Tails", and "Cara o Cruz" queries with Direct Answer blocks.

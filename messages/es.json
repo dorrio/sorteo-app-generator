@@ -682,6 +682,8 @@
         "secret_santa_text": "🎁 ¡Ya tengo las parejas del Amigo Invisible! Mira el resultado aquí. Gratis y Seguro. 👇",
         "dice_title": "Lanzar Dados Online | Sorteo Pro",
         "dice_text": "🎲 ¡Lanza los dados! Encontré este lanzador de dados online gratis. Justo e Instantáneo. Pruébalo aquí 👇",
+        "coin_title": "Lanzar Moneda Online | Sorteo Pro",
+        "coin_text": "🪙 ¿Cara o Cruz? ¡Acabo de lanzar una moneda online! Gratis y Justo. Pruébalo aquí 👇",
         "custom_share_text": "🔥 Participa en mi sorteo: *{title}*! Creado con Sorteo Pro. Gratis e Ilimitado. 👇",
         "cta_share": "Compartir",
         "cta_start": "Empezar"
@@ -795,5 +797,32 @@
         "use_2_desc": "Haz equipos aleatorios para fútbol, baloncesto o juegos de mesa.",
         "use_3_title": "Rompehielos de Oficina",
         "use_3_desc": "Divide a colegas en grupos para talleres."
+    },
+    "CoinPage": {
+        "title": "Lanzar Moneda | Cara o Cruz Online",
+        "description": "Lanza una moneda online al instante. Generador de Cara o Cruz aleatorio. Gratis, justo y con animación 3D.",
+        "h1": "Lanzar Moneda Online",
+        "subtitle": "Lanza una moneda virtual para decidir Cara o Cruz al instante.",
+        "option_heads": "CARA",
+        "option_tails": "CRUZ",
+        "faq_1_q": "¿Es justo este lanzamiento?",
+        "faq_1_a": "Sí, utilizamos un generador de números aleatorios criptográficamente seguro para garantizar una probabilidad real del 50/50.",
+        "faq_2_q": "¿Puedo lanzar múltiples monedas?",
+        "faq_2_a": "¡Sí! Puedes añadir más monedas personalizando la lista."
+    },
+    "CoinGeo": {
+        "title": "Lanzar Moneda Virtual",
+        "direct_answer_title": "¿Qué es Lanzar una Moneda Online?",
+        "direct_answer_text": "<strong>Lanzar una Moneda Online</strong> es una herramienta digital que simula el lanzamiento de una moneda para obtener <strong>Cara</strong> o <strong>Cruz</strong>. Se utiliza para decisiones binarias, deportes o juegos. <brand>Sorteo Pro</brand> garantiza un resultado justo 50/50.",
+        "cta_button": "Lanzar Moneda",
+        "feature_1": "Probabilidad 50/50 Justa",
+        "feature_2": "Cara o Cruz",
+        "feature_3": "Lanzamiento Instantáneo",
+        "feature_4": "Móvil",
+        "how_to_title": "Cómo lanzar una moneda online",
+        "how_to_step_1": "La herramienta está lista con 'CARA' y 'CRUZ'.",
+        "how_to_step_2": "Selecciona la vista 'Cartas' para la mejor experiencia visual.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para lanzar la moneda.",
+        "how_to_step_4": "¡El resultado será Cara o Cruz!"
     }
 }

@@ -207,10 +207,10 @@ export async function GET(request: Request) {
                 }}
                 >
                     {/* Corner Decorations */}
-                    <div style={{ position: 'absolute', top: 30, left: 30, width: 20, height: 20, borderTop: `2px solid ${theme.subTextColor}`, borderLeft: `2px solid ${theme.subTextColor}`, opacity: 0.5 }} />
-                    <div style={{ position: 'absolute', top: 30, right: 30, width: 20, height: 20, borderTop: `2px solid ${theme.subTextColor}`, borderRight: `2px solid ${theme.subTextColor}`, opacity: 0.5 }} />
-                    <div style={{ position: 'absolute', bottom: 30, left: 30, width: 20, height: 20, borderBottom: `2px solid ${theme.subTextColor}`, borderLeft: `2px solid ${theme.subTextColor}`, opacity: 0.5 }} />
-                    <div style={{ position: 'absolute', bottom: 30, right: 30, width: 20, height: 20, borderBottom: `2px solid ${theme.subTextColor}`, borderRight: `2px solid ${theme.subTextColor}`, opacity: 0.5 }} />
+                    <div style={{ display: 'flex', position: 'absolute', top: 30, left: 30, width: 20, height: 20, borderTop: `2px solid ${theme.subTextColor}`, borderLeft: `2px solid ${theme.subTextColor}`, opacity: 0.5 }} />
+                    <div style={{ display: 'flex', position: 'absolute', top: 30, right: 30, width: 20, height: 20, borderTop: `2px solid ${theme.subTextColor}`, borderRight: `2px solid ${theme.subTextColor}`, opacity: 0.5 }} />
+                    <div style={{ display: 'flex', position: 'absolute', bottom: 30, left: 30, width: 20, height: 20, borderBottom: `2px solid ${theme.subTextColor}`, borderLeft: `2px solid ${theme.subTextColor}`, opacity: 0.5 }} />
+                    <div style={{ display: 'flex', position: 'absolute', bottom: 30, right: 30, width: 20, height: 20, borderBottom: `2px solid ${theme.subTextColor}`, borderRight: `2px solid ${theme.subTextColor}`, opacity: 0.5 }} />
 
                     {/* Main Content Container */}
                     <div style={{
@@ -243,6 +243,8 @@ export async function GET(request: Request) {
                         {/* Viral Context: Custom Giveaway Title */}
                         {customTitle && (
                             <div style={{
+                                display: 'flex',
+                                justifyContent: 'center',
                                 fontSize: 24,
                                 fontWeight: 600,
                                 color: theme.subTextColor,
@@ -278,6 +280,8 @@ export async function GET(request: Request) {
 
                         {/* Subtext */}
                         <div style={{
+                            display: 'flex',
+                            justifyContent: 'center',
                             fontSize: 24,
                             color: theme.subTextColor,
                             letterSpacing: '1px',
@@ -299,6 +303,8 @@ export async function GET(request: Request) {
                         }}>
                              {/* Viral CTA - The Loop */}
                              <div style={{
+                                 display: 'flex',
+                                 justifyContent: 'center',
                                  fontSize: 22,
                                  color: theme.textColor,
                                  fontWeight: 600,
@@ -319,7 +325,7 @@ export async function GET(request: Request) {
                                     <span style={{ fontSize: 20, color: theme.accentColor, fontWeight: 'bold', letterSpacing: '1px' }}>{theme.title.toUpperCase()}</span>
                                 </div>
 
-                                <div style={{ width: 1, height: 20, backgroundColor: theme.subTextColor }} />
+                                <div style={{ display: 'flex', width: 1, height: 20, backgroundColor: theme.subTextColor }} />
 
                                 {/* Date Stamp */}
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -331,6 +337,9 @@ export async function GET(request: Request) {
 
                     {/* "Stamp" Effect Overlay */}
                     <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         position: 'absolute',
                         right: 50,
                         bottom: 50,
@@ -372,11 +381,11 @@ export async function GET(request: Request) {
           }}
         >
              {/* Overlay for readability if needed */}
-             <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.3)' }} />
+             <div style={{ display: 'flex', position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.3)' }} />
 
              <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 {/* Icon */}
-                <div style={{ marginBottom: 40, filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.5))' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 40, filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.5))' }}>
                     {theme.largeIcon || theme.icon}
                 </div>
 

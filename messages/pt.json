@@ -21,6 +21,32 @@
         "footer_glossary": "Glossário",
         "customize_hint": "🎨 Personalizar Sorteio"
     },
+    "Footer": {
+        "text": "Criado para influencers e criadores de conteúdo",
+        "nav_label": "Navegação do rodapé",
+        "sections": {
+            "tools": "Ferramentas",
+            "resources": "Recursos",
+            "comparisons": "Comparativos"
+        },
+        "links": {
+            "verify": "Verificar Sorteio",
+            "wheel": "Roleta de Nomes",
+            "instagram": "Sorteio Instagram",
+            "rng": "Gerador de Números",
+            "list": "Aleatorizar Lista",
+            "yesno": "Roleta Sim ou Não",
+            "letter": "Gerador de Letras",
+            "secret_santa": "Amigo Secreto",
+            "team": "Gerador de Equipes",
+            "dice": "Rolar Dados",
+            "coin": "Jogar Moeda",
+            "versus_appsorteos": "Alternativa ao AppSorteos",
+            "versus_wheel": "Alternativa ao Wheel of Names",
+            "versus_random": "Alternativa ao Random.org",
+            "glossary": "Glossário"
+        }
+    },
     "Metadata": {
         "title": "Sorteio Pro | Sorteios Premium para Influencers",
         "description": "A ferramenta definitiva para criar sorteios virais. Feita para criadores de conteúdo e influencers que querem impressionar sua audiência.",

@@ -419,7 +419,9 @@
         "faq_1_q": "¿Es este RNG realmente aleatorio?",
         "faq_1_a": "Sí, utilizamos un generador de números pseudoaleatorios criptográficamente seguro (CSPRNG) que es el estándar de la industria para la equidad.",
         "faq_2_q": "¿Hay un límite de cuántos números puedo generar?",
-        "faq_2_a": "No, puedes generar números aleatorios ilimitados de forma gratuita."
+        "faq_2_a": "No, puedes generar números aleatorios ilimitados de forma gratuita.",
+        "h1": "Generador de Números Aleatorios",
+        "subtitle": "Genera números aleatorios o lanza dados al instante."
     },
     "ListRandomizerPage": {
         "title": "Aleatorizar Lista | Generador de Equipos Aleatorios",
@@ -450,13 +452,13 @@
         "how_to_step_2": "Elige la vista 'Cuadrícula' o 'Lista' desde el Editor Visual.",
         "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para aleatorizar el orden al instante.",
         "how_to_step_4": "Usa el resultado para formar equipos, asignar tareas o elegir un ganador.",
-        "uses_title": "Usos Populares",
-        "use_1_title": "Para Profesores",
-        "use_1_desc": "Divide a los estudiantes en grupos de proyecto justos y aleatorios sin sesgos.",
+        "uses_title": "Casos de Uso Populares",
+        "use_1_title": "Para Profesores y Educación",
+        "use_1_desc": "Divide rápidamente a los estudiantes en grupos de proyectos o compañeros de estudio justos y aleatorios sin sesgos.",
         "use_2_title": "Equipos Ágiles y Scrum",
-        "use_2_desc": "Aleatoriza el orden de intervención en las reuniones diarias.",
-        "use_3_title": "Juegos y Torneos",
-        "use_3_desc": "Genera brackets aleatorios para torneos o parejas para el Amigo Invisible."
+        "use_2_desc": "Aleatoriza el orden de intervención para las reuniones diarias (dailies) para mantenerlas frescas y justas.",
+        "use_3_title": "Juegos, Torneos y Amigo Invisible",
+        "use_3_desc": "Genera llaves aleatorias para torneos o parejas para intercambios de regalos del Amigo Invisible."
     },
     "SecretSantaPage": {
         "title": "Amigo Invisible Online | Generador Gratis y Sin Registro",

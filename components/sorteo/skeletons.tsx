@@ -80,3 +80,67 @@ export function AppSkeleton() {
         </div>
     )
 }
+
+export function WheelSkeleton() {
+    return (
+        <div className="flex flex-col items-center">
+            {/* Pointer Placeholder */}
+            <div className="w-0 h-0 border-l-[20px] border-l-transparent border-r-[20px] border-r-transparent border-t-[35px] border-t-muted/20 mb-[-10px] z-20" />
+
+            {/* Wheel */}
+            <Skeleton className="w-[320px] h-[320px] rounded-full border-4 border-muted/20 mt-2" />
+
+            {/* Text below */}
+            <div className="mt-4 text-center">
+                 <Skeleton className="h-4 w-32 mx-auto" />
+            </div>
+        </div>
+    )
+}
+
+export function SlotSkeleton() {
+    return (
+        <div className="relative w-full max-w-2xl">
+             <Skeleton className="w-full h-[300px] rounded-2xl" />
+             <div className="mt-6 text-center">
+                 <Skeleton className="h-5 w-40 mx-auto" />
+             </div>
+        </div>
+    )
+}
+
+export function BoxSkeleton() {
+    return (
+        <div className="relative w-full">
+             <Skeleton className="w-full h-[350px] rounded-2xl" />
+             <div className="mt-6 text-center">
+                 <Skeleton className="h-5 w-40 mx-auto" />
+             </div>
+        </div>
+    )
+}
+
+export function GridSkeleton() {
+     return (
+        <div className="w-full max-w-6xl mx-auto p-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {Array.from({ length: 15 }).map((_, i) => (
+                    <Skeleton key={i} className="h-20 rounded-xl w-full" />
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export function CardsSkeleton() {
+    return (
+        <div className="flex flex-col items-center">
+            <div className="relative w-64 h-80">
+                 <Skeleton className="absolute inset-0 rounded-2xl w-full h-full" />
+            </div>
+             <div className="mt-8 text-center">
+                 <Skeleton className="h-5 w-40 mx-auto" />
+             </div>
+        </div>
+    )
+}

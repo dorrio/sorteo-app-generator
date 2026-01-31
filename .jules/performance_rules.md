@@ -10,6 +10,7 @@
 *   **Font Loading:** Use `next/font` with `variable` injection in `layout.tsx`. Browser only downloads used fonts.
 *   **Inert Handling:** Use imperative `ref.current.inert = true` for overlays to ensure accessibility without hydration mismatches.
 *   **Dynamic Imports:** Use `next/dynamic` with `ssr: false` for heavy interactive components (e.g., `Confetti`, `VisualEditor`).
+*   **Targeted Loading States:** When using `next/dynamic`, provide a `loading` component that matches the dimensions and shape of the lazy-loaded component to prevent CLS.
 *   **Image Optimization:** Use `next/image` with `unoptimized` for user-generated content (Blob URLs) while maintaining layout stability with `fill`.
 *   **Skeleton Loading:** Use Skeletons instead of spinners during hydration to match SSR layout and improve perceived performance.
 *   **Granular Skeletons:** Use component-level skeletons (e.g., `ParticipantListSkeleton`) instead of page-level blocking skeletons to enable SSR of static content.

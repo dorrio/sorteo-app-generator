@@ -82,6 +82,24 @@ interface MainAppProps {
     seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin';
 }
 
+// Helper to determine if a style should be forced based on the route/mode
+// This prevents users from switching styles on dedicated tool pages where it wouldn't make sense
+// and ensures hydration always matches the server-rendered skeleton.
+function getForcedStyle(seoMode: string): string | null {
+  switch (seoMode) {
+    case 'wheel': return 'roulette';
+    case 'dice': return 'grid'; // Dice uses grid to show dice faces
+    case 'coin': return 'cards'; // Coin uses cards to show Heads/Tails
+    case 'secret-santa': return 'grid';
+    case 'team': return 'grid';
+    case 'list-randomizer': return 'grid'; // Often users want list/grid view here
+    case 'rng': return 'slot-machine'; // RNG fits well with slot style usually, or just default
+    case 'letter': return 'roulette'; // Letter wheel
+    case 'yes-no': return 'roulette'; // Yes/No wheel
+    default: return null; // 'home' or others allow user preference
+  }
+}
+
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
@@ -99,9 +117,6 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const tShare = useTranslations("ShareContent")
   const [mounted, setMounted] = useState(false)
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
-
-  // Track if we have synced initialStyle with the store yet
-  const [isSynced, setIsSynced] = useState(false)
 
   const {
     participants,
@@ -141,6 +156,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
   useEffect(() => {
     setMounted(true)
+    // We keep this to update the store with the "correct" style for future visits or current session
     if (initialStyle) {
         const update: any = { sorteoStyle: initialStyle }
         if (seoMode === 'yes-no') {
@@ -177,8 +193,6 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         updateTheme(update)
     }
-    // Mark as synced after attempting to update theme
-    setIsSynced(true)
   }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice])
 
   // Separate effect for populating dummy data if empty on a specific landing page
@@ -379,9 +393,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const bgBlur = theme.backgroundBlur ?? 0
   const participantDisplay = theme.participantDisplay ?? "list"
 
-  // Calculate effective style for SorteoSelector to prevent hydration mismatch
-  // We force initialStyle until we are synced with the store (useEffect runs)
-  const effectiveStyle = (!isSynced && initialStyle) ? initialStyle : undefined
+  // Determine forced style (e.g. 'roulette' for 'wheel')
+  // We pass this to SorteoSelector to strictly enforce the tool's visualization
+  const forcedStyle = getForcedStyle(seoMode) ?? undefined
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
@@ -523,7 +537,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               </div>
 
               {/* Slot machine */}
-              <SorteoSelector onWinnerSelected={handleWinnerSelected} initialStyle={effectiveStyle} />
+              <SorteoSelector onWinnerSelected={handleWinnerSelected} forcedStyle={forcedStyle} />
 
               {/* Start button */}
               <div className="flex justify-center">

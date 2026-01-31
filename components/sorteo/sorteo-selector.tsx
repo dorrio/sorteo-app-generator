@@ -37,15 +37,15 @@ const SorteoGrid = dynamic(() => import("./sorteo-grid").then((mod) => mod.Sorte
 
 interface SorteoSelectorProps {
   onWinnerSelected: () => void
-  initialStyle?: string
+  forcedStyle?: string
 }
 
-export function SorteoSelector({ onWinnerSelected, initialStyle }: SorteoSelectorProps) {
+export function SorteoSelector({ onWinnerSelected, forcedStyle }: SorteoSelectorProps) {
   const { theme } = useSorteoStore()
 
-  // Prioritize initialStyle if provided (used during SSR and pre-hydration sync)
+  // Prioritize forcedStyle if provided (e.g. on dedicated tool pages)
   // Fallback to theme.sorteoStyle (user preference/persisted state)
-  const sorteoStyle = initialStyle ?? theme.sorteoStyle ?? "slot-machine"
+  const sorteoStyle = forcedStyle ?? theme.sorteoStyle ?? "slot-machine"
 
   switch (sorteoStyle) {
     case "roulette":

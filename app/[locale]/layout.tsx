@@ -120,6 +120,7 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages = await getMessages();
   const t = await getTranslations({ locale, namespace: 'GlobalSchema' });
+  const tHome = await getTranslations({ locale, namespace: 'HomePage' });
 
   const jsonLd = [
     {
@@ -185,6 +186,9 @@ export default async function RootLayout({
   return (
     <html lang={locale} className="dark" suppressHydrationWarning>
       <body className={`${inter.variable} ${spaceGrotesk.variable} ${geistMono.variable} font-sans antialiased`}>
+        <a href="#sorteo-section" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:p-4 focus:bg-background focus:text-foreground focus:rounded-lg focus:shadow-xl focus:border focus:border-primary">
+          {tHome('skip_to_content')}
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

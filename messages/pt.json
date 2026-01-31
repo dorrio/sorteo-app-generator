@@ -418,9 +418,7 @@
         "faq_1_q": "Este RNG é realmente aleatório?",
         "faq_1_a": "Sim, usamos um gerador de números pseudoaleatórios criptograficamente seguro (CSPRNG), que é o padrão da indústria para justiça.",
         "faq_2_q": "Existe limite de quantos números posso gerar?",
-        "faq_2_a": "Não, você pode gerar números aleatórios ilimitados gratuitamente.",
-        "h1": "Gerador de Números Aleatórios",
-        "subtitle": "Gere números aleatórios ou role dados instantaneamente."
+        "faq_2_a": "Não, você pode gerar números aleatórios ilimitados gratuitamente."
     },
     "ListRandomizerPage": {
         "title": "Aleatorizar Lista | Gerador de Equipes Aleatórias",
@@ -451,13 +449,13 @@
         "how_to_step_2": "Escolha a visualização 'Grade' ou 'Lista' no Editor Visual.",
         "how_to_step_3": "Clique em 'Iniciar Sorteio' para aleatorizar a ordem instantaneamente.",
         "how_to_step_4": "Use o resultado para formar equipes, atribuir tarefas ou escolher um vencedor.",
-        "uses_title": "Casos de Uso Populares",
-        "use_1_title": "Para Professores e Educação",
-        "use_1_desc": "Divida rapidamente os alunos em grupos de projetos ou parceiros de estudo justos e aleatórios, sem preconceitos.",
+        "uses_title": "Usos Populares",
+        "use_1_title": "Para Professores",
+        "use_1_desc": "Divida os alunos em grupos de projetos justos e aleatórios sem viés.",
         "use_2_title": "Equipes Ágeis e Scrum",
-        "use_2_desc": "Aleatorize a ordem de fala para reuniões diárias para mantê-las dinâmicas e justas.",
-        "use_3_title": "Jogos, Torneios e Amigo Secreto",
-        "use_3_desc": "Gere chaves aleatórias para torneios ou pares para trocas de presentes de Amigo Secreto."
+        "use_2_desc": "Aleatorize a ordem de fala nas reuniões diárias.",
+        "use_3_title": "Jogos e Torneios",
+        "use_3_desc": "Gere chaves aleatórias para torneios ou pares para o Amigo Secreto."
     },
     "SecretSantaPage": {
         "title": "Amigo Secreto Online | Gerador Grátis e Sem Cadastro",

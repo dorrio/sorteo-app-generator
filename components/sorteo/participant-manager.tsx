@@ -274,10 +274,6 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
     hasHydrated,
   } = useSorteoStore()
 
-  if (!hasHydrated) {
-    return <ParticipantListSkeleton />
-  }
-
   const t = useTranslations("ParticipantManager")
   const [inputMode, setInputMode] = useState<InputMode>("single")
   const [singleName, setSingleName] = useState("")
@@ -304,6 +300,10 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
   const cancelEdit = useCallback(() => {
     setEditingId(null)
   }, [])
+
+  if (!hasHydrated) {
+    return <ParticipantListSkeleton />
+  }
 
   const findDuplicates = (newNames: string[]): { duplicates: DuplicateInfo[]; uniqueNames: string[] } => {
     const existingNames = participants.map((p) => p.name.toLowerCase().trim())

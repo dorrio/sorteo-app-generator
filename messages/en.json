@@ -689,6 +689,8 @@
         "secret_santa_text": "🎁 I just created the Secret Santa pairings! Check it out here. Free & Secure. 👇",
         "dice_title": "Online Dice Roller | Sorteo Pro",
         "dice_text": "🎲 Roll the Dice! I found this amazing free online dice roller. Fair & Instant. Try it here 👇",
+        "coin_title": "Flip a Coin Online | Sorteo Pro",
+        "coin_text": "🪙 Heads or Tails? I just flipped a coin online! Fair & Instant. Try it here 👇",
         "custom_share_text": "🔥 Join my giveaway: *{title}*! Created with Sorteo Pro. Free & Unlimited. 👇",
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway"
@@ -802,5 +804,32 @@
         "use_2_desc": "Make random teams for soccer, basketball, or board games.",
         "use_3_title": "Office Icebreakers",
         "use_3_desc": "Split colleagues into breakout groups for workshops."
+    },
+    "CoinPage": {
+        "title": "Coin Flip | Flip a Coin Online (Heads or Tails)",
+        "description": "Flip a coin online instantly. Random Heads or Tails generator. Free, fair, and with 3D animation. Best virtual coin flipper.",
+        "h1": "Flip a Coin Online",
+        "subtitle": "Flip a virtual coin to decide Heads or Tails instantly.",
+        "option_heads": "HEADS",
+        "option_tails": "TAILS",
+        "faq_1_q": "Is this coin flip fair?",
+        "faq_1_a": "Yes, we use a cryptographically secure random number generator to ensure a true 50/50 probability, just like a real coin.",
+        "faq_2_q": "Can I flip multiple coins?",
+        "faq_2_a": "Yes! You can add more coins by customizing the list."
+    },
+    "CoinGeo": {
+        "title": "Online Coin Flip",
+        "direct_answer_title": "What is a Coin Flip Online?",
+        "direct_answer_text": "An <tool>Online Coin Flip</tool> is a digital tool that simulates tossing a coin to get <strong>Heads</strong> or <strong>Tails</strong>. It is used for binary decisions, sports (like kickoff), or games. <brand>Sorteo Pro</brand> guarantees a fair 50/50 result using secure RNG.",
+        "cta_button": "Flip Coin",
+        "feature_1": "Fair 50/50 Chance",
+        "feature_2": "Heads or Tails",
+        "feature_3": "Instant Flip",
+        "feature_4": "Mobile Ready",
+        "how_to_title": "How to flip a coin online",
+        "how_to_step_1": "The tool is ready with 'HEADS' and 'TAILS'.",
+        "how_to_step_2": "Select 'Cards' view for the best visual experience.",
+        "how_to_step_3": "Click 'Start Giveaway' (Flip) to toss the coin.",
+        "how_to_step_4": "The result will be Heads or Tails!"
     }
 }

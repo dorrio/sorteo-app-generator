@@ -1,5 +1,6 @@
 {
     "HomePage": {
+        "skip_to_content": "Pular para o conteúdo",
         "loading": "Carregando Sorteio Pro...",
         "customize": "Personalizar",
         "verify_sorteo": "Verificar Sorteio",

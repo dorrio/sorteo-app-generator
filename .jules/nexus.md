@@ -19,3 +19,8 @@
 **Blocker:** The `WinnerCeremony` modal lacks semantic role definition, making it a "Semantic Void". Screen readers cannot detect the context switch to a dialog, nor identify the winner information immediately.
 **Bridge:** Add `role="dialog"`, `aria-modal="true"`, and connect the title and winner name via `aria-labelledby` and `aria-describedby`.
 **Signal:** Improved accessibility compliance (WCAG) and better context for bots crawling the "Success" state (if they ever trigger it, or for the static snapshot if rendered).
+
+## 2024-05-26 - RootLayout
+**Blocker:** The application lacked a "Skip to Content" link, forcing keyboard users and screen readers to navigate through repetitive header elements before reaching the main tool, and missing a standard structural signal for search engines.
+**Bridge:** Implemented a semantic `<a>` tag as the first child of `<body>` pointing to `#sorteo-section`, visible only on focus.
+**Signal:** Improved WCAG 2.4.1 compliance and provided a clear "Main Content" signal to crawlers (Priority 1 Navigation).

@@ -230,7 +230,7 @@ export function VerifyContent() {
     }
 
     return (
-        <div
+        <main
             className="min-h-screen flex flex-col items-center justify-center p-4 pb-24 relative overflow-hidden"
             style={{
                 backgroundColor: theme.backgroundColor,
@@ -580,6 +580,6 @@ export function VerifyContent() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </div>
+        </main>
     )
 }

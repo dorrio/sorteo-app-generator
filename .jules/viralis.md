@@ -11,3 +11,11 @@
 1. Enhanced `app/api/og/route.tsx` to support custom titles/colors in Tool Promo mode.
 2. Updated `app/[locale]/wheel-of-names/page.tsx` and `app/[locale]/page.tsx` to read `searchParams` and override metadata.
 **Outcome:** Shared links now show the exact custom giveaway name and branding color, reducing the disconnect between the "invite" and the "landing page".
+
+## 2026-01-28 - [All Tools/Metadata]
+**Hypothesis:** Extending dynamic metadata support to *all* sub-tools (Dice, Secret Santa, Team Generator, etc.) will close the "Viral Leak" where sharing a customized specific tool reverted to generic metadata.
+**Implementation:**
+1. Removed `export const dynamic = 'force-static'` from 8 tool pages to enable `searchParams` access in `generateMetadata`.
+2. Updated `generateMetadata` in all tool pages to read `template_title` and `template_color` and pass them to `api/og` and `og:url`.
+3. Standardized translation keys across `en`, `es`, `pt` to support these dynamic titles without build errors.
+**Outcome:** Every tool in the suite now supports full viral context persistence. A user sharing a "Christmas Dice Game" will see exactly that in the link preview, not just "Dice Roller".

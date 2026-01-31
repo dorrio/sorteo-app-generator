@@ -21,6 +21,32 @@
         "footer_glossary": "Glossary",
         "customize_hint": "🎨 Customize Giveaway"
     },
+    "Footer": {
+        "text": "Created for influencers and content creators",
+        "nav_label": "Footer Navigation",
+        "sections": {
+            "tools": "Tools",
+            "resources": "Resources",
+            "comparisons": "Comparisons"
+        },
+        "links": {
+            "verify": "Verify Giveaway",
+            "wheel": "Wheel of Names",
+            "instagram": "Instagram Picker",
+            "rng": "Random Number Generator",
+            "list": "List Randomizer",
+            "yesno": "Yes or No Wheel",
+            "letter": "Random Letter Generator",
+            "secret_santa": "Secret Santa Generator",
+            "team": "Random Team Generator",
+            "dice": "Dice Roller",
+            "coin": "Coin Flip",
+            "versus_appsorteos": "AppSorteos Alternative",
+            "versus_wheel": "Wheel of Names Alternative",
+            "versus_random": "Random.org Alternative",
+            "glossary": "Glossary"
+        }
+    },
     "Metadata": {
         "title": "Sorteo Pro | Premium Giveaways for Influencers",
         "description": "The ultimate tool for viral giveaways. Designed for content creators and influencers who want to impress their audience.",

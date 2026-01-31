@@ -81,12 +81,11 @@ function HistoryItem({
 
 export function HistoryPanel() {
   const { pastWinners, clearHistory, theme, hasHydrated } = useSorteoStore()
+  const t = useTranslations("HistoryPanel")
 
   if (!hasHydrated) {
     return <HistoryListSkeleton />
   }
-
-  const t = useTranslations("HistoryPanel")
 
   if (pastWinners.length === 0) {
     return (

@@ -100,6 +100,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const [mounted, setMounted] = useState(false)
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
 
+  // Track if we have synced initialStyle with the store yet
+  const [isSynced, setIsSynced] = useState(false)
+
   const {
     participants,
     addParticipants,
@@ -174,6 +177,8 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         updateTheme(update)
     }
+    // Mark as synced after attempting to update theme
+    setIsSynced(true)
   }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice])
 
   // Separate effect for populating dummy data if empty on a specific landing page
@@ -374,6 +379,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const bgBlur = theme.backgroundBlur ?? 0
   const participantDisplay = theme.participantDisplay ?? "list"
 
+  // Calculate effective style for SorteoSelector to prevent hydration mismatch
+  // We force initialStyle until we are synced with the store (useEffect runs)
+  const effectiveStyle = (!isSynced && initialStyle) ? initialStyle : undefined
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       <Suspense fallback={null}>
@@ -514,7 +523,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               </div>
 
               {/* Slot machine */}
-              <SorteoSelector onWinnerSelected={handleWinnerSelected} initialStyle={initialStyle} />
+              <SorteoSelector onWinnerSelected={handleWinnerSelected} initialStyle={effectiveStyle} />
 
               {/* Start button */}
               <div className="flex justify-center">

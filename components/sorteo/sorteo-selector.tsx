@@ -41,11 +41,11 @@ interface SorteoSelectorProps {
 }
 
 export function SorteoSelector({ onWinnerSelected, initialStyle }: SorteoSelectorProps) {
-  const { theme, hasHydrated } = useSorteoStore()
+  const { theme } = useSorteoStore()
 
-  const sorteoStyle = (!hasHydrated && initialStyle)
-    ? initialStyle
-    : (theme.sorteoStyle ?? "slot-machine")
+  // Prioritize initialStyle if provided (used during SSR and pre-hydration sync)
+  // Fallback to theme.sorteoStyle (user preference/persisted state)
+  const sorteoStyle = initialStyle ?? theme.sorteoStyle ?? "slot-machine"
 
   switch (sorteoStyle) {
     case "roulette":

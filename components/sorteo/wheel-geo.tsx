@@ -43,7 +43,7 @@ export function WheelGeo() {
   const faqs = [
     {
       question: t('what_is_wheel'),
-      answer: t('what_is_wheel_answer'),
+      answer: t.raw('what_is_wheel_answer') as string,
     },
     {
       question: tFaq('faq_1_q'),

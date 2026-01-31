@@ -20,6 +20,7 @@ import { TeamGeo } from "@/components/sorteo/team-geo"
 import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
 import { LetterGeo } from "@/components/sorteo/letter-geo"
 import { DiceGeo } from "@/components/sorteo/dice-geo"
+import { CoinGeo } from "@/components/sorteo/coin-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
@@ -78,7 +79,7 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => voi
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
@@ -86,6 +87,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const tYesNo = useTranslations("YesNoPage")
   const tLetter = useTranslations("LetterGeneratorPage")
   const tDice = useTranslations("DicePage")
+  const tCoin = useTranslations("CoinPage")
   const tRng = useTranslations("RngPage")
   const tList = useTranslations("ListRandomizerPage")
   const tSecret = useTranslations("SecretSantaPage")
@@ -159,6 +161,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         } else if (seoMode === 'dice') {
             update.customTitle = tDice('h1')
             update.customSubtitle = tDice('subtitle')
+        } else if (seoMode === 'coin') {
+            update.customTitle = tCoin('h1')
+            update.customSubtitle = tCoin('subtitle')
         } else if (seoMode === 'instagram') {
             update.customTitle = tInsta('h1')
             update.customSubtitle = tInsta('subtitle')
@@ -169,16 +174,21 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         updateTheme(update)
     }
-  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel])
+  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
   useEffect(() => {
-      if ((initialStyle === 'roulette' || initialStyle === 'slot' || (seoMode === 'dice' && initialStyle === 'grid')) && mounted && hasHydrated && participants.length === 0) {
+      if ((initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid')) && mounted && hasHydrated && participants.length === 0) {
           if (seoMode === 'yes-no') {
               addParticipants([
                   { name: tYesNo('option_yes') },
                   { name: tYesNo('option_no') }
+              ])
+          } else if (seoMode === 'coin') {
+              addParticipants([
+                  { name: tCoin('option_heads') },
+                  { name: tCoin('option_tails') }
               ])
           } else if (seoMode === 'letter') {
               const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
@@ -270,6 +280,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareTitle = tShare('dice_title')
           shareText = tShare('dice_text')
           defaultTitle = tDice('h1')
+      } else if (seoMode === 'coin') {
+          shareTitle = tShare('coin_title')
+          shareText = tShare('coin_text')
+          defaultTitle = tCoin('h1')
       }
 
       // Viralis: Check for custom title to enhance share context
@@ -350,6 +364,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     } else if (seoMode === 'dice') {
         displayTitle = tDice('h1')
         displaySubtitle = tDice('subtitle')
+    } else if (seoMode === 'coin') {
+        displayTitle = tCoin('h1')
+        displaySubtitle = tCoin('subtitle')
     }
   }
 
@@ -618,6 +635,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             <>
                 <DiceGeo />
                 <Glossary seoMode="rng" />
+            </>
+       ) : seoMode === 'coin' ? (
+            /* Coin Mode */
+            <>
+                <CoinGeo />
+                <Glossary seoMode="yes-no" />
             </>
        ) : (
             /* Home Mode: Show everything */

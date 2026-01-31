@@ -625,6 +625,8 @@
         "secret_santa_text": "🎁 Já sorteei o Amigo Secreto! Confira o resultado aqui. Grátis e Seguro. 👇",
         "dice_title": "Rolar Dados Online | Sorteo Pro",
         "dice_text": "🎲 Jogue os dados! Encontrei este lançador de dados online grátis. Justo e Instantâneo. Teste aqui 👇",
+        "coin_title": "Jogar Moeda Online | Sorteo Pro",
+        "coin_text": "🪙 Cara ou Coroa? Acabei de jogar uma moeda online! Grátis e Justo. Teste aqui 👇",
         "custom_share_text": "🔥 Participe do meu sorteio: *{title}*! Criado com Sorteo Pro. Grátis e Ilimitado. 👇",
         "cta_share": "Compartilhar",
         "cta_start": "Começar"
@@ -796,5 +798,32 @@
         "use_2_desc": "Faça times aleatórios para futebol, basquete ou jogos de tabuleiro.",
         "use_3_title": "Dinâmicas de Escritório",
         "use_3_desc": "Divida colegas em grupos para workshops."
+    },
+    "CoinPage": {
+        "title": "Jogar Moeda | Cara ou Coroa Online",
+        "description": "Jogue uma moeda online instantaneamente. Gerador de Cara ou Coroa aleatório. Grátis, justo e com animação 3D.",
+        "h1": "Jogar Moeda Online",
+        "subtitle": "Jogue uma moeda virtual para decidir Cara ou Coroa instantaneamente.",
+        "option_heads": "CARA",
+        "option_tails": "COROA",
+        "faq_1_q": "Esse cara ou coroa é justo?",
+        "faq_1_a": "Sim, usamos um gerador de números aleatórios criptograficamente seguro para garantir uma probabilidade real de 50/50.",
+        "faq_2_q": "Posso jogar várias moedas?",
+        "faq_2_a": "Sim! Você pode adicionar mais moedas personalizando a lista."
+    },
+    "CoinGeo": {
+        "title": "Jogar Moeda Virtual",
+        "direct_answer_title": "O que é Jogar uma Moeda Online?",
+        "direct_answer_text": "<strong>Jogar uma Moeda Online</strong> é uma ferramenta digital que simula o lançamento de uma moeda para obter <strong>Cara</strong> ou <strong>Coroa</strong>. É usada para decisões binárias, esportes ou jogos. <brand>Sorteo Pro</brand> garante um resultado justo 50/50.",
+        "cta_button": "Jogar Moeda",
+        "feature_1": "Chance Justa de 50/50",
+        "feature_2": "Cara ou Coroa",
+        "feature_3": "Lançamento Instantâneo",
+        "feature_4": "Mobile",
+        "how_to_title": "Como jogar uma moeda online",
+        "how_to_step_1": "A ferramenta já vem com 'CARA' e 'COROA'.",
+        "how_to_step_2": "Selecione a visualização 'Cartas' para a melhor experiência.",
+        "how_to_step_3": "Clique em 'Iniciar Sorteio' para jogar a moeda.",
+        "how_to_step_4": "O resultado será Cara ou Coroa!"
     }
 }

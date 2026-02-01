@@ -43,6 +43,7 @@
             "team": "Generador de Equipos",
             "dice": "Lanzar Dados",
             "coin": "Lanzar Moneda",
+            "rps": "Piedra Papel Tijera",
             "versus_appsorteos": "Alternativa a AppSorteos",
             "versus_wheel": "Alternativa a Wheel of Names",
             "versus_random": "Alternativa a Random.org",
@@ -711,6 +712,8 @@
         "dice_text": "🎲 ¡Lanza los dados! Encontré este lanzador de dados online gratis. Justo e Instantáneo. Pruébalo aquí 👇",
         "coin_title": "Lanzar Moneda Online | Sorteo Pro",
         "coin_text": "🪙 ¿Cara o Cruz? ¡Acabo de lanzar una moneda online! Gratis y Justo. Pruébalo aquí 👇",
+        "rps_title": "Piedra Papel Tijera Online | Sorteo Pro",
+        "rps_text": "✊✋✌️ ¡Piedra, Papel o Tijera! Acabo de jugar online. Justo e Instantáneo. Pruébalo aquí 👇",
         "custom_share_text": "🔥 Participa en mi sorteo: *{title}*! Creado con Sorteo Pro. Gratis e Ilimitado. 👇",
         "cta_share": "Compartir",
         "cta_start": "Empezar"
@@ -851,5 +854,33 @@
         "how_to_step_2": "Selecciona la vista 'Cartas' para la mejor experiencia visual.",
         "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para lanzar la moneda.",
         "how_to_step_4": "¡El resultado será Cara o Cruz!"
+    },
+    "RpsPage": {
+        "title": "Piedra Papel Tijera Online | Jugar PPT",
+        "description": "Juega Piedra, Papel o Tijera online al instante. Generador aleatorio para Piedra, Papel, Tijera. Gratis, justo y divertido para resolver disputas.",
+        "h1": "Piedra Papel Tijera Online",
+        "subtitle": "Juega Piedra, Papel o Tijera al instante contra la computadora o un amigo.",
+        "option_rock": "PIEDRA",
+        "option_paper": "PAPEL",
+        "option_scissors": "TIJERA",
+        "faq_1_q": "¿Es justo este juego?",
+        "faq_1_a": "Sí, usamos un generador de números aleatorios seguro para asegurar que la elección de la computadora sea completamente impredecible.",
+        "faq_2_q": "¿Puedo jugar al mejor de 3?",
+        "faq_2_a": "¡Sí! Simplemente gira 3 veces y lleva la cuenta del puntaje."
+    },
+    "RpsGeo": {
+        "title": "Piedra Papel Tijera Online",
+        "direct_answer_title": "¿Qué es Piedra Papel Tijera Online?",
+        "direct_answer_text": "<strong>Piedra Papel Tijera Online</strong> es una versión digital del clásico juego de manos utilizado para resolver disputas o tomar decisiones. <brand>Sorteo Pro</brand> utiliza un algoritmo seguro para seleccionar aleatoriamente <strong>Piedra</strong>, <strong>Papel</strong> o <strong>Tijera</strong>, asegurando un juego justo cada vez.",
+        "cta_button": "Jugar PPT",
+        "feature_1": "Justo y Aleatorio",
+        "feature_2": "Juego Clásico",
+        "feature_3": "Juego Instantáneo",
+        "feature_4": "Sin Anuncios",
+        "how_to_title": "Cómo jugar Piedra Papel Tijera online",
+        "how_to_step_1": "El juego está cargado con 'PIEDRA', 'PAPEL' y 'TIJERA'.",
+        "how_to_step_2": "Haz clic en 'Iniciar Sorteo' (Jugar) para generar un movimiento aleatorio.",
+        "how_to_step_3": "Mira qué seleccionó la computadora.",
+        "how_to_step_4": "¡Compara con tu elección o úsalo para decidir!"
     }
 }

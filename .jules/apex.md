@@ -19,3 +19,8 @@
 **Gap:** Competitors (Random.org, JustFlipACoin) have dedicated "Coin Flip" pages. We lacked a dedicated URL for this high-volume binary RNG.
 **Action:** Created dedicated `/coin-flip` landing page with `CoinGeo` component, specialized Schema, and targeted Metadata.
 **GEO Impact:** Optimized for "Flip a Coin", "Heads or Tails", and "Cara o Cruz" queries with Direct Answer blocks.
+
+## 2025-05-28 - [Strategy/Cluster Content]
+**Gap:** Competitors (RPS Game, online-stopwatch) have dedicated "Rock Paper Scissors" pages. We missed this high-volume keyword which fits perfectly with Dice/Coin.
+**Action:** Created dedicated `/rock-paper-scissors` landing page with `RpsGeo` component, specialized Schema, and targeted Metadata.
+**GEO Impact:** Optimized for "Rock Paper Scissors Online", "Piedra Papel Tijera Online" and "RPS Game" queries with Direct Answer blocks.

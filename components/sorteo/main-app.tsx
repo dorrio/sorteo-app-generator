@@ -21,6 +21,7 @@ import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
 import { LetterGeo } from "@/components/sorteo/letter-geo"
 import { DiceGeo } from "@/components/sorteo/dice-geo"
 import { CoinGeo } from "@/components/sorteo/coin-geo"
+import { RpsGeo } from "@/components/sorteo/rps-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
@@ -79,7 +80,7 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => voi
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
@@ -88,6 +89,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const tLetter = useTranslations("LetterGeneratorPage")
   const tDice = useTranslations("DicePage")
   const tCoin = useTranslations("CoinPage")
+  const tRps = useTranslations("RpsPage")
   const tRng = useTranslations("RngPage")
   const tList = useTranslations("ListRandomizerPage")
   const tSecret = useTranslations("SecretSantaPage")
@@ -164,6 +166,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         } else if (seoMode === 'coin') {
             update.customTitle = tCoin('h1')
             update.customSubtitle = tCoin('subtitle')
+        } else if (seoMode === 'rps') {
+            update.customTitle = tRps('h1')
+            update.customSubtitle = tRps('subtitle')
         } else if (seoMode === 'instagram') {
             update.customTitle = tInsta('h1')
             update.customSubtitle = tInsta('subtitle')
@@ -174,7 +179,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         updateTheme(update)
     }
-  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice])
+  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice, tRps])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
@@ -189,6 +194,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               addParticipants([
                   { name: tCoin('option_heads') },
                   { name: tCoin('option_tails') }
+              ])
+          } else if (seoMode === 'rps') {
+              addParticipants([
+                  { name: tRps('option_rock') },
+                  { name: tRps('option_paper') },
+                  { name: tRps('option_scissors') }
               ])
           } else if (seoMode === 'letter') {
               const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
@@ -284,6 +295,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareTitle = tShare('coin_title')
           shareText = tShare('coin_text')
           defaultTitle = tCoin('h1')
+      } else if (seoMode === 'rps') {
+          shareTitle = tShare('rps_title')
+          shareText = tShare('rps_text')
+          defaultTitle = tRps('h1')
       }
 
       // Viralis: Check for custom title to enhance share context
@@ -367,6 +382,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     } else if (seoMode === 'coin') {
         displayTitle = tCoin('h1')
         displaySubtitle = tCoin('subtitle')
+    } else if (seoMode === 'rps') {
+        displayTitle = tRps('h1')
+        displaySubtitle = tRps('subtitle')
     }
   }
 
@@ -640,6 +658,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             /* Coin Mode */
             <>
                 <CoinGeo />
+                <Glossary seoMode="yes-no" />
+            </>
+       ) : seoMode === 'rps' ? (
+            /* RPS Mode */
+            <>
+                <RpsGeo />
                 <Glossary seoMode="yes-no" />
             </>
        ) : (

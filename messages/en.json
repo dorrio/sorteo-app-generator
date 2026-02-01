@@ -42,6 +42,7 @@
             "team": "Random Team Generator",
             "dice": "Dice Roller",
             "coin": "Coin Flip",
+            "rps": "Rock Paper Scissors",
             "versus_appsorteos": "AppSorteos Alternative",
             "versus_wheel": "Wheel of Names Alternative",
             "versus_random": "Random.org Alternative",
@@ -718,6 +719,8 @@
         "dice_text": "🎲 Roll the Dice! I found this amazing free online dice roller. Fair & Instant. Try it here 👇",
         "coin_title": "Flip a Coin Online | Sorteo Pro",
         "coin_text": "🪙 Heads or Tails? I just flipped a coin online! Fair & Instant. Try it here 👇",
+        "rps_title": "Rock Paper Scissors Online | Sorteo Pro",
+        "rps_text": "✊✋✌️ Rock, Paper, Scissors! I just played online. Fair & Instant. Try it here 👇",
         "custom_share_text": "🔥 Join my giveaway: *{title}*! Created with Sorteo Pro. Free & Unlimited. 👇",
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway"
@@ -858,5 +861,33 @@
         "how_to_step_2": "Select 'Cards' view for the best visual experience.",
         "how_to_step_3": "Click 'Start Giveaway' (Flip) to toss the coin.",
         "how_to_step_4": "The result will be Heads or Tails!"
+    },
+    "RpsPage": {
+        "title": "Rock Paper Scissors Online | Play RPS Game",
+        "description": "Play Rock Paper Scissors online instantly. Random generator for Rock, Paper, Scissors. Free, fair, and fun way to settle disputes or play games.",
+        "h1": "Rock Paper Scissors Online",
+        "subtitle": "Play Rock, Paper, Scissors instantly against the computer or a friend.",
+        "option_rock": "ROCK",
+        "option_paper": "PAPER",
+        "option_scissors": "SCISSORS",
+        "faq_1_q": "Is this RPS game fair?",
+        "faq_1_a": "Yes, we use a secure random number generator to ensure the computer's choice (or random selection) is completely unpredictable.",
+        "faq_2_q": "Can I play best of 3?",
+        "faq_2_a": "Yes! Just spin 3 times and keep track of the score."
+    },
+    "RpsGeo": {
+        "title": "Online Rock Paper Scissors",
+        "direct_answer_title": "What is Rock Paper Scissors Online?",
+        "direct_answer_text": "<strong>Rock Paper Scissors Online</strong> is a digital version of the classic hand game used to settle disputes or make decisions. <brand>Sorteo Pro</brand> uses a secure algorithm to randomly select <strong>Rock</strong>, <strong>Paper</strong>, or <strong>Scissors</strong>, ensuring a fair game every time.",
+        "cta_button": "Play RPS",
+        "feature_1": "Fair & Random",
+        "feature_2": "Classic Game",
+        "feature_3": "Instant Play",
+        "feature_4": "No Ads",
+        "how_to_title": "How to play Rock Paper Scissors online",
+        "how_to_step_1": "The game is loaded with 'ROCK', 'PAPER', and 'SCISSORS'.",
+        "how_to_step_2": "Click 'Start Giveaway' (Play) to generate a random move.",
+        "how_to_step_3": "See what the computer selected.",
+        "how_to_step_4": "Compare with your choice or use it to decide!"
     }
 }

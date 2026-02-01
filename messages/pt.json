@@ -42,6 +42,7 @@
             "team": "Gerador de Equipes",
             "dice": "Rolar Dados",
             "coin": "Jogar Moeda",
+            "rps": "Pedra Papel Tesoura",
             "versus_appsorteos": "Alternativa ao AppSorteos",
             "versus_wheel": "Alternativa ao Wheel of Names",
             "versus_random": "Alternativa ao Random.org",
@@ -654,6 +655,8 @@
         "dice_text": "🎲 Jogue os dados! Encontrei este lançador de dados online grátis. Justo e Instantâneo. Teste aqui 👇",
         "coin_title": "Jogar Moeda Online | Sorteo Pro",
         "coin_text": "🪙 Cara ou Coroa? Acabei de jogar uma moeda online! Grátis e Justo. Teste aqui 👇",
+        "rps_title": "Pedra Papel Tesoura Online | Sorteo Pro",
+        "rps_text": "✊✋✌️ Pedra, Papel ou Tesoura! Acabei de jogar online. Grátis e Justo. Teste aqui 👇",
         "custom_share_text": "🔥 Participe do meu sorteio: *{title}*! Criado com Sorteo Pro. Grátis e Ilimitado. 👇",
         "cta_share": "Compartilhar",
         "cta_start": "Começar"
@@ -852,5 +855,33 @@
         "how_to_step_2": "Selecione a visualização 'Cartas' para a melhor experiência.",
         "how_to_step_3": "Clique em 'Iniciar Sorteio' para jogar a moeda.",
         "how_to_step_4": "O resultado será Cara ou Coroa!"
+    },
+    "RpsPage": {
+        "title": "Pedra Papel Tesoura Online | Jogo PPT",
+        "description": "Jogue Pedra, Papel e Tesoura online instantaneamente. Gerador aleatório para Pedra, Papel, Tesoura. Grátis, justo e divertido para resolver disputas.",
+        "h1": "Pedra Papel Tesoura Online",
+        "subtitle": "Jogue Pedra, Papel e Tesoura instantaneamente contra o computador ou um amigo.",
+        "option_rock": "PEDRA",
+        "option_paper": "PAPEL",
+        "option_scissors": "TESOURA",
+        "faq_1_q": "Este jogo PPT é justo?",
+        "faq_1_a": "Sim, usamos um gerador de números aleatórios seguro para garantir que a escolha do computador seja completamente imprevisível.",
+        "faq_2_q": "Posso jogar melhor de 3?",
+        "faq_2_a": "Sim! Apenas gire 3 vezes e acompanhe a pontuação."
+    },
+    "RpsGeo": {
+        "title": "Pedra Papel Tesoura Online",
+        "direct_answer_title": "O que é Pedra Papel Tesoura Online?",
+        "direct_answer_text": "<strong>Pedra Papel Tesoura Online</strong> é uma versão digital do clássico jogo de mãos usado para resolver disputas ou tomar decisões. O <brand>Sorteo Pro</brand> usa um algoritmo seguro para selecionar aleatoriamente <strong>Pedra</strong>, <strong>Papel</strong> ou <strong>Tesoura</strong>, garantindo um jogo justo todas as vezes.",
+        "cta_button": "Jogar PPT",
+        "feature_1": "Justo e Aleatório",
+        "feature_2": "Jogo Clássico",
+        "feature_3": "Jogo Instantâneo",
+        "feature_4": "Sem Anúncios",
+        "how_to_title": "Como jogar Pedra Papel Tesoura online",
+        "how_to_step_1": "O jogo vem carregado com 'PEDRA', 'PAPEL' e 'TESOURA'.",
+        "how_to_step_2": "Clique em 'Iniciar Sorteio' para gerar um movimento aleatório.",
+        "how_to_step_3": "Veja o que o computador selecionou.",
+        "how_to_step_4": "Compare com sua escolha ou use para decidir!"
     }
 }

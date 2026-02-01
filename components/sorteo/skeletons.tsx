@@ -80,3 +80,55 @@ export function AppSkeleton() {
         </div>
     )
 }
+
+export function SlotSkeleton() {
+    return (
+        <div className="w-full max-w-2xl h-[300px] rounded-2xl bg-muted/20 animate-pulse border-4 border-muted/20 flex items-center justify-center">
+             <Skeleton className="w-32 h-16 rounded-lg" />
+        </div>
+    )
+}
+
+export function WheelSkeleton() {
+    return (
+         <div className="flex flex-col items-center w-full">
+             <div className="w-[320px] h-[320px] rounded-full border-4 border-muted/20 bg-muted/10 animate-pulse flex items-center justify-center">
+                 <div className="w-20 h-20 rounded-full bg-muted/30" />
+             </div>
+              <Skeleton className="w-24 h-4 mt-4" />
+         </div>
+    )
+}
+
+export function GridSkeleton() {
+     return (
+        <div className="w-full max-w-6xl mx-auto p-4">
+             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                 {[...Array(10)].map((_, i) => (
+                     <Skeleton key={i} className="h-20 rounded-xl" />
+                 ))}
+             </div>
+        </div>
+     )
+}
+
+export function CardsSkeleton() {
+    return (
+        <div className="flex flex-col items-center w-full">
+            <div className="relative w-64 h-80">
+                <Skeleton className="absolute inset-0 rounded-2xl bg-muted/30 rotate-3" />
+                <Skeleton className="absolute inset-0 rounded-2xl bg-muted/30 -rotate-3" />
+                <Skeleton className="absolute inset-0 rounded-2xl bg-muted border-4 border-background" />
+            </div>
+             <Skeleton className="w-24 h-4 mt-8" />
+        </div>
+    )
+}
+
+export function BoxSkeleton() {
+    return (
+        <div className="w-full h-[350px] rounded-2xl border-2 border-muted/20 bg-muted/10 animate-pulse flex items-center justify-center">
+             <Skeleton className="w-16 h-16 rounded-full opacity-20" />
+        </div>
+    )
+}

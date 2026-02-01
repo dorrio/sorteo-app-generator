@@ -432,7 +432,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         <header className="border-b border-border/50 backdrop-blur-sm bg-background/50">
           <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={false}
               animate={{ opacity: 1, x: 0 }}
             >
               <Link
@@ -481,7 +481,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           <div className="grid lg:grid-cols-[1fr,400px] gap-8">
             {/* Sorteo area */}
             <motion.section
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="space-y-8"

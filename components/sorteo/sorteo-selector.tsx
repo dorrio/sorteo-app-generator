@@ -1,38 +1,38 @@
 "use client"
 
 import dynamic from "next/dynamic"
-import { Loader2 } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
-
-const LoadingFallback = () => (
-  <div className="h-[300px] flex items-center justify-center">
-    <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
-  </div>
-)
+import {
+  WheelSkeleton,
+  SlotSkeleton,
+  GridSkeleton,
+  CardsSkeleton,
+  BoxSkeleton
+} from "@/components/sorteo/skeletons"
 
 const SlotMachine = dynamic(() => import("./slot-machine").then((mod) => mod.SlotMachine), {
   ssr: false,
-  loading: LoadingFallback,
+  loading: SlotSkeleton,
 })
 const SorteoRoulette = dynamic(() => import("./sorteo-roulette").then((mod) => mod.SorteoRoulette), {
   ssr: false,
-  loading: LoadingFallback,
+  loading: WheelSkeleton,
 })
 const SorteoCascade = dynamic(() => import("./sorteo-cascade").then((mod) => mod.SorteoCascade), {
   ssr: false,
-  loading: LoadingFallback,
+  loading: BoxSkeleton,
 })
 const SorteoCards = dynamic(() => import("./sorteo-cards").then((mod) => mod.SorteoCards), {
   ssr: false,
-  loading: LoadingFallback,
+  loading: CardsSkeleton,
 })
 const SorteoMatrix = dynamic(() => import("./sorteo-matrix").then((mod) => mod.SorteoMatrix), {
   ssr: false,
-  loading: LoadingFallback,
+  loading: BoxSkeleton,
 })
 const SorteoGrid = dynamic(() => import("./sorteo-grid").then((mod) => mod.SorteoGrid), {
   ssr: false,
-  loading: LoadingFallback,
+  loading: GridSkeleton,
 })
 
 interface SorteoSelectorProps {

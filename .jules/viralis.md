@@ -19,3 +19,8 @@
 2. Updated `generateMetadata` in all tool pages to read `template_title` and `template_color` and pass them to `api/og` and `og:url`.
 3. Standardized translation keys across `en`, `es`, `pt` to support these dynamic titles without build errors.
 **Outcome:** Every tool in the suite now supports full viral context persistence. A user sharing a "Christmas Dice Game" will see exactly that in the link preview, not just "Dice Roller".
+
+## 2026-01-29 - [WinnerCeremony/Share]
+**Hypothesis:** Sharing the actual Winner Certificate image directly via Native Share API (instead of just a link) will significantly increase engagement and reshare rates on visual platforms like WhatsApp and Instagram Stories.
+**Implementation:** Updated `shareNative` in `WinnerCeremony` and `VerifyContent` to asynchronously generate the OG Image as a Blob and attach it to the `navigator.share` payload.
+**Outcome:** Expect higher viral loop conversion as users can instantly share the "Proof of Victory" image with one tap.

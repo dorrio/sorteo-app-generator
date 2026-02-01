@@ -146,8 +146,8 @@ export function VerifyContent() {
     const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
 
 
-    const getCertificateUrl = () => {
-        if (!winnerName) return { url: "", date: new Date() }
+    const getCertificateUrl = (): { url: string | null; date: Date | null } => {
+        if (!winnerName) return { url: null, date: null }
 
         // Construct OG Image URL
         const ogParams = new URLSearchParams()
@@ -230,7 +230,7 @@ export function VerifyContent() {
 
     const handleDownload = async () => {
         const { url, date } = getCertificateUrl()
-        if (!url) return
+        if (!url || !date) return
 
         try {
             const response = await fetch(url)

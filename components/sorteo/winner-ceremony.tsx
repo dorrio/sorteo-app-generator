@@ -90,8 +90,8 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
 
 
-  const getCertificateUrl = () => {
-      if (!winner) return ""
+  const getCertificateUrl = (): { url: string | null; date: Date | null } => {
+      if (!winner) return { url: null, date: null }
 
       const ogParams = new URLSearchParams()
       ogParams.set("name", winner.name)
@@ -188,7 +188,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     if (!winner) return
 
     const { url, date } = getCertificateUrl()
-    if (!url) return
+    if (!url || !date) return
 
     try {
       const response = await fetch(url)

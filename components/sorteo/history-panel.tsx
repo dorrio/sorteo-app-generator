@@ -97,9 +97,15 @@ export function HistoryPanel() {
   }
 
   return (
-    <div className="space-y-4">
+    <section
+      className="space-y-4"
+      aria-labelledby="history-title"
+    >
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold flex items-center gap-2">
+        <h2
+          id="history-title"
+          className="font-semibold flex items-center gap-2"
+        >
           <Clock className="w-4 h-4" />
           {t("title")} ({pastWinners.length})
         </h2>
@@ -122,6 +128,6 @@ export function HistoryPanel() {
           ))}
         </AnimatePresence>
       </ul>
-    </div>
+    </section>
   )
 }

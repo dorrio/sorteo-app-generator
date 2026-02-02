@@ -89,6 +89,11 @@ export function SiteFooter() {
                   {t("links.coin")}
                 </Link>
               </li>
+               <li>
+                 <Link href="/rock-paper-scissors" className="hover:text-primary transition-colors">
+                  {t("links.rps")}
+                </Link>
+              </li>
             </ul>
 
             {/* Resources */}

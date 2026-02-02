@@ -24,3 +24,8 @@
 **Blocker:** The application lacked a "Skip to Content" link, forcing keyboard users and screen readers to navigate through repetitive header elements before reaching the main tool, and missing a standard structural signal for search engines.
 **Bridge:** Implemented a semantic `<a>` tag as the first child of `<body>` pointing to `#sorteo-section`, visible only on focus.
 **Signal:** Improved WCAG 2.4.1 compliance and provided a clear "Main Content" signal to crawlers (Priority 1 Navigation).
+
+## 2024-05-27 - MainApp/Sidebar
+**Blocker:** Sidebar tools (Participants, History) were generic `div` wrappers, hiding their functional boundaries within the `aside`.
+**Bridge:** Converted wrappers to `section` elements and linked them to their headings via `aria-labelledby`.
+**Signal:** Improved semantic landmarks (Priority 3), enhancing structural clarity for crawlers and assistive technology.

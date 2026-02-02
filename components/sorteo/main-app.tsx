@@ -558,8 +558,14 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               className="space-y-6"
             >
               {/* Participants card */}
-              <div className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-6">
-                <h2 className="font-bold text-lg mb-4 flex items-center gap-2">
+              <section
+                className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-6"
+                aria-labelledby="participants-title"
+              >
+                <h2
+                  id="participants-title"
+                  className="font-bold text-lg mb-4 flex items-center gap-2"
+                >
                   <Sparkles className="w-5 h-5" style={{ color: theme.primaryColor }} />
                   {t("participants_title")}
                 </h2>
@@ -571,7 +577,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                     <ParticipantManager showOnlyInput />
                   </div>
                 )}
-              </div>
+              </section>
 
               {/* History card */}
               <div className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-6">

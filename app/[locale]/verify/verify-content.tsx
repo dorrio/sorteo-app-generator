@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download } from "lucide-react"
+import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download, Loader2 } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ConfettiEffect } from "@/components/sorteo/confetti-effect"
 import { Button } from "@/components/ui/button"
@@ -36,6 +36,7 @@ export function VerifyContent() {
     const [canShareNative, setCanShareNative] = useState(true)
     const [isStickyVisible, setIsStickyVisible] = useState(false)
     const [showConfetti, setShowConfetti] = useState(false)
+    const [isSharing, setIsSharing] = useState(false)
 
     useEffect(() => {
         if (result?.status === "valid") {
@@ -143,16 +144,53 @@ export function VerifyContent() {
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
 
     const shareNative = async () => {
-        if (navigator.share) {
+        if (!navigator.share) return
+
+        setIsSharing(true)
+        try {
+            // Viralis: Attempt to fetch the certificate image to share it natively
+            let filesArray: File[] = []
+
             try {
-                await navigator.share({
-                    title: t("title"),
-                    text: shareText,
-                    url: shareUrl,
-                })
-            } catch {
-                // User cancelled
+                // Reuse OG params logic (simplified for shared context)
+                const ogParams = new URLSearchParams()
+                ogParams.set("name", winnerName)
+
+                let dateToUse = new Date()
+                if (result?.participant?.timestamp) {
+                    dateToUse = new Date(result.participant.timestamp)
+                } else if (result?.date) {
+                    dateToUse = new Date(result.date)
+                }
+                ogParams.set("date", dateToUse.toISOString())
+
+                if (type) ogParams.set("type", type)
+                if (title) ogParams.set("title", title)
+                if (color) ogParams.set("color", color)
+
+                const imageUrl = `/api/og?${ogParams.toString()}`
+
+                const response = await fetch(imageUrl)
+                const blob = await response.blob()
+                const file = new File([blob], 'certificate.png', { type: 'image/png' })
+
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    filesArray = [file]
+                }
+            } catch (e) {
+                console.error("Image generation failed, falling back to text share", e)
             }
+
+            await navigator.share({
+                files: filesArray.length > 0 ? filesArray : undefined,
+                title: t("title"),
+                text: shareText,
+                url: shareUrl,
+            })
+        } catch {
+            // User cancelled
+        } finally {
+            setIsSharing(false)
         }
     }
 
@@ -409,12 +447,13 @@ export function VerifyContent() {
                                                             size="lg"
                                                             variant="outline"
                                                             onClick={shareNative}
+                                                            disabled={isSharing}
                                                             style={{
                                                                 borderColor: theme.primaryColor,
                                                                 color: theme.primaryColor
                                                             }}
                                                         >
-                                                            <Share2 className="w-4 h-4" />
+                                                            {isSharing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Share2 className="w-4 h-4" />}
                                                             {t("share_button")}
                                                         </Button>
                                                     ) : (
@@ -553,12 +592,13 @@ export function VerifyContent() {
                                 size="lg"
                                 variant="outline"
                                 onClick={shareNative}
+                                disabled={isSharing}
                                 style={{
                                     borderColor: theme.primaryColor,
                                     color: theme.primaryColor
                                 }}
                             >
-                                <Share2 className="w-4 h-4 mr-2" />
+                                {isSharing ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Share2 className="w-4 h-4 mr-2" />}
                                 {t("share_button")}
                             </Button>
                         )}

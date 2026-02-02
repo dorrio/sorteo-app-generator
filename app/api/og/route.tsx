@@ -1,8 +1,9 @@
 import { ImageResponse } from 'next/og';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 export async function GET(request: Request) {
+  console.log("Generating OG Image for:", request.url);
   try {
     const { searchParams } = new URL(request.url);
 

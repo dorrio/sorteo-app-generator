@@ -193,6 +193,8 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
     try {
       const response = await fetch(url)
+      if (!response.ok) throw new Error(`Fetch failed: ${response.status}`)
+
       const blob = await response.blob()
       const blobUrl = window.URL.createObjectURL(blob)
       const link = document.createElement('a')
@@ -209,7 +211,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
           window.URL.revokeObjectURL(blobUrl)
       }, 100)
     } catch (e) {
-      console.error("Download failed", e)
+      console.error("Download failed, using fallback", e)
       window.open(url, '_blank')
     }
   }

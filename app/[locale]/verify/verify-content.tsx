@@ -199,7 +199,8 @@ export function VerifyContent() {
                     url: shareUrl,
                 })
             }
-        } catch {
+        } catch (e) {
+             console.error("Share failed", e)
              // User cancelled or error
              try {
                 await navigator.share({
@@ -245,8 +246,12 @@ export function VerifyContent() {
             document.body.appendChild(link)
             link.click()
             document.body.removeChild(link)
-            window.URL.revokeObjectURL(blobUrl)
+
+            setTimeout(() => {
+                window.URL.revokeObjectURL(blobUrl)
+            }, 100)
         } catch (e) {
+            console.error("Download failed", e)
             // Fallback: just open in new tab
             window.open(url, '_blank')
         }

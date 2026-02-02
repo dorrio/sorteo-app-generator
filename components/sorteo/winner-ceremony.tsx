@@ -156,6 +156,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
             })
         }
     } catch (e) {
+        console.error("Share failed", e)
         // Fallback on error
         try {
              await navigator.share({
@@ -202,8 +203,13 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
-      window.URL.revokeObjectURL(blobUrl)
+
+      // Delay revocation to support browsers that need time to process the download
+      setTimeout(() => {
+          window.URL.revokeObjectURL(blobUrl)
+      }, 100)
     } catch (e) {
+      console.error("Download failed", e)
       window.open(url, '_blank')
     }
   }

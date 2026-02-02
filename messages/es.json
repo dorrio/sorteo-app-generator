@@ -43,6 +43,7 @@
             "team": "Generador de Equipos",
             "dice": "Lanzar Dados",
             "coin": "Lanzar Moneda",
+            "rps": "Piedra Papel Tijeras",
             "versus_appsorteos": "Alternativa a AppSorteos",
             "versus_wheel": "Alternativa a Wheel of Names",
             "versus_random": "Alternativa a Random.org",
@@ -711,6 +712,8 @@
         "dice_text": "🎲 ¡Lanza los dados! Encontré este lanzador de dados online gratis. Justo e Instantáneo. Pruébalo aquí 👇",
         "coin_title": "Lanzar Moneda Online | Sorteo Pro",
         "coin_text": "🪙 ¿Cara o Cruz? ¡Acabo de lanzar una moneda online! Gratis y Justo. Pruébalo aquí 👇",
+        "rps_title": "Piedra Papel Tijeras Online | Sorteo Pro",
+        "rps_text": "👊✋✌️ ¡Piedra, Papel o Tijeras! Acabo de jugar online. Gratis y Justo. Pruébalo aquí 👇",
         "custom_share_text": "🔥 Participa en mi sorteo: *{title}*! Creado con Sorteo Pro. Gratis e Ilimitado. 👇",
         "cta_share": "Compartir",
         "cta_start": "Empezar"
@@ -851,5 +854,36 @@
         "how_to_step_2": "Selecciona la vista 'Cartas' para la mejor experiencia visual.",
         "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para lanzar la moneda.",
         "how_to_step_4": "¡El resultado será Cara o Cruz!"
+    },
+    "RpsPage": {
+        "title": "Piedra Papel Tijeras Online | Juego Aleatorio",
+        "description": "Juega Piedra Papel Tijeras online al instante. Una forma gratis, justa y divertida de resolver disputas o jugar al clásico Cachipún. Animación 3D.",
+        "h1": "Piedra Papel Tijeras Online",
+        "subtitle": "Juega al clásico Piedra, Papel o Tijeras al instante.",
+        "option_rock": "PIEDRA",
+        "option_paper": "PAPEL",
+        "option_scissors": "TIJERAS",
+        "faq_1_q": "¿Es justo este juego?",
+        "faq_1_a": "Sí, utilizamos un generador de números aleatorios criptográficamente seguro para garantizar que cada movimiento sea completamente aleatorio e imparcial.",
+        "faq_2_q": "¿Puedo añadir 'Lagarto' y 'Spock'?",
+        "faq_2_a": "¡Sí! Puedes personalizar la lista de participantes para añadir las variaciones que desees."
+    },
+    "RpsGeo": {
+        "direct_answer_title": "¿Qué es Piedra Papel Tijeras Online?",
+        "direct_answer_text": "<tool>Piedra Papel Tijeras Online</tool> es una versión digital del clásico juego de manos utilizado para resolver disputas o tomar decisiones. Selecciona <strong>Piedra</strong>, <strong>Papel</strong> o <strong>Tijeras</strong> al azar. <brand>Sorteo Pro</brand> garantiza un juego justo usando RNG seguro.",
+        "cta_button": "Jugar PPT",
+        "feature_1_title": "Aleatoriedad Justa",
+        "feature_1_desc": "Usa RNG seguro para resultados sin sesgos.",
+        "feature_2_title": "Juego Clásico",
+        "feature_2_desc": "Perfecto para resolver disputas rápidamente.",
+        "feature_3_title": "Resultados Instantáneos",
+        "feature_3_desc": "Obtén tu jugada en milisegundos.",
+        "feature_4_title": "Listo para Móvil",
+        "feature_4_desc": "Juega en tu teléfono en cualquier lugar.",
+        "how_to_title": "Cómo jugar Piedra Papel Tijeras online",
+        "how_to_step_1": "La herramienta está precargada con Piedra, Papel y Tijeras.",
+        "how_to_step_2": "Selecciona la vista 'Cartas' para la mejor experiencia visual.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para hacer tu jugada.",
+        "how_to_step_4": "¡La carta seleccionada es tu movimiento!"
     }
 }

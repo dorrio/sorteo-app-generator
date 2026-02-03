@@ -167,7 +167,13 @@ export async function GET(request: Request) {
     if (customColor) {
         theme.accentColor = customColor;
         // Generate a lighter version for subtext (simple approach)
-        theme.subTextColor = customColor + "CC"; // 80% opacity hex
+        // Ensure we don't double up on alpha or create invalid hex
+        if (customColor.length === 7) { // #RRGGBB
+             theme.subTextColor = customColor + "CC"; // 80% opacity
+        } else {
+             // Fallback or just use as is if it's already got alpha or is weird
+             theme.subTextColor = customColor;
+        }
 
         // Update gradient if it's not the Instagram gradient
         if (type !== 'instagram') {
@@ -298,7 +304,8 @@ export async function GET(request: Request) {
                             alignItems: 'center',
                             marginTop: '20px',
                             paddingTop: '20px',
-                            borderTop: `1px solid ${theme.subTextColor}33`, // 20% opacity
+                            // Use accent color for border opacity instead of subTextColor to avoid double-alpha issues
+                            borderTop: `1px solid ${theme.accentColor}33`, // 20% opacity
                             width: '600px',
                         }}>
                              {/* Viral CTA - The Loop */}

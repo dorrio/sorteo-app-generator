@@ -19,6 +19,7 @@ import {
   MessageCircle,
   Instagram,
   Download,
+  Loader2,
 } from "lucide-react"
 
 interface WinnerCeremonyProps {
@@ -33,6 +34,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const [showContent, setShowContent] = useState(false)
   const [copied, setCopied] = useState(false)
   const [canShareNative, setCanShareNative] = useState(false)
+  const [isSharing, setIsSharing] = useState(false)
 
   useEffect(() => {
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
@@ -82,16 +84,59 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
 
   const shareNative = async () => {
-    if (navigator.share) {
+    if (!navigator.share) return
+
+    setIsSharing(true)
+    try {
+      // Viralis: Attempt to fetch the certificate image to share it natively
+      // This increases social engagement by sharing an image instead of just text
+      let filesArray: File[] = []
+
       try {
-        await navigator.share({
-          title: t("share_title"),
-          text: shareText,
-          url: shareUrl,
-        })
-      } catch {
-        // User cancelled
+        // Reuse OG params logic (simplified)
+        const ogParams = new URLSearchParams()
+        if (winner) ogParams.set("name", winner.name)
+
+        let dateToUse = new Date()
+        if (winner && winner.verificationId) {
+             try {
+                const parts = winner.verificationId.split('-')
+                if (parts.length >= 3) {
+                  const timestampHex = parts[parts.length - 1]
+                  const timestamp = parseInt(timestampHex, 16)
+                  const d = new Date(timestamp)
+                  if (!isNaN(d.getTime())) dateToUse = d
+                }
+             } catch (e) {}
+        }
+        ogParams.set("date", dateToUse.toISOString())
+        if (seoMode && seoMode !== 'home') ogParams.set("type", seoMode)
+        if (theme.customTitle) ogParams.set("title", theme.customTitle)
+        if (theme.primaryColor) ogParams.set("color", theme.primaryColor)
+
+        const imageUrl = `/api/og?${ogParams.toString()}`
+
+        const response = await fetch(imageUrl)
+        const blob = await response.blob()
+        const file = new File([blob], 'certificate.png', { type: 'image/png' })
+
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+             filesArray = [file]
+        }
+      } catch (e) {
+          console.error("Image generation failed, falling back to text share", e)
       }
+
+      await navigator.share({
+        files: filesArray.length > 0 ? filesArray : undefined,
+        title: t("share_title"),
+        text: shareText,
+        url: shareUrl,
+      })
+    } catch {
+      // User cancelled
+    } finally {
+        setIsSharing(false)
     }
   }
 
@@ -293,12 +338,13 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                 size="lg"
                 className="gap-2"
                 onClick={shareNative}
+                disabled={isSharing}
                 style={{
                   backgroundColor: theme.primaryColor,
                   color: theme.backgroundColor,
                 }}
               >
-                <Share2 className="w-5 h-5" />
+                {isSharing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Share2 className="w-5 h-5" />}
                 {t("share_button")}
               </Button>
             ) : (

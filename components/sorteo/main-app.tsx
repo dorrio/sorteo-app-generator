@@ -80,6 +80,31 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => voi
   return null
 }
 
+function ListParamsHandler() {
+  const searchParams = useSearchParams()
+  const { participants, addParticipants, hasHydrated } = useSorteoStore()
+
+  useEffect(() => {
+    // Viralis: Check for shared list in URL (Deep Linking)
+    // This runs before default population to respect user intent
+    if (hasHydrated && participants.length === 0) {
+      const listParam = searchParams.get('list')
+      if (listParam) {
+        try {
+          const names = JSON.parse(decodeURIComponent(listParam))
+          if (Array.isArray(names) && names.length > 0) {
+            addParticipants(names.map((n: string) => ({ name: n })))
+          }
+        } catch (e) {
+          console.error("Failed to parse shared list", e)
+        }
+      }
+    }
+  }, [hasHydrated, searchParams, participants.length, addParticipants])
+
+  return null
+}
+
 interface MainAppProps {
     initialStyle?: string;
     seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country';
@@ -190,18 +215,18 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
   useEffect(() => {
-          // Check for initial population scenarios
-          const shouldPopulate =
-              (initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid') || (seoMode === 'country'))
-              && mounted && hasHydrated && participants.length === 0
+    // Check for initial population scenarios
+    const shouldPopulate =
+      (initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid') || (seoMode === 'country'))
+      && mounted && hasHydrated && participants.length === 0
 
-          if (shouldPopulate) {
-          if (seoMode === 'yes-no') {
-              addParticipants([
-                  { name: tYesNo('option_yes') },
-                  { name: tYesNo('option_no') }
-              ])
-          } else if (seoMode === 'coin') {
+    if (shouldPopulate) {
+      if (seoMode === 'yes-no') {
+        addParticipants([
+          { name: tYesNo('option_yes') },
+          { name: tYesNo('option_no') }
+        ])
+      } else if (seoMode === 'coin') {
               addParticipants([
                   { name: tCoin('option_heads') },
                   { name: tCoin('option_tails') }
@@ -323,20 +348,34 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
       const isCustomTitle = theme.customTitle && theme.customTitle !== defaultTitle
 
-      if (isCustomTitle && typeof window !== "undefined") {
-          // Use the viral hook with custom title
-          shareText = tShare('custom_share_text', { title: theme.customTitle })
+      if (typeof window !== "undefined") {
+        try {
+          const urlObj = new URL(window.location.href)
 
-          try {
-              const urlObj = new URL(window.location.href)
-              urlObj.searchParams.set('template_title', theme.customTitle)
-              if (theme.primaryColor) {
-                  urlObj.searchParams.set('template_color', theme.primaryColor)
-              }
-              url = urlObj.toString()
-          } catch (e) {
-              // Fallback to current url if parsing fails
+          // 1. Branding: Custom Title & Color
+          if (isCustomTitle) {
+            shareText = tShare('custom_share_text', { title: theme.customTitle })
+            urlObj.searchParams.set('template_title', theme.customTitle)
+            if (theme.primaryColor) {
+              urlObj.searchParams.set('template_color', theme.primaryColor)
+            }
           }
+
+          // 2. Content: Shareable Participant List (Deep Linking)
+          if (participants.length > 0 && participants.length <= 100) {
+            // We only share the list if it fits within URL limits
+            const names = participants.map(p => p.name)
+            const encoded = encodeURIComponent(JSON.stringify(names))
+            // Safety limit for URL length (browser limits usually ~2000)
+            if (encoded.length < 1500) {
+              urlObj.searchParams.set('list', encoded)
+            }
+          }
+
+          url = urlObj.toString()
+        } catch (e) {
+          // Fallback to current url if parsing fails
+        }
       }
 
       return {
@@ -416,6 +455,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     <div className="min-h-screen bg-background relative overflow-hidden">
       <Suspense fallback={null}>
         <ThemeParamsHandler updateTheme={updateTheme} />
+        <ListParamsHandler />
       </Suspense>
 
       {/* Background image */}

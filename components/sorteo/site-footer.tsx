@@ -94,6 +94,11 @@ export function SiteFooter() {
                   {t("links.rps")}
                 </Link>
               </li>
+               <li>
+                 <Link href="/random-country-generator" className="hover:text-primary transition-colors">
+                  {t("links.country")}
+                </Link>
+              </li>
             </ul>
 
             {/* Resources */}

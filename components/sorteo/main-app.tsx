@@ -22,11 +22,13 @@ import { LetterGeo } from "@/components/sorteo/letter-geo"
 import { DiceGeo } from "@/components/sorteo/dice-geo"
 import { CoinGeo } from "@/components/sorteo/coin-geo"
 import { RpsGeo } from "@/components/sorteo/rps-geo"
+import { CountryGeo } from "@/components/sorteo/country-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
 import { SiteFooter } from "@/components/sorteo/site-footer"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
+import { COUNTRIES } from "@/lib/countries"
 import { Sparkles, Settings2, Play, Trophy, ShieldCheck, Share2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
@@ -80,7 +82,7 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => voi
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
@@ -90,6 +92,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const tDice = useTranslations("DicePage")
   const tCoin = useTranslations("CoinPage")
   const tRps = useTranslations("RpsPage")
+  const tCountry = useTranslations("CountryPage")
   const tRng = useTranslations("RngPage")
   const tList = useTranslations("ListRandomizerPage")
   const tSecret = useTranslations("SecretSantaPage")
@@ -169,6 +172,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         } else if (seoMode === 'rps') {
             update.customTitle = tRps('h1')
             update.customSubtitle = tRps('subtitle')
+        } else if (seoMode === 'country') {
+            update.customTitle = tCountry('h1')
+            update.customSubtitle = tCountry('subtitle')
         } else if (seoMode === 'instagram') {
             update.customTitle = tInsta('h1')
             update.customSubtitle = tInsta('subtitle')
@@ -179,12 +185,17 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         updateTheme(update)
     }
-  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice, tRps])
+  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice, tRps, tCountry])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
   useEffect(() => {
-      if ((initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid')) && mounted && hasHydrated && participants.length === 0) {
+          // Check for initial population scenarios
+          const shouldPopulate =
+              (initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid') || (seoMode === 'country'))
+              && mounted && hasHydrated && participants.length === 0
+
+          if (shouldPopulate) {
           if (seoMode === 'yes-no') {
               addParticipants([
                   { name: tYesNo('option_yes') },
@@ -206,6 +217,8 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               addParticipants(alphabet.map(l => ({ name: l })))
           } else if (seoMode === 'dice') {
               addParticipants(["1", "2", "3", "4", "5", "6"].map(n => ({ name: n })))
+              } else if (seoMode === 'country') {
+                  addParticipants(COUNTRIES.map(c => ({ name: c })))
           } else {
               addParticipants([
                   { name: "Option 1" },
@@ -299,6 +312,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareTitle = tShare('rps_title')
           shareText = tShare('rps_text')
           defaultTitle = tRps('h1')
+      } else if (seoMode === 'country') {
+          shareTitle = tShare('country_title')
+          shareText = tShare('country_text')
+          defaultTitle = tCountry('h1')
       }
 
       // Viralis: Check for custom title to enhance share context
@@ -385,6 +402,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     } else if (seoMode === 'rps') {
         displayTitle = tRps('h1')
         displaySubtitle = tRps('subtitle')
+    } else if (seoMode === 'country') {
+        displayTitle = tCountry('h1')
+        displaySubtitle = tCountry('subtitle')
     }
   }
 
@@ -671,6 +691,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             <>
                 <RpsGeo />
                 <Glossary seoMode="yes-no" />
+            </>
+       ) : seoMode === 'country' ? (
+            /* Country Mode */
+            <>
+                <CountryGeo />
+                <Glossary seoMode="wheel" />
             </>
        ) : (
             /* Home Mode: Show everything */

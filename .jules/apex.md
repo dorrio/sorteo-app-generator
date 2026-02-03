@@ -19,3 +19,8 @@
 **Gap:** Competitors (Random.org, JustFlipACoin) have dedicated "Coin Flip" pages. We lacked a dedicated URL for this high-volume binary RNG.
 **Action:** Created dedicated `/coin-flip` landing page with `CoinGeo` component, specialized Schema, and targeted Metadata.
 **GEO Impact:** Optimized for "Flip a Coin", "Heads or Tails", and "Cara o Cruz" queries with Direct Answer blocks.
+
+## 2025-05-28 - [Strategy/Cluster Content]
+**Gap:** Competitors (Random.org, randomcountry.net) have dedicated "Random Country Generator" pages. We missed high-intent traffic for travel inspiration and geography games.
+**Action:** Created dedicated `/random-country-generator` landing page with `CountryGeo` component, specialized Schema, and targeted Metadata.
+**GEO Impact:** Optimized for "Random Country Picker" and "Geography Quiz" queries with Direct Answer blocks.

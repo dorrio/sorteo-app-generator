@@ -10,3 +10,4 @@
 | 2026-01-27 | Bundle Size | Removed unused recharts dependency | Reduced bundle size |
 [2026-01-29] | FCP Optimization | Removed 5 unused Google Fonts (Roboto, Montserrat, Open Sans, Lato, Poppins) from global layout | Reduced critical CSS size and eliminated potential font downloads; implemented system-font fallbacks for legacy data.
 [2026-01-29] | LCP & SEO | Enabled SSR in MainApp | Removed global blocking skeleton, implemented granular skeletons, and enabled server-side rendering of SEO content and layout.
+[2026-01-30] | LCP Optimization | Removed framer-motion initial states from Header and MainApp | Improved LCP by enabling immediate paint of critical content and preventing hydration blink.

@@ -83,7 +83,7 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
 
   return (
     <div className="relative flex flex-col items-center">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center" aria-hidden="true">
         <div
           className="w-0 h-0 relative"
           style={{
@@ -108,6 +108,7 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
         style={{
           background: `linear-gradient(to bottom, ${theme.primaryColor}, transparent)`,
         }}
+        aria-hidden="true"
       />
 
       {/* Roulette wheel */}
@@ -118,6 +119,7 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
           boxShadow: `0 0 40px ${theme.primaryColor}30, inset 0 0 60px ${theme.primaryColor}10`,
           transform: `rotate(${rotation}deg)`,
         }}
+        role="list"
       >
         <div
           className="absolute -inset-2 rounded-full pointer-events-none"
@@ -125,6 +127,7 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
             border: `2px solid ${theme.primaryColor}40`,
             boxShadow: `0 0 20px ${theme.primaryColor}20`,
           }}
+          aria-hidden="true"
         />
 
         {/* Center circle */}
@@ -134,6 +137,7 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
             backgroundColor: theme.primaryColor,
             boxShadow: `0 0 30px ${theme.primaryColor}60`,
           }}
+          aria-hidden="true"
         >
           <span className="text-3xl">🎰</span>
         </div>
@@ -149,6 +153,7 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
                 transform: `rotate(${angle}deg)`,
                 background: `linear-gradient(to right, transparent 40px, ${theme.primaryColor}30 40px, ${theme.primaryColor}30)`,
               }}
+              aria-hidden="true"
             />
           )
         })}
@@ -169,6 +174,7 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
                 top: y,
                 transform: `translate(-50%, -50%) rotate(${angle + 90}deg)`,
               }}
+              role="listitem"
             >
               <div
                 className="px-3 py-1.5 rounded-full text-sm font-medium max-w-[100px] truncate text-center"

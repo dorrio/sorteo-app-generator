@@ -29,3 +29,8 @@
 **Blocker:** Sidebar tools (Participants, History) were generic `div` wrappers, hiding their functional boundaries within the `aside`.
 **Bridge:** Converted wrappers to `section` elements and linked them to their headings via `aria-labelledby`.
 **Signal:** Improved semantic landmarks (Priority 3), enhancing structural clarity for crawlers and assistive technology.
+
+## 2026-02-02 - SorteoRoulette
+**Blocker:** The "Wheel of Names" component (`SorteoRoulette`) was a collection of generic `div`s, hiding the list of participants from crawlers and screen readers.
+**Bridge:** Converted the container to a `div` with `role="list"` and participants to `div`s with `role="listitem"`, while hiding decorative elements with `aria-hidden="true"`.
+**Signal:** Improved semantic structure (Priority 3), ensuring the core content (participants list) is indexable and accessible.

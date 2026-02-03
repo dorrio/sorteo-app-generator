@@ -532,7 +532,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               </div>
 
               {/* Slot machine */}
-              <SorteoSelector onWinnerSelected={handleWinnerSelected} />
+              <SorteoSelector onWinnerSelected={handleWinnerSelected} forcedStyle={initialStyle} />
 
               {/* Start button */}
               <div className="flex justify-center">

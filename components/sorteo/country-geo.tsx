@@ -13,7 +13,7 @@ export function CountryGeo() {
   const { updateTheme } = useSorteoStore()
 
   const handleTryIt = () => {
-    updateTheme({ sorteoStyle: 'wheel' })
+    updateTheme({ sorteoStyle: 'roulette' })
   }
 
   const faqs = [

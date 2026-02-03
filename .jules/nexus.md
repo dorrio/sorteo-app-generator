@@ -34,3 +34,8 @@
 **Blocker:** The "Wheel of Names" component (`SorteoRoulette`) was a collection of generic `div`s, hiding the list of participants from crawlers and screen readers.
 **Bridge:** Converted the container to a `div` with `role="list"` and participants to `div`s with `role="listitem"`, while hiding decorative elements with `aria-hidden="true"`.
 **Signal:** Improved semantic structure (Priority 3), ensuring the core content (participants list) is indexable and accessible.
+
+## 2026-02-03 - HistoryPanel
+**Blocker:** The "History" section (`HistoryPanel`) disappeared from the accessibility tree (returning a `div` instead of `section`) when the list of winners was empty, creating a "Semantic Void" and inconsistent landmarks.
+**Bridge:** Refactored `HistoryPanel` to always render the `<section>` with `aria-labelledby`, placing the empty state message *inside* the semantic container.
+**Signal:** Improved semantic stability (Priority 3), ensuring the "History" landmark is always discoverable by screen readers and crawlers regardless of content state.

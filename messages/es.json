@@ -44,6 +44,7 @@
             "dice": "Lanzar Dados",
             "coin": "Lanzar Moneda",
             "rps": "Piedra Papel Tijeras",
+            "country": "Generador de Países",
             "versus_appsorteos": "Alternativa a AppSorteos",
             "versus_wheel": "Alternativa a Wheel of Names",
             "versus_random": "Alternativa a Random.org",

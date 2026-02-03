@@ -43,6 +43,7 @@
             "dice": "Dice Roller",
             "coin": "Coin Flip",
             "rps": "Rock Paper Scissors",
+            "country": "Random Country Generator",
             "versus_appsorteos": "AppSorteos Alternative",
             "versus_wheel": "Wheel of Names Alternative",
             "versus_random": "Random.org Alternative",

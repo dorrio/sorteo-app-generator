@@ -3,26 +3,27 @@ import { ImageResponse } from 'next/og';
 export const runtime = 'nodejs';
 
 export async function GET(request: Request) {
-  console.log("Generating OG Image for:", request.url);
   try {
     const { searchParams } = new URL(request.url);
 
     // Params
-    const type = searchParams.get('type'); // 'wheel' | 'list' | 'rng' | 'instagram' | undefined
+    const type = searchParams.get('type');
     const name = searchParams.get('name')?.slice(0, 50);
     const dateParam = searchParams.get('date');
     const customTitle = searchParams.get('title')?.slice(0, 60);
     const customColor = searchParams.get('color');
 
     // --- THEME CONFIGURATION ---
-    // Default: Golden Ticket (Generic)
+    // Satori Best Practice: Use standard fonts or load them. defaulting to sans-serif for safety.
+    // Ensure display: 'flex' is used for all containers.
+
     let theme = {
         title: "Sorteo Pro",
         subtitle: "The Ultimate Giveaway Tool",
-        bgGradient: "radial-gradient(circle at 50% 0%, #423506 0%, #09090b 70%)", // Gold/Dark
-        accentColor: "#FFD700", // Gold
+        bgGradient: "radial-gradient(circle at 50% 0%, #423506 0%, #09090b 70%)",
+        accentColor: "#FFD700",
         textColor: "white",
-        subTextColor: "#a1a1aa", // zinc-400
+        subTextColor: "#a1a1aa",
         icon: (
              <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFD700">
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
@@ -35,10 +36,10 @@ export async function GET(request: Request) {
         theme = {
             title: "Wheel of Names",
             subtitle: "Spin the Wheel • Pick a Winner",
-            bgGradient: "radial-gradient(circle at center, #2e1065 0%, #000000 100%)", // Purple/Black
-            accentColor: "#a855f7", // Purple 500
+            bgGradient: "radial-gradient(circle at center, #2e1065 0%, #000000 100%)",
+            accentColor: "#a855f7",
             textColor: "white",
-            subTextColor: "#d8b4fe", // Purple 200
+            subTextColor: "#d8b4fe",
             icon: (
                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="10"/>
@@ -58,7 +59,7 @@ export async function GET(request: Request) {
         theme = {
             title: "Instagram Comment Picker",
             subtitle: "Free & Unlimited • No Login",
-            bgGradient: "linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D)", // Insta Gradient
+            bgGradient: "linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D)",
             accentColor: "#FFFFFF",
             textColor: "white",
             subTextColor: "rgba(255,255,255,0.9)",
@@ -81,17 +82,17 @@ export async function GET(request: Request) {
         theme = {
             title: "Random Number Generator",
             subtitle: "Secure • Fair • Instant",
-            bgGradient: "radial-gradient(circle at center, #064e3b 0%, #022c22 100%)", // Emerald/Dark
-            accentColor: "#34d399", // Emerald 400
+            bgGradient: "radial-gradient(circle at center, #064e3b 0%, #022c22 100%)",
+            accentColor: "#34d399",
             textColor: "white",
-            subTextColor: "#6ee7b7", // Emerald 300
+            subTextColor: "#6ee7b7",
             icon: (
-                <div style={{ display: 'flex', gap: '2px', fontSize: 20, fontWeight: 900, color: "#34d399", fontFamily: 'monospace' }}>
-                    <span>7</span>
+                <div style={{ display: 'flex', fontSize: 20, fontWeight: 900, color: "#34d399" }}>
+                    7
                 </div>
             ),
             largeIcon: (
-                <div style={{ display: 'flex', gap: '20px', fontSize: 120, fontWeight: 900, color: "#34d399", fontFamily: 'monospace' }}>
+                <div style={{ display: 'flex', gap: '20px', fontSize: 120, fontWeight: 900, color: "#34d399" }}>
                     <span>7</span><span>7</span><span>7</span>
                 </div>
             )
@@ -100,10 +101,10 @@ export async function GET(request: Request) {
         theme = {
             title: "List Randomizer",
             subtitle: "Shuffle Lists • Team Generator",
-            bgGradient: "radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%)", // Blue/Dark
-            accentColor: "#60a5fa", // Blue 400
+            bgGradient: "radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%)",
+            accentColor: "#60a5fa",
             textColor: "white",
-            subTextColor: "#93c5fd", // Blue 300
+            subTextColor: "#93c5fd",
             icon: (
                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="21" x2="3" y1="6" y2="6"/>
@@ -125,10 +126,10 @@ export async function GET(request: Request) {
         theme = {
             title: "Yes or No Wheel",
             subtitle: "Spin for Answer • 50/50 Chance",
-            bgGradient: "radial-gradient(circle at center, #172554 0%, #020617 100%)", // Blue Dark
-            accentColor: "#60a5fa", // Blue 400
+            bgGradient: "radial-gradient(circle at center, #172554 0%, #020617 100%)",
+            accentColor: "#60a5fa",
             textColor: "white",
-            subTextColor: "#93c5fd", // Blue 300
+            subTextColor: "#93c5fd",
             icon: (
                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="10"/>
@@ -147,39 +148,33 @@ export async function GET(request: Request) {
         theme = {
             title: "Random Letter Generator",
             subtitle: "A-Z Random Picker • Alphabet Wheel",
-            bgGradient: "radial-gradient(circle at center, #be123c 0%, #4c0519 100%)", // Rose/Dark
-            accentColor: "#fb7185", // Rose 400
+            bgGradient: "radial-gradient(circle at center, #be123c 0%, #4c0519 100%)",
+            accentColor: "#fb7185",
             textColor: "white",
-            subTextColor: "#fda4af", // Rose 300
+            subTextColor: "#fda4af",
             icon: (
-                 <div style={{ display: 'flex', gap: '2px', fontSize: 20, fontWeight: 900, color: "#fb7185", fontFamily: 'serif' }}>
-                    <span>A</span>
+                 <div style={{ display: 'flex', fontSize: 20, fontWeight: 900, color: "#fb7185" }}>
+                    A
                 </div>
             ),
             largeIcon: (
-                 <div style={{ display: 'flex', gap: '5px', fontSize: 100, fontWeight: 900, color: "#fb7185", fontFamily: 'serif' }}>
+                 <div style={{ display: 'flex', gap: '5px', fontSize: 100, fontWeight: 900, color: "#fb7185" }}>
                     <span>A</span><span style={{opacity:0.5}}>B</span><span style={{opacity:0.25}}>C</span>
                 </div>
             )
         };
     }
 
-    // VIRALIS: Apply custom color override if present
     if (customColor) {
         theme.accentColor = customColor;
-        // Generate a lighter version for subtext (simple approach)
-        theme.subTextColor = customColor + "CC"; // 80% opacity hex
-
-        // Update gradient if it's not the Instagram gradient
+        theme.subTextColor = customColor + "CC";
         if (type !== 'instagram') {
-             // Dark gradient with custom color hint
              theme.bgGradient = `radial-gradient(circle at center, ${customColor}40 0%, #000000 100%)`;
         }
     }
 
     // --- MODE SELECTION ---
 
-    // MODE 1: VERIFICATION (Name is present)
     if (name) {
         const winnerName = name;
         let dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -202,32 +197,33 @@ export async function GET(request: Request) {
                     justifyContent: 'center',
                     backgroundImage: theme.bgGradient,
                     backgroundColor: '#09090b',
+                    // Using default font fallback to ensure stability
                     fontFamily: 'sans-serif',
                     position: 'relative',
                     color: theme.textColor,
                 }}
                 >
-                    {/* Corner Decorations */}
+                    {/* Decorations */}
                     <div style={{ display: 'flex', position: 'absolute', top: 30, left: 30, width: 20, height: 20, borderTop: `2px solid ${theme.subTextColor}`, borderLeft: `2px solid ${theme.subTextColor}`, opacity: 0.5 }} />
                     <div style={{ display: 'flex', position: 'absolute', top: 30, right: 30, width: 20, height: 20, borderTop: `2px solid ${theme.subTextColor}`, borderRight: `2px solid ${theme.subTextColor}`, opacity: 0.5 }} />
                     <div style={{ display: 'flex', position: 'absolute', bottom: 30, left: 30, width: 20, height: 20, borderBottom: `2px solid ${theme.subTextColor}`, borderLeft: `2px solid ${theme.subTextColor}`, opacity: 0.5 }} />
                     <div style={{ display: 'flex', position: 'absolute', bottom: 30, right: 30, width: 20, height: 20, borderBottom: `2px solid ${theme.subTextColor}`, borderRight: `2px solid ${theme.subTextColor}`, opacity: 0.5 }} />
 
-                    {/* Main Content Container */}
+                    {/* Content */}
                     <div style={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         zIndex: 10,
                     }}>
-                        {/* Verified Badge Header */}
+                        {/* Verified Badge */}
                         <div style={{
                             display: 'flex',
                             alignItems: 'center',
                             gap: '10px',
                             padding: '8px 20px',
-                            backgroundColor: `${theme.accentColor}26`, // 15% opacity
-                            border: `1px solid ${theme.accentColor}4D`, // 30% opacity
+                            backgroundColor: `${theme.accentColor}26`,
+                            border: `1px solid ${theme.accentColor}4D`,
                             borderRadius: '100px',
                             marginBottom: '30px',
                         }}>
@@ -241,7 +237,7 @@ export async function GET(request: Request) {
                             }}>Official Verified Result</span>
                         </div>
 
-                        {/* Viral Context: Custom Giveaway Title */}
+                        {/* Title */}
                         {customTitle && (
                             <div style={{
                                 display: 'flex',
@@ -259,7 +255,7 @@ export async function GET(request: Request) {
                             </div>
                         )}
 
-                        {/* The Winner Name */}
+                        {/* Winner Name */}
                         <div style={{
                             display: 'flex',
                             flexDirection: 'column',
@@ -292,17 +288,16 @@ export async function GET(request: Request) {
                             has been randomly selected as the winner
                         </div>
 
-                        {/* Footer Bar */}
+                        {/* Footer */}
                         <div style={{
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
                             marginTop: '20px',
                             paddingTop: '20px',
-                            borderTop: `1px solid ${theme.subTextColor}33`, // 20% opacity
+                            borderTop: `1px solid ${theme.subTextColor}33`,
                             width: '600px',
                         }}>
-                             {/* Viral CTA - The Loop */}
                              <div style={{
                                  display: 'flex',
                                  justifyContent: 'center',
@@ -321,22 +316,20 @@ export async function GET(request: Request) {
                                  gap: '20px',
                                  justifyContent: 'center',
                              }}>
-                                {/* Brand */}
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                     <span style={{ fontSize: 20, color: theme.accentColor, fontWeight: 'bold', letterSpacing: '1px' }}>{theme.title.toUpperCase()}</span>
                                 </div>
 
                                 <div style={{ display: 'flex', width: 1, height: 20, backgroundColor: theme.subTextColor }} />
 
-                                {/* Date Stamp */}
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                    <span style={{ fontSize: 18, color: theme.subTextColor, fontFamily: 'monospace' }}>{dateStr}</span>
+                                    <span style={{ fontSize: 18, color: theme.subTextColor }}>{dateStr}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* "Stamp" Effect Overlay */}
+                    {/* Stamp */}
                     <div style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -344,7 +337,7 @@ export async function GET(request: Request) {
                         position: 'absolute',
                         right: 50,
                         bottom: 50,
-                        border: '4px solid #22c55e', // Green stamp
+                        border: '4px solid #22c55e',
                         color: '#22c55e',
                         padding: '10px 20px',
                         borderRadius: '8px',
@@ -364,7 +357,7 @@ export async function GET(request: Request) {
         );
     }
 
-    // MODE 2: TOOL PROMO (No Name)
+    // MODE 2: TOOL PROMO
     return new ImageResponse(
       (
         <div
@@ -381,16 +374,13 @@ export async function GET(request: Request) {
             color: 'white',
           }}
         >
-             {/* Overlay for readability if needed */}
              <div style={{ display: 'flex', position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.3)' }} />
 
              <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                {/* Icon */}
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 40, filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.5))' }}>
                     {theme.largeIcon || theme.icon}
                 </div>
 
-                {/* Title */}
                 <h1 style={{
                     fontSize: 80,
                     fontWeight: 900,
@@ -406,7 +396,6 @@ export async function GET(request: Request) {
                     {customTitle || theme.title}
                 </h1>
 
-                {/* Subtitle */}
                 <p style={{
                     fontSize: 40,
                     margin: 0,
@@ -419,7 +408,6 @@ export async function GET(request: Request) {
                 </p>
              </div>
 
-             {/* Brand Logo Bottom Center */}
              <div style={{
                  position: 'absolute',
                  bottom: 50,

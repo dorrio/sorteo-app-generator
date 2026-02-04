@@ -87,15 +87,6 @@ export function HistoryPanel() {
     return <HistoryListSkeleton />
   }
 
-  if (pastWinners.length === 0) {
-    return (
-      <div className="text-center py-8 text-muted-foreground">
-        <Trophy className="w-10 h-10 mx-auto mb-3 opacity-30" />
-        <p className="text-sm">{t("empty")}</p>
-      </div>
-    )
-  }
-
   return (
     <section
       className="space-y-4"
@@ -109,25 +100,34 @@ export function HistoryPanel() {
           <Clock className="w-4 h-4" />
           {t("title")} ({pastWinners.length})
         </h2>
-        <Button variant="ghost" size="sm" onClick={clearHistory} className="text-destructive hover:text-destructive">
-          <Trash2 className="w-4 h-4 mr-1" />
-          {t("clear")}
-        </Button>
+        {pastWinners.length > 0 && (
+          <Button variant="ghost" size="sm" onClick={clearHistory} className="text-destructive hover:text-destructive">
+            <Trash2 className="w-4 h-4 mr-1" />
+            {t("clear")}
+          </Button>
+        )}
       </div>
 
-      <ul className="space-y-2 max-h-[200px] overflow-y-auto" role="list">
-        <AnimatePresence>
-          {pastWinners.map((winner, index) => (
-            <HistoryItem
-              key={`${winner.id}-${index}`}
-              winner={winner}
-              index={index}
-              totalCount={pastWinners.length}
-              theme={theme}
-            />
-          ))}
-        </AnimatePresence>
-      </ul>
+      {pastWinners.length === 0 ? (
+        <div className="text-center py-8 text-muted-foreground">
+          <Trophy className="w-10 h-10 mx-auto mb-3 opacity-30" />
+          <p className="text-sm">{t("empty")}</p>
+        </div>
+      ) : (
+        <ul className="space-y-2 max-h-[200px] overflow-y-auto" role="list">
+          <AnimatePresence>
+            {pastWinners.map((winner, index) => (
+              <HistoryItem
+                key={`${winner.id}-${index}`}
+                winner={winner}
+                index={index}
+                totalCount={pastWinners.length}
+                theme={theme}
+              />
+            ))}
+          </AnimatePresence>
+        </ul>
+      )}
     </section>
   )
 }

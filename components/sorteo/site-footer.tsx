@@ -99,6 +99,11 @@ export function SiteFooter() {
                   {t("links.country")}
                 </Link>
               </li>
+               <li>
+                 <Link href="/random-month-generator" className="hover:text-primary transition-colors">
+                  {t("links.month")}
+                </Link>
+              </li>
             </ul>
 
             {/* Resources */}

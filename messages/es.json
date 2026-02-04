@@ -48,7 +48,8 @@
             "versus_appsorteos": "Alternativa a AppSorteos",
             "versus_wheel": "Alternativa a Wheel of Names",
             "versus_random": "Alternativa a Random.org",
-            "glossary": "Glosario"
+            "glossary": "Glosario",
+            "month": "Generador de Mes Aleatorio"
         }
     },
     "Metadata": {
@@ -718,6 +719,8 @@
         "country_title": "Generador de Países Aleatorios | Sorteo Pro",
         "country_text": "🌍 ¡Acabo de elegir un país al azar! Generador de Países. Gratis y Justo. 👇",
         "custom_share_text": "🔥 Participa en mi sorteo: *{title}*! Creado con Sorteo Pro. Gratis e Ilimitado. 👇",
+        "month_title": "Generador de Mes Aleatorio | Sorteo Pro",
+        "month_text": "📅 ¡Acabo de elegir un mes al azar! Justo y Gratis. 👇",
         "cta_share": "Compartir",
         "cta_start": "Empezar"
     },
@@ -921,5 +924,35 @@
         "how_to_step_2": "Selecciona la vista 'Cartas' para la mejor experiencia visual.",
         "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para hacer tu jugada.",
         "how_to_step_4": "¡La carta seleccionada es tu movimiento!"
+    },
+    "MonthPage": {
+        "title": "Generador de Mes Aleatorio | Elige un Mes (Ene-Dic)",
+        "description": "Elige un mes del año al azar al instante. Gratis, justo y perfecto para planificar, horóscopos o ideas de citas. Sin anuncios.",
+        "h1": "Generador de Mes Aleatorio",
+        "subtitle": "Gira para elegir un mes al azar de Enero a Diciembre."
+    },
+    "MonthGeo": {
+        "direct_answer_title": "¿Qué es un Generador de Mes Aleatorio?",
+        "direct_answer_text": "Un <tool>Generador de Mes Aleatorio</tool> es una herramienta que selecciona un mes del año calendario (Enero-Diciembre) completamente por azar. Es útil para <strong>planificar eventos</strong>, <strong>seleccionar meses de cumpleaños</strong> para juegos o elegir una fecha para un objetivo futuro. <brand>Sorteo Pro</brand> asegura que cada mes tenga la misma probabilidad.",
+        "cta_button": "Elegir un Mes",
+        "feature_1_title": "Los 12 Meses",
+        "feature_1_desc": "Incluye el año calendario gregoriano completo.",
+        "feature_2_title": "Selección Justa",
+        "feature_2_desc": "Cada mes tiene una probabilidad igual de 1/12.",
+        "feature_3_title": "Resultado Instantáneo",
+        "feature_3_desc": "Obtén un mes aleatorio en milisegundos.",
+        "feature_4_title": "Compatible con Móviles",
+        "feature_4_desc": "Funciona perfectamente en cualquier teléfono.",
+        "how_to_title": "Cómo generar un mes aleatorio",
+        "how_to_step_1": "El generador está precargado con Enero hasta Diciembre.",
+        "how_to_step_2": "Selecciona 'Ruleta' o 'Cartas' para una visualización divertida.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para elegir un mes.",
+        "how_to_step_4": "¡El mes seleccionado se muestra al instante!",
+        "faq_title": "Preguntas Frecuentes del Generador de Meses",
+        "features_title": "Características Clave",
+        "faq_1_q": "¿Es aleatoria la selección del mes?",
+        "faq_1_a": "Sí, utilizamos un generador de números aleatorios seguro para asegurar que cada mes tenga exactamente un 8.33% de probabilidad de ser elegido.",
+        "faq_2_q": "¿Puedo usar esto para cumpleaños?",
+        "faq_2_a": "¡Absolutamente! Es una forma divertida de seleccionar aleatoriamente un mes de nacimiento para juegos de fiesta o simulaciones."
     }
 }

@@ -189,14 +189,16 @@
     },
     "WinnerCeremony": {
         "winner_label": "Ganador",
-        "share_text": "¡Acabo de realizar un sorteo con Sorteo Pro y *{name}* ha ganado! 🏆 Resultado verificado y crea el tuyo aquí: 👇",
-        "share_text_custom": "🔥 ¡Acabo de elegir un ganador para *{title}*!\n\n🏆 Ganador: *{name}*\n\n✅ Resultado verificado y crea el tuyo aquí: 👇",
+        "share_text": "🏆 ¡*{name}* GANÓ! 🎉 Resultado Oficial verificado por Sorteo Pro. 👇",
+        "share_text_custom": "🔥 ¡*{name}* ganó *{title}*! 🎉 Resultado Oficial verificado por Sorteo Pro. 👇",
         "share_title": "¡Tenemos Ganador! 🏆",
         "congratulations": "¡Felicidades! 🎉",
         "share_button": "Compartir Resultado",
         "share_menu": "Compartir...",
         "copied": "¡Copiado!",
         "copy_text": "Copiar Enlace",
+        "copy_image": "Copiar Imagen",
+        "image_copied": "¡Imagen Copiada!",
         "download_certificate": "Descargar Certificado",
         "new_giveaway": "Nuevo Sorteo",
         "close": "Cerrar"
@@ -241,6 +243,8 @@
         "create_your_own": "🚀 Crear Sorteo Gratis",
         "share_button": "Compartir Prueba",
         "download_certificate": "Descargar Certificado",
+        "copy_image": "Copiar Imagen",
+        "image_copied": "¡Imagen Copiada!",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* es el GANADOR!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* ganó *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "result": {

@@ -10,7 +10,7 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-border/50 w-full bg-background z-10 relative">
       <div className="max-w-7xl mx-auto px-4 pt-12 pb-28 md:pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+        <nav className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12" aria-label={t("nav_label")}>
 
           {/* Brand Column */}
           <div className="flex flex-col gap-4">
@@ -65,9 +65,10 @@ export function SiteFooter() {
           {/* Tools Column 2 & Resources */}
           <div className="flex flex-col gap-4">
              {/* Extended Tools - Hidden title on desktop for alignment if we want 2 cols of tools, but here I'll just list them */}
-            <h3 className="font-semibold text-foreground md:hidden lg:block lg:invisible h-0 lg:h-auto overflow-hidden">
+             <h3 className="sr-only">{t("sections.tools")}</h3>
+             <h3 aria-hidden="true" className="font-semibold text-foreground hidden lg:block invisible select-none">
                 {t("sections.tools")}
-            </h3>
+             </h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
                <li>
                  <Link href="/secret-santa-generator" className="hover:text-primary transition-colors">
@@ -144,7 +145,7 @@ export function SiteFooter() {
             </ul>
           </div>
 
-        </div>
+        </nav>
 
         <div className="mt-12 pt-8 border-t border-border/50 text-center text-xs text-muted-foreground">
           © {new Date().getFullYear()} Sorteo Pro. {t("text")}

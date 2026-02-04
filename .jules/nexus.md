@@ -39,3 +39,7 @@
 **Blocker:** The footer navigation links were generic `div`s without a semantic landmark, and the "Extended Tools" list lacked an accessible heading (hidden via `invisible` for visual alignment), making the navigation structure opaque to screen readers and bots.
 **Bridge:** Wrapped the footer link columns in a `<nav>` with a descriptive `aria-label`, and replaced the invisible heading with a dual `sr-only` heading (for a11y) and `aria-hidden` spacer (for layout).
 **Signal:** Improved semantic landmarks (Priority 3) and restored accessible names for navigation sections, enhancing sitewide crawlability and structure.
+## 2026-02-03 - HistoryPanel
+**Blocker:** The "History" section (`HistoryPanel`) disappeared from the accessibility tree (returning a `div` instead of `section`) when the list of winners was empty, creating a "Semantic Void" and inconsistent landmarks.
+**Bridge:** Refactored `HistoryPanel` to always render the `<section>` with `aria-labelledby`, placing the empty state message *inside* the semantic container.
+**Signal:** Improved semantic stability (Priority 3), ensuring the "History" landmark is always discoverable by screen readers and crawlers regardless of content state.

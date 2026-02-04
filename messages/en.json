@@ -725,6 +725,8 @@
         "country_title": "Random Country Generator | Sorteo Pro",
         "country_text": "🌍 I just picked a random country! Random Country Generator. Fair & Free. 👇",
         "custom_share_text": "🔥 Join my giveaway: *{title}*! Created with Sorteo Pro. Free & Unlimited. 👇",
+        "month_title": "Random Month Generator | Sorteo Pro",
+        "month_text": "📅 I just picked a random month! Fair & Free. 👇",
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway"
     },
@@ -928,5 +930,35 @@
         "how_to_step_2": "Select 'Cards' view for the best visual experience.",
         "how_to_step_3": "Click 'Start Giveaway' to make your move.",
         "how_to_step_4": "The selected card is your move!"
+    },
+    "MonthPage": {
+        "title": "Random Month Generator | Pick a Month (Jan-Dec)",
+        "description": "Pick a random month from the year instantly. Free, fair, and perfect for planning, horoscopes, or date ideas. No ads.",
+        "h1": "Random Month Generator",
+        "subtitle": "Spin to pick a random month from January to December."
+    },
+    "MonthGeo": {
+        "direct_answer_title": "What is a Random Month Generator?",
+        "direct_answer_text": "A <tool>Random Month Generator</tool> is a tool that selects one month from the calendar year (January-December) completely by chance. It is useful for <strong>planning events</strong>, <strong>selecting birth months</strong> for games, or choosing a time for a future goal. <brand>Sorteo Pro</brand> ensures every month has an equal probability.",
+        "cta_button": "Pick a Month",
+        "feature_1_title": "All 12 Months",
+        "feature_1_desc": "Includes the full Gregorian calendar year.",
+        "feature_2_title": "Fair Selection",
+        "feature_2_desc": "Every month has an equal 1/12 chance.",
+        "feature_3_title": "Instant Result",
+        "feature_3_desc": "Get a random month in milliseconds.",
+        "feature_4_title": "Mobile Friendly",
+        "feature_4_desc": "Works perfectly on any phone.",
+        "how_to_title": "How to generate a random month",
+        "how_to_step_1": "The generator is pre-loaded with January through December.",
+        "how_to_step_2": "Select 'Wheel' or 'Cards' for a fun visual.",
+        "how_to_step_3": "Click 'Start Giveaway' to pick a month.",
+        "how_to_step_4": "The selected month is displayed instantly!",
+        "faq_title": "Random Month Generator FAQ",
+        "features_title": "Key Features",
+        "faq_1_q": "Is the month selection random?",
+        "faq_1_a": "Yes, we use a secure random number generator to ensure every month has exactly an 8.33% chance of being picked.",
+        "faq_2_q": "Can I use this for birthdays?",
+        "faq_2_a": "Absolutely! It's a fun way to randomly select a birth month for party games or simulations."
     }
 }

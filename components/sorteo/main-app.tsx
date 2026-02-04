@@ -6,7 +6,6 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { SorteoSelector } from "@/components/sorteo/sorteo-selector"
-import { AppSkeleton } from "@/components/sorteo/skeletons"
 import { ParticipantManager } from "@/components/sorteo/participant-manager"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { Button } from "@/components/ui/button"
@@ -23,6 +22,7 @@ import { DiceGeo } from "@/components/sorteo/dice-geo"
 import { CoinGeo } from "@/components/sorteo/coin-geo"
 import { RpsGeo } from "@/components/sorteo/rps-geo"
 import { CountryGeo } from "@/components/sorteo/country-geo"
+import { MonthGeo } from "@/components/sorteo/month-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
@@ -30,7 +30,7 @@ import { SiteFooter } from "@/components/sorteo/site-footer"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { COUNTRIES } from "@/lib/countries"
 import { Sparkles, Settings2, Play, Trophy, ShieldCheck, Share2 } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
 
@@ -80,12 +80,38 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => voi
   return null
 }
 
+function ListParamsHandler() {
+  const searchParams = useSearchParams()
+  const { participants, addParticipants, hasHydrated } = useSorteoStore()
+
+  useEffect(() => {
+    // Viralis: Check for shared list in URL (Deep Linking)
+    // This runs before default population to respect user intent
+    if (hasHydrated && participants.length === 0) {
+      const listParam = searchParams.get('list')
+      if (listParam) {
+        try {
+          const names = JSON.parse(decodeURIComponent(listParam))
+          if (Array.isArray(names) && names.length > 0) {
+            addParticipants(names.map((n: string) => ({ name: n })))
+          }
+        } catch (e) {
+          console.error("Failed to parse shared list", e)
+        }
+      }
+    }
+  }, [hasHydrated, searchParams, participants.length, addParticipants])
+
+  return null
+}
+
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
+  const locale = useLocale()
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
   const tLetter = useTranslations("LetterGeneratorPage")
@@ -93,6 +119,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const tCoin = useTranslations("CoinPage")
   const tRps = useTranslations("RpsPage")
   const tCountry = useTranslations("CountryPage")
+  const tMonth = useTranslations("MonthPage")
   const tRng = useTranslations("RngPage")
   const tList = useTranslations("ListRandomizerPage")
   const tSecret = useTranslations("SecretSantaPage")
@@ -175,6 +202,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         } else if (seoMode === 'country') {
             update.customTitle = tCountry('h1')
             update.customSubtitle = tCountry('subtitle')
+        } else if (seoMode === 'month') {
+            update.customTitle = tMonth('h1')
+            update.customSubtitle = tMonth('subtitle')
         } else if (seoMode === 'instagram') {
             update.customTitle = tInsta('h1')
             update.customSubtitle = tInsta('subtitle')
@@ -185,23 +215,23 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         updateTheme(update)
     }
-  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice, tRps, tCountry])
+  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice, tRps, tCountry, tMonth])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
   useEffect(() => {
-          // Check for initial population scenarios
-          const shouldPopulate =
-              (initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid') || (seoMode === 'country'))
-              && mounted && hasHydrated && participants.length === 0
+    // Check for initial population scenarios
+    const shouldPopulate =
+      (initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid') || (seoMode === 'country'))
+      && mounted && hasHydrated && participants.length === 0
 
-          if (shouldPopulate) {
-          if (seoMode === 'yes-no') {
-              addParticipants([
-                  { name: tYesNo('option_yes') },
-                  { name: tYesNo('option_no') }
-              ])
-          } else if (seoMode === 'coin') {
+    if (shouldPopulate) {
+      if (seoMode === 'yes-no') {
+        addParticipants([
+          { name: tYesNo('option_yes') },
+          { name: tYesNo('option_no') }
+        ])
+      } else if (seoMode === 'coin') {
               addParticipants([
                   { name: tCoin('option_heads') },
                   { name: tCoin('option_tails') }
@@ -217,7 +247,14 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               addParticipants(alphabet.map(l => ({ name: l })))
           } else if (seoMode === 'dice') {
               addParticipants(["1", "2", "3", "4", "5", "6"].map(n => ({ name: n })))
-              } else if (seoMode === 'country') {
+          } else if (seoMode === 'month') {
+              const months = Array.from({ length: 12 }, (_, i) => {
+                  return new Date(2024, i, 1).toLocaleString(locale, { month: 'long' })
+              })
+              // Capitalize first letter as Intl returns lowercase in some locales
+              const capitalizedMonths = months.map(m => m.charAt(0).toUpperCase() + m.slice(1))
+              addParticipants(capitalizedMonths.map(m => ({ name: m })))
+          } else if (seoMode === 'country') {
                   addParticipants(COUNTRIES.map(c => ({ name: c })))
           } else {
               addParticipants([
@@ -316,6 +353,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareTitle = tShare('country_title')
           shareText = tShare('country_text')
           defaultTitle = tCountry('h1')
+      } else if (seoMode === 'month') {
+          shareTitle = tShare('month_title')
+          shareText = tShare('month_text')
+          defaultTitle = tMonth('h1')
       }
 
       // Viralis: Check for custom title to enhance share context
@@ -323,20 +364,34 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
       const isCustomTitle = theme.customTitle && theme.customTitle !== defaultTitle
 
-      if (isCustomTitle && typeof window !== "undefined") {
-          // Use the viral hook with custom title
-          shareText = tShare('custom_share_text', { title: theme.customTitle })
+      if (typeof window !== "undefined") {
+        try {
+          const urlObj = new URL(window.location.href)
 
-          try {
-              const urlObj = new URL(window.location.href)
-              urlObj.searchParams.set('template_title', theme.customTitle)
-              if (theme.primaryColor) {
-                  urlObj.searchParams.set('template_color', theme.primaryColor)
-              }
-              url = urlObj.toString()
-          } catch (e) {
-              // Fallback to current url if parsing fails
+          // 1. Branding: Custom Title & Color
+          if (isCustomTitle) {
+            shareText = tShare('custom_share_text', { title: theme.customTitle })
+            urlObj.searchParams.set('template_title', theme.customTitle)
+            if (theme.primaryColor) {
+              urlObj.searchParams.set('template_color', theme.primaryColor)
+            }
           }
+
+          // 2. Content: Shareable Participant List (Deep Linking)
+          if (participants.length > 0 && participants.length <= 100) {
+            // We only share the list if it fits within URL limits
+            const names = participants.map(p => p.name)
+            const encoded = encodeURIComponent(JSON.stringify(names))
+            // Safety limit for URL length (browser limits usually ~2000)
+            if (encoded.length < 1500) {
+              urlObj.searchParams.set('list', encoded)
+            }
+          }
+
+          url = urlObj.toString()
+        } catch (e) {
+          // Fallback to current url if parsing fails
+        }
       }
 
       return {
@@ -405,6 +460,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     } else if (seoMode === 'country') {
         displayTitle = tCountry('h1')
         displaySubtitle = tCountry('subtitle')
+    } else if (seoMode === 'month') {
+        displayTitle = tMonth('h1')
+        displaySubtitle = tMonth('subtitle')
     }
   }
 
@@ -416,6 +474,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     <div className="min-h-screen bg-background relative overflow-hidden">
       <Suspense fallback={null}>
         <ThemeParamsHandler updateTheme={updateTheme} />
+        <ListParamsHandler />
       </Suspense>
 
       {/* Background image */}
@@ -469,10 +528,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         {/* Header */}
         <header className="border-b border-border/50 backdrop-blur-sm bg-background/50">
           <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-            >
+            <div>
               <Link
                 href="/"
                 className="flex items-center gap-3"
@@ -490,7 +546,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                   <div className="font-bold text-xl tracking-tight">{displayTitle}</div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
 
             <div className="flex items-center gap-2">
               <LanguageSwitcher />
@@ -518,10 +574,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         <main id="sorteo-section" className="max-w-7xl mx-auto px-4 py-8">
           <div className="grid lg:grid-cols-[1fr,400px] gap-8">
             {/* Sorteo area */}
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+            <section
               className="space-y-8"
               aria-label="Main Tool Area"
             >
@@ -534,10 +587,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                   {displayTitle}
                 </h1>
                 <p className="text-muted-foreground text-lg">{displaySubtitle}</p>
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
+                <button
                   className="inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-full text-sm font-medium transition-all hover:scale-105"
                   style={{
                     backgroundColor: `${theme.primaryColor}20`,
@@ -548,7 +598,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                 >
                   <Settings2 className="w-4 h-4" />
                   {t("customize")}
-                </motion.button>
+                </button>
               </div>
 
               {/* Slot machine */}
@@ -586,7 +636,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               {participants.length < 2 && participants.length > 0 && (
                 <p className="text-center text-sm text-muted-foreground">{t("min_participants_warning")}</p>
               )}
-            </motion.section>
+            </section>
 
             {/* Sidebar */}
             <motion.aside
@@ -696,6 +746,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             /* Country Mode */
             <>
                 <CountryGeo />
+                <Glossary seoMode="wheel" />
+            </>
+       ) : seoMode === 'month' ? (
+            /* Month Mode */
+            <>
+                <MonthGeo />
                 <Glossary seoMode="wheel" />
             </>
        ) : (

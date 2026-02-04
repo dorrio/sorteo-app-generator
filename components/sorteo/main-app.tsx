@@ -23,6 +23,7 @@ import { DiceGeo } from "@/components/sorteo/dice-geo"
 import { CoinGeo } from "@/components/sorteo/coin-geo"
 import { RpsGeo } from "@/components/sorteo/rps-geo"
 import { CountryGeo } from "@/components/sorteo/country-geo"
+import { MonthGeo } from "@/components/sorteo/month-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
@@ -30,7 +31,7 @@ import { SiteFooter } from "@/components/sorteo/site-footer"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { COUNTRIES } from "@/lib/countries"
 import { Sparkles, Settings2, Play, Trophy, ShieldCheck, Share2 } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
 
@@ -82,10 +83,11 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => voi
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
+  const locale = useLocale()
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
   const tLetter = useTranslations("LetterGeneratorPage")
@@ -93,6 +95,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const tCoin = useTranslations("CoinPage")
   const tRps = useTranslations("RpsPage")
   const tCountry = useTranslations("CountryPage")
+  const tMonth = useTranslations("MonthPage")
   const tRng = useTranslations("RngPage")
   const tList = useTranslations("ListRandomizerPage")
   const tSecret = useTranslations("SecretSantaPage")
@@ -175,6 +178,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         } else if (seoMode === 'country') {
             update.customTitle = tCountry('h1')
             update.customSubtitle = tCountry('subtitle')
+        } else if (seoMode === 'month') {
+            update.customTitle = tMonth('h1')
+            update.customSubtitle = tMonth('subtitle')
         } else if (seoMode === 'instagram') {
             update.customTitle = tInsta('h1')
             update.customSubtitle = tInsta('subtitle')
@@ -185,7 +191,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         updateTheme(update)
     }
-  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice, tRps, tCountry])
+  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice, tRps, tCountry, tMonth])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
@@ -217,7 +223,14 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               addParticipants(alphabet.map(l => ({ name: l })))
           } else if (seoMode === 'dice') {
               addParticipants(["1", "2", "3", "4", "5", "6"].map(n => ({ name: n })))
-              } else if (seoMode === 'country') {
+          } else if (seoMode === 'month') {
+              const months = Array.from({ length: 12 }, (_, i) => {
+                  return new Date(2024, i, 1).toLocaleString(locale, { month: 'long' })
+              })
+              // Capitalize first letter as Intl returns lowercase in some locales
+              const capitalizedMonths = months.map(m => m.charAt(0).toUpperCase() + m.slice(1))
+              addParticipants(capitalizedMonths.map(m => ({ name: m })))
+          } else if (seoMode === 'country') {
                   addParticipants(COUNTRIES.map(c => ({ name: c })))
           } else {
               addParticipants([
@@ -316,6 +329,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareTitle = tShare('country_title')
           shareText = tShare('country_text')
           defaultTitle = tCountry('h1')
+      } else if (seoMode === 'month') {
+          shareTitle = tShare('month_title')
+          shareText = tShare('month_text')
+          defaultTitle = tMonth('h1')
       }
 
       // Viralis: Check for custom title to enhance share context
@@ -405,6 +422,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     } else if (seoMode === 'country') {
         displayTitle = tCountry('h1')
         displaySubtitle = tCountry('subtitle')
+    } else if (seoMode === 'month') {
+        displayTitle = tMonth('h1')
+        displaySubtitle = tMonth('subtitle')
     }
   }
 
@@ -696,6 +716,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             /* Country Mode */
             <>
                 <CountryGeo />
+                <Glossary seoMode="wheel" />
+            </>
+       ) : seoMode === 'month' ? (
+            /* Month Mode */
+            <>
+                <MonthGeo />
                 <Glossary seoMode="wheel" />
             </>
        ) : (

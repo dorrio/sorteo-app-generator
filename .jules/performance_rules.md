@@ -18,3 +18,4 @@
 *   **Sync Imports:** Importing heavy widgets directly in the main bundle.
 *   **Raw `<img>`:** Using standard image tags without explicit dimensions.
 *   **Layout Shift:** Missing skeleton states for dynamic content.
+*   **LCP Blocking:** Using entrance animations (e.g., `initial={{ opacity: 0 }}`) on LCP elements (Header, H1, Hero Image).

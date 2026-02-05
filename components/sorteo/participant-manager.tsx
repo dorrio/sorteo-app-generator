@@ -27,6 +27,8 @@ import {
   Check,
   AlertTriangle,
   RefreshCw,
+  Share2,
+  Loader2,
 } from "lucide-react"
 
 type InputMode = "single" | "bulk" | "csv"
@@ -284,10 +286,53 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
   const [showDuplicateModal, setShowDuplicateModal] = useState(false)
   const [pendingNames, setPendingNames] = useState<string[]>([])
   const [duplicates, setDuplicates] = useState<DuplicateInfo[]>([])
+  const [isSharing, setIsSharing] = useState(false)
+  const [isCopied, setIsCopied] = useState(false)
 
   const startEditing = useCallback((id: string) => {
     setEditingId(id)
   }, [])
+
+  const handleShareList = async () => {
+    setIsSharing(true)
+    const url = typeof window !== "undefined" ? window.location.href : ""
+    try {
+      const urlObj = new URL(url)
+
+      // Add branding if present
+      if (theme.customTitle) urlObj.searchParams.set("template_title", theme.customTitle)
+      if (theme.primaryColor) urlObj.searchParams.set("template_color", theme.primaryColor)
+
+      // Add list
+      if (participants.length > 0 && participants.length <= 100) {
+        const names = participants.map((p) => p.name)
+        const encoded = encodeURIComponent(JSON.stringify(names))
+        // Browser URL limits safety
+        if (encoded.length < 2000) {
+          urlObj.searchParams.set("list", encoded)
+        }
+      }
+
+      const finalUrl = urlObj.toString()
+      const shareData = {
+        title: theme.customTitle || t("share_list"),
+        text: t("share_list"), // Generic fallback
+        url: finalUrl,
+      }
+
+      if (typeof navigator !== "undefined" && navigator.share) {
+        await navigator.share(shareData)
+      } else {
+        await navigator.clipboard.writeText(finalUrl)
+        setIsCopied(true)
+        setTimeout(() => setIsCopied(false), 2000)
+      }
+    } catch (e) {
+      console.error("Share failed", e)
+    } finally {
+      setIsSharing(false)
+    }
+  }
 
   const saveEdit = useCallback(
     (id: string, newName: string) => {
@@ -806,15 +851,34 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
               {t("participants_count", { count: participants.length })}
             </span>
             {participants.length > 0 && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={clearParticipants}
-                className="text-destructive hover:text-destructive"
-              >
-                <Trash2 className="w-4 h-4 mr-2" />
-                {t("clear_all")}
-              </Button>
+              <div className="flex items-center gap-1">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleShareList}
+                  className="text-primary hover:text-primary hover:bg-primary/10 h-7 text-xs px-2 gap-1.5"
+                  disabled={isSharing}
+                >
+                  {isSharing ? (
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                  ) : isCopied ? (
+                    <Check className="w-3 h-3" />
+                  ) : (
+                    <Share2 className="w-3 h-3" />
+                  )}
+                  {isCopied ? t("share_list_copied") : t("share_list")}
+                </Button>
+                <div className="w-px h-3 bg-border" />
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={clearParticipants}
+                  className="text-destructive hover:text-destructive h-7 text-xs px-2"
+                >
+                  <Trash2 className="w-3 h-3 mr-1" />
+                  {t("clear_all")}
+                </Button>
+              </div>
             )}
           </div>
 

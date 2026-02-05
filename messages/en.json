@@ -47,7 +47,8 @@
             "versus_appsorteos": "AppSorteos Alternative",
             "versus_wheel": "Wheel of Names Alternative",
             "versus_random": "Random.org Alternative",
-            "glossary": "Glossary"
+            "glossary": "Glossary",
+            "month": "Random Month Generator"
         }
     },
     "Metadata": {
@@ -112,7 +113,9 @@
             "applied": "Applied",
             "apply_change": "Apply change",
             "edit_placeholder": "Edit name"
-        }
+        },
+        "share_list": "Share List",
+        "share_list_copied": "Link copied!"
     },
     "VisualEditor": {
         "title": "Visual Editor",

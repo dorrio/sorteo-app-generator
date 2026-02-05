@@ -310,7 +310,19 @@
         "term_7": "Gerador de Letras Aleatórias",
         "def_7": "Uma ferramenta digital que escolhe uma letra do alfabeto (A-Z) aleatoriamente. Útil para jogos de palavras, ensino de fonética e siglas.",
         "term_8": "Amigo Secreto",
-        "def_8": "Uma tradição natalina em que os membros de um grupo recebem aleatoriamente a designação de uma pessoa para quem devem dar um presente. A identidade do doador deve permanecer em segredo."
+        "def_8": "Uma tradição natalina em que os membros de um grupo recebem aleatoriamente a designação de uma pessoa para quem devem dar um presente. A identidade do doador deve permanecer em segredo.",
+        "term_9": "Rolar Dados Online",
+        "def_9": "Uma ferramenta digital que simula o lançamento de dados físicos. O Sorteio Pro usa RNG criptograficamente seguro para garantir que cada rolagem seja justa.",
+        "term_10": "Jogar Moeda",
+        "def_10": "Um gerador aleatório binário que simula o lançamento de uma moeda (Cara ou Coroa). Oferece uma probabilidade real de 50/50 usando algoritmos seguros.",
+        "term_11": "Pedra Papel Tesoura",
+        "def_11": "Versão digital do clássico jogo de mãos. O sistema seleciona aleatoriamente Pedra, Papel ou Tesoura para jogar contra você de forma justa.",
+        "term_12": "Gerador de Equipes",
+        "def_12": "Ferramenta que divide uma lista de participantes em grupos ou equipes iguais aleatoriamente. Essencial para professores, treinadores e dinâmicas.",
+        "term_13": "Gerador de Países",
+        "def_13": "Ferramenta que seleciona uma nação da lista de 195 estados soberanos do mundo completamente ao acaso. Usado para educação e jogos.",
+        "term_14": "Gerador de Mês Aleatório",
+        "def_14": "Ferramenta simples que escolhe um mês do ano (Janeiro-Dezembro) ao acaso. Útil para planejar eventos, horóscopos ou jogos de datas."
     },
     "InstagramPicker": {
         "title": "Sorteador de Comentários do Instagram Grátis | Ilimitado",

@@ -24,3 +24,8 @@
 **Gap:** Competitors (Random.org, randomcountry.net) have dedicated "Random Country Generator" pages. We missed high-intent traffic for travel inspiration and geography games.
 **Action:** Created dedicated `/random-country-generator` landing page with `CountryGeo` component, specialized Schema, and targeted Metadata.
 **GEO Impact:** Optimized for "Random Country Picker" and "Geography Quiz" queries with Direct Answer blocks.
+
+## 2025-05-29 - [Strategy/Semantics]
+**Gap:** The Glossary was outdated and missing definitions for 6 new tools (Dice, Coin, RPS, Team, Country, Month), reducing topical authority and internal linking opportunities.
+**Action:** Expanded Glossary with 6 new terms, updated `Glossary.tsx` component to filter contextually, and enriched `GlossaryPage` with links and icons.
+**GEO Impact:** Optimized for "What is a Random Country Generator?" and similar definition-based queries which LLMs frequently cite.

@@ -23,6 +23,8 @@ import { CoinGeo } from "@/components/sorteo/coin-geo"
 import { RpsGeo } from "@/components/sorteo/rps-geo"
 import { CountryGeo } from "@/components/sorteo/country-geo"
 import { MonthGeo } from "@/components/sorteo/month-geo"
+import { CardGeo } from "@/components/sorteo/card-geo"
+import { BingoGeo } from "@/components/sorteo/bingo-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
@@ -107,7 +109,7 @@ function ListParamsHandler() {
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
@@ -120,6 +122,8 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const tRps = useTranslations("RpsPage")
   const tCountry = useTranslations("CountryPage")
   const tMonth = useTranslations("MonthPage")
+  const tCard = useTranslations("CardPage")
+  const tBingo = useTranslations("BingoPage")
   const tRng = useTranslations("RngPage")
   const tList = useTranslations("ListRandomizerPage")
   const tSecret = useTranslations("SecretSantaPage")
@@ -135,6 +139,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const {
     participants,
     addParticipants,
+    clearParticipants,
+    activeTool,
+    setActiveTool,
     theme,
     isSpinning,
     setIsSpinning,
@@ -205,6 +212,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         } else if (seoMode === 'month') {
             update.customTitle = tMonth('h1')
             update.customSubtitle = tMonth('subtitle')
+        } else if (seoMode === 'card') {
+            update.customTitle = tCard('h1')
+            update.customSubtitle = tCard('subtitle')
+        } else if (seoMode === 'bingo') {
+            update.customTitle = tBingo('h1')
+            update.customSubtitle = tBingo('subtitle')
         } else if (seoMode === 'instagram') {
             update.customTitle = tInsta('h1')
             update.customSubtitle = tInsta('subtitle')
@@ -215,17 +228,30 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         updateTheme(update)
     }
-  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice, tRps, tCountry, tMonth])
+  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice, tRps, tCountry, tMonth, tCard, tBingo])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
   useEffect(() => {
-    // Check for initial population scenarios
-    const shouldPopulate =
-      (initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid') || (seoMode === 'country'))
-      && mounted && hasHydrated && participants.length === 0
+    if (!mounted || !hasHydrated) return
+
+    // Detect if we just navigated to a new mode
+    const modeChanged = activeTool !== seoMode
+
+    const isEmpty = participants.length === 0
+    const isPresetTool = ['card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter'].includes(seoMode)
+
+    // We populate if:
+    // 1. The list is empty (standard behavior)
+    // 2. OR we are switching to a "Preset Tool" (Generator), forcing a reset to ensure correct dataset.
+    const shouldPopulate = isEmpty || (modeChanged && isPresetTool)
 
     if (shouldPopulate) {
+      // If forcing reset due to mode change, clear first
+      if (!isEmpty && modeChanged && isPresetTool) {
+         clearParticipants()
+      }
+
       if (seoMode === 'yes-no') {
         addParticipants([
           { name: tYesNo('option_yes') },
@@ -256,7 +282,26 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               addParticipants(capitalizedMonths.map(m => ({ name: m })))
           } else if (seoMode === 'country') {
                   addParticipants(COUNTRIES.map(c => ({ name: c })))
-          } else {
+          } else if (seoMode === 'bingo') {
+              const bingoNumbers = Array.from({ length: 75 }, (_, i) => (i + 1).toString())
+              addParticipants(bingoNumbers.map(n => ({ name: n })))
+          } else if (seoMode === 'card') {
+              const suits = ['♠', '♥', '♦', '♣']
+              const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+              const deck = []
+              for (const suit of suits) {
+                  for (const rank of ranks) {
+                      deck.push(`${rank}${suit}`)
+                  }
+              }
+              addParticipants(deck.map(c => ({ name: c })))
+          } else if (isEmpty) {
+              // Only add default options if list is empty and NOT a preset tool (which is handled above)
+              // But if it IS a preset tool, we already handled it.
+              // Wait, the block above handles strict logic.
+              // If we are here, we are populating.
+              // If it was a preset tool, one of the `if` blocks matched.
+              // If it is 'home' or 'wheel' and empty, we fall here.
               addParticipants([
                   { name: "Option 1" },
                   { name: "Option 2" },
@@ -266,14 +311,11 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               ])
           }
       }
-      // We only run this when mounted/hydrated changes to true, or initialStyle changes
-      // We include participants.length in dependency to know if it's 0, but we should be careful not to loop.
-      // addParticipants is stable.
-      // To avoid infinite loop if user clears list, we might want to only do this ONCE.
-      // But for a landing page, maybe it's okay?
-      // Actually, if user clears list, participants becomes 0, and this re-adds them. That's annoying.
-      // We should use a ref to track if we've auto-populated.
-  }, [mounted, hasHydrated, initialStyle, seoMode]) // Removed participants.length from dependency to avoid re-populating on clear
+
+      if (modeChanged) {
+          setActiveTool(seoMode)
+      }
+  }, [mounted, hasHydrated, initialStyle, seoMode, activeTool, setActiveTool])
 
   const startSorteo = () => {
     if (participants.length < 2) return
@@ -357,6 +399,14 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareTitle = tShare('month_title')
           shareText = tShare('month_text')
           defaultTitle = tMonth('h1')
+      } else if (seoMode === 'card') {
+          shareTitle = tShare('card_title')
+          shareText = tShare('card_text')
+          defaultTitle = tCard('h1')
+      } else if (seoMode === 'bingo') {
+          shareTitle = tShare('bingo_title')
+          shareText = tShare('bingo_text')
+          defaultTitle = tBingo('h1')
       }
 
       // Viralis: Check for custom title to enhance share context
@@ -463,6 +513,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     } else if (seoMode === 'month') {
         displayTitle = tMonth('h1')
         displaySubtitle = tMonth('subtitle')
+    } else if (seoMode === 'card') {
+        displayTitle = tCard('h1')
+        displaySubtitle = tCard('subtitle')
+    } else if (seoMode === 'bingo') {
+        displayTitle = tBingo('h1')
+        displaySubtitle = tBingo('subtitle')
     }
   }
 
@@ -493,16 +549,6 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             }}
           />
         </div>
-      )}
-
-      {theme.backgroundImage && (
-        <div
-          className="fixed inset-0 z-0"
-          style={{
-            backgroundColor: theme.backgroundColor,
-            opacity: 0.7,
-          }}
-        />
       )}
 
       {/* Particle background */}
@@ -753,6 +799,18 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             <>
                 <MonthGeo />
                 <Glossary seoMode="wheel" />
+            </>
+       ) : seoMode === 'card' ? (
+            /* Card Mode */
+            <>
+                <CardGeo />
+                <Glossary seoMode="card" />
+            </>
+       ) : seoMode === 'bingo' ? (
+            /* Bingo Mode */
+            <>
+                <BingoGeo />
+                <Glossary seoMode="bingo" />
             </>
        ) : (
             /* Home Mode: Show everything */

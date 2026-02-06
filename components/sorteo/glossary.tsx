@@ -5,7 +5,7 @@ import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
 
 interface GlossaryProps {
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa';
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
 }
 
 export function Glossary({ seoMode }: GlossaryProps) {
@@ -52,6 +52,16 @@ export function Glossary({ seoMode }: GlossaryProps) {
       term: t("term_8"),
       definition: t("def_8"),
     },
+    {
+      id: "card",
+      term: t("term_9"),
+      definition: t("def_9"),
+    },
+    {
+      id: "bingo",
+      term: t("term_10"),
+      definition: t("def_10"),
+    },
   ]
 
   // Filter terms based on seoMode (Apex Optimization: Relevance)
@@ -68,6 +78,11 @@ export function Glossary({ seoMode }: GlossaryProps) {
       if (seoMode === 'yes-no' && term.id === 'yes-no') return true;
       if (seoMode === 'letter' && term.id === 'letter') return true;
       if (seoMode === 'secret-santa' && term.id === 'secret-santa') return true;
+      if (seoMode === 'card' && term.id === 'card') return true;
+      if (seoMode === 'bingo' && term.id === 'bingo') return true;
+
+      // For other modes, maybe show related terms?
+      // For now, keep it strict to avoid clutter.
 
       return false;
   });

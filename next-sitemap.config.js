@@ -17,7 +17,7 @@ module.exports = {
             changefreq = 'daily';
         }
         // Competitor Alternatives (High Value) & Semantic Hubs (Glossary)
-        else if (path.includes('alternativa-') || path.includes('instagram-comment-picker') || path.includes('wheel-of-names') || path.includes('glossary') || path.includes('random-number-generator') || path.includes('list-randomizer') || path.includes('secret-santa-generator') || path.includes('team-generator') || path.includes('yes-or-no-wheel') || path.includes('random-letter-generator') || path.includes('dice-roller') || path.includes('coin-flip') || path.includes('rock-paper-scissors') || path.includes('random-country-generator') || path.includes('random-month-generator') || path.includes('versus')) {
+        else if (path.includes('alternativa-') || path.includes('instagram-comment-picker') || path.includes('wheel-of-names') || path.includes('glossary') || path.includes('random-number-generator') || path.includes('list-randomizer') || path.includes('secret-santa-generator') || path.includes('team-generator') || path.includes('yes-or-no-wheel') || path.includes('random-letter-generator') || path.includes('dice-roller') || path.includes('coin-flip') || path.includes('rock-paper-scissors') || path.includes('random-country-generator') || path.includes('random-month-generator') || path.includes('random-card-generator') || path.includes('bingo-number-generator') || path.includes('versus')) {
             priority = 0.9;
             changefreq = 'weekly';
         }

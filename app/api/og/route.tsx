@@ -8,6 +8,7 @@ export async function GET(request: Request) {
 
     // Params
     const type = searchParams.get('type'); // 'wheel' | 'list' | 'rng' | 'instagram' | undefined
+    const listParam = searchParams.get('list');
     const name = searchParams.get('name')?.slice(0, 50);
     const dateParam = searchParams.get('date');
     const customTitle = searchParams.get('title')?.slice(0, 60);
@@ -368,6 +369,141 @@ export async function GET(request: Request) {
             ),
             { width: 1200, height: 630 }
         );
+    }
+
+    // MODE 3: LIST PREVIEW (List param is present)
+    if (listParam) {
+        let participants: string[] = [];
+        try {
+            // MainApp double encodes the list (JSON stringify -> encodeURIComponent -> URLSearchParams)
+            // So we likely need to decode once before parsing
+            participants = JSON.parse(decodeURIComponent(listParam));
+        } catch (e) {
+            try {
+                // Fallback: maybe it wasn't double encoded?
+                participants = JSON.parse(listParam);
+            } catch (e2) {
+                // Invalid list
+            }
+        }
+
+        if (Array.isArray(participants) && participants.length > 0) {
+            const displayLimit = 6;
+            const visibleParticipants = participants.slice(0, displayLimit);
+            const remaining = participants.length - displayLimit;
+
+            return new ImageResponse(
+                (
+                    <div
+                        style={{
+                            height: '100%',
+                            width: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            backgroundImage: theme.bgGradient,
+                            fontFamily: 'sans-serif',
+                            position: 'relative',
+                            color: 'white',
+                        }}
+                    >
+                         {/* Overlay */}
+                         <div style={{ display: 'flex', position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.3)' }} />
+
+                         <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '90%' }}>
+                            {/* Header */}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 15, marginBottom: 30 }}>
+                                <div style={{ display: 'flex', filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.5))' }}>{theme.icon}</div>
+                                <div style={{
+                                    fontSize: 40,
+                                    fontWeight: 900,
+                                    color: theme.subTextColor,
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '2px',
+                                    textShadow: '0 2px 10px rgba(0,0,0,0.5)',
+                                    textAlign: 'center',
+                                }}>
+                                    {customTitle || theme.title}
+                                </div>
+                            </div>
+
+                            {/* List Card */}
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                backgroundColor: 'rgba(0,0,0,0.4)',
+                                border: `1px solid ${theme.accentColor}60`,
+                                borderRadius: 24,
+                                padding: '30px 50px',
+                                width: '100%',
+                                maxWidth: '700px',
+                                boxShadow: `0 20px 50px -10px ${theme.accentColor}20`,
+                            }}>
+                                <div style={{
+                                    fontSize: 18,
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '2px',
+                                    color: theme.accentColor,
+                                    marginBottom: 20,
+                                    fontWeight: 700,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                    borderBottom: `1px solid ${theme.accentColor}40`,
+                                    paddingBottom: 10,
+                                }}>
+                                    <span>Participants</span>
+                                    <span style={{ backgroundColor: theme.accentColor, color: 'black', padding: '2px 8px', borderRadius: 4, fontSize: 14 }}>{participants.length}</span>
+                                </div>
+
+                                {visibleParticipants.map((p, i) => (
+                                    <div key={i} style={{
+                                        display: 'flex',
+                                        fontSize: 32,
+                                        color: 'white',
+                                        marginBottom: 8,
+                                        fontWeight: 600,
+                                        textShadow: '0 1px 2px rgba(0,0,0,0.8)',
+                                    }}>
+                                        {p.length > 30 ? p.slice(0, 30) + '...' : p}
+                                    </div>
+                                ))}
+
+                                {remaining > 0 && (
+                                    <div style={{
+                                        display: 'flex',
+                                        marginTop: 15,
+                                        fontSize: 20,
+                                        color: theme.subTextColor,
+                                        fontStyle: 'italic',
+                                        fontWeight: 500,
+                                    }}>
+                                        ... and {remaining} more
+                                    </div>
+                                )}
+                            </div>
+
+                             {/* Brand Footer */}
+                             <div style={{
+                                 position: 'absolute',
+                                 bottom: 40,
+                                 display: 'flex',
+                                 alignItems: 'center',
+                                 gap: 10,
+                                 opacity: 0.9,
+                                 backgroundColor: 'rgba(0,0,0,0.6)',
+                                 padding: '10px 20px',
+                                 borderRadius: 100,
+                             }}>
+                                 <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: '1px', color: 'white' }}>SORTEOPRO.COM</span>
+                             </div>
+                        </div>
+                    </div>
+                ),
+                { width: 1200, height: 630 }
+            );
+        }
     }
 
     // MODE 2: TOOL PROMO (No Name)

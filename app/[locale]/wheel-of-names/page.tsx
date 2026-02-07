@@ -14,7 +14,7 @@ type Props = {
 
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
-  const { template_title, template_color } = await searchParams;
+  const { template_title, template_color, list } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'WheelGeoPage' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
@@ -26,6 +26,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
+  const customList = typeof list === 'string' ? list : undefined;
 
   const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : t('title');
   const displayDescription = t('description');
@@ -34,12 +35,14 @@ export async function generateMetadata({ params, searchParams }: Props) {
   ogImageUrl.searchParams.set('type', 'wheel');
   if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
+  if (customList) ogImageUrl.searchParams.set('list', customList);
 
   // Construct Canonical/Share URL for OG
   // This must include params so social bots scrape this specific dynamic version
   const shareUrl = new URL(`${baseUrl}/${locale}/wheel-of-names`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
+  if (customList) shareUrl.searchParams.set('list', customList);
 
   return {
     title: displayTitle,

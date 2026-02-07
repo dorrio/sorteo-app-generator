@@ -143,10 +143,9 @@ export function WheelGeo() {
               <div className="pt-4">
                   <Button
                     asChild
-                    onClick={handleTryWheel}
                     className="gap-2 font-bold text-lg h-12 px-6 rounded-full shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
                   >
-                    <a href="#sorteo-section">
+                    <a href="#sorteo-section" onClick={handleTryWheel}>
                       <Play className="w-5 h-5 fill-current" />
                       {t('cta_button')}
                     </a>

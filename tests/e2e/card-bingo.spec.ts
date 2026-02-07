@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = process.env.BASE_URL || 'http://localhost:3002';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 
 test('Random Card Generator loads correctly', async ({ page }) => {
   await page.goto(`${BASE_URL}/es/random-card-generator`);

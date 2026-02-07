@@ -239,7 +239,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     const modeChanged = activeTool !== seoMode
 
     const isEmpty = participants.length === 0
-    const isPresetTool = ['card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter'].includes(seoMode)
+    const isPresetTool = ['card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter', 'yes-no'].includes(seoMode)
 
     // We populate if:
     // 1. The list is empty (standard behavior)

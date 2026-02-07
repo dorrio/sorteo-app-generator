@@ -1,7 +1,7 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { Disc, Palette, ShieldCheck, Play, Music, CheckCircle, HelpCircle, BookOpen } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
@@ -11,6 +11,7 @@ export function WheelGeo() {
   const t = useTranslations("WheelGeo")
   const tFaq = useTranslations("WheelGeoPage")
   const { updateTheme } = useSorteoStore()
+  const shouldReduceMotion = useReducedMotion()
 
   const handleTryWheel = () => {
     updateTheme({ sorteoStyle: "roulette" })
@@ -198,8 +199,9 @@ export function WheelGeo() {
            >
                 <span className="sr-only">{t('cta_button')}</span>
                 <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    animate={shouldReduceMotion ? {} : { rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear", repeatType: "loop" }}
+                    style={{ willChange: "transform" }}
                     className="absolute inset-0 rounded-full border-t-4 border-primary"
                 />
                 <Disc className="w-24 h-24 text-primary/50" />

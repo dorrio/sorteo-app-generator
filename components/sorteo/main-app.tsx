@@ -36,6 +36,11 @@ import { useTranslations, useLocale } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
 
+const CARD_SUITS = ['♠', '♥', '♦', '♣']
+const CARD_RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+const CARD_DECK = CARD_SUITS.flatMap(suit => CARD_RANKS.map(rank => `${rank}${suit}`))
+const BINGO_NUMBERS = Array.from({ length: 75 }, (_, i) => (i + 1).toString())
+
 const ParticleBackground = dynamic(
   () => import("@/components/sorteo/particle-background").then((mod) => mod.ParticleBackground),
   { ssr: false }
@@ -283,18 +288,9 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           } else if (seoMode === 'country') {
                   addParticipants(COUNTRIES.map(c => ({ name: c })))
           } else if (seoMode === 'bingo') {
-              const bingoNumbers = Array.from({ length: 75 }, (_, i) => (i + 1).toString())
-              addParticipants(bingoNumbers.map(n => ({ name: n })))
+              addParticipants(BINGO_NUMBERS.map(n => ({ name: n })))
           } else if (seoMode === 'card') {
-              const suits = ['♠', '♥', '♦', '♣']
-              const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-              const deck = []
-              for (const suit of suits) {
-                  for (const rank of ranks) {
-                      deck.push(`${rank}${suit}`)
-                  }
-              }
-              addParticipants(deck.map(c => ({ name: c })))
+              addParticipants(CARD_DECK.map(c => ({ name: c })))
           } else if (isEmpty) {
               // Only add default options if list is empty and NOT a preset tool (which is handled above)
               // But if it IS a preset tool, we already handled it.

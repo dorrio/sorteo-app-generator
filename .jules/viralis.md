@@ -19,3 +19,8 @@
 2. Updated `generateMetadata` in all tool pages to read `template_title` and `template_color` and pass them to `api/og` and `og:url`.
 3. Standardized translation keys across `en`, `es`, `pt` to support these dynamic titles without build errors.
 **Outcome:** Every tool in the suite now supports full viral context persistence. A user sharing a "Christmas Dice Game" will see exactly that in the link preview, not just "Dice Roller".
+
+## 2026-01-29 - [ParticipantManager/Share]
+**Hypothesis:** Adding a visible "Share List" button directly in the Participant Manager will prompt users to share their custom setup *before* running the giveaway, closing the loop where users create content but don't share it until the end (if at all).
+**Implementation:** Added a `Share2` button in `ParticipantManager` header that triggers Native Share with a deep link containing the encoded list and custom branding.
+**Outcome:** Expect increased pre-giveaway sharing, especially for tools like Secret Santa and Team Generator.

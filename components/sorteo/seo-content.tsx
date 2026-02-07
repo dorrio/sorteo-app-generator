@@ -7,6 +7,7 @@ import { Link } from "@/i18n/routing"
 
 export function SeoContent() {
   const t = useTranslations("SEOContent")
+  const tSpecs = useTranslations("QuickSpecs")
 
   const features = [
     {
@@ -75,17 +76,52 @@ export function SeoContent() {
       <div className="max-w-5xl mx-auto space-y-16">
 
         {/* Direct Answer Block (ChatGPT Bait) */}
-        <div className="space-y-4">
-          <h2 className="text-3xl font-bold tracking-tight">{t("what_is_title")}</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
-            {t.rich("what_is_text", {
-              b: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
-              wheel: (chunks) => <Link href="/wheel-of-names" className="font-semibold text-primary hover:underline">{chunks}</Link>,
-              insta: (chunks) => <Link href="/instagram-comment-picker" className="font-semibold text-primary hover:underline">{chunks}</Link>,
-              rng: (chunks) => <Link href="/random-number-generator" className="font-semibold text-primary hover:underline">{chunks}</Link>,
-              verify: (chunks) => <Link href="/verify" className="font-semibold text-primary hover:underline">{chunks}</Link>,
-            })}
-          </p>
+        <div className="space-y-6">
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold tracking-tight">{t("what_is_title")}</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
+              {t.rich("what_is_text", {
+                b: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
+                wheel: (chunks) => <Link href="/wheel-of-names" className="font-semibold text-primary hover:underline">{chunks}</Link>,
+                insta: (chunks) => <Link href="/instagram-comment-picker" className="font-semibold text-primary hover:underline">{chunks}</Link>,
+                rng: (chunks) => <Link href="/random-number-generator" className="font-semibold text-primary hover:underline">{chunks}</Link>,
+                verify: (chunks) => <Link href="/verify" className="font-semibold text-primary hover:underline">{chunks}</Link>,
+              })}
+            </p>
+          </div>
+
+          {/* Quick Specs Table (GEO Optimization) */}
+          <div className="border border-border/60 rounded-xl overflow-hidden shadow-sm max-w-2xl bg-card/40">
+            <div className="bg-primary/10 px-6 py-3 border-b border-border/60">
+              <h3 className="font-semibold text-primary flex items-center gap-2">
+                {tSpecs("title")}
+              </h3>
+            </div>
+            <dl className="divide-y divide-border/60">
+              <div className="grid grid-cols-2 px-6 py-3 hover:bg-muted/30 transition-colors">
+                <dt className="text-sm font-medium text-muted-foreground">{tSpecs("type")}</dt>
+                <dd className="text-sm font-semibold">{tSpecs("type_web")}</dd>
+              </div>
+              <div className="grid grid-cols-2 px-6 py-3 bg-muted/20 hover:bg-muted/30 transition-colors">
+                <dt className="text-sm font-medium text-muted-foreground">{tSpecs("price")}</dt>
+                <dd className="text-sm font-bold text-green-600 dark:text-green-400">{tSpecs("price_free")}</dd>
+              </div>
+              <div className="grid grid-cols-2 px-6 py-3 hover:bg-muted/30 transition-colors">
+                <dt className="text-sm font-medium text-muted-foreground">{tSpecs("login")}</dt>
+                <dd className="text-sm font-semibold">{tSpecs("login_none")}</dd>
+              </div>
+              <div className="grid grid-cols-2 px-6 py-3 bg-muted/20 hover:bg-muted/30 transition-colors">
+                <dt className="text-sm font-medium text-muted-foreground">{tSpecs("limit")}</dt>
+                <dd className="text-sm font-semibold">{tSpecs("limit_unlimited")}</dd>
+              </div>
+              <div className="grid grid-cols-2 px-6 py-3 hover:bg-muted/30 transition-colors">
+                <dt className="text-sm font-medium text-muted-foreground">{tSpecs("fairness")}</dt>
+                <dd className="text-sm font-semibold flex items-center gap-2">
+                  {tSpecs("fairness_provably")}
+                </dd>
+              </div>
+            </dl>
+          </div>
         </div>
 
         {/* Features Grid */}

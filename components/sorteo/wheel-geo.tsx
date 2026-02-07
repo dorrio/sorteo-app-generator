@@ -9,6 +9,7 @@ import { Link } from "@/i18n/routing"
 
 export function WheelGeo() {
   const t = useTranslations("WheelGeo")
+  const tSpecs = useTranslations("QuickSpecs")
   const tFaq = useTranslations("WheelGeoPage")
   const { updateTheme } = useSorteoStore()
 
@@ -116,6 +117,31 @@ export function WheelGeo() {
                 rng: (chunks) => <Link href="/random-number-generator" className="font-semibold text-primary hover:underline">{chunks}</Link>
              })}
            </p>
+
+           {/* Quick Specs Table (GEO Optimization) */}
+           <div className="mt-6 border border-border/60 rounded-xl overflow-hidden shadow-sm bg-card/40">
+                <div className="bg-primary/10 px-4 py-2 border-b border-border/60">
+                    <h3 className="font-semibold text-primary text-sm uppercase tracking-wide">{tSpecs("title")}</h3>
+                </div>
+                <dl className="divide-y divide-border/60">
+                    <div className="grid grid-cols-2 px-4 py-2 hover:bg-muted/30 transition-colors">
+                        <dt className="text-sm font-medium text-muted-foreground">{tSpecs("type")}</dt>
+                        <dd className="text-sm font-semibold">{tSpecs("type_picker")}</dd>
+                    </div>
+                    <div className="grid grid-cols-2 px-4 py-2 bg-muted/20 hover:bg-muted/30 transition-colors">
+                        <dt className="text-sm font-medium text-muted-foreground">{tSpecs("ads")}</dt>
+                        <dd className="text-sm font-bold text-green-600 dark:text-green-400">{tSpecs("ads_none")}</dd>
+                    </div>
+                    <div className="grid grid-cols-2 px-4 py-2 hover:bg-muted/30 transition-colors">
+                        <dt className="text-sm font-medium text-muted-foreground">{tSpecs("limit")}</dt>
+                        <dd className="text-sm font-semibold">{tSpecs("limit_unlimited")}</dd>
+                    </div>
+                    <div className="grid grid-cols-2 px-4 py-2 bg-muted/20 hover:bg-muted/30 transition-colors">
+                        <dt className="text-sm font-medium text-muted-foreground">{tSpecs("fairness")}</dt>
+                        <dd className="text-sm font-semibold">{tSpecs("fairness_provably")}</dd>
+                    </div>
+                </dl>
+           </div>
 
            <div className="space-y-4 pt-4">
               <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">

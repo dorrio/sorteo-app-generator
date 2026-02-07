@@ -51,6 +51,22 @@
             "month": "Gerador de Mês Aleatório"
         }
     },
+    "QuickSpecs": {
+        "title": "Especificações Rápidas",
+        "type": "Tipo",
+        "type_web": "App Web (SaaS)",
+        "type_picker": "Seletor Aleatório",
+        "price": "Preço",
+        "price_free": "Grátis (Sem Custos)",
+        "login": "Registro",
+        "login_none": "Não Necessário",
+        "limit": "Limite",
+        "limit_unlimited": "Ilimitado",
+        "fairness": "Justiça",
+        "fairness_provably": "Provavelmente Justo (CSPRNG)",
+        "ads": "Anúncios",
+        "ads_none": "Nenhum (Sem Anúncios)"
+    },
     "Metadata": {
         "title": "Sorteio Pro | Sorteios Premium para Influencers",
         "description": "A ferramenta definitiva para criar sorteios virais. Feita para criadores de conteúdo e influencers que querem impressionar sua audiência.",

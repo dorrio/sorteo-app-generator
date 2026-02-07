@@ -58,6 +58,28 @@ export async function generateMetadata({ params, searchParams }: Props) {
   };
 }
 
-export default function SorteoApp() {
-  return <MainApp seoMode="home" />
+export default async function SorteoApp({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://sorteopro.com';
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Sorteo Pro",
+      "item": `${baseUrl}/${locale}`
+    }]
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <MainApp seoMode="home" />
+    </>
+  )
 }

@@ -6,6 +6,16 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
+/**
+ * Builds page metadata (title, description, Open Graph and Twitter data) based on locale and optional template query parameters.
+ *
+ * @param params - A promise resolving to route parameters containing `locale`.
+ * @param searchParams - A promise resolving to query parameters; may include `template_title` and `template_color` to customize title and OG image.
+ * @returns The metadata object with:
+ *  - `title` and `description` for the page,
+ *  - `openGraph` containing `title`, `description`, `url`, and an `images` array (OG image URL includes `title`/`color` query params when provided),
+ *  - `twitter` metadata including card type and image URL.
+ */
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
   const { template_title, template_color } = await searchParams;
@@ -58,6 +68,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
   };
 }
 
+/**
+ * Renders the home app with a locale-aware JSON-LD breadcrumb and the main application component.
+ *
+ * @param params - A promise resolving to an object with a `locale` string used to build the breadcrumb URL
+ * @returns A React fragment containing an embedded BreadcrumbList JSON-LD script and the main app component
+ */
 export default async function SorteoApp({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://sorteopro.com';

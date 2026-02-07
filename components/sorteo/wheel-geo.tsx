@@ -6,6 +6,11 @@ import { Link } from "@/i18n/routing"
 import { TryButton } from "./interactive/try-button"
 import { WheelVisual } from "./interactive/wheel-visual"
 
+/**
+ * Render the WheelGeo section containing localized descriptive content, a Quick Specs table, features list, how-to steps, FAQ entries, embedded JSON-LD, and a visual wheel.
+ *
+ * @returns A React element for the WheelGeo section
+ */
 export function WheelGeo() {
   const t = useTranslations("WheelGeo")
   const tSpecs = useTranslations("QuickSpecs")

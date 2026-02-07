@@ -6,12 +6,14 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { SorteoSelector } from "@/components/sorteo/sorteo-selector"
-import { ParticipantManager } from "@/components/sorteo/participant-manager"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
+import { ParticipantListSkeleton } from "@/components/sorteo/skeletons"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { SeoContent } from "@/components/sorteo/seo-content"
-import { WheelGeo } from "@/components/sorteo/wheel-geo"
+// WheelGeo is now dynamic to reduce initial bundle size for MainApp
+const WheelGeo = dynamic(() => import("@/components/sorteo/wheel-geo").then(mod => mod.WheelGeo))
+
 import { RngGeo } from "@/components/sorteo/rng-geo"
 import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
 import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo"
@@ -39,6 +41,11 @@ import { useSearchParams } from "next/navigation"
 const ParticleBackground = dynamic(
   () => import("@/components/sorteo/particle-background").then((mod) => mod.ParticleBackground),
   { ssr: false }
+)
+
+const ParticipantManager = dynamic(
+  () => import("@/components/sorteo/participant-manager").then((mod) => mod.ParticipantManager),
+  { ssr: false, loading: ParticipantListSkeleton }
 )
 
 const VisualEditor = dynamic(
@@ -112,7 +119,7 @@ interface MainAppProps {
     seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
 }
 
-export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
+export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppProps) {
   const locale = useLocale()
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
@@ -135,6 +142,11 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const tShare = useTranslations("ShareContent")
   const [mounted, setMounted] = useState(false)
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
+
+  // Lazy loading states for modals
+  const [hasWinnerCeremonyOpened, setHasWinnerCeremonyOpened] = useState(false)
+  const [hasEditorOpened, setHasEditorOpened] = useState(false)
+  const [hasVerifyModalOpened, setHasVerifyModalOpened] = useState(false)
 
   const {
     participants,
@@ -174,6 +186,19 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
       }
     }
   }, [isOverlayOpen])
+
+  // Lazy Load Triggers
+  useEffect(() => {
+    if (showWinnerCeremony) setHasWinnerCeremonyOpened(true)
+  }, [showWinnerCeremony])
+
+  useEffect(() => {
+    if (isEditorOpen) setHasEditorOpened(true)
+  }, [isEditorOpen])
+
+  useEffect(() => {
+    if (isVerifyModalOpen) setHasVerifyModalOpened(true)
+  }, [isVerifyModalOpen])
 
   useEffect(() => {
     setMounted(true)
@@ -721,106 +746,107 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           </div>
         </main>
 
-        {/* SEO Content Conditional Rendering */}
-        {seoMode === 'wheel' ? (
-             /* Wheel Mode: Prioritize WheelGeo */
-             <>
-                <WheelGeo />
-                <Glossary seoMode={seoMode} />
-             </>
-        ) : seoMode === 'instagram' ? (
-             /* Instagram Mode: Show Instagram specific content */
-             <>
-                <InstagramGeo />
-                <Glossary seoMode={seoMode} />
-             </>
-        ) : seoMode === 'rng' ? (
-            /* RNG Mode: Show Random Number Generator content */
-            <>
-               <RngGeo />
-               <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'list-randomizer' ? (
-            /* List Randomizer Mode: Show List Randomizer content */
-            <>
-                <ListRandomizerGeo />
-                <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'secret-santa' ? (
-            /* Secret Santa Mode */
-            <>
-                <SecretSantaGeo />
-                <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'team' ? (
-            /* Team Mode */
-            <>
-                <TeamGeo />
-                <Glossary seoMode="list-randomizer" />
-            </>
-       ) : seoMode === 'yes-no' ? (
-            /* Yes/No Mode */
-            <>
-                <YesNoGeo />
-                <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'letter' ? (
-            /* Letter Mode */
-            <>
-                <LetterGeo />
-                <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'dice' ? (
-            /* Dice Mode */
-            <>
-                <DiceGeo />
-                <Glossary seoMode="rng" />
-            </>
-       ) : seoMode === 'coin' ? (
-            /* Coin Mode */
-            <>
-                <CoinGeo />
-                <Glossary seoMode="yes-no" />
-            </>
-       ) : seoMode === 'rps' ? (
-            /* RPS Mode */
-            <>
-                <RpsGeo />
-                <Glossary seoMode="yes-no" />
-            </>
-       ) : seoMode === 'country' ? (
-            /* Country Mode */
-            <>
-                <CountryGeo />
-                <Glossary seoMode="wheel" />
-            </>
-       ) : seoMode === 'month' ? (
-            /* Month Mode */
-            <>
-                <MonthGeo />
-                <Glossary seoMode="wheel" />
-            </>
-       ) : seoMode === 'card' ? (
-            /* Card Mode */
-            <>
-                <CardGeo />
-                <Glossary seoMode="card" />
-            </>
-       ) : seoMode === 'bingo' ? (
-            /* Bingo Mode */
-            <>
-                <BingoGeo />
-                <Glossary seoMode="bingo" />
-            </>
-       ) : (
-            /* Home Mode: Show everything */
-            <>
-                <WheelGeo />
-                <Glossary seoMode={seoMode} />
-                <SeoContent />
-            </>
-        )}
-
+{/* SEO Content Conditional Rendering */}
+{children ? children : (
+    seoMode === 'wheel' ? (
+        /* Wheel Mode: Prioritize WheelGeo */
+        <>
+            <WheelGeo />
+            <Glossary seoMode={seoMode} />
+        </>
+    ) : seoMode === 'instagram' ? (
+        /* Instagram Mode: Show Instagram specific content */
+        <>
+            <InstagramGeo />
+            <Glossary seoMode={seoMode} />
+        </>
+    ) : seoMode === 'rng' ? (
+        /* RNG Mode: Show Random Number Generator content */
+        <>
+            <RngGeo />
+            <Glossary seoMode={seoMode} />
+        </>
+    ) : seoMode === 'list-randomizer' ? (
+        /* List Randomizer Mode: Show List Randomizer content */
+        <>
+            <ListRandomizerGeo />
+            <Glossary seoMode={seoMode} />
+        </>
+    ) : seoMode === 'secret-santa' ? (
+        /* Secret Santa Mode */
+        <>
+            <SecretSantaGeo />
+            <Glossary seoMode={seoMode} />
+        </>
+    ) : seoMode === 'team' ? (
+        /* Team Mode */
+        <>
+            <TeamGeo />
+            <Glossary seoMode="list-randomizer" />
+        </>
+    ) : seoMode === 'yes-no' ? (
+        /* Yes/No Mode */
+        <>
+            <YesNoGeo />
+            <Glossary seoMode={seoMode} />
+        </>
+    ) : seoMode === 'letter' ? (
+        /* Letter Mode */
+        <>
+            <LetterGeo />
+            <Glossary seoMode={seoMode} />
+        </>
+    ) : seoMode === 'dice' ? (
+        /* Dice Mode */
+        <>
+            <DiceGeo />
+            <Glossary seoMode="rng" />
+        </>
+    ) : seoMode === 'coin' ? (
+        /* Coin Mode */
+        <>
+            <CoinGeo />
+            <Glossary seoMode="yes-no" />
+        </>
+    ) : seoMode === 'rps' ? (
+        /* RPS Mode */
+        <>
+            <RpsGeo />
+            <Glossary seoMode="yes-no" />
+        </>
+    ) : seoMode === 'country' ? (
+        /* Country Mode */
+        <>
+            <CountryGeo />
+            <Glossary seoMode="wheel" />
+        </>
+    ) : seoMode === 'month' ? (
+        /* Month Mode */
+        <>
+            <MonthGeo />
+            <Glossary seoMode="wheel" />
+        </>
+    ) : seoMode === 'card' ? (
+        /* Card Mode */
+        <>
+            <CardGeo />
+            <Glossary seoMode="card" />
+        </>
+    ) : seoMode === 'bingo' ? (
+        /* Bingo Mode */
+        <>
+            <BingoGeo />
+            <Glossary seoMode="bingo" />
+        </>
+    ) : (
+        /* Home Mode: Show everything */
+        <>
+            <WheelGeo />
+            <Glossary seoMode={seoMode} />
+            <SeoContent />
+        </>
+    )
+)}
         {/* Footer */}
         <SiteFooter />
         <StickyShareFooter shareContent={shareContent} translations={stickyTranslations} />
@@ -828,9 +854,13 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
       {/* Overlays */}
       <CountdownAnimation onComplete={handleCountdownComplete} />
-      <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} seoMode={seoMode} />
-      <VisualEditor />
-      <VerificationModal isOpen={isVerifyModalOpen} onClose={() => setIsVerifyModalOpen(false)} />
+      {hasWinnerCeremonyOpened && (
+        <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} seoMode={seoMode} />
+      )}
+      {hasEditorOpened && <VisualEditor />}
+      {hasVerifyModalOpened && (
+        <VerificationModal isOpen={isVerifyModalOpen} onClose={() => setIsVerifyModalOpen(false)} />
+      )}
     </div>
   )
 }

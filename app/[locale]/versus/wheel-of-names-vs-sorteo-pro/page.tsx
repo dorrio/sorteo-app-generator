@@ -2,6 +2,8 @@ import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
 import { VersusGeo } from "@/components/sorteo/versus-geo";
+import { WheelGeoServer } from "@/components/sorteo/wheel-geo-server";
+import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export const dynamic = 'force-static';
 
@@ -48,8 +50,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function WheelVersusPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'VersusWheel' });
+  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
+  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
+  const tWheel = await getTranslations({ locale, namespace: 'WheelGeoPage' });
 
-  // Schema: Article + FAQ
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -64,7 +68,7 @@ export default async function WheelVersusPage({ params }: { params: Promise<{ lo
         name: 'Sorteo Pro',
         logo: {
             '@type': 'ImageObject',
-            url: 'https://sorteopro.com/logo.png' // Placeholder if not real
+            url: 'https://sorteopro.com/logo.png'
         }
     }
   };
@@ -91,20 +95,40 @@ export default async function WheelVersusPage({ params }: { params: Promise<{ lo
     ]
   };
 
+  const shareTranslations = {
+      share: tWinner('share_menu'),
+      copy: tWinner('copy_text'),
+      copied: tWinner('copied'),
+      shareOn: "Share on"
+  }
+
+  const stickyTranslations = {
+      share_cta: tShare('cta_share'),
+      start_cta: tShare('cta_start')
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, faqSchema]) }}
       />
-      {/*
-         Strategy: Use the functional MainApp (Wheel mode) at the top so users can try it immediately,
-         then follow with the comparison content below.
-      */}
-      <MainApp initialStyle="roulette" seoMode="wheel" />
-
-      {/* The Comparison Content */}
-      <VersusGeo />
+      <MainApp
+        initialStyle="roulette"
+        seoMode="wheel"
+        initialTitle={tWheel('h1')} // Reuse standard wheel title
+        initialSubtitle={tWheel('subtitle')}
+        shareTitle={tShare('wheel_title')}
+        shareText={tShare('wheel_text')}
+        customShareTextTemplate={tShare('custom_share_text')}
+        shareTranslations={shareTranslations}
+        stickyTranslations={stickyTranslations}
+        footer={<SiteFooter />}
+      >
+        <WheelGeoServer />
+        {/* We place VersusGeo inside so it's part of the layout */}
+        <VersusGeo />
+      </MainApp>
     </>
   );
 }

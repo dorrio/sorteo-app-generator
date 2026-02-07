@@ -10,25 +10,7 @@ import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { ParticipantListSkeleton } from "@/components/sorteo/skeletons"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
-import { SeoContent } from "@/components/sorteo/seo-content"
-// WheelGeo is now dynamic to reduce initial bundle size for MainApp
-const WheelGeo = dynamic(() => import("@/components/sorteo/wheel-geo").then(mod => mod.WheelGeo))
-
-import { RngGeo } from "@/components/sorteo/rng-geo"
-import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
-import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo"
-import { TeamGeo } from "@/components/sorteo/team-geo"
-import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
-import { LetterGeo } from "@/components/sorteo/letter-geo"
-import { DiceGeo } from "@/components/sorteo/dice-geo"
-import { CoinGeo } from "@/components/sorteo/coin-geo"
-import { RpsGeo } from "@/components/sorteo/rps-geo"
-import { CountryGeo } from "@/components/sorteo/country-geo"
-import { MonthGeo } from "@/components/sorteo/month-geo"
-import { Glossary } from "@/components/sorteo/glossary"
-import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
-import { SiteFooter } from "@/components/sorteo/site-footer"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { COUNTRIES } from "@/lib/countries"
 import { Sparkles, Settings2, Play, Trophy, ShieldCheck, Share2 } from "lucide-react"
@@ -116,27 +98,58 @@ interface MainAppProps {
     initialStyle?: string;
     seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
     children?: React.ReactNode;
+    initialTitle?: string;
+    initialSubtitle?: string;
+    shareTitle?: string;
+    shareText?: string;
+    customShareTextTemplate?: string;
+    footer?: React.ReactNode;
+    shareTranslations?: {
+        share: string;
+        copy: string;
+        copied: string;
+        shareOn: string;
+    };
+    stickyTranslations?: {
+        share_cta: string;
+        start_cta: string;
+    };
+    // Translations for initial population (options)
+    initialOptions?: {
+        yes: string;
+        no: string;
+        heads: string;
+        tails: string;
+        rock: string;
+        paper: string;
+        scissors: string;
+    };
 }
 
-export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppProps) {
+export function MainApp({
+    initialStyle,
+    seoMode = 'home',
+    children,
+    initialTitle,
+    initialSubtitle,
+    shareTitle = "Sorteo Pro",
+    shareText = "Sorteo Pro",
+    customShareTextTemplate = "🔥 Join my giveaway: *{title}*! Created with Sorteo Pro. Free & Unlimited. 👇",
+    footer,
+    shareTranslations = {
+        share: "Share...",
+        copy: "Copy Link",
+        copied: "Copied!",
+        shareOn: "Share on"
+    },
+    stickyTranslations = {
+        share_cta: "Share Tool",
+        start_cta: "Start Giveaway"
+    },
+    initialOptions
+}: MainAppProps) {
   const locale = useLocale()
   const t = useTranslations("HomePage")
-  const tYesNo = useTranslations("YesNoPage")
-  const tLetter = useTranslations("LetterGeneratorPage")
-  const tDice = useTranslations("DicePage")
-  const tCoin = useTranslations("CoinPage")
-  const tRps = useTranslations("RpsPage")
-  const tCountry = useTranslations("CountryPage")
-  const tMonth = useTranslations("MonthPage")
-  const tRng = useTranslations("RngPage")
-  const tList = useTranslations("ListRandomizerPage")
-  const tSecret = useTranslations("SecretSantaPage")
-  const tTeam = useTranslations("TeamGeneratorPage")
-  const tInsta = useTranslations("InstagramPicker")
-  const tWheel = useTranslations("WheelGeoPage") 
-  const tMeta = useTranslations("Metadata")
-  const tWinner = useTranslations("WinnerCeremony")
-  const tShare = useTranslations("ShareContent")
   const [mounted, setMounted] = useState(false)
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
 
@@ -198,50 +211,18 @@ export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppPro
     setMounted(true)
     if (initialStyle) {
         const update: any = { sorteoStyle: initialStyle }
-        if (seoMode === 'yes-no') {
-            update.customTitle = tYesNo('h1')
-            update.customSubtitle = tYesNo('subtitle')
-        } else if (seoMode === 'letter') {
-            update.customTitle = tLetter('h1')
-            update.customSubtitle = tLetter('subtitle')
-        } else if (seoMode === 'rng') {
-            update.customTitle = tRng('h1')
-            update.customSubtitle = tRng('subtitle')
-        } else if (seoMode === 'list-randomizer') {
-            update.customTitle = tList('h1')
-            update.customSubtitle = tList('subtitle')
-        } else if (seoMode === 'secret-santa') {
-            update.customTitle = tSecret('h1')
-            update.customSubtitle = tSecret('subtitle')
-        } else if (seoMode === 'team') {
-            update.customTitle = tTeam('h1')
-            update.customSubtitle = tTeam('subtitle')
-        } else if (seoMode === 'dice') {
-            update.customTitle = tDice('h1')
-            update.customSubtitle = tDice('subtitle')
-        } else if (seoMode === 'coin') {
-            update.customTitle = tCoin('h1')
-            update.customSubtitle = tCoin('subtitle')
-        } else if (seoMode === 'rps') {
-            update.customTitle = tRps('h1')
-            update.customSubtitle = tRps('subtitle')
-        } else if (seoMode === 'country') {
-            update.customTitle = tCountry('h1')
-            update.customSubtitle = tCountry('subtitle')
-        } else if (seoMode === 'month') {
-            update.customTitle = tMonth('h1')
-            update.customSubtitle = tMonth('subtitle')
-        } else if (seoMode === 'instagram') {
-            update.customTitle = tInsta('h1')
-            update.customSubtitle = tInsta('subtitle')
-        } else if (seoMode === 'wheel') {
-            update.customTitle = tWheel('h1')
-            update.customSubtitle = tWheel('subtitle')
+
+        // Initialize custom title from props if available
+        if (initialTitle) {
+            update.customTitle = initialTitle
+        }
+        if (initialSubtitle) {
+            update.customSubtitle = initialSubtitle
         }
 
         updateTheme(update)
     }
-  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice, tRps, tCountry, tMonth])
+  }, [initialStyle, updateTheme, initialTitle, initialSubtitle])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
@@ -252,21 +233,21 @@ export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppPro
       && mounted && hasHydrated && participants.length === 0
 
     if (shouldPopulate) {
-      if (seoMode === 'yes-no') {
+      if (seoMode === 'yes-no' && initialOptions) {
         addParticipants([
-          { name: tYesNo('option_yes') },
-          { name: tYesNo('option_no') }
+          { name: initialOptions.yes },
+          { name: initialOptions.no }
         ])
-      } else if (seoMode === 'coin') {
+      } else if (seoMode === 'coin' && initialOptions) {
               addParticipants([
-                  { name: tCoin('option_heads') },
-                  { name: tCoin('option_tails') }
+                  { name: initialOptions.heads },
+                  { name: initialOptions.tails }
               ])
-          } else if (seoMode === 'rps') {
+          } else if (seoMode === 'rps' && initialOptions) {
               addParticipants([
-                  { name: tRps('option_rock') },
-                  { name: tRps('option_paper') },
-                  { name: tRps('option_scissors') }
+                  { name: initialOptions.rock },
+                  { name: initialOptions.paper },
+                  { name: initialOptions.scissors }
               ])
           } else if (seoMode === 'letter') {
               const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
@@ -292,14 +273,7 @@ export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppPro
               ])
           }
       }
-      // We only run this when mounted/hydrated changes to true, or initialStyle changes
-      // We include participants.length in dependency to know if it's 0, but we should be careful not to loop.
-      // addParticipants is stable.
-      // To avoid infinite loop if user clears list, we might want to only do this ONCE.
-      // But for a landing page, maybe it's okay?
-      // Actually, if user clears list, participants becomes 0, and this re-adds them. That's annoying.
-      // We should use a ref to track if we've auto-populated.
-  }, [mounted, hasHydrated, initialStyle, seoMode]) // Removed participants.length from dependency to avoid re-populating on clear
+  }, [mounted, hasHydrated, initialStyle, seoMode, initialOptions])
 
   const startSorteo = () => {
     if (participants.length < 2) return
@@ -326,68 +300,10 @@ export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppPro
 
   // Determine share content based on seoMode
   const getShareContent = () => {
-      // Default / Home
-      let shareTitle = tShare('home_title')
-      let shareText = tShare('home_text')
-      let defaultTitle = "Sorteo Pro"
-
-      if (seoMode === 'wheel') {
-          shareTitle = tShare('wheel_title')
-          shareText = tShare('wheel_text')
-          defaultTitle = tWheel('h1')
-      } else if (seoMode === 'instagram') {
-          shareTitle = tShare('instagram_title')
-          shareText = tShare('instagram_text')
-          defaultTitle = tInsta('h1')
-      } else if (seoMode === 'rng') {
-          shareTitle = tShare('rng_title')
-          shareText = tShare('rng_text')
-          defaultTitle = tRng('h1')
-      } else if (seoMode === 'list-randomizer') {
-          shareTitle = tShare('list_title')
-          shareText = tShare('list_text')
-          defaultTitle = tList('h1')
-      } else if (seoMode === 'team') {
-          shareTitle = tShare('list_title') // Reuse list share text as it mentions teams
-          shareText = tShare('list_text')
-          defaultTitle = tTeam('h1')
-      } else if (seoMode === 'secret-santa') {
-          shareTitle = tShare('secret_santa_title')
-          shareText = tShare('secret_santa_text')
-          defaultTitle = tSecret('h1')
-      } else if (seoMode === 'yes-no') {
-          shareTitle = tShare('yes_no_title')
-          shareText = tShare('yes_no_text')
-          defaultTitle = tYesNo('h1')
-      } else if (seoMode === 'letter') {
-          shareTitle = tShare('letter_title')
-          shareText = tShare('letter_text')
-          defaultTitle = tLetter('h1')
-      } else if (seoMode === 'dice') {
-          shareTitle = tShare('dice_title')
-          shareText = tShare('dice_text')
-          defaultTitle = tDice('h1')
-      } else if (seoMode === 'coin') {
-          shareTitle = tShare('coin_title')
-          shareText = tShare('coin_text')
-          defaultTitle = tCoin('h1')
-      } else if (seoMode === 'rps') {
-          shareTitle = tShare('rps_title')
-          shareText = tShare('rps_text')
-          defaultTitle = tRps('h1')
-      } else if (seoMode === 'country') {
-          shareTitle = tShare('country_title')
-          shareText = tShare('country_text')
-          defaultTitle = tCountry('h1')
-      } else if (seoMode === 'month') {
-          shareTitle = tShare('month_title')
-          shareText = tShare('month_text')
-          defaultTitle = tMonth('h1')
-      }
-
-      // Viralis: Check for custom title to enhance share context
+      let finalShareText = shareText
       let url = typeof window !== "undefined" ? window.location.href : ""
 
+      const defaultTitle = initialTitle || "Sorteo Pro"
       const isCustomTitle = theme.customTitle && theme.customTitle !== defaultTitle
 
       if (typeof window !== "undefined") {
@@ -395,8 +311,9 @@ export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppPro
           const urlObj = new URL(window.location.href)
 
           // 1. Branding: Custom Title & Color
-          if (isCustomTitle) {
-            shareText = tShare('custom_share_text', { title: theme.customTitle })
+          if (isCustomTitle && theme.customTitle) {
+            finalShareText = customShareTextTemplate.replace('{title}', theme.customTitle)
+
             urlObj.searchParams.set('template_title', theme.customTitle)
             if (theme.primaryColor) {
               urlObj.searchParams.set('template_color', theme.primaryColor)
@@ -422,75 +339,24 @@ export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppPro
 
       return {
           title: shareTitle,
-          text: shareText,
+          text: finalShareText,
           url: url
       }
   }
 
   const shareContent = getShareContent()
 
-  // Translations for ShareButton
-  // We'll reuse existing keys or provide defaults
-  const shareTranslations = {
-      share: tWinner('share_menu'),
-      copy: tWinner('copy_text'),
-      copied: tWinner('copied'),
-      shareOn: "Share on"
-  }
-
-  const stickyTranslations = {
-      share_cta: tShare('cta_share'),
-      start_cta: tShare('cta_start'),
+  // Full Sticky Translations Object
+  const fullStickyTranslations = {
+      ...stickyTranslations,
       share_button: shareTranslations
   }
 
   // Server-Side Rendering (SSR) & Initial Client Render
-  // If not hydrated, we use the SEO mode to set the correct Title/Subtitle for bots
-  let displayTitle = theme.customTitle
-  let displaySubtitle = theme.customSubtitle
-
-  if (!hasHydrated) {
-    if (seoMode === 'wheel') {
-        displayTitle = tWheel('h1')
-        displaySubtitle = tWheel('subtitle')
-    } else if (seoMode === 'instagram') {
-        displayTitle = tInsta('h1')
-        displaySubtitle = tInsta('subtitle')
-    } else if (seoMode === 'rng') {
-        displayTitle = tRng('h1')
-        displaySubtitle = tRng('subtitle')
-    } else if (seoMode === 'list-randomizer') {
-        displayTitle = tList('h1')
-        displaySubtitle = tList('subtitle')
-    } else if (seoMode === 'team') {
-        displayTitle = tTeam('h1')
-        displaySubtitle = tTeam('subtitle')
-    } else if (seoMode === 'secret-santa') {
-        displayTitle = tSecret('h1')
-        displaySubtitle = tSecret('subtitle')
-    } else if (seoMode === 'yes-no') {
-        displayTitle = tYesNo('h1')
-        displaySubtitle = tYesNo('subtitle')
-    } else if (seoMode === 'letter') {
-        displayTitle = tLetter('h1')
-        displaySubtitle = tLetter('subtitle')
-    } else if (seoMode === 'dice') {
-        displayTitle = tDice('h1')
-        displaySubtitle = tDice('subtitle')
-    } else if (seoMode === 'coin') {
-        displayTitle = tCoin('h1')
-        displaySubtitle = tCoin('subtitle')
-    } else if (seoMode === 'rps') {
-        displayTitle = tRps('h1')
-        displaySubtitle = tRps('subtitle')
-    } else if (seoMode === 'country') {
-        displayTitle = tCountry('h1')
-        displaySubtitle = tCountry('subtitle')
-    } else if (seoMode === 'month') {
-        displayTitle = tMonth('h1')
-        displaySubtitle = tMonth('subtitle')
-    }
-  }
+  // If not hydrated, we use the initialTitle prop for SSR (SEO friendly)
+  // Once hydrated, we use the store state (User preference)
+  let displayTitle = hasHydrated ? theme.customTitle : (initialTitle || theme.customTitle)
+  let displaySubtitle = hasHydrated ? theme.customSubtitle : (initialSubtitle || theme.customSubtitle)
 
   const bgOpacity = theme.backgroundOpacity ?? 30
   const bgBlur = theme.backgroundBlur ?? 0
@@ -701,99 +567,12 @@ export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppPro
           </div>
         </main>
 
-        {/* SEO Content Conditional Rendering */}
-        {children ? children : (
-            seoMode === 'wheel' ? (
-                /* Wheel Mode: Prioritize WheelGeo */
-                <>
-                    <WheelGeo />
-                    <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'instagram' ? (
-                /* Instagram Mode: Show Instagram specific content */
-                <>
-                    <InstagramGeo />
-                    <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'rng' ? (
-                /* RNG Mode: Show Random Number Generator content */
-                <>
-                <RngGeo />
-                <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'list-randomizer' ? (
-                /* List Randomizer Mode: Show List Randomizer content */
-                <>
-                    <ListRandomizerGeo />
-                    <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'secret-santa' ? (
-                /* Secret Santa Mode */
-                <>
-                    <SecretSantaGeo />
-                    <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'team' ? (
-                /* Team Mode */
-                <>
-                    <TeamGeo />
-                    <Glossary seoMode="list-randomizer" />
-                </>
-            ) : seoMode === 'yes-no' ? (
-                /* Yes/No Mode */
-                <>
-                    <YesNoGeo />
-                    <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'letter' ? (
-                /* Letter Mode */
-                <>
-                    <LetterGeo />
-                    <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'dice' ? (
-                /* Dice Mode */
-                <>
-                    <DiceGeo />
-                    <Glossary seoMode="rng" />
-                </>
-            ) : seoMode === 'coin' ? (
-                /* Coin Mode */
-                <>
-                    <CoinGeo />
-                    <Glossary seoMode="yes-no" />
-                </>
-            ) : seoMode === 'rps' ? (
-                /* RPS Mode */
-                <>
-                    <RpsGeo />
-                    <Glossary seoMode="yes-no" />
-                </>
-            ) : seoMode === 'country' ? (
-                /* Country Mode */
-                <>
-                    <CountryGeo />
-                    <Glossary seoMode="wheel" />
-                </>
-            ) : seoMode === 'month' ? (
-                /* Month Mode */
-                <>
-                    <MonthGeo />
-                    <Glossary seoMode="wheel" />
-                </>
-            ) : (
-                /* Home Mode: Show everything */
-                <>
-                    <WheelGeo />
-                    <Glossary seoMode={seoMode} />
-                    <SeoContent />
-                </>
-            )
-        )}
+        {/* SEO Content / Footer Children */}
+        {children}
 
         {/* Footer */}
-        <SiteFooter />
-        <StickyShareFooter shareContent={shareContent} translations={stickyTranslations} />
+        {footer}
+        <StickyShareFooter shareContent={shareContent} translations={fullStickyTranslations} />
       </div>
 
       {/* Overlays */}

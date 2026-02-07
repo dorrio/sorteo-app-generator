@@ -2,6 +2,8 @@ import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
 import { VersusGeo } from "@/components/sorteo/versus-geo";
+import { RngGeo } from "@/components/sorteo/rng-geo";
+import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export const dynamic = 'force-static';
 
@@ -48,6 +50,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function RandomVersusPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'VersusRandom' });
+  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
+  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
+  const tRng = await getTranslations({ locale, namespace: 'RngPage' });
 
   // Schema: Article + FAQ
   const articleSchema = {
@@ -91,20 +96,39 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
     ]
   };
 
+  const shareTranslations = {
+      share: tWinner('share_menu'),
+      copy: tWinner('copy_text'),
+      copied: tWinner('copied'),
+      shareOn: "Share on"
+  }
+
+  const stickyTranslations = {
+      share_cta: tShare('cta_share'),
+      start_cta: tShare('cta_start')
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, faqSchema]) }}
       />
-      {/*
-         Strategy: Use the functional MainApp (RNG mode) at the top so users can try it immediately.
-         "seoMode='rng'" ensures correct branding (titles) for RNG context.
-      */}
-      <MainApp initialStyle="slot_machine" seoMode="rng" />
-
-      {/* The Comparison Content (Random namespace) */}
-      <VersusGeo namespace="VersusRandom" />
+      <MainApp
+        initialStyle="slot_machine"
+        seoMode="rng"
+        initialTitle={tRng('h1')}
+        initialSubtitle={tRng('subtitle')}
+        shareTitle={tShare('rng_title')}
+        shareText={tShare('rng_text')}
+        customShareTextTemplate={tShare('custom_share_text')}
+        shareTranslations={shareTranslations}
+        stickyTranslations={stickyTranslations}
+        footer={<SiteFooter />}
+      >
+        <RngGeo />
+        <VersusGeo namespace="VersusRandom" />
+      </MainApp>
     </>
   );
 }

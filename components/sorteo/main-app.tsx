@@ -11,9 +11,7 @@ import { ParticipantListSkeleton } from "@/components/sorteo/skeletons"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { SeoContent } from "@/components/sorteo/seo-content"
-// WheelGeo is now dynamic to reduce initial bundle size for MainApp
-const WheelGeo = dynamic(() => import("@/components/sorteo/wheel-geo").then(mod => mod.WheelGeo))
-
+import { WheelGeo } from "@/components/sorteo/wheel-geo"
 import { RngGeo } from "@/components/sorteo/rng-geo"
 import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
 import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo"
@@ -115,10 +113,9 @@ function ListParamsHandler() {
 interface MainAppProps {
     initialStyle?: string;
     seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
-    children?: React.ReactNode;
 }
 
-export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppProps) {
+export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const locale = useLocale()
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
@@ -702,93 +699,91 @@ export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppPro
         </main>
 
         {/* SEO Content Conditional Rendering */}
-        {children ? children : (
-            seoMode === 'wheel' ? (
-                /* Wheel Mode: Prioritize WheelGeo */
-                <>
-                    <WheelGeo />
-                    <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'instagram' ? (
-                /* Instagram Mode: Show Instagram specific content */
-                <>
-                    <InstagramGeo />
-                    <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'rng' ? (
-                /* RNG Mode: Show Random Number Generator content */
-                <>
-                <RngGeo />
+        {seoMode === 'wheel' ? (
+             /* Wheel Mode: Prioritize WheelGeo */
+             <>
+                <WheelGeo />
                 <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'list-randomizer' ? (
-                /* List Randomizer Mode: Show List Randomizer content */
-                <>
-                    <ListRandomizerGeo />
-                    <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'secret-santa' ? (
-                /* Secret Santa Mode */
-                <>
-                    <SecretSantaGeo />
-                    <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'team' ? (
-                /* Team Mode */
-                <>
-                    <TeamGeo />
-                    <Glossary seoMode="list-randomizer" />
-                </>
-            ) : seoMode === 'yes-no' ? (
-                /* Yes/No Mode */
-                <>
-                    <YesNoGeo />
-                    <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'letter' ? (
-                /* Letter Mode */
-                <>
-                    <LetterGeo />
-                    <Glossary seoMode={seoMode} />
-                </>
-            ) : seoMode === 'dice' ? (
-                /* Dice Mode */
-                <>
-                    <DiceGeo />
-                    <Glossary seoMode="rng" />
-                </>
-            ) : seoMode === 'coin' ? (
-                /* Coin Mode */
-                <>
-                    <CoinGeo />
-                    <Glossary seoMode="yes-no" />
-                </>
-            ) : seoMode === 'rps' ? (
-                /* RPS Mode */
-                <>
-                    <RpsGeo />
-                    <Glossary seoMode="yes-no" />
-                </>
-            ) : seoMode === 'country' ? (
-                /* Country Mode */
-                <>
-                    <CountryGeo />
-                    <Glossary seoMode="wheel" />
-                </>
-            ) : seoMode === 'month' ? (
-                /* Month Mode */
-                <>
-                    <MonthGeo />
-                    <Glossary seoMode="wheel" />
-                </>
-            ) : (
-                /* Home Mode: Show everything */
-                <>
-                    <WheelGeo />
-                    <Glossary seoMode={seoMode} />
-                    <SeoContent />
-                </>
-            )
+             </>
+        ) : seoMode === 'instagram' ? (
+             /* Instagram Mode: Show Instagram specific content */
+             <>
+                <InstagramGeo />
+                <Glossary seoMode={seoMode} />
+             </>
+        ) : seoMode === 'rng' ? (
+            /* RNG Mode: Show Random Number Generator content */
+            <>
+               <RngGeo />
+               <Glossary seoMode={seoMode} />
+            </>
+       ) : seoMode === 'list-randomizer' ? (
+            /* List Randomizer Mode: Show List Randomizer content */
+            <>
+                <ListRandomizerGeo />
+                <Glossary seoMode={seoMode} />
+            </>
+       ) : seoMode === 'secret-santa' ? (
+            /* Secret Santa Mode */
+            <>
+                <SecretSantaGeo />
+                <Glossary seoMode={seoMode} />
+            </>
+       ) : seoMode === 'team' ? (
+            /* Team Mode */
+            <>
+                <TeamGeo />
+                <Glossary seoMode="list-randomizer" />
+            </>
+       ) : seoMode === 'yes-no' ? (
+            /* Yes/No Mode */
+            <>
+                <YesNoGeo />
+                <Glossary seoMode={seoMode} />
+            </>
+       ) : seoMode === 'letter' ? (
+            /* Letter Mode */
+            <>
+                <LetterGeo />
+                <Glossary seoMode={seoMode} />
+            </>
+       ) : seoMode === 'dice' ? (
+            /* Dice Mode */
+            <>
+                <DiceGeo />
+                <Glossary seoMode="rng" />
+            </>
+       ) : seoMode === 'coin' ? (
+            /* Coin Mode */
+            <>
+                <CoinGeo />
+                <Glossary seoMode="yes-no" />
+            </>
+       ) : seoMode === 'rps' ? (
+            /* RPS Mode */
+            <>
+                <RpsGeo />
+                <Glossary seoMode="yes-no" />
+            </>
+       ) : seoMode === 'country' ? (
+            /* Country Mode */
+            <>
+                <CountryGeo />
+                <Glossary seoMode="wheel" />
+            </>
+       ) : seoMode === 'month' ? (
+            /* Month Mode */
+            <>
+                <MonthGeo />
+                <Glossary seoMode="wheel" />
+            </>
+       ) : (
+            /* Home Mode: Show everything */
+            <>
+                <WheelGeo />
+                <Glossary seoMode={seoMode} />
+                <SeoContent />
+            </>
         )}
 
         {/* Footer */}

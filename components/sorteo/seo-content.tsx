@@ -5,11 +5,6 @@ import { motion } from "framer-motion"
 import { Shield, Wand2, Zap, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
 
-/**
- * Render a composed SEO content section with a direct answer, quick specs, feature grid, how-to steps, FAQ, and embedded JSON-LD structured data.
- *
- * @returns A React element containing the full SEO content block and its associated JSON-LD scripts.
- */
 export function SeoContent() {
   const t = useTranslations("SEOContent")
   const tSpecs = useTranslations("QuickSpecs")

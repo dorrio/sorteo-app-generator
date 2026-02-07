@@ -129,9 +129,7 @@
             "applied": "Applied",
             "apply_change": "Apply change",
             "edit_placeholder": "Edit name"
-        },
-        "share_list": "Share List",
-        "share_list_copied": "Link copied!"
+        }
     },
     "VisualEditor": {
         "title": "Visual Editor",

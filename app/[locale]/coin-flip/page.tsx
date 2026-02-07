@@ -164,7 +164,7 @@ export default async function CoinPage({ params }: { params: Promise<{ locale: s
         footer={<SiteFooter />}
       >
         <CoinGeo />
-        <Glossary seoMode="yes-no" />
+        <Glossary seoMode="coin" />
       </MainApp>
     </>
   );

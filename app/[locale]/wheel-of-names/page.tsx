@@ -128,7 +128,7 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
       share: tWinner('share_menu'),
       copy: tWinner('copy_text'),
       copied: tWinner('copied'),
-      shareOn: "Share on"
+      shareOn: tWinner('share_on')
   }
 
   const stickyTranslations = {

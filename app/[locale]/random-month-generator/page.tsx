@@ -152,7 +152,7 @@ export default async function MonthPage({ params }: { params: Promise<{ locale: 
         footer={<SiteFooter />}
       >
         <MonthGeo />
-        <Glossary seoMode="wheel" />
+        <Glossary seoMode="month" />
       </MainApp>
     </>
   );

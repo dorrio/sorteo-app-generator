@@ -206,7 +206,8 @@
         "image_copied": "Image Copied!",
         "download_certificate": "Download Certificate",
         "new_giveaway": "New Giveaway",
-        "close": "Close"
+        "close": "Close",
+        "share_on": "Share on"
     },
     "HistoryPanel": {
         "title": "History",

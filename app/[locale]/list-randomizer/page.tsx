@@ -129,7 +129,7 @@ export default async function ListRandomizerPage({ params }: { params: Promise<{
       share: tWinner('share_menu'),
       copy: tWinner('copy_text'),
       copied: tWinner('copied'),
-      shareOn: "Share on"
+      shareOn: tWinner('share_on')
   }
 
   const stickyTranslations = {

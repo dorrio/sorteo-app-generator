@@ -128,7 +128,7 @@ export default async function DiceRollerPage({ params }: { params: Promise<{ loc
       share: tWinner('share_menu'),
       copy: tWinner('copy_text'),
       copied: tWinner('copied'),
-      shareOn: "Share on"
+      shareOn: tWinner('share_on')
   }
 
   const stickyTranslations = {

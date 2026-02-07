@@ -203,7 +203,8 @@
         "image_copied": "¡Imagen Copiada!",
         "download_certificate": "Descargar Certificado",
         "new_giveaway": "Nuevo Sorteo",
-        "close": "Cerrar"
+        "close": "Cerrar",
+        "share_on": "Compartir en"
     },
     "HistoryPanel": {
         "title": "Historial",

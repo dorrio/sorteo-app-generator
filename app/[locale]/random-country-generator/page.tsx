@@ -155,7 +155,7 @@ export default async function CountryGeneratorPage({ params }: { params: Promise
         footer={<SiteFooter />}
       >
         <CountryGeo />
-        <Glossary seoMode="wheel" />
+        <Glossary seoMode="country" />
       </MainApp>
     </>
   );

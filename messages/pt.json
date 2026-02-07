@@ -202,7 +202,8 @@
         "image_copied": "Imagem Copiada!",
         "download_certificate": "Baixar Certificado",
         "new_giveaway": "Novo Sorteio",
-        "close": "Fechar"
+        "close": "Fechar",
+        "share_on": "Compartilhar em"
     },
     "HistoryPanel": {
         "title": "Histórico",

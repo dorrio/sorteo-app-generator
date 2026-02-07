@@ -166,7 +166,7 @@ export default async function RpsPage({ params }: { params: Promise<{ locale: st
         footer={<SiteFooter />}
       >
         <RpsGeo />
-        <Glossary seoMode="yes-no" />
+        <Glossary seoMode="rps" />
       </MainApp>
     </>
   );

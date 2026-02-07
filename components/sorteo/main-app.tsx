@@ -6,8 +6,8 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { SorteoSelector } from "@/components/sorteo/sorteo-selector"
-import { ParticipantManager } from "@/components/sorteo/participant-manager"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
+import { ParticipantListSkeleton } from "@/components/sorteo/skeletons"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { SeoContent } from "@/components/sorteo/seo-content"
@@ -39,6 +39,11 @@ import { useSearchParams } from "next/navigation"
 const ParticleBackground = dynamic(
   () => import("@/components/sorteo/particle-background").then((mod) => mod.ParticleBackground),
   { ssr: false }
+)
+
+const ParticipantManager = dynamic(
+  () => import("@/components/sorteo/participant-manager").then((mod) => mod.ParticipantManager),
+  { ssr: false, loading: ParticipantListSkeleton }
 )
 
 const VisualEditor = dynamic(
@@ -135,6 +140,11 @@ export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppPro
   const [mounted, setMounted] = useState(false)
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
 
+  // Lazy loading states for modals
+  const [hasWinnerCeremonyOpened, setHasWinnerCeremonyOpened] = useState(false)
+  const [hasEditorOpened, setHasEditorOpened] = useState(false)
+  const [hasVerifyModalOpened, setHasVerifyModalOpened] = useState(false)
+
   const {
     participants,
     addParticipants,
@@ -170,6 +180,19 @@ export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppPro
       }
     }
   }, [isOverlayOpen])
+
+  // Lazy Load Triggers
+  useEffect(() => {
+    if (showWinnerCeremony) setHasWinnerCeremonyOpened(true)
+  }, [showWinnerCeremony])
+
+  useEffect(() => {
+    if (isEditorOpen) setHasEditorOpened(true)
+  }, [isEditorOpen])
+
+  useEffect(() => {
+    if (isVerifyModalOpen) setHasVerifyModalOpened(true)
+  }, [isVerifyModalOpen])
 
   useEffect(() => {
     setMounted(true)
@@ -775,9 +798,13 @@ export function MainApp({ initialStyle, seoMode = 'home', children }: MainAppPro
 
       {/* Overlays */}
       <CountdownAnimation onComplete={handleCountdownComplete} />
-      <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} seoMode={seoMode} />
-      <VisualEditor />
-      <VerificationModal isOpen={isVerifyModalOpen} onClose={() => setIsVerifyModalOpen(false)} />
+      {hasWinnerCeremonyOpened && (
+        <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} seoMode={seoMode} />
+      )}
+      {hasEditorOpened && <VisualEditor />}
+      {hasVerifyModalOpened && (
+        <VerificationModal isOpen={isVerifyModalOpen} onClose={() => setIsVerifyModalOpen(false)} />
+      )}
     </div>
   )
 }

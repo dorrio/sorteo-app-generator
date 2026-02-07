@@ -189,14 +189,16 @@
     },
     "WinnerCeremony": {
         "winner_label": "Ganador",
-        "share_text": "¡Acabo de realizar un sorteo con Sorteo Pro y *{name}* ha ganado! 🏆 Resultado verificado y crea el tuyo aquí: 👇",
-        "share_text_custom": "🔥 ¡Acabo de elegir un ganador para *{title}*!\n\n🏆 Ganador: *{name}*\n\n✅ Resultado verificado y crea el tuyo aquí: 👇",
+        "share_text": "🏆 ¡*{name}* GANÓ! 🎉 Resultado Oficial verificado por Sorteo Pro. 👇",
+        "share_text_custom": "🔥 ¡*{name}* ganó *{title}*! 🎉 Resultado Oficial verificado por Sorteo Pro. 👇",
         "share_title": "¡Tenemos Ganador! 🏆",
         "congratulations": "¡Felicidades! 🎉",
         "share_button": "Compartir Resultado",
         "share_menu": "Compartir...",
         "copied": "¡Copiado!",
         "copy_text": "Copiar Enlace",
+        "copy_image": "Copiar Imagen",
+        "image_copied": "¡Imagen Copiada!",
         "download_certificate": "Descargar Certificado",
         "new_giveaway": "Nuevo Sorteo",
         "close": "Cerrar"
@@ -241,6 +243,8 @@
         "create_your_own": "🚀 Crear Sorteo Gratis",
         "share_button": "Compartir Prueba",
         "download_certificate": "Descargar Certificado",
+        "copy_image": "Copiar Imagen",
+        "image_copied": "¡Imagen Copiada!",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* es el GANADOR!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* ganó *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "result": {
@@ -311,7 +315,19 @@
         "term_7": "Generador de Letras Aleatorias",
         "def_7": "Una herramienta digital que elige una letra del alfabeto (A-Z) al azar. Útil para juegos de palabras, enseñar fonética y siglas.",
         "term_8": "Amigo Invisible",
-        "def_8": "Una tradición navideña en la que a los miembros de un grupo se les asigna aleatoriamente una persona a quien deben hacer un regalo. La identidad del regalador debe permanecer en secreto."
+        "def_8": "Una tradición navideña en la que a los miembros de un grupo se les asigna aleatoriamente una persona a quien deben hacer un regalo. La identidad del regalador debe permanecer en secreto.",
+        "term_9": "Dados Online",
+        "def_9": "Una herramienta digital que simula el lanzamiento de dados físicos. Sorteo Pro utiliza un RNG criptográficamente seguro para garantizar que cada tirada sea aleatoria y justa.",
+        "term_10": "Lanzar Moneda",
+        "def_10": "Un generador aleatorio binario que simula el lanzamiento de una moneda (Cara o Cruz). Ofrece una probabilidad real del 50/50 usando algoritmos seguros.",
+        "term_11": "Piedra Papel Tijeras",
+        "def_11": "Versión digital del clásico juego de manos. El sistema selecciona aleatoriamente Piedra, Papel o Tijeras para jugar contra ti de forma justa.",
+        "term_12": "Generador de Equipos Aleatorios",
+        "def_12": "Herramienta que divide una lista de participantes en grupos o equipos iguales al azar. Esencial para profesores, entrenadores y dinámicas de grupo.",
+        "term_13": "Generador de Países",
+        "def_13": "Herramienta que selecciona una nación de la lista de 195 estados soberanos del mundo completamente al azar. Usado para educación y juegos.",
+        "term_14": "Generador de Mes Aleatorio",
+        "def_14": "Herramienta simple que elige un mes del año (Enero-Diciembre) al azar. Útil para planificar eventos, horóscopos o juegos de fechas."
     },
     "InstagramPicker": {
         "title": "Selector de Comentarios de Instagram Gratis | Ilimitado",

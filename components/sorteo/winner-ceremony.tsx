@@ -20,6 +20,7 @@ import {
   Instagram,
   Download,
   Loader2,
+  Image as ImageIcon,
 } from "lucide-react"
 
 interface WinnerCeremonyProps {
@@ -33,11 +34,14 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const t = useTranslations("WinnerCeremony")
   const [showContent, setShowContent] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [copiedImage, setCopiedImage] = useState(false)
   const [canShareNative, setCanShareNative] = useState(false)
+  const [canCopyImage, setCanCopyImage] = useState(false)
   const [isSharing, setIsSharing] = useState(false)
 
   useEffect(() => {
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
+    setCanCopyImage(typeof ClipboardItem !== "undefined")
 
     if (showWinnerCeremony) {
       const timer = setTimeout(() => setShowContent(true), 300)
@@ -151,6 +155,57 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     await navigator.clipboard.writeText(shareText)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  const copyImage = async () => {
+    if (!winner) return
+
+    try {
+      const ogParams = new URLSearchParams()
+      ogParams.set("name", winner.name)
+
+      let dateToUse = new Date()
+      if (winner.verificationId) {
+        try {
+          const parts = winner.verificationId.split('-')
+          if (parts.length >= 3) {
+            const timestampHex = parts[parts.length - 1]
+            const timestamp = parseInt(timestampHex, 16)
+            const d = new Date(timestamp)
+            if (!isNaN(d.getTime())) {
+              dateToUse = d
+            }
+          }
+        } catch (e) {}
+      }
+      ogParams.set("date", dateToUse.toISOString())
+
+      if (seoMode && seoMode !== 'home') {
+        ogParams.set("type", seoMode)
+      }
+      if (theme.customTitle) {
+        ogParams.set("title", theme.customTitle)
+      }
+      if (theme.primaryColor) {
+        ogParams.set("color", theme.primaryColor)
+      }
+
+      const imageUrl = `/api/og?${ogParams.toString()}`
+
+      const response = await fetch(imageUrl)
+      const blob = await response.blob()
+
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          [blob.type]: blob
+        })
+      ])
+
+      setCopiedImage(true)
+      setTimeout(() => setCopiedImage(false), 2000)
+    } catch (e) {
+      console.error("Failed to copy image", e)
+    }
   }
 
   const handleDownload = async () => {
@@ -377,6 +432,22 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                       </>
                     )}
                   </DropdownMenuItem>
+
+                  {canCopyImage && (
+                    <DropdownMenuItem onClick={copyImage} className="gap-2 cursor-pointer">
+                      {copiedImage ? (
+                        <>
+                          <Check className="w-4 h-4 text-green-500" />
+                          <span className="text-green-500">{t("image_copied")}</span>
+                        </>
+                      ) : (
+                        <>
+                          <ImageIcon className="w-4 h-4" />
+                          {t("copy_image")}
+                        </>
+                      )}
+                    </DropdownMenuItem>
+                  )}
 
                   {/* Semantic Fix: Real links for bots and users */}
                   <DropdownMenuItem asChild className="gap-2 cursor-pointer">

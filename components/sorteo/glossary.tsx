@@ -54,43 +54,13 @@ export function Glossary({ seoMode }: GlossaryProps) {
     },
     {
       id: "card",
-      term: t("term_9"),
-      definition: t("def_9"),
-    },
-    {
-      id: "dice",
-      term: t("term_9"),
-      definition: t("def_9"),
+      term: t("term_15"),
+      definition: t("def_15"),
     },
     {
       id: "bingo",
-      term: t("term_10"),
-      definition: t("def_10"),
-    },
-    {
-      id: "coin",
-      term: t("term_10"),
-      definition: t("def_10"),
-    },
-    {
-      id: "rps",
-      term: t("term_11"),
-      definition: t("def_11"),
-    },
-    {
-      id: "team",
-      term: t("term_12"),
-      definition: t("def_12"),
-    },
-    {
-      id: "country",
-      term: t("term_13"),
-      definition: t("def_13"),
-    },
-    {
-      id: "month",
-      term: t("term_14"),
-      definition: t("def_14"),
+      term: t("term_16"),
+      definition: t("def_16"),
     },
   ]
 
@@ -113,12 +83,6 @@ export function Glossary({ seoMode }: GlossaryProps) {
 
       // For other modes, maybe show related terms?
       // For now, keep it strict to avoid clutter.
-      if (seoMode === 'dice' && term.id === 'dice') return true;
-      if (seoMode === 'coin' && term.id === 'coin') return true;
-      if (seoMode === 'rps' && term.id === 'rps') return true;
-      if (seoMode === 'team' && term.id === 'team') return true;
-      if (seoMode === 'country' && term.id === 'country') return true;
-      if (seoMode === 'month' && term.id === 'month') return true;
 
       return false;
   });

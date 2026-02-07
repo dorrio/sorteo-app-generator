@@ -2,8 +2,6 @@ import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
-import { WheelGeoServer } from "@/components/sorteo/wheel-geo-server";
-import { Glossary } from "@/components/sorteo/glossary";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -16,7 +14,7 @@ type Props = {
 
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
-  const { template_title, template_color, list } = await searchParams;
+  const { template_title, template_color } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'WheelGeoPage' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
@@ -28,7 +26,6 @@ export async function generateMetadata({ params, searchParams }: Props) {
   // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
-  const listParam = typeof list === 'string' ? list : undefined;
 
   const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : t('title');
   const displayDescription = t('description');
@@ -37,14 +34,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
   ogImageUrl.searchParams.set('type', 'wheel');
   if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
-  if (listParam) ogImageUrl.searchParams.set('list', listParam);
 
   // Construct Canonical/Share URL for OG
   // This must include params so social bots scrape this specific dynamic version
   const shareUrl = new URL(`${baseUrl}/${locale}/wheel-of-names`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
-  if (listParam) shareUrl.searchParams.set('list', listParam);
 
   return {
     title: displayTitle,
@@ -131,10 +126,7 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp initialStyle="roulette" seoMode="wheel">
-        <WheelGeoServer />
-        <Glossary seoMode="wheel" />
-      </MainApp>
+      <MainApp initialStyle="roulette" seoMode="wheel" />
     </>
   );
 }

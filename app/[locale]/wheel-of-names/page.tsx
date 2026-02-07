@@ -2,6 +2,8 @@ import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
+import { WheelGeoServer } from "@/components/sorteo/wheel-geo-server";
+import { Glossary } from "@/components/sorteo/glossary";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -126,7 +128,10 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp initialStyle="roulette" seoMode="wheel" />
+      <MainApp initialStyle="roulette" seoMode="wheel">
+        <WheelGeoServer />
+        <Glossary seoMode="wheel" />
+      </MainApp>
     </>
   );
 }

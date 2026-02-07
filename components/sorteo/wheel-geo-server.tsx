@@ -1,14 +1,12 @@
-"use client"
-
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { Disc, Palette, ShieldCheck, Music, CheckCircle, HelpCircle, BookOpen } from "lucide-react"
 import { Link } from "@/i18n/routing"
 import { TryButton } from "./interactive/try-button"
 import { WheelVisual } from "./interactive/wheel-visual"
 
-export function WheelGeo() {
-  const t = useTranslations("WheelGeo")
-  const tFaq = useTranslations("WheelGeoPage")
+export async function WheelGeoServer() {
+  const t = await getTranslations("WheelGeo")
+  const tFaq = await getTranslations("WheelGeoPage")
 
   const features = [
     {

@@ -1,14 +1,21 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { Disc, Palette, ShieldCheck, Music, CheckCircle, HelpCircle, BookOpen } from "lucide-react"
+import { motion } from "framer-motion"
+import { Disc, Palette, ShieldCheck, Play, Music, CheckCircle, HelpCircle, BookOpen } from "lucide-react"
+import { useSorteoStore } from "@/lib/sorteo-store"
+import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/routing"
-import { TryButton } from "./interactive/try-button"
-import { WheelVisual } from "./interactive/wheel-visual"
 
 export function WheelGeo() {
   const t = useTranslations("WheelGeo")
+  const tSpecs = useTranslations("QuickSpecs")
   const tFaq = useTranslations("WheelGeoPage")
+  const { updateTheme } = useSorteoStore()
+
+  const handleTryWheel = () => {
+    updateTheme({ sorteoStyle: "roulette" })
+  }
 
   const features = [
     {
@@ -56,6 +63,9 @@ export function WheelGeo() {
     { name: t('how_to_step_4') },
   ]
 
+  // Schema for "Direct Answer" optimization
+  // Using FAQPage schema specifically for the "What is..." question
+  // Added HowTo schema
   const jsonLd = [
     {
         '@context': 'https://schema.org',
@@ -108,6 +118,31 @@ export function WheelGeo() {
              })}
            </p>
 
+           {/* Quick Specs Table (GEO Optimization) */}
+           <div className="mt-6 border border-border/60 rounded-xl overflow-hidden shadow-sm bg-card/40">
+                <div className="bg-primary/10 px-4 py-2 border-b border-border/60">
+                    <h3 className="font-semibold text-primary text-sm uppercase tracking-wide">{tSpecs("title")}</h3>
+                </div>
+                <dl className="divide-y divide-border/60">
+                    <div className="grid grid-cols-2 px-4 py-2 hover:bg-muted/30 transition-colors">
+                        <dt className="text-sm font-medium text-muted-foreground">{tSpecs("type")}</dt>
+                        <dd className="text-sm font-semibold">{tSpecs("type_picker")}</dd>
+                    </div>
+                    <div className="grid grid-cols-2 px-4 py-2 bg-muted/20 hover:bg-muted/30 transition-colors">
+                        <dt className="text-sm font-medium text-muted-foreground">{tSpecs("ads")}</dt>
+                        <dd className="text-sm font-bold text-green-600 dark:text-green-400">{tSpecs("ads_none")}</dd>
+                    </div>
+                    <div className="grid grid-cols-2 px-4 py-2 hover:bg-muted/30 transition-colors">
+                        <dt className="text-sm font-medium text-muted-foreground">{tSpecs("limit")}</dt>
+                        <dd className="text-sm font-semibold">{tSpecs("limit_unlimited")}</dd>
+                    </div>
+                    <div className="grid grid-cols-2 px-4 py-2 bg-muted/20 hover:bg-muted/30 transition-colors">
+                        <dt className="text-sm font-medium text-muted-foreground">{tSpecs("fairness")}</dt>
+                        <dd className="text-sm font-semibold">{tSpecs("fairness_provably")}</dd>
+                    </div>
+                </dl>
+           </div>
+
            <div className="space-y-4 pt-4">
               <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
                 {t('features_list')}
@@ -132,7 +167,16 @@ export function WheelGeo() {
               </div>
 
               <div className="pt-4">
-                <TryButton label={t('cta_button')} />
+                  <Button
+                    asChild
+                    onClick={handleTryWheel}
+                    className="gap-2 font-bold text-lg h-12 px-6 rounded-full shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
+                  >
+                    <a href="#sorteo-section">
+                      <Play className="w-5 h-5 fill-current" />
+                      {t('cta_button')}
+                    </a>
+                  </Button>
               </div>
            </div>
 
@@ -174,7 +218,22 @@ export function WheelGeo() {
 
         {/* Right: Visual Abstract (Placeholder or Icon Graphic) */}
         <div className="hidden md:flex justify-center items-center sticky top-24">
-            <WheelVisual label={t('cta_button')} />
+           <a
+             href="#sorteo-section"
+             className="relative w-64 h-64 rounded-full border-4 border-primary/20 flex items-center justify-center bg-card/50 backdrop-blur-sm cursor-pointer hover:scale-105 transition-transform"
+             onClick={handleTryWheel}
+           >
+                <span className="sr-only">{t('cta_button')}</span>
+                <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 rounded-full border-t-4 border-primary"
+                />
+                <Disc className="w-24 h-24 text-primary/50" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-background/50 rounded-full">
+                    <Play className="w-12 h-12 text-primary fill-current" />
+                </div>
+           </a>
         </div>
 
       </div>

@@ -53,31 +53,31 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
   const locale = useLocale()
 
-  if (!showWinnerCeremony || !winner) return null
+  const shouldShow = showWinnerCeremony && !!winner
 
   // Viral Optimization: Create a deep link to the verification page
   const baseUrl = typeof window !== "undefined" ? window.location.origin : ""
-  let shareUrl = winner.verificationId
+  let shareUrl = winner?.verificationId
     ? `${baseUrl}/${locale}/verify?id=${winner.verificationId}&name=${encodeURIComponent(winner.name)}`
     : typeof window !== "undefined" ? window.location.href : ""
 
   // Viralis: Append tool type context to maintain the loop
-  if (winner.verificationId && seoMode && seoMode !== 'home') {
+  if (winner?.verificationId && seoMode && seoMode !== 'home') {
       shareUrl += `&type=${seoMode}`
   }
 
   // Viralis: Append custom context (Title & Color) to make the share more specific
-  if (winner.verificationId && theme.customTitle) {
+  if (winner?.verificationId && theme.customTitle) {
       shareUrl += `&title=${encodeURIComponent(theme.customTitle)}`
   }
-  if (winner.verificationId && theme.primaryColor) {
+  if (winner?.verificationId && theme.primaryColor) {
       shareUrl += `&color=${encodeURIComponent(theme.primaryColor)}`
   }
 
   // Compelling share text
-  let shareText = t("share_text", { name: winner.name })
+  let shareText = t("share_text", { name: winner?.name || "" })
   if (theme.customTitle) {
-      shareText = t("share_text_custom", { name: winner.name, title: theme.customTitle })
+      shareText = t("share_text_custom", { name: winner?.name || "", title: theme.customTitle })
   }
 
   // Pre-calculate Social URLs for SEO (Link Juice) & Accessibility
@@ -270,6 +270,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
   return (
     <AnimatePresence>
+      {shouldShow && winner && (
       <motion.div
         className="fixed inset-0 z-50 flex items-center justify-center"
         initial={{ opacity: 0 }}
@@ -529,6 +530,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
           transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, delay: 0.5 }}
         />
       </motion.div>
+      )}
     </AnimatePresence>
   )
 }

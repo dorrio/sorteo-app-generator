@@ -4,27 +4,12 @@ import { useCallback, useEffect, useState, Suspense, useRef } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { useSorteoStore, type ThemeConfig } from "@/lib/sorteo-store"
+import { useSorteoStore } from "@/lib/sorteo-store"
 import { SorteoSelector } from "@/components/sorteo/sorteo-selector"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { ParticipantListSkeleton } from "@/components/sorteo/skeletons"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
-import { SeoContent } from "@/components/sorteo/seo-content"
-import { WheelGeo } from "@/components/sorteo/wheel-geo"
-import { RngGeo } from "@/components/sorteo/rng-geo"
-import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
-import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo"
-import { TeamGeo } from "@/components/sorteo/team-geo"
-import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
-import { LetterGeo } from "@/components/sorteo/letter-geo"
-import { DiceGeo } from "@/components/sorteo/dice-geo"
-import { CoinGeo } from "@/components/sorteo/coin-geo"
-import { RpsGeo } from "@/components/sorteo/rps-geo"
-import { CountryGeo } from "@/components/sorteo/country-geo"
-import { MonthGeo } from "@/components/sorteo/month-geo"
-import { Glossary } from "@/components/sorteo/glossary"
-import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
 import { SiteFooter } from "@/components/sorteo/site-footer"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
@@ -65,7 +50,7 @@ const FloatingBubbles = dynamic(
   { ssr: false }
 )
 
-function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: Partial<ThemeConfig>) => void }) {
+function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => void }) {
   const searchParams = useSearchParams()
 
   useEffect(() => {
@@ -73,7 +58,7 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: Partial<The
     const templateTitle = searchParams.get('template_title')
     const templateColor = searchParams.get('template_color')
 
-    const update: Partial<ThemeConfig> = {}
+    const update: any = {}
     if (templateTitle) update.customTitle = templateTitle
     if (templateColor) update.primaryColor = templateColor
 
@@ -113,9 +98,10 @@ function ListParamsHandler() {
 interface MainAppProps {
     initialStyle?: string;
     seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
+    children?: React.ReactNode;
 }
 
-export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
+export function MainAppOptimized({ initialStyle, seoMode = 'home', children }: MainAppProps) {
   const locale = useLocale()
   const t = useTranslations("HomePage")
   const tYesNo = useTranslations("YesNoPage")
@@ -141,7 +127,6 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const [hasWinnerCeremonyOpened, setHasWinnerCeremonyOpened] = useState(false)
   const [hasEditorOpened, setHasEditorOpened] = useState(false)
   const [hasVerifyModalOpened, setHasVerifyModalOpened] = useState(false)
-  const hasAutoPopulated = useRef(false)
 
   const {
     participants,
@@ -195,8 +180,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   useEffect(() => {
     setMounted(true)
     if (initialStyle) {
-        // Fix: Explicitly cast initialStyle to the correct union type
-        const update: Partial<ThemeConfig> = { sorteoStyle: initialStyle as ThemeConfig['sorteoStyle'] }
+        const update: any = { sorteoStyle: initialStyle }
         if (seoMode === 'yes-no') {
             update.customTitle = tYesNo('h1')
             update.customSubtitle = tYesNo('subtitle')
@@ -248,7 +232,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     // Check for initial population scenarios
     const shouldPopulate =
       (initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid') || (seoMode === 'country'))
-      && mounted && hasHydrated && participants.length === 0 && !hasAutoPopulated.current
+      && mounted && hasHydrated && participants.length === 0
 
     if (shouldPopulate) {
       if (seoMode === 'yes-no') {
@@ -290,7 +274,6 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                   { name: "Option 5" }
               ])
           }
-          hasAutoPopulated.current = true
       }
       // We only run this when mounted/hydrated changes to true, or initialStyle changes
       // We include participants.length in dependency to know if it's 0, but we should be careful not to loop.
@@ -299,7 +282,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
       // But for a landing page, maybe it's okay?
       // Actually, if user clears list, participants becomes 0, and this re-adds them. That's annoying.
       // We should use a ref to track if we've auto-populated.
-  }, [mounted, hasHydrated, initialStyle, seoMode, participants.length, addParticipants, locale, tYesNo, tCoin, tRps]) // Removed participants.length from dependency to avoid re-populating on clear
+  }, [mounted, hasHydrated, initialStyle, seoMode]) // Removed participants.length from dependency to avoid re-populating on clear
 
   const startSorteo = () => {
     if (participants.length < 2) return
@@ -435,7 +418,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
       share: tWinner('share_menu'),
       copy: tWinner('copy_text'),
       copied: tWinner('copied'),
-      shareOn: tWinner('share_on')
+      shareOn: "Share on"
   }
 
   const stickyTranslations = {
@@ -701,93 +684,8 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           </div>
         </main>
 
-        {/* SEO Content Conditional Rendering */}
-        {seoMode === 'wheel' ? (
-             /* Wheel Mode: Prioritize WheelGeo */
-             <>
-                <WheelGeo />
-                <Glossary seoMode={seoMode} />
-             </>
-        ) : seoMode === 'instagram' ? (
-             /* Instagram Mode: Show Instagram specific content */
-             <>
-                <InstagramGeo />
-                <Glossary seoMode={seoMode} />
-             </>
-        ) : seoMode === 'rng' ? (
-            /* RNG Mode: Show Random Number Generator content */
-            <>
-               <RngGeo />
-               <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'list-randomizer' ? (
-            /* List Randomizer Mode: Show List Randomizer content */
-            <>
-                <ListRandomizerGeo />
-                <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'secret-santa' ? (
-            /* Secret Santa Mode */
-            <>
-                <SecretSantaGeo />
-                <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'team' ? (
-            /* Team Mode */
-            <>
-                <TeamGeo />
-                <Glossary seoMode="list-randomizer" />
-            </>
-       ) : seoMode === 'yes-no' ? (
-            /* Yes/No Mode */
-            <>
-                <YesNoGeo />
-                <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'letter' ? (
-            /* Letter Mode */
-            <>
-                <LetterGeo />
-                <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'dice' ? (
-            /* Dice Mode */
-            <>
-                <DiceGeo />
-                <Glossary seoMode="rng" />
-            </>
-       ) : seoMode === 'coin' ? (
-            /* Coin Mode */
-            <>
-                <CoinGeo />
-                <Glossary seoMode="yes-no" />
-            </>
-       ) : seoMode === 'rps' ? (
-            /* RPS Mode */
-            <>
-                <RpsGeo />
-                <Glossary seoMode="yes-no" />
-            </>
-       ) : seoMode === 'country' ? (
-            /* Country Mode */
-            <>
-                <CountryGeo />
-                <Glossary seoMode="wheel" />
-            </>
-       ) : seoMode === 'month' ? (
-            /* Month Mode */
-            <>
-                <MonthGeo />
-                <Glossary seoMode="wheel" />
-            </>
-       ) : (
-            /* Home Mode: Show everything */
-            <>
-                <WheelGeo />
-                <Glossary seoMode={seoMode} />
-                <SeoContent />
-            </>
-        )}
+        {/* SEO Content Slot - Rendered by Server Component Parent */}
+        {children}
 
         {/* Footer */}
         <SiteFooter />

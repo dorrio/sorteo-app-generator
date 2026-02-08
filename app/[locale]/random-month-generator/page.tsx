@@ -1,9 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
-import { MonthGeo } from "@/components/sorteo/month-geo";
-import { Glossary } from "@/components/sorteo/glossary";
-import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -25,6 +22,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       ? `https://${process.env.VERCEL_URL}`
       : 'https://sorteopro.com';
 
+  // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
 
@@ -36,6 +34,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
 
+  // Construct Canonical/Share URL for OG
   const shareUrl = new URL(`${baseUrl}/${locale}/random-month-generator`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
@@ -76,8 +75,6 @@ export default async function MonthPage({ params }: { params: Promise<{ locale: 
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'MonthPage' });
   const tGeo = await getTranslations({ locale, namespace: 'MonthGeo' });
-  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
-  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -121,39 +118,17 @@ export default async function MonthPage({ params }: { params: Promise<{ locale: 
     }]
   };
 
-  const shareTranslations = {
-      share: tWinner('share_menu'),
-      copy: tWinner('copy_text'),
-      copied: tWinner('copied'),
-      shareOn: tWinner('share_on')
-  }
-
-  const stickyTranslations = {
-      share_cta: tShare('cta_share'),
-      start_cta: tShare('cta_start')
-  }
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp
-        initialStyle="roulette"
-        seoMode="month"
-        initialTitle={t('h1')}
-        initialSubtitle={t('subtitle')}
-        shareTitle={tShare('month_title')}
-        shareText={tShare('month_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
-        shareTranslations={shareTranslations}
-        stickyTranslations={stickyTranslations}
-        footer={<SiteFooter />}
-      >
-        <MonthGeo />
-        <Glossary seoMode="month" />
-      </MainApp>
+      {/*
+          initialStyle="roulette" - Fun visualization for months
+          seoMode="month" - Triggers MonthGeo and logic
+      */}
+      <MainApp initialStyle="roulette" seoMode="month" />
     </>
   );
 }

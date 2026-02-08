@@ -1,9 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
-import { RpsGeo } from "@/components/sorteo/rps-geo";
-import { Glossary } from "@/components/sorteo/glossary";
-import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -25,6 +22,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       ? `https://${process.env.VERCEL_URL}`
       : 'https://sorteopro.com';
 
+  // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
 
@@ -39,6 +37,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
   else ogImageUrl.searchParams.set('color', '#8b5cf6'); // Purple default
 
+  // Construct Canonical/Share URL for OG
   const shareUrl = new URL(`${baseUrl}/${locale}/rock-paper-scissors`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
@@ -79,8 +78,6 @@ export default async function RpsPage({ params }: { params: Promise<{ locale: st
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'RpsPage' });
   const tGeo = await getTranslations({ locale, namespace: 'RpsGeo' });
-  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
-  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -124,50 +121,13 @@ export default async function RpsPage({ params }: { params: Promise<{ locale: st
     }]
   };
 
-  const shareTranslations = {
-      share: tWinner('share_menu'),
-      copy: tWinner('copy_text'),
-      copied: tWinner('copied'),
-      shareOn: tWinner('share_on')
-  }
-
-  const stickyTranslations = {
-      share_cta: tShare('cta_share'),
-      start_cta: tShare('cta_start')
-  }
-
-  const initialOptions = {
-      yes: "",
-      no: "",
-      heads: "",
-      tails: "",
-      rock: t('option_rock'),
-      paper: t('option_paper'),
-      scissors: t('option_scissors')
-  }
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp
-        initialStyle="cards"
-        seoMode="rps"
-        initialTitle={t('h1')}
-        initialSubtitle={t('subtitle')}
-        shareTitle={tShare('rps_title')}
-        shareText={tShare('rps_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
-        shareTranslations={shareTranslations}
-        stickyTranslations={stickyTranslations}
-        initialOptions={initialOptions}
-        footer={<SiteFooter />}
-      >
-        <RpsGeo />
-        <Glossary seoMode="rps" />
-      </MainApp>
+      <MainApp initialStyle="cards" seoMode="rps" />
     </>
   );
 }

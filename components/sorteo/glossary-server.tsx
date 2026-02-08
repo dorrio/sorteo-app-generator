@@ -1,6 +1,4 @@
-"use client"
-
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
 
@@ -8,8 +6,8 @@ interface GlossaryProps {
   seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'dice' | 'coin' | 'rps' | 'team' | 'country' | 'month';
 }
 
-export function Glossary({ seoMode }: GlossaryProps) {
-  const t = useTranslations("Glossary")
+export async function GlossaryServer({ seoMode }: GlossaryProps) {
+  const t = await getTranslations("Glossary")
 
   const allTerms = [
     {

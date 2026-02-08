@@ -1,11 +1,12 @@
 "use client"
 
 import { useSorteoStore } from "@/lib/sorteo-store"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { Disc, Play } from "lucide-react"
 
 export function WheelVisual({ title = "Try Wheel" }: { title?: string }) {
   const { updateTheme } = useSorteoStore()
+  const shouldReduceMotion = useReducedMotion()
 
   const handleTryIt = () => {
     updateTheme({ sorteoStyle: "roulette" })
@@ -23,8 +24,8 @@ export function WheelVisual({ title = "Try Wheel" }: { title?: string }) {
       >
         <span className="sr-only">{title}</span>
         <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            animate={shouldReduceMotion ? {} : { rotate: 360 }}
+            transition={shouldReduceMotion ? {} : { duration: 20, repeat: Infinity, ease: "linear" }}
             className="absolute inset-0 rounded-full border-t-4 border-primary"
         />
         <Disc className="w-24 h-24 text-primary/50" />

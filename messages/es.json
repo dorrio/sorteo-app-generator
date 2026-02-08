@@ -49,7 +49,7 @@
             "versus_wheel": "Alternativa a Wheel of Names",
             "versus_random": "Alternativa a Random.org",
             "glossary": "Glosario",
-            "month": "Generador de Mes Aleatorio"
+            "month": "Random Month Generator"
         }
     },
     "QuickSpecs": {
@@ -213,8 +213,8 @@
         "share_menu": "Compartir...",
         "copied": "¡Copiado!",
         "copy_text": "Copiar Enlace",
-        "copy_image": "Copiar Imagen",
-        "image_copied": "¡Imagen Copiada!",
+        "copy_image": "Copy Image",
+        "image_copied": "Image Copied!",
         "download_certificate": "Descargar Certificado",
         "new_giveaway": "Nuevo Sorteo",
         "close": "Cerrar"
@@ -259,8 +259,8 @@
         "create_your_own": "🚀 Crear Sorteo Gratis",
         "share_button": "Compartir Prueba",
         "download_certificate": "Descargar Certificado",
-        "copy_image": "Copiar Imagen",
-        "image_copied": "¡Imagen Copiada!",
+        "copy_image": "Copy Image",
+        "image_copied": "Image Copied!",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* es el GANADOR!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* ganó *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "result": {
@@ -754,7 +754,7 @@
         "month_title": "Generador de Mes Aleatorio | Sorteo Pro",
         "month_text": "📅 ¡Acabo de elegir un mes al azar! Justo y Gratis. 👇",
         "cta_share": "Compartir",
-        "cta_start": "Empezar"
+        "cta_start": "Start Giveaway"
     },
     "CountryPage": {
         "title": "Generador de Países Aleatorios | Elegir País al Azar",

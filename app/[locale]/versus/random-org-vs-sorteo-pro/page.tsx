@@ -93,6 +93,7 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
 
   return (
     <>
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, faqSchema]) }}

@@ -141,6 +141,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const [hasWinnerCeremonyOpened, setHasWinnerCeremonyOpened] = useState(false)
   const [hasEditorOpened, setHasEditorOpened] = useState(false)
   const [hasVerifyModalOpened, setHasVerifyModalOpened] = useState(false)
+  const hasAutoPopulated = useRef(false)
 
   const {
     participants,
@@ -246,7 +247,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     // Check for initial population scenarios
     const shouldPopulate =
       (initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid') || (seoMode === 'country'))
-      && mounted && hasHydrated && participants.length === 0
+      && mounted && hasHydrated && participants.length === 0 && !hasAutoPopulated.current
 
     if (shouldPopulate) {
       if (seoMode === 'yes-no') {
@@ -288,6 +289,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
                   { name: "Option 5" }
               ])
           }
+          hasAutoPopulated.current = true
       }
       // We only run this when mounted/hydrated changes to true, or initialStyle changes
       // We include participants.length in dependency to know if it's 0, but we should be careful not to loop.
@@ -296,7 +298,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
       // But for a landing page, maybe it's okay?
       // Actually, if user clears list, participants becomes 0, and this re-adds them. That's annoying.
       // We should use a ref to track if we've auto-populated.
-  }, [mounted, hasHydrated, initialStyle, seoMode]) // Removed participants.length from dependency to avoid re-populating on clear
+  }, [mounted, hasHydrated, initialStyle, seoMode, participants.length, addParticipants, locale, tYesNo, tCoin, tRps]) // Removed participants.length from dependency to avoid re-populating on clear
 
   const startSorteo = () => {
     if (participants.length < 2) return

@@ -50,7 +50,14 @@ export function VerifyContent() {
 
     useEffect(() => {
         setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
-        setCanCopyImage(typeof ClipboardItem !== "undefined")
+
+        // Strict Clipboard Verification
+        const hasClipboardItem = typeof ClipboardItem !== "undefined"
+        const hasNavigator = typeof navigator !== "undefined"
+        const hasClipboardWrite = hasNavigator && !!navigator.clipboard && typeof navigator.clipboard.write === "function"
+        const isSecure = typeof window !== "undefined" && window.isSecureContext
+
+        setCanCopyImage(hasClipboardItem && hasClipboardWrite && isSecure)
 
         // Show sticky CTA on scroll if result is visible
         const handleScroll = () => {

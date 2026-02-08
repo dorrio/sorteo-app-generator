@@ -56,16 +56,16 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
     headline: t('title'),
     description: t('description'),
     author: {
-        '@type': 'Organization',
-        name: 'Sorteo Pro'
+      '@type': 'Organization',
+      name: 'Sorteo Pro'
     },
     publisher: {
-        '@type': 'Organization',
-        name: 'Sorteo Pro',
-        logo: {
-            '@type': 'ImageObject',
-            url: 'https://sorteopro.com/logo.png'
-        }
+      '@type': 'Organization',
+      name: 'Sorteo Pro',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://sorteopro.com/logo.png'
+      }
     }
   };
 
@@ -73,21 +73,21 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
-        {
-            '@type': 'Question',
-            name: t('faq.q1'),
-            acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a1') }
-        },
-        {
-            '@type': 'Question',
-            name: t('faq.q2'),
-            acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a2') }
-        },
-        {
-            '@type': 'Question',
-            name: t('faq.q3'),
-            acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a3') }
-        }
+      {
+        '@type': 'Question',
+        name: t('faq.q1'),
+        acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a1') }
+      },
+      {
+        '@type': 'Question',
+        name: t('faq.q2'),
+        acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a2') }
+      },
+      {
+        '@type': 'Question',
+        name: t('faq.q3'),
+        acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a3') }
+      }
     ]
   };
 
@@ -101,7 +101,7 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
          Strategy: Use the functional MainApp (RNG mode) at the top so users can try it immediately.
          "seoMode='rng'" ensures correct branding (titles) for RNG context.
       */}
-      <MainApp initialStyle="slot_machine" seoMode="rng" />
+      <MainApp initialStyle="slot-machine" seoMode="rng" />
 
       {/* The Comparison Content (Random namespace) */}
       <VersusGeo namespace="VersusRandom" />

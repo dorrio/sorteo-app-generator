@@ -44,7 +44,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
     description: displayDescription,
     keywords: ["instagram comment picker", "free instagram giveaway", "instagram winner picker", "instagram giveaway tool", "sorteo instagram gratis", "no login giveaway"],
     alternates: {
-        canonical: `/${locale}/instagram-comment-picker`
+      canonical: `/${locale}/instagram-comment-picker`
     },
     openGraph: {
       title: displayTitle,
@@ -115,7 +115,7 @@ export default async function InstagramPickerPage({ params }: { params: Promise<
       "position": 1,
       "name": "Sorteo Pro",
       "item": `${baseUrl}/${locale}`
-    },{
+    }, {
       "@type": "ListItem",
       "position": 2,
       "name": t('h1'),
@@ -129,7 +129,7 @@ export default async function InstagramPickerPage({ params }: { params: Promise<
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp initialStyle="list" seoMode="instagram" />
+      <MainApp seoMode="instagram" />
     </>
   );
 }

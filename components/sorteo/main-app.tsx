@@ -67,9 +67,9 @@ const FloatingBubbles = dynamic(
   { ssr: false }
 )
 
-import { SorteoTheme } from "@/lib/sorteo-store"
+import { ThemeConfig } from "@/lib/sorteo-store"
 
-function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: Partial<SorteoTheme>) => void }) {
+function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: Partial<ThemeConfig>) => void }) {
   const searchParams = useSearchParams()
 
   useEffect(() => {
@@ -77,7 +77,7 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: Partial<Sor
     const templateTitle = searchParams.get('template_title')
     const templateColor = searchParams.get('template_color')
 
-    const update: Partial<SorteoTheme> = {}
+    const update: Partial<ThemeConfig> = {}
     if (templateTitle) update.customTitle = templateTitle
     if (templateColor) update.primaryColor = templateColor
 
@@ -115,7 +115,7 @@ function ListParamsHandler() {
 }
 
 interface MainAppProps {
-  initialStyle?: string;
+  initialStyle?: ThemeConfig["sorteoStyle"];
   seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
 }
 
@@ -172,11 +172,11 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     if (contentRef.current) {
       if (isOverlayOpen) {
         contentRef.current.setAttribute('inert', '')
-        // @ts-expect-error - 'inert' is not yet in the HTML definition but supported in modern browsers
+
         contentRef.current.inert = true
       } else {
         contentRef.current.removeAttribute('inert')
-        // @ts-expect-error - 'inert' is not yet in the HTML definition but supported in modern browsers
+
         contentRef.current.inert = false
       }
     }
@@ -185,7 +185,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   useEffect(() => {
     setMounted(true)
     if (initialStyle) {
-      const update: Partial<SorteoTheme> = { sorteoStyle: initialStyle }
+      const update: Partial<ThemeConfig> = { sorteoStyle: initialStyle }
       if (seoMode === 'yes-no') {
         update.customTitle = tYesNo('h1')
         update.customSubtitle = tYesNo('subtitle')

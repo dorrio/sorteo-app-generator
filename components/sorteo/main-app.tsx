@@ -6,10 +6,15 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { SorteoSelector } from "@/components/sorteo/sorteo-selector"
+import { ParticipantManager } from "@/components/sorteo/participant-manager"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
-import { ParticipantListSkeleton } from "@/components/sorteo/skeletons"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
+import { SeoContent } from "@/components/sorteo/seo-content"
+// Imports from main that we might need or not (most are handled by children now)
+// We only need the ones for data generation if they were used there, but they weren't.
+// However, we DO need to ensure we support the new modes.
+
 import { ShareButton } from "@/components/ui/share-button"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { COUNTRIES } from "@/lib/countries"
@@ -18,14 +23,14 @@ import { useTranslations, useLocale } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
 
+const CARD_SUITS = ['♠', '♥', '♦', '♣']
+const CARD_RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+const CARD_DECK = CARD_SUITS.flatMap(suit => CARD_RANKS.map(rank => `${rank}${suit}`))
+const BINGO_NUMBERS = Array.from({ length: 75 }, (_, i) => (i + 1).toString())
+
 const ParticleBackground = dynamic(
   () => import("@/components/sorteo/particle-background").then((mod) => mod.ParticleBackground),
   { ssr: false }
-)
-
-const ParticipantManager = dynamic(
-  () => import("@/components/sorteo/participant-manager").then((mod) => mod.ParticipantManager),
-  { ssr: false, loading: ParticipantListSkeleton }
 )
 
 const VisualEditor = dynamic(
@@ -49,7 +54,9 @@ const FloatingBubbles = dynamic(
   { ssr: false }
 )
 
-function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => void }) {
+import { ThemeConfig } from "@/lib/sorteo-store"
+
+function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: Partial<ThemeConfig>) => void }) {
   const searchParams = useSearchParams()
 
   useEffect(() => {
@@ -57,7 +64,7 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => voi
     const templateTitle = searchParams.get('template_title')
     const templateColor = searchParams.get('template_color')
 
-    const update: any = {}
+    const update: Partial<ThemeConfig> = {}
     if (templateTitle) update.customTitle = templateTitle
     if (templateColor) update.primaryColor = templateColor
 
@@ -95,72 +102,71 @@ function ListParamsHandler() {
 }
 
 interface MainAppProps {
-    initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
-    children?: React.ReactNode;
-    initialTitle?: string;
-    initialSubtitle?: string;
-    shareTitle?: string;
-    shareText?: string;
-    customShareTextTemplate?: string;
-    footer?: React.ReactNode;
-    shareTranslations?: {
-        share: string;
-        copy: string;
-        copied: string;
-        shareOn: string;
-    };
-    stickyTranslations?: {
-        share_cta: string;
-        start_cta: string;
-    };
-    // Translations for initial population (options)
-    initialOptions?: {
-        yes: string;
-        no: string;
-        heads: string;
-        tails: string;
-        rock: string;
-        paper: string;
-        scissors: string;
-    };
+  initialStyle?: string;
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
+  children?: React.ReactNode;
+  initialTitle?: string;
+  initialSubtitle?: string;
+  shareTitle?: string;
+  shareText?: string;
+  customShareTextTemplate?: string;
+  footer?: React.ReactNode;
+  shareTranslations?: {
+    share: string;
+    copy: string;
+    copied: string;
+    shareOn: string;
+  };
+  stickyTranslations?: {
+    share_cta: string;
+    start_cta: string;
+  };
+  // Translations for initial population (options)
+  initialOptions?: {
+    yes: string;
+    no: string;
+    heads: string;
+    tails: string;
+    rock: string;
+    paper: string;
+    scissors: string;
+    // Generators that might simply get passed translated strings or just use defaults
+  };
 }
 
 export function MainApp({
-    initialStyle,
-    seoMode = 'home',
-    children,
-    initialTitle,
-    initialSubtitle,
-    shareTitle = "Sorteo Pro",
-    shareText = "Sorteo Pro",
-    customShareTextTemplate = "🔥 Join my giveaway: *{title}*! Created with Sorteo Pro. Free & Unlimited. 👇",
-    footer,
-    shareTranslations = {
-        share: "Share...",
-        copy: "Copy Link",
-        copied: "Copied!",
-        shareOn: "Share on"
-    },
-    stickyTranslations = {
-        share_cta: "Share Tool",
-        start_cta: "Start Giveaway"
-    },
-    initialOptions
+  initialStyle,
+  seoMode = 'home',
+  children,
+  initialTitle,
+  initialSubtitle,
+  shareTitle = "Sorteo Pro",
+  shareText = "Sorteo Pro",
+  customShareTextTemplate = "🔥 Join my giveaway: *{title}*! Created with Sorteo Pro. Free & Unlimited. 👇",
+  footer,
+  shareTranslations = {
+    share: "Share...",
+    copy: "Copy Link",
+    copied: "Copied!",
+    shareOn: "Share on"
+  },
+  stickyTranslations = {
+    share_cta: "Share Tool",
+    start_cta: "Start Giveaway"
+  },
+  initialOptions
 }: MainAppProps) {
   const locale = useLocale()
   const t = useTranslations("HomePage")
   const [mounted, setMounted] = useState(false)
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
 
-  // Lazy loading states for modals
-  const [hasWinnerCeremonyOpened, setHasWinnerCeremonyOpened] = useState(false)
-  const [hasEditorOpened, setHasEditorOpened] = useState(false)
-  const [hasVerifyModalOpened, setHasVerifyModalOpened] = useState(false)
-
   const {
     participants,
     addParticipants,
+    clearParticipants,
+    activeTool,
+    setActiveTool,
     theme,
     isSpinning,
     setIsSpinning,
@@ -184,96 +190,105 @@ export function MainApp({
     if (contentRef.current) {
       if (isOverlayOpen) {
         contentRef.current.setAttribute('inert', '')
-        // @ts-ignore
+
         contentRef.current.inert = true
       } else {
         contentRef.current.removeAttribute('inert')
-        // @ts-ignore
+
         contentRef.current.inert = false
       }
     }
   }, [isOverlayOpen])
 
-  // Lazy Load Triggers
-  useEffect(() => {
-    if (showWinnerCeremony) setHasWinnerCeremonyOpened(true)
-  }, [showWinnerCeremony])
-
-  useEffect(() => {
-    if (isEditorOpen) setHasEditorOpened(true)
-  }, [isEditorOpen])
-
-  useEffect(() => {
-    if (isVerifyModalOpen) setHasVerifyModalOpened(true)
-  }, [isVerifyModalOpen])
-
   useEffect(() => {
     setMounted(true)
     if (initialStyle) {
-        const update: any = { sorteoStyle: initialStyle }
+      const update: any = { sorteoStyle: initialStyle }
 
-        // Initialize custom title from props if available
-        if (initialTitle) {
-            update.customTitle = initialTitle
-        }
-        if (initialSubtitle) {
-            update.customSubtitle = initialSubtitle
-        }
+      // Initialize custom title from props if available
+      if (initialTitle) {
+        update.customTitle = initialTitle
+      }
+      if (initialSubtitle) {
+        update.customSubtitle = initialSubtitle
+      }
 
-        updateTheme(update)
+      updateTheme(update)
     }
   }, [initialStyle, updateTheme, initialTitle, initialSubtitle])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
   useEffect(() => {
-    // Check for initial population scenarios
-    const shouldPopulate =
-      (initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid') || (seoMode === 'country'))
-      && mounted && hasHydrated && participants.length === 0
+    if (!mounted || !hasHydrated) return
+
+    // Detect if we just navigated to a new mode
+    const modeChanged = activeTool !== seoMode
+
+    const isEmpty = participants.length === 0
+    const isPresetTool = ['card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter', 'yes-no'].includes(seoMode)
+
+    // We populate if:
+    // 1. The list is empty (standard behavior)
+    // 2. OR we are switching to a "Preset Tool" (Generator), forcing a reset to ensure correct dataset.
+    const shouldPopulate = isEmpty || (modeChanged && isPresetTool)
 
     if (shouldPopulate) {
+      if (!isEmpty && modeChanged && isPresetTool) {
+        clearParticipants()
+      }
+
       if (seoMode === 'yes-no' && initialOptions) {
         addParticipants([
           { name: initialOptions.yes },
           { name: initialOptions.no }
         ])
       } else if (seoMode === 'coin' && initialOptions) {
-              addParticipants([
-                  { name: initialOptions.heads },
-                  { name: initialOptions.tails }
-              ])
-          } else if (seoMode === 'rps' && initialOptions) {
-              addParticipants([
-                  { name: initialOptions.rock },
-                  { name: initialOptions.paper },
-                  { name: initialOptions.scissors }
-              ])
-          } else if (seoMode === 'letter') {
-              const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
-              addParticipants(alphabet.map(l => ({ name: l })))
-          } else if (seoMode === 'dice') {
-              addParticipants(["1", "2", "3", "4", "5", "6"].map(n => ({ name: n })))
-          } else if (seoMode === 'month') {
-              const months = Array.from({ length: 12 }, (_, i) => {
-                  return new Date(2024, i, 1).toLocaleString(locale, { month: 'long' })
-              })
-              // Capitalize first letter as Intl returns lowercase in some locales
-              const capitalizedMonths = months.map(m => m.charAt(0).toUpperCase() + m.slice(1))
-              addParticipants(capitalizedMonths.map(m => ({ name: m })))
-          } else if (seoMode === 'country') {
-                  addParticipants(COUNTRIES.map(c => ({ name: c })))
-          } else {
-              addParticipants([
-                  { name: "Option 1" },
-                  { name: "Option 2" },
-                  { name: "Option 3" },
-                  { name: "Option 4" },
-                  { name: "Option 5" }
-              ])
-          }
+        addParticipants([
+          { name: initialOptions.heads },
+          { name: initialOptions.tails }
+        ])
+      } else if (seoMode === 'rps' && initialOptions) {
+        addParticipants([
+          { name: initialOptions.rock },
+          { name: initialOptions.paper },
+          { name: initialOptions.scissors }
+        ])
+      } else if (seoMode === 'letter') {
+        const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
+        addParticipants(alphabet.map(l => ({ name: l })))
+      } else if (seoMode === 'dice') {
+        addParticipants(["1", "2", "3", "4", "5", "6"].map(n => ({ name: n })))
+      } else if (seoMode === 'month') {
+        const months = Array.from({ length: 12 }, (_, i) => {
+          return new Date(2024, i, 1).toLocaleString(locale, { month: 'long' })
+        })
+        // Capitalize first letter as Intl returns lowercase in some locales
+        const capitalizedMonths = months.map(m => m.charAt(0).toUpperCase() + m.slice(1))
+        addParticipants(capitalizedMonths.map(m => ({ name: m })))
+      } else if (seoMode === 'country') {
+        addParticipants(COUNTRIES.map(c => ({ name: c })))
+      } else if (seoMode === 'bingo') {
+        addParticipants(BINGO_NUMBERS.map(n => ({ name: n })))
+      } else if (seoMode === 'card') {
+        addParticipants(CARD_DECK.map(c => ({ name: c })))
+      } else if (isEmpty && !isPresetTool) {
+        // Ensure we don't double populate if it WAS a preset tool
+        addParticipants([
+          { name: "Option 1" },
+          { name: "Option 2" },
+          { name: "Option 3" },
+          { name: "Option 4" },
+          { name: "Option 5" }
+        ])
       }
-  }, [mounted, hasHydrated, initialStyle, seoMode, initialOptions])
+    }
+
+    if (modeChanged) {
+      setActiveTool(seoMode)
+    }
+
+  }, [mounted, hasHydrated, initialStyle, seoMode, initialOptions, activeTool, setActiveTool, locale, addParticipants, clearParticipants])
 
   const startSorteo = () => {
     if (participants.length < 2) return
@@ -300,56 +315,60 @@ export function MainApp({
 
   // Determine share content based on seoMode
   const getShareContent = () => {
-      let finalShareText = shareText
-      let url = typeof window !== "undefined" ? window.location.href : ""
+    let finalShareText = shareText
+    let url = typeof window !== "undefined" ? window.location.href : ""
 
-      const defaultTitle = initialTitle || "Sorteo Pro"
-      const isCustomTitle = theme.customTitle && theme.customTitle !== defaultTitle
+    const defaultTitle = initialTitle || "Sorteo Pro"
+    const isCustomTitle = theme.customTitle && theme.customTitle !== defaultTitle
 
-      if (typeof window !== "undefined") {
-        try {
-          const urlObj = new URL(window.location.href)
+    if (typeof window !== "undefined") {
+      try {
+        const urlObj = new URL(window.location.href)
 
-          // 1. Branding: Custom Title & Color
-          if (isCustomTitle && theme.customTitle) {
-            finalShareText = customShareTextTemplate.replace('{title}', theme.customTitle)
+        // 1. Branding: Custom Title & Color
+        if (isCustomTitle && theme.customTitle) {
+          finalShareText = customShareTextTemplate.replace('{title}', theme.customTitle)
 
-            urlObj.searchParams.set('template_title', theme.customTitle)
-            if (theme.primaryColor) {
-              urlObj.searchParams.set('template_color', theme.primaryColor)
-            }
+          urlObj.searchParams.set('template_title', theme.customTitle)
+          if (theme.primaryColor) {
+            urlObj.searchParams.set('template_color', theme.primaryColor)
           }
-
-          // 2. Content: Shareable Participant List (Deep Linking)
-          if (participants.length > 0 && participants.length <= 100) {
-            // We only share the list if it fits within URL limits
-            const names = participants.map(p => p.name)
-            const encoded = encodeURIComponent(JSON.stringify(names))
-            // Safety limit for URL length (browser limits usually ~2000)
-            if (encoded.length < 1500) {
-              urlObj.searchParams.set('list', encoded)
-            }
-          }
-
-          url = urlObj.toString()
-        } catch (e) {
-          // Fallback to current url if parsing fails
         }
-      }
 
-      return {
+        // 2. Content: Shareable Participant List (Deep Linking)
+        if (participants.length > 0 && participants.length <= 100) {
+          // We only share the list if it fits within URL limits
+          const names = participants.map(p => p.name)
+          const encoded = encodeURIComponent(JSON.stringify(names))
+          // Safety limit for URL length (browser limits usually ~2000)
+          if (encoded.length < 1500) {
+            urlObj.searchParams.set('list', encoded)
+          }
+        }
+
+        return {
           title: shareTitle,
           text: finalShareText,
-          url: url
+          url: urlObj.toString()
+        }
+      } catch (e) {
+        // Fallback to current url if parsing fails
       }
+    }
+
+    return {
+      title: shareTitle,
+      text: shareText,
+      url: url
+    }
   }
 
   const shareContent = getShareContent()
 
   // Full Sticky Translations Object
   const fullStickyTranslations = {
-      ...stickyTranslations,
-      share_button: shareTranslations
+    ...stickyTranslations,
+    share_button: shareTranslations
   }
 
   // Server-Side Rendering (SSR) & Initial Client Render
@@ -385,16 +404,6 @@ export function MainApp({
             }}
           />
         </div>
-      )}
-
-      {theme.backgroundImage && (
-        <div
-          className="fixed inset-0 z-0"
-          style={{
-            backgroundColor: theme.backgroundColor,
-            opacity: 0.7,
-          }}
-        />
       )}
 
       {/* Particle background */}
@@ -445,10 +454,10 @@ export function MainApp({
 
               {/* Viralis: Added Share Button in Header */}
               <ShareButton
-                  title={shareContent.title}
-                  text={shareContent.text}
-                  url={shareContent.url}
-                  translations={shareTranslations}
+                title={shareContent.title}
+                text={shareContent.text}
+                url={shareContent.url}
+                translations={shareTranslations}
               />
 
               <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title="Verificar Sorteo" aria-label={t("verify_sorteo")}>
@@ -573,17 +582,13 @@ export function MainApp({
         {/* Footer */}
         {footer}
         <StickyShareFooter shareContent={shareContent} translations={fullStickyTranslations} />
-      </div>
+      </div >
 
       {/* Overlays */}
-      <CountdownAnimation onComplete={handleCountdownComplete} />
-      {hasWinnerCeremonyOpened && (
-        <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} seoMode={seoMode} />
-      )}
-      {hasEditorOpened && <VisualEditor />}
-      {hasVerifyModalOpened && (
-        <VerificationModal isOpen={isVerifyModalOpen} onClose={() => setIsVerifyModalOpen(false)} />
-      )}
-    </div>
+      < CountdownAnimation onComplete={handleCountdownComplete} />
+      <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} seoMode={seoMode} />
+      <VisualEditor />
+      <VerificationModal isOpen={isVerifyModalOpen} onClose={() => setIsVerifyModalOpen(false)} />
+    </div >
   )
 }

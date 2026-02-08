@@ -45,7 +45,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
     description: displayDescription,
     keywords: ["instagram comment picker", "free instagram giveaway", "instagram winner picker", "instagram giveaway tool", "sorteo instagram gratis", "no login giveaway"],
     alternates: {
-        canonical: `/${locale}/instagram-comment-picker`
+      canonical: `/${locale}/instagram-comment-picker`
     },
     openGraph: {
       title: displayTitle,
@@ -117,7 +117,7 @@ export default async function InstagramPickerPage({ params }: { params: Promise<
       "position": 1,
       "name": "Sorteo Pro",
       "item": `${baseUrl}/${locale}`
-    },{
+    }, {
       "@type": "ListItem",
       "position": 2,
       "name": t('h1'),
@@ -126,15 +126,15 @@ export default async function InstagramPickerPage({ params }: { params: Promise<
   };
 
   const shareTranslations = {
-      share: tWinner('share_menu'),
-      copy: tWinner('copy_text'),
-      copied: tWinner('copied'),
-      shareOn: tWinner('share_on')
+    share: tWinner('share_menu'),
+    copy: tWinner('copy_text'),
+    copied: tWinner('copied'),
+    shareOn: tWinner('share_on')
   }
 
   const stickyTranslations = {
-      share_cta: tShare('cta_share'),
-      start_cta: tShare('cta_start')
+    share_cta: tShare('cta_share'),
+    start_cta: tShare('cta_start')
   }
 
   return (

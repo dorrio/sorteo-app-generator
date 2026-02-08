@@ -116,7 +116,7 @@ export default async function CountryGeneratorPage({ params }: { params: Promise
       "position": 1,
       "name": "Sorteo Pro",
       "item": `${baseUrl}/${locale}`
-    },{
+    }, {
       "@type": "ListItem",
       "position": 2,
       "name": "Random Country Generator",
@@ -125,15 +125,15 @@ export default async function CountryGeneratorPage({ params }: { params: Promise
   };
 
   const shareTranslations = {
-      share: tWinner('share_menu'),
-      copy: tWinner('copy_text'),
-      copied: tWinner('copied'),
-      shareOn: tWinner('share_on')
+    share: tWinner('share_menu'),
+    copy: tWinner('copy_text'),
+    copied: tWinner('copied'),
+    shareOn: tWinner('share_on')
   }
 
   const stickyTranslations = {
-      share_cta: tShare('cta_share'),
-      start_cta: tShare('cta_start')
+    share_cta: tShare('cta_share'),
+    start_cta: tShare('cta_start')
   }
 
   return (

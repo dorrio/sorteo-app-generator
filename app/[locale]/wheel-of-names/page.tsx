@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
-import { WheelGeoServer } from "@/components/sorteo/wheel-geo-server";
+import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
 
@@ -16,7 +16,7 @@ type Props = {
 
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
-  const { template_title, template_color, list } = await searchParams;
+  const { template_title, template_color } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'WheelGeoPage' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
@@ -27,7 +27,6 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
-  const listParam = typeof list === 'string' ? list : undefined;
 
   const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : t('title');
   const displayDescription = t('description');
@@ -36,12 +35,10 @@ export async function generateMetadata({ params, searchParams }: Props) {
   ogImageUrl.searchParams.set('type', 'wheel');
   if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
-  if (listParam) ogImageUrl.searchParams.set('list', listParam);
 
   const shareUrl = new URL(`${baseUrl}/${locale}/wheel-of-names`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
-  if (listParam) shareUrl.searchParams.set('list', listParam);
 
   return {
     title: displayTitle,
@@ -116,7 +113,7 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
       "position": 1,
       "name": "Sorteo Pro",
       "item": `${baseUrl}/${locale}`
-    },{
+    }, {
       "@type": "ListItem",
       "position": 2,
       "name": t('h1'),
@@ -125,15 +122,15 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
   };
 
   const shareTranslations = {
-      share: tWinner('share_menu'),
-      copy: tWinner('copy_text'),
-      copied: tWinner('copied'),
-      shareOn: tWinner('share_on')
+    share: tWinner('share_menu'),
+    copy: tWinner('copy_text'),
+    copied: tWinner('copied'),
+    shareOn: tWinner('share_on')
   }
 
   const stickyTranslations = {
-      share_cta: tShare('cta_share'),
-      start_cta: tShare('cta_start')
+    share_cta: tShare('cta_share'),
+    start_cta: tShare('cta_start')
   }
 
   return (
@@ -154,7 +151,7 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}
       >
-        <WheelGeoServer />
+        <WheelGeo />
         <Glossary seoMode="wheel" />
       </MainApp>
     </>

@@ -64,37 +64,62 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function SorteoApp({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
   const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
 
   // Reuse existing share logic (Home has generic share content)
   const shareTranslations = {
-      share: tWinner('share_menu'),
-      copy: tWinner('copy_text'),
-      copied: tWinner('copied'),
-      shareOn: tWinner('share_on')
+    share: tWinner('share_menu'),
+    copy: tWinner('copy_text'),
+    copied: tWinner('copied'),
+    shareOn: tWinner('share_on')
   }
 
   const stickyTranslations = {
-      share_cta: tShare('cta_share'),
-      start_cta: tShare('cta_start')
+    share_cta: tShare('cta_share'),
+    start_cta: tShare('cta_start')
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
+    ? process.env.NEXT_PUBLIC_APP_URL
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'https://sorteopro.com';
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Sorteo Pro",
+      "item": `${baseUrl}/${locale}`
+    }]
+  };
+
   return (
-    <MainApp
-      seoMode="home"
-      initialTitle="Sorteo Pro"
-      initialSubtitle="The Premium Giveaway Tool"
-      shareTitle={tShare('home_title')}
-      shareText={tShare('home_text')}
-      customShareTextTemplate={tShare('custom_share_text')}
-      shareTranslations={shareTranslations}
-      stickyTranslations={stickyTranslations}
-      footer={<SiteFooter />}
-    >
-      <WheelGeo />
-      <Glossary seoMode="home" />
-      <SeoContent />
-    </MainApp>
+    <>
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <MainApp
+        seoMode="home"
+        initialTitle="Sorteo Pro"
+        initialSubtitle="The Premium Giveaway Tool"
+        shareTitle={tShare('home_title')}
+        shareText={tShare('home_text')}
+        customShareTextTemplate={tShare('custom_share_text')}
+        shareTranslations={shareTranslations}
+        stickyTranslations={stickyTranslations}
+        footer={<SiteFooter />}
+      >
+        <WheelGeo />
+        <Glossary seoMode="home" />
+        <SeoContent />
+      </MainApp>
+    </>
   )
 }

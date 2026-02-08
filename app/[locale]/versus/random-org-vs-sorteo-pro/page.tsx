@@ -61,16 +61,16 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
     headline: t('title'),
     description: t('description'),
     author: {
-        '@type': 'Organization',
-        name: 'Sorteo Pro'
+      '@type': 'Organization',
+      name: 'Sorteo Pro'
     },
     publisher: {
-        '@type': 'Organization',
-        name: 'Sorteo Pro',
-        logo: {
-            '@type': 'ImageObject',
-            url: 'https://sorteopro.com/logo.png'
-        }
+      '@type': 'Organization',
+      name: 'Sorteo Pro',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://sorteopro.com/logo.png'
+      }
     }
   };
 
@@ -78,34 +78,34 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
-        {
-            '@type': 'Question',
-            name: t('faq.q1'),
-            acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a1') }
-        },
-        {
-            '@type': 'Question',
-            name: t('faq.q2'),
-            acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a2') }
-        },
-        {
-            '@type': 'Question',
-            name: t('faq.q3'),
-            acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a3') }
-        }
+      {
+        '@type': 'Question',
+        name: t('faq.q1'),
+        acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a1') }
+      },
+      {
+        '@type': 'Question',
+        name: t('faq.q2'),
+        acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a2') }
+      },
+      {
+        '@type': 'Question',
+        name: t('faq.q3'),
+        acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a3') }
+      }
     ]
   };
 
   const shareTranslations = {
-      share: tWinner('share_menu'),
-      copy: tWinner('copy_text'),
-      copied: tWinner('copied'),
-      shareOn: tWinner('share_on')
+    share: tWinner('share_menu'),
+    copy: tWinner('copy_text'),
+    copied: tWinner('copied'),
+    shareOn: tWinner('share_on')
   }
 
   const stickyTranslations = {
-      share_cta: tShare('cta_share'),
-      start_cta: tShare('cta_start')
+    share_cta: tShare('cta_share'),
+    start_cta: tShare('cta_start')
   }
 
   return (

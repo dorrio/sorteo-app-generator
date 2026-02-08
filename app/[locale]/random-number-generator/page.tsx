@@ -113,7 +113,7 @@ export default async function RngPage({ params }: { params: Promise<{ locale: st
       "position": 1,
       "name": "Sorteo Pro",
       "item": `${baseUrl}/${locale}`
-    },{
+    }, {
       "@type": "ListItem",
       "position": 2,
       "name": "RNG",
@@ -122,15 +122,15 @@ export default async function RngPage({ params }: { params: Promise<{ locale: st
   };
 
   const shareTranslations = {
-      share: tWinner('share_menu'),
-      copy: tWinner('copy_text'),
-      copied: tWinner('copied'),
-      shareOn: tWinner('share_on')
+    share: tWinner('share_menu'),
+    copy: tWinner('copy_text'),
+    copied: tWinner('copied'),
+    shareOn: tWinner('share_on')
   }
 
   const stickyTranslations = {
-      share_cta: tShare('cta_share'),
-      start_cta: tShare('cta_start')
+    share_cta: tShare('cta_share'),
+    start_cta: tShare('cta_start')
   }
 
   return (

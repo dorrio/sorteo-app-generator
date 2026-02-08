@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
 import { VersusGeo } from "@/components/sorteo/versus-geo";
-import { WheelGeoServer } from "@/components/sorteo/wheel-geo-server";
+import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export const dynamic = 'force-static';
@@ -60,16 +60,16 @@ export default async function WheelVersusPage({ params }: { params: Promise<{ lo
     headline: t('title'),
     description: t('description'),
     author: {
-        '@type': 'Organization',
-        name: 'Sorteo Pro'
+      '@type': 'Organization',
+      name: 'Sorteo Pro'
     },
     publisher: {
-        '@type': 'Organization',
-        name: 'Sorteo Pro',
-        logo: {
-            '@type': 'ImageObject',
-            url: 'https://sorteopro.com/logo.png'
-        }
+      '@type': 'Organization',
+      name: 'Sorteo Pro',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://sorteopro.com/logo.png'
+      }
     }
   };
 
@@ -77,34 +77,34 @@ export default async function WheelVersusPage({ params }: { params: Promise<{ lo
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
-        {
-            '@type': 'Question',
-            name: t('faq.q1'),
-            acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a1') }
-        },
-        {
-            '@type': 'Question',
-            name: t('faq.q2'),
-            acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a2') }
-        },
-        {
-            '@type': 'Question',
-            name: t('faq.q3'),
-            acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a3') }
-        }
+      {
+        '@type': 'Question',
+        name: t('faq.q1'),
+        acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a1') }
+      },
+      {
+        '@type': 'Question',
+        name: t('faq.q2'),
+        acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a2') }
+      },
+      {
+        '@type': 'Question',
+        name: t('faq.q3'),
+        acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a3') }
+      }
     ]
   };
 
   const shareTranslations = {
-      share: tWinner('share_menu'),
-      copy: tWinner('copy_text'),
-      copied: tWinner('copied'),
-      shareOn: tWinner('share_on')
+    share: tWinner('share_menu'),
+    copy: tWinner('copy_text'),
+    copied: tWinner('copied'),
+    shareOn: tWinner('share_on')
   }
 
   const stickyTranslations = {
-      share_cta: tShare('cta_share'),
-      start_cta: tShare('cta_start')
+    share_cta: tShare('cta_share'),
+    start_cta: tShare('cta_start')
   }
 
   return (
@@ -125,7 +125,7 @@ export default async function WheelVersusPage({ params }: { params: Promise<{ lo
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}
       >
-        <WheelGeoServer />
+        <WheelGeo />
         {/* We place VersusGeo inside so it's part of the layout */}
         <VersusGeo />
       </MainApp>

@@ -16,7 +16,7 @@ type Props = {
 
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
-  const { template_title, template_color } = await searchParams;
+  const { template_title, template_color, list } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'TeamGeneratorPage' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
@@ -27,6 +27,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
+  const customList = typeof list === 'string' ? list : undefined;
 
   const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : t('title');
   const displayDescription = t('description');
@@ -37,10 +38,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
   else ogImageUrl.searchParams.set('title', 'Team Generator');
 
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
+  if (customList) ogImageUrl.searchParams.set('list', customList);
 
   const shareUrl = new URL(`${baseUrl}/${locale}/team-generator`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
+  if (customList) shareUrl.searchParams.set('list', customList);
 
   return {
     title: displayTitle,

@@ -54,6 +54,22 @@
             "bingo": "Generador de Bingo"
         }
     },
+    "QuickSpecs": {
+        "title": "Especificaciones Rápidas",
+        "type": "Tipo",
+        "type_web": "Aplicación Web (SaaS)",
+        "type_picker": "Selector Aleatorio",
+        "price": "Precio",
+        "price_free": "Gratis (Sin Costos)",
+        "login": "Registro",
+        "login_none": "No Requerido",
+        "limit": "Límite",
+        "limit_unlimited": "Ilimitado",
+        "fairness": "Equidad",
+        "fairness_provably": "Probablemente Justo (CSPRNG)",
+        "ads": "Anuncios",
+        "ads_none": "Ninguno (Sin Anuncios)"
+    },
     "Metadata": {
         "title": "Sorteo Pro | Sorteos Premium para Influencers",
         "description": "La herramienta definitiva para crear sorteos virales. Diseñada para creadores de contenido e influencers que quieren impresionar a su audiencia.",

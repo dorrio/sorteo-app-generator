@@ -113,8 +113,8 @@ function ListParamsHandler() {
 }
 
 interface MainAppProps {
-    initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
+  initialStyle?: string;
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
@@ -134,7 +134,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const tSecret = useTranslations("SecretSantaPage")
   const tTeam = useTranslations("TeamGeneratorPage")
   const tInsta = useTranslations("InstagramPicker")
-  const tWheel = useTranslations("WheelGeoPage") 
+  const tWheel = useTranslations("WheelGeoPage")
   const tMeta = useTranslations("Metadata")
   const tWinner = useTranslations("WinnerCeremony")
   const tShare = useTranslations("ShareContent")
@@ -183,55 +183,55 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   useEffect(() => {
     setMounted(true)
     if (initialStyle) {
-        const update: any = { sorteoStyle: initialStyle }
-        if (seoMode === 'yes-no') {
-            update.customTitle = tYesNo('h1')
-            update.customSubtitle = tYesNo('subtitle')
-        } else if (seoMode === 'letter') {
-            update.customTitle = tLetter('h1')
-            update.customSubtitle = tLetter('subtitle')
-        } else if (seoMode === 'rng') {
-            update.customTitle = tRng('h1')
-            update.customSubtitle = tRng('subtitle')
-        } else if (seoMode === 'list-randomizer') {
-            update.customTitle = tList('h1')
-            update.customSubtitle = tList('subtitle')
-        } else if (seoMode === 'secret-santa') {
-            update.customTitle = tSecret('h1')
-            update.customSubtitle = tSecret('subtitle')
-        } else if (seoMode === 'team') {
-            update.customTitle = tTeam('h1')
-            update.customSubtitle = tTeam('subtitle')
-        } else if (seoMode === 'dice') {
-            update.customTitle = tDice('h1')
-            update.customSubtitle = tDice('subtitle')
-        } else if (seoMode === 'coin') {
-            update.customTitle = tCoin('h1')
-            update.customSubtitle = tCoin('subtitle')
-        } else if (seoMode === 'rps') {
-            update.customTitle = tRps('h1')
-            update.customSubtitle = tRps('subtitle')
-        } else if (seoMode === 'country') {
-            update.customTitle = tCountry('h1')
-            update.customSubtitle = tCountry('subtitle')
-        } else if (seoMode === 'month') {
-            update.customTitle = tMonth('h1')
-            update.customSubtitle = tMonth('subtitle')
-        } else if (seoMode === 'card') {
-            update.customTitle = tCard('h1')
-            update.customSubtitle = tCard('subtitle')
-        } else if (seoMode === 'bingo') {
-            update.customTitle = tBingo('h1')
-            update.customSubtitle = tBingo('subtitle')
-        } else if (seoMode === 'instagram') {
-            update.customTitle = tInsta('h1')
-            update.customSubtitle = tInsta('subtitle')
-        } else if (seoMode === 'wheel') {
-            update.customTitle = tWheel('h1')
-            update.customSubtitle = tWheel('subtitle')
-        }
+      const update: any = { sorteoStyle: initialStyle }
+      if (seoMode === 'yes-no') {
+        update.customTitle = tYesNo('h1')
+        update.customSubtitle = tYesNo('subtitle')
+      } else if (seoMode === 'letter') {
+        update.customTitle = tLetter('h1')
+        update.customSubtitle = tLetter('subtitle')
+      } else if (seoMode === 'rng') {
+        update.customTitle = tRng('h1')
+        update.customSubtitle = tRng('subtitle')
+      } else if (seoMode === 'list-randomizer') {
+        update.customTitle = tList('h1')
+        update.customSubtitle = tList('subtitle')
+      } else if (seoMode === 'secret-santa') {
+        update.customTitle = tSecret('h1')
+        update.customSubtitle = tSecret('subtitle')
+      } else if (seoMode === 'team') {
+        update.customTitle = tTeam('h1')
+        update.customSubtitle = tTeam('subtitle')
+      } else if (seoMode === 'dice') {
+        update.customTitle = tDice('h1')
+        update.customSubtitle = tDice('subtitle')
+      } else if (seoMode === 'coin') {
+        update.customTitle = tCoin('h1')
+        update.customSubtitle = tCoin('subtitle')
+      } else if (seoMode === 'rps') {
+        update.customTitle = tRps('h1')
+        update.customSubtitle = tRps('subtitle')
+      } else if (seoMode === 'country') {
+        update.customTitle = tCountry('h1')
+        update.customSubtitle = tCountry('subtitle')
+      } else if (seoMode === 'month') {
+        update.customTitle = tMonth('h1')
+        update.customSubtitle = tMonth('subtitle')
+      } else if (seoMode === 'card') {
+        update.customTitle = tCard('h1')
+        update.customSubtitle = tCard('subtitle')
+      } else if (seoMode === 'bingo') {
+        update.customTitle = tBingo('h1')
+        update.customSubtitle = tBingo('subtitle')
+      } else if (seoMode === 'instagram') {
+        update.customTitle = tInsta('h1')
+        update.customSubtitle = tInsta('subtitle')
+      } else if (seoMode === 'wheel') {
+        update.customTitle = tWheel('h1')
+        update.customSubtitle = tWheel('subtitle')
+      }
 
-        updateTheme(update)
+      updateTheme(update)
     }
   }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice, tRps, tCountry, tMonth, tCard, tBingo])
 
@@ -254,7 +254,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     if (shouldPopulate) {
       // If forcing reset due to mode change, clear first
       if (!isEmpty && modeChanged && isPresetTool) {
-         clearParticipants()
+        clearParticipants()
       }
 
       if (seoMode === 'yes-no') {
@@ -263,54 +263,54 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           { name: tYesNo('option_no') }
         ])
       } else if (seoMode === 'coin') {
-              addParticipants([
-                  { name: tCoin('option_heads') },
-                  { name: tCoin('option_tails') }
-              ])
-          } else if (seoMode === 'rps') {
-              addParticipants([
-                  { name: tRps('option_rock') },
-                  { name: tRps('option_paper') },
-                  { name: tRps('option_scissors') }
-              ])
-          } else if (seoMode === 'letter') {
-              const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
-              addParticipants(alphabet.map(l => ({ name: l })))
-          } else if (seoMode === 'dice') {
-              addParticipants(["1", "2", "3", "4", "5", "6"].map(n => ({ name: n })))
-          } else if (seoMode === 'month') {
-              const months = Array.from({ length: 12 }, (_, i) => {
-                  return new Date(2024, i, 1).toLocaleString(locale, { month: 'long' })
-              })
-              // Capitalize first letter as Intl returns lowercase in some locales
-              const capitalizedMonths = months.map(m => m.charAt(0).toUpperCase() + m.slice(1))
-              addParticipants(capitalizedMonths.map(m => ({ name: m })))
-          } else if (seoMode === 'country') {
-                  addParticipants(COUNTRIES.map(c => ({ name: c })))
-          } else if (seoMode === 'bingo') {
-              addParticipants(BINGO_NUMBERS.map(n => ({ name: n })))
-          } else if (seoMode === 'card') {
-              addParticipants(CARD_DECK.map(c => ({ name: c })))
-          } else if (isEmpty) {
-              // Only add default options if list is empty and NOT a preset tool (which is handled above)
-              // But if it IS a preset tool, we already handled it.
-              // Wait, the block above handles strict logic.
-              // If we are here, we are populating.
-              // If it was a preset tool, one of the `if` blocks matched.
-              // If it is 'home' or 'wheel' and empty, we fall here.
-              addParticipants([
-                  { name: "Option 1" },
-                  { name: "Option 2" },
-                  { name: "Option 3" },
-                  { name: "Option 4" },
-                  { name: "Option 5" }
-              ])
-          }
+        addParticipants([
+          { name: tCoin('option_heads') },
+          { name: tCoin('option_tails') }
+        ])
+      } else if (seoMode === 'rps') {
+        addParticipants([
+          { name: tRps('option_rock') },
+          { name: tRps('option_paper') },
+          { name: tRps('option_scissors') }
+        ])
+      } else if (seoMode === 'letter') {
+        const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
+        addParticipants(alphabet.map(l => ({ name: l })))
+      } else if (seoMode === 'dice') {
+        addParticipants(["1", "2", "3", "4", "5", "6"].map(n => ({ name: n })))
+      } else if (seoMode === 'month') {
+        const months = Array.from({ length: 12 }, (_, i) => {
+          return new Date(2024, i, 1).toLocaleString(locale, { month: 'long' })
+        })
+        // Capitalize first letter as Intl returns lowercase in some locales
+        const capitalizedMonths = months.map(m => m.charAt(0).toUpperCase() + m.slice(1))
+        addParticipants(capitalizedMonths.map(m => ({ name: m })))
+      } else if (seoMode === 'country') {
+        addParticipants(COUNTRIES.map(c => ({ name: c })))
+      } else if (seoMode === 'bingo') {
+        addParticipants(BINGO_NUMBERS.map(n => ({ name: n })))
+      } else if (seoMode === 'card') {
+        addParticipants(CARD_DECK.map(c => ({ name: c })))
+      } else if (isEmpty) {
+        // Only add default options if list is empty and NOT a preset tool (which is handled above)
+        // But if it IS a preset tool, we already handled it.
+        // Wait, the block above handles strict logic.
+        // If we are here, we are populating.
+        // If it was a preset tool, one of the `if` blocks matched.
+        // If it is 'home' or 'wheel' and empty, we fall here.
+        addParticipants([
+          { name: "Option 1" },
+          { name: "Option 2" },
+          { name: "Option 3" },
+          { name: "Option 4" },
+          { name: "Option 5" }
+        ])
       }
+    }
 
-      if (modeChanged) {
-          setActiveTool(seoMode)
-      }
+    if (modeChanged) {
+      setActiveTool(seoMode)
+    }
   }, [mounted, hasHydrated, initialStyle, seoMode, activeTool, setActiveTool])
 
   const startSorteo = () => {
@@ -338,113 +338,113 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
   // Determine share content based on seoMode
   const getShareContent = () => {
-      // Default / Home
-      let shareTitle = tShare('home_title')
-      let shareText = tShare('home_text')
-      let defaultTitle = "Sorteo Pro"
+    // Default / Home
+    let shareTitle = tShare('home_title')
+    let shareText = tShare('home_text')
+    let defaultTitle = "Sorteo Pro"
 
-      if (seoMode === 'wheel') {
-          shareTitle = tShare('wheel_title')
-          shareText = tShare('wheel_text')
-          defaultTitle = tWheel('h1')
-      } else if (seoMode === 'instagram') {
-          shareTitle = tShare('instagram_title')
-          shareText = tShare('instagram_text')
-          defaultTitle = tInsta('h1')
-      } else if (seoMode === 'rng') {
-          shareTitle = tShare('rng_title')
-          shareText = tShare('rng_text')
-          defaultTitle = tRng('h1')
-      } else if (seoMode === 'list-randomizer') {
-          shareTitle = tShare('list_title')
-          shareText = tShare('list_text')
-          defaultTitle = tList('h1')
-      } else if (seoMode === 'team') {
-          shareTitle = tShare('list_title') // Reuse list share text as it mentions teams
-          shareText = tShare('list_text')
-          defaultTitle = tTeam('h1')
-      } else if (seoMode === 'secret-santa') {
-          shareTitle = tShare('secret_santa_title')
-          shareText = tShare('secret_santa_text')
-          defaultTitle = tSecret('h1')
-      } else if (seoMode === 'yes-no') {
-          shareTitle = tShare('yes_no_title')
-          shareText = tShare('yes_no_text')
-          defaultTitle = tYesNo('h1')
-      } else if (seoMode === 'letter') {
-          shareTitle = tShare('letter_title')
-          shareText = tShare('letter_text')
-          defaultTitle = tLetter('h1')
-      } else if (seoMode === 'dice') {
-          shareTitle = tShare('dice_title')
-          shareText = tShare('dice_text')
-          defaultTitle = tDice('h1')
-      } else if (seoMode === 'coin') {
-          shareTitle = tShare('coin_title')
-          shareText = tShare('coin_text')
-          defaultTitle = tCoin('h1')
-      } else if (seoMode === 'rps') {
-          shareTitle = tShare('rps_title')
-          shareText = tShare('rps_text')
-          defaultTitle = tRps('h1')
-      } else if (seoMode === 'country') {
-          shareTitle = tShare('country_title')
-          shareText = tShare('country_text')
-          defaultTitle = tCountry('h1')
-      } else if (seoMode === 'month') {
-          shareTitle = tShare('month_title')
-          shareText = tShare('month_text')
-          defaultTitle = tMonth('h1')
-      } else if (seoMode === 'card') {
-          shareTitle = tShare('card_title')
-          shareText = tShare('card_text')
-          defaultTitle = tCard('h1')
-      } else if (seoMode === 'bingo') {
-          shareTitle = tShare('bingo_title')
-          shareText = tShare('bingo_text')
-          defaultTitle = tBingo('h1')
-      }
+    if (seoMode === 'wheel') {
+      shareTitle = tShare('wheel_title')
+      shareText = tShare('wheel_text')
+      defaultTitle = tWheel('h1')
+    } else if (seoMode === 'instagram') {
+      shareTitle = tShare('instagram_title')
+      shareText = tShare('instagram_text')
+      defaultTitle = tInsta('h1')
+    } else if (seoMode === 'rng') {
+      shareTitle = tShare('rng_title')
+      shareText = tShare('rng_text')
+      defaultTitle = tRng('h1')
+    } else if (seoMode === 'list-randomizer') {
+      shareTitle = tShare('list_title')
+      shareText = tShare('list_text')
+      defaultTitle = tList('h1')
+    } else if (seoMode === 'team') {
+      shareTitle = tShare('list_title') // Reuse list share text as it mentions teams
+      shareText = tShare('list_text')
+      defaultTitle = tTeam('h1')
+    } else if (seoMode === 'secret-santa') {
+      shareTitle = tShare('secret_santa_title')
+      shareText = tShare('secret_santa_text')
+      defaultTitle = tSecret('h1')
+    } else if (seoMode === 'yes-no') {
+      shareTitle = tShare('yes_no_title')
+      shareText = tShare('yes_no_text')
+      defaultTitle = tYesNo('h1')
+    } else if (seoMode === 'letter') {
+      shareTitle = tShare('letter_title')
+      shareText = tShare('letter_text')
+      defaultTitle = tLetter('h1')
+    } else if (seoMode === 'dice') {
+      shareTitle = tShare('dice_title')
+      shareText = tShare('dice_text')
+      defaultTitle = tDice('h1')
+    } else if (seoMode === 'coin') {
+      shareTitle = tShare('coin_title')
+      shareText = tShare('coin_text')
+      defaultTitle = tCoin('h1')
+    } else if (seoMode === 'rps') {
+      shareTitle = tShare('rps_title')
+      shareText = tShare('rps_text')
+      defaultTitle = tRps('h1')
+    } else if (seoMode === 'country') {
+      shareTitle = tShare('country_title')
+      shareText = tShare('country_text')
+      defaultTitle = tCountry('h1')
+    } else if (seoMode === 'month') {
+      shareTitle = tShare('month_title')
+      shareText = tShare('month_text')
+      defaultTitle = tMonth('h1')
+    } else if (seoMode === 'card') {
+      shareTitle = tShare('card_title')
+      shareText = tShare('card_text')
+      defaultTitle = tCard('h1')
+    } else if (seoMode === 'bingo') {
+      shareTitle = tShare('bingo_title')
+      shareText = tShare('bingo_text')
+      defaultTitle = tBingo('h1')
+    }
 
-      // Viralis: Check for custom title to enhance share context
-      let url = typeof window !== "undefined" ? window.location.href : ""
+    // Viralis: Check for custom title to enhance share context
+    let url = typeof window !== "undefined" ? window.location.href : ""
 
-      const isCustomTitle = theme.customTitle && theme.customTitle !== defaultTitle
+    const isCustomTitle = theme.customTitle && theme.customTitle !== defaultTitle
 
-      if (typeof window !== "undefined") {
-        try {
-          const urlObj = new URL(window.location.href)
+    if (typeof window !== "undefined") {
+      try {
+        const urlObj = new URL(window.location.href)
 
-          // 1. Branding: Custom Title & Color
-          if (isCustomTitle) {
-            shareText = tShare('custom_share_text', { title: theme.customTitle })
-            urlObj.searchParams.set('template_title', theme.customTitle)
-            if (theme.primaryColor) {
-              urlObj.searchParams.set('template_color', theme.primaryColor)
-            }
+        // 1. Branding: Custom Title & Color
+        if (isCustomTitle) {
+          shareText = tShare('custom_share_text', { title: theme.customTitle })
+          urlObj.searchParams.set('template_title', theme.customTitle)
+          if (theme.primaryColor) {
+            urlObj.searchParams.set('template_color', theme.primaryColor)
           }
-
-          // 2. Content: Shareable Participant List (Deep Linking)
-          if (participants.length > 0 && participants.length <= 100) {
-            // We only share the list if it fits within URL limits
-            const names = participants.map(p => p.name)
-            const encoded = encodeURIComponent(JSON.stringify(names))
-            // Safety limit for URL length (browser limits usually ~2000)
-            if (encoded.length < 1500) {
-              urlObj.searchParams.set('list', encoded)
-            }
-          }
-
-          url = urlObj.toString()
-        } catch (e) {
-          // Fallback to current url if parsing fails
         }
-      }
 
-      return {
-          title: shareTitle,
-          text: shareText,
-          url: url
+        // 2. Content: Shareable Participant List (Deep Linking)
+        if (participants.length > 0 && participants.length <= 100) {
+          // We only share the list if it fits within URL limits
+          const names = participants.map(p => p.name)
+          const encoded = encodeURIComponent(JSON.stringify(names))
+          // Safety limit for URL length (browser limits usually ~2000)
+          if (encoded.length < 1500) {
+            urlObj.searchParams.set('list', encoded)
+          }
+        }
+
+        url = urlObj.toString()
+      } catch (e) {
+        // Fallback to current url if parsing fails
       }
+    }
+
+    return {
+      title: shareTitle,
+      text: shareText,
+      url: url
+    }
   }
 
   const shareContent = getShareContent()
@@ -452,16 +452,16 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   // Translations for ShareButton
   // We'll reuse existing keys or provide defaults
   const shareTranslations = {
-      share: tWinner('share_menu'),
-      copy: tWinner('copy_text'),
-      copied: tWinner('copied'),
-      shareOn: "Share on"
+    share: tWinner('share_menu'),
+    copy: tWinner('copy_text'),
+    copied: tWinner('copied'),
+    shareOn: "Share on"
   }
 
   const stickyTranslations = {
-      share_cta: tShare('cta_share'),
-      start_cta: tShare('cta_start'),
-      share_button: shareTranslations
+    share_cta: tShare('cta_share'),
+    start_cta: tShare('cta_start'),
+    share_button: shareTranslations
   }
 
   // Server-Side Rendering (SSR) & Initial Client Render
@@ -471,50 +471,50 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
   if (!hasHydrated) {
     if (seoMode === 'wheel') {
-        displayTitle = tWheel('h1')
-        displaySubtitle = tWheel('subtitle')
+      displayTitle = tWheel('h1')
+      displaySubtitle = tWheel('subtitle')
     } else if (seoMode === 'instagram') {
-        displayTitle = tInsta('h1')
-        displaySubtitle = tInsta('subtitle')
+      displayTitle = tInsta('h1')
+      displaySubtitle = tInsta('subtitle')
     } else if (seoMode === 'rng') {
-        displayTitle = tRng('h1')
-        displaySubtitle = tRng('subtitle')
+      displayTitle = tRng('h1')
+      displaySubtitle = tRng('subtitle')
     } else if (seoMode === 'list-randomizer') {
-        displayTitle = tList('h1')
-        displaySubtitle = tList('subtitle')
+      displayTitle = tList('h1')
+      displaySubtitle = tList('subtitle')
     } else if (seoMode === 'team') {
-        displayTitle = tTeam('h1')
-        displaySubtitle = tTeam('subtitle')
+      displayTitle = tTeam('h1')
+      displaySubtitle = tTeam('subtitle')
     } else if (seoMode === 'secret-santa') {
-        displayTitle = tSecret('h1')
-        displaySubtitle = tSecret('subtitle')
+      displayTitle = tSecret('h1')
+      displaySubtitle = tSecret('subtitle')
     } else if (seoMode === 'yes-no') {
-        displayTitle = tYesNo('h1')
-        displaySubtitle = tYesNo('subtitle')
+      displayTitle = tYesNo('h1')
+      displaySubtitle = tYesNo('subtitle')
     } else if (seoMode === 'letter') {
-        displayTitle = tLetter('h1')
-        displaySubtitle = tLetter('subtitle')
+      displayTitle = tLetter('h1')
+      displaySubtitle = tLetter('subtitle')
     } else if (seoMode === 'dice') {
-        displayTitle = tDice('h1')
-        displaySubtitle = tDice('subtitle')
+      displayTitle = tDice('h1')
+      displaySubtitle = tDice('subtitle')
     } else if (seoMode === 'coin') {
-        displayTitle = tCoin('h1')
-        displaySubtitle = tCoin('subtitle')
+      displayTitle = tCoin('h1')
+      displaySubtitle = tCoin('subtitle')
     } else if (seoMode === 'rps') {
-        displayTitle = tRps('h1')
-        displaySubtitle = tRps('subtitle')
+      displayTitle = tRps('h1')
+      displaySubtitle = tRps('subtitle')
     } else if (seoMode === 'country') {
-        displayTitle = tCountry('h1')
-        displaySubtitle = tCountry('subtitle')
+      displayTitle = tCountry('h1')
+      displaySubtitle = tCountry('subtitle')
     } else if (seoMode === 'month') {
-        displayTitle = tMonth('h1')
-        displaySubtitle = tMonth('subtitle')
+      displayTitle = tMonth('h1')
+      displaySubtitle = tMonth('subtitle')
     } else if (seoMode === 'card') {
-        displayTitle = tCard('h1')
-        displaySubtitle = tCard('subtitle')
+      displayTitle = tCard('h1')
+      displaySubtitle = tCard('subtitle')
     } else if (seoMode === 'bingo') {
-        displayTitle = tBingo('h1')
-        displaySubtitle = tBingo('subtitle')
+      displayTitle = tBingo('h1')
+      displaySubtitle = tBingo('subtitle')
     }
   }
 
@@ -595,10 +595,10 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
               {/* Viralis: Added Share Button in Header */}
               <ShareButton
-                  title={shareContent.title}
-                  text={shareContent.text}
-                  url={shareContent.url}
-                  translations={shareTranslations}
+                title={shareContent.title}
+                text={shareContent.text}
+                url={shareContent.url}
+                translations={shareTranslations}
               />
 
               <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title="Verificar Sorteo" aria-label={t("verify_sorteo")}>
@@ -719,102 +719,102 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         {/* SEO Content Conditional Rendering */}
         {seoMode === 'wheel' ? (
-             /* Wheel Mode: Prioritize WheelGeo */
-             <>
-                <WheelGeo />
-                <Glossary seoMode={seoMode} />
-             </>
+          /* Wheel Mode: Prioritize WheelGeo */
+          <>
+            <WheelGeo />
+            <Glossary seoMode={seoMode} />
+          </>
         ) : seoMode === 'instagram' ? (
-             /* Instagram Mode: Show Instagram specific content */
-             <>
-                <InstagramGeo />
-                <Glossary seoMode={seoMode} />
-             </>
+          /* Instagram Mode: Show Instagram specific content */
+          <>
+            <InstagramGeo />
+            <Glossary seoMode={seoMode} />
+          </>
         ) : seoMode === 'rng' ? (
-            /* RNG Mode: Show Random Number Generator content */
-            <>
-               <RngGeo />
-               <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'list-randomizer' ? (
-            /* List Randomizer Mode: Show List Randomizer content */
-            <>
-                <ListRandomizerGeo />
-                <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'secret-santa' ? (
-            /* Secret Santa Mode */
-            <>
-                <SecretSantaGeo />
-                <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'team' ? (
-            /* Team Mode */
-            <>
-                <TeamGeo />
-                <Glossary seoMode="list-randomizer" />
-            </>
-       ) : seoMode === 'yes-no' ? (
-            /* Yes/No Mode */
-            <>
-                <YesNoGeo />
-                <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'letter' ? (
-            /* Letter Mode */
-            <>
-                <LetterGeo />
-                <Glossary seoMode={seoMode} />
-            </>
-       ) : seoMode === 'dice' ? (
-            /* Dice Mode */
-            <>
-                <DiceGeo />
-                <Glossary seoMode="rng" />
-            </>
-       ) : seoMode === 'coin' ? (
-            /* Coin Mode */
-            <>
-                <CoinGeo />
-                <Glossary seoMode="yes-no" />
-            </>
-       ) : seoMode === 'rps' ? (
-            /* RPS Mode */
-            <>
-                <RpsGeo />
-                <Glossary seoMode="yes-no" />
-            </>
-       ) : seoMode === 'country' ? (
-            /* Country Mode */
-            <>
-                <CountryGeo />
-                <Glossary seoMode="wheel" />
-            </>
-       ) : seoMode === 'month' ? (
-            /* Month Mode */
-            <>
-                <MonthGeo />
-                <Glossary seoMode="wheel" />
-            </>
-       ) : seoMode === 'card' ? (
-            /* Card Mode */
-            <>
-                <CardGeo />
-                <Glossary seoMode="card" />
-            </>
-       ) : seoMode === 'bingo' ? (
-            /* Bingo Mode */
-            <>
-                <BingoGeo />
-                <Glossary seoMode="bingo" />
-            </>
-       ) : (
-            /* Home Mode: Show everything */
-            <>
-                <WheelGeo />
-                <Glossary seoMode={seoMode} />
-                <SeoContent />
-            </>
+          /* RNG Mode: Show Random Number Generator content */
+          <>
+            <RngGeo />
+            <Glossary seoMode={seoMode} />
+          </>
+        ) : seoMode === 'list-randomizer' ? (
+          /* List Randomizer Mode: Show List Randomizer content */
+          <>
+            <ListRandomizerGeo />
+            <Glossary seoMode={seoMode} />
+          </>
+        ) : seoMode === 'secret-santa' ? (
+          /* Secret Santa Mode */
+          <>
+            <SecretSantaGeo />
+            <Glossary seoMode={seoMode} />
+          </>
+        ) : seoMode === 'team' ? (
+          /* Team Mode */
+          <>
+            <TeamGeo />
+            <Glossary seoMode="list-randomizer" />
+          </>
+        ) : seoMode === 'yes-no' ? (
+          /* Yes/No Mode */
+          <>
+            <YesNoGeo />
+            <Glossary seoMode={seoMode} />
+          </>
+        ) : seoMode === 'letter' ? (
+          /* Letter Mode */
+          <>
+            <LetterGeo />
+            <Glossary seoMode={seoMode} />
+          </>
+        ) : seoMode === 'dice' ? (
+          /* Dice Mode */
+          <>
+            <DiceGeo />
+            <Glossary seoMode="rng" />
+          </>
+        ) : seoMode === 'coin' ? (
+          /* Coin Mode */
+          <>
+            <CoinGeo />
+            <Glossary seoMode="yes-no" />
+          </>
+        ) : seoMode === 'rps' ? (
+          /* RPS Mode */
+          <>
+            <RpsGeo />
+            <Glossary seoMode="yes-no" />
+          </>
+        ) : seoMode === 'country' ? (
+          /* Country Mode */
+          <>
+            <CountryGeo />
+            <Glossary seoMode="wheel" />
+          </>
+        ) : seoMode === 'month' ? (
+          /* Month Mode */
+          <>
+            <MonthGeo />
+            <Glossary seoMode="wheel" />
+          </>
+        ) : seoMode === 'card' ? (
+          /* Card Mode */
+          <>
+            <CardGeo />
+            <Glossary seoMode="card" />
+          </>
+        ) : seoMode === 'bingo' ? (
+          /* Bingo Mode */
+          <>
+            <BingoGeo />
+            <Glossary seoMode="bingo" />
+          </>
+        ) : (
+          /* Home Mode: Show everything */
+          <>
+            <WheelGeo />
+            <Glossary seoMode={seoMode} />
+            <SeoContent />
+          </>
         )}
 
         {/* Footer */}

@@ -11,13 +11,35 @@ module.exports = {
         let priority = config.priority;
         let changefreq = config.changefreq;
 
+        // Core Tools List (GEO Optimized)
+        const CORE_TOOLS = [
+            'alternativa-',
+            'instagram-comment-picker',
+            'wheel-of-names',
+            'glossary',
+            'random-number-generator',
+            'list-randomizer',
+            'secret-santa-generator',
+            'team-generator',
+            'yes-or-no-wheel',
+            'random-letter-generator',
+            'dice-roller',
+            'coin-flip',
+            'rock-paper-scissors',
+            'random-country-generator',
+            'random-month-generator',
+            'random-card-generator',
+            'bingo-number-generator',
+            'versus'
+        ];
+
         // Home Page & Locale Roots (e.g., /en, /es)
         if (path === '/' || /^\/[a-z]{2}$/.test(path)) {
             priority = 1.0;
             changefreq = 'daily';
         }
-        // Competitor Alternatives (High Value) & Semantic Hubs (Glossary)
-        else if (path.includes('alternativa-') || path.includes('instagram-comment-picker') || path.includes('wheel-of-names') || path.includes('glossary') || path.includes('random-number-generator') || path.includes('list-randomizer') || path.includes('secret-santa-generator') || path.includes('team-generator') || path.includes('yes-or-no-wheel') || path.includes('random-letter-generator') || path.includes('dice-roller') || path.includes('coin-flip') || path.includes('rock-paper-scissors') || path.includes('random-country-generator') || path.includes('random-month-generator') || path.includes('random-card-generator') || path.includes('bingo-number-generator') || path.includes('versus')) {
+        // Competitor Alternatives & Core Tools
+        else if (CORE_TOOLS.some(tool => path.includes(tool))) {
             priority = 0.9;
             changefreq = 'weekly';
         }

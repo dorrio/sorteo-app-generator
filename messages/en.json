@@ -53,6 +53,22 @@
             "month": "Random Month Generator"
         }
     },
+    "QuickSpecs": {
+        "title": "Quick Specifications",
+        "type": "Type",
+        "type_web": "Web App (SaaS)",
+        "type_picker": "Random Picker",
+        "price": "Price",
+        "price_free": "Free (No Hidden Costs)",
+        "login": "Registration",
+        "login_none": "Not Required",
+        "limit": "Limit",
+        "limit_unlimited": "Unlimited",
+        "fairness": "Fairness",
+        "fairness_provably": "Provably Fair (CSPRNG)",
+        "ads": "Ads",
+        "ads_none": "None (Ad-Free)"
+    },
     "Metadata": {
         "title": "Sorteo Pro | Premium Giveaways for Influencers",
         "description": "The ultimate tool for viral giveaways. Designed for content creators and influencers who want to impress their audience.",

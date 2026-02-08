@@ -202,17 +202,22 @@ export function MainApp({
 
   useEffect(() => {
     setMounted(true)
+
+    const update: Partial<ThemeConfig> = {}
+
     if (initialStyle) {
-      const update: any = { sorteoStyle: initialStyle }
+      update.sorteoStyle = initialStyle as any
+    }
 
-      // Initialize custom title from props if available
-      if (initialTitle) {
-        update.customTitle = initialTitle
-      }
-      if (initialSubtitle) {
-        update.customSubtitle = initialSubtitle
-      }
+    // Initialize custom title from props if available
+    if (initialTitle) {
+      update.customTitle = initialTitle
+    }
+    if (initialSubtitle) {
+      update.customSubtitle = initialSubtitle
+    }
 
+    if (Object.keys(update).length > 0) {
       updateTheme(update)
     }
   }, [initialStyle, updateTheme, initialTitle, initialSubtitle])
@@ -585,7 +590,7 @@ export function MainApp({
       </div >
 
       {/* Overlays */}
-      < CountdownAnimation onComplete={handleCountdownComplete} />
+      <CountdownAnimation onComplete={handleCountdownComplete} />
       <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} seoMode={seoMode} />
       <VisualEditor />
       <VerificationModal isOpen={isVerifyModalOpen} onClose={() => setIsVerifyModalOpen(false)} />

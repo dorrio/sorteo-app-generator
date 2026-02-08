@@ -216,7 +216,8 @@
         "copy_text": "Copiar Link",
         "download_certificate": "Baixar Certificado",
         "new_giveaway": "Novo Sorteio",
-        "close": "Fechar"
+        "close": "Fechar",
+        "share_on": "Compartilhar em"
     },
     "HistoryPanel": {
         "title": "Histórico",

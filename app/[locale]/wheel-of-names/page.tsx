@@ -1,7 +1,9 @@
-import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
+import { WheelGeo } from "@/components/sorteo/wheel-geo";
+import { Glossary } from "@/components/sorteo/glossary";
+import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -23,7 +25,6 @@ export async function generateMetadata({ params, searchParams }: Props) {
       ? `https://${process.env.VERCEL_URL}`
       : 'https://sorteopro.com';
 
-  // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
 
@@ -35,8 +36,6 @@ export async function generateMetadata({ params, searchParams }: Props) {
   if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
 
-  // Construct Canonical/Share URL for OG
-  // This must include params so social bots scrape this specific dynamic version
   const shareUrl = new URL(`${baseUrl}/${locale}/wheel-of-names`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
@@ -77,6 +76,8 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'WheelGeoPage' });
   const tGeo = await getTranslations({ locale, namespace: 'WheelGeo' });
+  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
+  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -112,7 +113,7 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
       "position": 1,
       "name": "Sorteo Pro",
       "item": `${baseUrl}/${locale}`
-    },{
+    }, {
       "@type": "ListItem",
       "position": 2,
       "name": t('h1'),
@@ -120,13 +121,39 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
     }]
   };
 
+  const shareTranslations = {
+    share: tWinner('share_menu'),
+    copy: tWinner('copy_text'),
+    copied: tWinner('copied'),
+    shareOn: tWinner('share_on')
+  }
+
+  const stickyTranslations = {
+    share_cta: tShare('cta_share'),
+    start_cta: tShare('cta_start')
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp initialStyle="roulette" seoMode="wheel" />
+      <MainApp
+        initialStyle="roulette"
+        seoMode="wheel"
+        initialTitle={t('h1')}
+        initialSubtitle={t('subtitle')}
+        shareTitle={tShare('wheel_title')}
+        shareText={tShare('wheel_text')}
+        customShareTextTemplate={tShare('custom_share_text')}
+        shareTranslations={shareTranslations}
+        stickyTranslations={stickyTranslations}
+        footer={<SiteFooter />}
+      >
+        <WheelGeo />
+        <Glossary seoMode="wheel" />
+      </MainApp>
     </>
   );
 }

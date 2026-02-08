@@ -1,6 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
+import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo";
+import { Glossary } from "@/components/sorteo/glossary";
+import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -22,7 +25,6 @@ export async function generateMetadata({ params, searchParams }: Props) {
       ? `https://${process.env.VERCEL_URL}`
       : 'https://sorteopro.com';
 
-  // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
 
@@ -35,7 +37,6 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
 
-  // Construct Canonical/Share URL for OG
   const shareUrl = new URL(`${baseUrl}/${locale}/list-randomizer`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
@@ -76,6 +77,8 @@ export default async function ListRandomizerPage({ params }: { params: Promise<{
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'ListRandomizerPage' });
   const tGeo = await getTranslations({ locale, namespace: 'ListRandomizerGeo' });
+  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
+  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -119,13 +122,39 @@ export default async function ListRandomizerPage({ params }: { params: Promise<{
     }]
   };
 
+  const shareTranslations = {
+      share: tWinner('share_menu'),
+      copy: tWinner('copy_text'),
+      copied: tWinner('copied'),
+      shareOn: tWinner('share_on')
+  }
+
+  const stickyTranslations = {
+      share_cta: tShare('cta_share'),
+      start_cta: tShare('cta_start')
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp initialStyle="grid" seoMode="list-randomizer" />
+      <MainApp
+        initialStyle="grid"
+        seoMode="list-randomizer"
+        initialTitle={t('h1')}
+        initialSubtitle={t('subtitle')}
+        shareTitle={tShare('list_title')}
+        shareText={tShare('list_text')}
+        customShareTextTemplate={tShare('custom_share_text')}
+        shareTranslations={shareTranslations}
+        stickyTranslations={stickyTranslations}
+        footer={<SiteFooter />}
+      >
+        <ListRandomizerGeo />
+        <Glossary seoMode="list-randomizer" />
+      </MainApp>
     </>
   );
 }

@@ -463,8 +463,8 @@ export async function GET(request: Request) {
                                     <span style={{ backgroundColor: theme.accentColor, color: 'black', padding: '2px 8px', borderRadius: 4, fontSize: 14 }}>{participants.length}</span>
                                 </div>
 
-                                {visibleParticipants.map((p, i) => (
-                                    <div key={i} style={{
+                                {visibleParticipants.map((participant, index) => (
+                                    <div key={index} style={{
                                         display: 'flex',
                                         fontSize: 32,
                                         color: 'white',
@@ -472,7 +472,7 @@ export async function GET(request: Request) {
                                         fontWeight: 600,
                                         textShadow: '0 1px 2px rgba(0,0,0,0.8)',
                                     }}>
-                                        {p.length > 30 ? p.slice(0, 30) + '...' : p}
+                                        {participant.length > 30 ? participant.slice(0, 30) + '...' : participant}
                                     </div>
                                 ))}
 

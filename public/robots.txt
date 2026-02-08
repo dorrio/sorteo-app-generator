@@ -11,7 +11,7 @@ User-agent: GPTBot
 Allow: /
 
 # Host
-Host: https://sorteopro.com
+Host: https://sorteo-app-generator.vercel.app
 
 # Sitemaps
-Sitemap: https://sorteopro.com/sitemap.xml
+Sitemap: https://sorteo-app-generator.vercel.app/sitemap.xml

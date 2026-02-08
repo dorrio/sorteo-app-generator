@@ -88,9 +88,6 @@ export interface SorteoState {
 
   hasHydrated: boolean
   setHasHydrated: (state: boolean) => void
-
-  activeTool: string | null
-  setActiveTool: (tool: string) => void
 }
 
 const defaultTheme: ThemeConfig = {
@@ -232,9 +229,6 @@ export const useSorteoStore = create<SorteoState>()(
 
       hasHydrated: false,
       setHasHydrated: (state) => set({ hasHydrated: state }),
-
-      activeTool: null,
-      setActiveTool: (activeTool) => set({ activeTool }),
     }),
     {
       name: "sorteo-storage",
@@ -242,7 +236,6 @@ export const useSorteoStore = create<SorteoState>()(
         participants: state.participants,
         pastWinners: state.pastWinners,
         theme: state.theme,
-        activeTool: state.activeTool,
       }),
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true)

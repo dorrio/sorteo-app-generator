@@ -1,9 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
-import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo";
-import { Glossary } from "@/components/sorteo/glossary";
-import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -25,6 +22,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       ? `https://${process.env.VERCEL_URL}`
       : 'https://sorteopro.com';
 
+  // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
   const customList = typeof list === 'string' ? list : undefined;
@@ -40,6 +38,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
   if (customList) ogImageUrl.searchParams.set('list', customList);
 
+  // Construct Canonical/Share URL for OG
   const shareUrl = new URL(`${baseUrl}/${locale}/secret-santa-generator`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
@@ -86,8 +85,6 @@ export default async function SecretSantaPage({ params }: { params: Promise<{ lo
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'SecretSantaPage' });
   const tGeo = await getTranslations({ locale, namespace: 'SecretSantaGeo' });
-  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
-  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -131,39 +128,13 @@ export default async function SecretSantaPage({ params }: { params: Promise<{ lo
     }]
   };
 
-  const shareTranslations = {
-      share: tWinner('share_menu'),
-      copy: tWinner('copy_text'),
-      copied: tWinner('copied'),
-      shareOn: tWinner('share_on')
-  }
-
-  const stickyTranslations = {
-      share_cta: tShare('cta_share'),
-      start_cta: tShare('cta_start')
-  }
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp
-        initialStyle="grid"
-        seoMode="secret-santa"
-        initialTitle={t('h1')}
-        initialSubtitle={t('subtitle')}
-        shareTitle={tShare('secret_santa_title')}
-        shareText={tShare('secret_santa_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
-        shareTranslations={shareTranslations}
-        stickyTranslations={stickyTranslations}
-        footer={<SiteFooter />}
-      >
-        <SecretSantaGeo />
-        <Glossary seoMode="secret-santa" />
-      </MainApp>
+      <MainApp initialStyle="grid" seoMode="secret-santa" />
     </>
   );
 }

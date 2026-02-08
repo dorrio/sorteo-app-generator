@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download, Loader2 } from "lucide-react"
+import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download, Loader2, Image as ImageIcon } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ConfettiEffect } from "@/components/sorteo/confetti-effect"
 import { Button } from "@/components/ui/button"
@@ -31,9 +31,11 @@ export function VerifyContent() {
         error?: string
     } | null>(null)
     const [showCopied, setShowCopied] = useState(false)
+    const [copiedImage, setCopiedImage] = useState(false)
     // Initialize to true (Mobile/Lite) to minimize server HTML size and avoid Mobile CLS.
     // Desktop will hydrate and switch to Dropdown (Heavy) if needed.
     const [canShareNative, setCanShareNative] = useState(true)
+    const [canCopyImage, setCanCopyImage] = useState(false)
     const [isStickyVisible, setIsStickyVisible] = useState(false)
     const [showConfetti, setShowConfetti] = useState(false)
     const [isSharing, setIsSharing] = useState(false)
@@ -48,6 +50,14 @@ export function VerifyContent() {
 
     useEffect(() => {
         setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
+
+        // Strict Clipboard Verification
+        const hasClipboardItem = typeof ClipboardItem !== "undefined"
+        const hasNavigator = typeof navigator !== "undefined"
+        const hasClipboardWrite = hasNavigator && !!navigator.clipboard && typeof navigator.clipboard.write === "function"
+        const isSecure = typeof window !== "undefined" && window.isSecureContext
+
+        setCanCopyImage(hasClipboardItem && hasClipboardWrite && isSecure)
 
         // Show sticky CTA on scroll if result is visible
         const handleScroll = () => {
@@ -198,6 +208,43 @@ export function VerifyContent() {
         await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
         setShowCopied(true)
         setTimeout(() => setShowCopied(false), 2000)
+    }
+
+    const copyImage = async () => {
+        const winnerName = result?.participant?.name || searchParams.get("name") || "Someone"
+
+        try {
+            const ogParams = new URLSearchParams()
+            ogParams.set("name", winnerName)
+
+            let dateToUse = new Date()
+            if (result?.participant?.timestamp) {
+                dateToUse = new Date(result.participant.timestamp)
+            } else if (result?.date) {
+                dateToUse = new Date(result.date)
+            }
+            ogParams.set("date", dateToUse.toISOString())
+
+            if (type) ogParams.set("type", type)
+            if (title) ogParams.set("title", title)
+            if (color) ogParams.set("color", color)
+
+            const imageUrl = `/api/og?${ogParams.toString()}`
+
+            const response = await fetch(imageUrl)
+            const blob = await response.blob()
+
+            await navigator.clipboard.write([
+                new ClipboardItem({
+                    [blob.type]: blob
+                })
+            ])
+
+            setCopiedImage(true)
+            setTimeout(() => setCopiedImage(false), 2000)
+        } catch (e) {
+            console.error("Failed to copy image", e)
+        }
     }
 
     const shareInstagram = async () => {
@@ -486,6 +533,22 @@ export function VerifyContent() {
                                                                     </>
                                                                 )}
                                                             </DropdownMenuItem>
+
+                                                            {canCopyImage && (
+                                                                <DropdownMenuItem onClick={copyImage} className="gap-2 cursor-pointer">
+                                                                    {copiedImage ? (
+                                                                        <>
+                                                                            <Check className="w-4 h-4 text-green-500" />
+                                                                            <span className="text-green-500">{t("image_copied")}</span>
+                                                                        </>
+                                                                    ) : (
+                                                                        <>
+                                                                            <ImageIcon className="w-4 h-4" />
+                                                                            {t("copy_image")}
+                                                                        </>
+                                                                    )}
+                                                                </DropdownMenuItem>
+                                                            )}
 
                                                             {/* Semantic Links for Social Sharing */}
                                                             <DropdownMenuItem asChild>

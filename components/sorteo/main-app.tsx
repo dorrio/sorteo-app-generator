@@ -255,7 +255,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   useEffect(() => {
     // Check for initial population scenarios
     const shouldPopulate =
-      (initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid') || (seoMode === 'country') || (seoMode === 'bingo'))
+      (initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid') || (seoMode === 'country') || (seoMode === 'bingo') || (seoMode === 'card'))
       && mounted && hasHydrated && participants.length === 0
 
     if (shouldPopulate) {

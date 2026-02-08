@@ -87,8 +87,8 @@ export function BingoGeo() {
                 })}
               </p>
             </div>
-            <Button asChild size="lg" className="mt-4 gap-2 text-lg font-bold shadow-lg shadow-primary/20" onClick={handleTryIt}>
-              <a href="#sorteo-section">
+            <Button asChild size="lg" className="mt-4 gap-2 text-lg font-bold shadow-lg shadow-primary/20">
+              <a href="#sorteo-section" onClick={handleTryIt}>
                 {t("cta_button")} <ArrowRight className="w-5 h-5" />
               </a>
             </Button>

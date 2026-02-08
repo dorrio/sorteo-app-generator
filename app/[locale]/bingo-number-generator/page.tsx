@@ -14,7 +14,7 @@ type Props = {
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
   const { template_title, template_color } = await searchParams;
-  const t = await getTranslations({ locale, namespace: 'BingoPage' });
+  const bingoT = await getTranslations({ locale, namespace: 'BingoPage' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -26,13 +26,13 @@ export async function generateMetadata({ params, searchParams }: Props) {
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
 
-  const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : t('title');
-  const displayDescription = t('description');
+  const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : bingoT('title');
+  const displayDescription = bingoT('description');
 
   const ogImageUrl = new URL(`${baseUrl}/api/og`);
   ogImageUrl.searchParams.set('type', 'bingo');
   if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
-  else ogImageUrl.searchParams.set('title', t('title'));
+  else ogImageUrl.searchParams.set('title', bingoT('title'));
 
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
   else ogImageUrl.searchParams.set('color', '#4f46e5'); // Indigo for Bingo
@@ -76,8 +76,8 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function BingoGeneratorPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'BingoPage' });
-  const tGeo = await getTranslations({ locale, namespace: 'BingoGeo' });
+  const bingoT = await getTranslations({ locale, namespace: 'BingoPage' });
+  const bingoGeoT = await getTranslations({ locale, namespace: 'BingoGeo' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -96,12 +96,12 @@ export default async function BingoGeneratorPage({ params }: { params: Promise<{
       price: '0',
       priceCurrency: 'USD',
     },
-    description: t('description'),
+    description: bingoT('description'),
     featureList: [
-      tGeo('feature_1_title'),
-      tGeo('feature_2_title'),
-      tGeo('feature_3_title'),
-      tGeo('feature_4_title')
+      bingoGeoT('feature_1_title'),
+      bingoGeoT('feature_2_title'),
+      bingoGeoT('feature_3_title'),
+      bingoGeoT('feature_4_title')
     ]
   };
 
@@ -121,11 +121,13 @@ export default async function BingoGeneratorPage({ params }: { params: Promise<{
     }]
   };
 
+  const jsonLd = JSON.stringify([softwareAppSchema, breadcrumbSchema]).replace(/</g, '\\u003c');
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <MainApp initialStyle="grid" seoMode="bingo" />
     </>

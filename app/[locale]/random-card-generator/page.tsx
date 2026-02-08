@@ -14,7 +14,7 @@ type Props = {
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
   const { template_title, template_color } = await searchParams;
-  const t = await getTranslations({ locale, namespace: 'CardPage' });
+  const cardT = await getTranslations({ locale, namespace: 'CardPage' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -26,13 +26,13 @@ export async function generateMetadata({ params, searchParams }: Props) {
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
 
-  const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : t('title');
-  const displayDescription = t('description');
+  const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : cardT('title');
+  const displayDescription = cardT('description');
 
   const ogImageUrl = new URL(`${baseUrl}/api/og`);
   ogImageUrl.searchParams.set('type', 'card');
   if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
-  else ogImageUrl.searchParams.set('title', t('title'));
+  else ogImageUrl.searchParams.set('title', cardT('title'));
 
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
   else ogImageUrl.searchParams.set('color', '#dc2626'); // Red for cards
@@ -45,7 +45,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   return {
     title: displayTitle,
     description: displayDescription,
-    keywords: ["random card generator", "draw a card", "pick a card", "playing cards", "deck of cards", "random playing card", "baraja española", "cartas poker"],
+    keywords: ["random card generator", "draw a card", "pick a card", "playing cards", "deck of cards", "random playing card"],
     alternates: {
       canonical: `/${locale}/random-card-generator`
     },
@@ -76,8 +76,8 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function CardGeneratorPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'CardPage' });
-  const tGeo = await getTranslations({ locale, namespace: 'CardGeo' });
+  const cardT = await getTranslations({ locale, namespace: 'CardPage' });
+  const cardGeoT = await getTranslations({ locale, namespace: 'CardGeo' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -96,12 +96,12 @@ export default async function CardGeneratorPage({ params }: { params: Promise<{ 
       price: '0',
       priceCurrency: 'USD',
     },
-    description: t('description'),
+    description: cardT('description'),
     featureList: [
-      tGeo('feature_1_title'),
-      tGeo('feature_2_title'),
-      tGeo('feature_3_title'),
-      tGeo('feature_4_title')
+      cardGeoT('feature_1_title'),
+      cardGeoT('feature_2_title'),
+      cardGeoT('feature_3_title'),
+      cardGeoT('feature_4_title')
     ]
   };
 
@@ -121,11 +121,13 @@ export default async function CardGeneratorPage({ params }: { params: Promise<{ 
     }]
   };
 
+  const jsonLd = JSON.stringify([softwareAppSchema, breadcrumbSchema]).replace(/</g, '\\u003c');
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <MainApp initialStyle="cards" seoMode="card" />
     </>

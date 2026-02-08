@@ -1016,7 +1016,7 @@
     },
     "CardGeo": {
         "direct_answer_title": "What is a Random Card Generator?",
-        "direct_answer_text": "A <tool>Random Card Generator</tool> is a digital tool that simulates drawing a playing card from a standard 52-card deck (Hearts, Diamonds, Clubs, Spades). It is used for <bold>magic tricks</bold>, <bold>probability lessons</bold>, and replacing physical decks in card games. <brand>Sorteo Pro</brand> ensures fair shuffling using secure RNG.",
+        "direct_answer_text": "A <tool>Random Card Generator</tool> is a digital tool that simulates drawing a playing card from a standard 52-card deck (Hearts, Diamonds, Clubs, Spades). It is used for <strong>magic tricks</strong>, <strong>probability lessons</strong>, and replacing physical decks in card games. <brand>Sorteo Pro</brand> ensures fair shuffling using secure RNG.",
         "cta_button": "Draw a Card",
         "feature_1_title": "Standard 52-Card Deck",
         "feature_1_desc": "Includes all suits and ranks (A-K).",

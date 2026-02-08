@@ -23,6 +23,8 @@ import { CoinGeo } from "@/components/sorteo/coin-geo"
 import { RpsGeo } from "@/components/sorteo/rps-geo"
 import { CountryGeo } from "@/components/sorteo/country-geo"
 import { MonthGeo } from "@/components/sorteo/month-geo"
+import { CardGeo } from "@/components/sorteo/card-geo"
+import { BingoGeo } from "@/components/sorteo/bingo-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
@@ -112,7 +114,7 @@ function ListParamsHandler() {
 
 interface MainAppProps {
     initialStyle?: string;
-    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
+    seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
 }
 
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
@@ -125,6 +127,8 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const tRps = useTranslations("RpsPage")
   const tCountry = useTranslations("CountryPage")
   const tMonth = useTranslations("MonthPage")
+  const tCard = useTranslations("CardPage")
+  const tBingo = useTranslations("BingoPage")
   const tRng = useTranslations("RngPage")
   const tList = useTranslations("ListRandomizerPage")
   const tSecret = useTranslations("SecretSantaPage")
@@ -228,6 +232,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
         } else if (seoMode === 'month') {
             update.customTitle = tMonth('h1')
             update.customSubtitle = tMonth('subtitle')
+        } else if (seoMode === 'card') {
+            update.customTitle = tCard('h1')
+            update.customSubtitle = tCard('subtitle')
+        } else if (seoMode === 'bingo') {
+            update.customTitle = tBingo('h1')
+            update.customSubtitle = tBingo('subtitle')
         } else if (seoMode === 'instagram') {
             update.customTitle = tInsta('h1')
             update.customSubtitle = tInsta('subtitle')
@@ -238,14 +248,14 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
 
         updateTheme(update)
     }
-  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice, tRps, tCountry, tMonth])
+  }, [initialStyle, updateTheme, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tInsta, tWheel, tCoin, tDice, tRps, tCountry, tMonth, tCard, tBingo])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
   useEffect(() => {
     // Check for initial population scenarios
     const shouldPopulate =
-      (initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid') || (seoMode === 'country'))
+      (initialStyle === 'roulette' || initialStyle === 'slot' || initialStyle === 'cards' || (seoMode === 'dice' && initialStyle === 'grid') || (seoMode === 'country') || (seoMode === 'bingo'))
       && mounted && hasHydrated && participants.length === 0
 
     if (shouldPopulate) {
@@ -279,6 +289,19 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
               addParticipants(capitalizedMonths.map(m => ({ name: m })))
           } else if (seoMode === 'country') {
                   addParticipants(COUNTRIES.map(c => ({ name: c })))
+          } else if (seoMode === 'card') {
+              const suits = ['♠', '♥', '♣', '♦']
+              const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+              const deck = []
+              for (const suit of suits) {
+                  for (const rank of ranks) {
+                      deck.push(`${rank}${suit}`)
+                  }
+              }
+              addParticipants(deck.map(c => ({ name: c })))
+          } else if (seoMode === 'bingo') {
+              const bingo = Array.from({ length: 75 }, (_, i) => (i + 1).toString())
+              addParticipants(bingo.map(n => ({ name: n })))
           } else {
               addParticipants([
                   { name: "Option 1" },
@@ -380,6 +403,14 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
           shareTitle = tShare('month_title')
           shareText = tShare('month_text')
           defaultTitle = tMonth('h1')
+      } else if (seoMode === 'card') {
+          shareTitle = tShare('card_title')
+          shareText = tShare('card_text')
+          defaultTitle = tCard('h1')
+      } else if (seoMode === 'bingo') {
+          shareTitle = tShare('bingo_title')
+          shareText = tShare('bingo_text')
+          defaultTitle = tBingo('h1')
       }
 
       // Viralis: Check for custom title to enhance share context
@@ -486,6 +517,12 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     } else if (seoMode === 'month') {
         displayTitle = tMonth('h1')
         displaySubtitle = tMonth('subtitle')
+    } else if (seoMode === 'card') {
+        displayTitle = tCard('h1')
+        displaySubtitle = tCard('subtitle')
+    } else if (seoMode === 'bingo') {
+        displayTitle = tBingo('h1')
+        displaySubtitle = tBingo('subtitle')
     }
   }
 
@@ -776,6 +813,18 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
             <>
                 <MonthGeo />
                 <Glossary seoMode="wheel" />
+            </>
+       ) : seoMode === 'card' ? (
+            /* Card Mode */
+            <>
+                <CardGeo />
+                <Glossary seoMode={seoMode} />
+            </>
+       ) : seoMode === 'bingo' ? (
+            /* Bingo Mode */
+            <>
+                <BingoGeo />
+                <Glossary seoMode={seoMode} />
             </>
        ) : (
             /* Home Mode: Show everything */

@@ -48,7 +48,9 @@
             "versus_wheel": "Wheel of Names Alternative",
             "versus_random": "Random.org Alternative",
             "glossary": "Glossary",
-            "month": "Random Month Generator"
+        "month": "Random Month Generator",
+        "cards": "Random Card Generator",
+        "bingo": "Bingo Number Generator"
         }
     },
     "QuickSpecs": {
@@ -346,7 +348,11 @@
         "term_13": "Random Country Generator",
         "def_13": "A tool that selects one nation from the list of 195 sovereign states in the world completely by chance. Used for education, travel inspiration, and quizzes.",
         "term_14": "Random Month Generator",
-        "def_14": "A simple tool that picks a random month of the year (January-December). Useful for planning events, horoscopes, or selecting birth months for games."
+        "def_14": "A simple tool that picks a random month of the year (January-December). Useful for planning events, horoscopes, or selecting birth months for games.",
+        "term_15": "Random Card Generator",
+        "def_15": "A digital simulation of drawing a playing card from a standard 52-card deck. Sorteo Pro uses secure RNG to ensure every card has an equal 1/52 probability.",
+        "term_16": "Bingo Number Generator",
+        "def_16": "A tool that generates random numbers from 1 to 75 (or 90) without replacement. Essential for hosting Bingo games, raffles, and lotteries."
     },
     "InstagramPicker": {
         "title": "Free Instagram Comment Picker | Unlimited & No Login",
@@ -760,6 +766,10 @@
         "custom_share_text": "🔥 Join my giveaway: *{title}*! Created with Sorteo Pro. Free & Unlimited. 👇",
         "month_title": "Random Month Generator | Sorteo Pro",
         "month_text": "📅 I just picked a random month! Fair & Free. 👇",
+        "card_title": "Random Card Generator | Sorteo Pro",
+        "card_text": "🃏 I just drew a random card! Fair & Free. 👇",
+        "bingo_title": "Bingo Number Generator | Sorteo Pro",
+        "bingo_text": "🎱 I'm calling Bingo numbers! Join the game. Fair & Free. 👇",
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway"
     },
@@ -993,5 +1003,71 @@
         "faq_1_a": "Yes, we use a secure random number generator to ensure every month has exactly an 8.33% chance of being picked.",
         "faq_2_q": "Can I use this for birthdays?",
         "faq_2_a": "Absolutely! It's a fun way to randomly select a birth month for party games or simulations."
+    },
+    "CardPage": {
+        "title": "Random Card Generator | Draw a Card Online",
+        "description": "Draw a random card from a standard 52-card deck instantly. Free, fair, and with 3D animation. Perfect for magic tricks, games, and probability.",
+        "h1": "Random Card Generator",
+        "subtitle": "Draw a random playing card from a virtual deck.",
+        "faq_1_q": "Is the card draw truly random?",
+        "faq_1_a": "Yes, we use a cryptographically secure random number generator to ensure every card has an equal 1/52 chance of being drawn.",
+        "faq_2_q": "Does it shuffle the deck?",
+        "faq_2_a": "Yes! Every time you start a new draw, the virtual deck is freshly shuffled using the Fisher-Yates algorithm."
+    },
+    "CardGeo": {
+        "direct_answer_title": "What is a Random Card Generator?",
+        "direct_answer_text": "A <tool>Random Card Generator</tool> is a digital tool that simulates drawing a playing card from a standard 52-card deck (Hearts, Diamonds, Clubs, Spades). It is used for <bold>magic tricks</bold>, <bold>probability lessons</bold>, and replacing physical decks in card games. <brand>Sorteo Pro</brand> ensures fair shuffling using secure RNG.",
+        "cta_button": "Draw a Card",
+        "feature_1_title": "Standard 52-Card Deck",
+        "feature_1_desc": "Includes all suits and ranks (A-K).",
+        "feature_2_title": "Fair Shuffling",
+        "feature_2_desc": "Uses secure algorithms for true randomness.",
+        "feature_3_title": "3D Animation",
+        "feature_3_desc": "Visual card flip effect.",
+        "feature_4_title": "Mobile Ready",
+        "feature_4_desc": "Draw cards on your phone anywhere.",
+        "how_to_title": "How to draw a random card",
+        "how_to_step_1": "The generator is pre-loaded with a full deck of cards.",
+        "how_to_step_2": "Select 'Cards' view for the best visual experience.",
+        "how_to_step_3": "Click 'Start Giveaway' to draw a card.",
+        "how_to_step_4": "The selected card is displayed instantly!",
+        "faq_title": "Random Card Generator FAQ",
+        "faq_1_q": "Can I draw multiple cards?",
+        "faq_1_a": "Yes, simply increase the number of winners in the settings to draw 2, 3, or 5 cards at once.",
+        "faq_2_q": "Is it rigged?",
+        "faq_2_a": "No, the result is provably fair and generated on the client-side using secure randomness."
+    },
+    "BingoPage": {
+        "title": "Bingo Number Generator | Call Numbers 1-75",
+        "description": "The best free Bingo Number Generator. Call random numbers from 1 to 75 (or 90) for your Bingo game. Fair, no ads, and automatic board checking.",
+        "h1": "Bingo Number Generator",
+        "subtitle": "Generate random Bingo numbers (1-75) instantly.",
+        "faq_1_q": "Can I use this for 90-ball Bingo?",
+        "faq_1_a": "Yes! You can customize the list to include numbers 1-90 for UK/Australian style Bingo.",
+        "faq_2_q": "Does it repeat numbers?",
+        "faq_2_a": "No. Once a number is called, it is removed from the pool so it cannot be called again until you reset the game."
+    },
+    "BingoGeo": {
+        "direct_answer_title": "What is a Bingo Number Generator?",
+        "direct_answer_text": "A <tool>Bingo Number Generator</tool> is a digital tool that selects random numbers from a pool (typically 1-75) without replacement. It replaces the physical cage and balls used in Bingo halls. <brand>Sorteo Pro</brand> ensures a fair game by using cryptographically secure RNG to call numbers.",
+        "cta_button": "Call Number",
+        "feature_1_title": "No Repeats",
+        "feature_1_desc": "Automatically removes called numbers.",
+        "feature_2_title": "Visual Board",
+        "feature_2_desc": "See all past numbers on the grid.",
+        "feature_3_title": "75 & 90 Ball Support",
+        "feature_3_desc": "Fully customizable range.",
+        "feature_4_title": "Voice Announcer",
+        "feature_4_desc": "Compatible with screen readers.",
+        "how_to_title": "How to use the Bingo Caller",
+        "how_to_step_1": "The generator is pre-loaded with numbers 1-75.",
+        "how_to_step_2": "Select 'Grid' view to see the board layout.",
+        "how_to_step_3": "Click 'Start Giveaway' to call the next number.",
+        "how_to_step_4": "Mark the number on your cards!",
+        "faq_title": "Bingo Caller FAQ",
+        "faq_1_q": "Is it truly random?",
+        "faq_1_a": "Yes, we use a secure random number generator to ensure every call is unpredictable and fair.",
+        "faq_2_q": "Can I restart the game?",
+        "faq_2_a": "Yes, simply click 'Reset' or refresh the page to start a new game with a full set of numbers."
     }
 }

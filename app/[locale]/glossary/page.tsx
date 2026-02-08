@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
-import { BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered, GraduationCap, Type, Gift, Coins, Scissors, Users, Globe, Calendar } from 'lucide-react';
+import { BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered, GraduationCap, Type, Gift, Coins, Scissors, Users, Globe, Calendar, Copy, Grid } from 'lucide-react';
 
 export const dynamic = 'force-static';
 
@@ -132,6 +132,20 @@ export default function GlossaryPage() {
         def: tGlossary('def_14'),
         icon: <Calendar className="w-6 h-6 text-primary" />,
         link: "/random-month-generator"
+    },
+    {
+        id: "card",
+        term: tGlossary('term_15'),
+        def: tGlossary('def_15'),
+        icon: <Copy className="w-6 h-6 text-primary" />,
+        link: "/random-card-generator"
+    },
+    {
+        id: "bingo",
+        term: tGlossary('term_16'),
+        def: tGlossary('def_16'),
+        icon: <Grid className="w-6 h-6 text-primary" />,
+        link: "/bingo-number-generator"
     }
   ];
 

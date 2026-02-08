@@ -5,7 +5,7 @@ import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
 
 interface GlossaryProps {
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'dice' | 'coin' | 'rps' | 'team' | 'country' | 'month';
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'dice' | 'coin' | 'rps' | 'team' | 'country' | 'month' | 'card' | 'bingo';
 }
 
 export function Glossary({ seoMode }: GlossaryProps) {
@@ -82,6 +82,16 @@ export function Glossary({ seoMode }: GlossaryProps) {
       term: t("term_14"),
       definition: t("def_14"),
     },
+    {
+      id: "card",
+      term: t("term_15"),
+      definition: t("def_15"),
+    },
+    {
+      id: "bingo",
+      term: t("term_16"),
+      definition: t("def_16"),
+    },
   ]
 
   // Filter terms based on seoMode (Apex Optimization: Relevance)
@@ -104,6 +114,8 @@ export function Glossary({ seoMode }: GlossaryProps) {
       if (seoMode === 'team' && term.id === 'team') return true;
       if (seoMode === 'country' && term.id === 'country') return true;
       if (seoMode === 'month' && term.id === 'month') return true;
+      if (seoMode === 'card' && term.id === 'card') return true;
+      if (seoMode === 'bingo' && term.id === 'bingo') return true;
 
       return false;
   });

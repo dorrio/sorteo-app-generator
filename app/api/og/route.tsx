@@ -374,20 +374,26 @@ export async function GET(request: Request) {
     // MODE 3: LIST PREVIEW (List param is present)
     if (listParam) {
         let participants: string[] = [];
+        let parsed: unknown;
         try {
             // MainApp double encodes the list (JSON stringify -> encodeURIComponent -> URLSearchParams)
             // So we likely need to decode once before parsing
-            participants = JSON.parse(decodeURIComponent(listParam));
-        } catch (e) {
+            parsed = JSON.parse(decodeURIComponent(listParam));
+        } catch {
             try {
                 // Fallback: maybe it wasn't double encoded?
-                participants = JSON.parse(listParam);
-            } catch (e2) {
+                parsed = JSON.parse(listParam);
+            } catch {
                 // Invalid list
+                parsed = [];
             }
         }
 
-        if (Array.isArray(participants) && participants.length > 0) {
+        if (Array.isArray(parsed) && parsed.every(item => typeof item === 'string')) {
+            participants = parsed as string[];
+        }
+
+        if (participants.length > 0) {
             const displayLimit = 6;
             const visibleParticipants = participants.slice(0, displayLimit);
             const remaining = participants.length - displayLimit;

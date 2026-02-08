@@ -67,7 +67,9 @@ const FloatingBubbles = dynamic(
   { ssr: false }
 )
 
-function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => void }) {
+import { SorteoTheme } from "@/lib/sorteo-store"
+
+function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: Partial<SorteoTheme>) => void }) {
   const searchParams = useSearchParams()
 
   useEffect(() => {
@@ -75,7 +77,7 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => voi
     const templateTitle = searchParams.get('template_title')
     const templateColor = searchParams.get('template_color')
 
-    const update: any = {}
+    const update: Partial<SorteoTheme> = {}
     if (templateTitle) update.customTitle = templateTitle
     if (templateColor) update.primaryColor = templateColor
 
@@ -170,11 +172,11 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
     if (contentRef.current) {
       if (isOverlayOpen) {
         contentRef.current.setAttribute('inert', '')
-        // @ts-ignore
+        // @ts-expect-error - 'inert' is not yet in the HTML definition but supported in modern browsers
         contentRef.current.inert = true
       } else {
         contentRef.current.removeAttribute('inert')
-        // @ts-ignore
+        // @ts-expect-error - 'inert' is not yet in the HTML definition but supported in modern browsers
         contentRef.current.inert = false
       }
     }
@@ -183,7 +185,7 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   useEffect(() => {
     setMounted(true)
     if (initialStyle) {
-      const update: any = { sorteoStyle: initialStyle }
+      const update: Partial<SorteoTheme> = { sorteoStyle: initialStyle }
       if (seoMode === 'yes-no') {
         update.customTitle = tYesNo('h1')
         update.customSubtitle = tYesNo('subtitle')

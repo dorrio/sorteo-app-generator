@@ -1,4 +1,3 @@
-import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
@@ -111,7 +110,7 @@ export default async function RngPage({ params }: { params: Promise<{ locale: st
       "position": 1,
       "name": "Sorteo Pro",
       "item": `${baseUrl}/${locale}`
-    },{
+    }, {
       "@type": "ListItem",
       "position": 2,
       "name": "RNG",
@@ -125,7 +124,7 @@ export default async function RngPage({ params }: { params: Promise<{ locale: st
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp initialStyle="slot_machine" seoMode="rng" />
+      <MainApp initialStyle="slot-machine" seoMode="rng" />
     </>
   );
 }

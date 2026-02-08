@@ -59,6 +59,11 @@ export function SiteFooter() {
                   {t("links.letter")}
                 </Link>
               </li>
+              <li>
+                 <Link href="/random-card-generator" className="hover:text-primary transition-colors">
+                  {t("links.card")}
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -103,6 +108,11 @@ export function SiteFooter() {
                <li>
                  <Link href="/random-month-generator" className="hover:text-primary transition-colors">
                   {t("links.month")}
+                </Link>
+              </li>
+              <li>
+                 <Link href="/bingo-number-generator" className="hover:text-primary transition-colors">
+                  {t("links.bingo")}
                 </Link>
               </li>
             </ul>

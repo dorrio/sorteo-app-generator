@@ -113,7 +113,7 @@ export default async function CountryGeneratorPage({ params }: { params: Promise
       "position": 1,
       "name": "Sorteo Pro",
       "item": `${baseUrl}/${locale}`
-    },{
+    }, {
       "@type": "ListItem",
       "position": 2,
       "name": "Random Country Generator",
@@ -127,7 +127,7 @@ export default async function CountryGeneratorPage({ params }: { params: Promise
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp initialStyle="wheel" seoMode="country" />
+      <MainApp initialStyle="roulette" seoMode="country" />
     </>
   );
 }

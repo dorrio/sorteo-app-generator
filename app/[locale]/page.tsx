@@ -1,9 +1,5 @@
 import { getTranslations } from 'next-intl/server';
 import { MainApp } from "@/components/sorteo/main-app";
-import { WheelGeo } from "@/components/sorteo/wheel-geo";
-import { Glossary } from "@/components/sorteo/glossary";
-import { SeoContent } from "@/components/sorteo/seo-content";
-import { SiteFooter } from "@/components/sorteo/site-footer";
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -65,27 +61,10 @@ export async function generateMetadata({ params, searchParams }: Props) {
 export default async function SorteoApp({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
 
-  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
-  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
-
-  // Reuse existing share logic (Home has generic share content)
-  const shareTranslations = {
-    share: tWinner('share_menu'),
-    copy: tWinner('copy_text'),
-    copied: tWinner('copied'),
-    shareOn: tWinner('share_on')
-  }
-
-  const stickyTranslations = {
-    share_cta: tShare('cta_share'),
-    start_cta: tShare('cta_start')
-  }
-
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
+    ?? (process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteopro.com';
+      : 'https://sorteopro.com');
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -105,21 +84,7 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <MainApp
-        seoMode="home"
-        initialTitle="Sorteo Pro"
-        initialSubtitle="The Premium Giveaway Tool"
-        shareTitle={tShare('home_title')}
-        shareText={tShare('home_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
-        shareTranslations={shareTranslations}
-        stickyTranslations={stickyTranslations}
-        footer={<SiteFooter />}
-      >
-        <WheelGeo />
-        <Glossary seoMode="home" />
-        <SeoContent />
-      </MainApp>
+      <MainApp seoMode="home" />
     </>
   )
 }

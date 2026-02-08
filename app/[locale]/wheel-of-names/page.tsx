@@ -1,9 +1,9 @@
+import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainAppOptimized } from "@/components/sorteo/main-app-optimized";
 import { WheelGeoServer } from "@/components/sorteo/wheel-geo-server";
 import { GlossaryServer } from "@/components/sorteo/glossary-server";
-import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -16,7 +16,7 @@ type Props = {
 
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
-  const { template_title, template_color, list } = await searchParams;
+  const { template_title, template_color } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'WheelGeoPage' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
@@ -25,9 +25,9 @@ export async function generateMetadata({ params, searchParams }: Props) {
       ? `https://${process.env.VERCEL_URL}`
       : 'https://sorteopro.com';
 
+  // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
-  const customList = typeof list === 'string' ? list : undefined;
 
   const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : t('title');
   const displayDescription = t('description');
@@ -36,12 +36,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
   ogImageUrl.searchParams.set('type', 'wheel');
   if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
-  if (customList) ogImageUrl.searchParams.set('list', customList);
 
+  // Construct Canonical/Share URL for OG
+  // This must include params so social bots scrape this specific dynamic version
   const shareUrl = new URL(`${baseUrl}/${locale}/wheel-of-names`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
-  if (customList) shareUrl.searchParams.set('list', customList);
 
   return {
     title: displayTitle,
@@ -79,8 +79,6 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'WheelGeoPage' });
   const tGeo = await getTranslations({ locale, namespace: 'WheelGeo' });
-  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
-  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -116,7 +114,7 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
       "position": 1,
       "name": "Sorteo Pro",
       "item": `${baseUrl}/${locale}`
-    }, {
+    },{
       "@type": "ListItem",
       "position": 2,
       "name": t('h1'),
@@ -124,36 +122,13 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
     }]
   };
 
-  const shareTranslations = {
-    share: tWinner('share_menu'),
-    copy: tWinner('copy_text'),
-    copied: tWinner('copied'),
-    shareOn: tWinner('share_on')
-  }
-
-  const stickyTranslations = {
-    share_cta: tShare('cta_share'),
-    start_cta: tShare('cta_start')
-  }
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainAppOptimized
-        initialStyle="roulette"
-        seoMode="wheel"
-        initialTitle={t('h1')}
-        initialSubtitle={t('subtitle')}
-        shareTitle={tShare('wheel_title')}
-        shareText={tShare('wheel_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
-        shareTranslations={shareTranslations}
-        stickyTranslations={stickyTranslations}
-        footer={<SiteFooter />}
-      >
+      <MainAppOptimized initialStyle="roulette" seoMode="wheel">
         <WheelGeoServer />
         <GlossaryServer seoMode="wheel" />
       </MainAppOptimized>

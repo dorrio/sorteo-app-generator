@@ -47,4 +47,3 @@ The following workflows are available via `/` (Slash Commands):
 - `/develop-backend`: Executes implementation following a plan.
 - `/develop-frontend`: Implements UI from Figma designs.
 
-Use always pnpm to install dependencies and run scripts.

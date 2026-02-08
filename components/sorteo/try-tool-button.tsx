@@ -1,13 +1,11 @@
 "use client"
 
-import { useSorteoStore } from "@/lib/sorteo-store"
+import { useSorteoStore, type ThemeConfig } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 import { Play } from "lucide-react"
 
-type SorteoStyle = "slot-machine" | "roulette" | "cascade" | "cards" | "matrix" | "grid"
-
 interface TryToolButtonProps {
-  style: SorteoStyle
+  style: ThemeConfig['sorteoStyle']
   children: React.ReactNode
   className?: string
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link"

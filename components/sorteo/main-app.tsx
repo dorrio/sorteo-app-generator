@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState, Suspense, useRef } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { useSorteoStore } from "@/lib/sorteo-store"
+import { useSorteoStore, type ThemeConfig } from "@/lib/sorteo-store"
 import { SorteoSelector } from "@/components/sorteo/sorteo-selector"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { ParticipantListSkeleton } from "@/components/sorteo/skeletons"
@@ -65,7 +65,7 @@ const FloatingBubbles = dynamic(
   { ssr: false }
 )
 
-function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => void }) {
+function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: Partial<ThemeConfig>) => void }) {
   const searchParams = useSearchParams()
 
   useEffect(() => {
@@ -73,7 +73,7 @@ function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: any) => voi
     const templateTitle = searchParams.get('template_title')
     const templateColor = searchParams.get('template_color')
 
-    const update: any = {}
+    const update: Partial<ThemeConfig> = {}
     if (templateTitle) update.customTitle = templateTitle
     if (templateColor) update.primaryColor = templateColor
 
@@ -195,7 +195,8 @@ export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   useEffect(() => {
     setMounted(true)
     if (initialStyle) {
-        const update: any = { sorteoStyle: initialStyle }
+        // Fix: Explicitly cast initialStyle to the correct union type
+        const update: Partial<ThemeConfig> = { sorteoStyle: initialStyle as ThemeConfig['sorteoStyle'] }
         if (seoMode === 'yes-no') {
             update.customTitle = tYesNo('h1')
             update.customSubtitle = tYesNo('subtitle')

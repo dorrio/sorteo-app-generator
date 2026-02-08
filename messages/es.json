@@ -205,8 +205,8 @@
     },
     "WinnerCeremony": {
         "winner_label": "Ganador",
-        "share_text": "🏆 ¡*{name}* GANÓ! 🎉 Resultado Oficial verificado por Sorteo Pro. 👇",
-        "share_text_custom": "🔥 ¡*{name}* ganó *{title}*! 🎉 Resultado Oficial verificado por Sorteo Pro. 👇",
+        "share_text": "🏆 *{name}* WON! 🎉 Official result verified by Sorteo Pro. 👇",
+        "share_text_custom": "🔥 *{name}* won *{title}*! 🎉 Official result verified by Sorteo Pro. 👇",
         "share_title": "¡Tenemos Ganador! 🏆",
         "congratulations": "¡Felicidades! 🎉",
         "share_button": "Compartir Resultado",
@@ -217,7 +217,8 @@
         "image_copied": "Image Copied!",
         "download_certificate": "Descargar Certificado",
         "new_giveaway": "Nuevo Sorteo",
-        "close": "Cerrar"
+        "close": "Close",
+        "share_on": "Share on"
     },
     "HistoryPanel": {
         "title": "Historial",
@@ -696,7 +697,7 @@
         "title": "Generador de Letras Aleatorias | ABC Picker",
         "description": "Elige una letra del alfabeto al azar al instante. Gratis, sin anuncios y perfecto para juegos como Stop o Basta.",
         "h1": "Generador de Letras Aleatorias",
-        "subtitle": "Gira para elegir una letra al azar de la A a la Z.",
+        "subtitle": "Gira para elegir una letra del alfabeto al azar.",
         "faq_1_q": "¿Es la selección de letras realmente aleatoria?",
         "faq_1_a": "Sí, utilizamos un generador de números aleatorios seguro para garantizar que cada letra tenga la misma probabilidad de ser seleccionada.",
         "faq_2_q": "¿Puedo eliminar las letras que ya salieron?",

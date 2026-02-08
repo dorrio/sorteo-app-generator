@@ -49,7 +49,9 @@
             "versus_wheel": "Alternativa a Wheel of Names",
             "versus_random": "Alternativa a Random.org",
             "glossary": "Glosario",
-            "month": "Random Month Generator"
+            "month": "Generador de Mes Aleatorio",
+            "card": "Generador de Cartas",
+            "bingo": "Generador de Bingo"
         }
     },
     "QuickSpecs": {
@@ -205,20 +207,18 @@
     },
     "WinnerCeremony": {
         "winner_label": "Ganador",
-        "share_text": "🏆 *{name}* WON! 🎉 Official result verified by Sorteo Pro. 👇",
-        "share_text_custom": "🔥 *{name}* won *{title}*! 🎉 Official result verified by Sorteo Pro. 👇",
+        "share_text": "¡Acabo de realizar un sorteo con Sorteo Pro y *{name}* ha ganado! 🏆 Resultado verificado y crea el tuyo aquí: 👇",
+        "share_text_custom": "🔥 ¡Acabo de elegir un ganador para *{title}*!\n\n🏆 Ganador: *{name}*\n\n✅ Resultado verificado y crea el tuyo aquí: 👇",
         "share_title": "¡Tenemos Ganador! 🏆",
         "congratulations": "¡Felicidades! 🎉",
         "share_button": "Compartir Resultado",
         "share_menu": "Compartir...",
         "copied": "¡Copiado!",
         "copy_text": "Copiar Enlace",
-        "copy_image": "Copy Image",
-        "image_copied": "Image Copied!",
         "download_certificate": "Descargar Certificado",
         "new_giveaway": "Nuevo Sorteo",
-        "close": "Close",
-        "share_on": "Share on"
+        "close": "Cerrar",
+        "share_on": "Compartir en"
     },
     "HistoryPanel": {
         "title": "Historial",
@@ -260,8 +260,6 @@
         "create_your_own": "🚀 Crear Sorteo Gratis",
         "share_button": "Compartir Prueba",
         "download_certificate": "Descargar Certificado",
-        "copy_image": "Copy Image",
-        "image_copied": "Image Copied!",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* es el GANADOR!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* ganó *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "result": {
@@ -333,18 +331,10 @@
         "def_7": "Una herramienta digital que elige una letra del alfabeto (A-Z) al azar. Útil para juegos de palabras, enseñar fonética y siglas.",
         "term_8": "Amigo Invisible",
         "def_8": "Una tradición navideña en la que a los miembros de un grupo se les asigna aleatoriamente una persona a quien deben hacer un regalo. La identidad del regalador debe permanecer en secreto.",
-        "term_9": "Dados Online",
-        "def_9": "Una herramienta digital que simula el lanzamiento de dados físicos. Sorteo Pro utiliza un RNG criptográficamente seguro para garantizar que cada tirada sea aleatoria y justa.",
-        "term_10": "Lanzar Moneda",
-        "def_10": "Un generador aleatorio binario que simula el lanzamiento de una moneda (Cara o Cruz). Ofrece una probabilidad real del 50/50 usando algoritmos seguros.",
-        "term_11": "Piedra Papel Tijeras",
-        "def_11": "Versión digital del clásico juego de manos. El sistema selecciona aleatoriamente Piedra, Papel o Tijeras para jugar contra ti de forma justa.",
-        "term_12": "Generador de Equipos Aleatorios",
-        "def_12": "Herramienta que divide una lista de participantes en grupos o equipos iguales al azar. Esencial para profesores, entrenadores y dinámicas de grupo.",
-        "term_13": "Generador de Países",
-        "def_13": "Herramienta que selecciona una nación de la lista de 195 estados soberanos del mundo completamente al azar. Usado para educación y juegos.",
-        "term_14": "Generador de Mes Aleatorio",
-        "def_14": "Herramienta simple que elige un mes del año (Enero-Diciembre) al azar. Útil para planificar eventos, horóscopos o juegos de fechas."
+        "term_15": "Generador de Cartas",
+        "def_15": "Herramienta que simula elegir una carta de una baraja estándar de 52 cartas usando un generador de números aleatorios.",
+        "term_16": "Cantador de Bingo",
+        "def_16": "Dispositivo o software que selecciona números aleatorios (generalmente 1-75) para un juego de Bingo."
     },
     "InstagramPicker": {
         "title": "Selector de Comentarios de Instagram Gratis | Ilimitado",
@@ -697,7 +687,7 @@
         "title": "Generador de Letras Aleatorias | ABC Picker",
         "description": "Elige una letra del alfabeto al azar al instante. Gratis, sin anuncios y perfecto para juegos como Stop o Basta.",
         "h1": "Generador de Letras Aleatorias",
-        "subtitle": "Gira para elegir una letra del alfabeto al azar.",
+        "subtitle": "Gira para elegir una letra al azar de la A a la Z.",
         "faq_1_q": "¿Es la selección de letras realmente aleatoria?",
         "faq_1_a": "Sí, utilizamos un generador de números aleatorios seguro para garantizar que cada letra tenga la misma probabilidad de ser seleccionada.",
         "faq_2_q": "¿Puedo eliminar las letras que ya salieron?",
@@ -755,7 +745,11 @@
         "month_title": "Generador de Mes Aleatorio | Sorteo Pro",
         "month_text": "📅 ¡Acabo de elegir un mes al azar! Justo y Gratis. 👇",
         "cta_share": "Compartir",
-        "cta_start": "Start Giveaway"
+        "cta_start": "Empezar",
+        "card_title": "Generador de Cartas Aleatorias | Sorteo Pro",
+        "card_text": "🃏 ¡Acabo de elegir una carta al azar! Justo e Instantáneo. Mira esto 👇",
+        "bingo_title": "Generador de Números de Bingo | Sorteo Pro",
+        "bingo_text": "🎱 ¡Bingo! Acabo de cantar un número con Sorteo Pro. Gratis. 👇"
     },
     "CountryPage": {
         "title": "Generador de Países Aleatorios | Elegir País al Azar",
@@ -987,5 +981,63 @@
         "faq_1_a": "Sí, utilizamos un generador de números aleatorios seguro para asegurar que cada mes tenga exactamente un 8.33% de probabilidad de ser elegido.",
         "faq_2_q": "¿Puedo usar esto para cumpleaños?",
         "faq_2_a": "¡Absolutamente! Es una forma divertida de seleccionar aleatoriamente un mes de nacimiento para juegos de fiesta o simulaciones."
+    },
+    "CardPage": {
+        "title": "Generador de Cartas Aleatorias | Elegir Carta Online",
+        "description": "Elige una carta al azar de una baraja de 52 cartas al instante. Gratis, justo y perfecto para trucos de magia o juegos.",
+        "h1": "Generador de Cartas Aleatorias",
+        "subtitle": "Gira para elegir una carta aleatoria de la baraja."
+    },
+    "CardGeo": {
+        "direct_answer_title": "¿Qué es un Generador de Cartas Aleatorias?",
+        "direct_answer_text": "Un <tool>Generador de Cartas Aleatorias</tool> es una herramienta digital que selecciona una carta de juego de una baraja estándar de 52 cartas completamente al azar. Se utiliza para <strong>trucos de magia</strong>, <strong>juegos de cartas</strong> o resolver disputas. <brand>Sorteo Pro</brand> asegura un barajado justo usando RNG seguro.",
+        "cta_button": "Elegir Carta",
+        "feature_1_title": "Baraja de 52 Cartas",
+        "feature_1_desc": "Incluye todos los palos: Picas, Corazones, Diamantes, Tréboles.",
+        "feature_2_title": "Barajado Justo",
+        "feature_2_desc": "Cada carta tiene una probabilidad igual de 1/52.",
+        "feature_3_title": "Resultado Instantáneo",
+        "feature_3_desc": "Obtén una carta aleatoria en segundos.",
+        "feature_4_title": "Listo para Móvil",
+        "feature_4_desc": "Funciona perfectamente en cualquier teléfono.",
+        "how_to_title": "Cómo elegir una carta aleatoria",
+        "how_to_step_1": "El generador está precargado con una baraja completa.",
+        "how_to_step_2": "Selecciona la vista 'Cartas' para la mejor experiencia visual.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para barajar y elegir una carta.",
+        "how_to_step_4": "¡La carta seleccionada se muestra al instante!",
+        "faq_title": "Preguntas Frecuentes de Cartas",
+        "faq_1_q": "¿Es la selección realmente aleatoria?",
+        "faq_1_a": "Sí, usamos un generador de números aleatorios seguro para asegurar que cada carta tenga exactamente 1/52 de probabilidad.",
+        "faq_2_q": "¿Incluye Jokers?",
+        "faq_2_a": "El modo estándar usa 52 cartas. Puedes añadir Jokers manualmente personalizando la lista."
+    },
+    "BingoPage": {
+        "title": "Generador de Números de Bingo | Número Aleatorio 1-75",
+        "description": "Genera números de Bingo aleatorios (1-75) al instante. Cantador de Bingo gratis para organizar juegos. Justo y simple.",
+        "h1": "Generador de Números de Bingo",
+        "subtitle": "Genera números de Bingo aleatorios del 1 al 75."
+    },
+    "BingoGeo": {
+        "direct_answer_title": "¿Qué es un Generador de Números de Bingo?",
+        "direct_answer_text": "Un <tool>Generador de Números de Bingo</tool> es una herramienta que selecciona números del 1 al 75 al azar para jugar al Bingo. Asegura un juego justo sin necesidad de un bombo físico. <brand>Sorteo Pro</brand> actúa como un cantador digital para tu noche de juegos.",
+        "cta_button": "Cantar Número",
+        "feature_1_title": "Rango 1-75",
+        "feature_1_desc": "Formato estándar de Bingo.",
+        "feature_2_title": "Canto Justo",
+        "feature_2_desc": "Usa RNG seguro para resultados imparciales.",
+        "feature_3_title": "Pantalla Grande",
+        "feature_3_desc": "Números fáciles de leer para grupos.",
+        "feature_4_title": "Gratis e Ilimitado",
+        "feature_4_desc": "Canta tantos números como necesites.",
+        "how_to_title": "Cómo generar números de Bingo",
+        "how_to_step_1": "El generador está precargado con números 1-75.",
+        "how_to_step_2": "Selecciona la vista 'Tragamonedas' para sentirte como un cantador clásico.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para cantar un número.",
+        "how_to_step_4": "¡Anuncia el número a tus jugadores!",
+        "faq_title": "Preguntas Frecuentes de Bingo",
+        "faq_1_q": "¿Puedo evitar números repetidos?",
+        "faq_1_a": "¡Sí! Ve a la configuración 'Personalizar' y activa 'Eliminar ganador' para asegurar que cada número salga solo una vez por juego.",
+        "faq_2_q": "¿Es justo?",
+        "faq_2_a": "Sí, usamos un RNG criptográficamente seguro para garantizar la equidad."
     }
 }

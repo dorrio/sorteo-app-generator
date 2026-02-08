@@ -45,12 +45,17 @@ export async function generateMetadata({ params, searchParams }: Props) {
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
   if (customList) shareUrl.searchParams.set('list', customList);
 
+  const canonicalUrl =
+    customTitle || customColor || customList
+      ? shareUrl.toString()
+      : `/${locale}/team-generator`;
+
   return {
     title: displayTitle,
     description: displayDescription,
     keywords: ["random team generator", "team maker", "random group generator", "split teams", "group randomizer", "classroom group generator", "team picker"],
     alternates: {
-      canonical: `/${locale}/team-generator`
+      canonical: canonicalUrl
     },
     openGraph: {
       title: displayTitle,

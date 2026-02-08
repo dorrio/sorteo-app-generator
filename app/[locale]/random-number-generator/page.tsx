@@ -43,12 +43,17 @@ export async function generateMetadata({ params, searchParams }: Props) {
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
   if (customList) shareUrl.searchParams.set('list', customList);
 
+  const canonicalUrl =
+    customTitle || customColor || customList
+      ? shareUrl.toString()
+      : `/${locale}/random-number-generator`;
+
   return {
     title: displayTitle,
     description: displayDescription,
     keywords: ["random number generator", "RNG", "number picker", "randomizer", "generador de numeros", "numero aleatorio", "gerador de numeros", "dice roller", "roll a dice", "online dice"],
     alternates: {
-      canonical: `/${locale}/random-number-generator`
+      canonical: canonicalUrl
     },
     openGraph: {
       title: displayTitle,

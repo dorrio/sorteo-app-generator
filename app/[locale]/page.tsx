@@ -33,16 +33,28 @@ export async function generateMetadata({ params, searchParams }: Props) {
   // Default type for home is undefined, which defaults to generic in api/og
   if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
-  if (customList) ogImageUrl.searchParams.set('list', customList);
+  if (customList) {
+    ogImageUrl.searchParams.set('list', customList);
+    // Explicitly set type to 'list' so the OG image renders the list content theme
+    ogImageUrl.searchParams.set('type', 'list');
+  }
 
   const shareUrl = new URL(`${baseUrl}/${locale}`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
   if (customList) shareUrl.searchParams.set('list', customList);
 
+  const canonicalUrl =
+    customTitle || customColor || customList
+      ? shareUrl.toString()
+      : `${baseUrl}/${locale}`;
+
   return {
     title: displayTitle,
     description: displayDescription,
+    alternates: {
+      canonical: canonicalUrl
+    },
     openGraph: {
       title: displayTitle,
       description: displayDescription,

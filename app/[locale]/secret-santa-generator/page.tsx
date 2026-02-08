@@ -45,12 +45,17 @@ export async function generateMetadata({ params, searchParams }: Props) {
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
   if (customList) shareUrl.searchParams.set('list', customList);
 
+  const canonicalUrl =
+    customTitle || customColor || customList
+      ? shareUrl.toString()
+      : `/${locale}/secret-santa-generator`;
+
   return {
     title: displayTitle,
     description: displayDescription,
     keywords: ["secret santa generator", "secret santa online", "amigo invisible online", "amigo secreto", "gift exchange generator", "christmas name picker", "secret santa maker", "free secret santa", "no email secret santa"],
     alternates: {
-      canonical: `/${locale}/secret-santa-generator`
+      canonical: canonicalUrl
     },
     openGraph: {
       title: displayTitle,

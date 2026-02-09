@@ -44,7 +44,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   return {
     title: displayTitle,
     description: displayDescription,
-    keywords: ["random card generator", "pick a card", "draw a card", "playing cards online", "generador de cartas", "carta aleatoria", "baraja española", "poker cards"],
+    keywords: ["random card generator", "pick a card", "draw a card", "playing cards online", "card generator", "random card", "spanish deck", "poker cards"],
     alternates: {
       canonical: `/${locale}/random-card-generator`
     },

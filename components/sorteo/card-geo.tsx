@@ -50,15 +50,20 @@ export function CardGeo() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  // Helper to safely escape JSON-LD
+  const safeJsonLd = (data: unknown) => {
+    return JSON.stringify(data).replace(/</g, '\\u003c')
+  }
+
   return (
     <div className="w-full">
         <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
         <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }}
+            dangerouslySetInnerHTML={{ __html: safeJsonLd(howToLd) }}
         />
 
       {/* Direct Answer Block (GEO) */}

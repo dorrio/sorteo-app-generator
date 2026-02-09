@@ -1,22 +1,14 @@
-"use client"
-
 import { useTranslations } from "next-intl"
-import { motion, useReducedMotion } from "framer-motion"
 import { Disc, Palette, ShieldCheck, Play, Music, CheckCircle, HelpCircle, BookOpen } from "lucide-react"
-import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/routing"
+import { TryToolButton } from "./try-tool-button"
+import { WheelVisual } from "./wheel-visual"
 
 export function WheelGeo() {
   const t = useTranslations("WheelGeo")
   const tSpecs = useTranslations("QuickSpecs")
   const tFaq = useTranslations("WheelGeoPage")
-  const { updateTheme } = useSorteoStore()
-  const shouldReduceMotion = useReducedMotion()
-
-  const handleTryWheel = () => {
-    updateTheme({ sorteoStyle: "roulette" })
-  }
 
   const features = [
     {
@@ -172,10 +164,10 @@ export function WheelGeo() {
                 asChild
                 className="gap-2 font-bold text-lg h-12 px-6 rounded-full shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
               >
-                <a href="#sorteo-section" onClick={handleTryWheel}>
+                <TryToolButton sorteoStyle="roulette">
                   <Play className="w-5 h-5 fill-current" />
                   {t('cta_button')}
-                </a>
+                </TryToolButton>
               </Button>
 
             </div>
@@ -219,23 +211,13 @@ export function WheelGeo() {
 
         {/* Right: Visual Abstract (Placeholder or Icon Graphic) */}
         <div className="hidden md:flex justify-center items-center sticky top-24">
-          <a
-            href="#sorteo-section"
+          <TryToolButton
+            sorteoStyle="roulette"
             className="relative w-64 h-64 rounded-full border-4 border-primary/20 flex items-center justify-center bg-card/50 backdrop-blur-sm cursor-pointer hover:scale-105 transition-transform"
-            onClick={handleTryWheel}
           >
             <span className="sr-only">{t('cta_button')}</span>
-            <motion.div
-              animate={shouldReduceMotion ? {} : { rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear", repeatType: "loop" }}
-              style={{ willChange: "transform" }}
-              className="absolute inset-0 rounded-full border-t-4 border-primary"
-            />
-            <Disc className="w-24 h-24 text-primary/50" />
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-background/50 rounded-full">
-              <Play className="w-12 h-12 text-primary fill-current" />
-            </div>
-          </a>
+            <WheelVisual />
+          </TryToolButton>
         </div>
 
       </div >

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { copyBlobToClipboard } from "@/lib/utils"
 import { ConfettiEffect } from "./confetti-effect"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -20,6 +21,7 @@ import {
   Instagram,
   Download,
   Loader2,
+  ImageIcon,
 } from "lucide-react"
 
 interface WinnerCeremonyProps {
@@ -33,6 +35,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const t = useTranslations("WinnerCeremony")
   const [showContent, setShowContent] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [imageCopied, setImageCopied] = useState(false)
   const [canShareNative, setCanShareNative] = useState(false)
   const [isSharing, setIsSharing] = useState(false)
 
@@ -151,6 +154,54 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     await navigator.clipboard.writeText(shareText)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  const handleCopyImage = async () => {
+    if (!winner) return
+
+    // Construct OG Image URL (Same logic as handleDownload)
+    const ogParams = new URLSearchParams()
+    ogParams.set("name", winner.name)
+
+    let dateToUse = new Date()
+    if (winner.verificationId) {
+      try {
+        const parts = winner.verificationId.split('-')
+        if (parts.length >= 3) {
+          const timestampHex = parts[parts.length - 1]
+          const timestamp = parseInt(timestampHex, 16)
+          const d = new Date(timestamp)
+          if (!isNaN(d.getTime())) {
+            dateToUse = d
+          }
+        }
+      } catch (e) {}
+    }
+    ogParams.set("date", dateToUse.toISOString())
+
+    if (seoMode && seoMode !== 'home') {
+      ogParams.set("type", seoMode)
+    }
+    if (theme.customTitle) {
+      ogParams.set("title", theme.customTitle)
+    }
+    if (theme.primaryColor) {
+      ogParams.set("color", theme.primaryColor)
+    }
+
+    const imageUrl = `/api/og?${ogParams.toString()}`
+
+    try {
+      const response = await fetch(imageUrl)
+      const blob = await response.blob()
+      const success = await copyBlobToClipboard(blob)
+      if (success) {
+        setImageCopied(true)
+        setTimeout(() => setImageCopied(false), 2000)
+      }
+    } catch (e) {
+      console.error("Failed to copy image", e)
+    }
   }
 
   const handleDownload = async () => {
@@ -373,6 +424,21 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                       <>
                         <Copy className="w-4 h-4" />
                         {t("copy_text")}
+                      </>
+                    )}
+                  </DropdownMenuItem>
+
+                  {/* Viralis: Direct Copy Image for Desktop Sharing */}
+                  <DropdownMenuItem onClick={handleCopyImage} className="gap-2 cursor-pointer">
+                    {imageCopied ? (
+                      <>
+                        <Check className="w-4 h-4 text-green-500" />
+                        <span className="text-green-500">Image Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <ImageIcon className="w-4 h-4" />
+                        Copy Certificate Image
                       </>
                     )}
                   </DropdownMenuItem>

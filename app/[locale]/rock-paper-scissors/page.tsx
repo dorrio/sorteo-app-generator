@@ -124,26 +124,42 @@ export default async function RpsPage({ params }: { params: Promise<{ locale: st
     }]
   };
 
-  const shareTranslations = {
-      share: tWinner('share_menu'),
-      copy: tWinner('copy_text'),
-      copied: tWinner('copied'),
-      shareOn: tWinner('share_on')
+  const shareTranslations: {
+    share: string;
+    copy: string;
+    copied: string;
+    shareOn: string;
+  } = {
+    share: tWinner('share_menu'),
+    copy: tWinner('copy_text'),
+    copied: tWinner('copied'),
+    shareOn: tWinner('share_on')
   }
 
-  const stickyTranslations = {
-      share_cta: tShare('cta_share'),
-      start_cta: tShare('cta_start')
+  const stickyTranslations: {
+    share_cta: string;
+    start_cta: string;
+  } = {
+    share_cta: tShare('cta_share'),
+    start_cta: tShare('cta_start')
   }
 
-  const initialOptions = {
-      yes: "",
-      no: "",
-      heads: "",
-      tails: "",
-      rock: t('option_rock'),
-      paper: t('option_paper'),
-      scissors: t('option_scissors')
+  const initialOptions: {
+    yes: string;
+    no: string;
+    heads: string;
+    tails: string;
+    rock: string;
+    paper: string;
+    scissors: string;
+  } = {
+    yes: "",
+    no: "",
+    heads: "",
+    tails: "",
+    rock: t('option_rock'),
+    paper: t('option_paper'),
+    scissors: t('option_scissors')
   }
 
   return (

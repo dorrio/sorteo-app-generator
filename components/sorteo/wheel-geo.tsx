@@ -67,7 +67,7 @@ export function WheelGeo() {
   // Schema for "Direct Answer" optimization
   // Using FAQPage schema specifically for the "What is..." question
   // Added HowTo schema
-  const jsonLd = [
+  const jsonLd: Array<Record<string, unknown>> = [
     {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',

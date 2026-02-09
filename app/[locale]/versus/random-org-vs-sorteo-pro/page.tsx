@@ -110,6 +110,7 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
 
   return (
     <>
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, faqSchema]) }}

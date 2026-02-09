@@ -90,7 +90,7 @@ export interface SorteoState {
   setHasHydrated: (state: boolean) => void
 
   activeTool: string | null
-  setActiveTool: (tool: string) => void
+  setActiveTool: (tool: string | null) => void
 }
 
 const defaultTheme: ThemeConfig = {

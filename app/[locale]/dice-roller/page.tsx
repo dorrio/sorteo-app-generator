@@ -155,7 +155,8 @@ export default async function DiceRollerPage({ params }: { params: Promise<{ loc
         footer={<SiteFooter />}
       >
         <DiceGeo />
-        <Glossary seoMode="rng" />
+        {/* Dice is a form of RNG, so we use the 'dice' mode which maps to 'rng' glossary terms */}
+        <Glossary seoMode="dice" />
       </MainApp>
     </>
   );

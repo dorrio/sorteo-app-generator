@@ -80,6 +80,7 @@ export function Glossary({ seoMode }: GlossaryProps) {
       if (seoMode === 'secret-santa' && term.id === 'secret-santa') return true;
       if (seoMode === 'card' && term.id === 'card') return true;
       if (seoMode === 'bingo' && term.id === 'bingo') return true;
+      if (seoMode === 'dice' && term.id === 'rng') return true; // Dice is a form of RNG
 
       // For other modes, maybe show related terms?
       // For now, keep it strict to avoid clutter.

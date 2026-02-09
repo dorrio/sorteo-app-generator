@@ -224,7 +224,7 @@ const ParticipantItem = memo(function ParticipantItem({
           >
             {participant.name}
           </button>
-          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
             <Tooltip>
               <TooltipTrigger asChild>
                 <button

@@ -1,6 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
+import { CoinGeo } from "@/components/sorteo/coin-geo";
+import { Glossary } from "@/components/sorteo/glossary";
+import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -22,7 +25,6 @@ export async function generateMetadata({ params, searchParams }: Props) {
       ? `https://${process.env.VERCEL_URL}`
       : 'https://sorteopro.com';
 
-  // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
 
@@ -35,7 +37,6 @@ export async function generateMetadata({ params, searchParams }: Props) {
   if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
 
-  // Construct Canonical/Share URL for OG
   const shareUrl = new URL(`${baseUrl}/${locale}/coin-flip`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
@@ -76,6 +77,8 @@ export default async function CoinPage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'CoinPage' });
   const tGeo = await getTranslations({ locale, namespace: 'CoinGeo' });
+  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
+  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -119,16 +122,50 @@ export default async function CoinPage({ params }: { params: Promise<{ locale: s
     }]
   };
 
+  const shareTranslations = {
+      share: tWinner('share_menu'),
+      copy: tWinner('copy_text'),
+      copied: tWinner('copied'),
+      shareOn: tWinner('share_on')
+  }
+
+  const stickyTranslations = {
+      share_cta: tShare('cta_share'),
+      start_cta: tShare('cta_start')
+  }
+
+  const initialOptions = {
+      yes: "",
+      no: "",
+      heads: t('option_heads'),
+      tails: t('option_tails'),
+      rock: "",
+      paper: "",
+      scissors: ""
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      {/*
-        initialStyle="cards" provides a nice visual for 2 options.
-      */}
-      <MainApp initialStyle="cards" seoMode="coin" />
+      <MainApp
+        initialStyle="cards"
+        seoMode="coin"
+        initialTitle={t('h1')}
+        initialSubtitle={t('subtitle')}
+        shareTitle={tShare('coin_title')}
+        shareText={tShare('coin_text')}
+        customShareTextTemplate={tShare('custom_share_text')}
+        shareTranslations={shareTranslations}
+        stickyTranslations={stickyTranslations}
+        initialOptions={initialOptions}
+        footer={<SiteFooter />}
+      >
+        <CoinGeo />
+        <Glossary seoMode="coin" />
+      </MainApp>
     </>
   );
 }

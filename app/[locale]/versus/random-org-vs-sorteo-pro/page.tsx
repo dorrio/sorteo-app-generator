@@ -2,6 +2,8 @@ import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
 import { VersusGeo } from "@/components/sorteo/versus-geo";
+import { RngGeo } from "@/components/sorteo/rng-geo";
+import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export const dynamic = 'force-static';
 
@@ -48,6 +50,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function RandomVersusPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'VersusRandom' });
+  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
+  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
+  const tRng = await getTranslations({ locale, namespace: 'RngPage' });
 
   // Schema: Article + FAQ
   const articleSchema = {
@@ -56,16 +61,16 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
     headline: t('title'),
     description: t('description'),
     author: {
-        '@type': 'Organization',
-        name: 'Sorteo Pro'
+      '@type': 'Organization',
+      name: 'Sorteo Pro'
     },
     publisher: {
-        '@type': 'Organization',
-        name: 'Sorteo Pro',
-        logo: {
-            '@type': 'ImageObject',
-            url: 'https://sorteopro.com/logo.png'
-        }
+      '@type': 'Organization',
+      name: 'Sorteo Pro',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://sorteopro.com/logo.png'
+      }
     }
   };
 
@@ -73,39 +78,58 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
-        {
-            '@type': 'Question',
-            name: t('faq.q1'),
-            acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a1') }
-        },
-        {
-            '@type': 'Question',
-            name: t('faq.q2'),
-            acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a2') }
-        },
-        {
-            '@type': 'Question',
-            name: t('faq.q3'),
-            acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a3') }
-        }
+      {
+        '@type': 'Question',
+        name: t('faq.q1'),
+        acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a1') }
+      },
+      {
+        '@type': 'Question',
+        name: t('faq.q2'),
+        acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a2') }
+      },
+      {
+        '@type': 'Question',
+        name: t('faq.q3'),
+        acceptedAnswer: { '@type': 'Answer', text: t.raw('faq.a3') }
+      }
     ]
   };
 
+  const shareTranslations = {
+    share: tWinner('share_menu'),
+    copy: tWinner('copy_text'),
+    copied: tWinner('copied'),
+    shareOn: tWinner('share_on')
+  }
+
+  const stickyTranslations = {
+    share_cta: tShare('cta_share'),
+    start_cta: tShare('cta_start')
+  }
+
   return (
     <>
-      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */}
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, faqSchema]) }}
       />
-      {/*
-         Strategy: Use the functional MainApp (RNG mode) at the top so users can try it immediately.
-         "seoMode='rng'" ensures correct branding (titles) for RNG context.
-      */}
-      <MainApp initialStyle="slot_machine" seoMode="rng" />
-
-      {/* The Comparison Content (Random namespace) */}
-      <VersusGeo namespace="VersusRandom" />
+      <MainApp
+        initialStyle="slot_machine"
+        seoMode="rng"
+        initialTitle={tRng('h1')}
+        initialSubtitle={tRng('subtitle')}
+        shareTitle={tShare('rng_title')}
+        shareText={tShare('rng_text')}
+        customShareTextTemplate={tShare('custom_share_text')}
+        shareTranslations={shareTranslations}
+        stickyTranslations={stickyTranslations}
+        footer={<SiteFooter />}
+      >
+        <RngGeo />
+        <VersusGeo namespace="VersusRandom" />
+      </MainApp>
     </>
   );
 }

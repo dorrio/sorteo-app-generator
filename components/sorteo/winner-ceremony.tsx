@@ -20,7 +20,6 @@ import {
   Instagram,
   Download,
   Loader2,
-  Image as ImageIcon,
 } from "lucide-react"
 
 interface WinnerCeremonyProps {
@@ -34,14 +33,11 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const t = useTranslations("WinnerCeremony")
   const [showContent, setShowContent] = useState(false)
   const [copied, setCopied] = useState(false)
-  const [copiedImage, setCopiedImage] = useState(false)
   const [canShareNative, setCanShareNative] = useState(false)
-  const [canCopyImage, setCanCopyImage] = useState(false)
   const [isSharing, setIsSharing] = useState(false)
 
   useEffect(() => {
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
-    setCanCopyImage(typeof ClipboardItem !== "undefined")
 
     if (showWinnerCeremony) {
       const timer = setTimeout(() => setShowContent(true), 300)
@@ -53,31 +49,31 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
   const locale = useLocale()
 
-  const shouldShow = showWinnerCeremony && !!winner
+  if (!showWinnerCeremony || !winner) return null
 
   // Viral Optimization: Create a deep link to the verification page
   const baseUrl = typeof window !== "undefined" ? window.location.origin : ""
-  let shareUrl = winner?.verificationId
+  let shareUrl = winner.verificationId
     ? `${baseUrl}/${locale}/verify?id=${winner.verificationId}&name=${encodeURIComponent(winner.name)}`
     : typeof window !== "undefined" ? window.location.href : ""
 
   // Viralis: Append tool type context to maintain the loop
-  if (winner?.verificationId && seoMode && seoMode !== 'home') {
+  if (winner.verificationId && seoMode && seoMode !== 'home') {
       shareUrl += `&type=${seoMode}`
   }
 
   // Viralis: Append custom context (Title & Color) to make the share more specific
-  if (winner?.verificationId && theme.customTitle) {
+  if (winner.verificationId && theme.customTitle) {
       shareUrl += `&title=${encodeURIComponent(theme.customTitle)}`
   }
-  if (winner?.verificationId && theme.primaryColor) {
+  if (winner.verificationId && theme.primaryColor) {
       shareUrl += `&color=${encodeURIComponent(theme.primaryColor)}`
   }
 
   // Compelling share text
-  let shareText = t("share_text", { name: winner?.name || "" })
+  let shareText = t("share_text", { name: winner.name })
   if (theme.customTitle) {
-      shareText = t("share_text_custom", { name: winner?.name || "", title: theme.customTitle })
+      shareText = t("share_text_custom", { name: winner.name, title: theme.customTitle })
   }
 
   // Pre-calculate Social URLs for SEO (Link Juice) & Accessibility
@@ -157,57 +153,6 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     setTimeout(() => setCopied(false), 2000)
   }
 
-  const copyImage = async () => {
-    if (!winner) return
-
-    try {
-      const ogParams = new URLSearchParams()
-      ogParams.set("name", winner.name)
-
-      let dateToUse = new Date()
-      if (winner.verificationId) {
-        try {
-          const parts = winner.verificationId.split('-')
-          if (parts.length >= 3) {
-            const timestampHex = parts[parts.length - 1]
-            const timestamp = parseInt(timestampHex, 16)
-            const d = new Date(timestamp)
-            if (!isNaN(d.getTime())) {
-              dateToUse = d
-            }
-          }
-        } catch (e) {}
-      }
-      ogParams.set("date", dateToUse.toISOString())
-
-      if (seoMode && seoMode !== 'home') {
-        ogParams.set("type", seoMode)
-      }
-      if (theme.customTitle) {
-        ogParams.set("title", theme.customTitle)
-      }
-      if (theme.primaryColor) {
-        ogParams.set("color", theme.primaryColor)
-      }
-
-      const imageUrl = `/api/og?${ogParams.toString()}`
-
-      const response = await fetch(imageUrl)
-      const blob = await response.blob()
-
-      await navigator.clipboard.write([
-        new ClipboardItem({
-          [blob.type]: blob
-        })
-      ])
-
-      setCopiedImage(true)
-      setTimeout(() => setCopiedImage(false), 2000)
-    } catch (e) {
-      console.error("Failed to copy image", e)
-    }
-  }
-
   const handleDownload = async () => {
     if (!winner) return
 
@@ -270,7 +215,6 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
   return (
     <AnimatePresence>
-      {shouldShow && winner && (
       <motion.div
         className="fixed inset-0 z-50 flex items-center justify-center"
         initial={{ opacity: 0 }}
@@ -433,22 +377,6 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                     )}
                   </DropdownMenuItem>
 
-                  {canCopyImage && (
-                    <DropdownMenuItem onClick={copyImage} className="gap-2 cursor-pointer">
-                      {copiedImage ? (
-                        <>
-                          <Check className="w-4 h-4 text-green-500" />
-                          <span className="text-green-500">{t("image_copied")}</span>
-                        </>
-                      ) : (
-                        <>
-                          <ImageIcon className="w-4 h-4" />
-                          {t("copy_image")}
-                        </>
-                      )}
-                    </DropdownMenuItem>
-                  )}
-
                   {/* Semantic Fix: Real links for bots and users */}
                   <DropdownMenuItem asChild className="gap-2 cursor-pointer">
                     <a href={twitterUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">
@@ -530,7 +458,6 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
           transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, delay: 0.5 }}
         />
       </motion.div>
-      )}
     </AnimatePresence>
   )
 }

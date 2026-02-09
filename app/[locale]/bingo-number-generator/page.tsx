@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
     : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
+      ? (process.env.VERCEL_URL.startsWith('http') ? process.env.VERCEL_URL : `https://${process.env.VERCEL_URL}`)
       : 'https://sorteopro.com';
 
   return {
@@ -60,7 +60,7 @@ export default async function BingoNumberGeneratorPage({ params }: { params: Pro
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
     : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
+      ? (process.env.VERCEL_URL.startsWith('http') ? process.env.VERCEL_URL : `https://${process.env.VERCEL_URL}`)
       : 'https://sorteopro.com';
 
   const softwareAppSchema = {

@@ -3,7 +3,7 @@ import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
 
 interface GlossaryProps {
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'dice' | 'coin' | 'rps' | 'team' | 'country' | 'month';
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'dice' | 'coin' | 'rps' | 'team' | 'country' | 'month' | 'card';
 }
 
 export async function GlossaryServer({ seoMode }: GlossaryProps) {
@@ -80,6 +80,11 @@ export async function GlossaryServer({ seoMode }: GlossaryProps) {
       term: t("term_14"),
       definition: t("def_14"),
     },
+    {
+      id: "card",
+      term: t("term_15"),
+      definition: t("def_15"),
+    },
   ]
 
   // Filter terms based on seoMode (Apex Optimization: Relevance)
@@ -102,6 +107,7 @@ export async function GlossaryServer({ seoMode }: GlossaryProps) {
       if (seoMode === 'team' && term.id === 'team') return true;
       if (seoMode === 'country' && term.id === 'country') return true;
       if (seoMode === 'month' && term.id === 'month') return true;
+      if (seoMode === 'card' && term.id === 'card') return true;
 
       return false;
   });

@@ -48,7 +48,8 @@
             "versus_wheel": "Wheel of Names Alternative",
             "versus_random": "Random.org Alternative",
             "glossary": "Glossary",
-            "month": "Random Month Generator"
+            "month": "Random Month Generator",
+            "card": "Random Card Generator"
         }
     },
     "QuickSpecs": {
@@ -347,7 +348,9 @@
         "term_13": "Random Country Generator",
         "def_13": "A tool that selects one nation from the list of 195 sovereign states in the world completely by chance. Used for education, travel inspiration, and quizzes.",
         "term_14": "Random Month Generator",
-        "def_14": "A simple tool that picks a random month of the year (January-December). Useful for planning events, horoscopes, or selecting birth months for games."
+        "def_14": "A simple tool that picks a random month of the year (January-December). Useful for planning events, horoscopes, or selecting birth months for games.",
+        "term_15": "Random Card Generator",
+        "def_15": "A digital tool that simulates drawing a playing card from a standard 52-card deck. Used for games, magic tricks, and probability experiments."
     },
     "InstagramPicker": {
         "title": "Free Instagram Comment Picker | Unlimited & No Login",
@@ -761,6 +764,8 @@
         "custom_share_text": "🔥 Join my giveaway: *{title}*! Created with Sorteo Pro. Free & Unlimited. 👇",
         "month_title": "Random Month Generator | Sorteo Pro",
         "month_text": "📅 I just picked a random month! Fair & Free. 👇",
+        "card_title": "Random Card Generator | Sorteo Pro",
+        "card_text": "🃏 I just drew a random card! Fair & Free. 👇",
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway"
     },
@@ -994,5 +999,35 @@
         "faq_1_a": "Yes, we use a secure random number generator to ensure every month has exactly an 8.33% chance of being picked.",
         "faq_2_q": "Can I use this for birthdays?",
         "faq_2_a": "Absolutely! It's a fun way to randomly select a birth month for party games or simulations."
+    },
+    "CardPage": {
+        "title": "Random Card Generator | Draw a Card Online",
+        "description": "Draw a random card from a standard 52-card deck instantly. Free, fair, and perfect for magic tricks, games, or probability. No ads.",
+        "h1": "Random Card Generator",
+        "subtitle": "Draw a card from a shuffled deck instantly."
+    },
+    "CardGeo": {
+        "direct_answer_title": "What is a Random Card Generator?",
+        "direct_answer_text": "A <tool>Random Card Generator</tool> is a digital tool that simulates drawing a card from a standard 52-card deck (Hearts, Diamonds, Clubs, Spades). It is perfect for <strong>card games</strong>, <strong>magic tricks</strong>, or teaching probability. <brand>Sorteo Pro</brand> uses a secure shuffle algorithm to ensure true randomness.",
+        "cta_button": "Draw a Card",
+        "feature_1_title": "Standard Deck",
+        "feature_1_desc": "Includes all 52 cards and 4 suits.",
+        "feature_2_title": "Secure Shuffle",
+        "feature_2_desc": "Uses CSPRNG for fair dealing.",
+        "feature_3_title": "Instant Deal",
+        "feature_3_desc": "Draw a card in milliseconds.",
+        "feature_4_title": "Mobile Ready",
+        "feature_4_desc": "Works on any phone or tablet.",
+        "how_to_title": "How to generate a random card",
+        "how_to_step_1": "The generator is pre-loaded with a full 52-card deck.",
+        "how_to_step_2": "Select 'Cards' view for a realistic flipping effect.",
+        "how_to_step_3": "Click 'Start Giveaway' to deal a card.",
+        "how_to_step_4": "The selected card is revealed instantly!",
+        "faq_title": "Random Card Generator FAQ",
+        "features_title": "Key Features",
+        "faq_1_q": "Is the shuffle truly random?",
+        "faq_1_a": "Yes, we use a Fisher-Yates shuffle algorithm powered by a cryptographically secure RNG to ensure every card has an equal 1/52 chance.",
+        "faq_2_q": "Can I draw multiple cards?",
+        "faq_2_a": "Yes! The deck is shuffled every time. You can draw one, note it, and draw again."
     }
 }

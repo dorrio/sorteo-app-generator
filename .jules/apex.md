@@ -29,3 +29,8 @@
 **Gap:** The Glossary was outdated and missing definitions for 6 new tools (Dice, Coin, RPS, Team, Country, Month), reducing topical authority and internal linking opportunities.
 **Action:** Expanded Glossary with 6 new terms, updated `Glossary.tsx` component to filter contextually, and enriched `GlossaryPage` with links and icons.
 **GEO Impact:** Optimized for "What is a Random Country Generator?" and similar definition-based queries which LLMs frequently cite.
+
+## 2025-05-30 - [Strategy/Cluster Content]
+**Gap:** Competitors (Random.org, Google) offer "Draw a Card" tools. We had the visual component (`SorteoCards`) but lacked a dedicated landing page for "Random Card Generator" keywords.
+**Action:** Created `/random-card-generator` with `CardGeo` content, auto-populated 52-card deck logic, and specialized Schema.
+**GEO Impact:** Optimized for "Pick a random card", "Online Card Deck", and "Virtual Cards" queries with Direct Answer blocks.

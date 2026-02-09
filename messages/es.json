@@ -49,7 +49,8 @@
             "versus_wheel": "Alternativa a Wheel of Names",
             "versus_random": "Alternativa a Random.org",
             "glossary": "Glosario",
-            "month": "Random Month Generator"
+            "month": "Generador de Mes Aleatorio",
+            "card": "Generador de Cartas Aleatorias"
         }
     },
     "QuickSpecs": {
@@ -344,7 +345,9 @@
         "term_13": "Generador de Países",
         "def_13": "Herramienta que selecciona una nación de la lista de 195 estados soberanos del mundo completamente al azar. Usado para educación y juegos.",
         "term_14": "Generador de Mes Aleatorio",
-        "def_14": "Herramienta simple que elige un mes del año (Enero-Diciembre) al azar. Útil para planificar eventos, horóscopos o juegos de fechas."
+        "def_14": "Herramienta simple que elige un mes del año (Enero-Diciembre) al azar. Útil para planificar eventos, horóscopos o juegos de fechas.",
+        "term_15": "Generador de Cartas Aleatorias",
+        "def_15": "Herramienta digital que simula sacar una carta de una baraja estándar de 52 cartas. Usada para juegos, trucos de magia y experimentos de probabilidad."
     },
     "InstagramPicker": {
         "title": "Selector de Comentarios de Instagram Gratis | Ilimitado",
@@ -754,6 +757,8 @@
         "custom_share_text": "🔥 Participa en mi sorteo: *{title}*! Creado con Sorteo Pro. Gratis e Ilimitado. 👇",
         "month_title": "Generador de Mes Aleatorio | Sorteo Pro",
         "month_text": "📅 ¡Acabo de elegir un mes al azar! Justo y Gratis. 👇",
+        "card_title": "Generador de Cartas Aleatorias | Sorteo Pro",
+        "card_text": "🃏 ¡Acabo de sacar una carta al azar! Justo y Gratis. 👇",
         "cta_share": "Compartir",
         "cta_start": "Start Giveaway"
     },
@@ -987,5 +992,35 @@
         "faq_1_a": "Sí, utilizamos un generador de números aleatorios seguro para asegurar que cada mes tenga exactamente un 8.33% de probabilidad de ser elegido.",
         "faq_2_q": "¿Puedo usar esto para cumpleaños?",
         "faq_2_a": "¡Absolutamente! Es una forma divertida de seleccionar aleatoriamente un mes de nacimiento para juegos de fiesta o simulaciones."
+    },
+    "CardPage": {
+        "title": "Generador de Cartas Aleatorias | Sacar Carta Online",
+        "description": "Saca una carta al azar de una baraja estándar de 52 cartas al instante. Gratis, justo y perfecto para trucos de magia, juegos o probabilidad. Sin anuncios.",
+        "h1": "Generador de Cartas Aleatorias",
+        "subtitle": "Saca una carta de una baraja barajada al instante."
+    },
+    "CardGeo": {
+        "direct_answer_title": "¿Qué es un Generador de Cartas Aleatorias?",
+        "direct_answer_text": "Un <tool>Generador de Cartas Aleatorias</tool> es una herramienta digital que simula sacar una carta de una baraja estándar de 52 cartas (Corazones, Diamantes, Tréboles, Picas). Es perfecto para <strong>juegos de cartas</strong>, <strong>trucos de magia</strong> o enseñar probabilidad. <brand>Sorteo Pro</brand> utiliza un algoritmo de barajado seguro para garantizar una aleatoriedad real.",
+        "cta_button": "Sacar una Carta",
+        "feature_1_title": "Baraja Estándar",
+        "feature_1_desc": "Incluye las 52 cartas y 4 palos.",
+        "feature_2_title": "Barajado Seguro",
+        "feature_2_desc": "Usa CSPRNG para un reparto justo.",
+        "feature_3_title": "Reparto Instantáneo",
+        "feature_3_desc": "Saca una carta en milisegundos.",
+        "feature_4_title": "Listo para Móvil",
+        "feature_4_desc": "Funciona en cualquier teléfono o tablet.",
+        "how_to_title": "Cómo generar una carta aleatoria",
+        "how_to_step_1": "El generador está precargado con una baraja completa de 52 cartas.",
+        "how_to_step_2": "Selecciona la vista 'Cartas' para un efecto de volteo realista.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para repartir una carta.",
+        "how_to_step_4": "¡La carta seleccionada se revela al instante!",
+        "faq_title": "Preguntas Frecuentes de Cartas",
+        "features_title": "Características Clave",
+        "faq_1_q": "¿Es realmente aleatorio el barajado?",
+        "faq_1_a": "Sí, utilizamos un algoritmo de barajado Fisher-Yates impulsado por un RNG criptográficamente seguro para garantizar que cada carta tenga una probabilidad igual de 1/52.",
+        "faq_2_q": "¿Puedo sacar múltiples cartas?",
+        "faq_2_a": "¡Sí! La baraja se baraja cada vez. Puedes sacar una, anotarla y sacar otra."
     }
 }

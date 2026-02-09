@@ -8,8 +8,8 @@ import { useSorteoStore } from "@/lib/sorteo-store"
 import { Link } from "@/i18n/routing"
 
 export function BingoGeo() {
-  const t = useTranslations("BingoGeo")
-  const tFaq = useTranslations("BingoPage")
+  const bingoT = useTranslations("BingoGeo")
+  const bingoFaqT = useTranslations("BingoPage")
   const { updateTheme } = useSorteoStore()
 
   const handleTryIt = () => {
@@ -18,20 +18,20 @@ export function BingoGeo() {
 
   const faqs = [
     {
-      question: tFaq("faq_1_q"),
-      answer: tFaq("faq_1_a"),
+      question: bingoFaqT("faq_1_q"),
+      answer: bingoFaqT("faq_1_a"),
     },
     {
-      question: tFaq("faq_2_q"),
-      answer: tFaq("faq_2_a"),
+      question: bingoFaqT("faq_2_q"),
+      answer: bingoFaqT("faq_2_a"),
     },
   ]
 
   const howToSteps = [
-    { name: t('how_to_step_1') },
-    { name: t('how_to_step_2') },
-    { name: t('how_to_step_3') },
-    { name: t('how_to_step_4') },
+    { name: bingoT('how_to_step_1') },
+    { name: bingoT('how_to_step_2') },
+    { name: bingoT('how_to_step_3') },
+    { name: bingoT('how_to_step_4') },
   ]
 
   const jsonLd = [
@@ -50,7 +50,7 @@ export function BingoGeo() {
     {
       '@context': 'https://schema.org',
       '@type': 'HowTo',
-      name: t('how_to_title'),
+      name: bingoT('how_to_title'),
       step: howToSteps.map((step, idx) => ({
         '@type': 'HowToStep',
         position: idx + 1,
@@ -60,11 +60,16 @@ export function BingoGeo() {
     }
   ]
 
+  const safeJsonLd = JSON.stringify(jsonLd)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026');
+
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd }}
       />
       <div className="max-w-4xl mx-auto px-4 relative z-10">
         <motion.div
@@ -76,11 +81,11 @@ export function BingoGeo() {
           {/* Direct Answer Block (GEO) */}
           <div className="mb-10 space-y-4">
             <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-amber-200">
-              {t("direct_answer_title")}
+              {bingoT("direct_answer_title")}
             </h2>
             <div className="prose prose-invert max-w-none">
               <p className="text-lg text-muted-foreground leading-relaxed">
-                {t.rich("direct_answer_text", {
+                {bingoT.rich("direct_answer_text", {
                   strong: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
                   tool: (chunks) => <Link href="/bingo-number-generator" className="font-semibold text-primary hover:underline">{chunks}</Link>,
                   brand: (chunks) => <Link href="/" className="font-semibold text-primary hover:underline">{chunks}</Link>
@@ -89,7 +94,7 @@ export function BingoGeo() {
             </div>
             <Button asChild size="lg" className="mt-4 gap-2 text-lg font-bold shadow-lg shadow-primary/20">
               <a href="#sorteo-section" onClick={handleTryIt}>
-                {t("cta_button")} <ArrowRight className="w-5 h-5" />
+                {bingoT("cta_button")} <ArrowRight className="w-5 h-5" />
               </a>
             </Button>
           </div>
@@ -99,33 +104,33 @@ export function BingoGeo() {
             <li className="space-y-4">
               <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
                 <ShieldCheck className="w-5 h-5" />
-                {t("feature_1_title")}
+                {bingoT("feature_1_title")}
               </h3>
-              <p className="text-muted-foreground">{t("feature_1_desc")}</p>
+              <p className="text-muted-foreground">{bingoT("feature_1_desc")}</p>
             </li>
 
             <li className="space-y-4">
               <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
                 <Grid className="w-5 h-5" />
-                {t("feature_2_title")}
+                {bingoT("feature_2_title")}
               </h3>
-              <p className="text-muted-foreground">{t("feature_2_desc")}</p>
+              <p className="text-muted-foreground">{bingoT("feature_2_desc")}</p>
             </li>
 
             <li className="space-y-4">
               <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
                 <RefreshCw className="w-5 h-5" />
-                {t("feature_3_title")}
+                {bingoT("feature_3_title")}
               </h3>
-              <p className="text-muted-foreground">{t("feature_3_desc")}</p>
+              <p className="text-muted-foreground">{bingoT("feature_3_desc")}</p>
             </li>
 
             <li className="space-y-4">
               <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
                 <Volume2 className="w-5 h-5" />
-                {t("feature_4_title")}
+                {bingoT("feature_4_title")}
               </h3>
-              <p className="text-muted-foreground">{t("feature_4_desc")}</p>
+              <p className="text-muted-foreground">{bingoT("feature_4_desc")}</p>
             </li>
           </ul>
 
@@ -133,7 +138,7 @@ export function BingoGeo() {
           <div className="mb-16 border-t border-primary/10 pt-10">
               <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
                  <CheckCircle className="w-6 h-6 text-primary" />
-                 {t('how_to_title')}
+                 {bingoT('how_to_title')}
               </h3>
               <ol className="relative border-l border-primary/20 ml-3 space-y-8">
                  {howToSteps.map((step, idx) => (

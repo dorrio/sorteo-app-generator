@@ -7,17 +7,34 @@ import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/routing"
 
-export function TruthDareGeo() {
+interface Feature {
+  icon: JSX.Element;
+  text: string;
+  desc: string;
+}
+
+interface Faq {
+  question: string;
+  answer: string;
+}
+
+interface HowToStep {
+  name: string;
+}
+
+type JsonLd = Record<string, unknown>;
+
+export function TruthDareGeo(): JSX.Element {
   const t = useTranslations("TruthDareGeo")
   const tSpecs = useTranslations("QuickSpecs")
   const { updateTheme } = useSorteoStore()
 
-  const handleTryTool = () => {
+  const handleTryTool = (): void => {
     updateTheme({ sorteoStyle: "roulette" })
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
-  const features = [
+  const features: Feature[] = [
     {
       icon: <HelpCircle className="w-5 h-5 text-primary" />,
       text: t("feature_1_title"),
@@ -40,7 +57,7 @@ export function TruthDareGeo() {
     },
   ]
 
-  const faqs = [
+  const faqs: Faq[] = [
     {
       question: t('direct_answer_title'),
       answer: t('direct_answer_text'),
@@ -55,14 +72,14 @@ export function TruthDareGeo() {
     },
   ]
 
-  const howToSteps = [
+  const howToSteps: HowToStep[] = [
     { name: t('how_to_step_1') },
     { name: t('how_to_step_2') },
     { name: t('how_to_step_3') },
     { name: t('how_to_step_4') },
   ]
 
-  const jsonLd = [
+  const jsonLd: JsonLd[] = [
     {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
@@ -103,6 +120,7 @@ export function TruthDareGeo() {
 
   return (
     <section className="w-full py-12 px-4 border-t border-border/30 bg-card/20">
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}

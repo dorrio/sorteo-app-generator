@@ -193,14 +193,24 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
     try {
       const response = await fetch(imageUrl)
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch image: ${response.statusText}`)
+      }
+
       const blob = await response.blob()
+
+      if (!blob.type.startsWith('image/')) {
+        throw new Error(`Invalid image type: ${blob.type}`)
+      }
+
       const success = await copyBlobToClipboard(blob)
       if (success) {
         setImageCopied(true)
         setTimeout(() => setImageCopied(false), 2000)
       }
-    } catch (e) {
-      console.error("Failed to copy image", e)
+    } catch (e: unknown) {
+      console.error("Failed to copy image", e instanceof Error ? e.message : String(e))
     }
   }
 

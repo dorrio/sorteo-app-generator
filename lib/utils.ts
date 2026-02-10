@@ -13,15 +13,16 @@ export async function copyBlobToClipboard(blob: Blob): Promise<boolean> {
   try {
     // Check if ClipboardItem is supported (Safari requirement for images)
     if (typeof ClipboardItem !== "undefined") {
-      const data = [new ClipboardItem({ [blob.type]: blob })]
+      const type = blob.type || "image/png"
+      const data = [new ClipboardItem({ [type]: blob })]
       await navigator.clipboard.write(data)
       return true
     } else {
       console.warn("ClipboardItem not supported")
       return false
     }
-  } catch (error) {
-    console.error("Failed to copy blob to clipboard:", error)
+  } catch (error: unknown) {
+    console.error("Failed to copy blob to clipboard:", error instanceof Error ? error.message : String(error))
     return false
   }
 }

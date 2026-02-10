@@ -20,7 +20,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
     ? process.env.NEXT_PUBLIC_APP_URL
     : process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteopro.com';
+      : 'https://sorteo-app-generator.vercel.app';
 
   // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
@@ -82,7 +82,7 @@ export default async function CardPage({ params }: { params: Promise<{ locale: s
     ? process.env.NEXT_PUBLIC_APP_URL
     : process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteopro.com';
+      : 'https://sorteo-app-generator.vercel.app';
 
   const softwareAppSchema = {
     '@context': 'https://schema.org',
@@ -120,11 +120,16 @@ export default async function CardPage({ params }: { params: Promise<{ locale: s
     }]
   };
 
+  // Helper to safely escape JSON-LD
+  const safeJsonLd = (data: unknown) => {
+    return JSON.stringify(data).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026')
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd([softwareAppSchema, breadcrumbSchema]) }}
       />
       {/*
           initialStyle="cards" - Specific visualization for cards

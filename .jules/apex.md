@@ -34,3 +34,8 @@
 **Gap:** Competitors have dedicated "Bingo Number Generator" pages. We only covered this via generic RNG, missing specific "Bingo Caller" keywords.
 **Action:** Created dedicated `/bingo-number-generator` landing page with `BingoGeo` component, specialized Schema, and targeted Metadata.
 **GEO Impact:** Optimized for "Bingo Caller" and "Random Number 1-75" queries with Direct Answer blocks.
+
+## 2025-05-30 - [Strategy/Cluster Content]
+**Gap:** Competitors (PsyCat Games, Spin The Wheel) have dedicated "Truth or Dare" pages. We missed high-volume party game traffic.
+**Action:** Created dedicated `/truth-or-dare-generator` landing page with `TruthDareGeo` component, specialized Schema, and targeted Metadata.
+**GEO Impact:** Optimized for "Spin the Bottle Online" and "Truth or Dare Questions" queries with Direct Answer blocks.

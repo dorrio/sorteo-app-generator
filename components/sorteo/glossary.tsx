@@ -5,7 +5,7 @@ import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
 
 interface GlossaryProps {
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'truth-dare';
 }
 
 export function Glossary({ seoMode }: GlossaryProps) {
@@ -62,6 +62,11 @@ export function Glossary({ seoMode }: GlossaryProps) {
       term: t("term_16"),
       definition: t("def_16"),
     },
+    {
+      id: "truth-dare",
+      term: t("term_truth_dare"),
+      definition: t("def_truth_dare"),
+    },
   ]
 
   // Filter terms based on seoMode (Apex Optimization: Relevance)
@@ -80,6 +85,7 @@ export function Glossary({ seoMode }: GlossaryProps) {
       if (seoMode === 'secret-santa' && term.id === 'secret-santa') return true;
       if (seoMode === 'card' && term.id === 'card') return true;
       if (seoMode === 'bingo' && term.id === 'bingo') return true;
+      if (seoMode === 'truth-dare' && term.id === 'truth-dare') return true;
       if (seoMode === 'dice' && term.id === 'rng') return true; // Dice is a form of RNG
 
       // For other modes, maybe show related terms?

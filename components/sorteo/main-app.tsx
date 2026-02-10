@@ -103,7 +103,7 @@ function ListParamsHandler() {
 
 interface MainAppProps {
   initialStyle?: string;
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo' | 'truth-dare';
   children?: React.ReactNode;
   initialTitle?: string;
   initialSubtitle?: string;
@@ -123,13 +123,15 @@ interface MainAppProps {
   };
   // Translations for initial population (options)
   initialOptions?: {
-    yes: string;
-    no: string;
-    heads: string;
-    tails: string;
-    rock: string;
-    paper: string;
-    scissors: string;
+    yes?: string;
+    no?: string;
+    heads?: string;
+    tails?: string;
+    rock?: string;
+    paper?: string;
+    scissors?: string;
+    truths?: string[];
+    dares?: string[];
     // Generators that might simply get passed translated strings or just use defaults
   };
 }
@@ -231,7 +233,7 @@ export function MainApp({
     const modeChanged = activeTool !== seoMode
 
     const isEmpty = participants.length === 0
-    const isPresetTool = ['card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter', 'yes-no'].includes(seoMode)
+    const isPresetTool = ['card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter', 'yes-no', 'truth-dare'].includes(seoMode)
 
     // We populate if:
     // 1. The list is empty (standard behavior)
@@ -243,17 +245,21 @@ export function MainApp({
         clearParticipants()
       }
 
-      if (seoMode === 'yes-no' && initialOptions) {
+      if (seoMode === 'yes-no' && initialOptions?.yes && initialOptions?.no) {
         addParticipants([
           { name: initialOptions.yes },
           { name: initialOptions.no }
         ])
-      } else if (seoMode === 'coin' && initialOptions) {
+      } else if (seoMode === 'truth-dare' && initialOptions?.truths && initialOptions?.dares) {
+        // Interleave or combine truths and dares
+        const combined = [...initialOptions.truths, ...initialOptions.dares];
+        addParticipants(combined.map(t => ({ name: t })));
+      } else if (seoMode === 'coin' && initialOptions?.heads && initialOptions?.tails) {
         addParticipants([
           { name: initialOptions.heads },
           { name: initialOptions.tails }
         ])
-      } else if (seoMode === 'rps' && initialOptions) {
+      } else if (seoMode === 'rps' && initialOptions?.rock && initialOptions?.paper && initialOptions?.scissors) {
         addParticipants([
           { name: initialOptions.rock },
           { name: initialOptions.paper },

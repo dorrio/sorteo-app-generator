@@ -443,12 +443,12 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                     {imageCopied ? (
                       <>
                         <Check className="w-4 h-4 text-green-500" />
-                        <span className="text-green-500">Image Copied!</span>
+                        <span className="text-green-500">{t("image_copied")}</span>
                       </>
                     ) : (
                       <>
                         <ImageIcon className="w-4 h-4" />
-                        Copy Certificate Image
+                        {t("copy_image")}
                       </>
                     )}
                   </DropdownMenuItem>

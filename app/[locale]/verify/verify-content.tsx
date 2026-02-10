@@ -538,12 +538,12 @@ export function VerifyContent() {
                                                                 {imageCopied ? (
                                                                     <>
                                                                         <Check className="w-4 h-4 text-green-500" />
-                                                                        <span className="text-green-500">Image Copied!</span>
+                                                                        <span className="text-green-500">{t("result.image_copied")}</span>
                                                                     </>
                                                                 ) : (
                                                                     <>
                                                                         <ImageIcon className="w-4 h-4" />
-                                                                        Copy Image
+                                                                        {t("result.copy_image")}
                                                                     </>
                                                                 )}
                                                             </DropdownMenuItem>

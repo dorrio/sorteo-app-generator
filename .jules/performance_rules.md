@@ -13,9 +13,11 @@
 *   **Image Optimization:** Use `next/image` with `unoptimized` for user-generated content (Blob URLs) while maintaining layout stability with `fill`.
 *   **Skeleton Loading:** Use Skeletons instead of spinners during hydration to match SSR layout and improve perceived performance.
 *   **Granular Skeletons:** Use component-level skeletons (e.g., `ParticipantListSkeleton`) instead of page-level blocking skeletons to enable SSR of static content.
+*   **Server Component Islands:** Extract small interactive parts (buttons, toggles) into "Client Islands" to keep the parent component as a Server Component (RSC). This drastically reduces the client bundle for content-heavy sections.
 
 ## ❌ BAD PATTERNS (Avoid This)
 *   **Sync Imports:** Importing heavy widgets directly in the main bundle.
 *   **Raw `<img>`:** Using standard image tags without explicit dimensions.
 *   **Layout Shift:** Missing skeleton states for dynamic content.
 *   **LCP Blocking:** Using entrance animations (e.g., `initial={{ opacity: 0 }}`) on LCP elements (Header, H1, Hero Image).
+*   **Client Component Bloat:** Making an entire large section `"use client"` just for one button or animation. Split it up!

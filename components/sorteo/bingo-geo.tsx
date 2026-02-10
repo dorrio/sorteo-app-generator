@@ -7,6 +7,13 @@ import { ArrowRight, Lock, Zap, RefreshCw, Smartphone, HelpCircle, CheckCircle, 
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Link } from "@/i18n/routing"
 
+/**
+ * Render the BingoGeo promotional section with features, a how-to, FAQs, and embedded JSON-LD.
+ *
+ * The rendered CTA anchors to the sorteo section and, when activated, updates the global sorteo theme to `grid`.
+ *
+ * @returns A React element containing the BingoGeo section markup and structured data.
+ */
 export function BingoGeo() {
   const bingoT = useTranslations("BingoGeo")
   const bingoFaqT = useTranslations("BingoPage")

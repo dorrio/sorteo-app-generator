@@ -117,6 +117,13 @@ interface MainAppProps {
     seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
 }
 
+/**
+ * Root component for the Sorteo application UI that renders the main tool, sidebar, SEO content and overlays according to the provided initial style and SEO mode.
+ *
+ * @param initialStyle - Optional initial visual style to apply (e.g., "roulette", "slot", "cards", "grid"); when provided the theme is updated to use this style.
+ * @param seoMode - Optional SEO/content mode which selects translations, default participants, share content, and conditional informational content (e.g., "home", "wheel", "dice", "card", "bingo", etc.).
+ * @returns The rendered main application element containing header, main tool area, participants panel, SEO-specific content blocks, footers, and lazy-loaded overlays.
+ */
 export function MainApp({ initialStyle, seoMode = 'home' }: MainAppProps) {
   const locale = useLocale()
   const t = useTranslations("HomePage")

@@ -2,6 +2,11 @@ import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
 
+/**
+ * Enumerates all supported locales for static route generation.
+ *
+ * @returns An array of objects with a `locale` property for each supported locale.
+ */
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -11,6 +16,20 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
+/**
+ * Generate locale-aware SEO metadata for the Random Card Generator page, including Open Graph and Twitter data.
+ *
+ * @param props - An object with `params` and `searchParams`.
+ * @param props.params - Resolves to an object containing `locale`, used to select translations and locale-specific values.
+ * @param props.searchParams - Resolves to an object that may contain `template_title` and `template_color` to override the page title and OG image color.
+ * @returns An object with SEO metadata:
+ * - `title`: page title (uses `template_title` when provided)
+ * - `description`: page description from translations
+ * - `keywords`: array of keywords
+ * - `alternates.canonical`: canonical path for the page
+ * - `openGraph`: object with `title`, `description`, `url`, `type`, `siteName`, `locale`, and `images` (including a generated OG image URL)
+ * - `twitter`: object with `card`, `title`, `description`, and `images`
+ */
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
   const { template_title, template_color } = await searchParams;
@@ -74,6 +93,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
   };
 }
 
+/**
+ * Render the locale-aware Random Card Generator page, embedding JSON-LD SEO data and the main application UI.
+ *
+ * @param params - Promise resolving to an object with a `locale` string used to load translations and build locale-specific URLs
+ * @returns A React fragment containing an `application/ld+json` script with SoftwareApplication and BreadcrumbList schemas and the `MainApp` component configured for the card generator
+ */
 export default async function CardGeneratorPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const cardT = await getTranslations({ locale, namespace: 'CardPage' });

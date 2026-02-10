@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
 import { HelpCircle, Check, X, ShieldCheck, Play, CheckCircle, Flame, BookOpen } from "lucide-react"

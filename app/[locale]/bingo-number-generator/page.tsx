@@ -2,6 +2,11 @@ import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
 
+/**
+ * Produce route parameters for each supported locale.
+ *
+ * @returns An array of objects each containing a `locale` string for a supported locale
+ */
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -11,6 +16,13 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
+/**
+ * Generate localized SEO, Open Graph, and Twitter metadata for the Bingo Number Generator page.
+ *
+ * @param params - Promise resolving to an object with a `locale` string used to localize titles and URLs
+ * @param searchParams - Promise resolving to query parameters; may include `template_title` and `template_color` to customize the page title and OG image color
+ * @returns A metadata object for Next.js containing `title`, `description`, `keywords`, `alternates.canonical`, `openGraph` (with images and locale), and `twitter` card data
+ */
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
   const { template_title, template_color } = await searchParams;
@@ -74,6 +86,15 @@ export async function generateMetadata({ params, searchParams }: Props) {
   };
 }
 
+/**
+ * Renders the Bingo Number Generator page with localized SEO and structured data.
+ *
+ * Fetches locale translations, builds JSON-LD for a SoftwareApplication and breadcrumbs,
+ * injects the JSON-LD into the page, and renders the main application UI configured for bingo.
+ *
+ * @param params - Route params containing the `locale` used to localize content and metadata
+ * @returns A React fragment containing the page's JSON-LD script and the main app component for the Bingo Number Generator
+ */
 export default async function BingoGeneratorPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const bingoT = await getTranslations({ locale, namespace: 'BingoPage' });

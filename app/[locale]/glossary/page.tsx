@@ -30,6 +30,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
+/**
+ * Render the localized Glossary page with term cards, a direct-answer block, embedded JSON-LD schemas, and a call-to-action.
+ *
+ * @returns The page's JSX element containing the glossary UI and embedded schema.org JSON-LD data
+ */
 export default function GlossaryPage() {
   const t = useTranslations('GlossaryPage');
   const tGlossary = useTranslations('Glossary'); // Reuse existing glossary strings

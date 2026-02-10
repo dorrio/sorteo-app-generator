@@ -7,6 +7,13 @@ import { ArrowRight, Lock, Zap, RefreshCw, Smartphone, HelpCircle, CheckCircle, 
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Link } from "@/i18n/routing"
 
+/**
+ * Renders a localized feature card section containing a direct-answer block, feature grid, how-to steps, FAQ, and embedded JSON-LD for SEO.
+ *
+ * The primary CTA updates the Sorteo store theme to the "cards" style when activated.
+ *
+ * @returns The component's rendered React element (section) containing the card UI and structured data script.
+ */
 export function CardGeo() {
   const cardT = useTranslations("CardGeo")
   const cardFaqT = useTranslations("CardPage")

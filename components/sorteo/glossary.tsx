@@ -8,6 +8,18 @@ interface GlossaryProps {
   seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'dice' | 'coin' | 'rps' | 'team' | 'country' | 'month' | 'card' | 'bingo';
 }
 
+/**
+ * Renders a localized glossary section showing a filtered set of terms and embedded JSON-LD.
+ *
+ * The glossary picks which terms to display based on `seoMode`. When `seoMode` is absent or
+ * `'home'`, all terms are shown. The term with id `'provably-fair'` is always included as a
+ * trust signal. When `seoMode` is set to a specific tool id (e.g., `'wheel'`, `'rng'`, `'card'`,
+ * `'bingo'`, etc.), only that term plus `'provably-fair'` are shown. When a subset is shown,
+ * a "View Full Glossary" link to `/glossary` is rendered.
+ *
+ * @param seoMode - Optional mode controlling which glossary term(s) to display (e.g. 'home', 'wheel', 'rng', 'card', 'bingo', etc.)
+ * @returns The rendered glossary React element containing term entries and a JSON-LD script for the displayed terms.
+ */
 export function Glossary({ seoMode }: GlossaryProps) {
   const t = useTranslations("Glossary")
 

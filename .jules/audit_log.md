@@ -8,7 +8,7 @@
 | 2026-01-28 | LCP | Replaced `Loader2` spinner with `AppSkeleton` in `MainApp` | Improved FCP/LCP by showing layout skeleton during hydration |
 | 2026-01-27 | Perceived Performance | Replaced MainApp spinner with AppSkeleton | Improved LCP and Reduced Layout Shift |
 | 2026-01-27 | Bundle Size | Removed unused recharts dependency | Reduced bundle size |
-| [2026-01-29] | FCP Optimization | Removed 5 unused Google Fonts (Roboto, Montserrat, Open Sans, Lato, Poppins) from global layout | Reduced critical CSS size and eliminated potential font downloads; implemented system-font fallbacks for legacy data. |
-| [2026-01-29] | LCP & SEO | Enabled SSR in MainApp | Removed global blocking skeleton, implemented granular skeletons, and enabled server-side rendering of SEO content and layout. |
-| [2026-01-30] | LCP & FCP | Optimized MainApp Animations | Removed `initial={{ opacity: 0 }}` from Header, H1, and Main Section to prevent LCP delay. Removed unused `AppSkeleton` import. |
-| [2026-02-12] | Bundle Size | Refactored `WheelGeo` to Server Component (`WheelGeoServer`) | Removed large client-side JS chunk for static SEO content. Isolated interactivity into `TryToolButton` and `WheelGeoVisual`. |
+| 2026-01-29 | FCP Optimization | Removed 5 unused Google Fonts (Roboto, Montserrat, Open Sans, Lato, Poppins) from global layout | Reduced critical CSS size and eliminated potential font downloads; implemented system-font fallbacks for legacy data. |
+| 2026-01-29 | LCP & SEO | Enabled SSR in MainApp | Removed global blocking skeleton, implemented granular skeletons, and enabled server-side rendering of SEO content and layout. |
+| 2026-01-30 | LCP & FCP | Optimized MainApp Animations | Removed `initial={{ opacity: 0 }}` from Header, H1, and Main Section to prevent LCP delay. Removed unused `AppSkeleton` import. |
+| 2026-02-12 | Bundle Size | Refactored `WheelGeo` to Server Component (`WheelGeoServer`) | Removed large client-side JS chunk for static SEO content. Isolated interactivity into `TryToolButton` and `WheelGeoVisual`. |

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Shuffle, List, Zap, Eye, HelpCircle, CheckCircle, GraduationCap, Users, Gamepad2 } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Link } from "@/i18n/routing"
+import { QuickSpecs } from "./quick-specs"
 
 export function ListRandomizerGeo() {
   const t = useTranslations("ListRandomizerGeo")
@@ -71,10 +72,7 @@ export function ListRandomizerGeo() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="max-w-4xl mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
           className="bg-card/30 backdrop-blur-xl border border-primary/20 rounded-3xl p-8 md:p-12 shadow-2xl"
         >
           {/* Direct Answer Block (GEO) */}
@@ -97,6 +95,9 @@ export function ListRandomizerGeo() {
               </a>
             </Button>
           </div>
+
+          {/* Quick Specs Table (GEO Optimization) */}
+          <QuickSpecs className="mb-12" />
 
           {/* Features Grid */}
           <ul className="grid md:grid-cols-2 gap-8 mt-12 mb-16" role="list">
@@ -189,7 +190,7 @@ export function ListRandomizerGeo() {
              </dl>
           </div>
 
-        </motion.div>
+        </div>
       </div>
 
       {/* Decorative background elements */}

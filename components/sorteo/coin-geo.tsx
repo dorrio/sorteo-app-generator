@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 import { Coins, ShieldCheck, Zap, Smartphone, HelpCircle, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/routing"
+import { QuickSpecs } from "./quick-specs"
 
 export function CoinGeo() {
   const t = useTranslations("CoinGeo")
@@ -92,6 +93,9 @@ export function CoinGeo() {
           <div className="prose prose-lg text-muted-foreground leading-relaxed"
             dangerouslySetInnerHTML={{ __html: t.raw("direct_answer_text") }}
           />
+
+          {/* Quick Specs Table (GEO Optimization) */}
+          <QuickSpecs />
 
           <div className="space-y-4 pt-4">
             <ul className="space-y-3" role="list">

@@ -1,9 +1,13 @@
 import { getTranslations } from 'next-intl/server';
-import { MainApp } from "@/components/sorteo/main-app";
+import { MainAppOptimized } from "@/components/sorteo/main-app-optimized";
+import { ToolWrapper } from "@/components/sorteo/tool-wrapper";
+import { ParticipantManager } from "@/components/sorteo/participant-manager";
+import { HistoryPanel } from "@/components/sorteo/history-panel";
 import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SeoContent } from "@/components/sorteo/seo-content";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+import { Sparkles } from "lucide-react";
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -82,8 +86,8 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
 
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
   const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
+  const tHome = await getTranslations({ locale, namespace: 'HomePage' });
 
-  // Reuse existing share logic (Home has generic share content)
   const shareTranslations = {
     share: tWinner('share_menu'),
     copy: tWinner('copy_text'),
@@ -113,6 +117,29 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
     }]
   };
 
+  const sidebarContent = (
+    <>
+      <section className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-6" aria-labelledby="participants-title">
+        <div className="font-bold text-lg mb-4 flex items-center gap-2">
+          <Sparkles className="w-5 h-5 text-primary" />
+          <span id="participants-title">{tHome('participants_title')}</span>
+        </div>
+        <ParticipantManager />
+      </section>
+      <div className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-6">
+        <HistoryPanel />
+      </div>
+    </>
+  )
+
+  const seoContent = (
+    <>
+      <WheelGeo />
+      <Glossary seoMode="home" />
+      <SeoContent />
+    </>
+  )
+
   return (
     <>
       {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */}
@@ -120,7 +147,7 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <MainApp
+      <MainAppOptimized
         seoMode="home"
         initialTitle="Sorteo Pro"
         initialSubtitle="The Premium Giveaway Tool"
@@ -130,11 +157,11 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}
+        sidebar={sidebarContent}
+        seoContent={seoContent}
       >
-        <WheelGeo />
-        <Glossary seoMode="home" />
-        <SeoContent />
-      </MainApp>
+        <ToolWrapper />
+      </MainAppOptimized>
     </>
   )
 }

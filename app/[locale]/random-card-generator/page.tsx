@@ -4,6 +4,7 @@ import { routing } from '@/i18n/routing';
 import { SiteFooter } from '@/components/sorteo/site-footer';
 import { CardGeo } from '@/components/sorteo/card-geo';
 import { Glossary } from '@/components/sorteo/glossary';
+import { safeJsonLdStringify } from '@/lib/utils';
 
 export const dynamic = 'force-static';
 
@@ -115,7 +116,7 @@ export default async function RandomCardGeneratorPage({ params }: { params: Prom
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
         seoMode="card"

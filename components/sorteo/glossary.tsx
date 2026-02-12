@@ -1,8 +1,7 @@
-"use client"
-
 import { useTranslations } from "next-intl"
 import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
+import { safeJsonLdStringify } from "@/lib/utils"
 
 interface GlossaryProps {
   seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
@@ -66,26 +65,26 @@ export function Glossary({ seoMode }: GlossaryProps) {
 
   // Filter terms based on seoMode (Apex Optimization: Relevance)
   const filteredTerms = allTerms.filter(term => {
-      if (!seoMode || seoMode === 'home') return true;
+    if (!seoMode || seoMode === 'home') return true;
 
-      // Always show Provably Fair (id: provably-fair) as a trust signal
-      if (term.id === 'provably-fair') return true;
+    // Always show Provably Fair (id: provably-fair) as a trust signal
+    if (term.id === 'provably-fair') return true;
 
-      if (seoMode === 'wheel' && term.id === 'wheel') return true;
-      if (seoMode === 'rng' && term.id === 'rng') return true;
-      if (seoMode === 'instagram' && term.id === 'instagram') return true;
-      if (seoMode === 'list-randomizer' && term.id === 'list') return true;
-      if (seoMode === 'yes-no' && term.id === 'yes-no') return true;
-      if (seoMode === 'letter' && term.id === 'letter') return true;
-      if (seoMode === 'secret-santa' && term.id === 'secret-santa') return true;
-      if (seoMode === 'card' && term.id === 'card') return true;
-      if (seoMode === 'bingo' && term.id === 'bingo') return true;
-      if (seoMode === 'dice' && term.id === 'rng') return true; // Dice is a form of RNG
+    if (seoMode === 'wheel' && term.id === 'wheel') return true;
+    if (seoMode === 'rng' && term.id === 'rng') return true;
+    if (seoMode === 'instagram' && term.id === 'instagram') return true;
+    if (seoMode === 'list-randomizer' && term.id === 'list') return true;
+    if (seoMode === 'yes-no' && term.id === 'yes-no') return true;
+    if (seoMode === 'letter' && term.id === 'letter') return true;
+    if (seoMode === 'secret-santa' && term.id === 'secret-santa') return true;
+    if (seoMode === 'card' && term.id === 'card') return true;
+    if (seoMode === 'bingo' && term.id === 'bingo') return true;
+    if (seoMode === 'dice' && term.id === 'rng') return true; // Dice is a form of RNG
 
-      // For other modes, maybe show related terms?
-      // For now, keep it strict to avoid clutter.
+    // For other modes, maybe show related terms?
+    // For now, keep it strict to avoid clutter.
 
-      return false;
+    return false;
   });
 
   const jsonLd = {
@@ -106,42 +105,42 @@ export function Glossary({ seoMode }: GlossaryProps) {
     <section className="w-full py-12 px-4 border-t border-border/30 bg-background">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
       <div className="max-w-5xl mx-auto space-y-8">
         <div className="flex items-center justify-between mb-6">
-           <div className="flex items-center gap-2">
-                <Book className="w-6 h-6 text-primary" />
-                <h2 className="text-2xl font-bold tracking-tight">{t("title")}</h2>
-           </div>
-           {showFullGlossaryLink && (
-               <Link href="/glossary" className="text-sm font-medium text-primary hover:underline flex items-center gap-1">
-                   {t("title")} <ArrowRight className="w-4 h-4" />
-               </Link>
-           )}
+          <div className="flex items-center gap-2">
+            <Book className="w-6 h-6 text-primary" />
+            <h2 className="text-2xl font-bold tracking-tight">{t("title")}</h2>
+          </div>
+          {showFullGlossaryLink && (
+            <Link href="/glossary" className="text-sm font-medium text-primary hover:underline flex items-center gap-1">
+              {t("title")} <ArrowRight className="w-4 h-4" />
+            </Link>
+          )}
         </div>
 
         <dl className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-           {filteredTerms.map((item, idx) => (
-             <div key={idx} id={item.id} className="p-5 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-colors">
-                <dt className="font-bold text-lg mb-2 flex items-center gap-2">
-                   <CheckCircle2 className="w-4 h-4 text-primary/60" />
-                   {item.term}
-                </dt>
-                <dd className="text-sm text-muted-foreground leading-relaxed">
-                   {item.definition}
-                </dd>
-             </div>
-           ))}
+          {filteredTerms.map((item, idx) => (
+            <div key={idx} id={item.id} className="p-5 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-colors">
+              <dt className="font-bold text-lg mb-2 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-primary/60" />
+                {item.term}
+              </dt>
+              <dd className="text-sm text-muted-foreground leading-relaxed">
+                {item.definition}
+              </dd>
+            </div>
+          ))}
         </dl>
 
         {showFullGlossaryLink && (
-            <div className="flex justify-center mt-8">
-                 <Link href="/glossary" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-secondary/50 text-secondary-foreground hover:bg-secondary transition-colors text-sm font-medium">
-                    <Book className="w-4 h-4" />
-                    {t("title")}
-                 </Link>
-            </div>
+          <div className="flex justify-center mt-8">
+            <Link href="/glossary" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-secondary/50 text-secondary-foreground hover:bg-secondary transition-colors text-sm font-medium">
+              <Book className="w-4 h-4" />
+              {t("title")}
+            </Link>
+          </div>
         )}
       </div>
     </section>

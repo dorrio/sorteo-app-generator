@@ -49,8 +49,7 @@
             "versus_random": "Alternativa ao Random.org",
             "glossary": "Glossário",
             "month": "Gerador de Mês Aleatório",
-            "card": "Gerador de Cartas",
-            "bingo": "Gerador de Bingo"
+            "card": "Gerador de Cartas Aleatórias"
         }
     },
     "QuickSpecs": {
@@ -206,18 +205,20 @@
     },
     "WinnerCeremony": {
         "winner_label": "Vencedor",
-        "share_text": "Acabei de realizar um sorteio com Sorteo Pro e *{name}* ganhou! 🏆 Crie seu próprio sorteio viral grátis aqui: 👇",
-        "share_text_custom": "🔥 Acabei de sortear um vencedor para *{title}*!\n\n🏆 Vencedor: *{name}*\n\n✅ Resultado verificado e crie o seu aqui: 👇",
+        "share_text": "🏆 *{name}* GANHOU! 🎉 Resultado Oficial verificado por Sorteio Pro. 👇",
+        "share_text_custom": "🔥 *{name}* ganhou *{title}*! 🎉 Resultado Oficial verificado por Sorteio Pro. 👇",
         "share_title": "Temos um Vencedor! 🏆",
         "congratulations": "Parabéns! 🎉",
         "share_button": "Compartilhar Resultado",
         "share_menu": "Compartilhar...",
         "copied": "Copiado!",
         "copy_text": "Copiar Link",
+        "copy_image": "Copiar Imagem",
+        "image_copied": "Imagem Copiada!",
         "download_certificate": "Baixar Certificado",
         "new_giveaway": "Novo Sorteio",
         "close": "Fechar",
-        "share_on": "Compartilhar em"
+        "share_on": "Compartilhar no"
     },
     "HistoryPanel": {
         "title": "Histórico",
@@ -259,6 +260,8 @@
         "create_your_own": "🚀 Criar Sorteio Grátis",
         "share_button": "Compartilhar Prova",
         "download_certificate": "Baixar Certificado",
+        "copy_image": "Copiar Imagem",
+        "image_copied": "Imagem Copiada!",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou o sorteio!\n\n✅ Verificado por Sorteio Pro.\n\nVeja o certificado e crie o seu aqui 👇",
         "result": {
             "valid_title": "ID Válido",
@@ -330,10 +333,20 @@
         "def_7": "Uma ferramenta digital que escolhe uma letra do alfabeto (A-Z) aleatoriamente. Útil para jogos de palavras, ensino de fonética e siglas.",
         "term_8": "Amigo Secreto",
         "def_8": "Uma tradição natalina em que os membros de um grupo recebem aleatoriamente a designação de uma pessoa para quem devem dar um presente. A identidade do doador deve permanecer em segredo.",
-        "term_15": "Gerador de Cartas",
-        "def_15": "Ferramenta que simula a escolha de uma carta de um baralho padrão de 52 cartas usando um gerador de números aleatórios.",
-        "term_16": "Cantador de Bingo",
-        "def_16": "Dispositivo ou software que seleciona números aleatórios (geralmente 1-75) para um jogo de Bingo."
+        "term_9": "Rolar Dados Online",
+        "def_9": "Uma ferramenta digital que simula o lançamento de dados físicos. O Sorteio Pro usa RNG criptograficamente seguro para garantir que cada rolagem seja justa.",
+        "term_10": "Jogar Moeda",
+        "def_10": "Um gerador aleatório binário que simula o lançamento de uma moeda (Cara ou Coroa). Oferece uma probabilidade real de 50/50 usando algoritmos seguros.",
+        "term_11": "Pedra Papel Tesoura",
+        "def_11": "Versão digital do clássico jogo de mãos. O sistema seleciona aleatoriamente Pedra, Papel ou Tesoura para jogar contra você de forma justa.",
+        "term_12": "Gerador de Equipes",
+        "def_12": "Ferramenta que divide uma lista de participantes em grupos ou equipes iguais aleatoriamente. Essencial para professores, treinadores e dinâmicas.",
+        "term_13": "Gerador de Países",
+        "def_13": "Ferramenta que seleciona uma nação da lista de 195 estados soberanos do mundo completamente ao acaso. Usado para educação e jogos.",
+        "term_14": "Gerador de Mês Aleatório",
+        "def_14": "Ferramenta simples que escolhe um mês do ano (Janeiro-Dezembro) ao acaso. Útil para planejar eventos, horóscopos ou jogos de datas.",
+        "term_15": "Gerador de Cartas Aleatórias",
+        "def_15": "Uma ferramenta digital que simula sacar uma carta de um baralho padrão de 52 cartas. Usado para jogos, truques de mágica e experimentos de probabilidade."
     },
     "InstagramPicker": {
         "title": "Sorteador de Comentários do Instagram Grátis | Ilimitado",
@@ -687,12 +700,10 @@
         "custom_share_text": "🔥 Participe do meu sorteio: *{title}*! Criado com Sorteo Pro. Grátis e Ilimitado. 👇",
         "month_title": "Gerador de Mês Aleatório | Sorteio Pro",
         "month_text": "📅 Acabei de escolher um mês aleatório! Justo e Grátis. 👇",
-        "cta_share": "Compartilhar",
-        "cta_start": "Começar",
         "card_title": "Gerador de Cartas Aleatórias | Sorteio Pro",
-        "card_text": "🃏 Acabei de escolher uma carta aleatória! Justo e Instantâneo. Veja isso 👇",
-        "bingo_title": "Gerador de Números de Bingo | Sorteio Pro",
-        "bingo_text": "🎱 Bingo! Acabei de cantar um número com Sorteio Pro. Grátis. 👇"
+        "card_text": "🃏 Acabei de tirar uma carta aleatória! Justo e Grátis. 👇",
+        "cta_share": "Compartilhar",
+        "cta_start": "Começar"
     },
     "CountryPage": {
         "title": "Gerador de Países Aleatórios | Escolher País ao Acaso",
@@ -984,36 +995,37 @@
         "faq_2_a": "Com certeza! É uma maneira divertida de selecionar aleatoriamente um mês de nascimento para jogos de festa ou simulações."
     },
     "CardPage": {
-        "title": "Gerador de Cartas Aleatórias | Escolher Carta Online",
-        "description": "Escolha uma carta aleatória de um baralho de 52 cartas instantaneamente. Grátis, justo e perfeito para truques de mágica ou jogos.",
+        "title": "Gerador de Cartas Aleatórias | Tirar Carta Online",
+        "description": "Tire uma carta aleatória de um baralho padrão de 52 cartas instantaneamente. Grátis, justo e perfeito para truques de mágica, jogos ou probabilidade. Sem anúncios.",
         "h1": "Gerador de Cartas Aleatórias",
-        "subtitle": "Gire para escolher uma carta aleatória do baralho."
+        "subtitle": "Tire uma carta de um baralho embaralhado instantaneamente."
     },
     "CardGeo": {
         "direct_answer_title": "O que é um Gerador de Cartas Aleatórias?",
-        "direct_answer_text": "Um <tool>Gerador de Cartas Aleatórias</tool> é uma ferramenta digital que seleciona uma carta de baralho de um maço padrão de 52 cartas completamente ao acaso. É usado para <strong>truques de mágica</strong>, <strong>jogos de cartas</strong> ou resolver disputas. <brand>Sorteo Pro</brand> garante um embaralhamento justo usando RNG seguro.",
-        "cta_button": "Escolher Carta",
-        "feature_1_title": "Baralho de 52 Cartas",
-        "feature_1_desc": "Inclui todos os naipes: Espadas, Copas, Ouros, Paus.",
-        "feature_2_title": "Embaralhamento Justo",
-        "feature_2_desc": "Cada carta tem uma probabilidade igual de 1/52.",
-        "feature_3_title": "Resultado Instantâneo",
-        "feature_3_desc": "Obtenha uma carta aleatória em segundos.",
+        "direct_answer_text": "Um <tool>Gerador de Cartas Aleatórias</tool> é uma ferramenta digital que simula sacar uma carta de um baralho padrão de 52 cartas (Copas, Ouros, Paus, Espadas). É perfeito para <strong>jogos de cartas</strong>, <strong>truques de mágica</strong> ou ensino de probabilidade. O <brand>Sorteo Pro</brand> usa um algoritmo de embaralhamento seguro para garantir aleatoriedade real.",
+        "cta_button": "Tirar uma Carta",
+        "feature_1_title": "Baralho Padrão",
+        "feature_1_desc": "Inclui todas as 52 cartas e 4 naipes.",
+        "feature_2_title": "Embaralhamento Seguro",
+        "feature_2_desc": "Usa CSPRNG para distribuição justa.",
+        "feature_3_title": "Distribuição Instantânea",
+        "feature_3_desc": "Tire uma carta em milissegundos.",
         "feature_4_title": "Pronto para Celular",
-        "feature_4_desc": "Funciona perfeitamente em qualquer telefone.",
-        "how_to_title": "Como escolher uma carta aleatória",
-        "how_to_step_1": "O gerador vem pré-carregado com um baralho completo.",
-        "how_to_step_2": "Selecione a visualização 'Cartas' para a melhor experiência visual.",
-        "how_to_step_3": "Clique em 'Iniciar Sorteio' para embaralhar e escolher uma carta.",
-        "how_to_step_4": "A carta selecionada é exibida instantaneamente!",
-        "faq_title": "Perguntas Frequentes de Cartas",
-        "faq_1_q": "A seleção de cartas é realmente aleatória?",
-        "faq_1_a": "Sim, usamos um gerador de números aleatórios seguro para garantir que cada carta tenha exatamente 1/52 de chance de ser escolhida.",
-        "faq_2_q": "Inclui Coringas?",
-        "faq_2_a": "O modo padrão usa 52 cartas. Você pode adicionar Coringas manualmente personalizando a lista."
+        "feature_4_desc": "Funciona em qualquer celular ou tablet.",
+        "how_to_title": "Como gerar uma carta aleatória",
+        "how_to_step_1": "O gerador vem pré-carregado com um baralho completo de 52 cartas.",
+        "how_to_step_2": "Selecione a visualização 'Cartas' para um efeito realista de virar.",
+        "how_to_step_3": "Clique em 'Iniciar Sorteio' para tirar uma carta.",
+        "how_to_step_4": "A carta selecionada é revelada instantaneamente!",
+        "faq_title": "Perguntas Frequentes sobre Cartas",
+        "features_title": "Principais Recursos",
+        "faq_1_q": "O embaralhamento é realmente aleatório?",
+        "faq_1_a": "Sim, usamos um algoritmo de embaralhamento Fisher-Yates impulsionado por um RNG criptograficamente seguro para garantir que cada carta tenha uma probabilidade igual de 1/52.",
+        "faq_2_q": "Posso tirar várias cartas?",
+        "faq_2_a": "Sim! O baralho é embaralhado a cada vez. Você pode tirar uma, anotar e tirar outra."
     },
     "BingoPage": {
-        "title": "Gerador de Números de Bingo | Número Aleatório 1-75",
+        "title": "Gerador de Números de Bingo | Número Aleatorio 1-75",
         "description": "Gere números de Bingo aleatórios (1-75) instantaneamente. Cantador de Bingo grátis para jogos. Justo e simples.",
         "h1": "Gerador de Números de Bingo",
         "subtitle": "Gere números de Bingo aleatórios de 1 a 75."

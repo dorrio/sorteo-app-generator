@@ -31,6 +31,6 @@
 **GEO Impact:** Optimized for "What is a Random Country Generator?" and similar definition-based queries which LLMs frequently cite.
 
 ## 2025-05-30 - [Strategy/Cluster Content]
-**Gap:** Competitors (Random.org, Google) offer "Draw a Card" tools. We had the visual component (`SorteoCards`) but lacked a dedicated landing page for "Random Card Generator" keywords.
-**Action:** Created `/random-card-generator` with `CardGeo` content, auto-populated 52-card deck logic, and specialized Schema.
-**GEO Impact:** Optimized for "Pick a random card", "Online Card Deck", and "Virtual Cards" queries with Direct Answer blocks.
+**Gap:** Competitors (Random.org, Pinetools) have dedicated "Random Card" and "Bingo Number" generators. We missed high-volume, low-difficulty keywords.
+**Action:** Created dedicated `/random-card-generator` and `/bingo-number-generator` landing pages with `CardGeo` and `BingoGeo` components, specialized Schema, and targeted Metadata.
+**GEO Impact:** Optimized for "Draw a Card", "Bingo Caller", and "Random Playing Card" queries with Direct Answer blocks.

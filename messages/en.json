@@ -1029,5 +1029,34 @@
         "faq_1_a": "Yes, we use a Fisher-Yates shuffle algorithm powered by a cryptographically secure RNG to ensure every card has an equal 1/52 chance.",
         "faq_2_q": "Can I draw multiple cards?",
         "faq_2_a": "Yes! The deck is shuffled every time. You can draw one, note it, and draw again."
+    },
+    "BingoPage": {
+        "title": "Bingo Number Generator | Random Number 1-75",
+        "description": "Generate random Bingo numbers (1-75) instantly. Free Bingo Caller for hosting games. Fair and simple.",
+        "h1": "Bingo Number Generator",
+        "subtitle": "Generate random Bingo numbers from 1 to 75."
+    },
+    "BingoGeo": {
+        "direct_answer_title": "What is a Bingo Number Generator?",
+        "direct_answer_text": "A <tool>Bingo Number Generator</tool> (or Bingo Caller) is a tool that selects numbers from 1 to 75 at random for playing Bingo. It ensures a fair game without needing a physical cage. <brand>Sorteo Pro</brand> acts as a digital caller for your game night.",
+        "cta_button": "Call Number",
+        "feature_1_title": "Range 1-75",
+        "feature_1_desc": "Standard US Bingo format.",
+        "feature_2_title": "Fair Calling",
+        "feature_2_desc": "Uses secure RNG for unbiased calls.",
+        "feature_3_title": "Large Display",
+        "feature_3_desc": "Easy to read numbers for groups.",
+        "feature_4_title": "Free & Unlimited",
+        "feature_4_desc": "Call as many numbers as you need.",
+        "how_to_title": "How to generate Bingo numbers",
+        "how_to_step_1": "The generator is pre-loaded with numbers 1-75.",
+        "how_to_step_2": "Select 'Slot Machine' view for a classic caller feel.",
+        "how_to_step_3": "Click 'Start Giveaway' to call a number.",
+        "how_to_step_4": "Announce the number to your players!",
+        "faq_title": "Bingo Generator FAQ",
+        "faq_1_q": "Can I prevent repeat numbers?",
+        "faq_1_a": "Yes! Go to 'Customize' settings and enable 'Remove Winner' to ensure each number is called only once per game.",
+        "faq_2_q": "Is it fair?",
+        "faq_2_a": "Yes, we use a cryptographically secure RNG to ensure fairness."
     }
 }

@@ -11,4 +11,4 @@
 | 2026-01-29 | FCP Optimization | Removed 5 unused Google Fonts (Roboto, Montserrat, Open Sans, Lato, Poppins) from global layout | Reduced critical CSS size and eliminated potential font downloads; implemented system-font fallbacks for legacy data. |
 | 2026-01-29 | LCP & SEO | Enabled SSR in MainApp | Removed global blocking skeleton, implemented granular skeletons, and enabled server-side rendering of SEO content and layout. |
 | 2026-01-30 | LCP & FCP | Optimized MainApp Animations | Removed `initial={{ opacity: 0 }}` from Header, H1, and Main Section to prevent LCP delay. Removed unused `AppSkeleton` import. |
-| 2026-01-30 | Bundle Size | Refactored Wheel Page to use MainAppOptimized | Reduced bundle size by moving Geo components to Server Components and removing imports from Client Bundle. |
+| 2026-02-02 | TBT & Bundle | Refactored `WheelGeo` and `Glossary` to Server Components | Removed hydration cost for large text blocks and isolated `framer-motion` to small Client Islands (`WheelVisual`, `TryToolButton`). |

@@ -29,6 +29,7 @@ module.exports = {
             'random-country-generator',
             'random-month-generator',
             'random-card-generator',
+            'bingo-number-generator',
             'versus'
         ];
 

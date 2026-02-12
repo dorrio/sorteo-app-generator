@@ -1,46 +1,24 @@
 "use client"
 
+import type React from "react"
 import { useSorteoStore, type ThemeConfig } from "@/lib/sorteo-store"
-import { Button } from "@/components/ui/button"
-import { Play } from "lucide-react"
 
-interface TryToolButtonProps {
-  style: ThemeConfig['sorteoStyle']
+interface TryToolButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  sorteoStyle: ThemeConfig["sorteoStyle"]
   children: React.ReactNode
-  className?: string
-  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link"
-  size?: "default" | "sm" | "lg" | "icon"
-  asChild?: boolean
 }
 
-export function TryToolButton({ style, children, className, variant = "default", size = "default", asChild = false }: TryToolButtonProps) {
+export function TryToolButton({ sorteoStyle, children, onClick, ...props }: TryToolButtonProps) {
   const { updateTheme } = useSorteoStore()
 
-  const handleTryIt = () => {
-    updateTheme({ sorteoStyle: style })
-    // Scroll to tool area
-    const element = document.getElementById("sorteo-section")
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    updateTheme({ sorteoStyle })
+    if (onClick) onClick(e)
   }
 
   return (
-    <Button
-      variant={variant}
-      size={size}
-      className={className}
-      onClick={handleTryIt}
-      asChild={asChild}
-    >
-      {asChild ? (
-        children
-      ) : (
-        <span className="flex items-center gap-2">
-            <Play className="w-5 h-5 fill-current" />
-            {children}
-        </span>
-      )}
-    </Button>
+    <a href="#sorteo-section" onClick={handleClick} {...props}>
+      {children}
+    </a>
   )
 }

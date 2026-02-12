@@ -1023,5 +1023,34 @@
         "faq_1_a": "Sim, usamos um algoritmo de embaralhamento Fisher-Yates impulsionado por um RNG criptograficamente seguro para garantir que cada carta tenha uma probabilidade igual de 1/52.",
         "faq_2_q": "Posso tirar várias cartas?",
         "faq_2_a": "Sim! O baralho é embaralhado a cada vez. Você pode tirar uma, anotar e tirar outra."
+    },
+    "BingoPage": {
+        "title": "Gerador de Números de Bingo | Número Aleatorio 1-75",
+        "description": "Gere números de Bingo aleatórios (1-75) instantaneamente. Cantador de Bingo grátis para jogos. Justo e simples.",
+        "h1": "Gerador de Números de Bingo",
+        "subtitle": "Gere números de Bingo aleatórios de 1 a 75."
+    },
+    "BingoGeo": {
+        "direct_answer_title": "O que é um Gerador de Números de Bingo?",
+        "direct_answer_text": "Um <tool>Gerador de Números de Bingo</tool> é uma ferramenta que seleciona números de 1 a 75 aleatoriamente para jogar Bingo. Garante um jogo justo sem precisar de um globo físico. <brand>Sorteo Pro</brand> atua como um cantador digital para sua noite de jogos.",
+        "cta_button": "Cantar Número",
+        "feature_1_title": "Intervalo 1-75",
+        "feature_1_desc": "Formato padrão de Bingo.",
+        "feature_2_title": "Sorteio Justo",
+        "feature_2_desc": "Usa RNG seguro para resultados imparciais.",
+        "feature_3_title": "Tela Grande",
+        "feature_3_desc": "Números fáceis de ler para grupos.",
+        "feature_4_title": "Grátis e Ilimitado",
+        "feature_4_desc": "Cante quantos números precisar.",
+        "how_to_title": "Como gerar números de Bingo",
+        "how_to_step_1": "O gerador vem pré-carregado com números 1-75.",
+        "how_to_step_2": "Selecione a visualização 'Caça-níquel' para a sensação clássica.",
+        "how_to_step_3": "Clique em 'Iniciar Sorteio' para cantar um número.",
+        "how_to_step_4": "Anuncie o número aos seus jogadores!",
+        "faq_title": "Perguntas Frequentes de Bingo",
+        "faq_1_q": "Posso evitar números repetidos?",
+        "faq_1_a": "Sim! Vá em configurações 'Personalizar' e ative 'Remover vencedor' para garantir que cada número saia apenas uma vez por jogo.",
+        "faq_2_q": "É justo?",
+        "faq_2_a": "Sim, usamos um RNG criptograficamente seguro para garantir a justiça."
     }
 }

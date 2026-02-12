@@ -1,6 +1,12 @@
+import { MainApp } from '@/components/sorteo/main-app';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import { MainApp } from "@/components/sorteo/main-app";
+import { SiteFooter } from '@/components/sorteo/site-footer';
+import { CardGeo } from '@/components/sorteo/card-geo';
+import { Glossary } from '@/components/sorteo/glossary';
+import { safeJsonLdStringify } from '@/lib/utils';
+
+export const dynamic = 'force-static';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -19,8 +25,8 @@ export async function generateMetadata({ params, searchParams }: Props) {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
     : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteo-app-generator.vercel.app';
+      ? (process.env.VERCEL_URL.startsWith('http') ? process.env.VERCEL_URL : `https://${process.env.VERCEL_URL}`)
+      : 'https://sorteopro.com';
 
   // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
@@ -77,12 +83,13 @@ export default async function CardPage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'CardPage' });
   const tGeo = await getTranslations({ locale, namespace: 'CardGeo' });
-
+  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
+  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
     : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteo-app-generator.vercel.app';
+      ? (process.env.VERCEL_URL.startsWith('http') ? process.env.VERCEL_URL : `https://${process.env.VERCEL_URL}`)
+      : 'https://sorteopro.com';
 
   const softwareAppSchema = {
     '@context': 'https://schema.org',
@@ -112,30 +119,47 @@ export default async function CardPage({ params }: { params: Promise<{ locale: s
       "position": 1,
       "name": "Sorteo Pro",
       "item": `${baseUrl}/${locale}`
-    },{
+    }, {
       "@type": "ListItem",
       "position": 2,
-      "name": "Random Card Generator",
+      "name": t('h1'),
       "item": `${baseUrl}/${locale}/random-card-generator`
     }]
   };
 
-  // Helper to safely escape JSON-LD
-  const safeJsonLd = (data: unknown) => {
-    return JSON.stringify(data).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026')
+  const shareTranslations = {
+    share: tWinner('share_menu'),
+    copy: tWinner('copy_text'),
+    copied: tWinner('copied'),
+    shareOn: tWinner('share_on')
+  }
+
+  const stickyTranslations = {
+    share_cta: tShare('cta_share'),
+    start_cta: tShare('cta_start')
   }
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd([softwareAppSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      {/*
-          initialStyle="cards" - Specific visualization for cards
-          seoMode="card" - Triggers CardGeo and logic
-      */}
-      <MainApp initialStyle="cards" seoMode="card" />
+      <MainApp
+        seoMode="card"
+        initialStyle="cards"
+        initialTitle={t('h1')}
+        initialSubtitle={t('subtitle')}
+        shareTitle={tShare('card_title')}
+        shareText={tShare('card_text')}
+        customShareTextTemplate={tShare('custom_share_text')}
+        shareTranslations={shareTranslations}
+        stickyTranslations={stickyTranslations}
+        footer={<SiteFooter />}
+      >
+        <CardGeo />
+        <Glossary seoMode="card" />
+      </MainApp>
     </>
   );
 }

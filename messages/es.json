@@ -1022,5 +1022,34 @@
         "faq_1_a": "Sí, utilizamos un algoritmo de barajado Fisher-Yates impulsado por un RNG criptográficamente seguro para garantizar que cada carta tenga una probabilidad igual de 1/52.",
         "faq_2_q": "¿Puedo sacar múltiples cartas?",
         "faq_2_a": "¡Sí! La baraja se baraja cada vez. Puedes sacar una, anotarla y sacar otra."
+    },
+    "BingoPage": {
+        "title": "Generador de Números de Bingo | Número Aleatorio 1-75",
+        "description": "Genera números de Bingo aleatorios (1-75) al instante. Cantador de Bingo gratis para organizar juegos. Justo y simple.",
+        "h1": "Generador de Números de Bingo",
+        "subtitle": "Genera números de Bingo aleatorios del 1 al 75."
+    },
+    "BingoGeo": {
+        "direct_answer_title": "¿Qué es un Generador de Números de Bingo?",
+        "direct_answer_text": "Un <tool>Generador de Números de Bingo</tool> es una herramienta que selecciona números del 1 al 75 al azar para jugar al Bingo. Asegura un juego justo sin necesidad de un bombo físico. <brand>Sorteo Pro</brand> actúa como un cantador digital para tu noche de juegos.",
+        "cta_button": "Cantar Número",
+        "feature_1_title": "Rango 1-75",
+        "feature_1_desc": "Formato estándar de Bingo.",
+        "feature_2_title": "Canto Justo",
+        "feature_2_desc": "Usa RNG seguro para resultados imparciales.",
+        "feature_3_title": "Pantalla Grande",
+        "feature_3_desc": "Números fáciles de leer para grupos.",
+        "feature_4_title": "Gratis e Ilimitado",
+        "feature_4_desc": "Cante tantos números como necesites.",
+        "how_to_title": "Cómo generar números de Bingo",
+        "how_to_step_1": "El generador está precargado con números 1-75.",
+        "how_to_step_2": "Selecciona la vista 'Tragamonedas' para sentirte como un cantador clásico.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para cantar un número.",
+        "how_to_step_4": "¡Anuncia el número a tus jugadores!",
+        "faq_title": "Preguntas Frecuentes de Bingo",
+        "faq_1_q": "¿Puedo evitar números repetidos?",
+        "faq_1_a": "¡Sí! Ve a la configuración 'Personalizar' y activa 'Eliminar ganador' para asegurar que cada número salga solo una vez por juego.",
+        "faq_2_q": "¿Es justo?",
+        "faq_2_a": "Sí, usamos un RNG criptográficamente seguro para garantizar la equidad."
     }
 }

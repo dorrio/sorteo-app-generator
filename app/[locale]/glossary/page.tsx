@@ -2,7 +2,10 @@ import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
-import { BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered, GraduationCap } from 'lucide-react';
+import {
+  BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered, GraduationCap,
+  Dices, Coins, Scissors, Globe, Calendar, Users, Spade, Mic2
+} from 'lucide-react';
 
 export const dynamic = 'force-static';
 
@@ -69,7 +72,84 @@ export default function GlossaryPage() {
         def: tGlossary('def_5'),
         icon: <HelpCircle className="w-6 h-6 text-primary" />,
         link: "/wheel-of-names"
-    }
+    },
+    {
+        id: "yes-no",
+        term: tGlossary('term_6'),
+        def: tGlossary('def_6'),
+        icon: <HelpCircle className="w-6 h-6 text-primary" />,
+        link: "/yes-or-no-wheel"
+    },
+    {
+        id: "letter",
+        term: tGlossary('term_7'),
+        def: tGlossary('def_7'),
+        icon: <BookOpen className="w-6 h-6 text-primary" />,
+        link: "/random-letter-generator"
+    },
+    {
+        id: "secret-santa",
+        term: tGlossary('term_8'),
+        def: tGlossary('def_8'),
+        icon: <Users className="w-6 h-6 text-primary" />,
+        link: "/secret-santa-generator"
+    },
+    {
+      id: "dice",
+      term: tGlossary('term_9'),
+      def: tGlossary('def_9'),
+      icon: <Dices className="w-6 h-6 text-primary" />,
+      link: "/dice-roller"
+    },
+    {
+      id: "coin",
+      term: tGlossary('term_10'),
+      def: tGlossary('def_10'),
+      icon: <Coins className="w-6 h-6 text-primary" />,
+      link: "/coin-flip"
+    },
+    {
+      id: "rps",
+      term: tGlossary('term_11'),
+      def: tGlossary('def_11'),
+      icon: <Scissors className="w-6 h-6 text-primary" />,
+      link: "/rock-paper-scissors"
+    },
+    {
+      id: "country",
+      term: tGlossary('term_12'),
+      def: tGlossary('def_12'),
+      icon: <Globe className="w-6 h-6 text-primary" />,
+      link: "/random-country-generator"
+    },
+    {
+      id: "month",
+      term: tGlossary('term_13'),
+      def: tGlossary('def_13'),
+      icon: <Calendar className="w-6 h-6 text-primary" />,
+      link: "/random-month-generator"
+    },
+    {
+      id: "team",
+      term: tGlossary('term_14'),
+      def: tGlossary('def_14'),
+      icon: <Users className="w-6 h-6 text-primary" />,
+      link: "/team-generator"
+    },
+    {
+      id: "card",
+      term: tGlossary('term_15'),
+      def: tGlossary('def_15'),
+      icon: <Spade className="w-6 h-6 text-primary" />,
+      link: "/random-card-generator"
+    },
+    {
+      id: "bingo",
+      term: tGlossary('term_16'),
+      def: tGlossary('def_16'),
+      icon: <Mic2 className="w-6 h-6 text-primary" />,
+      link: "/bingo-number-generator"
+    },
   ];
 
   // Schema: CollectionPage + DefinedTermSet

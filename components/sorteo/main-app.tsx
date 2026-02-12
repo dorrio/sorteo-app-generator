@@ -65,7 +65,7 @@ const FloatingBubbles = dynamic(
   { ssr: false }
 )
 
-import { ThemeConfig } from "@/lib/sorteo-store"
+
 
 function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: Partial<ThemeConfig>) => void }) {
   const searchParams = useSearchParams()

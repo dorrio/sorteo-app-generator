@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { MainApp } from "@/components/sorteo/main-app";
+import { MainAppOptimized } from "@/components/sorteo/main-app-optimized";
 import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SeoContent } from "@/components/sorteo/seo-content";
@@ -82,6 +82,7 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
 
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
   const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
+  const tHome = await getTranslations({ locale, namespace: 'HomePage' });
 
   // Reuse existing share logic (Home has generic share content)
   const shareTranslations = {
@@ -120,7 +121,7 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <MainApp
+      <MainAppOptimized
         seoMode="home"
         initialTitle="Sorteo Pro"
         initialSubtitle="The Premium Giveaway Tool"
@@ -130,11 +131,12 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}
+        customizeText={tHome('customize')}
       >
         <WheelGeo />
         <Glossary seoMode="home" />
         <SeoContent />
-      </MainApp>
+      </MainAppOptimized>
     </>
   )
 }

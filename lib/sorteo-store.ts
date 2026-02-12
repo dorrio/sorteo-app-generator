@@ -86,6 +86,10 @@ export interface SorteoState {
   isEditorOpen: boolean
   setIsEditorOpen: (open: boolean) => void
 
+  // Modals
+  isVerifyModalOpen: boolean
+  setIsVerifyModalOpen: (open: boolean) => void
+
   hasHydrated: boolean
   setHasHydrated: (state: boolean) => void
 
@@ -229,6 +233,10 @@ export const useSorteoStore = create<SorteoState>()(
       // Editor
       isEditorOpen: false,
       setIsEditorOpen: (isEditorOpen) => set({ isEditorOpen }),
+
+      // Modals
+      isVerifyModalOpen: false,
+      setIsVerifyModalOpen: (isVerifyModalOpen) => set({ isVerifyModalOpen }),
 
       hasHydrated: false,
       setHasHydrated: (state) => set({ hasHydrated: state }),

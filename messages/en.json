@@ -49,7 +49,8 @@
             "versus_random": "Random.org Alternative",
             "glossary": "Glossary",
             "month": "Random Month Generator",
-            "card": "Random Card Generator"
+            "card": "Random Card Generator",
+            "bingo": "Bingo Number Generator"
         }
     },
     "QuickSpecs": {

@@ -50,7 +50,8 @@
             "versus_random": "Alternativa a Random.org",
             "glossary": "Glosario",
             "month": "Generador de Mes Aleatorio",
-            "card": "Generador de Cartas Aleatorias"
+            "card": "Generador de Cartas Aleatorias",
+            "bingo": "Generador de Números de Bingo"
         }
     },
     "QuickSpecs": {

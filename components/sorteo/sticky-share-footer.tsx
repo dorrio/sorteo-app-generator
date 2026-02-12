@@ -29,10 +29,13 @@ export function StickyShareFooter({ shareContent, translations }: StickyShareFoo
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling 300px
-      const show = window.scrollY > 300
+      // Viralis: Show after scrolling 100px (reduced from 300px) to capture users on mobile faster
+      const show = window.scrollY > 100
       setIsVisible(show)
     }
+
+    // Check immediately on mount (in case of anchor link or refresh)
+    handleScroll()
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)

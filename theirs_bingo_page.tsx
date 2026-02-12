@@ -2,9 +2,8 @@ import { MainApp } from '@/components/sorteo/main-app';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { SiteFooter } from '@/components/sorteo/site-footer';
-import { CardGeo } from '@/components/sorteo/card-geo';
+import { BingoGeo } from '@/components/sorteo/bingo-geo';
 import { Glossary } from '@/components/sorteo/glossary';
-import { safeJsonLdStringify } from '@/lib/utils';
 
 export const dynamic = 'force-static';
 
@@ -14,7 +13,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'CardPage' });
+  const t = await getTranslations({ locale, namespace: 'BingoPage' });
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
     : process.env.VERCEL_URL
@@ -25,18 +24,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t('title'),
     description: t('description'),
     alternates: {
-      canonical: `/${locale}/random-card-generator`
+      canonical: `/${locale}/bingo-number-generator`
     },
     openGraph: {
       title: t('title'),
       description: t('description'),
-      url: `${baseUrl}/${locale}/random-card-generator`,
+      url: `${baseUrl}/${locale}/bingo-number-generator`,
       type: "website",
       siteName: "Sorteo Pro",
       locale: locale,
       images: [
         {
-          url: `${baseUrl}/api/og?type=card`,
+          url: `${baseUrl}/api/og?type=bingo`,
           width: 1200,
           height: 630,
           alt: t('title'),
@@ -47,15 +46,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: 'summary_large_image',
       title: t('title'),
       description: t('description'),
-      images: [`${baseUrl}/api/og?type=card`],
+      images: [`${baseUrl}/api/og?type=bingo`],
     },
   };
 }
 
-export default async function RandomCardGeneratorPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function BingoNumberGeneratorPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'CardPage' });
-  const tGeo = await getTranslations({ locale, namespace: 'CardGeo' });
+  const t = await getTranslations({ locale, namespace: 'BingoPage' });
+  const tGeo = await getTranslations({ locale, namespace: 'BingoGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
   const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
@@ -67,7 +66,7 @@ export default async function RandomCardGeneratorPage({ params }: { params: Prom
   const softwareAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: 'Random Card Generator by Sorteo Pro',
+    name: 'Bingo Number Generator by Sorteo Pro',
     applicationCategory: 'EntertainmentApplication',
     operatingSystem: 'Web, iOS, Android',
     offers: {
@@ -96,7 +95,7 @@ export default async function RandomCardGeneratorPage({ params }: { params: Prom
       "@type": "ListItem",
       "position": 2,
       "name": t('h1'),
-      "item": `${baseUrl}/${locale}/random-card-generator`
+      "item": `${baseUrl}/${locale}/bingo-number-generator`
     }]
   };
 
@@ -116,22 +115,22 @@ export default async function RandomCardGeneratorPage({ params }: { params: Prom
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
-        seoMode="card"
-        initialStyle="cards"
+        seoMode="bingo"
+        initialStyle="slot-machine"
         initialTitle={t('h1')}
         initialSubtitle={t('subtitle')}
-        shareTitle={tShare('card_title')}
-        shareText={tShare('card_text')}
+        shareTitle={tShare('bingo_title')}
+        shareText={tShare('bingo_text')}
         customShareTextTemplate={tShare('custom_share_text')}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}
       >
-        <CardGeo />
-        <Glossary seoMode="card" />
+        <BingoGeo />
+        <Glossary seoMode="bingo" />
       </MainApp>
     </>
   );

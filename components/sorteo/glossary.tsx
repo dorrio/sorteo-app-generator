@@ -61,6 +61,31 @@ export function Glossary({ seoMode }: GlossaryProps) {
       term: t("term_16"),
       definition: t("def_16"),
     },
+    {
+      id: "coin",
+      term: t("term_10"),
+      definition: t("def_10"),
+    },
+    {
+      id: "rps",
+      term: t("term_11"),
+      definition: t("def_11"),
+    },
+    {
+      id: "team",
+      term: t("term_12"),
+      definition: t("def_12"),
+    },
+    {
+      id: "country",
+      term: t("term_13"),
+      definition: t("def_13"),
+    },
+    {
+      id: "month",
+      term: t("term_14"),
+      definition: t("def_14"),
+    },
   ]
 
   // Filter terms based on seoMode (Apex Optimization: Relevance)

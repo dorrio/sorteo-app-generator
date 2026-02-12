@@ -350,7 +350,9 @@
         "term_14": "Random Month Generator",
         "def_14": "A simple tool that picks a random month of the year (January-December). Useful for planning events, horoscopes, or selecting birth months for games.",
         "term_15": "Random Card Generator",
-        "def_15": "A digital tool that simulates drawing a playing card from a standard 52-card deck. Used for games, magic tricks, and probability experiments."
+        "def_15": "A digital tool that simulates drawing a playing card from a standard 52-card deck. Used for games, magic tricks, and probability experiments.",
+        "term_16": "Bingo Number Generator",
+        "def_16": "A classic game of chance where numbers are drawn randomly and players match them on cards. Sorteo Pro generates random Bingo numbers 1-75."
     },
     "InstagramPicker": {
         "title": "Free Instagram Comment Picker | Unlimited & No Login",

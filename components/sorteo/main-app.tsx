@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState, Suspense, useRef } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { useSorteoStore } from "@/lib/sorteo-store"
+import { useSorteoStore, type ThemeConfig } from "@/lib/sorteo-store"
 import { SorteoSelector } from "@/components/sorteo/sorteo-selector"
 import { ParticipantManager } from "@/components/sorteo/participant-manager"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
@@ -212,8 +212,7 @@ export function MainApp({
 
   const contentRef = useRef<HTMLDivElement>(null)
 
-  // Ref to track if we have already auto-populated in Head's logic, to avoid re-populating
-  const hasAutoPopulated = useRef(false)
+
 
   // Calculated state for inert
   const isOverlayOpen = isVerifyModalOpen || showWinnerCeremony || isEditorOpen || showCountdown
@@ -240,7 +239,7 @@ export function MainApp({
 
     if (initialStyle) {
       // Fix: Explicitly cast initialStyle to the correct union type
-      update.sorteoStyle = initialStyle as any
+      update.sorteoStyle = initialStyle as ThemeConfig["sorteoStyle"]
     }
 
     // Initialize custom title

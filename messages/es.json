@@ -347,7 +347,9 @@
         "term_14": "Generador de Mes Aleatorio",
         "def_14": "Herramienta simple que elige un mes del año (Enero-Diciembre) al azar. Útil para planificar eventos, horóscopos o juegos de fechas.",
         "term_15": "Generador de Cartas Aleatorias",
-        "def_15": "Herramienta digital que simula sacar una carta de una baraja estándar de 52 cartas. Usada para juegos, trucos de magia y experimentos de probabilidad."
+        "def_15": "Herramienta digital que simula sacar una carta de una baraja estándar de 52 cartas. Usada para juegos, trucos de magia y experimentos de probabilidad.",
+        "term_16": "Generador de Cartones de Bingo",
+        "def_16": "Herramienta digital que crea cartones de bingo aleatorios con números del 1 al 75. Ideal para jugar al bingo en casa o en eventos."
     },
     "InstagramPicker": {
         "title": "Selector de Comentarios de Instagram Gratis | Ilimitado",

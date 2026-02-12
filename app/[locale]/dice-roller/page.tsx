@@ -1,6 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
+import { DiceGeo } from "@/components/sorteo/dice-geo";
+import { Glossary } from "@/components/sorteo/glossary";
+import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -22,7 +25,6 @@ export async function generateMetadata({ params, searchParams }: Props) {
       ? `https://${process.env.VERCEL_URL}`
       : 'https://sorteopro.com';
 
-  // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
 
@@ -37,7 +39,6 @@ export async function generateMetadata({ params, searchParams }: Props) {
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
   else ogImageUrl.searchParams.set('color', '#e11d48');
 
-  // Construct Canonical/Share URL for OG
   const shareUrl = new URL(`${baseUrl}/${locale}/dice-roller`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
@@ -78,6 +79,8 @@ export default async function DiceRollerPage({ params }: { params: Promise<{ loc
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'DicePage' });
   const tGeo = await getTranslations({ locale, namespace: 'DiceGeo' });
+  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
+  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -121,13 +124,40 @@ export default async function DiceRollerPage({ params }: { params: Promise<{ loc
     }]
   };
 
+  const shareTranslations = {
+      share: tWinner('share_menu'),
+      copy: tWinner('copy_text'),
+      copied: tWinner('copied'),
+      shareOn: tWinner('share_on')
+  }
+
+  const stickyTranslations = {
+      share_cta: tShare('cta_share'),
+      start_cta: tShare('cta_start')
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp initialStyle="grid" seoMode="dice" />
+      <MainApp
+        initialStyle="grid"
+        seoMode="dice"
+        initialTitle={t('h1')}
+        initialSubtitle={t('subtitle')}
+        shareTitle={tShare('dice_title')}
+        shareText={tShare('dice_text')}
+        customShareTextTemplate={tShare('custom_share_text')}
+        shareTranslations={shareTranslations}
+        stickyTranslations={stickyTranslations}
+        footer={<SiteFooter />}
+      >
+        <DiceGeo />
+        {/* Dice is a form of RNG, so we use the 'dice' mode which maps to 'rng' glossary terms */}
+        <Glossary seoMode="dice" />
+      </MainApp>
     </>
   );
 }

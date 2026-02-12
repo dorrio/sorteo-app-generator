@@ -1,25 +1,11 @@
-"use client"
-
 import { useTranslations } from "next-intl"
 import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
 
 interface GlossaryProps {
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'dice' | 'coin' | 'rps' | 'team' | 'country' | 'month' | 'card' | 'bingo';
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
 }
 
-/**
- * Renders a localized glossary section showing a filtered set of terms and embedded JSON-LD.
- *
- * The glossary picks which terms to display based on `seoMode`. When `seoMode` is absent or
- * `'home'`, all terms are shown. The term with id `'provably-fair'` is always included as a
- * trust signal. When `seoMode` is set to a specific tool id (e.g., `'wheel'`, `'rng'`, `'card'`,
- * `'bingo'`, etc.), only that term plus `'provably-fair'` are shown. When a subset is shown,
- * a "View Full Glossary" link to `/glossary` is rendered.
- *
- * @param seoMode - Optional mode controlling which glossary term(s) to display (e.g. 'home', 'wheel', 'rng', 'card', 'bingo', etc.)
- * @returns The rendered glossary React element containing term entries and a JSON-LD script for the displayed terms.
- */
 export function Glossary({ seoMode }: GlossaryProps) {
   const t = useTranslations("Glossary")
 
@@ -65,36 +51,6 @@ export function Glossary({ seoMode }: GlossaryProps) {
       definition: t("def_8"),
     },
     {
-      id: "dice",
-      term: t("term_9"),
-      definition: t("def_9"),
-    },
-    {
-      id: "coin",
-      term: t("term_10"),
-      definition: t("def_10"),
-    },
-    {
-      id: "rps",
-      term: t("term_11"),
-      definition: t("def_11"),
-    },
-    {
-      id: "team",
-      term: t("term_12"),
-      definition: t("def_12"),
-    },
-    {
-      id: "country",
-      term: t("term_13"),
-      definition: t("def_13"),
-    },
-    {
-      id: "month",
-      term: t("term_14"),
-      definition: t("def_14"),
-    },
-    {
       id: "card",
       term: t("term_15"),
       definition: t("def_15"),
@@ -120,14 +76,12 @@ export function Glossary({ seoMode }: GlossaryProps) {
       if (seoMode === 'yes-no' && term.id === 'yes-no') return true;
       if (seoMode === 'letter' && term.id === 'letter') return true;
       if (seoMode === 'secret-santa' && term.id === 'secret-santa') return true;
-      if (seoMode === 'dice' && term.id === 'dice') return true;
-      if (seoMode === 'coin' && term.id === 'coin') return true;
-      if (seoMode === 'rps' && term.id === 'rps') return true;
-      if (seoMode === 'team' && term.id === 'team') return true;
-      if (seoMode === 'country' && term.id === 'country') return true;
-      if (seoMode === 'month' && term.id === 'month') return true;
       if (seoMode === 'card' && term.id === 'card') return true;
       if (seoMode === 'bingo' && term.id === 'bingo') return true;
+      if (seoMode === 'dice' && term.id === 'rng') return true; // Dice is a form of RNG
+
+      // For other modes, maybe show related terms?
+      // For now, keep it strict to avoid clutter.
 
       return false;
   });

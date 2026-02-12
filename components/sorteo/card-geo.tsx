@@ -2,186 +2,159 @@
 
 import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Lock, Zap, RefreshCw, Smartphone, HelpCircle, CheckCircle, Copy } from "lucide-react"
-import { useSorteoStore } from "@/lib/sorteo-store"
+import { Shield, Zap, RefreshCw, Smartphone, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
 
-/**
- * Renders a localized feature card section containing a direct-answer block, feature grid, how-to steps, FAQ, and embedded JSON-LD for SEO.
- *
- * The primary CTA updates the Sorteo store theme to the "cards" style when activated.
- *
- * @returns The component's rendered React element (section) containing the card UI and structured data script.
- */
 export function CardGeo() {
-  const cardT = useTranslations("CardGeo")
-  const cardFaqT = useTranslations("CardPage")
-  const { updateTheme } = useSorteoStore()
+  const t = useTranslations("CardGeo")
 
-  const handleTryIt = () => {
-    updateTheme({ sorteoStyle: 'cards' })
-  }
+  const features = [
+    {
+      icon: <Shield className="w-6 h-6 text-primary" />,
+      title: t("feature_1_title"),
+      desc: t("feature_1_desc"),
+    },
+    {
+      icon: <RefreshCw className="w-6 h-6 text-primary" />,
+      title: t("feature_2_title"),
+      desc: t("feature_2_desc"),
+    },
+    {
+      icon: <Zap className="w-6 h-6 text-primary" />,
+      title: t("feature_3_title"),
+      desc: t("feature_3_desc"),
+    },
+    {
+      icon: <Smartphone className="w-6 h-6 text-primary" />,
+      title: t("feature_4_title"),
+      desc: t("feature_4_desc"),
+    },
+  ]
 
   const faqs = [
     {
-      question: cardFaqT("faq_1_q"),
-      answer: cardFaqT("faq_1_a"),
+      question: t("faq_1_q"),
+      answer: t("faq_1_a"),
     },
     {
-      question: cardFaqT("faq_2_q"),
-      answer: cardFaqT("faq_2_a"),
+      question: t("faq_2_q"),
+      answer: t("faq_2_a"),
     },
   ]
 
-  const howToSteps = [
-    { name: cardT('how_to_step_1') },
-    { name: cardT('how_to_step_2') },
-    { name: cardT('how_to_step_3') },
-    { name: cardT('how_to_step_4') },
-  ]
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  }
 
-  const jsonLd = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: faqs.map(faq => ({
-        '@type': 'Question',
-        name: faq.question,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: faq.answer,
-        },
-      })),
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'HowTo',
-      name: cardT('how_to_title'),
-      step: howToSteps.map((step, idx) => ({
-        '@type': 'HowToStep',
-        position: idx + 1,
-        name: step.name,
-        text: step.name
-      }))
-    }
-  ]
-
-  const safeJsonLd = JSON.stringify(jsonLd)
-    .replace(/</g, '\\u003c')
-    .replace(/>/g, '\\u003e')
-    .replace(/&/g, '\\u0026');
+  const howToLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: t('how_to_title'),
+    step: [1, 2, 3, 4].map(step => ({
+      '@type': 'HowToStep',
+      position: step,
+      name: t(`how_to_step_${step}`),
+      text: t(`how_to_step_${step}`),
+    })),
+  }
 
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden">
+    <section className="w-full py-16 px-4 bg-card/30 backdrop-blur-sm border-t border-border/50">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="max-w-4xl mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-card/30 backdrop-blur-xl border border-primary/20 rounded-3xl p-8 md:p-12 shadow-2xl"
-        >
-          {/* Direct Answer Block (GEO) */}
-          <div className="mb-10 space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-amber-200">
-              {cardT("direct_answer_title")}
-            </h2>
-            <div className="prose prose-invert max-w-none">
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {cardT.rich("direct_answer_text", {
-                  strong: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
-                  bold: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
-                  tool: (chunks) => <Link href="/random-card-generator" className="font-semibold text-primary hover:underline">{chunks}</Link>,
-                  brand: (chunks) => <Link href="/" className="font-semibold text-primary hover:underline">{chunks}</Link>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }}
+      />
+      <div className="max-w-5xl mx-auto space-y-16">
+
+        {/* Direct Answer Block (ChatGPT Bait) */}
+        <div className="space-y-4 bg-card border border-primary/20 rounded-2xl p-8 shadow-sm">
+          <h2 className="text-2xl font-bold tracking-tight flex items-center gap-2">
+            <Zap className="w-6 h-6 text-primary" />
+            {t("direct_answer_title")}
+          </h2>
+          <div className="prose prose-invert max-w-none text-muted-foreground leading-relaxed">
+            <p className="text-lg">
+                {t.rich("direct_answer_text", {
+                tool: (chunks) => <strong className="text-primary font-semibold">{chunks}</strong>,
+                brand: (chunks) => <Link href="/" className="font-bold text-foreground hover:underline">{chunks}</Link>,
+                strong: (chunks) => <strong className="text-foreground font-semibold">{chunks}</strong>
                 })}
-              </p>
-            </div>
-            <Button asChild size="lg" className="mt-4 gap-2 text-lg font-bold shadow-lg shadow-primary/20">
-              <a href="#sorteo-section" onClick={handleTryIt}>
-                {cardT("cta_button")} <ArrowRight className="w-5 h-5" />
-              </a>
-            </Button>
+            </p>
           </div>
+          <div className="pt-4">
+             <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="inline-flex items-center justify-center bg-primary text-primary-foreground font-bold py-2 px-6 rounded-full hover:scale-105 transition-transform">
+                {t("cta_button")}
+             </button>
+          </div>
+        </div>
 
-          {/* Features Grid */}
-          <ul className="grid md:grid-cols-2 gap-8 mt-12 mb-16" role="list">
-            <li className="space-y-4">
-              <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
-                <Copy className="w-5 h-5" />
-                {cardT("feature_1_title")}
-              </h3>
-              <p className="text-muted-foreground">{cardT("feature_1_desc")}</p>
-            </li>
-
-            <li className="space-y-4">
-              <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
-                <Lock className="w-5 h-5" />
-                {cardT("feature_2_title")}
-              </h3>
-              <p className="text-muted-foreground">{cardT("feature_2_desc")}</p>
-            </li>
-
-            <li className="space-y-4">
-              <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
-                <RefreshCw className="w-5 h-5" />
-                {cardT("feature_3_title")}
-              </h3>
-              <p className="text-muted-foreground">{cardT("feature_3_desc")}</p>
-            </li>
-
-            <li className="space-y-4">
-              <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
-                <Smartphone className="w-5 h-5" />
-                {cardT("feature_4_title")}
-              </h3>
-              <p className="text-muted-foreground">{cardT("feature_4_desc")}</p>
-            </li>
+        {/* Features Grid */}
+        <div className="space-y-8">
+          <h2 className="text-2xl font-bold">{t("feature_1_title")} & {t("feature_2_title")}</h2>
+          <ul className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" role="list">
+            {features.map((feature, idx) => (
+              <motion.li
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-colors list-none"
+              >
+                <div className="mb-4 p-3 bg-primary/10 rounded-xl w-fit">
+                  {feature.icon}
+                </div>
+                <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm">{feature.desc}</p>
+              </motion.li>
+            ))}
           </ul>
+        </div>
 
-          {/* How To Section */}
-          <div className="mb-16 border-t border-primary/10 pt-10">
-              <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
-                 <CheckCircle className="w-6 h-6 text-primary" />
-                 {cardT('how_to_title')}
-              </h3>
-              <ol className="relative border-l border-primary/20 ml-3 space-y-8">
-                 {howToSteps.map((step, idx) => (
-                     <li key={idx} className="ml-8">
-                        <span className="absolute flex items-center justify-center w-8 h-8 bg-primary/10 rounded-full -left-4 ring-4 ring-background text-sm font-bold text-primary">
-                            {idx + 1}
-                        </span>
-                        <p className="text-lg text-foreground/90 font-medium">{step.name}</p>
-                     </li>
-                 ))}
-              </ol>
-           </div>
+        {/* How To / Steps */}
+        <div className="space-y-8">
+          <h2 className="text-2xl font-bold">{t("how_to_title")}</h2>
+          <ol className="grid md:grid-cols-4 gap-4" role="list">
+            {[1, 2, 3, 4].map((step) => (
+              <li key={step} className="flex flex-col gap-2 p-4 rounded-xl bg-muted/20 border border-border/30">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-sm">
+                  {step}
+                </div>
+                <p className="text-sm text-muted-foreground pt-1">{t(`how_to_step_${step}`)}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
 
-          {/* FAQ Section */}
-          <div className="pt-10 border-t border-primary/10">
-             <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
-                <HelpCircle className="w-6 h-6 text-primary" />
-                FAQ
-             </h3>
-             <dl className="grid gap-6">
-                {faqs.map((faq, idx) => (
-                    <div key={idx} className="space-y-2">
-                        <dt className="font-bold text-lg text-foreground">{faq.question}</dt>
-                        <dd className="text-muted-foreground leading-relaxed">{faq.answer}</dd>
-                    </div>
-                ))}
-             </dl>
-          </div>
+        {/* FAQ Section */}
+        <div className="space-y-8">
+          <h2 className="text-2xl font-bold flex items-center gap-2">
+            <HelpCircle className="w-6 h-6 text-primary" />
+            {t("faq_title")}
+          </h2>
+          <dl className="grid gap-4 md:grid-cols-2">
+            {faqs.map((faq, idx) => (
+              <div key={idx} className="p-6 rounded-2xl bg-card/50 border border-border/50">
+                <dt className="font-semibold text-lg mb-2">{faq.question}</dt>
+                <dd className="text-muted-foreground">{faq.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
 
-        </motion.div>
-      </div>
-
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
     </section>
   )

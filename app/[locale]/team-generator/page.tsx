@@ -1,6 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
+import { TeamGeo } from "@/components/sorteo/team-geo";
+import { Glossary } from "@/components/sorteo/glossary";
+import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -13,7 +16,7 @@ type Props = {
 
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
-  const { template_title, template_color } = await searchParams;
+  const { template_title, template_color, list } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'TeamGeneratorPage' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
@@ -22,9 +25,9 @@ export async function generateMetadata({ params, searchParams }: Props) {
       ? `https://${process.env.VERCEL_URL}`
       : 'https://sorteopro.com';
 
-  // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
+  const customList = typeof list === 'string' ? list : undefined;
 
   const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : t('title');
   const displayDescription = t('description');
@@ -35,18 +38,24 @@ export async function generateMetadata({ params, searchParams }: Props) {
   else ogImageUrl.searchParams.set('title', 'Team Generator');
 
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
+  if (customList) ogImageUrl.searchParams.set('list', customList);
 
-  // Construct Canonical/Share URL for OG
   const shareUrl = new URL(`${baseUrl}/${locale}/team-generator`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
+  if (customList) shareUrl.searchParams.set('list', customList);
+
+  const canonicalUrl =
+    customTitle || customColor || customList
+      ? `/${locale}/team-generator?${shareUrl.searchParams.toString()}`
+      : `/${locale}/team-generator`;
 
   return {
     title: displayTitle,
     description: displayDescription,
     keywords: ["random team generator", "team maker", "random group generator", "split teams", "group randomizer", "classroom group generator", "team picker"],
     alternates: {
-      canonical: `/${locale}/team-generator`
+      canonical: canonicalUrl
     },
     openGraph: {
       title: displayTitle,
@@ -77,6 +86,8 @@ export default async function TeamGeneratorPage({ params }: { params: Promise<{ 
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'TeamGeneratorPage' });
   const tGeo = await getTranslations({ locale, namespace: 'TeamGeo' });
+  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
+  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
@@ -125,13 +136,39 @@ export default async function TeamGeneratorPage({ params }: { params: Promise<{ 
     }]
   };
 
+  const shareTranslations = {
+      share: tWinner('share_menu'),
+      copy: tWinner('copy_text'),
+      copied: tWinner('copied'),
+      shareOn: tWinner('share_on')
+  }
+
+  const stickyTranslations = {
+      share_cta: tShare('cta_share'),
+      start_cta: tShare('cta_start')
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp initialStyle="grid" seoMode="team" />
+      <MainApp
+        initialStyle="grid"
+        seoMode="team"
+        initialTitle={t('h1')}
+        initialSubtitle={t('subtitle')}
+        shareTitle={tShare('list_title')} // Team uses List share content
+        shareText={tShare('list_text')}
+        customShareTextTemplate={tShare('custom_share_text')}
+        shareTranslations={shareTranslations}
+        stickyTranslations={stickyTranslations}
+        footer={<SiteFooter />}
+      >
+        <TeamGeo />
+        <Glossary seoMode="team" />
+      </MainApp>
     </>
   );
 }

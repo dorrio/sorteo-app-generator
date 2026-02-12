@@ -43,8 +43,3 @@
 **Blocker:** The "History" section (`HistoryPanel`) disappeared from the accessibility tree (returning a `div` instead of `section`) when the list of winners was empty, creating a "Semantic Void" and inconsistent landmarks.
 **Bridge:** Refactored `HistoryPanel` to always render the `<section>` with `aria-labelledby`, placing the empty state message *inside* the semantic container.
 **Signal:** Improved semantic stability (Priority 3), ensuring the "History" landmark is always discoverable by screen readers and crawlers regardless of content state.
-
-## 2026-02-04 - ParticipantManager/List
-**Blocker:** The "Edit" and "Delete" buttons in the participant list were hidden via `opacity: 0`, creating a "Semantic Void" and a navigation trap for keyboard users (who could focus them but not see them).
-**Bridge:** Added `focus-within:opacity-100` to the container, ensuring interactive elements become visible when they receive focus.
-**Signal:** Improved WCAG 2.1 compliance (Focus Visible) and ensured deeper link crawlability for bots that follow tab order or focusable elements.

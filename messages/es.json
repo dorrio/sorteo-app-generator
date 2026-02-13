@@ -50,7 +50,8 @@
             "versus_random": "Alternativa a Random.org",
             "glossary": "Glosario",
             "month": "Generador de Mes Aleatorio",
-            "card": "Generador de Cartas Aleatorias"
+            "card": "Generador de Cartas Aleatorias",
+            "bingo": "Generador de Bingo"
         }
     },
     "QuickSpecs": {
@@ -761,6 +762,8 @@
         "month_text": "📅 ¡Acabo de elegir un mes al azar! Justo y Gratis. 👇",
         "card_title": "Generador de Cartas Aleatorias | Sorteo Pro",
         "card_text": "🃏 ¡Acabo de sacar una carta al azar! Justo y Gratis. 👇",
+            "bingo_title": "Generador de Bingo | Sorteo Pro",
+            "bingo_text": "🎱 ¡Acabo de generar números de Bingo al azar! Gratis y Justo. 👇",
         "cta_share": "Compartir",
         "cta_start": "Start Giveaway"
     },

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ShareButton } from "@/components/ui/share-button"
-import { Play, Share2 } from "lucide-react"
+import { Play, Share2, Loader2 } from "lucide-react"
 
 interface StickyShareFooterProps {
   shareContent: {
@@ -22,10 +22,58 @@ interface StickyShareFooterProps {
         shareOn: string
     }
   }
+  seoMode?: string
 }
 
-export function StickyShareFooter({ shareContent, translations }: StickyShareFooterProps) {
+export function StickyShareFooter({ shareContent, translations, seoMode }: StickyShareFooterProps) {
   const [isVisible, setIsVisible] = useState(false)
+  const [isSharing, setIsSharing] = useState(false)
+
+  // Viralis: Advanced visual sharing logic
+  const handleNativeShare = async () => {
+    if (!navigator.share) return
+
+    setIsSharing(true)
+    try {
+      let filesArray: File[] = []
+
+      // Try to fetch OG Image for visual context
+      try {
+        const urlObj = new URL(shareContent.url)
+        const customTitle = urlObj.searchParams.get('template_title')
+        const customColor = urlObj.searchParams.get('template_color')
+        const list = urlObj.searchParams.get('list')
+
+        // Construct the dynamic OG URL based on current context
+        const ogUrl = new URL(window.location.origin + '/api/og')
+        if (seoMode) ogUrl.searchParams.set('type', seoMode)
+        if (customTitle) ogUrl.searchParams.set('title', customTitle)
+        if (customColor) ogUrl.searchParams.set('color', customColor)
+        if (list) ogUrl.searchParams.set('list', list)
+
+        const response = await fetch(ogUrl.toString())
+        const blob = await response.blob()
+        const file = new File([blob], 'share-card.png', { type: 'image/png' })
+
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+             filesArray = [file]
+        }
+      } catch (e) {
+          console.error("Failed to generate share image", e)
+      }
+
+      await navigator.share({
+        files: filesArray.length > 0 ? filesArray : undefined,
+        title: shareContent.title,
+        text: shareContent.text,
+        url: shareContent.url,
+      })
+    } catch {
+       // User cancelled or error
+    } finally {
+        setIsSharing(false)
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,11 +111,12 @@ export function StickyShareFooter({ shareContent, translations }: StickyShareFoo
                     text={shareContent.text}
                     url={shareContent.url}
                     translations={translations.share_button}
+                    onNativeShare={handleNativeShare}
                     buttonVariant="secondary"
                     buttonSize="lg"
                     className="w-full gap-2 font-bold shadow-sm"
                 >
-                   <Share2 className="w-4 h-4" />
+                   {isSharing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Share2 className="w-4 h-4" />}
                    {translations.share_cta}
                 </ShareButton>
              </div>

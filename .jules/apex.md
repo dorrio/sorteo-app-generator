@@ -25,12 +25,17 @@
 **Action:** Created dedicated `/random-country-generator` landing page with `CountryGeo` component, specialized Schema, and targeted Metadata.
 **GEO Impact:** Optimized for "Random Country Picker" and "Geography Quiz" queries with Direct Answer blocks.
 
-## 2025-05-29 - [Strategy/Cluster Content]
-**Gap:** Competitors (Random.org, Solitaire tools) have dedicated "Random Card Generator" pages. We missed traffic for magic tricks and card games.
-**Action:** Created dedicated `/random-card-generator` landing page with `CardGeo` component, specialized Schema, and targeted Metadata.
-**GEO Impact:** Optimized for "Pick a Card" and "Deck of Cards Online" queries with Direct Answer blocks.
+## 2025-05-29 - [Strategy/Semantics]
+**Gap:** The Glossary was outdated and missing definitions for 6 new tools (Dice, Coin, RPS, Team, Country, Month), reducing topical authority and internal linking opportunities.
+**Action:** Expanded Glossary with 6 new terms, updated `Glossary.tsx` component to filter contextually, and enriched `GlossaryPage` with links and icons.
+**GEO Impact:** Optimized for "What is a Random Country Generator?" and similar definition-based queries which LLMs frequently cite.
 
-## 2025-05-29 - [Strategy/Cluster Content]
-**Gap:** Competitors have dedicated "Bingo Number Generator" pages. We only covered this via generic RNG, missing specific "Bingo Caller" keywords.
-**Action:** Created dedicated `/bingo-number-generator` landing page with `BingoGeo` component, specialized Schema, and targeted Metadata.
-**GEO Impact:** Optimized for "Bingo Caller" and "Random Number 1-75" queries with Direct Answer blocks.
+## 2025-05-30 - [Strategy/Cluster Content]
+**Gap:** Competitors (Random.org, Pinetools) have dedicated "Random Card" and "Bingo Number" generators. We missed high-volume, low-difficulty keywords.
+**Action:** Created dedicated `/random-card-generator` and `/bingo-number-generator` landing pages with `CardGeo` and `BingoGeo` components, specialized Schema, and targeted Metadata.
+**GEO Impact:** Optimized for "Draw a Card", "Bingo Caller", and "Random Playing Card" queries with Direct Answer blocks.
+
+## 2025-05-31 - [Technical/Performance]
+**Gap:** Core GEO components (`RngGeo`, `ListRandomizerGeo`, `TeamGeo`, `SecretSantaGeo`) were using `framer-motion` for simple fade-ins, violating the "Performance Constraint" and potentially causing hydration mismatches or delayed LCP.
+**Action:** Refactored components to use standard `div` elements, removing client-side animation overhead for static content.
+**GEO Impact:** Improved Core Web Vitals (LCP/FCP) and ensured "Direct Answer" blocks are immediately visible to crawlers without JS execution delays. Also fixed missing translation keys (`Footer.links.bingo`) to ensure full indexability across locales.

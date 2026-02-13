@@ -49,7 +49,8 @@
             "versus_random": "Alternativa ao Random.org",
             "glossary": "Glossário",
             "month": "Gerador de Mês Aleatório",
-            "card": "Gerador de Cartas Aleatórias"
+            "card": "Gerador de Cartas Aleatórias",
+            "bingo": "Gerador de Bingo"
         }
     },
     "QuickSpecs": {
@@ -346,7 +347,9 @@
         "term_14": "Gerador de Mês Aleatório",
         "def_14": "Ferramenta simples que escolhe um mês do ano (Janeiro-Dezembro) ao acaso. Útil para planejar eventos, horóscopos ou jogos de datas.",
         "term_15": "Gerador de Cartas Aleatórias",
-        "def_15": "Uma ferramenta digital que simula sacar uma carta de um baralho padrão de 52 cartas. Usado para jogos, truques de mágica e experimentos de probabilidade."
+        "def_15": "Uma ferramenta digital que simula sacar uma carta de um baralho padrão de 52 cartas. Usado para jogos, truques de mágica e experimentos de probabilidade.",
+        "term_16": "Gerador de Números de Bingo",
+        "def_16": "Uma ferramenta clássica de sorte onde números são tirados aleatoriamente e jogadores os marcam em cartelas. O Sorteio Pro gera números de Bingo aleatórios de 1 a 75."
     },
     "InstagramPicker": {
         "title": "Sorteador de Comentários do Instagram Grátis | Ilimitado",
@@ -702,6 +705,8 @@
         "month_text": "📅 Acabei de escolher um mês aleatório! Justo e Grátis. 👇",
         "card_title": "Gerador de Cartas Aleatórias | Sorteio Pro",
         "card_text": "🃏 Acabei de tirar uma carta aleatória! Justo e Grátis. 👇",
+            "bingo_title": "Gerador de Bingo | Sorteo Pro",
+            "bingo_text": "🎱 Acabei de gerar números de Bingo aleatórios! Grátis e Justo. 👇",
         "cta_share": "Compartilhar",
         "cta_start": "Começar"
     },

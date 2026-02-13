@@ -6,7 +6,13 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export async function copyBlobToClipboard(blob: Blob): Promise<void> {
-  if (!navigator.clipboard || !navigator.clipboard.write) {
+  if (
+    typeof window === 'undefined' ||
+    typeof navigator === 'undefined' ||
+    !navigator.clipboard ||
+    !navigator.clipboard.write ||
+    typeof ClipboardItem === 'undefined'
+  ) {
     throw new Error('Clipboard API not supported')
   }
   try {

@@ -234,9 +234,6 @@ export function VerifyContent() {
 
         try {
             const response = await fetch(imageUrl)
-            if (!response.ok) {
-                throw new Error(`Failed to fetch OG image: ${response.status}`)
-            }
             const blob = await response.blob()
             await copyBlobToClipboard(blob)
             setImageCopied(true)

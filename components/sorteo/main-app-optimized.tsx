@@ -2,14 +2,16 @@ import { Suspense } from "react"
 import Link from "next/link"
 import { Trophy } from "lucide-react"
 
-import { ThemeInitializer } from "@/components/sorteo/islands/theme-initializer"
-import { BackgroundIsland } from "@/components/sorteo/islands/background-island"
-import { TitleIsland } from "@/components/sorteo/islands/title-island"
-import { HeaderIsland } from "@/components/sorteo/islands/header-island"
-import { SidebarIsland } from "@/components/sorteo/islands/sidebar-island"
-import { OverlaysIsland } from "@/components/sorteo/islands/overlays-island"
-import { SorteoGameIsland } from "@/components/sorteo/islands/sorteo-game-island"
-import { SmartStickyFooter } from "@/components/sorteo/islands/smart-sticky-footer"
+import {
+  ThemeInitializer,
+  BackgroundIsland,
+  TitleIsland,
+  HeaderIsland,
+  SidebarIsland,
+  OverlaysIsland,
+  SorteoGameIsland,
+  SmartStickyFooter,
+} from "@/components/sorteo/islands"
 
 interface MainAppOptimizedProps {
   initialStyle?: string

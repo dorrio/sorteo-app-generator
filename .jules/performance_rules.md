@@ -21,3 +21,4 @@
 *   **Layout Shift:** Missing skeleton states for dynamic content.
 *   **LCP Blocking:** Using entrance animations (e.g., `initial={{ opacity: 0 }}`) on LCP elements (Header, H1, Hero Image).
 *   **Unnecessary Client Components:** Using `"use client"` on large components just because they contain one interactive button or `Link`.
+*   **Overlay Accessibility:** When using global overlays (modals), use a dedicated Client Component wrapper (e.g., `SorteoLayoutWrapper`) to manage the `inert` attribute on the main content. This avoids hydration mismatches caused by direct DOM manipulation in parent Server Components.

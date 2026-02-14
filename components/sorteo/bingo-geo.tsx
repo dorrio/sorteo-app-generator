@@ -1,7 +1,6 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { motion } from "framer-motion"
 import { Shield, Zap, RefreshCw, Monitor, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
 import { safeJsonLdStringify } from "@/lib/utils"
@@ -109,12 +108,8 @@ export function BingoGeo() {
           <h2 className="text-2xl font-bold">{t("feature_1_title")} & {t("feature_2_title")}</h2>
           <ul className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" role="list">
             {features.map((feature, idx) => (
-              <motion.li
+              <li
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
                 className="p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-colors list-none"
               >
                 <div className="mb-4 p-3 bg-primary/10 rounded-xl w-fit">
@@ -122,7 +117,7 @@ export function BingoGeo() {
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground text-sm">{feature.desc}</p>
-              </motion.li>
+              </li>
             ))}
           </ul>
         </div>

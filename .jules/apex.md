@@ -39,3 +39,8 @@
 **Gap:** Core GEO components (`RngGeo`, `ListRandomizerGeo`, `TeamGeo`, `SecretSantaGeo`) were using `framer-motion` for simple fade-ins, violating the "Performance Constraint" and potentially causing hydration mismatches or delayed LCP.
 **Action:** Refactored components to use standard `div` elements, removing client-side animation overhead for static content.
 **GEO Impact:** Improved Core Web Vitals (LCP/FCP) and ensured "Direct Answer" blocks are immediately visible to crawlers without JS execution delays. Also fixed missing translation keys (`Footer.links.bingo`) to ensure full indexability across locales.
+
+## 2025-06-01 - [Technical/Performance]
+**Gap:** Remaining GEO components (`BingoGeo`, `DiceGeo`, `RpsGeo`) were still using `framer-motion` and `animate-pulse`, causing unnecessary bundle size and LCP delays. `CoinGeo` used unsecure `dangerouslySetInnerHTML`.
+**Action:** Refactored `BingoGeo`, `DiceGeo`, and `RpsGeo` to remove motion libraries and background animations. Refactored `CoinGeo` to use `t.rich()` and `safeJsonLdStringify`. Deleted misplaced `ours_bingo_geo.tsx`.
+**GEO Impact:** Reduced First Input Delay (FID) and improved Cumulative Layout Shift (CLS) for these high-traffic tools, ensuring GoogleBot parses the "Direct Answer" content instantly.

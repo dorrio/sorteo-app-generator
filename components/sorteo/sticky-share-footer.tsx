@@ -52,9 +52,11 @@ export function StickyShareFooter({ shareContent, translations, seoMode }: Stick
         if (list) ogUrl.searchParams.set('list', list)
 
         const response = await fetch(ogUrl.toString())
+
         if (!response.ok) {
-          throw new Error(`OG image fetch failed: ${response.status}`)
+           throw new Error(`Failed to fetch OG image: ${response.status} ${response.statusText} (${ogUrl.toString()})`)
         }
+
         const blob = await response.blob()
         const file = new File([blob], 'share-card.png', { type: 'image/png' })
 

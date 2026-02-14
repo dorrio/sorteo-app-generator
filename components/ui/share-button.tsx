@@ -50,19 +50,19 @@ export function ShareButton({
 
   const handleShare = async () => {
     if (canShareNative) {
-      if (onNativeShare) {
-        await onNativeShare()
-      } else {
-        try {
+      try {
+        if (onNativeShare) {
+          await onNativeShare()
+        } else {
           await navigator.share({
             title: title,
             text: text,
             url: url,
           })
-        } catch (err) {
-          // Fallback to dropdown if user cancels or error
-          // But typically we don't need to do anything if user cancels
         }
+      } catch (err) {
+        // Fallback to dropdown if user cancels or error
+        // But typically we don't need to do anything if user cancels
       }
     }
   }

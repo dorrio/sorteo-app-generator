@@ -62,6 +62,7 @@ export function DiceGeo() {
 
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}

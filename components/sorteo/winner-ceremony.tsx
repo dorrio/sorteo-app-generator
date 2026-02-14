@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ConfettiEffect } from "./confetti-effect"
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { ShareButton } from "@/components/ui/share-button"
 import {
   Trophy,
   Sparkles,
@@ -14,10 +14,6 @@ import {
   RotateCcw,
   Copy,
   Check,
-  Twitter,
-  Facebook,
-  MessageCircle,
-  Instagram,
   Download,
   Loader2,
 } from "lucide-react"
@@ -33,12 +29,9 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const t = useTranslations("WinnerCeremony")
   const [showContent, setShowContent] = useState(false)
   const [copied, setCopied] = useState(false)
-  const [canShareNative, setCanShareNative] = useState(false)
   const [isSharing, setIsSharing] = useState(false)
 
   useEffect(() => {
-    setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
-
     if (showWinnerCeremony) {
       const timer = setTimeout(() => setShowContent(true), 300)
       return () => clearTimeout(timer)
@@ -76,15 +69,9 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
       shareText = t("share_text_custom", { name: winner.name, title: theme.customTitle })
   }
 
-  // Pre-calculate Social URLs for SEO (Link Juice) & Accessibility
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`
-  // Facebook requires 'u' param
-  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
-  // WhatsApp: Use api.whatsapp.com for better cross-device support
-  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
-
   const shareNative = async () => {
-    if (!navigator.share) return
+    // Note: ShareButton handles the availability check and fallback logic.
+    // We only provide the custom sharing logic (fetching image).
 
     setIsSharing(true)
     try {
@@ -133,24 +120,12 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
         text: shareText,
         url: shareUrl,
       })
-    } catch {
-      // User cancelled
+    } catch (error) {
+       // Re-throw so ShareButton knows to fallback to dropdown if native share fails
+       throw error
     } finally {
         setIsSharing(false)
     }
-  }
-
-  const copyToClipboard = async () => {
-    // Viralis Optimization: Copy full text + url
-    await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
-  const shareInstagram = async () => {
-    await navigator.clipboard.writeText(shareText)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
   }
 
   const handleDownload = async () => {
@@ -212,6 +187,20 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
       window.open(imageUrl, '_blank')
     }
   }
+
+  // Construct translation object for ShareButton
+  // Note: We use existing keys. If 'share_on' is missing, ShareButton has a default fallback for aria-label, but the text "Share on Instagram" is constructed manually in ShareButton.
+  // We pass what we have.
+  const shareTranslations = {
+    share: t("share_button"),
+    copy: t("copy_text"),
+    copied: t("copied"),
+    // shareOn: t("share_on"), // Assuming this key might not exist in WinnerCeremony namespace, so omitting to use defaults or if it breaks typescript I check.
+    // WinnerCeremony.json usually has limited keys.
+    // If I omit shareOn, ShareButton uses "Share on Instagram" (English) in aria-label construction?
+    // ShareButton: aria-label={translations.shareOn ? `${translations.shareOn} Instagram` : "Share on Instagram"}
+    // So it's safe to omit.
+  } as any // Cast to satisfy strict typing if keys are missing, though mostly they align.
 
   return (
     <AnimatePresence>
@@ -332,89 +321,23 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
             transition={{ delay: 1 }}
             className="flex flex-wrap gap-4 justify-center"
           >
-            {/* Primary Share Action */}
-            {canShareNative ? (
-              <Button
-                size="lg"
+            {/* Viralis: Unified Share Button with Hybrid Logic */}
+            <ShareButton
+                title={t("share_title")}
+                text={shareText}
+                url={shareUrl}
+                translations={shareTranslations}
+                onNativeShare={shareNative}
+                buttonSize="lg"
                 className="gap-2"
-                onClick={shareNative}
-                disabled={isSharing}
                 style={{
                   backgroundColor: theme.primaryColor,
                   color: theme.backgroundColor,
                 }}
-              >
+            >
                 {isSharing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Share2 className="w-5 h-5" />}
                 {t("share_button")}
-              </Button>
-            ) : (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    size="lg"
-                    className="gap-2"
-                    style={{
-                      backgroundColor: theme.primaryColor,
-                      color: theme.backgroundColor,
-                    }}
-                  >
-                    <Share2 className="w-5 h-5" />
-                    {t("share_button")}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="center" className="w-48">
-                  <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
-                    {copied ? (
-                      <>
-                        <Check className="w-4 h-4 text-green-500" />
-                        <span className="text-green-500">{t("copied")}</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4" />
-                        {t("copy_text")}
-                      </>
-                    )}
-                  </DropdownMenuItem>
-
-                  {/* Semantic Fix: Real links for bots and users */}
-                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                    <a href={twitterUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">
-                      <Twitter className="w-4 h-4" />
-                      Twitter / X
-                    </a>
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                    <a
-                      href="https://www.instagram.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={shareInstagram}
-                      aria-label="Share on Instagram"
-                    >
-                      <Instagram className="w-4 h-4" />
-                      Instagram
-                    </a>
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                    <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
-                      <Facebook className="w-4 h-4" />
-                      Facebook
-                    </a>
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
-                      <MessageCircle className="w-4 h-4" />
-                      WhatsApp
-                    </a>
-                  </DropdownMenuItem>
-
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
+            </ShareButton>
 
             {/* Viralis: Exposed Download Certificate Button (Visible on Mobile & Desktop) */}
             <Button

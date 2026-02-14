@@ -17,6 +17,7 @@ interface ShareButtonProps {
   buttonVariant?: "default" | "outline" | "ghost" | "secondary"
   buttonSize?: "default" | "sm" | "lg" | "icon"
   className?: string
+  style?: React.CSSProperties
   iconClassName?: string
   children?: React.ReactNode // Default to <Share2 /> icon if empty
   onNativeShare?: () => Promise<void> // Viralis: Optional custom handler for native sharing
@@ -36,6 +37,7 @@ export function ShareButton({
   buttonVariant = "ghost",
   buttonSize = "icon",
   className,
+  style,
   iconClassName = "w-5 h-5",
   children,
   onNativeShare,
@@ -43,13 +45,15 @@ export function ShareButton({
 }: ShareButtonProps) {
   const [canShareNative, setCanShareNative] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
   }, [])
 
-  const handleShare = async () => {
+  const handleShare = async (e: React.MouseEvent) => {
     if (canShareNative) {
+      e.preventDefault()
       try {
         if (onNativeShare) {
           await onNativeShare()
@@ -60,11 +64,17 @@ export function ShareButton({
             url: url,
           })
         }
-      } catch (err) {
-        // Fallback to dropdown if user cancels or error
-        // But typically we don't need to do anything if user cancels
+      } catch (err: any) {
+        // Viralis: Hybrid Share Pattern
+        // If native share fails (e.g. not supported for files, or unknown error),
+        // we fallback to the dropdown menu to ensure the user isn't dead-ended.
+        // We ignore AbortError as that means the user explicitly cancelled the native dialog.
+        if (err.name !== 'AbortError') {
+           setIsOpen(true)
+        }
       }
     }
+    // If !canShareNative, we let the event propagate so DropdownMenuTrigger opens the menu normally
   }
 
   const copyToClipboard = async () => {
@@ -90,27 +100,20 @@ export function ShareButton({
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + url)}`
 
 
-  const TriggerButton = (
-    <Button
-      variant={buttonVariant}
-      size={buttonSize}
-      className={className}
-      onClick={canShareNative ? handleShare : undefined}
-      title={translations.share}
-      aria-label={translations.share}
-    >
-      {children || <Share2 className={iconClassName} />}
-    </Button>
-  )
-
-  if (canShareNative) {
-    return TriggerButton
-  }
-
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        {TriggerButton}
+        <Button
+          variant={buttonVariant}
+          size={buttonSize}
+          className={className}
+      style={style}
+          onClick={handleShare}
+          title={translations.share}
+          aria-label={translations.share}
+        >
+          {children || <Share2 className={iconClassName} />}
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
         <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">

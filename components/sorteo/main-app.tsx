@@ -717,7 +717,7 @@ export function MainApp({
 
         {/* Footer */}
         {footer}
-        <StickyShareFooter shareContent={shareContent} translations={fullStickyTranslations} />
+        <StickyShareFooter shareContent={shareContent} translations={fullStickyTranslations} seoMode={seoMode} />
       </div >
 
       {/* Overlays */}

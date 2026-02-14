@@ -19,6 +19,7 @@ interface ShareButtonProps {
   className?: string
   iconClassName?: string
   children?: React.ReactNode // Default to <Share2 /> icon if empty
+  onNativeShare?: () => Promise<void> // Viralis: Optional custom handler for native sharing
   translations: {
     share: string
     copy: string
@@ -37,6 +38,7 @@ export function ShareButton({
   className,
   iconClassName = "w-5 h-5",
   children,
+  onNativeShare,
   translations
 }: ShareButtonProps) {
   const [canShareNative, setCanShareNative] = useState(false)
@@ -49,11 +51,15 @@ export function ShareButton({
   const handleShare = async () => {
     if (canShareNative) {
       try {
-        await navigator.share({
-          title: title,
-          text: text,
-          url: url,
-        })
+        if (onNativeShare) {
+          await onNativeShare()
+        } else {
+          await navigator.share({
+            title: title,
+            text: text,
+            url: url,
+          })
+        }
       } catch (err) {
         // Fallback to dropdown if user cancels or error
         // But typically we don't need to do anything if user cancels

@@ -93,8 +93,8 @@ export function ThemeInitializer({
           if (Array.isArray(names) && names.length > 0) {
             addParticipants(names.map((n: string) => ({ name: n })))
           }
-        } catch (e) {
-          console.error("Failed to parse shared list", e)
+        } catch (e: unknown) {
+          console.error("Failed to parse shared list", e instanceof Error ? e.message : "Unknown error")
         }
       }
     }

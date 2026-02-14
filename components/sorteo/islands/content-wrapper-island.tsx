@@ -17,11 +17,9 @@ export function ContentWrapperIsland({ children }: ContentWrapperIslandProps) {
     if (contentRef.current) {
       if (isOverlayOpen) {
         contentRef.current.setAttribute('inert', '')
-        // @ts-ignore - inert property exists in modern browsers
         contentRef.current.inert = true
       } else {
         contentRef.current.removeAttribute('inert')
-        // @ts-ignore
         contentRef.current.inert = false
       }
     }

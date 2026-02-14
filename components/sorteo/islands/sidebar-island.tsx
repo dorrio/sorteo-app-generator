@@ -14,7 +14,7 @@ const FloatingBubbles = dynamic(
 )
 
 export function SidebarIsland() {
-  const t = useTranslations("HomePage")
+  const translateHome = useTranslations("HomePage")
   const { theme } = useSorteoStore()
   const participantDisplay = theme.participantDisplay ?? "list"
 
@@ -35,7 +35,7 @@ export function SidebarIsland() {
           className="font-bold text-lg mb-4 flex items-center gap-2"
         >
           <Sparkles className="w-5 h-5" style={{ color: theme.primaryColor }} />
-          {t("participants_title")}
+          {translateHome("participants_title")}
         </h2>
 
         {participantDisplay === "bubbles" ? <FloatingBubbles /> : <ParticipantManager />}

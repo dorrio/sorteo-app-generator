@@ -85,7 +85,8 @@ export function StickyShareFooterIsland({
           text: finalShareText,
           url: urlObj.toString()
         }
-      } catch (e) {
+      } catch (e: unknown) {
+        console.error("Error constructing share URL in StickyShareFooterIsland", e instanceof Error ? e.message : String(e))
       }
     }
 

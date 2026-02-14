@@ -50,8 +50,8 @@ export function SorteoGameIsland({
   } = useSorteoStore()
 
   // Display Title Logic
-  let displayTitle = hasHydrated ? theme.customTitle : (initialTitle || theme.customTitle)
-  let displaySubtitle = hasHydrated ? theme.customSubtitle : (initialSubtitle || theme.customSubtitle)
+  let displayTitle = hasHydrated ? (theme.customTitle ?? initialTitle) : (initialTitle ?? theme.customTitle)
+  let displaySubtitle = hasHydrated ? (theme.customSubtitle ?? initialSubtitle) : (initialSubtitle ?? theme.customSubtitle)
 
   if (!hasHydrated && !initialTitle) {
     if (seoMode === 'wheel') { displayTitle = tWheel('h1'); displaySubtitle = tWheel('subtitle'); }

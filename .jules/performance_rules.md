@@ -21,3 +21,7 @@
 *   **Layout Shift:** Missing skeleton states for dynamic content.
 *   **LCP Blocking:** Using entrance animations (e.g., `initial={{ opacity: 0 }}`) on LCP elements (Header, H1, Hero Image).
 *   **Unnecessary Client Components:** Using `"use client"` on large components just because they contain one interactive button or `Link`.
+
+## 💡 OPTIMIZATION STRATEGIES
+*   **Monolith Refactor:** Break down large Client Components (like `MainApp`) into a Server Component shell (`MainAppOptimized`) with small, interactive Client Islands (`HeaderIsland`, `GameIsland`).
+*   **Static Content Isolation:** Pass heavy static content (e.g., `WheelGeo`, SEO text) as `children` to the Server Component shell to avoid hydration costs.

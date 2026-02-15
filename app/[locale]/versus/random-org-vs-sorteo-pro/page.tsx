@@ -122,7 +122,7 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
         initialSubtitle={tRng('subtitle')}
         shareTitle={tShare('rng_title')}
         shareText={tShare('rng_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

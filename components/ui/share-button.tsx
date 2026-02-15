@@ -48,8 +48,18 @@ export function ShareButton({
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
   }, [])
 
-  const handleShare = async () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleInteraction = async (e: React.MouseEvent) => {
     if (canShareNative) {
+      e.preventDefault() // Stop default toggle behavior
+
+      // If already open, close it
+      if (isOpen) {
+        setIsOpen(false)
+        return
+      }
+
       try {
         if (onNativeShare) {
           await onNativeShare()
@@ -60,11 +70,14 @@ export function ShareButton({
             url: url,
           })
         }
-      } catch (err) {
-        // Fallback to dropdown if user cancels or error
-        // But typically we don't need to do anything if user cancels
+      } catch (err: any) {
+        // If error is NOT AbortError (User cancelled), fallback to dropdown
+        if (err.name !== 'AbortError') {
+          setIsOpen(true)
+        }
       }
     }
+    // If not native, let default behavior handle open/close
   }
 
   const copyToClipboard = async () => {
@@ -90,27 +103,19 @@ export function ShareButton({
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + url)}`
 
 
-  const TriggerButton = (
-    <Button
-      variant={buttonVariant}
-      size={buttonSize}
-      className={className}
-      onClick={canShareNative ? handleShare : undefined}
-      title={translations.share}
-      aria-label={translations.share}
-    >
-      {children || <Share2 className={iconClassName} />}
-    </Button>
-  )
-
-  if (canShareNative) {
-    return TriggerButton
-  }
-
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        {TriggerButton}
+        <Button
+          variant={buttonVariant}
+          size={buttonSize}
+          className={className}
+          onClick={handleInteraction}
+          title={translations.share}
+          aria-label={translations.share}
+        >
+          {children || <Share2 className={iconClassName} />}
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
         <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">

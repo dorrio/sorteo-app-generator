@@ -152,7 +152,7 @@ export default async function CardPage({ params }: { params: Promise<{ locale: s
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('card_title')}
         shareText={tShare('card_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

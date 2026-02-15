@@ -146,7 +146,7 @@ export default async function MonthPage({ params }: { params: Promise<{ locale: 
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('month_title')}
         shareText={tShare('month_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

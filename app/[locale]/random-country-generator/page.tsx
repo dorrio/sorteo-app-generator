@@ -149,7 +149,7 @@ export default async function CountryGeneratorPage({ params }: { params: Promise
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('country_title')}
         shareText={tShare('country_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

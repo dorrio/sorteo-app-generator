@@ -149,7 +149,7 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('wheel_title')}
         shareText={tShare('wheel_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

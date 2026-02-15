@@ -151,7 +151,7 @@ export default async function LetterGeneratorPage({ params }: { params: Promise<
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('letter_title')}
         shareText={tShare('letter_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

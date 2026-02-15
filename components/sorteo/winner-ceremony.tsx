@@ -35,6 +35,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const [copied, setCopied] = useState(false)
   const [canShareNative, setCanShareNative] = useState(false)
   const [isSharing, setIsSharing] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
@@ -83,8 +84,15 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   // WhatsApp: Use api.whatsapp.com for better cross-device support
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
 
-  const shareNative = async () => {
+  const shareNative = async (e: React.MouseEvent) => {
     if (!navigator.share) return
+
+    e.preventDefault()
+
+    if (isOpen) {
+      setIsOpen(false)
+      return
+    }
 
     setIsSharing(true)
     try {
@@ -133,8 +141,10 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
         text: shareText,
         url: shareUrl,
       })
-    } catch {
-      // User cancelled
+    } catch (err: any) {
+      if (err.name !== 'AbortError') {
+        setIsOpen(true)
+      }
     } finally {
         setIsSharing(false)
     }
@@ -333,88 +343,74 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
             className="flex flex-wrap gap-4 justify-center"
           >
             {/* Primary Share Action */}
-            {canShareNative ? (
-              <Button
-                size="lg"
-                className="gap-2"
-                onClick={shareNative}
-                disabled={isSharing}
-                style={{
-                  backgroundColor: theme.primaryColor,
-                  color: theme.backgroundColor,
-                }}
-              >
-                {isSharing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Share2 className="w-5 h-5" />}
-                {t("share_button")}
-              </Button>
-            ) : (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    size="lg"
-                    className="gap-2"
-                    style={{
-                      backgroundColor: theme.primaryColor,
-                      color: theme.backgroundColor,
-                    }}
+            <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  size="lg"
+                  className="gap-2"
+                  onClick={canShareNative ? shareNative : undefined}
+                  disabled={isSharing}
+                  style={{
+                    backgroundColor: theme.primaryColor,
+                    color: theme.backgroundColor,
+                  }}
+                >
+                  {isSharing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Share2 className="w-5 h-5" />}
+                  {t("share_button")}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="center" className="w-48">
+                <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
+                  {copied ? (
+                    <>
+                      <Check className="w-4 h-4 text-green-500" />
+                      <span className="text-green-500">{t("copied")}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4" />
+                      {t("copy_text")}
+                    </>
+                  )}
+                </DropdownMenuItem>
+
+                {/* Semantic Fix: Real links for bots and users */}
+                <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                  <a href={twitterUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">
+                    <Twitter className="w-4 h-4" />
+                    Twitter / X
+                  </a>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                  <a
+                    href="https://www.instagram.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={shareInstagram}
+                    aria-label="Share on Instagram"
                   >
-                    <Share2 className="w-5 h-5" />
-                    {t("share_button")}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="center" className="w-48">
-                  <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
-                    {copied ? (
-                      <>
-                        <Check className="w-4 h-4 text-green-500" />
-                        <span className="text-green-500">{t("copied")}</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4" />
-                        {t("copy_text")}
-                      </>
-                    )}
-                  </DropdownMenuItem>
+                    <Instagram className="w-4 h-4" />
+                    Instagram
+                  </a>
+                </DropdownMenuItem>
 
-                  {/* Semantic Fix: Real links for bots and users */}
-                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                    <a href={twitterUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">
-                      <Twitter className="w-4 h-4" />
-                      Twitter / X
-                    </a>
-                  </DropdownMenuItem>
+                <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                  <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+                    <Facebook className="w-4 h-4" />
+                    Facebook
+                  </a>
+                </DropdownMenuItem>
 
-                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                    <a
-                      href="https://www.instagram.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={shareInstagram}
-                      aria-label="Share on Instagram"
-                    >
-                      <Instagram className="w-4 h-4" />
-                      Instagram
-                    </a>
-                  </DropdownMenuItem>
+                <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
+                    <MessageCircle className="w-4 h-4" />
+                    WhatsApp
+                  </a>
+                </DropdownMenuItem>
 
-                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                    <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
-                      <Facebook className="w-4 h-4" />
-                      Facebook
-                    </a>
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
-                      <MessageCircle className="w-4 h-4" />
-                      WhatsApp
-                    </a>
-                  </DropdownMenuItem>
-
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             {/* Viralis: Exposed Download Certificate Button (Visible on Mobile & Desktop) */}
             <Button

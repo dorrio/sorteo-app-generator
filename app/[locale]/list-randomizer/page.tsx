@@ -155,7 +155,7 @@ export default async function ListRandomizerPage({ params }: { params: Promise<{
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('list_title')}
         shareText={tShare('list_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

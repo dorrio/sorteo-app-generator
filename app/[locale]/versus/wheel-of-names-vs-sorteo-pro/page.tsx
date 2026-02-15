@@ -120,7 +120,7 @@ export default async function WheelVersusPage({ params }: { params: Promise<{ lo
         initialSubtitle={tWheel('subtitle')}
         shareTitle={tShare('wheel_title')}
         shareText={tShare('wheel_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

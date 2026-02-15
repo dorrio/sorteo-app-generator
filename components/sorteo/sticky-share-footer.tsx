@@ -73,8 +73,6 @@ export function StickyShareFooter({ shareContent, translations, seoMode }: Stick
         text: shareContent.text,
         url: shareContent.url,
       })
-    } catch {
-       // User cancelled or error
     } finally {
         setIsSharing(false)
     }

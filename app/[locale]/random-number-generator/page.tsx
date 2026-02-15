@@ -155,7 +155,7 @@ export default async function RngPage({ params }: { params: Promise<{ locale: st
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('rng_title')}
         shareText={tShare('rng_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

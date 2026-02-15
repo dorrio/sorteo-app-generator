@@ -14,6 +14,8 @@
 *   **Skeleton Loading:** Use Skeletons instead of spinners during hydration to match SSR layout and improve perceived performance.
 *   **Granular Skeletons:** Use component-level skeletons (e.g., `ParticipantListSkeleton`) instead of page-level blocking skeletons to enable SSR of static content.
 *   **Server Component Extraction:** For content-heavy sections (SEO text, FAQ, Glossary), extract interactivity into small "Client Islands" (e.g., `<TryToolButton>`) and make the parent a Server Component. This removes hydration cost for static text.
+*   **Shared State for Islands:** When decoupling components into Islands, lift shared local state (like modal visibility) to the global store (`useSorteoStore`) to allow cross-island communication.
+*   **Secure JSON-LD:** Always use `safeJsonLdStringify` for structured data injection.
 
 ## ❌ BAD PATTERNS (Avoid This)
 *   **Sync Imports:** Importing heavy widgets directly in the main bundle.

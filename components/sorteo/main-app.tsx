@@ -134,13 +134,13 @@ interface MainAppProps {
   };
   // Translations for initial population (options)
   initialOptions?: {
-    yes: string;
-    no: string;
-    heads: string;
-    tails: string;
-    rock: string;
-    paper: string;
-    scissors: string;
+    yes?: string;
+    no?: string;
+    heads?: string;
+    tails?: string;
+    rock?: string;
+    paper?: string;
+    scissors?: string;
     truths?: string[];
     dares?: string[];
     // Generators that might simply get passed translated strings or just use defaults
@@ -350,8 +350,12 @@ export function MainApp({
           ...(initialOptions?.truths || []).map(t => ({ name: t })),
           ...(initialOptions?.dares || []).map(d => ({ name: d }))
         ]
-        // Shuffle initially for fun
-        const shuffled = allOptions.sort(() => Math.random() - 0.5)
+        // Shuffle initially for fun (Fisher-Yates)
+        const shuffled = [...allOptions]
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+        }
         addParticipants(shuffled)
       } else if (isEmpty && !isPresetTool) {
         addParticipants([

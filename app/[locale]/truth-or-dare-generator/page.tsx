@@ -4,7 +4,7 @@ import { MainApp } from "@/components/sorteo/main-app";
 import { TruthDareGeo } from "@/components/sorteo/truth-dare-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
-import { safeJsonLdStringify } from "@/lib/utils";
+import { safeJsonLdStringify, getBaseUrl } from "@/lib/utils";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -20,11 +20,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   const { template_title, template_color } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'TruthPage' });
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteopro.com';
+  const baseUrl = getBaseUrl();
 
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
@@ -81,11 +77,7 @@ export default async function TruthPage({ params }: { params: Promise<{ locale: 
   const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
   const tQuestions = await getTranslations({ locale, namespace: 'TruthOrDare' });
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteopro.com';
+  const baseUrl = getBaseUrl();
 
   const softwareAppSchema = {
     '@context': 'https://schema.org',
@@ -140,13 +132,6 @@ export default async function TruthPage({ params }: { params: Promise<{ locale: 
   const dares = Array.from({ length: 10 }, (_, i) => tQuestions(`dare_${i}`));
 
   const initialOptions = {
-      yes: "",
-      no: "",
-      heads: "",
-      tails: "",
-      rock: "",
-      paper: "",
-      scissors: "",
       truths,
       dares
   }

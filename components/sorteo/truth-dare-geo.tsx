@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl"
 import { Zap, HelpCircle, Flame, MessageCircle, PartyPopper, Smartphone, Shuffle } from "lucide-react"
-import { safeJsonLdStringify } from "@/lib/utils"
+import { safeJsonLdStringify, stripHtml } from "@/lib/utils"
 
 export function TruthDareGeo() {
   const t = useTranslations("TruthGeo")
@@ -55,7 +55,7 @@ export function TruthDareGeo() {
       price: '0',
       priceCurrency: 'USD',
     },
-    description: t('direct_answer_text'),
+    description: stripHtml(t('direct_answer_text')),
     featureList: [
         t('feature_1_title'),
         t('feature_2_title'),

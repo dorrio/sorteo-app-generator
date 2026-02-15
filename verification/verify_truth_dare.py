@@ -1,5 +1,4 @@
 from playwright.sync_api import Page, expect, sync_playwright
-import time
 
 def verify_truth_dare(page: Page):
     # Navigate to the page
@@ -39,8 +38,11 @@ if __name__ == "__main__":
         try:
             verify_truth_dare(page)
             print("Verification successful!")
+        except AssertionError as e:
+            print(f"Verification failed (assertion): {e}")
+            page.screenshot(path="verification/error.png")
         except Exception as e:
-            print(f"Verification failed: {e}")
+            print(f"Verification failed (unexpected): {type(e).__name__}: {e}")
             page.screenshot(path="verification/error.png")
         finally:
             browser.close()

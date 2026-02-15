@@ -50,7 +50,8 @@
             "glossary": "Glossary",
             "month": "Random Month Generator",
             "card": "Random Card Generator",
-            "bingo": "Bingo Number Generator"
+            "bingo": "Bingo Number Generator",
+            "truth": "Truth or Dare Generator"
         }
     },
     "QuickSpecs": {
@@ -353,7 +354,9 @@
         "term_15": "Random Card Generator",
         "def_15": "A digital tool that simulates drawing a playing card from a standard 52-card deck. Used for games, magic tricks, and probability experiments.",
         "term_16": "Bingo Number Generator",
-        "def_16": "A classic game of chance where numbers are drawn randomly and players match them on cards. Sorteo Pro generates random Bingo numbers 1-75."
+        "def_16": "A classic game of chance where numbers are drawn randomly and players match them on cards. Sorteo Pro generates random Bingo numbers 1-75.",
+        "term_17": "Truth or Dare Generator",
+        "def_17": "A digital party game that randomly assigns a Truth question or a Dare challenge to players. It replaces the need for cards or a bottle spin."
     },
     "InstagramPicker": {
         "title": "Free Instagram Comment Picker | Unlimited & No Login",
@@ -771,6 +774,8 @@
         "card_text": "🃏 I just drew a random card! Fair & Free. 👇",
             "bingo_title": "Bingo Number Generator | Sorteo Pro",
             "bingo_text": "🎱 I just generated random Bingo numbers! Free & Fair. 👇",
+            "truth_title": "Truth or Dare Generator | Sorteo Pro",
+            "truth_text": "🔥 I just spun for a Truth or Dare challenge! Free & Fun. 👇",
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway"
     },
@@ -1063,5 +1068,56 @@
         "faq_1_a": "Yes! Go to 'Customize' settings and enable 'Remove Winner' to ensure each number is called only once per game.",
         "faq_2_q": "Is it fair?",
         "faq_2_a": "Yes, we use a cryptographically secure RNG to ensure fairness."
+    },
+    "TruthPage": {
+        "title": "Truth or Dare Generator | Online Party Game",
+        "description": "The best free Truth or Dare Generator online. Spin for a random Truth or Dare question. Perfect for parties, friends, and couples. No ads.",
+        "h1": "Truth or Dare Generator",
+        "subtitle": "Spin to get a random Truth or Dare challenge."
+    },
+    "TruthGeo": {
+        "direct_answer_title": "What is a Truth or Dare Generator?",
+        "direct_answer_text": "A <tool>Truth or Dare Generator</tool> is a digital version of the classic party game. It randomly selects a <strong>Truth</strong> question or a <strong>Dare</strong> challenge for players to complete. <brand>Sorteo Pro</brand> offers a fun, fair, and free way to play online.",
+        "cta_button": "Spin for Truth/Dare",
+        "feature_1_title": "Hundreds of Questions",
+        "feature_1_desc": "Packed with fun truths and dares.",
+        "feature_2_title": "Fair Selection",
+        "feature_2_desc": "Randomly picks Truth or Dare.",
+        "feature_3_title": "Party Mode",
+        "feature_3_desc": "Great for friends and icebreakers.",
+        "feature_4_title": "Mobile Friendly",
+        "feature_4_desc": "Play anywhere on your phone.",
+        "how_to_title": "How to play Truth or Dare online",
+        "how_to_step_1": "Gather your friends around.",
+        "how_to_step_2": "Click 'Start Giveaway' to spin for a challenge.",
+        "how_to_step_3": "The winner must complete the Truth or Dare shown.",
+        "how_to_step_4": "Pass the turn to the next player!",
+        "faq_title": "Truth or Dare FAQ",
+        "faq_1_q": "Are the questions appropriate?",
+        "faq_1_a": "Yes, our default list is designed to be fun and generally safe for work/friends, but always play with consent!",
+        "faq_2_q": "Can I add my own dares?",
+        "faq_2_a": "Yes! Use the 'Customize' button to add your own custom truths and dares to the list."
+    },
+    "TruthOrDare": {
+        "truth_0": "What is your biggest fear?",
+        "truth_1": "What is the most embarrassing thing you've ever done?",
+        "truth_2": "Who is your secret crush?",
+        "truth_3": "What is a secret you've never told anyone?",
+        "truth_4": "What is your biggest regret?",
+        "truth_5": "When was the last time you lied?",
+        "truth_6": "What is the weirdest dream you've ever had?",
+        "truth_7": "Who is the last person you texted?",
+        "truth_8": "What is your guilty pleasure?",
+        "truth_9": "What is the worst date you've ever been on?",
+        "dare_0": "Do 10 pushups.",
+        "dare_1": "Sing the chorus of your favorite song.",
+        "dare_2": "Let the group look through your phone for 1 minute.",
+        "dare_3": "Dance with no music for 1 minute.",
+        "dare_4": "Imitate a celebrity until someone guesses who it is.",
+        "dare_5": "Post an embarrassing photo on your story.",
+        "dare_6": "Let someone write on your forehead with a marker.",
+        "dare_7": "Eat a spoonful of hot sauce.",
+        "dare_8": "Hold a plank for 30 seconds.",
+        "dare_9": "Talk in an accent for the next 3 rounds."
     }
 }

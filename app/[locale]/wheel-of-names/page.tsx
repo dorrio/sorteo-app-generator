@@ -4,6 +4,7 @@ import { MainApp } from "@/components/sorteo/main-app";
 import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+import { safeJsonLdStringify } from "@/lib/utils";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -140,7 +141,8 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
+        /* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
         initialStyle="roulette"

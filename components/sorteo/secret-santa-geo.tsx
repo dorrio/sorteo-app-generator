@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Gift, Users, CheckCircle, HelpCircle, Smartphone, ShieldCheck } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Link } from "@/i18n/routing"
+import { safeJsonLdStringify } from "@/lib/utils";
 
 export function SecretSantaGeo() {
   const t = useTranslations("SecretSantaGeo")
@@ -63,7 +64,8 @@ export function SecretSantaGeo() {
     <section className="py-16 md:py-24 relative overflow-hidden">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        /* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
       <div className="max-w-4xl mx-auto px-4 relative z-10">
         <div

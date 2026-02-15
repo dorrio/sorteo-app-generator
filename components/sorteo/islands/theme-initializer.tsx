@@ -86,9 +86,10 @@ export function ThemeInitializer({
       const listParam = searchParams.get('list')
       if (listParam) {
         try {
-          const names = JSON.parse(decodeURIComponent(listParam))
-          if (Array.isArray(names) && names.length > 0) {
-            addParticipants(names.map((n: string) => ({ name: n })))
+          const parsed = JSON.parse(decodeURIComponent(listParam)) as unknown
+          if (Array.isArray(parsed) && parsed.length > 0 && parsed.every(item => typeof item === "string")) {
+             const names = parsed as string[]
+             addParticipants(names.map((n) => ({ name: n })))
           }
         } catch (e) {
           console.error("Failed to parse shared list", e)

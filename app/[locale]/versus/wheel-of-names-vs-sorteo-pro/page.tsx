@@ -4,6 +4,7 @@ import { MainApp } from "@/components/sorteo/main-app";
 import { VersusGeo } from "@/components/sorteo/versus-geo";
 import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+import { safeJsonLdStringify } from "@/lib/utils";
 
 export const dynamic = 'force-static';
 
@@ -111,7 +112,8 @@ export default async function WheelVersusPage({ params }: { params: Promise<{ lo
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, faqSchema]) }}
+        /* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([articleSchema, faqSchema]) }}
       />
       <MainApp
         initialStyle="roulette"

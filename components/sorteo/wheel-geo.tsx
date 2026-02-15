@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/routing"
 import { TryToolButton } from "./try-tool-button"
 import { WheelVisual } from "./wheel-visual"
+import { safeJsonLdStringify } from "@/lib/utils";
 
 export function WheelGeo() {
   const t = useTranslations("WheelGeo")
@@ -89,7 +90,8 @@ export function WheelGeo() {
     <section className="w-full py-12 px-4 border-t border-border/30 bg-card/20">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        /* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-start">
 

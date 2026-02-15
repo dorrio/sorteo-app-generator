@@ -4,6 +4,7 @@ import { MainApp } from "@/components/sorteo/main-app";
 import { YesNoGeo } from "@/components/sorteo/yes-no-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+import { safeJsonLdStringify } from "@/lib/utils";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -147,7 +148,8 @@ export default async function YesNoPage({ params }: { params: Promise<{ locale: 
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
+        /* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
         initialStyle="roulette"

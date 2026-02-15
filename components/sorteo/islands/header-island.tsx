@@ -137,7 +137,7 @@ export function HeaderIsland({
             translations={shareTranslations}
           />
 
-          <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title="Verificar Sorteo" aria-label={t("verify_sorteo")}>
+          <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title={t("verify_sorteo")} aria-label={t("verify_sorteo")}>
             <ShieldCheck className="w-5 h-5" />
           </Button>
           <Button variant="outline" size="sm" onClick={() => setIsEditorOpen(true)} className="gap-2" aria-label={t("customize")}>

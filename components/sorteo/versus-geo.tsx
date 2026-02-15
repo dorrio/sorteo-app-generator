@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Check, X, ArrowRight, Zap, ShieldCheck, Palette, Monitor, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
+import { safeJsonLdStringify } from "@/lib/utils";
 
 interface VersusGeoProps {
   namespace?: string;
@@ -50,7 +51,8 @@ export function VersusGeo({ namespace = "VersusWheel" }: VersusGeoProps) {
     <section className="py-16 md:py-24 relative overflow-hidden">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        /* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
       <div className="max-w-5xl mx-auto px-4 relative z-10">
 

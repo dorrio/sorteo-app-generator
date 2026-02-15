@@ -23,6 +23,7 @@ export function BackgroundIsland() {
             alt="Custom Background"
             fill
             priority
+            sizes="100vw"
             className="object-cover"
             unoptimized
             style={{

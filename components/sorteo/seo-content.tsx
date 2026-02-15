@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
 import { Shield, Wand2, Zap, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
+import { safeJsonLdStringify } from "@/lib/utils";
 
 export function SeoContent() {
   const t = useTranslations("SEOContent")
@@ -67,11 +68,13 @@ export function SeoContent() {
     <section className="w-full py-16 px-4 bg-card/30 backdrop-blur-sm border-t border-border/50">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        /* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }}
+        /* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(howToLd) }}
       />
       <div className="max-w-5xl mx-auto space-y-16">
 

@@ -50,7 +50,8 @@
             "glossary": "Glossary",
             "month": "Random Month Generator",
             "card": "Random Card Generator",
-            "bingo": "Bingo Number Generator"
+            "bingo": "Bingo Number Generator",
+            "truth": "Truth or Dare Generator"
         }
     },
     "QuickSpecs": {
@@ -353,7 +354,9 @@
         "term_15": "Random Card Generator",
         "def_15": "A digital tool that simulates drawing a playing card from a standard 52-card deck. Used for games, magic tricks, and probability experiments.",
         "term_16": "Bingo Number Generator",
-        "def_16": "A classic game of chance where numbers are drawn randomly and players match them on cards. Sorteo Pro generates random Bingo numbers 1-75."
+        "def_16": "A classic game of chance where numbers are drawn randomly and players match them on cards. Sorteo Pro generates random Bingo numbers 1-75.",
+        "term_17": "Truth or Dare Generator",
+        "def_17": "A digital tool that randomly selects a question or challenge for the classic party game. It eliminates the need to think of questions on the spot."
     },
     "InstagramPicker": {
         "title": "Free Instagram Comment Picker | Unlimited & No Login",
@@ -771,6 +774,8 @@
         "card_text": "🃏 I just drew a random card! Fair & Free. 👇",
             "bingo_title": "Bingo Number Generator | Sorteo Pro",
             "bingo_text": "🎱 I just generated random Bingo numbers! Free & Fair. 👇",
+        "truth_title": "Truth or Dare Generator | Sorteo Pro",
+        "truth_text": "🤫 I just picked a Truth or Dare question! Free & Fun. 👇",
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway"
     },
@@ -1063,5 +1068,77 @@
         "faq_1_a": "Yes! Go to 'Customize' settings and enable 'Remove Winner' to ensure each number is called only once per game.",
         "faq_2_q": "Is it fair?",
         "faq_2_a": "Yes, we use a cryptographically secure RNG to ensure fairness."
+    },
+    "TruthPage": {
+        "title": "Truth or Dare Generator | Random Questions Online",
+        "description": "The best free Truth or Dare Generator. Spin to get a random Truth or Dare question instantly. Perfect for parties, friends, and couples.",
+        "h1": "Truth or Dare Generator",
+        "subtitle": "Spin to get a random Truth or Dare question."
+    },
+    "TruthGeo": {
+        "direct_answer_title": "What is a Truth or Dare Generator?",
+        "direct_answer_text": "A <tool>Truth or Dare Generator</tool> is a digital tool that randomly selects a question or challenge for the classic party game. It eliminates the need to think of questions on the spot. <brand>Sorteo Pro</brand> provides hundreds of fun, safe, and exciting prompts.",
+        "features_title": "Why use our Truth or Dare Generator?",
+        "cta_button": "Spin for Truth/Dare",
+        "feature_1_title": "Hundreds of Questions",
+        "feature_1_desc": "A mix of fun, deep, and silly prompts.",
+        "feature_2_title": "Truths & Dares",
+        "feature_2_desc": "Balanced mix of questions and challenges.",
+        "feature_3_title": "Fair Randomness",
+        "feature_3_desc": "Uses secure RNG to pick prompts.",
+        "feature_4_title": "Party Ready",
+        "feature_4_desc": "Great for friends, couples, and sleepovers.",
+        "how_to_title": "How to play Truth or Dare online",
+        "how_to_step_1": "The generator is pre-loaded with fun Truths and Dares.",
+        "how_to_step_2": "Select 'Cards' or 'Wheel' view for the best experience.",
+        "how_to_step_3": "Click 'Start Giveaway' to pick a random prompt.",
+        "how_to_step_4": "Complete the Truth or Dare challenge!",
+        "faq_title": "Truth or Dare FAQ",
+        "faq_1_q": "Are the questions safe for work?",
+        "faq_1_a": "Yes, our default list is designed to be fun and friendly (PG-13).",
+        "faq_2_q": "Can I add my own questions?",
+        "faq_2_a": "Absolutely! You can use the 'Participant Manager' to add your own custom Truths and Dares."
+    },
+    "TruthOrDare": {
+        "truth_0": "What is your biggest fear?",
+        "truth_1": "What is the most embarrassing thing you've ever done?",
+        "truth_2": "Who is your secret crush?",
+        "truth_3": "What is a secret you've never told anyone?",
+        "truth_4": "What is your biggest regret?",
+        "truth_5": "When was the last time you lied?",
+        "truth_6": "What is the most trouble you've ever been in?",
+        "truth_7": "What is your worst habit?",
+        "truth_8": "Who is the last person you texted?",
+        "truth_9": "What is your biggest insecurity?",
+        "truth_10": "Have you ever cheated on a test?",
+        "truth_11": "What is the meanest thing you've ever said to someone?",
+        "truth_12": "What is your guilty pleasure?",
+        "truth_13": "What is the most expensive thing you've bought?",
+        "truth_14": "What is your favorite childhood memory?",
+        "truth_15": "Who would you like to trade lives with for a day?",
+        "truth_16": "What is your biggest pet peeve?",
+        "truth_17": "Have you ever kept a secret from your best friend?",
+        "truth_18": "What is the most childish thing you still do?",
+        "truth_19": "What is the last dream you remember?",
+        "dare_0": "Do 10 pushups.",
+        "dare_1": "Sing the chorus of your favorite song.",
+        "dare_2": "Do your best dance move.",
+        "dare_3": "Let the person to your right post something on your social media.",
+        "dare_4": "Talk in an accent for the next 3 rounds.",
+        "dare_5": "Eat a spoonful of hot sauce.",
+        "dare_6": "Text your crush something silly.",
+        "dare_7": "Let the group look through your phone for 1 minute.",
+        "dare_8": "Do an impression of someone in the room.",
+        "dare_9": "Hold an ice cube in your hand until it melts.",
+        "dare_10": "Wear your socks on your hands for the next round.",
+        "dare_11": "Do a cartwheel.",
+        "dare_12": "Make a funny face and keep it until your next turn.",
+        "dare_13": "Let someone tickle you for 30 seconds.",
+        "dare_14": "Speak in a whisper for the next 5 minutes.",
+        "dare_15": "Walk backwards for the rest of the game.",
+        "dare_16": "Try to lick your elbow.",
+        "dare_17": "Let someone style your hair.",
+        "dare_18": "Act like a chicken for 1 minute.",
+        "dare_19": "Tell a joke without laughing."
     }
 }

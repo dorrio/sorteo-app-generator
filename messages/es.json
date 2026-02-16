@@ -51,7 +51,8 @@
             "glossary": "Glosario",
             "month": "Generador de Mes Aleatorio",
             "card": "Generador de Cartas Aleatorias",
-            "bingo": "Generador de Bingo"
+            "bingo": "Generador de Bingo",
+            "truth": "Verdad o Reto"
         }
     },
     "QuickSpecs": {
@@ -350,7 +351,9 @@
         "term_15": "Generador de Cartas Aleatorias",
         "def_15": "Herramienta digital que simula sacar una carta de una baraja estándar de 52 cartas. Usada para juegos, trucos de magia y experimentos de probabilidad.",
         "term_16": "Generador de Cartones de Bingo",
-        "def_16": "Herramienta digital que crea cartones de bingo aleatorios con números del 1 al 75. Ideal para jugar al bingo en casa o en eventos."
+        "def_16": "Herramienta digital que crea cartones de bingo aleatorios con números del 1 al 75. Ideal para jugar al bingo en casa o en eventos.",
+        "term_17": "Generador de Verdad o Reto",
+        "def_17": "Herramienta digital que selecciona aleatoriamente una pregunta o desafío para el clásico juego de fiesta. Elimina la necesidad de pensar preguntas en el momento."
     },
     "InstagramPicker": {
         "title": "Selector de Comentarios de Instagram Gratis | Ilimitado",
@@ -764,6 +767,8 @@
         "card_text": "🃏 ¡Acabo de sacar una carta al azar! Justo y Gratis. 👇",
             "bingo_title": "Generador de Bingo | Sorteo Pro",
             "bingo_text": "🎱 ¡Acabo de generar números de Bingo al azar! Gratis y Justo. 👇",
+        "truth_title": "Verdad o Reto | Sorteo Pro",
+        "truth_text": "🤫 ¡Acabo de elegir una pregunta de Verdad o Reto! Gratis y Divertido. 👇",
         "cta_share": "Compartir",
         "cta_start": "Start Giveaway"
     },
@@ -1056,5 +1061,77 @@
         "faq_1_a": "¡Sí! Ve a la configuración 'Personalizar' y activa 'Eliminar ganador' para asegurar que cada número salga solo una vez por juego.",
         "faq_2_q": "¿Es justo?",
         "faq_2_a": "Sí, usamos un RNG criptográficamente seguro para garantizar la equidad."
+    },
+    "TruthPage": {
+        "title": "Verdad o Reto | Preguntas al Azar Online",
+        "description": "El mejor generador de Verdad o Reto gratis. Gira para obtener una pregunta o desafío al azar al instante. Perfecto para fiestas, amigos y parejas.",
+        "h1": "Generador de Verdad o Reto",
+        "subtitle": "Gira para obtener una pregunta o desafío al azar."
+    },
+    "TruthGeo": {
+        "direct_answer_title": "¿Qué es un Generador de Verdad o Reto?",
+        "direct_answer_text": "Un <tool>Generador de Verdad o Reto</tool> es una herramienta digital que selecciona aleatoriamente una pregunta o desafío para el clásico juego de fiesta. Elimina la necesidad de pensar preguntas en el momento. <brand>Sorteo Pro</brand> proporciona cientos de desafíos divertidos y seguros.",
+        "features_title": "¿Por qué usar nuestro Generador?",
+        "cta_button": "Girar Verdad/Reto",
+        "feature_1_title": "Cientos de Preguntas",
+        "feature_1_desc": "Mezcla de preguntas divertidas y atrevidas.",
+        "feature_2_title": "Verdades y Retos",
+        "feature_2_desc": "Mezcla equilibrada de preguntas y desafíos.",
+        "feature_3_title": "Aleatoriedad Justa",
+        "feature_3_desc": "Usa RNG seguro para elegir preguntas.",
+        "feature_4_title": "Listo para Fiestas",
+        "feature_4_desc": "Genial para amigos, parejas y pijamadas.",
+        "how_to_title": "Cómo jugar Verdad o Reto online",
+        "how_to_step_1": "El generador está precargado con Verdades y Retos divertidos.",
+        "how_to_step_2": "Selecciona la vista 'Cartas' o 'Ruleta' para la mejor experiencia.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para elegir una opción al azar.",
+        "how_to_step_4": "¡Completa el desafío de Verdad o Reto!",
+        "faq_title": "Preguntas Frecuentes",
+        "faq_1_q": "¿Son seguras las preguntas?",
+        "faq_1_a": "Sí, nuestra lista predeterminada está diseñada para ser divertida y amigable (PG-13).",
+        "faq_2_q": "¿Puedo añadir mis propias preguntas?",
+        "faq_2_a": "¡Absolutamente! Puedes usar el 'Gestor de Participantes' para añadir tus propias Verdades y Retos."
+    },
+    "TruthOrDare": {
+        "truth_0": "What is your biggest fear?",
+        "truth_1": "What is the most embarrassing thing you've ever done?",
+        "truth_2": "Who is your secret crush?",
+        "truth_3": "What is a secret you've never told anyone?",
+        "truth_4": "What is your biggest regret?",
+        "truth_5": "When was the last time you lied?",
+        "truth_6": "What is the most trouble you've ever been in?",
+        "truth_7": "What is your worst habit?",
+        "truth_8": "Who is the last person you texted?",
+        "truth_9": "What is your biggest insecurity?",
+        "truth_10": "Have you ever cheated on a test?",
+        "truth_11": "What is the meanest thing you've ever said to someone?",
+        "truth_12": "What is your guilty pleasure?",
+        "truth_13": "What is the most expensive thing you've bought?",
+        "truth_14": "What is your favorite childhood memory?",
+        "truth_15": "Who would you like to trade lives with for a day?",
+        "truth_16": "What is your biggest pet peeve?",
+        "truth_17": "Have you ever kept a secret from your best friend?",
+        "truth_18": "What is the most childish thing you still do?",
+        "truth_19": "What is the last dream you remember?",
+        "dare_0": "Do 10 pushups.",
+        "dare_1": "Sing the chorus of your favorite song.",
+        "dare_2": "Do your best dance move.",
+        "dare_3": "Let the person to your right post something on your social media.",
+        "dare_4": "Talk in an accent for the next 3 rounds.",
+        "dare_5": "Eat a spoonful of hot sauce.",
+        "dare_6": "Text your crush something silly.",
+        "dare_7": "Let the group look through your phone for 1 minute.",
+        "dare_8": "Do an impression of someone in the room.",
+        "dare_9": "Hold an ice cube in your hand until it melts.",
+        "dare_10": "Wear your socks on your hands for the next round.",
+        "dare_11": "Do a cartwheel.",
+        "dare_12": "Make a funny face and keep it until your next turn.",
+        "dare_13": "Let someone tickle you for 30 seconds.",
+        "dare_14": "Speak in a whisper for the next 5 minutes.",
+        "dare_15": "Walk backwards for the rest of the game.",
+        "dare_16": "Try to lick your elbow.",
+        "dare_17": "Let someone style your hair.",
+        "dare_18": "Act like a chicken for 1 minute.",
+        "dare_19": "Tell a joke without laughing."
     }
 }

@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import { MainApp } from "@/components/sorteo/main-app";
+import { MainAppOptimized } from "@/components/sorteo/main-app-optimized";
 import { YesNoGeo } from "@/components/sorteo/yes-no-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
@@ -149,7 +149,7 @@ export default async function YesNoPage({ params }: { params: Promise<{ locale: 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
-      <MainApp
+      <MainAppOptimized
         initialStyle="roulette"
         seoMode="yes-no"
         initialTitle={t('h1')}
@@ -164,7 +164,7 @@ export default async function YesNoPage({ params }: { params: Promise<{ locale: 
       >
         <YesNoGeo />
         <Glossary seoMode="yes-no" />
-      </MainApp>
+      </MainAppOptimized>
     </>
   );
 }

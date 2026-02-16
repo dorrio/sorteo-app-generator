@@ -394,32 +394,34 @@ export async function GET(request: Request) {
         }
 
         if (participants.length > 0) {
-            // Force list theme/type for rendering if we have participants
-            // This ensures consistent styling even if the type param was different
-            theme = {
-                title: "List Randomizer",
-                subtitle: "Shuffle Lists • Team Generator",
-                bgGradient: "radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%)", // Blue/Dark
-                accentColor: "#60a5fa", // Blue 400
-                textColor: "white",
-                subTextColor: "#93c5fd", // Blue 300
-                icon: (
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="21" x2="3" y1="6" y2="6"/>
-                        <line x1="21" x2="9" y1="12" y2="12"/>
-                        <line x1="21" x2="7" y1="18" y2="18"/>
-                    </svg>
-                ),
-                largeIcon: (
-                     <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="21" x2="3" y1="6" y2="6"/>
-                        <line x1="21" x2="9" y1="12" y2="12"/>
-                        <line x1="21" x2="7" y1="18" y2="18"/>
-                        <line x1="3" x2="3.01" y1="12" y2="12"/>
-                        <line x1="3" x2="3.01" y1="18" y2="18"/>
-                    </svg>
-                )
-            };
+            // Viralis: Preserve branding if a specific tool type is present
+            // Only force list theme if type is generic or explicitly 'list'
+            if (!type || type === 'list') {
+                theme = {
+                    title: "List Randomizer",
+                    subtitle: "Shuffle Lists • Team Generator",
+                    bgGradient: "radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%)", // Blue/Dark
+                    accentColor: "#60a5fa", // Blue 400
+                    textColor: "white",
+                    subTextColor: "#93c5fd", // Blue 300
+                    icon: (
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="21" x2="3" y1="6" y2="6"/>
+                            <line x1="21" x2="9" y1="12" y2="12"/>
+                            <line x1="21" x2="7" y1="18" y2="18"/>
+                        </svg>
+                    ),
+                    largeIcon: (
+                        <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="21" x2="3" y1="6" y2="6"/>
+                            <line x1="21" x2="9" y1="12" y2="12"/>
+                            <line x1="21" x2="7" y1="18" y2="18"/>
+                            <line x1="3" x2="3.01" y1="12" y2="12"/>
+                            <line x1="3" x2="3.01" y1="18" y2="18"/>
+                        </svg>
+                    )
+                };
+            }
 
             // Re-apply custom color if present, as we just reset the theme
             if (customColor) {

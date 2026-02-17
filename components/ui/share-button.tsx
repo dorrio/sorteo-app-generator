@@ -43,13 +43,15 @@ export function ShareButton({
 }: ShareButtonProps) {
   const [canShareNative, setCanShareNative] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
   }, [])
 
-  const handleShare = async () => {
+  const handleShare = async (e: React.MouseEvent) => {
     if (canShareNative) {
+      e.preventDefault() // Prevent dropdown from opening immediately
       try {
         if (onNativeShare) {
           await onNativeShare()
@@ -62,7 +64,7 @@ export function ShareButton({
         }
       } catch (err) {
         // Fallback to dropdown if user cancels or error
-        // But typically we don't need to do anything if user cancels
+        setIsOpen(true)
       }
     }
   }
@@ -95,7 +97,7 @@ export function ShareButton({
       variant={buttonVariant}
       size={buttonSize}
       className={className}
-      onClick={canShareNative ? handleShare : undefined}
+      onClick={handleShare}
       title={translations.share}
       aria-label={translations.share}
     >
@@ -103,12 +105,8 @@ export function ShareButton({
     </Button>
   )
 
-  if (canShareNative) {
-    return TriggerButton
-  }
-
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         {TriggerButton}
       </DropdownMenuTrigger>

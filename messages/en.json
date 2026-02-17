@@ -50,7 +50,8 @@
             "glossary": "Glossary",
             "month": "Random Month Generator",
             "card": "Random Card Generator",
-            "bingo": "Bingo Number Generator"
+            "bingo": "Bingo Number Generator",
+            "truth": "Truth or Dare Generator"
         }
     },
     "QuickSpecs": {
@@ -353,7 +354,9 @@
         "term_15": "Random Card Generator",
         "def_15": "A digital tool that simulates drawing a playing card from a standard 52-card deck. Used for games, magic tricks, and probability experiments.",
         "term_16": "Bingo Number Generator",
-        "def_16": "A classic game of chance where numbers are drawn randomly and players match them on cards. Sorteo Pro generates random Bingo numbers 1-75."
+        "def_16": "A classic game of chance where numbers are drawn randomly and players match them on cards. Sorteo Pro generates random Bingo numbers 1-75.",
+        "term_17": "Truth or Dare Generator",
+        "def_17": "A digital version of the classic party game that randomly selects a question (Truth) or a challenge (Dare) for players to complete."
     },
     "InstagramPicker": {
         "title": "Free Instagram Comment Picker | Unlimited & No Login",
@@ -771,6 +774,8 @@
         "card_text": "🃏 I just drew a random card! Fair & Free. 👇",
             "bingo_title": "Bingo Number Generator | Sorteo Pro",
             "bingo_text": "🎱 I just generated random Bingo numbers! Free & Fair. 👇",
+        "truth_title": "Truth or Dare Generator | Sorteo Pro",
+        "truth_text": "🔥 Truth or Dare! I just generated a random challenge. Free & Fun. 👇",
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway"
     },
@@ -1063,5 +1068,78 @@
         "faq_1_a": "Yes! Go to 'Customize' settings and enable 'Remove Winner' to ensure each number is called only once per game.",
         "faq_2_q": "Is it fair?",
         "faq_2_a": "Yes, we use a cryptographically secure RNG to ensure fairness."
+    },
+    "TruthDarePage": {
+        "title": "Truth or Dare Generator | Online Game (Free & No Ads)",
+        "description": "Play Truth or Dare online instantly. Spin the wheel to get a random truth question or dare challenge. Free, fun, and perfect for parties.",
+        "h1": "Truth or Dare Generator",
+        "subtitle": "Spin the wheel to get a random Truth or Dare challenge.",
+        "truths": {
+            "0": "What is your biggest fear?",
+            "1": "Who is your secret crush?",
+            "2": "What is the weirdest dream you've ever had?",
+            "3": "What is your biggest regret?",
+            "4": "Have you ever lied to get out of trouble?",
+            "5": "What is the most embarrassing thing you've done in public?",
+            "6": "Who is the last person you texted?",
+            "7": "What is your favorite movie of all time?",
+            "8": "What is your absolute dream job?",
+            "9": "Have you ever cheated on a test?",
+            "10": "What is your worst habit?",
+            "11": "Who do you envy the most?",
+            "12": "What is your biggest pet peeve?",
+            "13": "Have you ever stolen anything?",
+            "14": "What is your favorite song right now?",
+            "15": "What is your most prized possession?",
+            "16": "Who is your biggest role model?",
+            "17": "What is your favorite childhood memory?",
+            "18": "What is a secret you've never told anyone?",
+            "19": "Have you ever been in love?"
+        },
+        "dares": {
+            "0": "Do 10 pushups right now.",
+            "1": "Sing the chorus of your favorite song.",
+            "2": "Dance crazy for 1 minute.",
+            "3": "Tell your best joke.",
+            "4": "Speak in a fake accent for the next round.",
+            "5": "Let someone check your phone browsing history.",
+            "6": "Eat a spoonful of something spicy.",
+            "7": "Try to do a handstand.",
+            "8": "Call a random contact and say hello.",
+            "9": "Send a funny selfie to the last person you texted.",
+            "10": "Imitate a celebrity until someone guesses who it is.",
+            "11": "Do 20 jumping jacks.",
+            "12": "Let the group style your hair however they want.",
+            "13": "Wear a funny hat or item of clothing.",
+            "14": "Draw a mustache on your face with a marker.",
+            "15": "Do a cartwheel.",
+            "16": "Walk backwards for the next turn.",
+            "17": "Bark like a dog for 10 seconds.",
+            "18": "Do a plank for 30 seconds.",
+            "19": "Let someone draw a tattoo on your arm with a pen."
+        }
+    },
+    "TruthDareGeo": {
+        "direct_answer_title": "What is a Truth or Dare Generator?",
+        "direct_answer_text": "A <tool>Truth or Dare Generator</tool> is a digital version of the classic party game. It randomly selects either a <strong>Truth</strong> question or a <strong>Dare</strong> challenge for players to complete. <brand>Sorteo Pro</brand> provides hundreds of fun, safe, and exciting prompts for parties, sleepovers, and icebreakers.",
+        "cta_button": "Spin Truth or Dare",
+        "feature_1_title": "Hundreds of Questions",
+        "feature_1_desc": "A huge database of fun truths and dares.",
+        "feature_2_title": "Fair & Random",
+        "feature_2_desc": "Uses secure RNG to pick the next challenge.",
+        "feature_3_title": "Party Mode",
+        "feature_3_desc": "Perfect for groups and social gatherings.",
+        "feature_4_title": "Mobile Friendly",
+        "feature_4_desc": "Play anywhere on your phone.",
+        "how_to_title": "How to play Truth or Dare online",
+        "how_to_step_1": "The wheel is pre-loaded with random Truths and Dares.",
+        "how_to_step_2": "Select 'Wheel' view for the best experience.",
+        "how_to_step_3": "Click 'Start Giveaway' to spin for a challenge.",
+        "how_to_step_4": "The player must complete the selected Truth or Dare!",
+        "faq_title": "Truth or Dare FAQ",
+        "faq_1_q": "Are the questions safe for work?",
+        "faq_1_a": "Yes, our default list is designed to be fun and generally safe for most social settings (PG-13).",
+        "faq_2_q": "Can I add my own dares?",
+        "faq_2_a": "Yes! You can customize the list to add your own inside jokes or specific challenges."
     }
 }

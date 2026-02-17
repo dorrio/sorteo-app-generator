@@ -50,7 +50,8 @@
             "glossary": "Glossário",
             "month": "Gerador de Mês Aleatório",
             "card": "Gerador de Cartas Aleatórias",
-            "bingo": "Gerador de Bingo"
+            "bingo": "Gerador de Bingo",
+            "truth": "Verdade ou Desafio"
         }
     },
     "QuickSpecs": {
@@ -349,7 +350,9 @@
         "term_15": "Gerador de Cartas Aleatórias",
         "def_15": "Uma ferramenta digital que simula sacar uma carta de um baralho padrão de 52 cartas. Usado para jogos, truques de mágica e experimentos de probabilidade.",
         "term_16": "Gerador de Números de Bingo",
-        "def_16": "Uma ferramenta clássica de sorte onde números são tirados aleatoriamente e jogadores os marcam em cartelas. O Sorteio Pro gera números de Bingo aleatórios de 1 a 75."
+        "def_16": "Uma ferramenta clássica de sorte onde números são tirados aleatoriamente e jogadores os marcam em cartelas. O Sorteio Pro gera números de Bingo aleatórios de 1 a 75.",
+        "term_17": "Verdade ou Desafio",
+        "def_17": "Uma versão digital do clássico jogo de festa que seleciona aleatoriamente uma pergunta (Verdade) ou um desafio (Desafio) para os jogadores completarem."
     },
     "InstagramPicker": {
         "title": "Sorteador de Comentários do Instagram Grátis | Ilimitado",
@@ -707,6 +710,8 @@
         "card_text": "🃏 Acabei de tirar uma carta aleatória! Justo e Grátis. 👇",
         "bingo_title": "Gerador de Bingo | Sorteio Pro",
             "bingo_text": "🎱 Acabei de gerar números de Bingo aleatórios! Grátis e Justo. 👇",
+        "truth_title": "Verdade ou Desafio | Sorteio Pro",
+        "truth_text": "🔥 Verdade ou Desafio! Acabei de gerar um desafio aleatório. Grátis e Divertido. 👇",
         "cta_share": "Compartilhar",
         "cta_start": "Começar"
     },
@@ -1057,5 +1062,78 @@
         "faq_1_a": "Sim! Vá em configurações 'Personalizar' e ative 'Remover vencedor' para garantir que cada número saia apenas uma vez por jogo.",
         "faq_2_q": "É justo?",
         "faq_2_a": "Sim, usamos um RNG criptograficamente seguro para garantir a justiça."
+    },
+    "TruthDarePage": {
+        "title": "Verdade ou Desafio | Jogo Online (Grátis e Sem Anúncios)",
+        "description": "Jogue Verdade ou Desafio online instantaneamente. Gire a roleta para obter uma pergunta de verdade ou um desafio. Grátis, divertido e perfeito para festas.",
+        "h1": "Gerador de Verdade ou Desafio",
+        "subtitle": "Gire a roleta para obter um desafio aleatório de Verdade ou Desafio.",
+        "truths": {
+            "0": "Qual é o seu maior medo?",
+            "1": "Quem é o seu crush secreto?",
+            "2": "Qual foi o sonho mais estranho que você já teve?",
+            "3": "Qual é o seu maior arrependimento?",
+            "4": "Você já mentiu para se livrar de problemas?",
+            "5": "Qual foi a coisa mais embaraçosa que você já fez?",
+            "6": "Quem foi a última pessoa para quem você mandou mensagem?",
+            "7": "Qual é o seu filme favorito de todos os tempos?",
+            "8": "Qual é o emprego dos seus sonhos?",
+            "9": "Você já colou em uma prova?",
+            "10": "Qual é o seu pior hábito?",
+            "11": "Quem você mais inveja?",
+            "12": "O que mais te irrita?",
+            "13": "Você já roubou alguma coisa?",
+            "14": "Qual é a sua música favorita agora?",
+            "15": "Qual é o seu bem mais precioso?",
+            "16": "Quem é o seu maior ídolo?",
+            "17": "Qual é a sua memória favorita da infância?",
+            "18": "Qual é o seu maior segredo?",
+            "19": "Você já se apaixonou?"
+        },
+        "dares": {
+            "0": "Faça 10 flexões agora.",
+            "1": "Cante o refrão da sua música favorita.",
+            "2": "Dance como um louco por 1 minuto.",
+            "3": "Conte sua melhor piada.",
+            "4": "Fale com um sotaque falso na próxima rodada.",
+            "5": "Deixe alguém ver seu histórico de navegação.",
+            "6": "Coma uma colher de algo picante.",
+            "7": "Tente plantar bananeira.",
+            "8": "Ligue para um contato aleatório e diga oi.",
+            "9": "Mande uma selfie engraçada para a última pessoa que você conversou.",
+            "10": "Imite uma celebridade até alguém adivinhar quem é.",
+            "11": "Faça 20 polichinelos.",
+            "12": "Deixe o grupo pentear seu cabelo como quiser.",
+            "13": "Use um chapéu ou peça de roupa engraçada.",
+            "14": "Desenhe um bigode no rosto com caneta.",
+            "15": "Dê uma cambalhota.",
+            "16": "Ande de costas na próxima rodada.",
+            "17": "Lata como um cachorro por 10 segundos.",
+            "18": "Faça prancha por 30 segundos.",
+            "19": "Deixe alguém desenhar uma tatuagem no seu braço com caneta."
+        }
+    },
+    "TruthDareGeo": {
+        "direct_answer_title": "O que é um Gerador de Verdade ou Desafio?",
+        "direct_answer_text": "Um <tool>Gerador de Verdade ou Desafio</tool> é uma versão digital do clássico jogo de festa. Seleciona aleatoriamente uma pergunta de <strong>Verdade</strong> ou um <strong>Desafio</strong> para os jogadores completarem. O <brand>Sorteo Pro</brand> oferece centenas de opções divertidas e seguras para festas.",
+        "cta_button": "Girar Verdade ou Desafio",
+        "feature_1_title": "Centenas de Perguntas",
+        "feature_1_desc": "Uma enorme base de dados de verdades e desafios.",
+        "feature_2_title": "Justo e Aleatório",
+        "feature_2_desc": "Usa RNG seguro para escolher o próximo desafio.",
+        "feature_3_title": "Modo Festa",
+        "feature_3_desc": "Perfeito para grupos e reuniões sociais.",
+        "feature_4_title": "Compatível com Celular",
+        "feature_4_desc": "Jogue em qualquer lugar com seu telefone.",
+        "how_to_title": "Como jogar Verdade ou Desafio online",
+        "how_to_step_1": "A roleta vem pré-carregada com Verdades e Desafios aleatórios.",
+        "how_to_step_2": "Selecione a visualização 'Roleta' para a melhor experiência.",
+        "how_to_step_3": "Clique em 'Iniciar Sorteio' para girar por um desafio.",
+        "how_to_step_4": "O jogador deve completar a Verdade ou Desafio selecionado!",
+        "faq_title": "Perguntas Frequentes de Verdade ou Desafio",
+        "faq_1_q": "As perguntas são seguras?",
+        "faq_1_a": "Sim, nossa lista padrão é projetada para ser divertida e geralmente segura para a maioria dos ambientes sociais.",
+        "faq_2_q": "Posso adicionar meus próprios desafios?",
+        "faq_2_a": "Sim! Você pode personalizar a lista para adicionar suas próprias piadas internas ou desafios específicos."
     }
 }

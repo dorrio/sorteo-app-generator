@@ -10,26 +10,10 @@ import { ParticipantManager } from "@/components/sorteo/participant-manager"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
-import { SeoContent } from "@/components/sorteo/seo-content"
-import { WheelGeo } from "@/components/sorteo/wheel-geo"
-import { RngGeo } from "@/components/sorteo/rng-geo"
-import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
-import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo"
-import { TeamGeo } from "@/components/sorteo/team-geo"
-import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
-import { LetterGeo } from "@/components/sorteo/letter-geo"
-import { DiceGeo } from "@/components/sorteo/dice-geo"
-import { CoinGeo } from "@/components/sorteo/coin-geo"
-import { RpsGeo } from "@/components/sorteo/rps-geo"
-import { CountryGeo } from "@/components/sorteo/country-geo"
-import { MonthGeo } from "@/components/sorteo/month-geo"
-import { CardGeo } from "@/components/sorteo/card-geo"
-import { Glossary } from "@/components/sorteo/glossary"
-import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { COUNTRIES } from "@/lib/countries"
-import { Sparkles, Settings2, Play, Trophy, ShieldCheck, Share2 } from "lucide-react"
+import { Sparkles, Settings2, Play, Trophy, ShieldCheck } from "lucide-react"
 import { useTranslations, useLocale } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
@@ -183,8 +167,6 @@ export function MainApp({
   const tTeam = useTranslations("TeamGeneratorPage")
   const tInsta = useTranslations("InstagramPicker")
   const tWheel = useTranslations("WheelGeoPage")
-  const tMeta = useTranslations("Metadata")
-  const tWinner = useTranslations("WinnerCeremony")
   const tShare = useTranslations("ShareContent")
 
   const [mounted, setMounted] = useState(false)
@@ -286,6 +268,7 @@ export function MainApp({
     if (Object.keys(update).length > 0) {
       updateTheme(update)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialStyle, updateTheme, initialTitle, initialSubtitle, seoMode])
 
   // Population Logic
@@ -354,7 +337,7 @@ export function MainApp({
     if (modeChanged) {
       setActiveTool(seoMode)
     }
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted, hasHydrated, initialStyle, seoMode, initialOptions, activeTool, setActiveTool, locale, addParticipants, clearParticipants])
 
   const startSorteo = () => {
@@ -384,7 +367,7 @@ export function MainApp({
   const getShareContent = () => {
     let finalShareText = shareText
     let finalShareTitle = shareTitle
-    let url = typeof window !== "undefined" ? window.location.href : ""
+    const url = typeof window !== "undefined" ? window.location.href : ""
 
     // Fallback logic if shareTitle/Text are defaults and we're in a specific mode without props passed
     if (shareTitle === "Sorteo Pro" && seoMode) {
@@ -437,7 +420,7 @@ export function MainApp({
           text: finalShareText,
           url: urlObj.toString()
         }
-      } catch (e) {
+      } catch {
         // Fallback to current url if parsing fails
       }
     }
@@ -680,40 +663,7 @@ export function MainApp({
         </main>
 
         {/* SEO Content / Footer Children */}
-        {children ? children : (
-          /* Fallback for Legacy Pages that don't pass children yet */
-          seoMode === 'wheel' ? (
-            <> <WheelGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'instagram' ? (
-            <> <InstagramGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'rng' ? (
-            <> <RngGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'list-randomizer' ? (
-            <> <ListRandomizerGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'secret-santa' ? (
-            <> <SecretSantaGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'team' ? (
-            <> <TeamGeo /> <Glossary seoMode="list-randomizer" /> </>
-          ) : seoMode === 'yes-no' ? (
-            <> <YesNoGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'letter' ? (
-            <> <LetterGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'dice' ? (
-            <> <DiceGeo /> <Glossary seoMode="rng" /> </>
-          ) : seoMode === 'coin' ? (
-            <> <CoinGeo /> <Glossary seoMode="yes-no" /> </>
-          ) : seoMode === 'rps' ? (
-            <> <RpsGeo /> <Glossary seoMode="yes-no" /> </>
-          ) : seoMode === 'country' ? (
-            <> <CountryGeo /> <Glossary seoMode="wheel" /> </>
-          ) : seoMode === 'month' ? (
-            <> <MonthGeo /> <Glossary seoMode="wheel" /> </>
-          ) : seoMode === 'card' ? (
-            <> <CardGeo /> <Glossary seoMode="card" /> </>
-          ) : (
-            <> <WheelGeo /> <Glossary seoMode={seoMode} /> <SeoContent /> </>
-          )
-        )}
+        {children}
 
         {/* Footer */}
         {footer}

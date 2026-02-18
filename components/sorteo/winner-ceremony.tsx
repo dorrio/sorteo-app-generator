@@ -34,10 +34,12 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const [showContent, setShowContent] = useState(false)
   const [copied, setCopied] = useState(false)
   const [canShareNative, setCanShareNative] = useState(false)
+  const [isTouch, setIsTouch] = useState(false)
   const [isSharing, setIsSharing] = useState(false)
 
   useEffect(() => {
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
+    setIsTouch(window.matchMedia("(pointer: coarse)").matches)
 
     if (showWinnerCeremony) {
       const timer = setTimeout(() => setShowContent(true), 300)
@@ -332,8 +334,8 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
             transition={{ delay: 1 }}
             className="flex flex-wrap gap-4 justify-center"
           >
-            {/* Primary Share Action */}
-            {canShareNative ? (
+            {/* Primary Share Action - Viralis Smart Share: Only prioritize native on touch devices */}
+            {canShareNative && isTouch ? (
               <Button
                 size="lg"
                 className="gap-2"
@@ -353,16 +355,25 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                   <Button
                     size="lg"
                     className="gap-2"
+                    disabled={isSharing}
                     style={{
                       backgroundColor: theme.primaryColor,
                       color: theme.backgroundColor,
                     }}
                   >
-                    <Share2 className="w-5 h-5" />
+                    {isSharing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Share2 className="w-5 h-5" />}
                     {t("share_button")}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="center" className="w-48">
+                  {/* System Share Option for Desktop Safari/Edge */}
+                  {canShareNative && (
+                    <DropdownMenuItem onClick={shareNative} className="gap-2 cursor-pointer font-medium">
+                      <Share2 className="w-4 h-4" />
+                      {t("share_button")}
+                    </DropdownMenuItem>
+                  )}
+
                   <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
                     {copied ? (
                       <>

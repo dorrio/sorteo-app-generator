@@ -42,10 +42,12 @@ export function ShareButton({
   translations
 }: ShareButtonProps) {
   const [canShareNative, setCanShareNative] = useState(false)
+  const [isTouch, setIsTouch] = useState(false)
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
+    setIsTouch(window.matchMedia("(pointer: coarse)").matches)
   }, [])
 
   const handleShare = async () => {
@@ -103,7 +105,12 @@ export function ShareButton({
     </Button>
   )
 
-  if (canShareNative) {
+  // Viralis Optimization: Only prioritize native share on touch devices (mobile/tablet)
+  // On desktop (even with native share support like Safari), the dropdown is often preferred
+  // as it offers direct "Copy Link" access which native share sheets sometimes bury.
+  const shouldUseNative = canShareNative && isTouch
+
+  if (shouldUseNative) {
     return TriggerButton
   }
 
@@ -113,6 +120,14 @@ export function ShareButton({
         {TriggerButton}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
+        {/* Viralis: Provide access to System Share on desktop if available */}
+        {canShareNative && (
+          <DropdownMenuItem onClick={handleShare} className="gap-2 cursor-pointer font-medium">
+            <Share2 className="w-4 h-4" />
+            {translations.share}
+          </DropdownMenuItem>
+        )}
+
         <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
           {copied ? (
             <>

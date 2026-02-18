@@ -44,3 +44,8 @@
 **Gap:** Remaining GEO components (`BingoGeo`, `DiceGeo`, `RpsGeo`) were still using `framer-motion` and `animate-pulse`, causing unnecessary bundle size and LCP delays. `CoinGeo` used unsecure `dangerouslySetInnerHTML`.
 **Action:** Refactored `BingoGeo`, `DiceGeo`, and `RpsGeo` to remove motion libraries and background animations. Refactored `CoinGeo` to use `t.rich()` and `safeJsonLdStringify`. Deleted misplaced `ours_bingo_geo.tsx`.
 **GEO Impact:** Reduced First Input Delay (FID) and improved Cumulative Layout Shift (CLS) for these high-traffic tools, ensuring GoogleBot parses the "Direct Answer" content instantly.
+
+## 2025-06-02 - [Strategy/Cluster Content]
+**Gap:** Competitors (Psycat Games, Parade) dominate the "Truth or Dare Generator" niche. We were completely missing this high-volume party game tool.
+**Action:** Created dedicated `/truth-or-dare-generator` landing page with `TruthGeo` component, specialized Schema, and pre-loaded `TruthData` questions.
+**GEO Impact:** Optimized for "Online Truth or Dare" and "Truth or Dare Questions" with Direct Answer blocks and automated list generation.

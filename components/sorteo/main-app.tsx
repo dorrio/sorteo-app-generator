@@ -11,21 +11,6 @@ import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { SeoContent } from "@/components/sorteo/seo-content"
-import { WheelGeo } from "@/components/sorteo/wheel-geo"
-import { RngGeo } from "@/components/sorteo/rng-geo"
-import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
-import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo"
-import { TeamGeo } from "@/components/sorteo/team-geo"
-import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
-import { LetterGeo } from "@/components/sorteo/letter-geo"
-import { DiceGeo } from "@/components/sorteo/dice-geo"
-import { CoinGeo } from "@/components/sorteo/coin-geo"
-import { RpsGeo } from "@/components/sorteo/rps-geo"
-import { CountryGeo } from "@/components/sorteo/country-geo"
-import { MonthGeo } from "@/components/sorteo/month-geo"
-import { CardGeo } from "@/components/sorteo/card-geo"
-import { Glossary } from "@/components/sorteo/glossary"
-import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { COUNTRIES } from "@/lib/countries"
@@ -680,40 +665,7 @@ export function MainApp({
         </main>
 
         {/* SEO Content / Footer Children */}
-        {children ? children : (
-          /* Fallback for Legacy Pages that don't pass children yet */
-          seoMode === 'wheel' ? (
-            <> <WheelGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'instagram' ? (
-            <> <InstagramGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'rng' ? (
-            <> <RngGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'list-randomizer' ? (
-            <> <ListRandomizerGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'secret-santa' ? (
-            <> <SecretSantaGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'team' ? (
-            <> <TeamGeo /> <Glossary seoMode="list-randomizer" /> </>
-          ) : seoMode === 'yes-no' ? (
-            <> <YesNoGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'letter' ? (
-            <> <LetterGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'dice' ? (
-            <> <DiceGeo /> <Glossary seoMode="rng" /> </>
-          ) : seoMode === 'coin' ? (
-            <> <CoinGeo /> <Glossary seoMode="yes-no" /> </>
-          ) : seoMode === 'rps' ? (
-            <> <RpsGeo /> <Glossary seoMode="yes-no" /> </>
-          ) : seoMode === 'country' ? (
-            <> <CountryGeo /> <Glossary seoMode="wheel" /> </>
-          ) : seoMode === 'month' ? (
-            <> <MonthGeo /> <Glossary seoMode="wheel" /> </>
-          ) : seoMode === 'card' ? (
-            <> <CardGeo /> <Glossary seoMode="card" /> </>
-          ) : (
-            <> <WheelGeo /> <Glossary seoMode={seoMode} /> <SeoContent /> </>
-          )
-        )}
+        {children}
 
         {/* Footer */}
         {footer}

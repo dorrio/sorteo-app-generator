@@ -1,5 +1,4 @@
 import type React from "react"
-import { Suspense } from "react"
 import type { Metadata, Viewport } from "next"
 import {
   Inter,
@@ -13,6 +12,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
+import { safeJsonLdStringify } from "@/lib/utils";
 import "../globals.css"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -109,7 +109,7 @@ export default async function RootLayout({
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     notFound();
   }
 
@@ -191,7 +191,7 @@ export default async function RootLayout({
         </a>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
         />
         <NextIntlClientProvider messages={messages}>
           {children}

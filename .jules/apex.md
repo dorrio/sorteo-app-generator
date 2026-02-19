@@ -44,3 +44,8 @@
 **Gap:** Remaining GEO components (`BingoGeo`, `DiceGeo`, `RpsGeo`) were still using `framer-motion` and `animate-pulse`, causing unnecessary bundle size and LCP delays. `CoinGeo` used unsecure `dangerouslySetInnerHTML`.
 **Action:** Refactored `BingoGeo`, `DiceGeo`, and `RpsGeo` to remove motion libraries and background animations. Refactored `CoinGeo` to use `t.rich()` and `safeJsonLdStringify`. Deleted misplaced `ours_bingo_geo.tsx`.
 **GEO Impact:** Reduced First Input Delay (FID) and improved Cumulative Layout Shift (CLS) for these high-traffic tools, ensuring GoogleBot parses the "Direct Answer" content instantly.
+
+## 2025-06-02 - [Strategy/Semantics & Technical/Security]
+**Gap:** The "Bingo Number Generator" was missing from the Glossary page, limiting internal linking. Also, JSON-LD injection in `layout.tsx` and `versus/page.tsx` was using unsecure `JSON.stringify`.
+**Action:** Added Bingo term to Glossary page and component. Replaced `JSON.stringify` with `safeJsonLdStringify` to prevent script injection and ensure correct serialization. Corrected Spanish translations for Bingo.
+**GEO Impact:** Enhanced topical authority for Bingo-related queries and ensured Schema markup is robust and safe for all crawlers.

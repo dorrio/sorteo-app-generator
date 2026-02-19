@@ -14,6 +14,7 @@
 *   **Skeleton Loading:** Use Skeletons instead of spinners during hydration to match SSR layout and improve perceived performance.
 *   **Granular Skeletons:** Use component-level skeletons (e.g., `ParticipantListSkeleton`) instead of page-level blocking skeletons to enable SSR of static content.
 *   **Server Component Extraction:** For content-heavy sections (SEO text, FAQ, Glossary), extract interactivity into small "Client Islands" (e.g., `<TryToolButton>`) and make the parent a Server Component. This removes hydration cost for static text.
+*   **Composition Pattern:** Always pass heavy content (e.g., Geo components, Articles, SEO text) as Server Component `children` to Client Component shells (`MainApp`). Never import heavy components directly inside a `"use client"` file.
 
 ## ❌ BAD PATTERNS (Avoid This)
 *   **Sync Imports:** Importing heavy widgets directly in the main bundle.

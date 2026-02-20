@@ -20,6 +20,8 @@ import {
   Instagram,
   Download,
   Loader2,
+  Linkedin,
+  Send,
 } from "lucide-react"
 
 interface WinnerCeremonyProps {
@@ -82,6 +84,10 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
   // WhatsApp: Use api.whatsapp.com for better cross-device support
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
+  // Telegram: Highly viral in crypto/giveaway communities
+  const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
+  // LinkedIn: Good for professional tools (Team Generator)
+  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`
 
   const shareNative = async () => {
     if (!navigator.share) return
@@ -141,8 +147,8 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   }
 
   const copyToClipboard = async () => {
-    // Viralis Optimization: Copy full text + url
-    await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
+    // Viralis Optimization: Copy ONLY the URL
+    await navigator.clipboard.writeText(shareUrl)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -386,19 +392,6 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                   </DropdownMenuItem>
 
                   <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                    <a
-                      href="https://www.instagram.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={shareInstagram}
-                      aria-label="Share on Instagram"
-                    >
-                      <Instagram className="w-4 h-4" />
-                      Instagram
-                    </a>
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
                     <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
                       <Facebook className="w-4 h-4" />
                       Facebook
@@ -409,6 +402,33 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                     <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
                       <MessageCircle className="w-4 h-4" />
                       WhatsApp
+                    </a>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Telegram">
+                      <Send className="w-4 h-4" />
+                      Telegram
+                    </a>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+                      <Linkedin className="w-4 h-4" />
+                      LinkedIn
+                    </a>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <a
+                      href="https://www.instagram.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={shareInstagram}
+                      aria-label="Share on Instagram"
+                    >
+                      <Instagram className="w-4 h-4" />
+                      Instagram
                     </a>
                   </DropdownMenuItem>
 

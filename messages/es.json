@@ -765,6 +765,8 @@
             "bingo_title": "Generador de Bingo | Sorteo Pro",
             "bingo_text": "🎱 ¡Acabo de generar números de Bingo al azar! Gratis y Justo. 👇",
         "cta_share": "Compartir",
+        "cta_invite": "Invitar Amigos",
+        "cta_share_list": "Compartir Lista",
         "cta_start": "Start Giveaway"
     },
     "CountryPage": {

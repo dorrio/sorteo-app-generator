@@ -772,6 +772,8 @@
             "bingo_title": "Bingo Number Generator | Sorteo Pro",
             "bingo_text": "🎱 I just generated random Bingo numbers! Free & Fair. 👇",
         "cta_share": "Share Tool",
+        "cta_invite": "Invite Friends",
+        "cta_share_list": "Share List",
         "cta_start": "Start Giveaway"
     },
     "CountryPage": {

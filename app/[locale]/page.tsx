@@ -1,6 +1,13 @@
 import { getTranslations } from 'next-intl/server';
-import { MainApp } from "@/components/sorteo/main-app";
+import dynamic from 'next/dynamic';
+import { safeJsonLdStringify } from '@/lib/utils';
+import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { WheelGeo } from "@/components/sorteo/wheel-geo";
+
+const MainApp = dynamic(
+  () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
+  { loading: () => <AppSkeleton /> }
+)
 import { Glossary } from "@/components/sorteo/glossary";
 import { SeoContent } from "@/components/sorteo/seo-content";
 import { SiteFooter } from "@/components/sorteo/site-footer";
@@ -118,7 +125,7 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
       {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(breadcrumbSchema) }}
       />
       <MainApp
         seoMode="home"

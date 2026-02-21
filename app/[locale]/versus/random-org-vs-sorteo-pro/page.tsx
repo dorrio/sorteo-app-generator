@@ -1,7 +1,14 @@
 import { getTranslations } from 'next-intl/server';
+import dynamic from 'next/dynamic';
+import { safeJsonLdStringify } from '@/lib/utils';
+import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { routing } from '@/i18n/routing';
-import { MainApp } from "@/components/sorteo/main-app";
 import { VersusGeo } from "@/components/sorteo/versus-geo";
+
+const MainApp = dynamic(
+  () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
+  { loading: () => <AppSkeleton /> }
+)
 import { RngGeo } from "@/components/sorteo/rng-geo";
 import { SiteFooter } from "@/components/sorteo/site-footer";
 
@@ -110,10 +117,10 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
 
   return (
     <>
-      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, faqSchema]) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([articleSchema, faqSchema]) }}
       />
       <MainApp
         initialStyle="slot_machine"

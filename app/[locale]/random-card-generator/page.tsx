@@ -1,10 +1,15 @@
-import { MainApp } from '@/components/sorteo/main-app';
 import { getTranslations } from 'next-intl/server';
-import { routing } from '@/i18n/routing';
-import { SiteFooter } from '@/components/sorteo/site-footer';
-import { CardGeo } from '@/components/sorteo/card-geo';
-import { Glossary } from '@/components/sorteo/glossary';
+import dynamic from 'next/dynamic';
 import { safeJsonLdStringify } from '@/lib/utils';
+import { AppSkeleton } from "@/components/sorteo/skeletons";
+import { routing } from '@/i18n/routing';
+import { CardGeo } from '@/components/sorteo/card-geo';
+
+const MainApp = dynamic(
+  () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
+  { loading: () => <AppSkeleton /> }
+)
+import { Glossary } from '@/components/sorteo/glossary';
 
 export const dynamic = 'force-static';
 
@@ -141,6 +146,7 @@ export default async function CardPage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}

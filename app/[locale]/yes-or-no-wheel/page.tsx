@@ -1,7 +1,14 @@
 import { getTranslations } from 'next-intl/server';
+import dynamic from 'next/dynamic';
+import { safeJsonLdStringify } from '@/lib/utils';
+import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { routing } from '@/i18n/routing';
-import { MainApp } from "@/components/sorteo/main-app";
 import { YesNoGeo } from "@/components/sorteo/yes-no-geo";
+
+const MainApp = dynamic(
+  () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
+  { loading: () => <AppSkeleton /> }
+)
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
 
@@ -145,9 +152,10 @@ export default async function YesNoPage({ params }: { params: Promise<{ locale: 
 
   return (
     <>
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
         initialStyle="roulette"

@@ -12,3 +12,4 @@
 | 2026-01-29 | LCP & SEO | Enabled SSR in MainApp | Removed global blocking skeleton, implemented granular skeletons, and enabled server-side rendering of SEO content and layout. |
 | 2026-01-30 | LCP & FCP | Optimized MainApp Animations | Removed `initial={{ opacity: 0 }}` from Header, H1, and Main Section to prevent LCP delay. Removed unused `AppSkeleton` import. |
 | 2026-02-02 | TBT & Bundle | Refactored `WheelGeo` and `Glossary` to Server Components | Removed hydration cost for large text blocks and isolated `framer-motion` to small Client Islands (`WheelVisual`, `TryToolButton`). |
+| 2026-02-03 | Bundle Size | Refactored `MainApp` to remove 14 heavy Geo Component imports and fallback logic. Enforced `next/dynamic` usage in all page routes. | Drastically reduced main bundle size by tree-shaking unused tool components. |

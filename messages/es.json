@@ -51,7 +51,8 @@
             "glossary": "Glosario",
             "month": "Generador de Mes Aleatorio",
             "card": "Generador de Cartas Aleatorias",
-            "bingo": "Generador de Bingo"
+            "bingo": "Generador de Bingo",
+            "truth": "Verdad o Reto"
         }
     },
     "QuickSpecs": {
@@ -350,7 +351,9 @@
         "term_15": "Generador de Cartas Aleatorias",
         "def_15": "Herramienta digital que simula sacar una carta de una baraja estándar de 52 cartas. Usada para juegos, trucos de magia y experimentos de probabilidad.",
         "term_16": "Generador de Cartones de Bingo",
-        "def_16": "Herramienta digital que crea cartones de bingo aleatorios con números del 1 al 75. Ideal para jugar al bingo en casa o en eventos."
+        "def_16": "Herramienta digital que crea cartones de bingo aleatorios con números del 1 al 75. Ideal para jugar al bingo en casa o en eventos.",
+        "term_17": "Verdad o Reto",
+        "def_17": "Un juego clásico de fiesta donde los jugadores deben elegir entre responder una pregunta con la verdad o realizar un desafío (reto)."
     },
     "InstagramPicker": {
         "title": "Selector de Comentarios de Instagram Gratis | Ilimitado",
@@ -764,6 +767,8 @@
         "card_text": "🃏 ¡Acabo de sacar una carta al azar! Justo y Gratis. 👇",
             "bingo_title": "Generador de Bingo | Sorteo Pro",
             "bingo_text": "🎱 ¡Acabo de generar números de Bingo al azar! Gratis y Justo. 👇",
+            "truth_title": "Generador de Verdad o Reto | Sorteo Pro",
+            "truth_text": "🔥 ¿Verdad o Reto? ¡Acabo de usar este generador! Gratis y Divertido. 👇",
         "cta_share": "Compartir",
         "cta_start": "Start Giveaway"
     },
@@ -1056,5 +1061,78 @@
         "faq_1_a": "¡Sí! Ve a la configuración 'Personalizar' y activa 'Eliminar ganador' para asegurar que cada número salga solo una vez por juego.",
         "faq_2_q": "¿Es justo?",
         "faq_2_a": "Sí, usamos un RNG criptográficamente seguro para garantizar la equidad."
+    },
+    "TruthPage": {
+        "title": "Verdad o Reto Online | Generador de Preguntas (Gratis)",
+        "description": "El mejor Generador de Verdad o Reto gratis. Gira la ruleta para obtener una pregunta de verdad o un reto. Perfecto para fiestas y amigos.",
+        "h1": "Generador de Verdad o Reto",
+        "subtitle": "Gira para obtener una Verdad o un Reto aleatorio."
+    },
+    "TruthGeo": {
+        "direct_answer_title": "¿Qué es un Generador de Verdad o Reto?",
+        "direct_answer_text": "Un <tool>Generador de Verdad o Reto</tool> es una herramienta digital que selecciona aleatoriamente una pregunta o desafío para el clásico juego de fiesta. Elimina la necesidad de pensar preguntas en el momento. <brand>Sorteo Pro</brand> ofrece una mezcla de opciones divertidas y emocionantes.",
+        "cta_button": "Girar Verdad/Reto",
+        "feature_1_title": "Cientos de Preguntas",
+        "feature_1_desc": "Una base de datos masiva de verdades y retos.",
+        "feature_2_title": "Selección Justa",
+        "feature_2_desc": "Elige aleatoriamente entre Verdad o Reto.",
+        "feature_3_title": "Listo para Fiestas",
+        "feature_3_desc": "Perfecto para pijamadas y reuniones.",
+        "feature_4_title": "Compatible con Móviles",
+        "feature_4_desc": "Juega en cualquier lugar con tu teléfono.",
+        "how_to_title": "Cómo jugar Verdad o Reto online",
+        "how_to_step_1": "El generador está precargado con Verdades y Retos mezclados.",
+        "how_to_step_2": "Selecciona la vista 'Cartas' o 'Ruleta'.",
+        "how_to_step_3": "Haz clic en 'Iniciar Sorteo' para elegir una carta.",
+        "how_to_step_4": "¡Cumple el Reto o responde la Verdad!",
+        "faq_title": "Preguntas Frecuentes de Verdad o Reto",
+        "faq_1_q": "¿Son apropiadas las preguntas?",
+        "faq_1_a": "Sí, nuestra lista predeterminada está diseñada para ser generalmente segura, pero juega siempre con gente de confianza.",
+        "faq_2_q": "¿Puedo añadir las mías?",
+        "faq_2_a": "¡Sí! Haz clic en 'Personalizar' para añadir tus propias bromas o retos específicos."
+    },
+    "Truths": {
+        "0": "Verdad: ¿Cuál es tu mayor miedo?",
+        "1": "Verdad: ¿Qué es lo más vergonzoso que has hecho?",
+        "2": "Verdad: ¿Quién fue tu primer amor?",
+        "3": "Verdad: ¿Cuál es un secreto que nunca le has contado a nadie?",
+        "4": "Verdad: ¿Cuál es tu peor hábito?",
+        "5": "Verdad: ¿Quién es tu familiar favorito?",
+        "6": "Verdad: ¿Cuál es la mentira más grande que has dicho?",
+        "7": "Verdad: ¿De qué te arrepientes más?",
+        "8": "Verdad: ¿En qué lío gordo te has metido?",
+        "9": "Verdad: ¿Cuál es tu trabajo soñado?",
+        "10": "Verdad: Si pudieras ser invisible por un día, ¿qué harías?",
+        "11": "Verdad: ¿Qué es lo más asqueroso que has comido?",
+        "12": "Verdad: ¿Con quién te cambiarías la vida por un día?",
+        "13": "Verdad: ¿Cuál es tu talento más inútil?",
+        "14": "Verdad: ¿Cuál es el mejor regalo que has recibido?",
+        "15": "Verdad: ¿Cuál es el peor regalo que has recibido?",
+        "16": "Verdad: Si pudieras tener un superpoder, ¿cuál sería?",
+        "17": "Verdad: ¿Cuál es tu película favorita?",
+        "18": "Verdad: ¿Quién es tu amor platónico famoso?",
+        "19": "Verdad: ¿Cuál es tu idea de una cita perfecta?"
+    },
+    "Dares": {
+        "0": "Reto: Haz 10 flexiones.",
+        "1": "Reto: Canta el estribillo de tu canción favorita.",
+        "2": "Reto: Deja que el grupo mire tu teléfono por 1 minuto.",
+        "3": "Reto: Baila durante 30 segundos sin música.",
+        "4": "Reto: Habla con acento las próximas 3 rondas.",
+        "5": "Reto: Envía un mensaje a tu crush (o contacto aleatorio) diciendo 'Te amo'.",
+        "6": "Reto: Deja que alguien te pinte la cara con un bolígrafo.",
+        "7": "Reto: Come una cucharada de mostaza o salsa picante.",
+        "8": "Reto: Haz tu mejor imitación de una celebridad.",
+        "9": "Reto: Camina hacia atrás el resto del juego.",
+        "10": "Reto: Actúa como una gallina durante 1 minuto.",
+        "11": "Reto: Deja que alguien te peine.",
+        "12": "Reto: Intenta lamerte el codo.",
+        "13": "Reto: Mantén una plancha durante 1 minuto.",
+        "14": "Reto: Habla en rimas las próximas 3 rondas.",
+        "15": "Reto: Haz 20 saltos de tijera.",
+        "16": "Reto: Deja que el grupo publique un estado en tus redes sociales.",
+        "17": "Reto: Usa tus calcetines en las manos la próxima ronda.",
+        "18": "Reto: No parpadees durante 30 segundos.",
+        "19": "Reto: Abraza un árbol (o un mueble) durante 1 minuto."
     }
 }

@@ -1,13 +1,14 @@
 "use client"
 
-import { useSorteoStore } from "@/lib/sorteo-store"
+import type React from "react"
+import { useSorteoStore, type ThemeConfig } from "@/lib/sorteo-store"
 import { Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface TryToolButtonProps {
   children: React.ReactNode
   className?: string
-  targetStyle?: "slot-machine" | "roulette" | "cascade" | "cards" | "matrix" | "grid"
+  targetStyle?: ThemeConfig["sorteoStyle"]
   onClick?: () => void
 }
 

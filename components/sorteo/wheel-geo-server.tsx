@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server"
-import { Disc, Palette, ShieldCheck, Play, Music, CheckCircle, HelpCircle, BookOpen } from "lucide-react"
+import { Disc, Palette, ShieldCheck, Music, CheckCircle, HelpCircle, BookOpen } from "lucide-react"
 import { TryToolButton } from "@/components/sorteo/try-tool-button"
 import { WheelGeoVisual } from "@/components/sorteo/wheel-geo-visual"
 import { Link } from "@/i18n/routing"

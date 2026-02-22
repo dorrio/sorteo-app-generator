@@ -272,6 +272,8 @@
         "result": {
             "valid_title": "Valid ID",
             "copied": "Copied!",
+            "image_copied": "Image Copied!",
+            "copy_image": "Copy Image",
             "invalid_title": "ID Not Found",
             "winner_label": "Winner",
             "date_label": "Giveaway Date",

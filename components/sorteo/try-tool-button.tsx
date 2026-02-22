@@ -2,23 +2,38 @@
 
 import type React from "react"
 import { useSorteoStore, type ThemeConfig } from "@/lib/sorteo-store"
+import { Play } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
-interface TryToolButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  sorteoStyle: ThemeConfig["sorteoStyle"]
+interface TryToolButtonProps {
   children: React.ReactNode
+  className?: string
+  targetStyle?: ThemeConfig["sorteoStyle"]
+  onClick?: () => void
 }
 
-export function TryToolButton({ sorteoStyle, children, onClick, ...props }: TryToolButtonProps) {
+export function TryToolButton({
+  children,
+  className,
+  targetStyle = "roulette",
+  onClick
+}: TryToolButtonProps) {
   const { updateTheme } = useSorteoStore()
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    updateTheme({ sorteoStyle })
-    if (onClick) onClick(e)
+  const handleTry = (e: React.MouseEvent) => {
+    updateTheme({ sorteoStyle: targetStyle })
+    if (onClick) onClick()
   }
 
   return (
-    <a href="#sorteo-section" onClick={handleClick} {...props}>
-      {children}
-    </a>
+    <Button
+      asChild
+      className={className}
+    >
+      <a href="#sorteo-section" onClick={handleTry}>
+        <Play className="w-5 h-5 fill-current" />
+        {children}
+      </a>
+    </Button>
   )
 }

@@ -11,7 +11,6 @@ import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { SeoContent } from "@/components/sorteo/seo-content"
-import { WheelGeo } from "@/components/sorteo/wheel-geo"
 import { RngGeo } from "@/components/sorteo/rng-geo"
 import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
 import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo"
@@ -683,7 +682,7 @@ export function MainApp({
         {children ? children : (
           /* Fallback for Legacy Pages that don't pass children yet */
           seoMode === 'wheel' ? (
-            <> <WheelGeo /> <Glossary seoMode={seoMode} /> </>
+            <> <Glossary seoMode={seoMode} /> </>
           ) : seoMode === 'instagram' ? (
             <> <InstagramGeo /> <Glossary seoMode={seoMode} /> </>
           ) : seoMode === 'rng' ? (
@@ -711,7 +710,7 @@ export function MainApp({
           ) : seoMode === 'card' ? (
             <> <CardGeo /> <Glossary seoMode="card" /> </>
           ) : (
-            <> <WheelGeo /> <Glossary seoMode={seoMode} /> <SeoContent /> </>
+            <> <Glossary seoMode={seoMode} /> <SeoContent /> </>
           )
         )}
 

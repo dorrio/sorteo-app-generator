@@ -22,6 +22,8 @@ import {
   Download,
   Loader2,
   ImageIcon,
+  Send,
+  Linkedin
 } from "lucide-react"
 
 interface WinnerCeremonyProps {
@@ -40,7 +42,9 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const [isSharing, setIsSharing] = useState(false)
 
   useEffect(() => {
-    setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
+    // Viralis: Smart Hybrid Share - Only use native share on touch devices
+    const isTouch = typeof window !== "undefined" && window.matchMedia('(pointer: coarse)').matches
+    setCanShareNative(typeof navigator !== "undefined" && !!navigator.share && isTouch)
 
     if (showWinnerCeremony) {
       const timer = setTimeout(() => setShowContent(true), 300)
@@ -85,6 +89,10 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
   // WhatsApp: Use api.whatsapp.com for better cross-device support
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
+  // Telegram
+  const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
+  // LinkedIn
+  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`
 
   const shareNative = async () => {
     if (!navigator.share) return
@@ -144,8 +152,8 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   }
 
   const copyToClipboard = async () => {
-    // Viralis Optimization: Copy full text + url
-    await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
+    // Viralis Optimization: Copy ONLY url
+    await navigator.clipboard.writeText(shareUrl)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -485,6 +493,20 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                     <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
                       <MessageCircle className="w-4 h-4" />
                       WhatsApp
+                    </a>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Telegram">
+                      <Send className="w-4 h-4" />
+                      Telegram
+                    </a>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+                      <Linkedin className="w-4 h-4" />
+                      LinkedIn
                     </a>
                   </DropdownMenuItem>
 

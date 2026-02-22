@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
-import { WheelGeo } from "@/components/sorteo/wheel-geo";
+import { WheelGeoServer } from "@/components/sorteo/wheel-geo-server";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
 
@@ -154,7 +154,7 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}
       >
-        <WheelGeo />
+        <WheelGeoServer />
         <Glossary seoMode="wheel" />
       </MainApp>
     </>

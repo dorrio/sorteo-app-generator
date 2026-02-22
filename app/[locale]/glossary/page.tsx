@@ -4,8 +4,9 @@ import { routing } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
 import {
   BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered, GraduationCap,
-  Dices, Coins, Scissors, Globe, Calendar, Users, Spade, Mic2
+  Dices, Coins, Scissors, Globe, Calendar, Users, Spade, Mic2, Type, Gift, Layers, Flame
 } from 'lucide-react';
+import { safeJsonLdStringify } from '@/lib/utils';
 
 export const dynamic = 'force-static';
 
@@ -22,13 +23,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t('title'),
     description: t('description'),
     alternates: {
-        canonical: `/${locale}/glossary`
+      canonical: `/${locale}/glossary`
     },
     openGraph: {
-        title: t('title'),
-        description: t('description'),
-        url: `${baseUrl}/${locale}/glossary`,
-        type: "article",
+      title: t('title'),
+      description: t('description'),
+      url: `${baseUrl}/${locale}/glossary`,
+      type: "article",
     }
   };
 }
@@ -60,39 +61,68 @@ export default function GlossaryPage() {
       link: "/instagram-comment-picker"
     },
     {
-        id: "list-randomizer",
-        term: tGlossary('term_4'),
-        def: tGlossary('def_4'),
-        icon: <ListOrdered className="w-6 h-6 text-primary" />,
-        link: "/list-randomizer"
+      id: "list-randomizer",
+      term: tGlossary('term_4'),
+      def: tGlossary('def_4'),
+      icon: <ListOrdered className="w-6 h-6 text-primary" />,
+      link: "/list-randomizer"
     },
     {
-        id: "wheel",
-        term: tGlossary('term_5'),
-        def: tGlossary('def_5'),
-        icon: <HelpCircle className="w-6 h-6 text-primary" />,
-        link: "/wheel-of-names"
+<<<<<<< HEAD
+      id: "wheel",
+      term: tGlossary('term_5'),
+      def: tGlossary('def_5'),
+      icon: <HelpCircle className="w-6 h-6 text-primary" />,
+      link: "/wheel-of-names"
     },
     {
-        id: "yes-no",
-        term: tGlossary('term_6'),
-        def: tGlossary('def_6'),
-        icon: <HelpCircle className="w-6 h-6 text-primary" />,
-        link: "/yes-or-no-wheel"
+      id: "yes-no",
+      term: tGlossary('term_6'),
+      def: tGlossary('def_6'),
+      icon: <HelpCircle className="w-6 h-6 text-primary" />,
+      link: "/yes-or-no-wheel"
     },
     {
-        id: "letter",
-        term: tGlossary('term_7'),
-        def: tGlossary('def_7'),
-        icon: <BookOpen className="w-6 h-6 text-primary" />,
-        link: "/random-letter-generator"
+      id: "letter",
+      term: tGlossary('term_7'),
+      def: tGlossary('def_7'),
+      icon: <BookOpen className="w-6 h-6 text-primary" />,
+      link: "/random-letter-generator"
     },
     {
-        id: "secret-santa",
-        term: tGlossary('term_8'),
-        def: tGlossary('def_8'),
-        icon: <Users className="w-6 h-6 text-primary" />,
-        link: "/secret-santa-generator"
+      id: "secret-santa",
+      term: tGlossary('term_8'),
+      def: tGlossary('def_8'),
+      icon: <Users className="w-6 h-6 text-primary" />,
+      link: "/secret-santa-generator"
+=======
+      id: "wheel",
+      term: tGlossary('term_5'),
+      def: tGlossary('def_5'),
+      icon: <HelpCircle className="w-6 h-6 text-primary" />,
+      link: "/wheel-of-names"
+    },
+    {
+      id: "yes-no",
+      term: tGlossary('term_6'),
+      def: tGlossary('def_6'),
+      icon: <HelpCircle className="w-6 h-6 text-primary" />,
+      link: "/yes-or-no-wheel"
+    },
+    {
+      id: "letter",
+      term: tGlossary('term_7'),
+      def: tGlossary('def_7'),
+      icon: <Type className="w-6 h-6 text-primary" />,
+      link: "/random-letter-generator"
+    },
+    {
+      id: "secret-santa",
+      term: tGlossary('term_8'),
+      def: tGlossary('def_8'),
+      icon: <Gift className="w-6 h-6 text-primary" />,
+      link: "/secret-santa-generator"
+>>>>>>> origin/main
     },
     {
       id: "dice",
@@ -116,31 +146,31 @@ export default function GlossaryPage() {
       link: "/rock-paper-scissors"
     },
     {
-      id: "country",
+      id: "team",
       term: tGlossary('term_12'),
       def: tGlossary('def_12'),
+      icon: <Users className="w-6 h-6 text-primary" />,
+      link: "/team-generator"
+    },
+    {
+      id: "country",
+      term: tGlossary('term_13'),
+      def: tGlossary('def_13'),
       icon: <Globe className="w-6 h-6 text-primary" />,
       link: "/random-country-generator"
     },
     {
       id: "month",
-      term: tGlossary('term_13'),
-      def: tGlossary('def_13'),
-      icon: <Calendar className="w-6 h-6 text-primary" />,
-      link: "/random-month-generator"
-    },
-    {
-      id: "team",
       term: tGlossary('term_14'),
       def: tGlossary('def_14'),
-      icon: <Users className="w-6 h-6 text-primary" />,
-      link: "/team-generator"
+      icon: <Calendar className="w-6 h-6 text-primary" />,
+      link: "/random-month-generator"
     },
     {
       id: "card",
       term: tGlossary('term_15'),
       def: tGlossary('def_15'),
-      icon: <Spade className="w-6 h-6 text-primary" />,
+      icon: <Layers className="w-6 h-6 text-primary" />,
       link: "/random-card-generator"
     },
     {
@@ -150,128 +180,135 @@ export default function GlossaryPage() {
       icon: <Mic2 className="w-6 h-6 text-primary" />,
       link: "/bingo-number-generator"
     },
+    {
+      id: "truth",
+      term: tGlossary('term_17'),
+      def: tGlossary('def_17'),
+      icon: <Flame className="w-6 h-6 text-primary" />,
+      link: "/truth-or-dare-generator"
+    }
   ];
 
   // Schema: CollectionPage + DefinedTermSet
   const collectionSchema = {
-      '@context': 'https://schema.org',
-      '@type': 'CollectionPage',
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: t('title'),
+    description: t('description'),
+    url: 'https://sorteopro.com/glossary',
+    mainEntity: {
+      '@type': 'DefinedTermSet',
       name: t('title'),
       description: t('description'),
-      url: 'https://sorteopro.com/glossary',
-      mainEntity: {
-        '@type': 'DefinedTermSet',
-        name: t('title'),
-        description: t('description'),
-        definedTerm: terms.map(term => ({
-            '@type': 'DefinedTerm',
-            name: term.term,
-            description: term.def
-        }))
-      }
+      definedTerm: terms.map(term => ({
+        '@type': 'DefinedTerm',
+        name: term.term,
+        description: term.def
+      }))
+    }
   };
 
   // Schema: BreadcrumbList
   const breadcrumbSchema = {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Sorteo Pro",
-        "item": "https://sorteopro.com"
-      },{
-        "@type": "ListItem",
-        "position": 2,
-        "name": t('h1'),
-        "item": "https://sorteopro.com/glossary"
-      }]
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Sorteo Pro",
+      "item": "https://sorteopro.com"
+    }, {
+      "@type": "ListItem",
+      "position": 2,
+      "name": t('h1'),
+      "item": "https://sorteopro.com/glossary"
+    }]
   };
 
   // Schema: FAQPage (New Pattern)
   // Converting definitions into Questions for AI
   const faqSchema = {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: terms.map(term => ({
-          '@type': 'Question',
-          name: `What is a ${term.term}?`,
-          acceptedAnswer: {
-              '@type': 'Answer',
-              text: term.def
-          }
-      }))
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: terms.map(term => ({
+      '@type': 'Question',
+      name: `What is a ${term.term}?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: term.def
+      }
+    }))
   };
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([collectionSchema, breadcrumbSchema, faqSchema]) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([collectionSchema, breadcrumbSchema, faqSchema]) }}
       />
 
       <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-blue-900/10 to-transparent -z-10" />
 
       <section className="pt-24 pb-12 px-4 text-center">
         <div className="max-w-4xl mx-auto">
-             <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6">
-                <BookOpen className="w-4 h-4" />
-                {t('tagline')}
-             </div>
-             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-                {t('h1')}
-             </h1>
-             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                {t('subtitle')}
-             </p>
+          <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6">
+            <BookOpen className="w-4 h-4" />
+            {t('tagline')}
+          </div>
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+            {t('h1')}
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            {t('subtitle')}
+          </p>
         </div>
       </section>
 
       {/* New: Direct Answer Block (GEO) */}
       <section className="py-8 px-4 max-w-3xl mx-auto -mt-6">
-         <div className="bg-card/50 border border-primary/20 rounded-2xl p-8 shadow-sm">
-             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                 <GraduationCap className="w-6 h-6 text-primary" />
-                 {t('direct_answer_title')}
-             </h2>
-             <div className="prose prose-invert max-w-none text-muted-foreground leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: t.raw('direct_answer_text') }}
-             />
-         </div>
+        <div className="bg-card/50 border border-primary/20 rounded-2xl p-8 shadow-sm">
+          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+            <GraduationCap className="w-6 h-6 text-primary" />
+            {t('direct_answer_title')}
+          </h2>
+          <div className="prose prose-invert max-w-none text-muted-foreground leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: t.raw('direct_answer_text') }}
+          />
+        </div>
       </section>
 
       <section className="py-12 px-4 max-w-4xl mx-auto">
         <div className="grid gap-6">
-            {terms.map((item, idx) => (
-                <div key={idx} id={item.id} className="p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-colors shadow-sm">
-                    <div className="flex items-start gap-4">
-                        <div className="p-3 bg-primary/10 rounded-xl mt-1">
-                            {item.icon}
-                        </div>
-                        <div className="space-y-3">
-                            <h2 className="text-2xl font-bold text-foreground">
-                                {item.term}
-                            </h2>
-                            <p className="text-lg text-muted-foreground leading-relaxed">
-                                {item.def}
-                            </p>
-                            {item.link && (
-                                <Link href={item.link} className="inline-flex items-center text-primary hover:underline font-medium mt-2">
-                                    {t('learn_more', { tool: item.term })} →
-                                </Link>
-                            )}
-                        </div>
-                    </div>
+          {terms.map((item, idx) => (
+            <div key={idx} id={item.id} className="p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-colors shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-primary/10 rounded-xl mt-1">
+                  {item.icon}
                 </div>
-            ))}
+                <div className="space-y-3">
+                  <h2 className="text-2xl font-bold text-foreground">
+                    {item.term}
+                  </h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    {item.def}
+                  </p>
+                  {item.link && (
+                    <Link href={item.link} className="inline-flex items-center text-primary hover:underline font-medium mt-2">
+                      {t('learn_more', { tool: item.term })} →
+                    </Link>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
       <section className="py-16 px-4 text-center">
-         <h2 className="text-2xl font-bold mb-8">{t('cta_title')}</h2>
-         <Link href="/" className="inline-flex items-center justify-center bg-primary text-primary-foreground font-bold py-3 px-8 rounded-full hover:scale-105 transition-transform">
-            {t('cta_button')}
-         </Link>
+        <h2 className="text-2xl font-bold mb-8">{t('cta_title')}</h2>
+        <Link href="/" className="inline-flex items-center justify-center bg-primary text-primary-foreground font-bold py-3 px-8 rounded-full hover:scale-105 transition-transform">
+          {t('cta_button')}
+        </Link>
       </section>
     </main>
   );

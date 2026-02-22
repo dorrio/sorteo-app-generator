@@ -1,9 +1,10 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
-import { CoinGeo } from "@/components/sorteo/coin-geo";
+import { TruthDareGeo } from "@/components/sorteo/truth-dare-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+import { safeJsonLdStringify, getBaseUrl } from "@/lib/utils";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -17,13 +18,9 @@ type Props = {
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
   const { template_title, template_color } = await searchParams;
-  const t = await getTranslations({ locale, namespace: 'CoinPage' });
+  const t = await getTranslations({ locale, namespace: 'TruthPage' });
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteopro.com';
+  const baseUrl = getBaseUrl();
 
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
@@ -32,21 +29,20 @@ export async function generateMetadata({ params, searchParams }: Props) {
   const displayDescription = t('description');
 
   const ogImageUrl = new URL(`${baseUrl}/api/og`);
-  // Using yes-no for now as it maps closely to 50/50 mechanics
-  ogImageUrl.searchParams.set('type', 'yes-no');
+  ogImageUrl.searchParams.set('type', 'truth-or-dare');
   if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
 
-  const shareUrl = new URL(`${baseUrl}/${locale}/coin-flip`);
+  const shareUrl = new URL(`${baseUrl}/${locale}/truth-or-dare-generator`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
 
   return {
     title: displayTitle,
     description: displayDescription,
-    keywords: ["flip a coin", "coin flip online", "heads or tails", "cara o cruz", "cara ou coroa", "virtual coin toss", "simulate coin flip", "online coin flipper"],
+    keywords: ["truth or dare generator", "truth or dare questions", "spin the bottle app", "random truth or dare", "party game online", "verdad o reto"],
     alternates: {
-      canonical: `/${locale}/coin-flip`
+      canonical: `/${locale}/truth-or-dare-generator`
     },
     openGraph: {
       title: displayTitle,
@@ -73,23 +69,20 @@ export async function generateMetadata({ params, searchParams }: Props) {
   };
 }
 
-export default async function CoinPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function TruthPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'CoinPage' });
-  const tGeo = await getTranslations({ locale, namespace: 'CoinGeo' });
+  const t = await getTranslations({ locale, namespace: 'TruthPage' });
+  const tGeo = await getTranslations({ locale, namespace: 'TruthGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
   const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
+  const tQuestions = await getTranslations({ locale, namespace: 'TruthOrDare' });
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteopro.com';
+  const baseUrl = getBaseUrl();
 
   const softwareAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: 'Online Coin Flip by Sorteo Pro',
+    name: 'Truth or Dare Generator by Sorteo Pro',
     applicationCategory: 'GameApplication',
     operatingSystem: 'Web, iOS, Android',
     offers: {
@@ -99,10 +92,10 @@ export default async function CoinPage({ params }: { params: Promise<{ locale: s
     },
     description: t('description'),
     featureList: [
-      tGeo('feature_1'),
-      tGeo('feature_2'),
-      tGeo('feature_3'),
-      tGeo('feature_4')
+      tGeo('feature_1_title'),
+      tGeo('feature_2_title'),
+      tGeo('feature_3_title'),
+      tGeo('feature_4_title')
     ]
   };
 
@@ -118,7 +111,7 @@ export default async function CoinPage({ params }: { params: Promise<{ locale: s
       "@type": "ListItem",
       "position": 2,
       "name": t('h1'),
-      "item": `${baseUrl}/${locale}/coin-flip`
+      "item": `${baseUrl}/${locale}/truth-or-dare-generator`
     }]
   };
 
@@ -134,37 +127,37 @@ export default async function CoinPage({ params }: { params: Promise<{ locale: s
       start_cta: tShare('cta_start')
   }
 
+  // Construct truths and dares arrays
+  const truths = Array.from({ length: 10 }, (_, i) => tQuestions(`truth_${i}`));
+  const dares = Array.from({ length: 10 }, (_, i) => tQuestions(`dare_${i}`));
+
   const initialOptions = {
-      yes: "",
-      no: "",
-      heads: t('option_heads'),
-      tails: t('option_tails'),
-      rock: "",
-      paper: "",
-      scissors: ""
+      truths,
+      dares
   }
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
+        /* biome-ignore lint/security/noDangerouslySetInnerHtml: Valid JSON-LD */
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
-        initialStyle="cards"
-        seoMode="coin"
+        initialStyle="roulette"
+        seoMode="truth-or-dare"
         initialTitle={t('h1')}
         initialSubtitle={t('subtitle')}
-        shareTitle={tShare('coin_title')}
-        shareText={tShare('coin_text')}
-        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
+        shareTitle={tShare('truth_title')}
+        shareText={tShare('truth_text')}
+        customShareTextTemplate={tShare('custom_share_text')}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         initialOptions={initialOptions}
         footer={<SiteFooter />}
       >
-        <CoinGeo />
-        <Glossary seoMode="coin" />
+        <TruthDareGeo />
+        <Glossary seoMode="truth-or-dare" />
       </MainApp>
     </>
   );

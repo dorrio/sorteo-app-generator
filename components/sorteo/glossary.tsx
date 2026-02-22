@@ -4,7 +4,7 @@ import { Link } from "@/i18n/routing"
 import { safeJsonLdStringify } from "@/lib/utils"
 
 interface GlossaryProps {
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'truth-or-dare';
 }
 
 export function Glossary({ seoMode }: GlossaryProps) {
@@ -91,6 +91,11 @@ export function Glossary({ seoMode }: GlossaryProps) {
       term: t("term_14"),
       definition: t("def_14"),
     },
+    {
+      id: "truth-or-dare",
+      term: t("term_17"),
+      definition: t("def_17"),
+    },
   ]
 
   // Filter terms based on seoMode (Apex Optimization: Relevance)
@@ -115,6 +120,7 @@ export function Glossary({ seoMode }: GlossaryProps) {
     if (seoMode === 'team' && term.id === 'team') return true;
     if (seoMode === 'country' && term.id === 'country') return true;
     if (seoMode === 'month' && term.id === 'month') return true;
+    if (seoMode === 'truth-or-dare' && term.id === 'truth-or-dare') return true;
 
     // For other modes, maybe show related terms?
     // For now, keep it strict to avoid clutter.

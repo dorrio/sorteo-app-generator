@@ -114,7 +114,7 @@ function ListParamsHandler() {
 
 interface MainAppProps {
   initialStyle?: string;
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo' | 'truth-or-dare';
   children?: React.ReactNode;
   initialTitle?: string;
   initialSubtitle?: string;
@@ -134,13 +134,15 @@ interface MainAppProps {
   };
   // Translations for initial population (options)
   initialOptions?: {
-    yes: string;
-    no: string;
-    heads: string;
-    tails: string;
-    rock: string;
-    paper: string;
-    scissors: string;
+    yes?: string;
+    no?: string;
+    heads?: string;
+    tails?: string;
+    rock?: string;
+    paper?: string;
+    scissors?: string;
+    truths?: string[];
+    dares?: string[];
     // Generators that might simply get passed translated strings or just use defaults
   };
 }
@@ -183,6 +185,7 @@ export function MainApp({
   const tTeam = useTranslations("TeamGeneratorPage")
   const tInsta = useTranslations("InstagramPicker")
   const tWheel = useTranslations("WheelGeoPage")
+  const tTruth = useTranslations("TruthPage")
   const tMeta = useTranslations("Metadata")
   const tWinner = useTranslations("WinnerCeremony")
   const tShare = useTranslations("ShareContent")
@@ -261,6 +264,7 @@ export function MainApp({
       else if (seoMode === 'card') update.customTitle = tCard('h1')
       else if (seoMode === 'instagram') update.customTitle = tInsta('h1')
       else if (seoMode === 'wheel') update.customTitle = tWheel('h1')
+      else if (seoMode === 'truth-or-dare') update.customTitle = tTruth('h1')
     }
 
     if (initialSubtitle) {
@@ -281,6 +285,7 @@ export function MainApp({
       else if (seoMode === 'card') update.customSubtitle = tCard('subtitle')
       else if (seoMode === 'instagram') update.customSubtitle = tInsta('subtitle')
       else if (seoMode === 'wheel') update.customSubtitle = tWheel('subtitle')
+      else if (seoMode === 'truth-or-dare') update.customSubtitle = tTruth('subtitle')
     }
 
     if (Object.keys(update).length > 0) {
@@ -295,7 +300,7 @@ export function MainApp({
     // Detect if we just navigated to a new mode
     const modeChanged = activeTool !== seoMode
     const isEmpty = participants.length === 0
-    const isPresetTool = ['card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter', 'yes-no'].includes(seoMode) // Added card, bingo, etc.
+    const isPresetTool = ['truth-or-dare', 'card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter', 'yes-no'].includes(seoMode) // Added card, bingo, etc.
 
     // We populate if:
     // 1. The list is empty (standard behavior)
@@ -340,6 +345,20 @@ export function MainApp({
         addParticipants(BINGO_NUMBERS.map(n => ({ name: n })))
       } else if (seoMode === 'card') {
         addParticipants(CARD_DECK.map(c => ({ name: c })))
+      } else if (seoMode === 'truth-or-dare') {
+        if (initialOptions?.truths && initialOptions?.dares) {
+          // Merge and shuffle or just add them. The prompt says "merge... into a single shuffled participants list"
+          // We'll just add them all and let the user spin (which picks randomly).
+          // We can label them? e.g. "TRUTH: ..."
+          // The prompt doesn't specify labeling, just "merges... into a single shuffled participants list".
+          // I will assume they are just strings.
+          // Wait, if I shuffle here, it's fine. But addParticipants just appends.
+          // I'll combine them.
+          const allOptions = [...initialOptions.truths, ...initialOptions.dares];
+          // Simple shuffle
+          const shuffled = allOptions.sort(() => 0.5 - Math.random());
+          addParticipants(shuffled.map(s => ({ name: s })));
+        }
       } else if (isEmpty && !isPresetTool) {
         addParticipants([
           { name: "Option 1" },
@@ -402,6 +421,7 @@ export function MainApp({
       else if (seoMode === 'country') { finalShareTitle = tShare('country_title'); finalShareText = tShare('country_text'); }
       else if (seoMode === 'month') { finalShareTitle = tShare('month_title'); finalShareText = tShare('month_text'); }
       else if (seoMode === 'card') { finalShareTitle = tShare('card_title'); finalShareText = tShare('card_text'); }
+      else if (seoMode === 'truth-or-dare') { finalShareTitle = tShare('truth_title'); finalShareText = tShare('truth_text'); }
     }
 
     const defaultTitle = initialTitle || "Sorteo Pro"
@@ -478,6 +498,7 @@ export function MainApp({
     else if (seoMode === 'country') { displayTitle = tCountry('h1'); displaySubtitle = tCountry('subtitle'); }
     else if (seoMode === 'month') { displayTitle = tMonth('h1'); displaySubtitle = tMonth('subtitle'); }
     else if (seoMode === 'card') { displayTitle = tCard('h1'); displaySubtitle = tCard('subtitle'); }
+    else if (seoMode === 'truth-or-dare') { displayTitle = tTruth('h1'); displaySubtitle = tTruth('subtitle'); }
   }
 
   const bgOpacity = theme.backgroundOpacity ?? 30

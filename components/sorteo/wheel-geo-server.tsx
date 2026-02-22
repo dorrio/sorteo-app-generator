@@ -5,9 +5,11 @@ import { WheelGeoVisual } from "@/components/sorteo/wheel-geo-visual"
 import { Link } from "@/i18n/routing"
 
 export async function WheelGeoServer() {
-  const t = await getTranslations("WheelGeo")
-  const tSpecs = await getTranslations("QuickSpecs")
-  const tFaq = await getTranslations("WheelGeoPage")
+  const [t, tSpecs, tFaq] = await Promise.all([
+    getTranslations("WheelGeo"),
+    getTranslations("QuickSpecs"),
+    getTranslations("WheelGeoPage")
+  ])
 
   const features = [
     {

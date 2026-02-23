@@ -154,7 +154,8 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   }
 
   const shareInstagram = async () => {
-    await navigator.clipboard.writeText(shareText)
+    // Viralis: Copy Text + URL for Instagram (consistency with ShareButton)
+    await navigator.clipboard.writeText(shareText + " " + shareUrl)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }

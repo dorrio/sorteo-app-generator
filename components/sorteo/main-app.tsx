@@ -268,8 +268,7 @@ export function MainApp({
     if (Object.keys(update).length > 0) {
       updateTheme(update)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialStyle, updateTheme, initialTitle, initialSubtitle, seoMode])
+  }, [initialStyle, updateTheme, initialTitle, initialSubtitle, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tDice, tCoin, tRps, tCountry, tMonth, tCard, tInsta, tWheel])
 
   // Population Logic
   useEffect(() => {
@@ -337,8 +336,7 @@ export function MainApp({
     if (modeChanged) {
       setActiveTool(seoMode)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mounted, hasHydrated, initialStyle, seoMode, initialOptions, activeTool, setActiveTool, locale, addParticipants, clearParticipants])
+  }, [mounted, hasHydrated, initialStyle, seoMode, initialOptions, activeTool, setActiveTool, locale, addParticipants, clearParticipants, participants.length, tYesNo, tCoin, tRps])
 
   const startSorteo = () => {
     if (participants.length < 2) return

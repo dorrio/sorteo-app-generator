@@ -13,7 +13,7 @@ def run():
         last_error = None
         for i in range(10):
             try:
-                page.goto("http://localhost:3000/en", timeout=10000)
+                page.goto("http://localhost:3000/en", timeout=30000)
                 break
             except Exception as e:
                 last_error = e

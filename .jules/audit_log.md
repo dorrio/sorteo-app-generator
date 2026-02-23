@@ -13,3 +13,5 @@
 | 2026-01-30 | LCP & FCP | Optimized MainApp Animations | Removed `initial={{ opacity: 0 }}` from Header, H1, and Main Section to prevent LCP delay. Removed unused `AppSkeleton` import. |
 | 2026-02-12 | TBT & Bundle | Refactored `WheelGeo` and `Glossary` to Server Components | Removed hydration cost for large static content. Isolated interactivity into `TryToolButton` and `WheelGeoVisual`. |
 | 2026-05-22 | FCP & Bundle | Refactored `MainApp` to Code Split & Dynamic Import | Reduced initial JS bundle by splitting `MainApp` and removing static imports of all Geo components. Pages now lazy load the app shell. |
+| 2026-05-23 | Bundle & Runtime | Configured `next.config.mjs` & Optimized Listeners | Enabled `optimizePackageImports` for `lucide-react`/`radix-ui`. Replaced sync scroll listener in `StickyShareFooter` with throttled rAF loop. |
+| 2026-05-23 | CLS & FOUT | Refactored Font Loading in `MainApp` | Switched from inline style font injection to conditional Tailwind classes (`font-sans`/`font-display`) to improve CSSOM construction. |

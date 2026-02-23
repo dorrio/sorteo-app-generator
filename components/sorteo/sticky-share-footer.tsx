@@ -81,16 +81,25 @@ export function StickyShareFooter({ shareContent, translations, seoMode }: Stick
   }
 
   useEffect(() => {
+    let ticking = false
+
     const handleScroll = () => {
-      // Viralis: Show after scrolling 100px (reduced from 300px) to capture users on mobile faster
-      const show = window.scrollY > 100
-      setIsVisible(show)
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Viralis: Show after scrolling 100px (reduced from 300px) to capture users on mobile faster
+          const show = window.scrollY > 100
+          setIsVisible(show)
+          ticking = false
+        })
+        ticking = true
+      }
     }
 
     // Check immediately on mount (in case of anchor link or refresh)
-    handleScroll()
+    const show = window.scrollY > 100
+    setIsVisible(show)
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 

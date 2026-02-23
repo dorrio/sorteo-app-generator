@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ConfettiEffect } from "./confetti-effect"
 import { Button } from "@/components/ui/button"
-import { ShareButton } from "@/components/ui/share-button"
+import { ShareButton, type ShareButtonProps } from "@/components/ui/share-button"
 import {
   Trophy,
   Sparkles,
@@ -191,16 +191,13 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   // Construct translation object for ShareButton
   // Note: We use existing keys. If 'share_on' is missing, ShareButton has a default fallback for aria-label, but the text "Share on Instagram" is constructed manually in ShareButton.
   // We pass what we have.
-  const shareTranslations = {
+  const shareTranslations: ShareButtonProps['translations'] = {
     share: t("share_button"),
     copy: t("copy_text"),
     copied: t("copied"),
-    // shareOn: t("share_on"), // Assuming this key might not exist in WinnerCeremony namespace, so omitting to use defaults or if it breaks typescript I check.
-    // WinnerCeremony.json usually has limited keys.
-    // If I omit shareOn, ShareButton uses "Share on Instagram" (English) in aria-label construction?
-    // ShareButton: aria-label={translations.shareOn ? `${translations.shareOn} Instagram` : "Share on Instagram"}
-    // So it's safe to omit.
-  } as any // Cast to satisfy strict typing if keys are missing, though mostly they align.
+    // shareOn is optional in ShareButtonProps, so we can omit it safely or add it if available
+    // shareOn: t("share_on"),
+  }
 
   return (
     <AnimatePresence>

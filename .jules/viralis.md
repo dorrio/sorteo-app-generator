@@ -1,6 +1,6 @@
 # Viralis Journal - Growth Experiments
 
-## 2024-05-24 - [Mobile/Sharing]
+## 2026-02-14 - [Mobile/Sharing]
 **Hypothesis:** The current native share implementation (`navigator.share`) creates a "dead end" for users when it fails (e.g., unsupported file types, user cancellation, or platform quirks), reducing the K-Factor.
 **Implementation:** Implemented a "Hybrid Share" pattern in `ShareButton`.
 - **Logic:** The button attempts a Native Share first. If it fails (throwing an error other than `AbortError`), it automatically falls back to opening the Dropdown Menu with manual sharing options (Copy Link, WhatsApp, etc.).

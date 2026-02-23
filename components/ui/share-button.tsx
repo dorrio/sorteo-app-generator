@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Share2, Copy, Twitter, Facebook, MessageCircle, Check, Instagram } from "lucide-react"
 
-interface ShareButtonProps {
+export interface ShareButtonProps {
   title: string
   text: string
   url: string
@@ -28,6 +28,15 @@ interface ShareButtonProps {
     close?: string
     shareOn?: string // "Share on {platform}"
   }
+}
+
+function isAbortError(error: unknown): boolean {
+  return (
+    typeof error === 'object' &&
+    error !== null &&
+    'name' in error &&
+    (error as { name: string }).name === 'AbortError'
+  )
 }
 
 export function ShareButton({
@@ -64,12 +73,12 @@ export function ShareButton({
             url: url,
           })
         }
-      } catch (err: any) {
+      } catch (err: unknown) {
         // Viralis: Hybrid Share Pattern
         // If native share fails (e.g. not supported for files, or unknown error),
         // we fallback to the dropdown menu to ensure the user isn't dead-ended.
         // We ignore AbortError as that means the user explicitly cancelled the native dialog.
-        if (err.name !== 'AbortError') {
+        if (!isAbortError(err)) {
            setIsOpen(true)
         }
       }

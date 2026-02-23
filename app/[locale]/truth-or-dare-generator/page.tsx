@@ -1,15 +1,10 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import dynamic from 'next/dynamic';
-import { AppSkeleton } from "@/components/sorteo/skeletons";
-import { WheelGeoServer } from "@/components/sorteo/wheel-geo-server";
+import { MainApp } from "@/components/sorteo/main-app";
+import { TruthDareGeo } from "@/components/sorteo/truth-dare-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
-
-const MainApp = dynamic(
-  () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
-  { loading: () => <AppSkeleton /> }
-);
+import { safeJsonLdStringify, getBaseUrl } from "@/lib/utils";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -22,39 +17,32 @@ type Props = {
 
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
-  const { template_title, template_color, list } = await searchParams;
-  const t = await getTranslations({ locale, namespace: 'WheelGeoPage' });
+  const { template_title, template_color } = await searchParams;
+  const t = await getTranslations({ locale, namespace: 'TruthPage' });
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteopro.com';
+  const baseUrl = getBaseUrl();
 
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
-  const customList = typeof list === 'string' ? list : undefined;
 
   const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : t('title');
   const displayDescription = t('description');
 
   const ogImageUrl = new URL(`${baseUrl}/api/og`);
-  ogImageUrl.searchParams.set('type', 'wheel');
+  ogImageUrl.searchParams.set('type', 'truth-or-dare');
   if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
   if (customColor) ogImageUrl.searchParams.set('color', customColor);
-  if (customList) ogImageUrl.searchParams.set('list', customList);
 
-  const shareUrl = new URL(`${baseUrl}/${locale}/wheel-of-names`);
+  const shareUrl = new URL(`${baseUrl}/${locale}/truth-or-dare-generator`);
   if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
   if (customColor) shareUrl.searchParams.set('template_color', customColor);
-  if (customList) shareUrl.searchParams.set('list', customList);
 
   return {
     title: displayTitle,
     description: displayDescription,
-    keywords: ["wheel of names", "random picker wheel", "spin the wheel", "wheel decider", "ruleta aleatoria", "ruleta de nombres", "roleta de nomes", "random name picker", "wheel generator"],
+    keywords: ["truth or dare generator", "truth or dare questions", "spin the bottle app", "random truth or dare", "party game online", "verdad o reto"],
     alternates: {
-      canonical: `/${locale}/wheel-of-names`
+      canonical: `/${locale}/truth-or-dare-generator`
     },
     openGraph: {
       title: displayTitle,
@@ -81,23 +69,20 @@ export async function generateMetadata({ params, searchParams }: Props) {
   };
 }
 
-export default async function WheelOfNamesPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function TruthPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'WheelGeoPage' });
-  const tGeo = await getTranslations({ locale, namespace: 'WheelGeo' });
+  const t = await getTranslations({ locale, namespace: 'TruthPage' });
+  const tGeo = await getTranslations({ locale, namespace: 'TruthGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
   const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
+  const tQuestions = await getTranslations({ locale, namespace: 'TruthOrDare' });
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteopro.com';
+  const baseUrl = getBaseUrl();
 
   const softwareAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: 'Wheel of Names by Sorteo Pro',
+    name: 'Truth or Dare Generator by Sorteo Pro',
     applicationCategory: 'GameApplication',
     operatingSystem: 'Web, iOS, Android',
     offers: {
@@ -107,10 +92,10 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
     },
     description: t('description'),
     featureList: [
-      tGeo('feature_1'),
-      tGeo('feature_2'),
-      tGeo('feature_3'),
-      tGeo('feature_4')
+      tGeo('feature_1_title'),
+      tGeo('feature_2_title'),
+      tGeo('feature_3_title'),
+      tGeo('feature_4_title')
     ]
   };
 
@@ -122,46 +107,57 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
       "position": 1,
       "name": "Sorteo Pro",
       "item": `${baseUrl}/${locale}`
-    }, {
+    },{
       "@type": "ListItem",
       "position": 2,
       "name": t('h1'),
-      "item": `${baseUrl}/${locale}/wheel-of-names`
+      "item": `${baseUrl}/${locale}/truth-or-dare-generator`
     }]
   };
 
   const shareTranslations = {
-    share: tWinner('share_menu'),
-    copy: tWinner('copy_text'),
-    copied: tWinner('copied'),
-    shareOn: tWinner('share_on')
+      share: tWinner('share_menu'),
+      copy: tWinner('copy_text'),
+      copied: tWinner('copied'),
+      shareOn: tWinner('share_on')
   }
 
   const stickyTranslations = {
-    share_cta: tShare('cta_share'),
-    start_cta: tShare('cta_start')
+      share_cta: tShare('cta_share'),
+      start_cta: tShare('cta_start')
+  }
+
+  // Construct truths and dares arrays
+  const truths = Array.from({ length: 10 }, (_, i) => tQuestions(`truth_${i}`));
+  const dares = Array.from({ length: 10 }, (_, i) => tQuestions(`dare_${i}`));
+
+  const initialOptions = {
+      truths,
+      dares
   }
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
+        /* biome-ignore lint/security/noDangerouslySetInnerHtml: Valid JSON-LD */
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
         initialStyle="roulette"
-        seoMode="wheel"
+        seoMode="truth-or-dare"
         initialTitle={t('h1')}
         initialSubtitle={t('subtitle')}
-        shareTitle={tShare('wheel_title')}
-        shareText={tShare('wheel_text')}
+        shareTitle={tShare('truth_title')}
+        shareText={tShare('truth_text')}
         customShareTextTemplate={tShare('custom_share_text')}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
+        initialOptions={initialOptions}
         footer={<SiteFooter />}
       >
-        <WheelGeoServer />
-        <Glossary seoMode="wheel" />
+        <TruthDareGeo />
+        <Glossary seoMode="truth-or-dare" />
       </MainApp>
     </>
   );

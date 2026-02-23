@@ -10,6 +10,7 @@ import { ParticipantManager } from "@/components/sorteo/participant-manager"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
+// Imports managed dynamically by parent components to reduce bundle size
 import { ShareButton } from "@/components/ui/share-button"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { COUNTRIES } from "@/lib/countries"
@@ -96,7 +97,7 @@ function ListParamsHandler() {
 
 interface MainAppProps {
   initialStyle?: string;
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo' | 'truth-or-dare';
   children?: React.ReactNode;
   initialTitle?: string;
   initialSubtitle?: string;
@@ -116,13 +117,15 @@ interface MainAppProps {
   };
   // Translations for initial population (options)
   initialOptions?: {
-    yes: string;
-    no: string;
-    heads: string;
-    tails: string;
-    rock: string;
-    paper: string;
-    scissors: string;
+    yes?: string;
+    no?: string;
+    heads?: string;
+    tails?: string;
+    rock?: string;
+    paper?: string;
+    scissors?: string;
+    truths?: string[];
+    dares?: string[];
     // Generators that might simply get passed translated strings or just use defaults
   };
 }
@@ -166,6 +169,7 @@ export function MainApp({
   const tInsta = useTranslations("InstagramPicker")
   const tWheel = useTranslations("WheelGeoPage")
   const tShare = useTranslations("ShareContent")
+  const tTruth = useTranslations("TruthPage")
 
   const [mounted, setMounted] = useState(false)
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
@@ -239,6 +243,7 @@ export function MainApp({
       else if (seoMode === 'country') update.customTitle = tCountry('h1')
       else if (seoMode === 'month') update.customTitle = tMonth('h1')
       else if (seoMode === 'card') update.customTitle = tCard('h1')
+      else if (seoMode === 'truth-or-dare') update.customTitle = tTruth('h1')
       else if (seoMode === 'instagram') update.customTitle = tInsta('h1')
       else if (seoMode === 'wheel') update.customTitle = tWheel('h1')
     }
@@ -259,6 +264,7 @@ export function MainApp({
       else if (seoMode === 'country') update.customSubtitle = tCountry('subtitle')
       else if (seoMode === 'month') update.customSubtitle = tMonth('subtitle')
       else if (seoMode === 'card') update.customSubtitle = tCard('subtitle')
+      else if (seoMode === 'truth-or-dare') update.customSubtitle = tTruth('subtitle')
       else if (seoMode === 'instagram') update.customSubtitle = tInsta('subtitle')
       else if (seoMode === 'wheel') update.customSubtitle = tWheel('subtitle')
     }
@@ -275,7 +281,7 @@ export function MainApp({
     // Detect if we just navigated to a new mode
     const modeChanged = activeTool !== seoMode
     const isEmpty = participants.length === 0
-    const isPresetTool = ['card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter', 'yes-no'].includes(seoMode) // Added card, bingo, etc.
+    const isPresetTool = ['truth-or-dare', 'card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter', 'yes-no'].includes(seoMode) // Added card, bingo, etc.
 
     // We populate if:
     // 1. The list is empty (standard behavior)
@@ -320,6 +326,18 @@ export function MainApp({
         addParticipants(BINGO_NUMBERS.map(n => ({ name: n })))
       } else if (seoMode === 'card') {
         addParticipants(CARD_DECK.map(c => ({ name: c })))
+      } else if (seoMode === 'truth-or-dare') {
+        const allOptions = [
+          ...(initialOptions?.truths || []).map(t => ({ name: t })),
+          ...(initialOptions?.dares || []).map(d => ({ name: d }))
+        ]
+        // Shuffle initially for fun (Fisher-Yates)
+        const shuffled = [...allOptions]
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+        }
+        addParticipants(shuffled)
       } else if (isEmpty && !isPresetTool) {
         addParticipants([
           { name: "Option 1" },
@@ -364,7 +382,7 @@ export function MainApp({
   const getShareContent = () => {
     let finalShareText = shareText
     let finalShareTitle = shareTitle
-    let url = typeof window !== "undefined" ? window.location.href : ""
+    const url = typeof window !== "undefined" ? window.location.href : ""
 
     // Fallback logic if shareTitle/Text are defaults and we're in a specific mode without props passed
     if (shareTitle === "Sorteo Pro" && seoMode) {
@@ -382,6 +400,7 @@ export function MainApp({
       else if (seoMode === 'country') { finalShareTitle = tShare('country_title'); finalShareText = tShare('country_text'); }
       else if (seoMode === 'month') { finalShareTitle = tShare('month_title'); finalShareText = tShare('month_text'); }
       else if (seoMode === 'card') { finalShareTitle = tShare('card_title'); finalShareText = tShare('card_text'); }
+      else if (seoMode === 'truth-or-dare') { finalShareTitle = tShare('truth_title'); finalShareText = tShare('truth_text'); }
     }
 
     const defaultTitle = initialTitle || "Sorteo Pro"
@@ -458,6 +477,7 @@ export function MainApp({
     else if (seoMode === 'country') { displayTitle = tCountry('h1'); displaySubtitle = tCountry('subtitle'); }
     else if (seoMode === 'month') { displayTitle = tMonth('h1'); displaySubtitle = tMonth('subtitle'); }
     else if (seoMode === 'card') { displayTitle = tCard('h1'); displaySubtitle = tCard('subtitle'); }
+    else if (seoMode === 'truth-or-dare') { displayTitle = tTruth('h1'); displaySubtitle = tTruth('subtitle'); }
   }
 
   const bgOpacity = theme.backgroundOpacity ?? 30

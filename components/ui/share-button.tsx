@@ -4,11 +4,10 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Share2, Copy, Twitter, Facebook, MessageCircle, Check, Instagram } from "lucide-react"
+import { Share2 } from "lucide-react"
+import { ShareDropdownContent } from "@/components/ui/share-dropdown-content"
 
 interface ShareButtonProps {
   title: string
@@ -110,55 +109,16 @@ export function ShareButton({
       <DropdownMenuTrigger asChild>
         {TriggerButton}
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48">
-        <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
-          {copied ? (
-            <>
-              <Check className="w-4 h-4 text-green-500" />
-              <span className="text-green-500">{translations.copied}</span>
-            </>
-          ) : (
-            <>
-              <Copy className="w-4 h-4" />
-              {translations.copy}
-            </>
-          )}
-        </DropdownMenuItem>
-
-        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-          <a href={twitterUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">
-            <Twitter className="w-4 h-4" />
-            Twitter / X
-          </a>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-            <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
-              <Facebook className="w-4 h-4" />
-              Facebook
-            </a>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
-            <MessageCircle className="w-4 h-4" />
-            WhatsApp
-           </a>
-        </DropdownMenuItem>
-
-         <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-            <a
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={shareInstagram}
-              aria-label={translations.shareOn ? `${translations.shareOn} Instagram` : "Share on Instagram"}
-            >
-              <Instagram className="w-4 h-4" />
-              Instagram
-            </a>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
+      <ShareDropdownContent
+        copyToClipboard={copyToClipboard}
+        shareInstagram={shareInstagram}
+        copied={copied}
+        twitterUrl={twitterUrl}
+        facebookUrl={facebookUrl}
+        whatsappUrl={whatsappUrl}
+        translations={translations}
+        align="end"
+      />
     </DropdownMenu>
   )
 }

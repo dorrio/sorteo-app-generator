@@ -6,7 +6,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ConfettiEffect } from "./confetti-effect"
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { ShareDropdownContent } from "@/components/ui/share-dropdown-content"
 import {
   Trophy,
   Sparkles,
@@ -32,7 +33,8 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const { winner, theme, showWinnerCeremony } = useSorteoStore()
   const t = useTranslations("WinnerCeremony")
   const [showContent, setShowContent] = useState(false)
-  const [copied, setCopied] = useState(false)
+  const [copiedVerificationId, setCopiedVerificationId] = useState(false)
+  const [copiedShareLink, setCopiedShareLink] = useState(false)
   const [canShareNative, setCanShareNative] = useState(false)
   const [isSharing, setIsSharing] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -152,14 +154,14 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const copyToClipboard = async () => {
     // Viralis Optimization: Copy full text + url
     await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    setCopiedShareLink(true)
+    setTimeout(() => setCopiedShareLink(false), 2000)
   }
 
   const shareInstagram = async () => {
-    await navigator.clipboard.writeText(shareText)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
+    setCopiedShareLink(true)
+    setTimeout(() => setCopiedShareLink(false), 2000)
   }
 
   const handleDownload = async () => {
@@ -313,13 +315,13 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                 className="flex items-center gap-2 px-3 py-1 rounded-md bg-muted/50 cursor-pointer hover:bg-muted transition-colors border-none outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 onClick={() => {
                   navigator.clipboard.writeText(winner.verificationId!)
-                  setCopied(true)
-                  setTimeout(() => setCopied(false), 2000)
+                  setCopiedVerificationId(true)
+                  setTimeout(() => setCopiedVerificationId(false), 2000)
                 }}
                 aria-label={t("copy_text") + " " + winner.verificationId}
               >
                 <code className="text-sm font-mono text-primary">{winner.verificationId}</code>
-                {copied ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3 text-muted-foreground" />}
+                {copiedVerificationId ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3 text-muted-foreground" />}
               </button>
             </motion.div>
           )}
@@ -358,57 +360,20 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                   {t("share_button")}
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="center" className="w-48">
-                <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
-                  {copied ? (
-                    <>
-                      <Check className="w-4 h-4 text-green-500" />
-                      <span className="text-green-500">{t("copied")}</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-4 h-4" />
-                      {t("copy_text")}
-                    </>
-                  )}
-                </DropdownMenuItem>
-
-                {/* Semantic Fix: Real links for bots and users */}
-                <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                  <a href={twitterUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">
-                    <Twitter className="w-4 h-4" />
-                    Twitter / X
-                  </a>
-                </DropdownMenuItem>
-
-                <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                  <a
-                    href="https://www.instagram.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={shareInstagram}
-                    aria-label="Share on Instagram"
-                  >
-                    <Instagram className="w-4 h-4" />
-                    Instagram
-                  </a>
-                </DropdownMenuItem>
-
-                <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                  <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
-                    <Facebook className="w-4 h-4" />
-                    Facebook
-                  </a>
-                </DropdownMenuItem>
-
-                <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
-                    <MessageCircle className="w-4 h-4" />
-                    WhatsApp
-                  </a>
-                </DropdownMenuItem>
-
-              </DropdownMenuContent>
+              <ShareDropdownContent
+                copyToClipboard={copyToClipboard}
+                shareInstagram={shareInstagram}
+                copied={copiedShareLink}
+                twitterUrl={twitterUrl}
+                facebookUrl={facebookUrl}
+                whatsappUrl={whatsappUrl}
+                translations={{
+                  copy: t("copy_text"),
+                  copied: t("copied"),
+                  shareOn: t("share_button")
+                }}
+                align="center"
+              />
             </DropdownMenu>
 
             {/* Viralis: Exposed Download Certificate Button (Visible on Mobile & Desktop) */}

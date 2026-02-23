@@ -1,5 +1,5 @@
 import time
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, TimeoutError
 
 def run_test():
     with sync_playwright() as p:
@@ -32,8 +32,17 @@ def run_test():
         # Assuming server is running on localhost:3000
         page.goto("http://localhost:3000")
 
-        # Wait for hydration
-        page.wait_for_timeout(5000)
+        # Wait for hydration - improved
+        print("Waiting for page to be ready...")
+        try:
+             # Wait for the share button to be attached to the DOM, which indicates main content is loaded
+             # Using title attribute as it is more stable than text content for this button
+             page.wait_for_selector("header button[title='Share...']", timeout=10000)
+        except TimeoutError:
+             print("Timeout waiting for page hydration")
+             page.screenshot(path="verification_timeout.png")
+             browser.close()
+             return
 
         print("Looking for share button in header...")
         # The share button in header has aria-label="Share..."
@@ -53,18 +62,23 @@ def run_test():
             share_btn.first.click()
 
             # 3. Verify Dropdown is open
-            # Dropdown content usually has role="menu" or check for specific items like "Copy Link"
             try:
                 # Wait for dropdown to be visible
-                dropdown_item = page.locator("text=Copy Link") # "Copy Link" is in translations
+                # Using role="menuitem" which is standard for DropdownMenu items
+                # We specifically look for the one containing the Twitter icon/link as a proxy for the menu being open
+                dropdown_item = page.locator("a[aria-label='Share on Twitter']")
                 dropdown_item.wait_for(state="visible", timeout=5000)
                 print("SUCCESS: Dropdown menu opened after native share failure!")
 
                 # Take screenshot
                 page.screenshot(path="verification_share_success.png")
-            except Exception as e:
-                print(f"FAILURE: Dropdown menu did not open. Error: {e}")
+            except TimeoutError as e:
+                print(f"FAILURE: Dropdown menu did not open (Timeout).")
                 page.screenshot(path="verification_share_failure.png")
+            except Exception as e:
+                print(f"FAILURE: Unexpected error: {e}")
+                page.screenshot(path="verification_error.png")
+
         else:
             print("FAILURE: Share button not found.")
             page.screenshot(path="verification_not_found.png")

@@ -1,9 +1,15 @@
 import { getTranslations } from 'next-intl/server';
-import { MainApp } from "@/components/sorteo/main-app";
+import dynamic from 'next/dynamic';
+import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { WheelGeoServer } from "@/components/sorteo/wheel-geo-server";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SeoContent } from "@/components/sorteo/seo-content";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+
+const MainApp = dynamic(
+  () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
+  { loading: () => <AppSkeleton /> }
+);
 
 type Props = {
   params: Promise<{ locale: string }>

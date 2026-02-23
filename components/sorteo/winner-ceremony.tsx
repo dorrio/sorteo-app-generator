@@ -147,17 +147,27 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   }
 
   const copyToClipboard = async () => {
-    // Viralis Optimization: Copy ONLY the URL
-    await navigator.clipboard.writeText(shareUrl)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      // Viralis Optimization: Copy ONLY the URL
+      await navigator.clipboard.writeText(shareUrl)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err)
+      setCopied(false)
+    }
   }
 
   const shareInstagram = async () => {
-    // Viralis: Copy Text + URL for Instagram (consistency with ShareButton)
-    await navigator.clipboard.writeText(shareText + " " + shareUrl)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      // Viralis: Copy Text + URL for Instagram (consistency with ShareButton)
+      await navigator.clipboard.writeText(shareText + " " + shareUrl)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err)
+      setCopied(false)
+    }
   }
 
   const handleDownload = async () => {
@@ -309,10 +319,15 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
               <button
                 type="button"
                 className="flex items-center gap-2 px-3 py-1 rounded-md bg-muted/50 cursor-pointer hover:bg-muted transition-colors border-none outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                onClick={() => {
-                  navigator.clipboard.writeText(winner.verificationId!)
-                  setCopied(true)
-                  setTimeout(() => setCopied(false), 2000)
+                onClick={async () => {
+                  try {
+                    await navigator.clipboard.writeText(winner.verificationId!)
+                    setCopied(true)
+                    setTimeout(() => setCopied(false), 2000)
+                  } catch (err) {
+                    console.error('Failed to copy ID:', err)
+                    setCopied(false)
+                  }
                 }}
                 aria-label={t("copy_text") + " " + winner.verificationId}
               >

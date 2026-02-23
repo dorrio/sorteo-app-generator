@@ -68,19 +68,27 @@ export function ShareButton({
   }
 
   const copyToClipboard = async () => {
-    // Viralis Optimization: Copy ONLY the URL to reduce friction for manual sharing
-    // Users often want just the link to paste into Discord/Slack/Email without the "Check this out" prefix.
-    await navigator.clipboard.writeText(url)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      // Viralis Optimization: Copy ONLY the URL to reduce friction for manual sharing
+      // Users often want just the link to paste into Discord/Slack/Email without the "Check this out" prefix.
+      await navigator.clipboard.writeText(url)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      // Fail silently or log if needed
+    }
   }
 
   const shareInstagram = async () => {
-      // Instagram doesn't have a direct share URL for text/links easily on web
-      // Best practice is to copy to clipboard and open instagram
-      await navigator.clipboard.writeText(text + " " + url)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      try {
+        // Instagram doesn't have a direct share URL for text/links easily on web
+        // Best practice is to copy to clipboard and open instagram
+        await navigator.clipboard.writeText(text + " " + url)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      } catch (err) {
+        // Fail silently or log
+      }
   }
 
   // Pre-calculate Social URLs

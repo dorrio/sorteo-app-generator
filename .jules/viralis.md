@@ -19,3 +19,10 @@
 2. Updated `generateMetadata` in all tool pages to read `template_title` and `template_color` and pass them to `api/og` and `og:url`.
 3. Standardized translation keys across `en`, `es`, `pt` to support these dynamic titles without build errors.
 **Outcome:** Every tool in the suite now supports full viral context persistence. A user sharing a "Christmas Dice Game" will see exactly that in the link preview, not just "Dice Roller".
+
+## 2026-02-05 - [Sharing/Platform]
+**Hypothesis:** If we add explicit sharing options for Telegram and LinkedIn, users who prefer these networks will share more frequently, and changing the 'Copy Link' feature to copy only the URL will reduce 404 errors caused by pasting the previous 'text + URL' combo directly into browsers.
+**Implementation:**
+1. Updated `components/ui/share-button.tsx` to add Telegram and LinkedIn `DropdownMenuItem` using respective URLs, and changed `copyToClipboard` to copy only `url`.
+2. Updated `components/sorteo/winner-ceremony.tsx` similarly to add Telegram and LinkedIn, and changed `copyToClipboard` to copy only `shareUrl`.
+**Outcome:** Expect increased conversion rates from LinkedIn and Telegram due to reduced social friction, and decreased bounce rates caused by malformed pasted URLs.

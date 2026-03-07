@@ -25,8 +25,14 @@
 **Action:** Created dedicated `/random-country-generator` landing page with `CountryGeo` component, specialized Schema, and targeted Metadata.
 **GEO Impact:** Optimized for "Random Country Picker" and "Geography Quiz" queries with Direct Answer blocks.
 
-## 2025-05-29 - [Strategy/Cluster Content]
-**Gap:** Competitors (Random.org, Solitaire tools) have dedicated "Random Card" and "Bingo Number" pages. We missed high-volume, low-difficulty keywords like "Bingo Caller" and "Pick a Card".
+## 2025-05-29 - [Strategy/Semantics]
+**Gap:** The Glossary was outdated and missing definitions for 6 new tools (Dice, Coin, RPS, Team, Country, Month), reducing topical authority and internal linking opportunities.
+**Action:** Expanded Glossary with 6 new terms, updated `Glossary.tsx` component to filter contextually, and enriched `GlossaryPage` with links and icons.
+**GEO Impact:** Optimized for "What is a Random Country Generator?" and similar definition-based queries which LLMs frequently cite.
+
+## 2025-05-30 - [Strategy/Cluster Content]
+**Gap:** Competitors (Random.org, Pinetools) have dedicated "Random Card" and "Bingo Number" generators. We missed high-volume, low-difficulty keywords.
+
 **Action:** Created dedicated `/random-card-generator` and `/bingo-number-generator` landing pages with `CardGeo` and `BingoGeo` components, specialized Schema, and targeted Metadata.
 **GEO Impact:** Optimized for "Pick a Card", "Bingo Caller", and "Deck of Cards Online" queries with Direct Answer blocks.
 

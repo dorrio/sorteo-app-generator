@@ -15,3 +15,4 @@
 | 2026-02-03 | Bundle Size | Refactored `MainApp` to composition pattern | Removed 16 heavy component imports (Geo components) from Client Bundle. Enabled font-display: swap and safe JSON-LD. |
 | 2026-02-04 | Tree Shaking | Enabled `optimizePackageImports` in `next.config.mjs` | Improved tree-shaking for `lucide-react`, `date-fns`, `framer-motion`, and `@radix-ui`. |
 | 2026-02-05 | Bundle Size & TBT | Refactored MainApp to remove static imports of Geo components | Eliminated fallback logic and static imports of heavy content components from the client bundle. All pages now pass content as children. |
+

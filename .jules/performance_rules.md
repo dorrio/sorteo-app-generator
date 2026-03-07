@@ -18,9 +18,9 @@
 *   **Composition Pattern:** Always pass heavy content (e.g., Geo components, Articles, SEO text) as Server Component `children` to Client Component shells (`MainApp`). Never import heavy components directly inside a `"use client"` file.
 *   **Static Content Injection:** Always pass heavy static content (SEO text, FAQ) as `children` to Client Components (like `MainApp`). Avoid importing them statically inside the Client Component to prevent bundle bloat.
 
+
 ## ❌ BAD PATTERNS (Avoid This)
 *   **Sync Imports:** Importing heavy widgets directly in the main bundle.
-*   **Large Fallback Blocks:** Using large conditional rendering blocks (e.g., `seoMode === 'wheel' ? <WheelGeo /> ...`) inside Client Components. This forces the bundler to include all conditional components. Use Composition (`children`) instead.
 *   **Raw `<img>`:** Using standard image tags without explicit dimensions.
 *   **Layout Shift:** Missing skeleton states for dynamic content.
 *   **LCP Blocking:** Using entrance animations (e.g., `initial={{ opacity: 0 }}`) on LCP elements (Header, H1, Hero Image).

@@ -18,7 +18,7 @@ import { SeoContent } from "@/components/sorteo/seo-content"
 import { ShareButton } from "@/components/ui/share-button"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { COUNTRIES } from "@/lib/countries"
-import { Sparkles, Settings2, Play, Trophy, ShieldCheck, Share2 } from "lucide-react"
+import { Sparkles, Settings2, Play, Trophy, ShieldCheck } from "lucide-react"
 import { useTranslations, useLocale } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
@@ -158,6 +158,23 @@ export function MainApp({
 }: MainAppProps) {
   const locale = useLocale()
   const t = useTranslations("HomePage")
+  const tYesNo = useTranslations("YesNoPage")
+  const tLetter = useTranslations("LetterGeneratorPage")
+  const tDice = useTranslations("DicePage")
+  const tCoin = useTranslations("CoinPage")
+  const tRps = useTranslations("RpsPage")
+  const tCountry = useTranslations("CountryPage")
+  const tMonth = useTranslations("MonthPage")
+  const tCard = useTranslations("CardPage")
+  const tRng = useTranslations("RngPage")
+  const tList = useTranslations("ListRandomizerPage")
+  const tSecret = useTranslations("SecretSantaPage")
+  const tTeam = useTranslations("TeamGeneratorPage")
+  const tInsta = useTranslations("InstagramPicker")
+  const tWheel = useTranslations("WheelGeoPage")
+  const tShare = useTranslations("ShareContent")
+
+
   const [mounted, setMounted] = useState(false)
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
 
@@ -220,7 +237,7 @@ export function MainApp({
     if (Object.keys(update).length > 0) {
       updateTheme(update)
     }
-  }, [initialStyle, updateTheme, initialTitle, initialSubtitle])
+  }, [initialStyle, updateTheme, initialTitle, initialSubtitle, seoMode, tYesNo, tLetter, tRng, tList, tSecret, tTeam, tDice, tCoin, tRps, tCountry, tMonth, tCard, tInsta, tWheel])
 
   // Separate effect for populating dummy data if empty on a specific landing page
   // This ensures the Wheel is visible immediately (UX Best Practice)
@@ -292,8 +309,7 @@ export function MainApp({
     if (modeChanged) {
       setActiveTool(seoMode)
     }
-
-  }, [mounted, hasHydrated, initialStyle, seoMode, initialOptions, activeTool, setActiveTool, locale, addParticipants, clearParticipants])
+  }, [mounted, hasHydrated, initialStyle, seoMode, initialOptions, activeTool, setActiveTool, locale, addParticipants, clearParticipants, participants.length, tYesNo, tCoin, tRps])
 
   const startSorteo = () => {
     if (participants.length < 2) return
@@ -321,7 +337,8 @@ export function MainApp({
   // Determine share content based on seoMode
   const getShareContent = () => {
     let finalShareText = shareText
-    let url = typeof window !== "undefined" ? window.location.href : ""
+    let finalShareTitle = shareTitle
+    const url = typeof window !== "undefined" ? window.location.href : ""
 
     const defaultTitle = initialTitle || "Sorteo Pro"
     const isCustomTitle = theme.customTitle && theme.customTitle !== defaultTitle
@@ -356,7 +373,7 @@ export function MainApp({
           text: finalShareText,
           url: urlObj.toString()
         }
-      } catch (e) {
+      } catch {
         // Fallback to current url if parsing fails
       }
     }

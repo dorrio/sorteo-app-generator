@@ -495,8 +495,8 @@ export function MainApp({
       case "Lato":
       case "Poppins":
       case "system-ui":
-        return { className: "", style: { fontFamily: "system-ui, sans-serif" } as React.CSSProperties }
-      default: return { className: "font-display", style: {} }
+        return { className: undefined, style: { fontFamily: "system-ui, sans-serif" } as React.CSSProperties }
+      default: return { className: undefined, style: { fontFamily: "system-ui, sans-serif" } as React.CSSProperties }
     }
   }
 
@@ -533,7 +533,7 @@ export function MainApp({
       {/* Main content */}
       <div
         ref={contentRef}
-        className={`relative z-10 ${fontClassName}`}
+        className={`relative z-10${fontClassName ? ` ${fontClassName}` : ""}`}
         style={fontStyle}
       >
         {/* Header */}

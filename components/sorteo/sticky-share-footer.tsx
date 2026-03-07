@@ -82,10 +82,13 @@ export function StickyShareFooter({ shareContent, translations, seoMode }: Stick
 
   useEffect(() => {
     let ticking = false
+    let rafId: number | null = null
+    let mounted = true
 
     const handleScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(() => {
+        rafId = window.requestAnimationFrame(() => {
+          if (!mounted) return
           // Viralis: Show after scrolling 100px (reduced from 300px) to capture users on mobile faster
           const show = window.scrollY > 100
           setIsVisible(show)
@@ -100,7 +103,13 @@ export function StickyShareFooter({ shareContent, translations, seoMode }: Stick
     setIsVisible(show)
 
     window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => {
+      mounted = false
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId)
+      }
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [])
 
   const scrollToTop = () => {

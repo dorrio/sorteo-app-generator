@@ -4,7 +4,9 @@ import { Copy, Check, Twitter, Facebook, MessageCircle, Instagram, Share2, Image
 interface ShareDropdownContentProps {
   copyToClipboard: () => Promise<void>
   shareInstagram: () => Promise<void>
+  /** Viralis: Optional handler for native system share (e.g. on Desktop Safari) */
   onSystemShare?: () => Promise<void>
+  /** Viralis: Optional handler to copy the generated OG image to clipboard */
   onCopyImage?: () => Promise<void>
   copied: boolean
   imageCopied?: boolean

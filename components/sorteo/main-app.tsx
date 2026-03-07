@@ -484,6 +484,24 @@ export function MainApp({
   const bgBlur = theme.backgroundBlur ?? 0
   const participantDisplay = theme.participantDisplay ?? "list"
 
+  // Font Optimization: Use classes for preloaded fonts to avoid FOUT/Layout Shifts
+  const getFontConfig = () => {
+    switch (theme.fontFamily) {
+      case "Inter": return { className: "font-sans", style: {} }
+      case "Space Grotesk": return { className: "font-display", style: {} }
+      case "Roboto":
+      case "Montserrat":
+      case "Open Sans":
+      case "Lato":
+      case "Poppins":
+      case "system-ui":
+        return { className: undefined, style: { fontFamily: "system-ui, sans-serif" } as React.CSSProperties }
+      default: return { className: undefined, style: { fontFamily: "system-ui, sans-serif" } as React.CSSProperties }
+    }
+  }
+
+  const { className: fontClassName, style: fontStyle } = getFontConfig()
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       <Suspense fallback={null}>
@@ -515,19 +533,8 @@ export function MainApp({
       {/* Main content */}
       <div
         ref={contentRef}
-        className="relative z-10"
-        style={{
-          fontFamily:
-            theme.fontFamily === "Inter" ? "var(--font-inter)" :
-              theme.fontFamily === "Space Grotesk" ? "var(--font-display)" :
-                theme.fontFamily === "Roboto" ? "system-ui, sans-serif" :
-                  theme.fontFamily === "Montserrat" ? "system-ui, sans-serif" :
-                    theme.fontFamily === "Open Sans" ? "system-ui, sans-serif" :
-                      theme.fontFamily === "Lato" ? "system-ui, sans-serif" :
-                        theme.fontFamily === "Poppins" ? "system-ui, sans-serif" :
-                          theme.fontFamily === "system-ui" ? "system-ui, sans-serif" :
-                            "var(--font-display)"
-        }}
+        className={`relative z-10${fontClassName ? ` ${fontClassName}` : ""}`}
+        style={fontStyle}
       >
         {/* Header */}
         <header className="border-b border-border/50 backdrop-blur-sm bg-background/50">

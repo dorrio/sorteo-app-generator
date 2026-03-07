@@ -42,6 +42,9 @@ const nextConfig = {
       '@radix-ui/react-tooltip',
     ],
   },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
 };
 
 export default withNextIntl(nextConfig);

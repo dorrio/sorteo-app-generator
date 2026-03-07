@@ -81,6 +81,53 @@ module.exports = {
             alternateRefs: alternateRefs,
         }
     },
+    additionalPaths: async (config) => {
+        const result = [];
+        const CORE_TOOLS = [
+            'instagram-comment-picker',
+            'wheel-of-names',
+            'glossary',
+            'random-number-generator',
+            'list-randomizer',
+            'secret-santa-generator',
+            'team-generator',
+            'yes-or-no-wheel',
+            'random-letter-generator',
+            'dice-roller',
+            'coin-flip',
+            'rock-paper-scissors',
+            'random-country-generator',
+            'random-month-generator',
+            'random-card-generator',
+            'bingo-number-generator',
+            'truth-or-dare-generator',
+            'versus',
+            'alternativa-appsorteos',
+            'alternativa-wheel-of-names'
+        ];
+        const locales = ['en', 'es', 'pt'];
+
+        for (const locale of locales) {
+            for (const tool of CORE_TOOLS) {
+                const path = `/${locale}/${tool}`;
+
+                const alternateRefs = locales.map(altLocale => ({
+                    hreflang: altLocale,
+                    href: `${config.siteUrl}/${altLocale}/${tool}`,
+                    hrefIsAbsolute: true
+                }));
+
+                result.push({
+                    loc: path,
+                    changefreq: 'weekly',
+                    priority: 0.9,
+                    lastmod: new Date().toISOString(),
+                    alternateRefs: alternateRefs
+                });
+            }
+        }
+        return result;
+    },
     robotsTxtOptions: {
         policies: [
             { userAgent: "*", allow: "/" },

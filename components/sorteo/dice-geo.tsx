@@ -1,11 +1,11 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Lock, Zap, RefreshCw, Smartphone, HelpCircle, CheckCircle } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Link } from "@/i18n/routing"
+import { safeJsonLdStringify } from "@/lib/utils"
 
 export function DiceGeo() {
   const t = useTranslations("DiceGeo")
@@ -62,15 +62,13 @@ export function DiceGeo() {
 
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
       <div className="max-w-4xl mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
           className="bg-card/30 backdrop-blur-xl border border-primary/20 rounded-3xl p-8 md:p-12 shadow-2xl"
         >
           {/* Direct Answer Block (GEO) */}
@@ -163,12 +161,7 @@ export function DiceGeo() {
              </dl>
           </div>
 
-        </motion.div>
-      </div>
-
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        </div>
       </div>
     </section>
   )

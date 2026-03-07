@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl"
 import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
+import { safeJsonLdStringify } from "@/lib/utils"
 
 interface GlossaryProps {
   seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
@@ -51,6 +52,16 @@ export function Glossary({ seoMode }: GlossaryProps) {
       definition: t("def_8"),
     },
     {
+      id: "card",
+      term: t("term_15"),
+      definition: t("def_15"),
+    },
+    {
+      id: "bingo",
+      term: t("term_16"),
+      definition: t("def_16"),
+    },
+    {
       id: "dice",
       term: t("term_9"),
       definition: t("def_9"),
@@ -66,29 +77,19 @@ export function Glossary({ seoMode }: GlossaryProps) {
       definition: t("def_11"),
     },
     {
-      id: "country",
+      id: "team",
       term: t("term_12"),
       definition: t("def_12"),
     },
     {
-      id: "month",
+      id: "country",
       term: t("term_13"),
       definition: t("def_13"),
     },
     {
-      id: "team",
+      id: "month",
       term: t("term_14"),
       definition: t("def_14"),
-    },
-    {
-      id: "card",
-      term: t("term_15"),
-      definition: t("def_15"),
-    },
-    {
-      id: "bingo",
-      term: t("term_16"),
-      definition: t("def_16"),
     },
   ]
 
@@ -108,14 +109,12 @@ export function Glossary({ seoMode }: GlossaryProps) {
     if (seoMode === 'secret-santa' && term.id === 'secret-santa') return true;
     if (seoMode === 'card' && term.id === 'card') return true;
     if (seoMode === 'bingo' && term.id === 'bingo') return true;
-
-    // Expanded logic for new tools
-    if (seoMode === 'dice' && (term.id === 'dice' || term.id === 'rng')) return true;
-    if (seoMode === 'coin' && (term.id === 'coin' || term.id === 'yes-no')) return true;
+    if (seoMode === 'dice' && (term.id === 'dice' || term.id === 'rng')) return true; // Dice is a form of RNG
+    if (seoMode === 'coin' && term.id === 'coin') return true;
     if (seoMode === 'rps' && term.id === 'rps') return true;
+    if (seoMode === 'team' && term.id === 'team') return true;
     if (seoMode === 'country' && term.id === 'country') return true;
     if (seoMode === 'month' && term.id === 'month') return true;
-    if (seoMode === 'team' && (term.id === 'team' || term.id === 'list')) return true;
 
     // For other modes, maybe show related terms?
     // For now, keep it strict to avoid clutter.
@@ -141,7 +140,7 @@ export function Glossary({ seoMode }: GlossaryProps) {
     <section className="w-full py-12 px-4 border-t border-border/30 bg-background">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
       <div className="max-w-5xl mx-auto space-y-8">
         <div className="flex items-center justify-between mb-6">

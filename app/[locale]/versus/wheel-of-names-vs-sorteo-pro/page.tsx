@@ -1,9 +1,15 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import { MainApp } from "@/components/sorteo/main-app";
+import nextDynamic from "next/dynamic";
+import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { VersusGeo } from "@/components/sorteo/versus-geo";
 import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+
+const MainApp = nextDynamic(
+  () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
+  { loading: () => <AppSkeleton /> }
+);
 
 export const dynamic = 'force-static';
 

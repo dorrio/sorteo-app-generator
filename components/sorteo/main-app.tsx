@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useState, Suspense, useRef } from "react"
+import { useCallback, useEffect, useMemo, useState, Suspense, useRef } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { motion } from "framer-motion"
@@ -381,7 +381,7 @@ export function MainApp({
   }
 
   // Determine share content based on seoMode
-  const getShareContent = () => {
+  const shareContent = useMemo(() => {
     let finalShareText = shareText
     let finalShareTitle = shareTitle
     let url = typeof window !== "undefined" ? window.location.href : ""
@@ -423,10 +423,8 @@ export function MainApp({
 
         // 2. Content: Shareable Participant List (Deep Linking)
         if (participants.length > 0 && participants.length <= 100) {
-          // We only share the list if it fits within URL limits
           const names = participants.map(p => p.name)
           const encoded = encodeURIComponent(JSON.stringify(names))
-          // Safety limit for URL length (browser limits usually ~2000)
           if (encoded.length < 1500) {
             urlObj.searchParams.set('list', encoded)
           }
@@ -447,9 +445,7 @@ export function MainApp({
       text: finalShareText,
       url: url
     }
-  }
-
-  const shareContent = getShareContent()
+  }, [shareTitle, shareText, seoMode, tShare, initialTitle, theme.customTitle, theme.primaryColor, customShareTextTemplate, participants])
 
   // Full Sticky Translations Object
   const fullStickyTranslations = {
@@ -485,7 +481,7 @@ export function MainApp({
   const participantDisplay = theme.participantDisplay ?? "list"
 
   // Font Optimization: Use classes for preloaded fonts to avoid FOUT/Layout Shifts
-  const getFontConfig = () => {
+  const { className: fontClassName, style: fontStyle } = useMemo(() => {
     switch (theme.fontFamily) {
       case "Inter": return { className: "font-sans", style: {} }
       case "Space Grotesk": return { className: "font-display", style: {} }
@@ -498,9 +494,7 @@ export function MainApp({
         return { className: undefined, style: { fontFamily: "system-ui, sans-serif" } as React.CSSProperties }
       default: return { className: undefined, style: { fontFamily: "system-ui, sans-serif" } as React.CSSProperties }
     }
-  }
-
-  const { className: fontClassName, style: fontStyle } = getFontConfig()
+  }, [theme.fontFamily])
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">

@@ -3,7 +3,7 @@
 import type React from "react"
 import { useTranslations } from "next-intl"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
@@ -44,15 +44,15 @@ export function VisualEditor() {
   const [imageUrlInput, setImageUrlInput] = useState("")
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  const tabs = [
+  const tabs = useMemo(() => [
     { id: "presets" as const, label: t("tabs.presets"), icon: Crown },
     { id: "colors" as const, label: t("tabs.colors"), icon: Palette },
     { id: "text" as const, label: t("tabs.text"), icon: Type },
     { id: "effects" as const, label: t("tabs.effects"), icon: Sparkles },
     { id: "background" as const, label: t("tabs.background"), icon: ImageIcon },
-  ]
+  ], [t])
 
-  const presets = [
+  const presets = useMemo(() => [
     {
       id: "luxury-gold" as const,
       name: t("presets.luxury_gold"),
@@ -95,9 +95,9 @@ export function VisualEditor() {
       colors: ["#90EE90", "#228B22", "#0D1F0D"],
       icon: Leaf,
     },
-  ]
+  ], [t])
 
-  const sorteoStyles = [
+  const sorteoStyles = useMemo(() => [
     {
       id: "slot-machine" as const,
       name: t("styles.slot_machine"),
@@ -134,7 +134,7 @@ export function VisualEditor() {
       description: t("styles.grid_desc"),
       icon: LayoutGrid,
     },
-  ]
+  ], [t])
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]

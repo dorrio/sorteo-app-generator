@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
@@ -77,11 +77,11 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   }
 
   // Pre-calculate Social URLs for SEO (Link Juice) & Accessibility
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`
-  // Facebook requires 'u' param
-  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
-  // WhatsApp: Use api.whatsapp.com for better cross-device support
-  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
+  const { twitterUrl, facebookUrl, whatsappUrl } = useMemo(() => ({
+    twitterUrl: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
+    facebookUrl: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`,
+    whatsappUrl: `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`,
+  }), [shareText, shareUrl])
 
   const shareNative = async () => {
     if (!navigator.share) return

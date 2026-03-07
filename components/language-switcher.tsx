@@ -11,16 +11,16 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Languages } from "lucide-react"
 
+const languages = [
+    { code: "en", label: "English" },
+    { code: "es", label: "Español" },
+    { code: "pt", label: "Português" },
+] as const
+
 export function LanguageSwitcher() {
     const locale = useLocale()
     const pathname = usePathname()
     const t = useTranslations("LanguageSwitcher")
-
-    const languages = [
-        { code: "en", label: "English" },
-        { code: "es", label: "Español" },
-        { code: "pt", label: "Português" },
-    ]
 
     return (
         <DropdownMenu>

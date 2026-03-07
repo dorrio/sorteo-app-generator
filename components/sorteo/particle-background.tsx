@@ -66,7 +66,11 @@ export function ParticleBackground() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      particles.forEach((p, i) => {
+      const maxDist = 150
+      const maxDistSq = maxDist * maxDist
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i]
         p.x += p.vx
         p.y += p.vy
 
@@ -78,21 +82,23 @@ export function ParticleBackground() {
         ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${p.opacity})`
         ctx.fill()
 
-        // Draw connections
-        particles.slice(i + 1).forEach((p2) => {
+        // Draw connections (squared distance to avoid sqrt per pair)
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j]
           const dx = p.x - p2.x
           const dy = p.y - p2.y
-          const dist = Math.sqrt(dx * dx + dy * dy)
+          const distSq = dx * dx + dy * dy
 
-          if (dist < 150) {
+          if (distSq < maxDistSq) {
+            const dist = Math.sqrt(distSq)
             ctx.beginPath()
             ctx.moveTo(p.x, p.y)
             ctx.lineTo(p2.x, p2.y)
-            ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${0.1 * (1 - dist / 150)})`
+            ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${0.1 * (1 - dist / maxDist)})`
             ctx.stroke()
           }
-        })
-      })
+        }
+      }
 
       animationId = requestAnimationFrame(animate)
     }

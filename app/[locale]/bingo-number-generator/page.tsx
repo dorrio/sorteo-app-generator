@@ -1,9 +1,15 @@
-import { MainApp } from '@/components/sorteo/main-app';
+import nextDynamic from 'next/dynamic';
+import { AppSkeleton } from '@/components/sorteo/skeletons';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { SiteFooter } from '@/components/sorteo/site-footer';
 import { BingoGeo } from '@/components/sorteo/bingo-geo';
 import { Glossary } from '@/components/sorteo/glossary';
+
+const MainApp = nextDynamic(
+  () => import('@/components/sorteo/main-app').then((mod) => mod.MainApp),
+  { loading: () => <AppSkeleton /> }
+);
 import { safeJsonLdStringify } from '@/lib/utils';
 
 export const dynamic = 'force-static';

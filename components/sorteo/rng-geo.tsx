@@ -1,10 +1,12 @@
 "use client"
 
 import { useTranslations } from "next-intl"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Lock, Zap, RefreshCw, Smartphone, HelpCircle, CheckCircle } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Link } from "@/i18n/routing"
+import { QuickSpecs } from "./quick-specs"
 
 export function RngGeo() {
   const t = useTranslations("RngGeo")
@@ -89,6 +91,9 @@ export function RngGeo() {
               </a>
             </Button>
           </div>
+
+          {/* Quick Specs Table (GEO Optimization) */}
+          <QuickSpecs className="mb-12" />
 
           {/* Features Grid */}
           <ul className="grid md:grid-cols-2 gap-8 mt-12 mb-16" role="list">

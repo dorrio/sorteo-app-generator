@@ -45,12 +45,20 @@ def test_share_dropdown():
 
             page.wait_for_timeout(1000)
 
+            # Assert new Telegram and LinkedIn menu items are present
+            telegram_item = page.get_by_role("menuitem", name="Telegram")
+            linkedin_item = page.get_by_role("menuitem", name="LinkedIn")
+
+            expect(telegram_item).to_be_visible()
+            expect(linkedin_item).to_be_visible()
+
             page.screenshot(path="verification/share_dropdown.png")
             print("Verification successful!")
 
         except Exception as e:
             print(f"Error: {e}")
             page.screenshot(path="verification/error_share_dropdown.png")
+            raise e
         finally:
             browser.close()
 

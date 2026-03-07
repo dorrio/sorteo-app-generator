@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Share2, Copy, Twitter, Facebook, MessageCircle, Check, Instagram, Send, Linkedin } from "lucide-react"
+import { buildTelegramShareUrl, buildLinkedinShareUrl } from "@/lib/social-share-urls"
 
 interface ShareButtonProps {
   title: string
@@ -90,8 +91,8 @@ export function ShareButton({
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`
   // WhatsApp: Use api.whatsapp.com for better cross-device support
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + url)}`
-  const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`
-  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
+  const telegramUrl = buildTelegramShareUrl(url, text)
+  const linkedinUrl = buildLinkedinShareUrl(url)
 
 
   const TriggerButton = (

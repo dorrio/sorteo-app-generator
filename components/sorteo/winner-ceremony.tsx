@@ -25,6 +25,7 @@ import {
   Send,
   Linkedin,
 } from "lucide-react"
+import { buildTelegramShareUrl, buildLinkedinShareUrl } from "@/lib/social-share-urls"
 
 interface WinnerCeremonyProps {
   onClose: () => void
@@ -89,8 +90,8 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
   // WhatsApp: Use api.whatsapp.com for better cross-device support
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
-  const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
-  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`
+  const telegramUrl = buildTelegramShareUrl(shareUrl, shareText)
+  const linkedinUrl = buildLinkedinShareUrl(shareUrl)
 
   const shareNative = async () => {
     if (!navigator.share) return

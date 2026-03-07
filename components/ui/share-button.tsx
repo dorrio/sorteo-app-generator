@@ -48,9 +48,9 @@ export function ShareButton({
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
   }, [])
 
-  const handleShare = async (e: React.MouseEvent) => {
+  const handleShare = async (e?: React.MouseEvent) => {
+    if (e) e.preventDefault() // Prevent dropdown from opening immediately
     if (canShareNative) {
-      e.preventDefault() // Prevent dropdown from opening immediately
       try {
         if (onNativeShare) {
           await onNativeShare()
@@ -65,30 +65,38 @@ export function ShareButton({
         // Fallback to dropdown if user cancels or error
         setIsOpen(true)
       }
+    } else {
+      setIsOpen(true)
     }
   }
 
   const copyToClipboard = async () => {
-    // Viralis Optimization: Copy full text + url to preserve the hook
-    const clipboardText = text ? `${text} ${url}` : url
-    await navigator.clipboard.writeText(clipboardText)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      // Viralis Optimization: Copy ONLY the URL to reduce friction for manual sharing
+      await navigator.clipboard.writeText(url)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      // Fail silently or log if needed
+    }
   }
 
   const shareInstagram = async () => {
-      // Instagram doesn't have a direct share URL for text/links easily on web
-      // Best practice is to copy to clipboard and open instagram
+    try {
       await navigator.clipboard.writeText(text + " " + url)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      // Fail silently or log
+    }
   }
 
   // Pre-calculate Social URLs
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`
-  // WhatsApp: Use api.whatsapp.com for better cross-device support
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + url)}`
+  const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`
+  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
 
 
   const TriggerButton = (
@@ -116,8 +124,12 @@ export function ShareButton({
         twitterUrl={twitterUrl}
         facebookUrl={facebookUrl}
         whatsappUrl={whatsappUrl}
+        telegramUrl={telegramUrl}
+        linkedinUrl={linkedinUrl}
         translations={translations}
         align="end"
+        canShareNative={canShareNative}
+        shareNative={handleShare}
       />
     </DropdownMenu>
   )

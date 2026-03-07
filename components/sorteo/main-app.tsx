@@ -452,8 +452,17 @@ export function MainApp({
   const shareContent = getShareContent()
 
   // Full Sticky Translations Object
+  // Viralis: Dynamic CTA based on context
+  let shareCta = stickyTranslations.share_cta
+  // If we have more than 1 participant, the context is likely a "List" or "Group"
+  // so "Invite Friends" is more actionable than "Share Tool".
+  if (participants.length > 1) {
+      shareCta = tShare('cta_invite')
+  }
+
   const fullStickyTranslations = {
     ...stickyTranslations,
+    share_cta: shareCta,
     share_button: shareTranslations
   }
 

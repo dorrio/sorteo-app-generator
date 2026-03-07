@@ -41,13 +41,11 @@ export function ShareButton({
   translations
 }: ShareButtonProps) {
   const [canShareNative, setCanShareNative] = useState(false)
-  const [isTouch, setIsTouch] = useState(false)
   const [copied, setCopied] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
-    setIsTouch(window.matchMedia("(pointer: coarse)").matches)
   }, [])
 
   const handleShare = async (e: React.MouseEvent) => {
@@ -79,11 +77,11 @@ export function ShareButton({
   }
 
   const shareInstagram = async () => {
-    // Instagram doesn't have a direct share URL for text/links easily on web
-    // Best practice is to copy to clipboard and open instagram
-    await navigator.clipboard.writeText(text + " " + url)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+      // Instagram doesn't have a direct share URL for text/links easily on web
+      // Best practice is to copy to clipboard and open instagram
+      await navigator.clipboard.writeText(text + " " + url)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
   }
 
   // Pre-calculate Social URLs
@@ -106,15 +104,6 @@ export function ShareButton({
     </Button>
   )
 
-  // Viralis Optimization: Only prioritize native share on touch devices (mobile/tablet)
-  // On desktop (even with native share support like Safari), the dropdown is often preferred
-  // as it offers direct "Copy Link" access which native share sheets sometimes bury.
-  const shouldUseNative = canShareNative && isTouch
-
-  if (shouldUseNative) {
-    return TriggerButton
-  }
-
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
@@ -123,7 +112,6 @@ export function ShareButton({
       <ShareDropdownContent
         copyToClipboard={copyToClipboard}
         shareInstagram={shareInstagram}
-        onSystemShare={canShareNative ? handleShare : undefined}
         copied={copied}
         twitterUrl={twitterUrl}
         facebookUrl={facebookUrl}

@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
-import { BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered, GraduationCap, Type, Gift, Coins, Scissors, Users, Globe, Calendar, Layers, Flame } from 'lucide-react';
+import { BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered, GraduationCap, Type, Gift, Coins, Scissors, Users, Globe, Calendar, Layers } from 'lucide-react';
 import { safeJsonLdStringify } from '@/lib/utils';
 
 export const dynamic = 'force-static';
@@ -140,13 +140,6 @@ export default function GlossaryPage() {
       def: tGlossary('def_15'),
       icon: <Layers className="w-6 h-6 text-primary" />,
       link: "/random-card-generator"
-    },
-    {
-      id: "truth",
-      term: tGlossary('term_17'),
-      def: tGlossary('def_17'),
-      icon: <Flame className="w-6 h-6 text-primary" />,
-      link: "/truth-or-dare-generator"
     }
   ];
 

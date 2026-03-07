@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
-import { copyBlobToClipboard } from "@/lib/utils"
 import { ConfettiEffect } from "./confetti-effect"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -22,7 +21,6 @@ import {
   Instagram,
   Download,
   Loader2,
-  ImageIcon,
 } from "lucide-react"
 
 interface WinnerCeremonyProps {
@@ -37,15 +35,12 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const [showContent, setShowContent] = useState(false)
   const [copiedVerificationId, setCopiedVerificationId] = useState(false)
   const [copiedShareLink, setCopiedShareLink] = useState(false)
-  const [imageCopied, setImageCopied] = useState(false)
   const [canShareNative, setCanShareNative] = useState(false)
-  const [isTouch, setIsTouch] = useState(false)
   const [isSharing, setIsSharing] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   useEffect(() => {
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
-    setIsTouch(window.matchMedia("(pointer: coarse)").matches)
 
     if (showWinnerCeremony) {
       const timer = setTimeout(() => setShowContent(true), 300)
@@ -67,21 +62,21 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
   // Viralis: Append tool type context to maintain the loop
   if (winner.verificationId && seoMode && seoMode !== 'home') {
-    shareUrl += `&type=${seoMode}`
+      shareUrl += `&type=${seoMode}`
   }
 
   // Viralis: Append custom context (Title & Color) to make the share more specific
   if (winner.verificationId && theme.customTitle) {
-    shareUrl += `&title=${encodeURIComponent(theme.customTitle)}`
+      shareUrl += `&title=${encodeURIComponent(theme.customTitle)}`
   }
   if (winner.verificationId && theme.primaryColor) {
-    shareUrl += `&color=${encodeURIComponent(theme.primaryColor)}`
+      shareUrl += `&color=${encodeURIComponent(theme.primaryColor)}`
   }
 
   // Compelling share text
   let shareText = t("share_text", { name: winner.name })
   if (theme.customTitle) {
-    shareText = t("share_text_custom", { name: winner.name, title: theme.customTitle })
+      shareText = t("share_text_custom", { name: winner.name, title: theme.customTitle })
   }
 
   // Pre-calculate Social URLs for SEO (Link Juice) & Accessibility
@@ -107,15 +102,15 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
         let dateToUse = new Date()
         if (winner && winner.verificationId) {
-          try {
-            const parts = winner.verificationId.split('-')
-            if (parts.length >= 3) {
-              const timestampHex = parts[parts.length - 1]
-              const timestamp = parseInt(timestampHex, 16)
-              const d = new Date(timestamp)
-              if (!isNaN(d.getTime())) dateToUse = d
-            }
-          } catch (e) { }
+             try {
+                const parts = winner.verificationId.split('-')
+                if (parts.length >= 3) {
+                  const timestampHex = parts[parts.length - 1]
+                  const timestamp = parseInt(timestampHex, 16)
+                  const d = new Date(timestamp)
+                  if (!isNaN(d.getTime())) dateToUse = d
+                }
+             } catch (e) {}
         }
         ogParams.set("date", dateToUse.toISOString())
         if (seoMode && seoMode !== 'home') ogParams.set("type", seoMode)
@@ -129,10 +124,10 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
         const file = new File([blob], 'certificate.png', { type: 'image/png' })
 
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          filesArray = [file]
+             filesArray = [file]
         }
       } catch (e) {
-        console.error("Image generation failed, falling back to text share", e)
+          console.error("Image generation failed, falling back to text share", e)
       }
 
       await navigator.share({
@@ -145,7 +140,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
       // User cancelled - fallback to dropdown
       setIsDropdownOpen(true)
     } finally {
-      setIsSharing(false)
+        setIsSharing(false)
     }
   }
 
@@ -167,64 +162,6 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
     setCopiedShareLink(true)
     setTimeout(() => setCopiedShareLink(false), 2000)
-  }
-
-  const handleCopyImage = async () => {
-    if (!winner) return
-
-    // Construct OG Image URL (Same logic as handleDownload)
-    const ogParams = new URLSearchParams()
-    ogParams.set("name", winner.name)
-
-    let dateToUse = new Date()
-    if (winner.verificationId) {
-      try {
-        const parts = winner.verificationId.split('-')
-        if (parts.length >= 3) {
-          const timestampHex = parts[parts.length - 1]
-          const timestamp = parseInt(timestampHex, 16)
-          const d = new Date(timestamp)
-          if (!isNaN(d.getTime())) {
-            dateToUse = d
-          }
-        }
-      } catch (e) { }
-    }
-    ogParams.set("date", dateToUse.toISOString())
-
-    if (seoMode && seoMode !== 'home') {
-      ogParams.set("type", seoMode)
-    }
-    if (theme.customTitle) {
-      ogParams.set("title", theme.customTitle)
-    }
-    if (theme.primaryColor) {
-      ogParams.set("color", theme.primaryColor)
-    }
-
-    const imageUrl = `/api/og?${ogParams.toString()}`
-
-    try {
-      const response = await fetch(imageUrl)
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch image: ${response.statusText}`)
-      }
-
-      const blob = await response.blob()
-
-      if (!blob.type.startsWith('image/')) {
-        throw new Error(`Invalid image type: ${blob.type}`)
-      }
-
-      const success = await copyBlobToClipboard(blob)
-      if (success) {
-        setImageCopied(true)
-        setTimeout(() => setImageCopied(false), 2000)
-      }
-    } catch (e: unknown) {
-      console.error("Failed to copy image", e instanceof Error ? e.message : String(e))
-    }
   }
 
   const handleDownload = async () => {
@@ -406,60 +343,38 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
             transition={{ delay: 1 }}
             className="flex flex-wrap gap-4 justify-center"
           >
-            {/* Primary Share Action - Viralis Smart Share: Only prioritize native on touch devices */}
-            {canShareNative && isTouch ? (
-              <Button
-                size="lg"
-                className="gap-2"
-                onClick={handleShareClick}
-                disabled={isSharing}
-                style={{
-                  backgroundColor: theme.primaryColor,
-                  color: theme.backgroundColor,
-                }}
-              >
-                {isSharing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Share2 className="w-5 h-5" />}
-                {t("share_button")}
-              </Button>
-            ) : (
-              <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    size="lg"
-                    className="gap-2"
-                    onClick={handleShareClick}
-                    disabled={isSharing}
-                    style={{
-                      backgroundColor: theme.primaryColor,
-                      color: theme.backgroundColor,
-                    }}
-                  >
-                    {isSharing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Share2 className="w-5 h-5" />}
-                    {t("share_button")}
-                  </Button>
-                </DropdownMenuTrigger>
-                <ShareDropdownContent
-                  copyToClipboard={copyToClipboard}
-                  shareInstagram={shareInstagram}
-                  onSystemShare={canShareNative ? shareNative : undefined}
-                  onCopyImage={handleCopyImage}
-                  copied={copiedShareLink}
-                  imageCopied={imageCopied}
-                  twitterUrl={twitterUrl}
-                  facebookUrl={facebookUrl}
-                  whatsappUrl={whatsappUrl}
-                  translations={{
-                    share: t("share_button"),
-                    copy: t("copy_text"),
-                    copied: t("copied"),
-                    copyImage: t("copy_image"),
-                    imageCopied: t("image_copied"),
-                    shareOn: t("share_button")
+            {/* Primary Share Action */}
+            <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  size="lg"
+                  className="gap-2"
+                  onClick={handleShareClick}
+                  disabled={isSharing}
+                  style={{
+                    backgroundColor: theme.primaryColor,
+                    color: theme.backgroundColor,
                   }}
-                  align="center"
-                />
-              </DropdownMenu>
-            )}
+                >
+                  {isSharing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Share2 className="w-5 h-5" />}
+                  {t("share_button")}
+                </Button>
+              </DropdownMenuTrigger>
+              <ShareDropdownContent
+                copyToClipboard={copyToClipboard}
+                shareInstagram={shareInstagram}
+                copied={copiedShareLink}
+                twitterUrl={twitterUrl}
+                facebookUrl={facebookUrl}
+                whatsappUrl={whatsappUrl}
+                translations={{
+                  copy: t("copy_text"),
+                  copied: t("copied"),
+                  shareOn: t("share_button")
+                }}
+                align="center"
+              />
+            </DropdownMenu>
 
             {/* Viralis: Exposed Download Certificate Button (Visible on Mobile & Desktop) */}
             <Button

@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl"
 import { Check, Shield, Users, HelpCircle, Instagram } from "lucide-react"
+import { QuickSpecs } from "./quick-specs"
 
 export function InstagramGeo() {
   const t = useTranslations("InstagramPicker")
@@ -69,6 +70,9 @@ export function InstagramGeo() {
                     strong: (chunks) => <strong className="text-foreground font-semibold bg-primary/10 px-1 rounded">{chunks}</strong>
                 })}
             </div>
+
+            {/* Quick Specs Table (GEO Optimization) */}
+            <QuickSpecs className="mt-8" />
         </div>
       </section>
 

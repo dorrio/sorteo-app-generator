@@ -44,3 +44,8 @@
 **Gap:** Remaining GEO components (`BingoGeo`, `DiceGeo`, `RpsGeo`) were still using `framer-motion` and `animate-pulse`, causing unnecessary bundle size and LCP delays. `CoinGeo` used unsecure `dangerouslySetInnerHTML`.
 **Action:** Refactored `BingoGeo`, `DiceGeo`, and `RpsGeo` to remove motion libraries and background animations. Refactored `CoinGeo` to use `t.rich()` and `safeJsonLdStringify`. Deleted misplaced `ours_bingo_geo.tsx`.
 **GEO Impact:** Reduced First Input Delay (FID) and improved Cumulative Layout Shift (CLS) for these high-traffic tools, ensuring GoogleBot parses the "Direct Answer" content instantly.
+
+## 2025-06-02 - [Strategy/Cluster Content]
+**Gap:** Competitors (PsyCat Games, Random Word Generator) dominate the "Truth or Dare" keyword space. We lacked a dedicated tool for this high-engagement party game.
+**Action:** Created dedicated `/truth-or-dare-generator` landing page with `TruthDareGeo` component, specialized Schema (GameApplication), and a curated list of localized questions.
+**GEO Impact:** Optimized for "Online Truth or Dare", "Spin the Bottle app", and "Verdad o Reto online" queries with Direct Answer blocks and Rich Snippets.

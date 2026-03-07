@@ -1,9 +1,15 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import { MainApp } from "@/components/sorteo/main-app";
+import dynamic from 'next/dynamic';
+import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { YesNoGeo } from "@/components/sorteo/yes-no-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+
+const MainApp = dynamic(
+  () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
+  { loading: () => <AppSkeleton /> }
+);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

@@ -1,5 +1,5 @@
 import { DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu"
-import { Copy, Check, Twitter, Facebook, MessageCircle, Instagram } from "lucide-react"
+import { Copy, Check, Twitter, Facebook, MessageCircle, Instagram, Send, Linkedin } from "lucide-react"
 
 interface ShareDropdownContentProps {
   copyToClipboard: () => Promise<void>
@@ -8,6 +8,8 @@ interface ShareDropdownContentProps {
   twitterUrl: string
   facebookUrl: string
   whatsappUrl: string
+  telegramUrl: string
+  linkedinUrl: string
   translations: {
     copy: string
     copied: string
@@ -24,6 +26,8 @@ export function ShareDropdownContent({
   twitterUrl,
   facebookUrl,
   whatsappUrl,
+  telegramUrl,
+  linkedinUrl,
   translations,
   align = "end",
   className
@@ -52,30 +56,44 @@ export function ShareDropdownContent({
       </DropdownMenuItem>
 
       <DropdownMenuItem asChild className="gap-2 cursor-pointer" data-testid="share-facebook">
-          <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label={translations.shareOn ? `${translations.shareOn} Facebook` : "Share on Facebook"}>
-            <Facebook className="w-4 h-4" />
-            {translations.shareOn ? `${translations.shareOn} Facebook` : "Facebook"}
-          </a>
+        <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label={translations.shareOn ? `${translations.shareOn} Facebook` : "Share on Facebook"}>
+          <Facebook className="w-4 h-4" />
+          {translations.shareOn ? `${translations.shareOn} Facebook` : "Facebook"}
+        </a>
       </DropdownMenuItem>
 
       <DropdownMenuItem asChild className="gap-2 cursor-pointer" data-testid="share-whatsapp">
-         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label={translations.shareOn ? `${translations.shareOn} WhatsApp` : "Share on WhatsApp"}>
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label={translations.shareOn ? `${translations.shareOn} WhatsApp` : "Share on WhatsApp"}>
           <MessageCircle className="w-4 h-4" />
           {translations.shareOn ? `${translations.shareOn} WhatsApp` : "WhatsApp"}
-         </a>
+        </a>
       </DropdownMenuItem>
 
-       <DropdownMenuItem asChild className="gap-2 cursor-pointer" data-testid="share-instagram">
-          <a
-            href="https://www.instagram.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={shareInstagram}
-            aria-label={translations.shareOn ? `${translations.shareOn} Instagram` : "Share on Instagram"}
-          >
-            <Instagram className="w-4 h-4" />
-            {translations.shareOn ? `${translations.shareOn} Instagram` : "Instagram"}
-          </a>
+      <DropdownMenuItem asChild className="gap-2 cursor-pointer" data-testid="share-telegram">
+        <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label={translations.shareOn ? `${translations.shareOn} Telegram` : "Share on Telegram"}>
+          <Send className="w-4 h-4" />
+          {translations.shareOn ? `${translations.shareOn} Telegram` : "Telegram"}
+        </a>
+      </DropdownMenuItem>
+
+      <DropdownMenuItem asChild className="gap-2 cursor-pointer" data-testid="share-linkedin">
+        <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={translations.shareOn ? `${translations.shareOn} LinkedIn` : "Share on LinkedIn"}>
+          <Linkedin className="w-4 h-4" />
+          {translations.shareOn ? `${translations.shareOn} LinkedIn` : "LinkedIn"}
+        </a>
+      </DropdownMenuItem>
+
+      <DropdownMenuItem asChild className="gap-2 cursor-pointer" data-testid="share-instagram">
+        <a
+          href="https://www.instagram.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={shareInstagram}
+          aria-label={translations.shareOn ? `${translations.shareOn} Instagram` : "Share on Instagram"}
+        >
+          <Instagram className="w-4 h-4" />
+          {translations.shareOn ? `${translations.shareOn} Instagram` : "Instagram"}
+        </a>
       </DropdownMenuItem>
     </DropdownMenuContent>
   )

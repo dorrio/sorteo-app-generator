@@ -17,7 +17,9 @@ import {
   Check,
   Download,
   Loader2,
+  ImageIcon,
 } from "lucide-react"
+import { buildTelegramShareUrl, buildLinkedinShareUrl } from "@/lib/social-share-urls"
 
 interface WinnerCeremonyProps {
   onClose: () => void
@@ -58,21 +60,21 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
   // Viralis: Append tool type context to maintain the loop
   if (winner.verificationId && seoMode && seoMode !== 'home') {
-      shareUrl += `&type=${seoMode}`
+    shareUrl += `&type=${seoMode}`
   }
 
   // Viralis: Append custom context (Title & Color) to make the share more specific
   if (winner.verificationId && theme.customTitle) {
-      shareUrl += `&title=${encodeURIComponent(theme.customTitle)}`
+    shareUrl += `&title=${encodeURIComponent(theme.customTitle)}`
   }
   if (winner.verificationId && theme.primaryColor) {
-      shareUrl += `&color=${encodeURIComponent(theme.primaryColor)}`
+    shareUrl += `&color=${encodeURIComponent(theme.primaryColor)}`
   }
 
   // Compelling share text
   let shareText = t("share_text", { name: winner.name })
   if (theme.customTitle) {
-      shareText = t("share_text_custom", { name: winner.name, title: theme.customTitle })
+    shareText = t("share_text_custom", { name: winner.name, title: theme.customTitle })
   }
 
   // Pre-calculate Social URLs for SEO (Link Juice) & Accessibility
@@ -81,6 +83,10 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
   // WhatsApp: Use api.whatsapp.com for better cross-device support
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
+  // Telegram: Highly viral in crypto/giveaway communities
+  const telegramUrl = buildTelegramShareUrl(shareUrl, shareText)
+  // LinkedIn: Good for professional tools (Team Generator)
+  const linkedinUrl = buildLinkedinShareUrl(shareUrl)
 
   const shareNative = async () => {
     if (!navigator.share) return
@@ -98,17 +104,17 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
         let dateToUse = new Date()
         if (winner && winner.verificationId) {
-             try {
-                const parts = winner.verificationId.split('-')
-                if (parts.length >= 3) {
-                  const timestampHex = parts[parts.length - 1]
-                  const timestamp = parseInt(timestampHex, 16)
-                  const d = new Date(timestamp)
-                  if (!isNaN(d.getTime())) dateToUse = d
-                }
-             } catch (e) {
-                 console.error("Failed to parse date from verificationId:", winner.verificationId, e)
-             }
+          try {
+            const parts = winner.verificationId.split('-')
+            if (parts.length >= 3) {
+              const timestampHex = parts[parts.length - 1]
+              const timestamp = parseInt(timestampHex, 16)
+              const d = new Date(timestamp)
+              if (!isNaN(d.getTime())) dateToUse = d
+            }
+          } catch (e) {
+            console.error("Failed to parse date from verificationId:", winner.verificationId, e)
+          }
         }
         ogParams.set("date", dateToUse.toISOString())
         if (seoMode && seoMode !== 'home') ogParams.set("type", seoMode)
@@ -122,10 +128,10 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
         const file = new File([blob], 'certificate.png', { type: 'image/png' })
 
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-             filesArray = [file]
+          filesArray = [file]
         }
       } catch (e) {
-          console.error("Image generation failed, falling back to text share", e)
+        console.error("Image generation failed, falling back to text share", e)
       }
 
       await navigator.share({
@@ -138,7 +144,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
       // User cancelled - fallback to dropdown
       setIsDropdownOpen(true)
     } finally {
-        setIsSharing(false)
+      setIsSharing(false)
     }
   }
 
@@ -150,10 +156,15 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   }
 
   const copyToClipboard = async () => {
-    // Viralis Optimization: Copy full text + url
-    await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
-    setCopiedShareLink(true)
-    setTimeout(() => setCopiedShareLink(false), 2000)
+    try {
+      // Viralis Optimization: Copy ONLY the URL to prevent '404' errors when pasted into address bars
+      await navigator.clipboard.writeText(shareUrl)
+      setCopiedShareLink(true)
+      setTimeout(() => setCopiedShareLink(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err)
+      setCopiedShareLink(false)
+    }
   }
 
   const shareInstagram = async () => {
@@ -370,6 +381,8 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                   copied: t("copied"),
                   shareOn: t("share_on")
                 }}
+                telegramUrl={telegramUrl}
+                linkedinUrl={linkedinUrl}
                 align="center"
               />
             </DropdownMenu>

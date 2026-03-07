@@ -26,3 +26,15 @@
 1. Refactored `ShareButton` and `WinnerCeremony` to implement a "Hybrid Share" pattern: Always render the fallback menu structure.
 2. Intercept native share errors (including cancellations) and programmatically open the fallback dropdown instead of doing nothing.
 **Outcome:** Eliminates the "dead end" user experience on mobile when cancelling a share, providing an immediate alternative path to copy the link or share via specific apps.
+
+## 2026-02-04 - [ShareFlow/Friction]
+**Hypothesis:** Users manually copying links often paste them into browser bars or non-social apps. The previous "Text + URL" format caused 404s and friction.
+**Implementation:** Updated `ShareButton.tsx` and `WinnerCeremony.tsx` "Copy Link" action to copy **URL only**. Added explicit "Invite Friends" CTA for multi-participant lists. Added Telegram and LinkedIn support.
+**Outcome:** Expect reduced bounce rate from broken links and higher share engagement due to expanded channel support.
+
+## 2026-02-05 - [Sharing/Platform]
+**Hypothesis:** If we add explicit sharing options for Telegram and LinkedIn, users who prefer these networks will share more frequently, and changing the 'Copy Link' feature to copy only the URL will reduce 404 errors caused by pasting the previous 'text + URL' combo directly into browsers.
+**Implementation:**
+1. Updated `components/ui/share-button.tsx` to add Telegram and LinkedIn `DropdownMenuItem` using respective URLs, and changed `copyToClipboard` to copy only `url`.
+2. Updated `components/sorteo/winner-ceremony.tsx` similarly to add Telegram and LinkedIn, and changed `copyToClipboard` to copy only `shareUrl`.
+**Outcome:** Expect increased conversion rates from LinkedIn and Telegram due to reduced social friction, and decreased bounce rates caused by malformed pasted URLs.

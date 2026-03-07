@@ -6,7 +6,8 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Share2 } from "lucide-react"
+import { Share2, Copy, Twitter, Facebook, MessageCircle, Check, Instagram, Send, Linkedin } from "lucide-react"
+import { buildTelegramShareUrl, buildLinkedinShareUrl } from "@/lib/social-share-urls"
 import { ShareDropdownContent } from "@/components/ui/share-dropdown-content"
 
 interface ShareButtonProps {
@@ -77,11 +78,11 @@ export function ShareButton({
   }
 
   const shareInstagram = async () => {
-      // Instagram doesn't have a direct share URL for text/links easily on web
-      // Best practice is to copy to clipboard and open instagram
-      await navigator.clipboard.writeText(text + " " + url)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+    // Instagram doesn't have a direct share URL for text/links easily on web
+    // Best practice is to copy to clipboard and open instagram
+    await navigator.clipboard.writeText(text + " " + url)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
 
   // Pre-calculate Social URLs
@@ -89,6 +90,10 @@ export function ShareButton({
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`
   // WhatsApp: Use api.whatsapp.com for better cross-device support
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + url)}`
+  // Telegram: Highly viral in crypto/giveaway communities
+  const telegramUrl = buildTelegramShareUrl(url, text)
+  // LinkedIn: Good for professional tools (Team Generator)
+  const linkedinUrl = buildLinkedinShareUrl(url)
 
 
   const TriggerButton = (
@@ -116,6 +121,8 @@ export function ShareButton({
         twitterUrl={twitterUrl}
         facebookUrl={facebookUrl}
         whatsappUrl={whatsappUrl}
+        telegramUrl={telegramUrl}
+        linkedinUrl={linkedinUrl}
         translations={translations}
         align="end"
       />

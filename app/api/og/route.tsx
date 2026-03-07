@@ -31,7 +31,8 @@ export async function GET(request: Request) {
         largeIcon: null as any
     };
 
-    if (type === 'wheel') {
+    // --- THEME MAPPING ---
+    if (type === 'wheel' || type === 'country' || type === 'month') {
         theme = {
             title: "Wheel of Names",
             subtitle: "Spin the Wheel • Pick a Winner",
@@ -54,6 +55,15 @@ export async function GET(request: Request) {
                  </svg>
             )
         };
+        // Specific Overrides
+        if (type === 'country') {
+            theme.title = "Random Country Picker";
+            theme.subtitle = "Spin the Globe • Pick a Destination";
+        } else if (type === 'month') {
+            theme.title = "Random Month Picker";
+            theme.subtitle = "Pick a Month • Plan Ahead";
+        }
+
     } else if (type === 'instagram') {
         theme = {
             title: "Instagram Comment Picker",
@@ -77,7 +87,7 @@ export async function GET(request: Request) {
                 </svg>
             )
         };
-    } else if (type === 'rng') {
+    } else if (type === 'rng' || type === 'dice' || type === 'bingo' || type === 'card') {
         theme = {
             title: "Random Number Generator",
             subtitle: "Secure • Fair • Instant",
@@ -96,7 +106,33 @@ export async function GET(request: Request) {
                 </div>
             )
         };
-    } else if (type === 'list') {
+        // Specific Overrides
+        if (type === 'dice') {
+            theme.title = "Dice Roller";
+            theme.subtitle = "Roll the Dice • Random 1-6";
+            theme.icon = (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                    <circle cx="9" cy="9" r="1" fill="#34d399"/>
+                    <circle cx="15" cy="15" r="1" fill="#34d399"/>
+                </svg>
+            );
+             theme.largeIcon = (
+                <svg width="150" height="150" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                    <circle cx="9" cy="9" r="1" fill="#34d399"/>
+                    <circle cx="15" cy="15" r="1" fill="#34d399"/>
+                </svg>
+            );
+        } else if (type === 'bingo') {
+            theme.title = "Bingo Number Generator";
+            theme.subtitle = "Call the Numbers • Play Bingo";
+        } else if (type === 'card') {
+            theme.title = "Random Card Generator";
+            theme.subtitle = "Pick a Card • Any Card";
+        }
+
+    } else if (type === 'list' || type === 'list-randomizer' || type === 'secret-santa' || type === 'team') {
         theme = {
             title: "List Randomizer",
             subtitle: "Shuffle Lists • Team Generator",
@@ -121,7 +157,16 @@ export async function GET(request: Request) {
                 </svg>
             )
         };
-    } else if (type === 'yes-no') {
+        // Specific Overrides
+        if (type === 'secret-santa') {
+            theme.title = "Secret Santa Generator";
+            theme.subtitle = "Organize your Gift Exchange";
+        } else if (type === 'team') {
+            theme.title = "Random Team Generator";
+            theme.subtitle = "Form Teams Instantly";
+        }
+
+    } else if (type === 'yes-no' || type === 'coin' || type === 'rps') {
         theme = {
             title: "Yes or No Wheel",
             subtitle: "Spin for Answer • 50/50 Chance",
@@ -143,6 +188,15 @@ export async function GET(request: Request) {
                 </svg>
             )
         };
+        // Specific Overrides
+        if (type === 'coin') {
+            theme.title = "Coin Flipper";
+            theme.subtitle = "Heads or Tails?";
+        } else if (type === 'rps') {
+            theme.title = "Rock Paper Scissors";
+            theme.subtitle = "Play Online";
+        }
+
     } else if (type === 'letter') {
         theme = {
             title: "Random Letter Generator",
@@ -394,42 +448,44 @@ export async function GET(request: Request) {
         }
 
         if (participants.length > 0) {
-            // Force list theme/type for rendering if we have participants
+            // Force list theme/type for rendering if we have participants ONLY if no specific type is provided
             // This ensures consistent styling even if the type param was different
-            theme = {
-                title: "List Randomizer",
-                subtitle: "Shuffle Lists • Team Generator",
-                bgGradient: "radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%)", // Blue/Dark
-                accentColor: "#60a5fa", // Blue 400
-                textColor: "white",
-                subTextColor: "#93c5fd", // Blue 300
-                icon: (
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="21" x2="3" y1="6" y2="6"/>
-                        <line x1="21" x2="9" y1="12" y2="12"/>
-                        <line x1="21" x2="7" y1="18" y2="18"/>
-                    </svg>
-                ),
-                largeIcon: (
-                     <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="21" x2="3" y1="6" y2="6"/>
-                        <line x1="21" x2="9" y1="12" y2="12"/>
-                        <line x1="21" x2="7" y1="18" y2="18"/>
-                        <line x1="3" x2="3.01" y1="12" y2="12"/>
-                        <line x1="3" x2="3.01" y1="18" y2="18"/>
-                    </svg>
-                )
-            };
+            if (!type || type === 'list') {
+                theme = {
+                    title: "List Randomizer",
+                    subtitle: "Shuffle Lists • Team Generator",
+                    bgGradient: "radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%)", // Blue/Dark
+                    accentColor: "#60a5fa", // Blue 400
+                    textColor: "white",
+                    subTextColor: "#93c5fd", // Blue 300
+                    icon: (
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="21" x2="3" y1="6" y2="6"/>
+                            <line x1="21" x2="9" y1="12" y2="12"/>
+                            <line x1="21" x2="7" y1="18" y2="18"/>
+                        </svg>
+                    ),
+                    largeIcon: (
+                        <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="21" x2="3" y1="6" y2="6"/>
+                            <line x1="21" x2="9" y1="12" y2="12"/>
+                            <line x1="21" x2="7" y1="18" y2="18"/>
+                            <line x1="3" x2="3.01" y1="12" y2="12"/>
+                            <line x1="3" x2="3.01" y1="18" y2="18"/>
+                        </svg>
+                    )
+                };
 
-            // Re-apply custom color if present, as we just reset the theme
-            if (customColor) {
-                theme.accentColor = customColor;
-                if (customColor.length === 7) {
-                     theme.subTextColor = customColor + "CC";
-                } else {
-                     theme.subTextColor = customColor;
+                // Re-apply custom color if present, as we just reset the theme
+                if (customColor) {
+                    theme.accentColor = customColor;
+                    if (customColor.length === 7) {
+                        theme.subTextColor = customColor + "CC";
+                    } else {
+                        theme.subTextColor = customColor;
+                    }
+                    theme.bgGradient = `radial-gradient(circle at center, ${customColor}40 0%, #000000 100%)`;
                 }
-                theme.bgGradient = `radial-gradient(circle at center, ${customColor}40 0%, #000000 100%)`;
             }
 
             const displayLimit = 6;

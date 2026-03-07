@@ -1,9 +1,21 @@
+import React, { ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
-import { BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered, GraduationCap, Type, Gift, Coins, Scissors, Users, Globe, Calendar, Layers, Grid3X3 } from 'lucide-react';
+import {
+  BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered, GraduationCap,
+  Type, Gift, Coins, Scissors, Users, Globe, Calendar, Layers, Grid3X3, Dices, Spade, Mic2
+} from 'lucide-react';
 import { safeJsonLdStringify } from '@/lib/utils';
+
+type GlossaryEntry = {
+  id: string;
+  term: string;
+  def: string;
+  icon: ReactNode;
+  link: string | null;
+};
 
 export const dynamic = 'force-static';
 
@@ -35,7 +47,7 @@ export default function GlossaryPage() {
   const t = useTranslations('GlossaryPage');
   const tGlossary = useTranslations('Glossary'); // Reuse existing glossary strings
 
-  const terms = [
+  const terms: GlossaryEntry[] = [
     {
       id: "rng",
       term: tGlossary('term_1'),
@@ -96,7 +108,7 @@ export default function GlossaryPage() {
       id: "dice",
       term: tGlossary('term_9'),
       def: tGlossary('def_9'),
-      icon: <Dice5 className="w-6 h-6 text-primary" />,
+      icon: <Dices className="w-6 h-6 text-primary" />,
       link: "/dice-roller"
     },
     {
@@ -114,31 +126,31 @@ export default function GlossaryPage() {
       link: "/rock-paper-scissors"
     },
     {
-      id: "team",
+      id: "country",
       term: tGlossary('term_12'),
       def: tGlossary('def_12'),
-      icon: <Users className="w-6 h-6 text-primary" />,
-      link: "/team-generator"
-    },
-    {
-      id: "country",
-      term: tGlossary('term_13'),
-      def: tGlossary('def_13'),
       icon: <Globe className="w-6 h-6 text-primary" />,
       link: "/random-country-generator"
     },
     {
       id: "month",
-      term: tGlossary('term_14'),
-      def: tGlossary('def_14'),
+      term: tGlossary('term_13'),
+      def: tGlossary('def_13'),
       icon: <Calendar className="w-6 h-6 text-primary" />,
       link: "/random-month-generator"
+    },
+    {
+      id: "team",
+      term: tGlossary('term_14'),
+      def: tGlossary('def_14'),
+      icon: <Users className="w-6 h-6 text-primary" />,
+      link: "/team-generator"
     },
     {
       id: "card",
       term: tGlossary('term_15'),
       def: tGlossary('def_15'),
-      icon: <Layers className="w-6 h-6 text-primary" />,
+      icon: <Spade className="w-6 h-6 text-primary" />,
       link: "/random-card-generator"
     },
     {

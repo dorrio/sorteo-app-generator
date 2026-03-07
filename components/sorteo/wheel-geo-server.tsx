@@ -1,14 +1,15 @@
-import { useTranslations } from "next-intl"
-import { Disc, Palette, ShieldCheck, Play, Music, CheckCircle, HelpCircle, BookOpen } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { getTranslations } from "next-intl/server"
+import { Disc, Palette, ShieldCheck, Music, CheckCircle, HelpCircle, BookOpen } from "lucide-react"
+import { TryToolButton } from "@/components/sorteo/try-tool-button"
+import { WheelGeoVisual } from "@/components/sorteo/wheel-geo-visual"
 import { Link } from "@/i18n/routing"
-import { TryToolButton } from "./try-tool-button"
-import { WheelVisual } from "./wheel-visual"
 
-export function WheelGeo() {
-  const t = useTranslations("WheelGeo")
-  const tSpecs = useTranslations("QuickSpecs")
-  const tFaq = useTranslations("WheelGeoPage")
+export async function WheelGeoServer() {
+  const [t, tSpecs, tFaq] = await Promise.all([
+    getTranslations("WheelGeo"),
+    getTranslations("QuickSpecs"),
+    getTranslations("WheelGeoPage")
+  ])
 
   const features = [
     {
@@ -57,8 +58,6 @@ export function WheelGeo() {
   ]
 
   // Schema for "Direct Answer" optimization
-  // Using FAQPage schema specifically for the "What is..." question
-  // Added HowTo schema
   const jsonLd: Array<Record<string, unknown>> = [
     {
       '@context': 'https://schema.org',
@@ -160,16 +159,12 @@ export function WheelGeo() {
             </div>
 
             <div className="pt-4">
-              <Button
-                asChild
+              <TryToolButton
+                targetStyle="roulette"
                 className="gap-2 font-bold text-lg h-12 px-6 rounded-full shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
               >
-                <TryToolButton sorteoStyle="roulette">
-                  <Play className="w-5 h-5 fill-current" />
-                  {t('cta_button')}
-                </TryToolButton>
-              </Button>
-
+                {t('cta_button')}
+              </TryToolButton>
             </div>
           </div>
 
@@ -210,15 +205,7 @@ export function WheelGeo() {
         </div>
 
         {/* Right: Visual Abstract (Placeholder or Icon Graphic) */}
-        <div className="hidden md:flex justify-center items-center sticky top-24">
-          <TryToolButton
-            sorteoStyle="roulette"
-            className="relative w-64 h-64 rounded-full border-4 border-primary/20 flex items-center justify-center bg-card/50 backdrop-blur-sm cursor-pointer hover:scale-105 transition-transform"
-          >
-            <span className="sr-only">{t('cta_button')}</span>
-            <WheelVisual />
-          </TryToolButton>
-        </div>
+        <WheelGeoVisual ctaText={t('cta_button')} />
 
       </div >
     </section >

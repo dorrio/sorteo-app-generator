@@ -42,10 +42,12 @@ export function ShareButton({
   translations
 }: ShareButtonProps) {
   const [canShareNative, setCanShareNative] = useState(false)
+  const [isTouch, setIsTouch] = useState(false)
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
+    setIsTouch(window.matchMedia("(pointer: coarse)").matches)
   }, [])
 
   const handleShare = async () => {
@@ -80,15 +82,15 @@ export function ShareButton({
   }
 
   const shareInstagram = async () => {
-      try {
-        // Instagram doesn't have a direct share URL for text/links easily on web
-        // Best practice is to copy to clipboard and open instagram
-        await navigator.clipboard.writeText(text + " " + url)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-      } catch (err) {
-        // Fail silently or log
-      }
+    try {
+      // Instagram doesn't have a direct share URL for text/links easily on web
+      // Best practice is to copy to clipboard and open instagram
+      await navigator.clipboard.writeText(text + " " + url)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      // Fail silently or log
+    }
   }
 
   // Pre-calculate Social URLs
@@ -115,7 +117,12 @@ export function ShareButton({
     </Button>
   )
 
-  if (canShareNative) {
+  // Viralis Optimization: Only prioritize native share on touch devices (mobile/tablet)
+  // On desktop (even with native share support like Safari), the dropdown is often preferred
+  // as it offers direct "Copy Link" access which native share sheets sometimes bury.
+  const shouldUseNative = canShareNative && isTouch
+
+  if (shouldUseNative) {
     return TriggerButton
   }
 
@@ -125,6 +132,13 @@ export function ShareButton({
         {TriggerButton}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
+        {/* Viralis: Provide access to System Share on desktop if available */}
+        {canShareNative && (
+          <DropdownMenuItem onClick={handleShare} className="gap-2 cursor-pointer font-medium">
+            <Share2 className="w-4 h-4" />
+            {translations.share}
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
           {copied ? (
             <>
@@ -147,44 +161,44 @@ export function ShareButton({
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-            <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
-              <Facebook className="w-4 h-4" />
-              Facebook
-            </a>
+          <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+            <Facebook className="w-4 h-4" />
+            Facebook
+          </a>
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
             <MessageCircle className="w-4 h-4" />
             WhatsApp
-           </a>
+          </a>
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-           <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Telegram">
+          <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Telegram">
             <Send className="w-4 h-4" />
             Telegram
-           </a>
+          </a>
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-           <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+          <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
             <Linkedin className="w-4 h-4" />
             LinkedIn
-           </a>
+          </a>
         </DropdownMenuItem>
 
-         <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-            <a
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={shareInstagram}
-              aria-label={translations.shareOn ? `${translations.shareOn} Instagram` : "Share on Instagram"}
-            >
-              <Instagram className="w-4 h-4" />
-              Instagram
-            </a>
+        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={shareInstagram}
+            aria-label={translations.shareOn ? `${translations.shareOn} Instagram` : "Share on Instagram"}
+          >
+            <Instagram className="w-4 h-4" />
+            Instagram
+          </a>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

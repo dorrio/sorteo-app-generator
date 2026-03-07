@@ -5,7 +5,6 @@ import { Coins, ShieldCheck, Zap, Smartphone, HelpCircle, CheckCircle } from "lu
 import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/routing"
 import { QuickSpecs } from "./quick-specs"
-import { safeJsonLdStringify } from "@/lib/utils"
 
 export function CoinGeo() {
   const t = useTranslations("CoinGeo")
@@ -76,10 +75,9 @@ export function CoinGeo() {
 
   return (
     <section className="w-full py-12 px-4 border-t border-border/30 bg-card/20">
-      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-start">
         <div className="space-y-6">
@@ -92,15 +90,9 @@ export function CoinGeo() {
             {t("direct_answer_title")}
           </h2>
 
-          <div className="prose prose-lg text-muted-foreground leading-relaxed">
-            <p>
-              {t.rich("direct_answer_text", {
-                strong: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
-                tool: (chunks) => <Link href="/coin-flip" className="font-semibold text-primary hover:underline">{chunks}</Link>,
-                brand: (chunks) => <Link href="/" className="font-semibold text-primary hover:underline">{chunks}</Link>
-              })}
-            </p>
-          </div>
+          <div className="prose prose-lg text-muted-foreground leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: t.raw("direct_answer_text") }}
+          />
 
           {/* Quick Specs Table (GEO Optimization) */}
           <QuickSpecs />

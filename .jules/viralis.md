@@ -20,6 +20,11 @@
 3. Standardized translation keys across `en`, `es`, `pt` to support these dynamic titles without build errors.
 **Outcome:** Every tool in the suite now supports full viral context persistence. A user sharing a "Christmas Dice Game" will see exactly that in the link preview, not just "Dice Roller".
 
+## 2026-02-04 - [ShareFlow/Friction]
+**Hypothesis:** Users manually copying links often paste them into browser bars or non-social apps. The previous "Text + URL" format caused 404s and friction.
+**Implementation:** Updated `ShareButton.tsx` and `WinnerCeremony.tsx` "Copy Link" action to copy **URL only**. Added explicit "Invite Friends" CTA for multi-participant lists. Added Telegram and LinkedIn support.
+**Outcome:** Expect reduced bounce rate from broken links and higher share engagement due to expanded channel support.
+
 ## 2026-02-05 - [Sharing/Platform]
 **Hypothesis:** If we add explicit sharing options for Telegram and LinkedIn, users who prefer these networks will share more frequently, and changing the 'Copy Link' feature to copy only the URL will reduce 404 errors caused by pasting the previous 'text + URL' combo directly into browsers.
 **Implementation:**

@@ -68,7 +68,10 @@ export function RngGeo() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="max-w-4xl mx-auto px-4 relative z-10">
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           className="bg-card/30 backdrop-blur-xl border border-primary/20 rounded-3xl p-8 md:p-12 shadow-2xl"
         >
           {/* Direct Answer Block (GEO) */}
@@ -164,7 +167,7 @@ export function RngGeo() {
              </dl>
           </div>
 
-        </div>
+        </motion.div>
       </div>
 
       {/* Decorative background elements */}

@@ -174,6 +174,7 @@ export function MainApp({
   const tWheel = useTranslations("WheelGeoPage")
   const tShare = useTranslations("ShareContent")
 
+
   const [mounted, setMounted] = useState(false)
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
 

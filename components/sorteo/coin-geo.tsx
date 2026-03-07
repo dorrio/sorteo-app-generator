@@ -149,9 +149,9 @@ export function CoinGeo() {
           <div className="relative w-64 h-64 rounded-full border-4 border-primary/20 flex items-center justify-center bg-card/50 backdrop-blur-sm">
             <Coins className="w-32 h-32 text-primary/50" />
             <div className="absolute -bottom-10 text-center w-full">
-                <Button asChild className="rounded-full font-bold shadow-lg shadow-primary/20">
-                    <a href="#sorteo-section">{t("cta_button")}</a>
-                </Button>
+              <Button asChild className="rounded-full font-bold shadow-lg shadow-primary/20">
+                <a href="#sorteo-section">{t("cta_button")}</a>
+              </Button>
             </div>
           </div>
         </div>

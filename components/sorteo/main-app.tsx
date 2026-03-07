@@ -10,11 +10,26 @@ import { ParticipantManager } from "@/components/sorteo/participant-manager"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
-// Imports managed dynamically by parent components to reduce bundle size
+import { SeoContent } from "@/components/sorteo/seo-content"
+import { WheelGeo } from "@/components/sorteo/wheel-geo"
+import { RngGeo } from "@/components/sorteo/rng-geo"
+import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
+import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo"
+import { TeamGeo } from "@/components/sorteo/team-geo"
+import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
+import { LetterGeo } from "@/components/sorteo/letter-geo"
+import { DiceGeo } from "@/components/sorteo/dice-geo"
+import { CoinGeo } from "@/components/sorteo/coin-geo"
+import { RpsGeo } from "@/components/sorteo/rps-geo"
+import { CountryGeo } from "@/components/sorteo/country-geo"
+import { MonthGeo } from "@/components/sorteo/month-geo"
+import { CardGeo } from "@/components/sorteo/card-geo"
+import { Glossary } from "@/components/sorteo/glossary"
+import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 import { ShareButton } from "@/components/ui/share-button"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { COUNTRIES } from "@/lib/countries"
-import { Sparkles, Settings2, Play, Trophy, ShieldCheck } from "lucide-react"
+import { Sparkles, Settings2, Play, Trophy, ShieldCheck, Share2 } from "lucide-react"
 import { useTranslations, useLocale } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
@@ -49,6 +64,8 @@ const FloatingBubbles = dynamic(
   () => import("@/components/sorteo/floating-bubbles").then((mod) => mod.FloatingBubbles),
   { ssr: false }
 )
+
+
 
 function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: Partial<ThemeConfig>) => void }) {
   const searchParams = useSearchParams()
@@ -97,7 +114,7 @@ function ListParamsHandler() {
 
 interface MainAppProps {
   initialStyle?: string;
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo' | 'truth-or-dare';
+  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
   children?: React.ReactNode;
   initialTitle?: string;
   initialSubtitle?: string;
@@ -117,15 +134,13 @@ interface MainAppProps {
   };
   // Translations for initial population (options)
   initialOptions?: {
-    yes?: string;
-    no?: string;
-    heads?: string;
-    tails?: string;
-    rock?: string;
-    paper?: string;
-    scissors?: string;
-    truths?: string[];
-    dares?: string[];
+    yes: string;
+    no: string;
+    heads: string;
+    tails: string;
+    rock: string;
+    paper: string;
+    scissors: string;
     // Generators that might simply get passed translated strings or just use defaults
   };
 }
@@ -168,8 +183,9 @@ export function MainApp({
   const tTeam = useTranslations("TeamGeneratorPage")
   const tInsta = useTranslations("InstagramPicker")
   const tWheel = useTranslations("WheelGeoPage")
+  const tMeta = useTranslations("Metadata")
+  const tWinner = useTranslations("WinnerCeremony")
   const tShare = useTranslations("ShareContent")
-  const tTruth = useTranslations("TruthPage")
 
   const [mounted, setMounted] = useState(false)
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
@@ -243,7 +259,6 @@ export function MainApp({
       else if (seoMode === 'country') update.customTitle = tCountry('h1')
       else if (seoMode === 'month') update.customTitle = tMonth('h1')
       else if (seoMode === 'card') update.customTitle = tCard('h1')
-      else if (seoMode === 'truth-or-dare') update.customTitle = tTruth('h1')
       else if (seoMode === 'instagram') update.customTitle = tInsta('h1')
       else if (seoMode === 'wheel') update.customTitle = tWheel('h1')
     }
@@ -264,7 +279,6 @@ export function MainApp({
       else if (seoMode === 'country') update.customSubtitle = tCountry('subtitle')
       else if (seoMode === 'month') update.customSubtitle = tMonth('subtitle')
       else if (seoMode === 'card') update.customSubtitle = tCard('subtitle')
-      else if (seoMode === 'truth-or-dare') update.customSubtitle = tTruth('subtitle')
       else if (seoMode === 'instagram') update.customSubtitle = tInsta('subtitle')
       else if (seoMode === 'wheel') update.customSubtitle = tWheel('subtitle')
     }
@@ -281,7 +295,7 @@ export function MainApp({
     // Detect if we just navigated to a new mode
     const modeChanged = activeTool !== seoMode
     const isEmpty = participants.length === 0
-    const isPresetTool = ['truth-or-dare', 'card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter', 'yes-no'].includes(seoMode) // Added card, bingo, etc.
+    const isPresetTool = ['card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter', 'yes-no'].includes(seoMode) // Added card, bingo, etc.
 
     // We populate if:
     // 1. The list is empty (standard behavior)
@@ -326,18 +340,6 @@ export function MainApp({
         addParticipants(BINGO_NUMBERS.map(n => ({ name: n })))
       } else if (seoMode === 'card') {
         addParticipants(CARD_DECK.map(c => ({ name: c })))
-      } else if (seoMode === 'truth-or-dare') {
-        const allOptions = [
-          ...(initialOptions?.truths || []).map(t => ({ name: t })),
-          ...(initialOptions?.dares || []).map(d => ({ name: d }))
-        ]
-        // Shuffle initially for fun (Fisher-Yates)
-        const shuffled = [...allOptions]
-        for (let i = shuffled.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-        }
-        addParticipants(shuffled)
       } else if (isEmpty && !isPresetTool) {
         addParticipants([
           { name: "Option 1" },
@@ -382,7 +384,7 @@ export function MainApp({
   const getShareContent = () => {
     let finalShareText = shareText
     let finalShareTitle = shareTitle
-    const url = typeof window !== "undefined" ? window.location.href : ""
+    let url = typeof window !== "undefined" ? window.location.href : ""
 
     // Fallback logic if shareTitle/Text are defaults and we're in a specific mode without props passed
     if (shareTitle === "Sorteo Pro" && seoMode) {
@@ -400,7 +402,6 @@ export function MainApp({
       else if (seoMode === 'country') { finalShareTitle = tShare('country_title'); finalShareText = tShare('country_text'); }
       else if (seoMode === 'month') { finalShareTitle = tShare('month_title'); finalShareText = tShare('month_text'); }
       else if (seoMode === 'card') { finalShareTitle = tShare('card_title'); finalShareText = tShare('card_text'); }
-      else if (seoMode === 'truth-or-dare') { finalShareTitle = tShare('truth_title'); finalShareText = tShare('truth_text'); }
     }
 
     const defaultTitle = initialTitle || "Sorteo Pro"
@@ -477,7 +478,6 @@ export function MainApp({
     else if (seoMode === 'country') { displayTitle = tCountry('h1'); displaySubtitle = tCountry('subtitle'); }
     else if (seoMode === 'month') { displayTitle = tMonth('h1'); displaySubtitle = tMonth('subtitle'); }
     else if (seoMode === 'card') { displayTitle = tCard('h1'); displaySubtitle = tCard('subtitle'); }
-    else if (seoMode === 'truth-or-dare') { displayTitle = tTruth('h1'); displaySubtitle = tTruth('subtitle'); }
   }
 
   const bgOpacity = theme.backgroundOpacity ?? 30
@@ -687,7 +687,40 @@ export function MainApp({
         </main>
 
         {/* SEO Content / Footer Children */}
-        {children}
+        {children ? children : (
+          /* Fallback for Legacy Pages that don't pass children yet */
+          seoMode === 'wheel' ? (
+            <> <WheelGeo /> <Glossary seoMode={seoMode} /> </>
+          ) : seoMode === 'instagram' ? (
+            <> <InstagramGeo /> <Glossary seoMode={seoMode} /> </>
+          ) : seoMode === 'rng' ? (
+            <> <RngGeo /> <Glossary seoMode={seoMode} /> </>
+          ) : seoMode === 'list-randomizer' ? (
+            <> <ListRandomizerGeo /> <Glossary seoMode={seoMode} /> </>
+          ) : seoMode === 'secret-santa' ? (
+            <> <SecretSantaGeo /> <Glossary seoMode={seoMode} /> </>
+          ) : seoMode === 'team' ? (
+            <> <TeamGeo /> <Glossary seoMode="list-randomizer" /> </>
+          ) : seoMode === 'yes-no' ? (
+            <> <YesNoGeo /> <Glossary seoMode={seoMode} /> </>
+          ) : seoMode === 'letter' ? (
+            <> <LetterGeo /> <Glossary seoMode={seoMode} /> </>
+          ) : seoMode === 'dice' ? (
+            <> <DiceGeo /> <Glossary seoMode="rng" /> </>
+          ) : seoMode === 'coin' ? (
+            <> <CoinGeo /> <Glossary seoMode="yes-no" /> </>
+          ) : seoMode === 'rps' ? (
+            <> <RpsGeo /> <Glossary seoMode="yes-no" /> </>
+          ) : seoMode === 'country' ? (
+            <> <CountryGeo /> <Glossary seoMode="wheel" /> </>
+          ) : seoMode === 'month' ? (
+            <> <MonthGeo /> <Glossary seoMode="wheel" /> </>
+          ) : seoMode === 'card' ? (
+            <> <CardGeo /> <Glossary seoMode="card" /> </>
+          ) : (
+            <> <WheelGeo /> <Glossary seoMode={seoMode} /> <SeoContent /> </>
+          )
+        )}
 
         {/* Footer */}
         {footer}

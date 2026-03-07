@@ -11,9 +11,6 @@ import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { SeoContent } from "@/components/sorteo/seo-content"
-// Imports from main that we might need or not (most are handled by children now)
-// We only need the ones for data generation if they were used there, but they weren't.
-// However, we DO need to ensure we support the new modes.
 
 import { ShareButton } from "@/components/ui/share-button"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
@@ -104,7 +101,7 @@ function ListParamsHandler() {
 interface MainAppProps {
   initialStyle?: string;
   seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
-  children?: React.ReactNode;
+  children: React.ReactNode;
   initialTitle?: string;
   initialSubtitle?: string;
   shareTitle?: string;

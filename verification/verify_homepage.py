@@ -1,8 +1,8 @@
 from playwright.sync_api import sync_playwright
 
 def verify_homepage():
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch()
         page = browser.new_page()
         try:
             print("Navigating to homepage...")
@@ -38,10 +38,10 @@ def verify_homepage():
             page.screenshot(path="verification/homepage.png")
             print("Screenshot saved to verification/homepage.png")
 
-        except Exception as e:
-            print(f"Verification failed: {e}")
+        except Exception as err:
+            print(f"Verification failed: {err}")
             page.screenshot(path="verification/error.png")
-            raise e
+            raise err
         finally:
             browser.close()
 

@@ -101,7 +101,7 @@ function ListParamsHandler() {
 interface MainAppProps {
   initialStyle?: string;
   seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
-  children?: React.ReactNode;
+  children: React.ReactNode;
   initialTitle?: string;
   initialSubtitle?: string;
   shareTitle?: string;

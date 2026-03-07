@@ -13,11 +13,12 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
+import { safeJsonLdStringify } from '@/lib/utils';
 import "../globals.css"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-display" })
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: 'swap' })
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-display", display: 'swap' })
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", display: 'swap' })
 
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL
   ? process.env.NEXT_PUBLIC_APP_URL
@@ -189,9 +190,10 @@ export default async function RootLayout({
         <a href="#sorteo-section" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:p-4 focus:bg-background focus:text-foreground focus:rounded-lg focus:shadow-xl focus:border focus:border-primary">
           {tHome('skip_to_content')}
         </a>
+        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safely stringified */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
         />
         <NextIntlClientProvider messages={messages}>
           {children}

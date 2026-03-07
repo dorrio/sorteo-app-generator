@@ -10,8 +10,6 @@ import { ParticipantManager } from "@/components/sorteo/participant-manager"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
-import { SeoContent } from "@/components/sorteo/seo-content"
-
 import { ShareButton } from "@/components/ui/share-button"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { COUNTRIES } from "@/lib/countries"

@@ -4,6 +4,7 @@ import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SeoContent } from "@/components/sorteo/seo-content";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+import { safeJsonLdStringify } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -118,7 +119,7 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
       {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(breadcrumbSchema) }}
       />
       <MainApp
         seoMode="home"

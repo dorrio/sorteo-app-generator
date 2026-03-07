@@ -66,6 +66,11 @@ export function HeaderIsland({
       try {
         const urlObj = new URL(window.location.href)
 
+        // Explicitly clear stale params
+        urlObj.searchParams.delete('template_title')
+        urlObj.searchParams.delete('template_color')
+        urlObj.searchParams.delete('list')
+
         // 1. Branding: Custom Title & Color
         if (isCustomTitle && theme.customTitle) {
           finalShareText = customShareTextTemplate.replace('{title}', theme.customTitle)
@@ -79,9 +84,11 @@ export function HeaderIsland({
         // 2. Content: Shareable Participant List
         if (participants.length > 0 && participants.length <= 100) {
           const names = participants.map(p => p.name)
-          const encoded = encodeURIComponent(JSON.stringify(names))
-          if (encoded.length < 1500) {
-            urlObj.searchParams.set('list', encoded)
+          const jsonString = JSON.stringify(names)
+          urlObj.searchParams.set('list', jsonString)
+
+          if (urlObj.toString().length >= 1500) {
+            urlObj.searchParams.delete('list')
           }
         }
 

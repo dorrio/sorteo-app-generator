@@ -5,16 +5,6 @@ const withNextIntl = createNextIntlPlugin(
 );
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    optimizePackageImports: [
-      'lucide-react',
-      'date-fns',
-      'framer-motion',
-      '@radix-ui/react-dialog',
-      '@radix-ui/react-slot'
-    ]
-  }
-};
+const nextConfig = {};
 
 export default withNextIntl(nextConfig);

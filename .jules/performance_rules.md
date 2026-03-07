@@ -15,6 +15,7 @@
 *   **Granular Skeletons:** Use component-level skeletons (e.g., `ParticipantListSkeleton`) instead of page-level blocking skeletons to enable SSR of static content.
 *   **Server Component Extraction:** For content-heavy sections (SEO text, FAQ, Glossary), extract interactivity into small "Client Islands" (e.g., `<TryToolButton>`) and make the parent a Server Component. This removes hydration cost for static text.
 *   **Optimized Package Imports:** Use `experimental.optimizePackageImports` in `next.config.mjs` for large barrel-file libraries (e.g., `lucide-react`, `date-fns`, `lodash`, `@radix-ui/*`).
+*   **Static Content Injection:** Always pass heavy static content (SEO text, FAQ) as `children` to Client Components (like `MainApp`). Avoid importing them statically inside the Client Component to prevent bundle bloat.
 
 ## ❌ BAD PATTERNS (Avoid This)
 *   **Sync Imports:** Importing heavy widgets directly in the main bundle.

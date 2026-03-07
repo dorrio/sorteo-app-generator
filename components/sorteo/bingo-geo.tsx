@@ -1,9 +1,9 @@
 "use client"
 
 import { useTranslations } from "next-intl"
+import { motion } from "framer-motion"
 import { Shield, Zap, RefreshCw, Monitor, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
-import { safeJsonLdStringify } from "@/lib/utils"
 
 export function BingoGeo() {
   const t = useTranslations("BingoGeo")
@@ -72,12 +72,12 @@ export function BingoGeo() {
       {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(howToLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }}
       />
       <div className="max-w-5xl mx-auto space-y-16">
 
@@ -89,17 +89,17 @@ export function BingoGeo() {
           </h2>
           <div className="prose prose-invert max-w-none text-muted-foreground leading-relaxed">
             <p className="text-lg">
-              {t.rich("direct_answer_text", {
+                {t.rich("direct_answer_text", {
                 tool: (chunks) => <strong className="text-primary font-semibold">{chunks}</strong>,
                 brand: (chunks) => <Link href="/" className="font-bold text-foreground hover:underline">{chunks}</Link>,
                 strong: (chunks) => <strong className="text-foreground font-semibold">{chunks}</strong>
-              })}
+                })}
             </p>
           </div>
           <div className="pt-4">
-            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="inline-flex items-center justify-center bg-primary text-primary-foreground font-bold py-2 px-6 rounded-full hover:scale-105 transition-transform">
-              {t("cta_button")}
-            </button>
+             <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="inline-flex items-center justify-center bg-primary text-primary-foreground font-bold py-2 px-6 rounded-full hover:scale-105 transition-transform">
+                {t("cta_button")}
+             </button>
           </div>
         </div>
 
@@ -108,8 +108,12 @@ export function BingoGeo() {
           <h2 className="text-2xl font-bold">{t("feature_1_title")} & {t("feature_2_title")}</h2>
           <ul className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" role="list">
             {features.map((feature, idx) => (
-              <li
+              <motion.li
                 key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
                 className="p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-colors list-none"
               >
                 <div className="mb-4 p-3 bg-primary/10 rounded-xl w-fit">
@@ -117,7 +121,7 @@ export function BingoGeo() {
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground text-sm">{feature.desc}</p>
-              </li>
+              </motion.li>
             ))}
           </ul>
         </div>

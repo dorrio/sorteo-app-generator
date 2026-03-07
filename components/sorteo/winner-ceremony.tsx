@@ -7,7 +7,8 @@ import { useSorteoStore } from "@/lib/sorteo-store"
 import { copyBlobToClipboard } from "@/lib/utils"
 import { ConfettiEffect } from "./confetti-effect"
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { ShareDropdownContent } from "@/components/ui/share-dropdown-content"
 import {
   Trophy,
   Sparkles,
@@ -15,13 +16,11 @@ import {
   RotateCcw,
   Copy,
   Check,
-  Twitter,
-  Facebook,
-  MessageCircle,
-  Instagram,
   Download,
   Loader2,
+  ImageIcon,
 } from "lucide-react"
+import { buildTelegramShareUrl, buildLinkedinShareUrl } from "@/lib/social-share-urls"
 
 interface WinnerCeremonyProps {
   onClose: () => void
@@ -35,8 +34,11 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const [showContent, setShowContent] = useState(false)
   const [copied, setCopied] = useState(false)
   const [imageCopied, setImageCopied] = useState(false)
+  const [copiedVerificationId, setCopiedVerificationId] = useState(false)
+  const [copiedShareLink, setCopiedShareLink] = useState(false)
   const [canShareNative, setCanShareNative] = useState(false)
   const [isSharing, setIsSharing] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   useEffect(() => {
     setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
@@ -61,21 +63,21 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
   // Viralis: Append tool type context to maintain the loop
   if (winner.verificationId && seoMode && seoMode !== 'home') {
-      shareUrl += `&type=${seoMode}`
+    shareUrl += `&type=${seoMode}`
   }
 
   // Viralis: Append custom context (Title & Color) to make the share more specific
   if (winner.verificationId && theme.customTitle) {
-      shareUrl += `&title=${encodeURIComponent(theme.customTitle)}`
+    shareUrl += `&title=${encodeURIComponent(theme.customTitle)}`
   }
   if (winner.verificationId && theme.primaryColor) {
-      shareUrl += `&color=${encodeURIComponent(theme.primaryColor)}`
+    shareUrl += `&color=${encodeURIComponent(theme.primaryColor)}`
   }
 
   // Compelling share text
   let shareText = t("share_text", { name: winner.name })
   if (theme.customTitle) {
-      shareText = t("share_text_custom", { name: winner.name, title: theme.customTitle })
+    shareText = t("share_text_custom", { name: winner.name, title: theme.customTitle })
   }
 
   // Pre-calculate Social URLs for SEO (Link Juice) & Accessibility
@@ -84,6 +86,10 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
   // WhatsApp: Use api.whatsapp.com for better cross-device support
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
+  // Telegram: Highly viral in crypto/giveaway communities
+  const telegramUrl = buildTelegramShareUrl(shareUrl, shareText)
+  // LinkedIn: Good for professional tools (Team Generator)
+  const linkedinUrl = buildLinkedinShareUrl(shareUrl)
 
   const shareNative = async () => {
     if (!navigator.share) return
@@ -101,15 +107,17 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
         let dateToUse = new Date()
         if (winner && winner.verificationId) {
-             try {
-                const parts = winner.verificationId.split('-')
-                if (parts.length >= 3) {
-                  const timestampHex = parts[parts.length - 1]
-                  const timestamp = parseInt(timestampHex, 16)
-                  const d = new Date(timestamp)
-                  if (!isNaN(d.getTime())) dateToUse = d
-                }
-             } catch (e) {}
+          try {
+            const parts = winner.verificationId.split('-')
+            if (parts.length >= 3) {
+              const timestampHex = parts[parts.length - 1]
+              const timestamp = parseInt(timestampHex, 16)
+              const d = new Date(timestamp)
+              if (!isNaN(d.getTime())) dateToUse = d
+            }
+          } catch (e) {
+            console.error("Failed to parse date from verificationId:", winner.verificationId, e)
+          }
         }
         ogParams.set("date", dateToUse.toISOString())
         if (seoMode && seoMode !== 'home') ogParams.set("type", seoMode)
@@ -123,10 +131,10 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
         const file = new File([blob], 'certificate.png', { type: 'image/png' })
 
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-             filesArray = [file]
+          filesArray = [file]
         }
       } catch (e) {
-          console.error("Image generation failed, falling back to text share", e)
+        console.error("Image generation failed, falling back to text share", e)
       }
 
       await navigator.share({
@@ -136,23 +144,36 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
         url: shareUrl,
       })
     } catch {
-      // User cancelled
+      // User cancelled - fallback to dropdown
+      setIsDropdownOpen(true)
     } finally {
-        setIsSharing(false)
+      setIsSharing(false)
+    }
+  }
+
+  const handleShareClick = async (e: React.MouseEvent) => {
+    if (canShareNative) {
+      e.preventDefault()
+      await shareNative()
     }
   }
 
   const copyToClipboard = async () => {
-    // Viralis Optimization: Copy full text + url
-    await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      // Viralis Optimization: Copy ONLY the URL to prevent '404' errors when pasted into address bars
+      await navigator.clipboard.writeText(shareUrl)
+      setCopiedShareLink(true)
+      setTimeout(() => setCopiedShareLink(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err)
+      setCopiedShareLink(false)
+    }
   }
 
   const shareInstagram = async () => {
-    await navigator.clipboard.writeText(shareText)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
+    setCopiedShareLink(true)
+    setTimeout(() => setCopiedShareLink(false), 2000)
   }
 
   const handleCopyImage = async () => {
@@ -174,7 +195,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
             dateToUse = d
           }
         }
-      } catch (e) {}
+      } catch (e) { }
     }
     ogParams.set("date", dateToUse.toISOString())
 
@@ -352,13 +373,13 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                 className="flex items-center gap-2 px-3 py-1 rounded-md bg-muted/50 cursor-pointer hover:bg-muted transition-colors border-none outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 onClick={() => {
                   navigator.clipboard.writeText(winner.verificationId!)
-                  setCopied(true)
-                  setTimeout(() => setCopied(false), 2000)
+                  setCopiedVerificationId(true)
+                  setTimeout(() => setCopiedVerificationId(false), 2000)
                 }}
                 aria-label={t("copy_text") + " " + winner.verificationId}
               >
                 <code className="text-sm font-mono text-primary">{winner.verificationId}</code>
-                {copied ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3 text-muted-foreground" />}
+                {copiedVerificationId ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3 text-muted-foreground" />}
               </button>
             </motion.div>
           )}
@@ -381,102 +402,43 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
             className="flex flex-wrap gap-4 justify-center"
           >
             {/* Primary Share Action */}
-            {canShareNative ? (
-              <Button
-                size="lg"
-                className="gap-2"
-                onClick={shareNative}
-                disabled={isSharing}
-                style={{
-                  backgroundColor: theme.primaryColor,
-                  color: theme.backgroundColor,
+            <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  size="lg"
+                  className="gap-2"
+                  onClick={handleShareClick}
+                  disabled={isSharing}
+                  style={{
+                    backgroundColor: theme.primaryColor,
+                    color: theme.backgroundColor,
+                  }}
+                >
+                  {isSharing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Share2 className="w-5 h-5" />}
+                  {t("share_button")}
+                </Button>
+              </DropdownMenuTrigger>
+              <ShareDropdownContent
+                copyToClipboard={copyToClipboard}
+                shareInstagram={shareInstagram}
+                copied={copiedShareLink}
+                twitterUrl={twitterUrl}
+                facebookUrl={facebookUrl}
+                whatsappUrl={whatsappUrl}
+                telegramUrl={telegramUrl}
+                linkedinUrl={linkedinUrl}
+                handleCopyImage={handleCopyImage}
+                imageCopied={imageCopied}
+                translations={{
+                  copy: t("copy_text"),
+                  copied: t("copied"),
+                  copyImage: t("copy_image"),
+                  imageCopied: t("image_copied") || t("copied"),
+                  shareOn: t("share_on")
                 }}
-              >
-                {isSharing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Share2 className="w-5 h-5" />}
-                {t("share_button")}
-              </Button>
-            ) : (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    size="lg"
-                    className="gap-2"
-                    style={{
-                      backgroundColor: theme.primaryColor,
-                      color: theme.backgroundColor,
-                    }}
-                  >
-                    <Share2 className="w-5 h-5" />
-                    {t("share_button")}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="center" className="w-48">
-                  <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
-                    {copied ? (
-                      <>
-                        <Check className="w-4 h-4 text-green-500" />
-                        <span className="text-green-500">{t("copied")}</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4" />
-                        {t("copy_text")}
-                      </>
-                    )}
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem onClick={handleCopyImage} className="gap-2 cursor-pointer">
-                    {imageCopied ? (
-                      <>
-                        <Check className="w-4 h-4 text-green-500" />
-                        <span className="text-green-500">{t("copied")}</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4" />
-                        {t("copy_image")}
-                      </>
-                    )}
-                  </DropdownMenuItem>
-
-                  {/* Semantic Fix: Real links for bots and users */}
-                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                    <a href={twitterUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">
-                      <Twitter className="w-4 h-4" />
-                      Twitter / X
-                    </a>
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                    <a
-                      href="https://www.instagram.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={shareInstagram}
-                      aria-label="Share on Instagram"
-                    >
-                      <Instagram className="w-4 h-4" />
-                      Instagram
-                    </a>
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                    <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
-                      <Facebook className="w-4 h-4" />
-                      Facebook
-                    </a>
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-                    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
-                      <MessageCircle className="w-4 h-4" />
-                      WhatsApp
-                    </a>
-                  </DropdownMenuItem>
-
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
+                align="center"
+              />
+            </DropdownMenu>
 
             {/* Viralis: Exposed Download Certificate Button (Visible on Mobile & Desktop) */}
             <Button

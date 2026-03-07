@@ -4,6 +4,7 @@ import { routing } from '@/i18n/routing';
 import { SiteFooter } from '@/components/sorteo/site-footer';
 import { BingoGeo } from '@/components/sorteo/bingo-geo';
 import { Glossary } from '@/components/sorteo/glossary';
+import { safeJsonLdStringify } from '@/lib/utils';
 
 export const dynamic = 'force-static';
 
@@ -115,7 +116,7 @@ export default async function BingoNumberGeneratorPage({ params }: { params: Pro
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
         seoMode="bingo"

@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { MainApp } from "@/components/sorteo/main-app";
-import { WheelGeoServer } from "@/components/sorteo/wheel-geo-server";
+import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SeoContent } from "@/components/sorteo/seo-content";
 import { SiteFooter } from "@/components/sorteo/site-footer";
@@ -131,7 +131,7 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}
       >
-        <WheelGeoServer />
+        <WheelGeo />
         <Glossary seoMode="home" />
         <SeoContent />
       </MainApp>

@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MainApp } from "@/components/sorteo/main-app";
 import { VersusGeo } from "@/components/sorteo/versus-geo";
-import { WheelGeoServer } from "@/components/sorteo/wheel-geo-server";
+import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export const dynamic = 'force-static';
@@ -125,7 +125,7 @@ export default async function WheelVersusPage({ params }: { params: Promise<{ lo
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}
       >
-        <WheelGeoServer />
+        <WheelGeo />
         {/* We place VersusGeo inside so it's part of the layout */}
         <VersusGeo />
       </MainApp>

@@ -26,6 +26,7 @@ import { MonthGeo } from "@/components/sorteo/month-geo"
 import { CardGeo } from "@/components/sorteo/card-geo"
 import { Glossary } from "@/components/sorteo/glossary"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
+
 import { ShareButton } from "@/components/ui/share-button"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { COUNTRIES } from "@/lib/countries"

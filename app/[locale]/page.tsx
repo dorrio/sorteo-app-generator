@@ -11,6 +11,7 @@ const MainApp = dynamic(
 import { Glossary } from "@/components/sorteo/glossary";
 import { SeoContent } from "@/components/sorteo/seo-content";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+import { safeJsonLdStringify } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ locale: string }>

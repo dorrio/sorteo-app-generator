@@ -12,3 +12,7 @@
 | 2026-01-29 | LCP & SEO | Enabled SSR in MainApp | Removed global blocking skeleton, implemented granular skeletons, and enabled server-side rendering of SEO content and layout. |
 | 2026-01-30 | LCP & FCP | Optimized MainApp Animations | Removed `initial={{ opacity: 0 }}` from Header, H1, and Main Section to prevent LCP delay. Removed unused `AppSkeleton` import. |
 | 2026-02-02 | TBT & Bundle | Refactored `WheelGeo` and `Glossary` to Server Components | Removed hydration cost for large text blocks and isolated `framer-motion` to small Client Islands (`WheelVisual`, `TryToolButton`). |
+| 2026-02-03 | Bundle Size | Refactored `MainApp` to composition pattern | Removed 16 heavy component imports (Geo components) from Client Bundle. Enabled font-display: swap and safe JSON-LD. |
+| 2026-02-04 | Tree Shaking | Enabled `optimizePackageImports` in `next.config.mjs` | Improved tree-shaking for `lucide-react`, `date-fns`, `framer-motion`, and `@radix-ui`. |
+| 2026-02-05 | Bundle Size & TBT | Refactored MainApp to remove static imports of Geo components | Eliminated fallback logic and static imports of heavy content components from the client bundle. All pages now pass content as children. |
+

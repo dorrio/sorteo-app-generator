@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { copyBlobToClipboard } from "@/lib/utils"
 import { ConfettiEffect } from "./confetti-effect"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -31,6 +32,8 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const { winner, theme, showWinnerCeremony } = useSorteoStore()
   const t = useTranslations("WinnerCeremony")
   const [showContent, setShowContent] = useState(false)
+  const [copied, setCopied] = useState(false)
+  const [imageCopied, setImageCopied] = useState(false)
   const [copiedVerificationId, setCopiedVerificationId] = useState(false)
   const [copiedShareLink, setCopiedShareLink] = useState(false)
   const [canShareNative, setCanShareNative] = useState(false)
@@ -171,6 +174,52 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
     setCopiedShareLink(true)
     setTimeout(() => setCopiedShareLink(false), 2000)
+  }
+
+  const handleCopyImage = async () => {
+    if (!winner) return
+
+    // Construct OG Image URL
+    const ogParams = new URLSearchParams()
+    ogParams.set("name", winner.name)
+
+    let dateToUse = new Date()
+    if (winner.verificationId) {
+      try {
+        const parts = winner.verificationId.split('-')
+        if (parts.length >= 3) {
+          const timestampHex = parts[parts.length - 1]
+          const timestamp = parseInt(timestampHex, 16)
+          const d = new Date(timestamp)
+          if (!isNaN(d.getTime())) {
+            dateToUse = d
+          }
+        }
+      } catch (e) { }
+    }
+    ogParams.set("date", dateToUse.toISOString())
+
+    if (seoMode && seoMode !== 'home') {
+      ogParams.set("type", seoMode)
+    }
+    if (theme.customTitle) {
+      ogParams.set("title", theme.customTitle)
+    }
+    if (theme.primaryColor) {
+      ogParams.set("color", theme.primaryColor)
+    }
+
+    const imageUrl = `/api/og?${ogParams.toString()}`
+
+    try {
+      const response = await fetch(imageUrl)
+      const blob = await response.blob()
+      await copyBlobToClipboard(blob)
+      setImageCopied(true)
+      setTimeout(() => setImageCopied(false), 2000)
+    } catch (e) {
+      console.error("Failed to copy image", e)
+    }
   }
 
   const handleDownload = async () => {
@@ -376,13 +425,17 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                 twitterUrl={twitterUrl}
                 facebookUrl={facebookUrl}
                 whatsappUrl={whatsappUrl}
+                telegramUrl={telegramUrl}
+                linkedinUrl={linkedinUrl}
+                handleCopyImage={handleCopyImage}
+                imageCopied={imageCopied}
                 translations={{
                   copy: t("copy_text"),
                   copied: t("copied"),
+                  copyImage: t("copy_image"),
+                  imageCopied: t("image_copied") || t("copied"),
                   shareOn: t("share_on")
                 }}
-                telegramUrl={telegramUrl}
-                linkedinUrl={linkedinUrl}
                 align="center"
               />
             </DropdownMenu>

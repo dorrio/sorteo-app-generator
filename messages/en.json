@@ -264,6 +264,7 @@
         "back_button": "Back to Home",
         "create_your_own": "🚀 Create Free Giveaway",
         "share_button": "Share Proof",
+        "copy_image": "Copy Image",
         "download_certificate": "Download Certificate",
         "copy_image": "Copy Image",
         "image_copied": "Image Copied!",
@@ -769,8 +770,8 @@
         "month_text": "📅 I just picked a random month! Fair & Free. 👇",
         "card_title": "Random Card Generator | Sorteo Pro",
         "card_text": "🃏 I just drew a random card! Fair & Free. 👇",
-            "bingo_title": "Bingo Number Generator | Sorteo Pro",
-            "bingo_text": "🎱 I just generated random Bingo numbers! Free & Fair. 👇",
+        "bingo_title": "Bingo Number Generator | Sorteo Pro",
+        "bingo_text": "🎱 I just generated random Bingo numbers! Free & Fair. 👇",
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway"
     },

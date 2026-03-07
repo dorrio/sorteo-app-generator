@@ -10,9 +10,13 @@ interface ShareDropdownContentProps {
   whatsappUrl: string
   telegramUrl: string
   linkedinUrl: string
+  handleCopyImage?: () => Promise<void>
+  imageCopied?: boolean
   translations: {
     copy: string
     copied: string
+    copyImage?: string
+    imageCopied?: string
     shareOn?: string
   }
   align?: "center" | "end" | "start"
@@ -28,6 +32,8 @@ export function ShareDropdownContent({
   whatsappUrl,
   telegramUrl,
   linkedinUrl,
+  handleCopyImage,
+  imageCopied,
   translations,
   align = "end",
   className
@@ -47,6 +53,22 @@ export function ShareDropdownContent({
           </>
         )}
       </DropdownMenuItem>
+
+      {handleCopyImage && (
+        <DropdownMenuItem onClick={handleCopyImage} className="gap-2 cursor-pointer" data-testid={imageCopied ? "share-copy-image-confirm" : "share-copy-image"}>
+          {imageCopied ? (
+            <>
+              <Check className="w-4 h-4 text-green-500" />
+              <span className="text-green-500">{translations.imageCopied || translations.copied}</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-4 h-4" />
+              {translations.copyImage || "Copy Image"}
+            </>
+          )}
+        </DropdownMenuItem>
+      )}
 
       <DropdownMenuItem asChild className="gap-2 cursor-pointer" data-testid="share-twitter">
         <a href={twitterUrl} target="_blank" rel="noopener noreferrer" aria-label={translations.shareOn ? `${translations.shareOn} Twitter` : "Share on Twitter"}>

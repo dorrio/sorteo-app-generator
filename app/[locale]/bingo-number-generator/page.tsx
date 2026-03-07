@@ -1,24 +1,12 @@
+import { MainApp } from '@/components/sorteo/main-app';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import dynamic from 'next/dynamic';
-import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { SiteFooter } from '@/components/sorteo/site-footer';
 import { BingoGeo } from '@/components/sorteo/bingo-geo';
 import { Glossary } from '@/components/sorteo/glossary';
 import { safeJsonLdStringify } from '@/lib/utils';
 
-const MainApp = dynamic(
-  () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
-  { loading: () => <AppSkeleton /> }
-);
-
-export const dynamicParams = true; // Changed from 'force-static' string to dynamicParams boolean to match pattern, or remove it. But original had `export const dynamic = 'force-static'`. I'll remove it because I don't want to force static if I'm dynamically loading. Or I'll just remove the export.
-// Actually, `export const dynamic = 'force-static'` means it will be static. But if `MainApp` is client and now dynamically imported, it shouldn't affect the page being static HTML with a placeholder.
-// I'll remove `export const dynamic = 'force-static'` to be safe and let Next.js decide based on usage. Or better, keep it if it's not broken.
-// I'll keep it consistent with `CardPage` where I removed the explicit export in my thought but didn't in code. Wait, in `CardPage` I didn't include it in the `write_file` content?
-// Let me check my previous `write_file` for `CardPage`.
-// I did not include `export const dynamic = 'force-static';` in the `write_file` for `CardPage`. So I removed it. Good.
-// I will do the same for Bingo.
+export const dynamic = 'force-static';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

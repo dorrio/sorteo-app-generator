@@ -1,15 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import dynamic from 'next/dynamic';
-import { AppSkeleton } from "@/components/sorteo/skeletons";
-import { WheelGeoServer } from "@/components/sorteo/wheel-geo-server";
+import { MainApp } from "@/components/sorteo/main-app";
+import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
-
-const MainApp = dynamic(
-  () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
-  { loading: () => <AppSkeleton /> }
-);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -160,7 +154,7 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}
       >
-        <WheelGeoServer />
+        <WheelGeo />
         <Glossary seoMode="wheel" />
       </MainApp>
     </>

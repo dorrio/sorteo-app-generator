@@ -1,15 +1,9 @@
 import { getTranslations } from 'next-intl/server';
-import dynamic from 'next/dynamic';
-import { AppSkeleton } from "@/components/sorteo/skeletons";
-import { WheelGeoServer } from "@/components/sorteo/wheel-geo-server";
+import { MainApp } from "@/components/sorteo/main-app";
+import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SeoContent } from "@/components/sorteo/seo-content";
 import { SiteFooter } from "@/components/sorteo/site-footer";
-
-const MainApp = dynamic(
-  () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
-  { loading: () => <AppSkeleton /> }
-);
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -132,12 +126,12 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
         initialSubtitle="The Premium Giveaway Tool"
         shareTitle={tShare('home_title')}
         shareText={tShare('home_text')}
-        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
+        customShareTextTemplate={tShare('custom_share_text')}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}
       >
-        <WheelGeoServer />
+        <WheelGeo />
         <Glossary seoMode="home" />
         <SeoContent />
       </MainApp>

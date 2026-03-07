@@ -1,23 +1,12 @@
+import { MainApp } from '@/components/sorteo/main-app';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import dynamic from 'next/dynamic';
-import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { SiteFooter } from '@/components/sorteo/site-footer';
 import { CardGeo } from '@/components/sorteo/card-geo';
 import { Glossary } from '@/components/sorteo/glossary';
 import { safeJsonLdStringify } from '@/lib/utils';
 
-const MainApp = dynamic(
-  () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
-  { loading: () => <AppSkeleton /> }
-);
-
-export const dynamicParams = true; // Was 'force-static' but dynamic import might need this? No, 'force-static' is for the page itself. But MainApp is client. Keep it consistent with others. Wait, other pages don't have 'export const dynamic = ...'.
-// The file had `export const dynamic = 'force-static';`. I should probably keep it if it was there, but typically pages using searchParams are dynamic.
-// However, `MainApp` is a client component.
-// I will keep `export const dynamic = 'force-static';` if it works, but `generateMetadata` uses `searchParams`, which usually opts out of static generation unless `generateStaticParams` covers all params (which it doesn't for searchParams).
-// Next.js 13+ treats searchParams usage as dynamic rendering.
-// I'll keep it as is from the original file to minimize side effects, unless it causes build errors.
+export const dynamic = 'force-static';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

@@ -4,13 +4,13 @@ import { safeJsonLdStringify } from '@/lib/utils';
 import { routing } from '@/i18n/routing';
 import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { CoinGeo } from "@/components/sorteo/coin-geo";
+import { Glossary } from "@/components/sorteo/glossary";
+import { SiteFooter } from "@/components/sorteo/site-footer";
 
 const MainApp = dynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
   { loading: () => <AppSkeleton /> }
 )
-import { Glossary } from "@/components/sorteo/glossary";
-import { SiteFooter } from "@/components/sorteo/site-footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

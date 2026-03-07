@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Share2, Copy, Twitter, Facebook, MessageCircle, Check, Instagram } from "lucide-react"
+import { Share2, Copy, Twitter, Facebook, MessageCircle, Check, Instagram, Linkedin, Send } from "lucide-react"
 
 interface ShareButtonProps {
   title: string
@@ -70,19 +70,27 @@ export function ShareButton({
   }
 
   const copyToClipboard = async () => {
-    // Viralis Optimization: Copy full text + url to preserve the hook
-    const clipboardText = text ? `${text} ${url}` : url
-    await navigator.clipboard.writeText(clipboardText)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      // Viralis Optimization: Copy ONLY the URL to reduce friction for manual sharing
+      // Users often want just the link to paste into Discord/Slack/Email without the "Check this out" prefix.
+      await navigator.clipboard.writeText(url)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      // Fail silently or log if needed
+    }
   }
 
   const shareInstagram = async () => {
+    try {
       // Instagram doesn't have a direct share URL for text/links easily on web
       // Best practice is to copy to clipboard and open instagram
       await navigator.clipboard.writeText(text + " " + url)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      // Fail silently or log
+    }
   }
 
   // Pre-calculate Social URLs
@@ -90,6 +98,10 @@ export function ShareButton({
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`
   // WhatsApp: Use api.whatsapp.com for better cross-device support
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + url)}`
+  // Telegram: Highly viral in crypto/giveaway communities
+  const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`
+  // LinkedIn: Good for professional tools (Team Generator)
+  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
 
 
   const TriggerButton = (
@@ -119,7 +131,7 @@ export function ShareButton({
       <DropdownMenuTrigger asChild>
         {TriggerButton}
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48">
+      <DropdownMenuContent align="end" className="w-56">
         {/* Viralis: Provide access to System Share on desktop if available */}
         {canShareNative && (
           <DropdownMenuItem onClick={handleShare} className="gap-2 cursor-pointer font-medium">
@@ -127,7 +139,6 @@ export function ShareButton({
             {translations.share}
           </DropdownMenuItem>
         )}
-
         <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
           {copied ? (
             <>
@@ -150,30 +161,44 @@ export function ShareButton({
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-            <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
-              <Facebook className="w-4 h-4" />
-              Facebook
-            </a>
+          <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+            <Facebook className="w-4 h-4" />
+            Facebook
+          </a>
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
             <MessageCircle className="w-4 h-4" />
             WhatsApp
-           </a>
+          </a>
         </DropdownMenuItem>
 
-         <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-            <a
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={shareInstagram}
-              aria-label={translations.shareOn ? `${translations.shareOn} Instagram` : "Share on Instagram"}
-            >
-              <Instagram className="w-4 h-4" />
-              Instagram
-            </a>
+        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+          <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Telegram">
+            <Send className="w-4 h-4" />
+            Telegram
+          </a>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+          <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+            <Linkedin className="w-4 h-4" />
+            LinkedIn
+          </a>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={shareInstagram}
+            aria-label={translations.shareOn ? `${translations.shareOn} Instagram` : "Share on Instagram"}
+          >
+            <Instagram className="w-4 h-4" />
+            Instagram
+          </a>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

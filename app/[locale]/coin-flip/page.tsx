@@ -159,7 +159,7 @@ export default async function CoinPage({ params }: { params: Promise<{ locale: s
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('coin_title')}
         shareText={tShare('coin_text')}
-        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
+        customShareTextTemplate={tShare('custom_share_text')}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         initialOptions={initialOptions}

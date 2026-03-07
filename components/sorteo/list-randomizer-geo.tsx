@@ -1,11 +1,13 @@
 "use client"
 
 import { useTranslations } from "next-intl"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Shuffle, List, Zap, Eye, HelpCircle, CheckCircle, GraduationCap, Users, Gamepad2 } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Link } from "@/i18n/routing"
 import { safeJsonLdStringify } from "@/lib/utils";
+import { QuickSpecs } from "./quick-specs"
 
 export function ListRandomizerGeo() {
   const t = useTranslations("ListRandomizerGeo")
@@ -52,15 +54,15 @@ export function ListRandomizerGeo() {
       })),
     },
     {
-        '@context': 'https://schema.org',
-        '@type': 'HowTo',
-        name: t('how_to_title'),
-        step: howToSteps.map((step, idx) => ({
-            '@type': 'HowToStep',
-            position: idx + 1,
-            name: step.name,
-            text: step.name
-        }))
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: t('how_to_title'),
+      step: howToSteps.map((step, idx) => ({
+        '@type': 'HowToStep',
+        position: idx + 1,
+        name: step.name,
+        text: step.name
+      }))
     }
   ]
 
@@ -72,7 +74,10 @@ export function ListRandomizerGeo() {
         dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
       <div className="max-w-4xl mx-auto px-4 relative z-10">
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           className="bg-card/30 backdrop-blur-xl border border-primary/20 rounded-3xl p-8 md:p-12 shadow-2xl"
         >
           {/* Direct Answer Block (GEO) */}
@@ -95,6 +100,9 @@ export function ListRandomizerGeo() {
               </a>
             </Button>
           </div>
+
+          {/* Quick Specs Table (GEO Optimization) */}
+          <QuickSpecs className="mb-12" />
 
           {/* Features Grid */}
           <ul className="grid md:grid-cols-2 gap-8 mt-12 mb-16" role="list">
@@ -135,59 +143,59 @@ export function ListRandomizerGeo() {
           <div className="mb-16">
             <h3 className="text-2xl font-bold mb-8 text-center">{t("uses_title")}</h3>
             <ul className="grid md:grid-cols-3 gap-6" role="list">
-                <li className="bg-background/40 p-6 rounded-2xl border border-primary/10 hover:border-primary/30 transition-colors">
-                    <GraduationCap className="w-8 h-8 text-primary mb-4" />
-                    <h4 className="font-bold text-lg mb-2">{t("use_1_title")}</h4>
-                    <p className="text-sm text-muted-foreground">{t("use_1_desc")}</p>
-                </li>
-                <li className="bg-background/40 p-6 rounded-2xl border border-primary/10 hover:border-primary/30 transition-colors">
-                    <Users className="w-8 h-8 text-primary mb-4" />
-                    <h4 className="font-bold text-lg mb-2">{t("use_2_title")}</h4>
-                    <p className="text-sm text-muted-foreground">{t("use_2_desc")}</p>
-                </li>
-                 <li className="bg-background/40 p-6 rounded-2xl border border-primary/10 hover:border-primary/30 transition-colors">
-                    <Gamepad2 className="w-8 h-8 text-primary mb-4" />
-                    <h4 className="font-bold text-lg mb-2">{t("use_3_title")}</h4>
-                    <p className="text-sm text-muted-foreground">{t("use_3_desc")}</p>
-                </li>
+              <li className="bg-background/40 p-6 rounded-2xl border border-primary/10 hover:border-primary/30 transition-colors">
+                <GraduationCap className="w-8 h-8 text-primary mb-4" />
+                <h4 className="font-bold text-lg mb-2">{t("use_1_title")}</h4>
+                <p className="text-sm text-muted-foreground">{t("use_1_desc")}</p>
+              </li>
+              <li className="bg-background/40 p-6 rounded-2xl border border-primary/10 hover:border-primary/30 transition-colors">
+                <Users className="w-8 h-8 text-primary mb-4" />
+                <h4 className="font-bold text-lg mb-2">{t("use_2_title")}</h4>
+                <p className="text-sm text-muted-foreground">{t("use_2_desc")}</p>
+              </li>
+              <li className="bg-background/40 p-6 rounded-2xl border border-primary/10 hover:border-primary/30 transition-colors">
+                <Gamepad2 className="w-8 h-8 text-primary mb-4" />
+                <h4 className="font-bold text-lg mb-2">{t("use_3_title")}</h4>
+                <p className="text-sm text-muted-foreground">{t("use_3_desc")}</p>
+              </li>
             </ul>
           </div>
 
           {/* How To Section (New) */}
           <div className="mb-16 border-t border-primary/10 pt-10">
-              <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
-                 <CheckCircle className="w-6 h-6 text-primary" />
-                 {t('how_to_title')}
-              </h3>
-              <ol className="relative border-l border-primary/20 ml-3 space-y-8">
-                 {howToSteps.map((step, idx) => (
-                     <li key={idx} className="ml-8">
-                        <span className="absolute flex items-center justify-center w-8 h-8 bg-primary/10 rounded-full -left-4 ring-4 ring-background text-sm font-bold text-primary">
-                            {idx + 1}
-                        </span>
-                        <p className="text-lg text-foreground/90 font-medium">{step.name}</p>
-                     </li>
-                 ))}
-              </ol>
-           </div>
+            <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
+              <CheckCircle className="w-6 h-6 text-primary" />
+              {t('how_to_title')}
+            </h3>
+            <ol className="relative border-l border-primary/20 ml-3 space-y-8">
+              {howToSteps.map((step, idx) => (
+                <li key={idx} className="ml-8">
+                  <span className="absolute flex items-center justify-center w-8 h-8 bg-primary/10 rounded-full -left-4 ring-4 ring-background text-sm font-bold text-primary">
+                    {idx + 1}
+                  </span>
+                  <p className="text-lg text-foreground/90 font-medium">{step.name}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
 
           {/* Visible FAQ Section (Anti-Cloaking) */}
           <div className="pt-10 border-t border-primary/10">
-             <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
-                <HelpCircle className="w-6 h-6 text-primary" />
-                FAQ
-             </h3>
-             <dl className="grid gap-6">
-                {faqs.map((faq, idx) => (
-                    <div key={idx} className="space-y-2">
-                        <dt className="font-bold text-lg text-foreground">{faq.question}</dt>
-                        <dd className="text-muted-foreground leading-relaxed">{faq.answer}</dd>
-                    </div>
-                ))}
-             </dl>
+            <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
+              <HelpCircle className="w-6 h-6 text-primary" />
+              FAQ
+            </h3>
+            <dl className="grid gap-6">
+              {faqs.map((faq, idx) => (
+                <div key={idx} className="space-y-2">
+                  <dt className="font-bold text-lg text-foreground">{faq.question}</dt>
+                  <dd className="text-muted-foreground leading-relaxed">{faq.answer}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
-        </div>
+        </motion.div>
       </div>
 
       {/* Decorative background elements */}

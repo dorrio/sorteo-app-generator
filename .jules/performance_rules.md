@@ -16,6 +16,7 @@
 *   **Server Component Extraction:** For content-heavy sections (SEO text, FAQ, Glossary), extract interactivity into small "Client Islands" (e.g., `<TryToolButton>`) and make the parent a Server Component. This removes hydration cost for static text.
 *   **Shared State for Islands:** When decoupling components into Islands, lift shared local state (like modal visibility) to the global store (`useSorteoStore`) to allow cross-island communication.
 *   **Secure JSON-LD:** Always use `safeJsonLdStringify` for structured data injection.
+*   **Static Content Injection:** Always pass heavy static content (SEO text, FAQ) as `children` to Client Components (like `MainApp`). Avoid importing them statically inside the Client Component to prevent bundle bloat.
 
 ## ❌ BAD PATTERNS (Avoid This)
 *   **Sync Imports:** Importing heavy widgets directly in the main bundle.

@@ -14,3 +14,4 @@
 | 2026-02-02 | TBT & Bundle | Refactored `WheelGeo` and `Glossary` to Server Components | Removed hydration cost for large text blocks and isolated `framer-motion` to small Client Islands (`WheelVisual`, `TryToolButton`). |
 | 2026-02-05 | FCP & Architecture | Created `MainAppOptimized` with Client Islands | Fully decoupled interactivity from static layout, enabling true SSR for SEO content and reducing TBT. |
 | 2026-02-05 | Security | Implemented `safeJsonLdStringify` | Secured JSON-LD injection against XSS vulnerabilities. |
+| 2026-02-05 | Bundle Size & TBT | Refactored MainApp to remove static imports of Geo components | Eliminated fallback logic and static imports of heavy content components from the client bundle. All pages now pass content as children. |

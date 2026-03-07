@@ -32,9 +32,8 @@
 
 ## 2025-05-30 - [Strategy/Cluster Content]
 **Gap:** Competitors (Random.org, Pinetools) have dedicated "Random Card" and "Bingo Number" generators. We missed high-volume, low-difficulty keywords.
-
 **Action:** Created dedicated `/random-card-generator` and `/bingo-number-generator` landing pages with `CardGeo` and `BingoGeo` components, specialized Schema, and targeted Metadata.
-**GEO Impact:** Optimized for "Pick a Card", "Bingo Caller", and "Deck of Cards Online" queries with Direct Answer blocks.
+**GEO Impact:** Optimized for "Draw a Card", "Bingo Caller", and "Random Playing Card" queries with Direct Answer blocks.
 
 ## 2025-05-31 - [Technical/Performance]
 **Gap:** Core GEO components (`RngGeo`, `ListRandomizerGeo`, `TeamGeo`, `SecretSantaGeo`) were using `framer-motion` for simple fade-ins, violating the "Performance Constraint" and potentially causing hydration mismatches or delayed LCP.
@@ -45,8 +44,3 @@
 **Gap:** Remaining GEO components (`BingoGeo`, `DiceGeo`, `RpsGeo`) were still using `framer-motion` and `animate-pulse`, causing unnecessary bundle size and LCP delays. `CoinGeo` used unsecure `dangerouslySetInnerHTML`.
 **Action:** Refactored `BingoGeo`, `DiceGeo`, and `RpsGeo` to remove motion libraries and background animations. Refactored `CoinGeo` to use `t.rich()` and `safeJsonLdStringify`. Deleted misplaced `ours_bingo_geo.tsx`.
 **GEO Impact:** Reduced First Input Delay (FID) and improved Cumulative Layout Shift (CLS) for these high-traffic tools, ensuring GoogleBot parses the "Direct Answer" content instantly.
-
-## 2025-06-02 - [Strategy/Semantics & Technical/Security]
-**Gap:** The "Bingo Number Generator" was missing from the Glossary page, limiting internal linking. Also, JSON-LD injection in `layout.tsx` and `versus/page.tsx` was using unsecure `JSON.stringify`.
-**Action:** Added Bingo term to Glossary page and component. Replaced `JSON.stringify` with `safeJsonLdStringify` to prevent script injection and ensure correct serialization. Corrected Spanish translations for Bingo.
-**GEO Impact:** Enhanced topical authority for Bingo-related queries and ensured Schema markup is robust and safe for all crawlers.

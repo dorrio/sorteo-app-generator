@@ -3,7 +3,6 @@ import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
 import { Swords, Trophy, Zap, ShieldCheck } from 'lucide-react';
-import { safeJsonLdStringify } from '@/lib/utils';
 
 export const dynamic = 'force-static';
 
@@ -77,7 +76,7 @@ export default function VersusHubPage() {
     <main className="min-h-screen bg-background text-foreground">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(collectionSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
 
       <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-purple-900/10 to-transparent -z-10" />

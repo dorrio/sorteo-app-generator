@@ -5,7 +5,6 @@ import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download, Loader2 } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
-import { copyBlobToClipboard } from "@/lib/utils"
 import { ConfettiEffect } from "@/components/sorteo/confetti-effect"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -32,7 +31,6 @@ export function VerifyContent() {
         error?: string
     } | null>(null)
     const [showCopied, setShowCopied] = useState(false)
-    const [imageCopied, setImageCopied] = useState(false)
     // Initialize to true (Mobile/Lite) to minimize server HTML size and avoid Mobile CLS.
     // Desktop will hydrate and switch to Dropdown (Heavy) if needed.
     const [canShareNative, setCanShareNative] = useState(true)
@@ -207,40 +205,6 @@ export function VerifyContent() {
         setShowCopied(true)
         setTimeout(() => setShowCopied(false), 2000)
         window.open("https://www.instagram.com/", "_blank")
-    }
-
-    const handleCopyImage = async () => {
-        if (!winnerName) return
-
-        // Construct OG Image URL
-        const ogParams = new URLSearchParams()
-        ogParams.set("name", winnerName)
-
-        // Logic to extract date from result
-        let dateToUse = new Date()
-        if (result?.participant?.timestamp) {
-            dateToUse = new Date(result.participant.timestamp)
-        } else if (result?.date) {
-            dateToUse = new Date(result.date)
-        }
-        ogParams.set("date", dateToUse.toISOString())
-
-        // Viralis: Apply branding context to the image
-        if (type) ogParams.set("type", type)
-        if (title) ogParams.set("title", title)
-        if (color) ogParams.set("color", color)
-
-        const imageUrl = `/api/og?${ogParams.toString()}`
-
-        try {
-            const response = await fetch(imageUrl)
-            const blob = await response.blob()
-            await copyBlobToClipboard(blob)
-            setImageCopied(true)
-            setTimeout(() => setImageCopied(false), 2000)
-        } catch (e) {
-            console.error("Failed to copy image", e)
-        }
     }
 
     const handleDownload = async () => {
@@ -519,20 +483,6 @@ export function VerifyContent() {
                                                                     <>
                                                                         <Copy className="w-4 h-4" />
                                                                         Copy Link
-                                                                    </>
-                                                                )}
-                                                            </DropdownMenuItem>
-
-                                                            <DropdownMenuItem onClick={handleCopyImage} className="gap-2 cursor-pointer">
-                                                                {imageCopied ? (
-                                                                    <>
-                                                                        <Check className="w-4 h-4 text-green-500" />
-                                                                        <span className="text-green-500">{t("result.copied")}</span>
-                                                                    </>
-                                                                ) : (
-                                                                    <>
-                                                                        <Copy className="w-4 h-4" />
-                                                                        {t("copy_image")}
                                                                     </>
                                                                 )}
                                                             </DropdownMenuItem>

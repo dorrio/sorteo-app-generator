@@ -1,4 +1,3 @@
-import time
 from playwright.sync_api import sync_playwright, TimeoutError
 
 def run_test():
@@ -64,19 +63,18 @@ def run_test():
             # 3. Verify Dropdown is open
             try:
                 # Wait for dropdown to be visible
-                # Using role="menuitem" which is standard for DropdownMenu items
                 # We specifically look for the one containing the Twitter icon/link as a proxy for the menu being open
-                dropdown_item = page.locator("a[aria-label='Share on Twitter']")
+                dropdown_item = page.locator("a[data-testid='share-twitter']")
                 dropdown_item.wait_for(state="visible", timeout=5000)
                 print("SUCCESS: Dropdown menu opened after native share failure!")
 
                 # Take screenshot
                 page.screenshot(path="verification_share_success.png")
-            except TimeoutError as e:
-                print(f"FAILURE: Dropdown menu did not open (Timeout).")
+            except TimeoutError:
+                print("FAILURE: Dropdown menu did not open (Timeout).")
                 page.screenshot(path="verification_share_failure.png")
-            except Exception as e:
-                print(f"FAILURE: Unexpected error: {e}")
+            except Exception as ex:
+                print(f"FAILURE: Unexpected error: {ex}")
                 page.screenshot(path="verification_error.png")
 
         else:

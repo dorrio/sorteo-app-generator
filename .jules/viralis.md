@@ -26,8 +26,3 @@
 1. Refactored `ShareButton` and `WinnerCeremony` to implement a "Hybrid Share" pattern: Always render the fallback menu structure.
 2. Intercept native share errors (including cancellations) and programmatically open the fallback dropdown instead of doing nothing.
 **Outcome:** Eliminates the "dead end" user experience on mobile when cancelling a share, providing an immediate alternative path to copy the link or share via specific apps.
-
-## 2026-02-04 - [ShareFlow/Friction]
-**Hypothesis:** Users manually copying links often paste them into browser bars or non-social apps. The previous "Text + URL" format caused 404s and friction.
-**Implementation:** Updated `ShareButton.tsx` and `WinnerCeremony.tsx` "Copy Link" action to copy **URL only**. Added explicit "Invite Friends" CTA for multi-participant lists. Added Telegram and LinkedIn support.
-**Outcome:** Expect reduced bounce rate from broken links and higher share engagement due to expanded channel support.

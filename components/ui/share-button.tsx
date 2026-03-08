@@ -45,7 +45,11 @@ export function ShareButton({
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
-    setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
+    setCanShareNative(
+      typeof navigator !== "undefined" &&
+      !!navigator.share &&
+      window.matchMedia("(pointer: coarse)").matches
+    )
   }, [])
 
   const handleShare = async () => {

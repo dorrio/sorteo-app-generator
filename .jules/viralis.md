@@ -19,3 +19,8 @@
 2. Updated `generateMetadata` in all tool pages to read `template_title` and `template_color` and pass them to `api/og` and `og:url`.
 3. Standardized translation keys across `en`, `es`, `pt` to support these dynamic titles without build errors.
 **Outcome:** Every tool in the suite now supports full viral context persistence. A user sharing a "Christmas Dice Game" will see exactly that in the link preview, not just "Dice Roller".
+
+## 2026-01-29 - [Share/SmartHybridShare]
+**Hypothesis:** If we restrict the Native Web Share API (`navigator.share`) to only trigger on touch-enabled devices (`(pointer: coarse)`), we will reduce friction for desktop users who currently see unhelpful native OS share dialogs, while preserving the seamless one-click sharing experience for mobile users. The custom dropdown menu is superior on desktop.
+**Implementation:** Updated `canShareNative` logic in `ShareButton`, `WinnerCeremony`, and `VerifyContent` components to evaluate `window.matchMedia('(pointer: coarse)').matches` alongside the existence of `navigator.share`.
+**Outcome:** Expect increased successful link copies and higher share completion rates on desktop environments without negative impact on mobile sharing.

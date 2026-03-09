@@ -3,8 +3,28 @@ import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
 import { safeJsonLdStringify } from "@/lib/utils"
 
+export type SeoMode = 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
+
 interface GlossaryProps {
-  seoMode?: string;
+  seoMode?: SeoMode;
+}
+
+const GLOSSARY_MAPPING: Record<string, string[]> = {
+  wheel: ['wheel'],
+  instagram: ['instagram'],
+  rng: ['rng'],
+  'list-randomizer': ['list'],
+  'yes-no': ['yes-no'],
+  letter: ['letter'],
+  'secret-santa': ['secret-santa'],
+  card: ['card'],
+  bingo: ['bingo'],
+  dice: ['dice', 'rng'],
+  coin: ['coin'],
+  rps: ['rps'],
+  team: ['team'],
+  country: ['country'],
+  month: ['month'],
 }
 
 export function Glossary({ seoMode }: GlossaryProps) {
@@ -100,26 +120,8 @@ export function Glossary({ seoMode }: GlossaryProps) {
     // Always show Provably Fair (id: provably-fair) as a trust signal
     if (term.id === 'provably-fair') return true;
 
-    if (seoMode === 'wheel' && term.id === 'wheel') return true;
-    if (seoMode === 'rng' && term.id === 'rng') return true;
-    if (seoMode === 'instagram' && term.id === 'instagram') return true;
-    if (seoMode === 'list-randomizer' && term.id === 'list') return true;
-    if (seoMode === 'yes-no' && term.id === 'yes-no') return true;
-    if (seoMode === 'letter' && term.id === 'letter') return true;
-    if (seoMode === 'secret-santa' && term.id === 'secret-santa') return true;
-    if (seoMode === 'card' && term.id === 'card') return true;
-    if (seoMode === 'bingo' && term.id === 'bingo') return true;
-    if (seoMode === 'dice' && (term.id === 'dice' || term.id === 'rng')) return true; // Dice is a form of RNG
-    if (seoMode === 'coin' && term.id === 'coin') return true;
-    if (seoMode === 'rps' && term.id === 'rps') return true;
-    if (seoMode === 'team' && term.id === 'team') return true;
-    if (seoMode === 'country' && term.id === 'country') return true;
-    if (seoMode === 'month' && term.id === 'month') return true;
-
-    // For other modes, maybe show related terms?
-    // For now, keep it strict to avoid clutter.
-
-    return false;
+    const relevantIds = GLOSSARY_MAPPING[seoMode as string] || [];
+    return relevantIds.includes(term.id);
   });
 
   const jsonLd = {

@@ -118,7 +118,7 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
         dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, faqSchema]) }}
       />
       <MainApp
-        initialStyle="slot_machine"
+        initialStyle="slot-machine"
         seoMode="rng"
         initialTitle={tRng('h1')}
         initialSubtitle={tRng('subtitle')}

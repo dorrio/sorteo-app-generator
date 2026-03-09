@@ -1,13 +1,14 @@
+import React from "react"
 import { WheelGeo } from "@/components/sorteo/wheel-geo"
-import { Glossary } from "@/components/sorteo/glossary"
+import { Glossary, type SeoMode } from "@/components/sorteo/glossary"
 import { SeoContent } from "@/components/sorteo/seo-content"
 import { InstagramGeo } from "@/components/sorteo/instagram-geo"
 
 interface WheelModeProps {
-    seoMode: string;
+    seoMode: SeoMode;
 }
 
-export function WheelMode({ seoMode }: WheelModeProps) {
+export function WheelMode({ seoMode }: WheelModeProps): React.JSX.Element {
     if (seoMode === 'instagram') {
         return (
             <>
@@ -22,8 +23,7 @@ export function WheelMode({ seoMode }: WheelModeProps) {
         <>
             <WheelGeo />
             <Glossary seoMode={seoMode} />
-            {seoMode === 'home' && <SeoContent />}
-            {seoMode !== 'home' && seoMode !== 'wheel' && seoMode !== 'instagram' && <SeoContent />}
+            {seoMode !== 'wheel' && <SeoContent />}
         </>
     )
 }

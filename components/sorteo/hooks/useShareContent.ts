@@ -1,9 +1,10 @@
 import { useMemo } from "react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { useTranslations } from "next-intl"
+import { type SeoMode } from "@/components/sorteo/glossary"
 
 export function useShareContent(
-    seoMode: string = 'home',
+    seoMode: SeoMode = 'home',
     shareTitle: string = "Sorteo Pro",
     shareText: string = "Sorteo Pro",
     initialTitle?: string,
@@ -19,20 +20,28 @@ export function useShareContent(
 
         // Fallback logic if shareTitle/Text are defaults and we're in a specific mode without props passed
         if (shareTitle === "Sorteo Pro" && seoMode) {
-            if (seoMode === 'wheel') { finalShareTitle = tShare('wheel_title'); finalShareText = tShare('wheel_text'); }
-            else if (seoMode === 'instagram') { finalShareTitle = tShare('instagram_title'); finalShareText = tShare('instagram_text'); }
-            else if (seoMode === 'rng') { finalShareTitle = tShare('rng_title'); finalShareText = tShare('rng_text'); }
-            else if (seoMode === 'list-randomizer') { finalShareTitle = tShare('list_title'); finalShareText = tShare('list_text'); }
-            else if (seoMode === 'team') { finalShareTitle = tShare('list_title'); finalShareText = tShare('list_text'); }
-            else if (seoMode === 'secret-santa') { finalShareTitle = tShare('secret_santa_title'); finalShareText = tShare('secret_santa_text'); }
-            else if (seoMode === 'yes-no') { finalShareTitle = tShare('yes_no_title'); finalShareText = tShare('yes_no_text'); }
-            else if (seoMode === 'letter') { finalShareTitle = tShare('letter_title'); finalShareText = tShare('letter_text'); }
-            else if (seoMode === 'dice') { finalShareTitle = tShare('dice_title'); finalShareText = tShare('dice_text'); }
-            else if (seoMode === 'coin') { finalShareTitle = tShare('coin_title'); finalShareText = tShare('coin_text'); }
-            else if (seoMode === 'rps') { finalShareTitle = tShare('rps_title'); finalShareText = tShare('rps_text'); }
-            else if (seoMode === 'country') { finalShareTitle = tShare('country_title'); finalShareText = tShare('country_text'); }
-            else if (seoMode === 'month') { finalShareTitle = tShare('month_title'); finalShareText = tShare('month_text'); }
-            else if (seoMode === 'card') { finalShareTitle = tShare('card_title'); finalShareText = tShare('card_text'); }
+            const MODE_SHARE_KEYS: Record<string, { title: string; text: string }> = {
+                wheel: { title: 'wheel_title', text: 'wheel_text' },
+                instagram: { title: 'instagram_title', text: 'instagram_text' },
+                rng: { title: 'rng_title', text: 'rng_text' },
+                'list-randomizer': { title: 'list_title', text: 'list_text' },
+                team: { title: 'list_title', text: 'list_text' },
+                'secret-santa': { title: 'secret_santa_title', text: 'secret_santa_text' },
+                'yes-no': { title: 'yes_no_title', text: 'yes_no_text' },
+                letter: { title: 'letter_title', text: 'letter_text' },
+                dice: { title: 'dice_title', text: 'dice_text' },
+                coin: { title: 'coin_title', text: 'coin_text' },
+                rps: { title: 'rps_title', text: 'rps_text' },
+                country: { title: 'country_title', text: 'country_text' },
+                month: { title: 'month_title', text: 'month_text' },
+                card: { title: 'card_title', text: 'card_text' },
+            }
+
+            const keys = MODE_SHARE_KEYS[seoMode]
+            if (keys) {
+                finalShareTitle = tShare(keys.title)
+                finalShareText = tShare(keys.text)
+            }
         }
 
         const defaultTitle = initialTitle || "Sorteo Pro"
@@ -67,7 +76,9 @@ export function useShareContent(
                     url: urlObj.toString()
                 }
             } catch (e) {
-                // Fallback to current url if parsing fails
+                if (process.env.NODE_ENV !== 'production') {
+                    console.warn("Failed to parse URL in useShareContent", e)
+                }
             }
         }
 

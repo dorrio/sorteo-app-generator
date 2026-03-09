@@ -2,15 +2,50 @@ import { useEffect } from "react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { useTranslations, useLocale } from "next-intl"
 import { COUNTRIES } from "@/lib/countries"
+import { type SeoMode } from "@/components/sorteo/glossary"
 
 const CARD_SUITS = ['♠', '♥', '♦', '♣']
 const CARD_RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
 export const CARD_DECK = CARD_SUITS.flatMap(suit => CARD_RANKS.map(rank => `${rank}${suit}`))
 export const BINGO_NUMBERS = Array.from({ length: 75 }, (_, i) => (i + 1).toString())
 
+interface PopulationContext {
+    opt?: Record<string, string>;
+    locale: string;
+    tYesNo: any;
+    tCoin: any;
+    tRps: any;
+}
+
+const POPULATION_MAPPERS: Partial<Record<SeoMode, (ctx: PopulationContext) => { name: string }[]>> = {
+    'yes-no': ({ opt, tYesNo }) => [
+        { name: opt?.yes || tYesNo('option_yes') },
+        { name: opt?.no || tYesNo('option_no') }
+    ],
+    'coin': ({ opt, tCoin }) => [
+        { name: opt?.heads || tCoin('option_heads') },
+        { name: opt?.tails || tCoin('option_tails') }
+    ],
+    'rps': ({ opt, tRps }) => [
+        { name: opt?.rock || tRps('option_rock') },
+        { name: opt?.paper || tRps('option_paper') },
+        { name: opt?.scissors || tRps('option_scissors') }
+    ],
+    'letter': () => Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)).map(l => ({ name: l })),
+    'dice': () => ["1", "2", "3", "4", "5", "6"].map(n => ({ name: n })),
+    'month': ({ locale }) => Array.from({ length: 12 }, (_, i) => {
+        return { name: new Date(2024, i, 1).toLocaleString(locale, { month: 'long' }) }
+    }),
+    'country': () => COUNTRIES.map(c => ({ name: c })),
+    'bingo': () => BINGO_NUMBERS.map(n => ({ name: n })),
+    'card': () => CARD_DECK.map(c => ({ name: c })),
+}
+
+const PRESET_TOOLS: SeoMode[] = Object.keys(POPULATION_MAPPERS) as SeoMode[]
+
 export function usePopulationLogic(
     mounted: boolean,
-    seoMode: string = 'home',
+    seoMode: SeoMode = 'home',
     initialOptions?: Record<string, string>
 ) {
     const {
@@ -35,7 +70,7 @@ export function usePopulationLogic(
         // Detect if we just navigated to a new mode
         const modeChanged = activeTool !== seoMode
         const isEmpty = participants.length === 0
-        const isPresetTool = ['card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter', 'yes-no'].includes(seoMode)
+        const isPresetTool = PRESET_TOOLS.includes(seoMode)
 
         // We populate if:
         // 1. The list is empty (standard behavior)
@@ -47,47 +82,20 @@ export function usePopulationLogic(
                 clearParticipants()
             }
 
-            if (seoMode === 'yes-no') {
-                addParticipants([
-                    { name: initialOptions?.yes || tYesNo('option_yes') },
-                    { name: initialOptions?.no || tYesNo('option_no') }
-                ])
-            } else if (seoMode === 'coin') {
-                addParticipants([
-                    { name: initialOptions?.heads || tCoin('option_heads') },
-                    { name: initialOptions?.tails || tCoin('option_tails') }
-                ])
-            } else if (seoMode === 'rps') {
-                addParticipants([
-                    { name: initialOptions?.rock || tRps('option_rock') },
-                    { name: initialOptions?.paper || tRps('option_paper') },
-                    { name: initialOptions?.scissors || tRps('option_scissors') }
-                ])
-            } else if (seoMode === 'letter') {
-                const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
-                addParticipants(alphabet.map(l => ({ name: l })))
-            } else if (seoMode === 'dice') {
-                addParticipants(["1", "2", "3", "4", "5", "6"].map(n => ({ name: n })))
-            } else if (seoMode === 'month') {
-                const months = Array.from({ length: 12 }, (_, i) => {
-                    return new Date(2024, i, 1).toLocaleString(locale, { month: 'long' })
-                })
-                const capitalizedMonths = months.map(m => m.charAt(0).toUpperCase() + m.slice(1))
-                addParticipants(capitalizedMonths.map(m => ({ name: m })))
-            } else if (seoMode === 'country') {
-                addParticipants(COUNTRIES.map(c => ({ name: c })))
-            } else if (seoMode === 'bingo') {
-                addParticipants(BINGO_NUMBERS.map(n => ({ name: n })))
-            } else if (seoMode === 'card') {
-                addParticipants(CARD_DECK.map(c => ({ name: c })))
+            const populateFn = POPULATION_MAPPERS[seoMode]
+            if (populateFn) {
+                addParticipants(populateFn({ opt: initialOptions, locale, tYesNo, tCoin, tRps }))
             } else if (isEmpty && !isPresetTool) {
-                addParticipants([
-                    { name: "Option 1" },
-                    { name: "Option 2" },
-                    { name: "Option 3" },
-                    { name: "Option 4" },
-                    { name: "Option 5" }
-                ])
+                const hasListParam = typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('list')
+                if (!hasListParam) {
+                    addParticipants([
+                        { name: "Option 1" },
+                        { name: "Option 2" },
+                        { name: "Option 3" },
+                        { name: "Option 4" },
+                        { name: "Option 5" }
+                    ])
+                }
             }
         }
 

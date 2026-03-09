@@ -21,11 +21,12 @@ import {
   Download,
   Loader2,
 } from "lucide-react"
+import { type SeoMode } from "@/components/sorteo/glossary"
 
 interface WinnerCeremonyProps {
   onClose: () => void
   onNewSorteo: () => void
-  seoMode?: string
+  seoMode?: SeoMode
 }
 
 export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremonyProps) {
@@ -63,21 +64,21 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
   // Viralis: Append tool type context to maintain the loop
   if (winner.verificationId && seoMode && seoMode !== 'home') {
-      shareUrl += `&type=${seoMode}`
+    shareUrl += `&type=${seoMode}`
   }
 
   // Viralis: Append custom context (Title & Color) to make the share more specific
   if (winner.verificationId && theme.customTitle) {
-      shareUrl += `&title=${encodeURIComponent(theme.customTitle)}`
+    shareUrl += `&title=${encodeURIComponent(theme.customTitle)}`
   }
   if (winner.verificationId && theme.primaryColor) {
-      shareUrl += `&color=${encodeURIComponent(theme.primaryColor)}`
+    shareUrl += `&color=${encodeURIComponent(theme.primaryColor)}`
   }
 
   // Compelling share text
   let shareText = t("share_text", { name: winner.name })
   if (theme.customTitle) {
-      shareText = t("share_text_custom", { name: winner.name, title: theme.customTitle })
+    shareText = t("share_text_custom", { name: winner.name, title: theme.customTitle })
   }
 
   // Pre-calculate Social URLs for SEO (Link Juice) & Accessibility
@@ -103,15 +104,15 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
         let dateToUse = new Date()
         if (winner && winner.verificationId) {
-             try {
-                const parts = winner.verificationId.split('-')
-                if (parts.length >= 3) {
-                  const timestampHex = parts[parts.length - 1]
-                  const timestamp = parseInt(timestampHex, 16)
-                  const d = new Date(timestamp)
-                  if (!isNaN(d.getTime())) dateToUse = d
-                }
-             } catch (e) {}
+          try {
+            const parts = winner.verificationId.split('-')
+            if (parts.length >= 3) {
+              const timestampHex = parts[parts.length - 1]
+              const timestamp = parseInt(timestampHex, 16)
+              const d = new Date(timestamp)
+              if (!isNaN(d.getTime())) dateToUse = d
+            }
+          } catch (e) { }
         }
         ogParams.set("date", dateToUse.toISOString())
         if (seoMode && seoMode !== 'home') ogParams.set("type", seoMode)
@@ -125,10 +126,10 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
         const file = new File([blob], 'certificate.png', { type: 'image/png' })
 
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-             filesArray = [file]
+          filesArray = [file]
         }
       } catch (e) {
-          console.error("Image generation failed, falling back to text share", e)
+        console.error("Image generation failed, falling back to text share", e)
       }
 
       await navigator.share({
@@ -140,7 +141,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     } catch {
       // User cancelled
     } finally {
-        setIsSharing(false)
+      setIsSharing(false)
     }
   }
 

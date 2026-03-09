@@ -10,7 +10,8 @@ import { ParticipantManager } from "@/components/sorteo/participant-manager"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
-import { WheelMode, ListMode, NumberMode, MiscModes } from "@/components/sorteo/modes"
+import { WheelMode, MODE_COMPONENTS } from "@/components/sorteo/modes"
+import { type SeoMode } from "@/components/sorteo/glossary"
 import { ShareButton } from "@/components/ui/share-button"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
 import { Sparkles, Settings2, Play, Trophy, ShieldCheck } from "lucide-react"
@@ -93,8 +94,8 @@ function ListParamsHandler() {
 }
 
 interface MainAppProps {
-  initialStyle?: string;
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
+  initialStyle?: ThemeConfig["sorteoStyle"];
+  seoMode?: SeoMode;
   children?: React.ReactNode;
   initialTitle?: string;
   initialSubtitle?: string;
@@ -442,17 +443,10 @@ export function MainApp({
         {/* SEO Content / Footer Children */}
         {children ? children : (
           /* Fallback for Legacy Pages that don't pass children yet */
-          seoMode === 'wheel' || seoMode === 'instagram' ? (
-            <WheelMode seoMode={seoMode} />
-          ) : seoMode === 'rng' ? (
-            <NumberMode seoMode={seoMode} />
-          ) : seoMode === 'list-randomizer' || seoMode === 'secret-santa' || seoMode === 'team' ? (
-            <ListMode seoMode={seoMode} />
-          ) : ['yes-no', 'letter', 'dice', 'coin', 'rps', 'country', 'month', 'card'].includes(seoMode) ? (
-            <MiscModes seoMode={seoMode} />
-          ) : (
-            <WheelMode seoMode={seoMode} />
-          )
+          (() => {
+            const ModeComponent = (seoMode && MODE_COMPONENTS[seoMode]) || WheelMode
+            return <ModeComponent seoMode={seoMode || 'home'} />
+          })()
         )}
 
         {/* Footer */}

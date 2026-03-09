@@ -1,3 +1,4 @@
+import React from "react"
 import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
 import { LetterGeo } from "@/components/sorteo/letter-geo"
 import { DiceGeo } from "@/components/sorteo/dice-geo"
@@ -6,9 +7,10 @@ import { RpsGeo } from "@/components/sorteo/rps-geo"
 import { CountryGeo } from "@/components/sorteo/country-geo"
 import { MonthGeo } from "@/components/sorteo/month-geo"
 import { CardGeo } from "@/components/sorteo/card-geo"
-import { Glossary } from "@/components/sorteo/glossary"
+import { BingoGeo } from "@/components/sorteo/bingo-geo"
+import { Glossary, type SeoMode } from "@/components/sorteo/glossary"
 
-export function MiscModes({ seoMode }: { seoMode: string }) {
+export function MiscModes({ seoMode }: { seoMode: SeoMode }): React.JSX.Element | null {
     switch (seoMode) {
         case 'yes-no':
             return <><YesNoGeo /><Glossary seoMode={seoMode} /></>
@@ -26,6 +28,8 @@ export function MiscModes({ seoMode }: { seoMode: string }) {
             return <><MonthGeo /><Glossary seoMode="wheel" /></>
         case 'card':
             return <><CardGeo /><Glossary seoMode="card" /></>
+        case 'bingo':
+            return <><BingoGeo /><Glossary seoMode={seoMode} /></>
         default:
             return null
     }

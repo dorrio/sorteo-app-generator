@@ -19,7 +19,7 @@ _Last updated: 2026-03-09_
 | Story | Title | Priority | Size | Doc |
 |-------|-------|----------|------|-----|
 | US-004 | Refactor `main-app.tsx` God Component | ✅ Done | L | [→](epics/tech-debt/US-004-refactor-main-app.md) |
-| US-005 | Consolidate `seoMode` if-chains into lookup map | 🟡 Medium | S | _(pending)_ |
+| US-005 | Consolidate `seoMode` if-chains into lookup map | ✅ Done | S | [→](epics/tech-debt/US-005-consolidate-seomode-lookup.md) |
 
 ### Sprint 3 — Observability
 
@@ -30,7 +30,7 @@ _Last updated: 2026-03-09_
 
 ---
 
-## 📋 Todo (Sprint 1)
+## 📋 Todo (Sprint 2)
 
 _(empty)_
 
@@ -40,6 +40,7 @@ _(empty)_
 
 _(empty)_
 
+- **[US-005]** Consolidate `seoMode` if-chains into lookup map — ✅ implemented
 - **[US-004]** Refactor `main-app.tsx` God Component — ✅ implemented
 - **[US-001]** Extract `getBaseUrl()` helper — ✅ merged to `main` (2026-03-09)
 - **[US-002]** Add Error Boundaries — ✅ merged to `main` (2026-03-09)

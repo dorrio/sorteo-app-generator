@@ -141,7 +141,7 @@ export default async function InstagramPickerPage({ params }: { params: Promise<
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
-        initialStyle="list"
+        initialStyle="grid"
         seoMode="instagram"
         initialTitle={t('h1')}
         initialSubtitle={t('subtitle')}

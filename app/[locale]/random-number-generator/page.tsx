@@ -146,7 +146,7 @@ export default async function RngPage({ params }: { params: Promise<{ locale: st
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
-        initialStyle="slot_machine"
+        initialStyle="slot-machine"
         seoMode="rng"
         initialTitle={t('h1')}
         initialSubtitle={t('subtitle')}

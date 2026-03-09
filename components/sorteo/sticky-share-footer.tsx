@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ShareButton } from "@/components/ui/share-button"
 import { Play, Share2, Loader2 } from "lucide-react"
+import { type SeoMode } from "@/components/sorteo/glossary"
 
 interface StickyShareFooterProps {
   shareContent: {
@@ -16,13 +17,13 @@ interface StickyShareFooterProps {
     share_cta: string
     start_cta: string
     share_button: {
-        share: string
-        copy: string
-        copied: string
-        shareOn: string
+      share: string
+      copy: string
+      copied: string
+      shareOn: string
     }
   }
-  seoMode?: string
+  seoMode?: SeoMode
 }
 
 export function StickyShareFooter({ shareContent, translations, seoMode }: StickyShareFooterProps) {
@@ -54,17 +55,17 @@ export function StickyShareFooter({ shareContent, translations, seoMode }: Stick
         const response = await fetch(ogUrl.toString())
 
         if (!response.ok) {
-           throw new Error(`Failed to fetch OG image: ${response.status} ${response.statusText} (${ogUrl.toString()})`)
+          throw new Error(`Failed to fetch OG image: ${response.status} ${response.statusText} (${ogUrl.toString()})`)
         }
 
         const blob = await response.blob()
         const file = new File([blob], 'share-card.png', { type: 'image/png' })
 
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-             filesArray = [file]
+          filesArray = [file]
         }
       } catch (e) {
-          console.error("Failed to generate share image", e)
+        console.error("Failed to generate share image", e)
       }
 
       await navigator.share({
@@ -74,9 +75,9 @@ export function StickyShareFooter({ shareContent, translations, seoMode }: Stick
         url: shareContent.url,
       })
     } catch {
-       // User cancelled or error
+      // User cancelled or error
     } finally {
-        setIsSharing(false)
+      setIsSharing(false)
     }
   }
 
@@ -127,34 +128,34 @@ export function StickyShareFooter({ shareContent, translations, seoMode }: Stick
           style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
         >
           <div className="p-4 flex gap-3 max-w-md mx-auto items-center">
-             {/* Share Button (Primary Viral Lever) */}
-             <div className="flex-1">
-                <ShareButton
-                    title={shareContent.title}
-                    text={shareContent.text}
-                    url={shareContent.url}
-                    translations={translations.share_button}
-                    onNativeShare={handleNativeShare}
-                    buttonVariant="secondary"
-                    buttonSize="lg"
-                    className="w-full gap-2 font-bold shadow-sm"
-                >
-                   {isSharing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Share2 className="w-4 h-4" />}
-                   {translations.share_cta}
-                </ShareButton>
-             </div>
+            {/* Share Button (Primary Viral Lever) */}
+            <div className="flex-1">
+              <ShareButton
+                title={shareContent.title}
+                text={shareContent.text}
+                url={shareContent.url}
+                translations={translations.share_button}
+                onNativeShare={handleNativeShare}
+                buttonVariant="secondary"
+                buttonSize="lg"
+                className="w-full gap-2 font-bold shadow-sm"
+              >
+                {isSharing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Share2 className="w-4 h-4" />}
+                {translations.share_cta}
+              </ShareButton>
+            </div>
 
-             {/* Start Button (Conversion Lever) */}
-             <div className="flex-1">
-                 <Button
-                    onClick={scrollToTop}
-                    size="lg"
-                    className="w-full gap-2 font-bold shadow-primary/20 shadow-lg"
-                 >
-                    <Play className="w-4 h-4 fill-current" />
-                    {translations.start_cta}
-                 </Button>
-             </div>
+            {/* Start Button (Conversion Lever) */}
+            <div className="flex-1">
+              <Button
+                onClick={scrollToTop}
+                size="lg"
+                className="w-full gap-2 font-bold shadow-primary/20 shadow-lg"
+              >
+                <Play className="w-4 h-4 fill-current" />
+                {translations.start_cta}
+              </Button>
+            </div>
           </div>
         </motion.div>
       )}

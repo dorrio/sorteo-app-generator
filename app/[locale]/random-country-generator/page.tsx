@@ -140,7 +140,7 @@ export default async function CountryGeneratorPage({ params }: { params: Promise
         dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
-        initialStyle="wheel"
+        initialStyle="roulette"
         seoMode="country"
         initialTitle={t('h1')}
         initialSubtitle={t('subtitle')}

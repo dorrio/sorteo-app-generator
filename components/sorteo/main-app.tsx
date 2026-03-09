@@ -10,34 +10,15 @@ import { ParticipantManager } from "@/components/sorteo/participant-manager"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
-import { SeoContent } from "@/components/sorteo/seo-content"
-import { WheelGeo } from "@/components/sorteo/wheel-geo"
-import { RngGeo } from "@/components/sorteo/rng-geo"
-import { ListRandomizerGeo } from "@/components/sorteo/list-randomizer-geo"
-import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo"
-import { TeamGeo } from "@/components/sorteo/team-geo"
-import { YesNoGeo } from "@/components/sorteo/yes-no-geo"
-import { LetterGeo } from "@/components/sorteo/letter-geo"
-import { DiceGeo } from "@/components/sorteo/dice-geo"
-import { CoinGeo } from "@/components/sorteo/coin-geo"
-import { RpsGeo } from "@/components/sorteo/rps-geo"
-import { CountryGeo } from "@/components/sorteo/country-geo"
-import { MonthGeo } from "@/components/sorteo/month-geo"
-import { CardGeo } from "@/components/sorteo/card-geo"
-import { Glossary } from "@/components/sorteo/glossary"
-import { InstagramGeo } from "@/components/sorteo/instagram-geo"
+import { WheelMode, MODE_COMPONENTS } from "@/components/sorteo/modes"
+import { type SeoMode } from "@/components/sorteo/glossary"
 import { ShareButton } from "@/components/ui/share-button"
 import { StickyShareFooter } from "@/components/sorteo/sticky-share-footer"
-import { COUNTRIES } from "@/lib/countries"
-import { Sparkles, Settings2, Play, Trophy, ShieldCheck, Share2 } from "lucide-react"
-import { useTranslations, useLocale } from "next-intl"
+import { Sparkles, Settings2, Play, Trophy, ShieldCheck } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
-
-const CARD_SUITS = ['♠', '♥', '♦', '♣']
-const CARD_RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-const CARD_DECK = CARD_SUITS.flatMap(suit => CARD_RANKS.map(rank => `${rank}${suit}`))
-const BINGO_NUMBERS = Array.from({ length: 75 }, (_, i) => (i + 1).toString())
+import { useThemeInitialization, usePopulationLogic, useShareContent } from "@/components/sorteo/hooks"
 
 const ParticleBackground = dynamic(
   () => import("@/components/sorteo/particle-background").then((mod) => mod.ParticleBackground),
@@ -113,8 +94,8 @@ function ListParamsHandler() {
 }
 
 interface MainAppProps {
-  initialStyle?: string;
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'card' | 'bingo';
+  initialStyle?: ThemeConfig["sorteoStyle"];
+  seoMode?: SeoMode;
   children?: React.ReactNode;
   initialTitle?: string;
   initialSubtitle?: string;
@@ -167,25 +148,7 @@ export function MainApp({
   },
   initialOptions
 }: MainAppProps) {
-  const locale = useLocale()
   const t = useTranslations("HomePage")
-  const tYesNo = useTranslations("YesNoPage")
-  const tLetter = useTranslations("LetterGeneratorPage")
-  const tDice = useTranslations("DicePage")
-  const tCoin = useTranslations("CoinPage")
-  const tRps = useTranslations("RpsPage")
-  const tCountry = useTranslations("CountryPage")
-  const tMonth = useTranslations("MonthPage")
-  const tCard = useTranslations("CardPage")
-  const tRng = useTranslations("RngPage")
-  const tList = useTranslations("ListRandomizerPage")
-  const tSecret = useTranslations("SecretSantaPage")
-  const tTeam = useTranslations("TeamGeneratorPage")
-  const tInsta = useTranslations("InstagramPicker")
-  const tWheel = useTranslations("WheelGeoPage")
-  const tMeta = useTranslations("Metadata")
-  const tWinner = useTranslations("WinnerCeremony")
-  const tShare = useTranslations("ShareContent")
 
   const [mounted, setMounted] = useState(false)
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
@@ -233,129 +196,10 @@ export function MainApp({
 
   useEffect(() => {
     setMounted(true)
+  }, [])
 
-    // Theme Update Logic
-    const update: Partial<ThemeConfig> = {}
-
-    if (initialStyle) {
-      // Fix: Explicitly cast initialStyle to the correct union type
-      update.sorteoStyle = initialStyle as ThemeConfig["sorteoStyle"]
-    }
-
-    // Initialize custom title
-    if (initialTitle) {
-      update.customTitle = initialTitle
-    } else if (seoMode) {
-      // Fallback to Head's logic if no initialTitle prop
-      if (seoMode === 'yes-no') update.customTitle = tYesNo('h1')
-      else if (seoMode === 'letter') update.customTitle = tLetter('h1')
-      else if (seoMode === 'rng') update.customTitle = tRng('h1')
-      else if (seoMode === 'list-randomizer') update.customTitle = tList('h1')
-      else if (seoMode === 'secret-santa') update.customTitle = tSecret('h1')
-      else if (seoMode === 'team') update.customTitle = tTeam('h1')
-      else if (seoMode === 'dice') update.customTitle = tDice('h1')
-      else if (seoMode === 'coin') update.customTitle = tCoin('h1')
-      else if (seoMode === 'rps') update.customTitle = tRps('h1')
-      else if (seoMode === 'country') update.customTitle = tCountry('h1')
-      else if (seoMode === 'month') update.customTitle = tMonth('h1')
-      else if (seoMode === 'card') update.customTitle = tCard('h1')
-      else if (seoMode === 'instagram') update.customTitle = tInsta('h1')
-      else if (seoMode === 'wheel') update.customTitle = tWheel('h1')
-    }
-
-    if (initialSubtitle) {
-      update.customSubtitle = initialSubtitle
-    } else if (seoMode) {
-      // Fallback to Head's logic
-      if (seoMode === 'yes-no') update.customSubtitle = tYesNo('subtitle')
-      else if (seoMode === 'letter') update.customSubtitle = tLetter('subtitle')
-      else if (seoMode === 'rng') update.customSubtitle = tRng('subtitle')
-      else if (seoMode === 'list-randomizer') update.customSubtitle = tList('subtitle')
-      else if (seoMode === 'secret-santa') update.customSubtitle = tSecret('subtitle')
-      else if (seoMode === 'team') update.customSubtitle = tTeam('subtitle')
-      else if (seoMode === 'dice') update.customSubtitle = tDice('subtitle')
-      else if (seoMode === 'coin') update.customSubtitle = tCoin('subtitle')
-      else if (seoMode === 'rps') update.customSubtitle = tRps('subtitle')
-      else if (seoMode === 'country') update.customSubtitle = tCountry('subtitle')
-      else if (seoMode === 'month') update.customSubtitle = tMonth('subtitle')
-      else if (seoMode === 'card') update.customSubtitle = tCard('subtitle')
-      else if (seoMode === 'instagram') update.customSubtitle = tInsta('subtitle')
-      else if (seoMode === 'wheel') update.customSubtitle = tWheel('subtitle')
-    }
-
-    if (Object.keys(update).length > 0) {
-      updateTheme(update)
-    }
-  }, [initialStyle, updateTheme, initialTitle, initialSubtitle, seoMode])
-
-  // Population Logic
-  useEffect(() => {
-    if (!mounted || !hasHydrated) return
-
-    // Detect if we just navigated to a new mode
-    const modeChanged = activeTool !== seoMode
-    const isEmpty = participants.length === 0
-    const isPresetTool = ['card', 'bingo', 'month', 'country', 'rps', 'coin', 'dice', 'letter', 'yes-no'].includes(seoMode) // Added card, bingo, etc.
-
-    // We populate if:
-    // 1. The list is empty (standard behavior)
-    // 2. OR we are switching to a "Preset Tool" (Generator), forcing a reset to ensure correct dataset.
-    const shouldPopulate = isEmpty || (modeChanged && isPresetTool)
-
-    if (shouldPopulate) {
-      if (!isEmpty && modeChanged && isPresetTool) {
-        clearParticipants()
-      }
-
-      if (seoMode === 'yes-no') {
-        addParticipants([
-          { name: initialOptions?.yes || tYesNo('option_yes') },
-          { name: initialOptions?.no || tYesNo('option_no') }
-        ])
-      } else if (seoMode === 'coin') {
-        addParticipants([
-          { name: initialOptions?.heads || tCoin('option_heads') },
-          { name: initialOptions?.tails || tCoin('option_tails') }
-        ])
-      } else if (seoMode === 'rps') {
-        addParticipants([
-          { name: initialOptions?.rock || tRps('option_rock') },
-          { name: initialOptions?.paper || tRps('option_paper') },
-          { name: initialOptions?.scissors || tRps('option_scissors') }
-        ])
-      } else if (seoMode === 'letter') {
-        const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
-        addParticipants(alphabet.map(l => ({ name: l })))
-      } else if (seoMode === 'dice') {
-        addParticipants(["1", "2", "3", "4", "5", "6"].map(n => ({ name: n })))
-      } else if (seoMode === 'month') {
-        const months = Array.from({ length: 12 }, (_, i) => {
-          return new Date(2024, i, 1).toLocaleString(locale, { month: 'long' })
-        })
-        const capitalizedMonths = months.map(m => m.charAt(0).toUpperCase() + m.slice(1))
-        addParticipants(capitalizedMonths.map(m => ({ name: m })))
-      } else if (seoMode === 'country') {
-        addParticipants(COUNTRIES.map(c => ({ name: c })))
-      } else if (seoMode === 'bingo') {
-        addParticipants(BINGO_NUMBERS.map(n => ({ name: n })))
-      } else if (seoMode === 'card') {
-        addParticipants(CARD_DECK.map(c => ({ name: c })))
-      } else if (isEmpty && !isPresetTool) {
-        addParticipants([
-          { name: "Option 1" },
-          { name: "Option 2" },
-          { name: "Option 3" },
-          { name: "Option 4" },
-          { name: "Option 5" }
-        ])
-      }
-    }
-
-    if (modeChanged) {
-      setActiveTool(seoMode)
-    }
-
-  }, [mounted, hasHydrated, initialStyle, seoMode, initialOptions, activeTool, setActiveTool, locale, addParticipants, clearParticipants])
+  const { displayTitle, displaySubtitle } = useThemeInitialization(initialStyle, initialTitle, initialSubtitle, seoMode)
+  usePopulationLogic(mounted, seoMode, initialOptions)
 
   const startSorteo = () => {
     if (participants.length < 2) return
@@ -381,71 +225,7 @@ export function MainApp({
   }
 
   // Determine share content based on seoMode
-  const shareContent = useMemo(() => {
-    let finalShareText = shareText
-    let finalShareTitle = shareTitle
-    let url = typeof window !== "undefined" ? window.location.href : ""
-
-    // Fallback logic if shareTitle/Text are defaults and we're in a specific mode without props passed
-    if (shareTitle === "Sorteo Pro" && seoMode) {
-      if (seoMode === 'wheel') { finalShareTitle = tShare('wheel_title'); finalShareText = tShare('wheel_text'); }
-      else if (seoMode === 'instagram') { finalShareTitle = tShare('instagram_title'); finalShareText = tShare('instagram_text'); }
-      else if (seoMode === 'rng') { finalShareTitle = tShare('rng_title'); finalShareText = tShare('rng_text'); }
-      else if (seoMode === 'list-randomizer') { finalShareTitle = tShare('list_title'); finalShareText = tShare('list_text'); }
-      else if (seoMode === 'team') { finalShareTitle = tShare('list_title'); finalShareText = tShare('list_text'); }
-      else if (seoMode === 'secret-santa') { finalShareTitle = tShare('secret_santa_title'); finalShareText = tShare('secret_santa_text'); }
-      else if (seoMode === 'yes-no') { finalShareTitle = tShare('yes_no_title'); finalShareText = tShare('yes_no_text'); }
-      else if (seoMode === 'letter') { finalShareTitle = tShare('letter_title'); finalShareText = tShare('letter_text'); }
-      else if (seoMode === 'dice') { finalShareTitle = tShare('dice_title'); finalShareText = tShare('dice_text'); }
-      else if (seoMode === 'coin') { finalShareTitle = tShare('coin_title'); finalShareText = tShare('coin_text'); }
-      else if (seoMode === 'rps') { finalShareTitle = tShare('rps_title'); finalShareText = tShare('rps_text'); }
-      else if (seoMode === 'country') { finalShareTitle = tShare('country_title'); finalShareText = tShare('country_text'); }
-      else if (seoMode === 'month') { finalShareTitle = tShare('month_title'); finalShareText = tShare('month_text'); }
-      else if (seoMode === 'card') { finalShareTitle = tShare('card_title'); finalShareText = tShare('card_text'); }
-    }
-
-    const defaultTitle = initialTitle || "Sorteo Pro"
-    const isCustomTitle = theme.customTitle && theme.customTitle !== defaultTitle
-
-    if (typeof window !== "undefined") {
-      try {
-        const urlObj = new URL(window.location.href)
-
-        // 1. Branding: Custom Title & Color
-        if (isCustomTitle && theme.customTitle) {
-          finalShareText = customShareTextTemplate.replace('{title}', theme.customTitle)
-
-          urlObj.searchParams.set('template_title', theme.customTitle)
-          if (theme.primaryColor) {
-            urlObj.searchParams.set('template_color', theme.primaryColor)
-          }
-        }
-
-        // 2. Content: Shareable Participant List (Deep Linking)
-        if (participants.length > 0 && participants.length <= 100) {
-          const names = participants.map(p => p.name)
-          const encoded = encodeURIComponent(JSON.stringify(names))
-          if (encoded.length < 1500) {
-            urlObj.searchParams.set('list', encoded)
-          }
-        }
-
-        return {
-          title: finalShareTitle,
-          text: finalShareText,
-          url: urlObj.toString()
-        }
-      } catch (e) {
-        // Fallback to current url if parsing fails
-      }
-    }
-
-    return {
-      title: finalShareTitle,
-      text: finalShareText,
-      url: url
-    }
-  }, [shareTitle, shareText, seoMode, tShare, initialTitle, theme.customTitle, theme.primaryColor, customShareTextTemplate, participants])
+  const shareContent = useShareContent(seoMode, shareTitle, shareText, initialTitle, customShareTextTemplate)
 
   // Full Sticky Translations Object
   const fullStickyTranslations = {
@@ -454,27 +234,7 @@ export function MainApp({
   }
 
   // Server-Side Rendering (SSR) & Initial Client Render
-  // If not hydrated, we use the initialTitle prop for SSR (SEO friendly), or fallback to Head logic
-  let displayTitle = hasHydrated ? theme.customTitle : (initialTitle || theme.customTitle)
-  let displaySubtitle = hasHydrated ? theme.customSubtitle : (initialSubtitle || theme.customSubtitle)
-
-  if (!hasHydrated && !initialTitle) {
-    // Fallback logic for SSR when props are missing (e.g. legacy pages)
-    if (seoMode === 'wheel') { displayTitle = tWheel('h1'); displaySubtitle = tWheel('subtitle'); }
-    else if (seoMode === 'instagram') { displayTitle = tInsta('h1'); displaySubtitle = tInsta('subtitle'); }
-    else if (seoMode === 'rng') { displayTitle = tRng('h1'); displaySubtitle = tRng('subtitle'); }
-    else if (seoMode === 'list-randomizer') { displayTitle = tList('h1'); displaySubtitle = tList('subtitle'); }
-    else if (seoMode === 'team') { displayTitle = tTeam('h1'); displaySubtitle = tTeam('subtitle'); }
-    else if (seoMode === 'secret-santa') { displayTitle = tSecret('h1'); displaySubtitle = tSecret('subtitle'); }
-    else if (seoMode === 'yes-no') { displayTitle = tYesNo('h1'); displaySubtitle = tYesNo('subtitle'); }
-    else if (seoMode === 'letter') { displayTitle = tLetter('h1'); displaySubtitle = tLetter('subtitle'); }
-    else if (seoMode === 'dice') { displayTitle = tDice('h1'); displaySubtitle = tDice('subtitle'); }
-    else if (seoMode === 'coin') { displayTitle = tCoin('h1'); displaySubtitle = tCoin('subtitle'); }
-    else if (seoMode === 'rps') { displayTitle = tRps('h1'); displaySubtitle = tRps('subtitle'); }
-    else if (seoMode === 'country') { displayTitle = tCountry('h1'); displaySubtitle = tCountry('subtitle'); }
-    else if (seoMode === 'month') { displayTitle = tMonth('h1'); displaySubtitle = tMonth('subtitle'); }
-    else if (seoMode === 'card') { displayTitle = tCard('h1'); displaySubtitle = tCard('subtitle'); }
-  }
+  // is now handled by `useThemeInitialization`
 
   const bgOpacity = theme.backgroundOpacity ?? 30
   const bgBlur = theme.backgroundBlur ?? 0
@@ -683,37 +443,10 @@ export function MainApp({
         {/* SEO Content / Footer Children */}
         {children ? children : (
           /* Fallback for Legacy Pages that don't pass children yet */
-          seoMode === 'wheel' ? (
-            <> <WheelGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'instagram' ? (
-            <> <InstagramGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'rng' ? (
-            <> <RngGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'list-randomizer' ? (
-            <> <ListRandomizerGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'secret-santa' ? (
-            <> <SecretSantaGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'team' ? (
-            <> <TeamGeo /> <Glossary seoMode="list-randomizer" /> </>
-          ) : seoMode === 'yes-no' ? (
-            <> <YesNoGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'letter' ? (
-            <> <LetterGeo /> <Glossary seoMode={seoMode} /> </>
-          ) : seoMode === 'dice' ? (
-            <> <DiceGeo /> <Glossary seoMode="rng" /> </>
-          ) : seoMode === 'coin' ? (
-            <> <CoinGeo /> <Glossary seoMode="yes-no" /> </>
-          ) : seoMode === 'rps' ? (
-            <> <RpsGeo /> <Glossary seoMode="yes-no" /> </>
-          ) : seoMode === 'country' ? (
-            <> <CountryGeo /> <Glossary seoMode="wheel" /> </>
-          ) : seoMode === 'month' ? (
-            <> <MonthGeo /> <Glossary seoMode="wheel" /> </>
-          ) : seoMode === 'card' ? (
-            <> <CardGeo /> <Glossary seoMode="card" /> </>
-          ) : (
-            <> <WheelGeo /> <Glossary seoMode={seoMode} /> <SeoContent /> </>
-          )
+          (() => {
+            const ModeComponent = (seoMode && MODE_COMPONENTS[seoMode]) || WheelMode
+            return <ModeComponent seoMode={seoMode || 'home'} />
+          })()
         )}
 
         {/* Footer */}

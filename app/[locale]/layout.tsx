@@ -15,6 +15,7 @@ import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server
 import { notFound } from 'next/navigation';
 import { safeJsonLdStringify } from '@/lib/utils';
 import { routing } from '../../i18n/routing';
+import { ErrorBoundaryWrapper } from '@/components/ui/error-boundary-wrapper';
 import "../globals.css"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -192,12 +193,16 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
         />
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <ErrorBoundaryWrapper>
+            {children}
+          </ErrorBoundaryWrapper>
         </NextIntlClientProvider>
         <Analytics />
         <SpeedInsights />
 
-        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || 'GTM-TVTR2LQC'} />
+        {process.env.NEXT_PUBLIC_GTM_ID && (
+          <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+        )}
       </body>
     </html>
   )

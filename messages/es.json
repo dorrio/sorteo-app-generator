@@ -264,6 +264,7 @@
         "download_certificate": "Descargar Certificado",
         "copy_image": "Copy Image",
         "image_copied": "Image Copied!",
+        "copy_link": "Copiar Enlace",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* es el GANADOR!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* ganó *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "result": {
@@ -273,6 +274,9 @@
             "winner_label": "Ganador",
             "date_label": "Fecha del Sorteo",
             "valid_format": "Formato Válido",
+            "valid_format_external": "Formato Válido (Externo)",
+            "valid_format_desc": "Este ID tiene un formato válido y fue generado el:",
+            "winner_details_device_only": "Los detalles del ganador solo están disponibles en el dispositivo que realizó el sorteo.",
             "local_record": "Registro Local Encontrado",
             "not_found_message": "Este ID no corresponde a ningún sorteo registrado en este dispositivo.",
             "invalid_format_message": "El formato del ID no es válido."

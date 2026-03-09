@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
+import { useCanShareNative } from "@/hooks/use-can-share-native"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -41,12 +42,8 @@ export function ShareButton({
   onNativeShare,
   translations
 }: ShareButtonProps) {
-  const [canShareNative, setCanShareNative] = useState(false)
+  const canShareNative = useCanShareNative()
   const [copied, setCopied] = useState(false)
-
-  useEffect(() => {
-    setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
-  }, [])
 
   const handleShare = async () => {
     if (canShareNative) {

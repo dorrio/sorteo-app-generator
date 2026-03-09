@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download, Loader2 } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { useCanShareNative } from "@/hooks/use-can-share-native"
 import { ConfettiEffect } from "@/components/sorteo/confetti-effect"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -31,12 +32,12 @@ export function VerifyContent() {
         error?: string
     } | null>(null)
     const [showCopied, setShowCopied] = useState(false)
-    // Initialize to true (Mobile/Lite) to minimize server HTML size and avoid Mobile CLS.
-    // Desktop will hydrate and switch to Dropdown (Heavy) if needed.
-    const [canShareNative, setCanShareNative] = useState(true)
     const [isStickyVisible, setIsStickyVisible] = useState(false)
     const [showConfetti, setShowConfetti] = useState(false)
     const [isSharing, setIsSharing] = useState(false)
+
+    // Desktop will hydrate and switch to Dropdown (Heavy) if needed.
+    const canShareNative = useCanShareNative()
 
     useEffect(() => {
         if (result?.status === "valid") {
@@ -47,8 +48,6 @@ export function VerifyContent() {
     }, [result])
 
     useEffect(() => {
-        setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
-
         // Show sticky CTA on scroll if result is visible
         const handleScroll = () => {
             if (result && window.scrollY > 150) {
@@ -376,7 +375,7 @@ export function VerifyContent() {
                                                     result.status === "partial" ? "text-yellow-500" : "text-red-500"
                                                 }`}>
                                                     {result.status === "valid" ? t("result.valid_title") :
-                                                     result.status === "partial" ? "Valid Format (External)" :
+                                                     result.status === "partial" ? t("result.valid_format_external") :
                                                      t("result.invalid_title")}
                                                 </h4>
 
@@ -410,7 +409,7 @@ export function VerifyContent() {
                                                 {result.status === "partial" && result.date && (
                                                     <div className="mt-4 space-y-3">
                                                         <p className="text-sm text-muted-foreground mb-2">
-                                                            This ID has a valid format and was generated on:
+                                                            {t("result.valid_format_desc")}
                                                         </p>
                                                         <div className="flex items-center gap-3 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
                                                             <Calendar className="w-5 h-5 text-yellow-500" />
@@ -423,7 +422,7 @@ export function VerifyContent() {
                                                         </div>
                                                         <div className="flex items-start gap-2 text-xs text-muted-foreground mt-2 bg-muted/50 p-2 rounded">
                                                             <AlertTriangle className="w-3 h-3 mt-0.5 shrink-0" />
-                                                            <span>Winner details are only available on the device that ran the giveaway.</span>
+                                                            <span>{t("result.winner_details_device_only")}</span>
                                                         </div>
                                                     </div>
                                                 )}
@@ -482,7 +481,7 @@ export function VerifyContent() {
                                                                 ) : (
                                                                     <>
                                                                         <Copy className="w-4 h-4" />
-                                                                        Copy Link
+                                                                        {t("copy_link")}
                                                                     </>
                                                                 )}
                                                             </DropdownMenuItem>

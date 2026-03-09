@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { useCanShareNative } from "@/hooks/use-can-share-native"
 import { ConfettiEffect } from "./confetti-effect"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -33,12 +34,10 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const t = useTranslations("WinnerCeremony")
   const [showContent, setShowContent] = useState(false)
   const [copied, setCopied] = useState(false)
-  const [canShareNative, setCanShareNative] = useState(false)
+  const canShareNative = useCanShareNative()
   const [isSharing, setIsSharing] = useState(false)
 
   useEffect(() => {
-    setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
-
     if (showWinnerCeremony) {
       const timer = setTimeout(() => setShowContent(true), 300)
       return () => clearTimeout(timer)
@@ -49,39 +48,48 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
   const locale = useLocale()
 
+  // Pre-calculate Social URLs for SEO (Link Juice) & Accessibility safely before early return
+  const { shareUrl, shareText, twitterUrl, facebookUrl, whatsappUrl } = useMemo(() => {
+    let url = ""
+    let text = ""
+
+    if (winner) {
+      // Viral Optimization: Create a deep link to the verification page
+      const baseUrl = typeof window !== "undefined" ? window.location.origin : ""
+      url = winner.verificationId
+        ? `${baseUrl}/${locale}/verify?id=${winner.verificationId}&name=${encodeURIComponent(winner.name)}`
+        : typeof window !== "undefined" ? window.location.href : ""
+
+      // Viralis: Append tool type context to maintain the loop
+      if (winner.verificationId && seoMode && seoMode !== 'home') {
+          url += `&type=${seoMode}`
+      }
+
+      // Viralis: Append custom context (Title & Color) to make the share more specific
+      if (winner.verificationId && theme.customTitle) {
+          url += `&title=${encodeURIComponent(theme.customTitle)}`
+      }
+      if (winner.verificationId && theme.primaryColor) {
+          url += `&color=${encodeURIComponent(theme.primaryColor)}`
+      }
+
+      // Compelling share text
+      text = t("share_text", { name: winner.name })
+      if (theme.customTitle) {
+          text = t("share_text_custom", { name: winner.name, title: theme.customTitle })
+      }
+    }
+
+    return {
+      shareUrl: url,
+      shareText: text,
+      twitterUrl: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
+      facebookUrl: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`,
+      whatsappUrl: `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + url)}`,
+    }
+  }, [winner, theme, seoMode, locale, t])
+
   if (!showWinnerCeremony || !winner) return null
-
-  // Viral Optimization: Create a deep link to the verification page
-  const baseUrl = typeof window !== "undefined" ? window.location.origin : ""
-  let shareUrl = winner.verificationId
-    ? `${baseUrl}/${locale}/verify?id=${winner.verificationId}&name=${encodeURIComponent(winner.name)}`
-    : typeof window !== "undefined" ? window.location.href : ""
-
-  // Viralis: Append tool type context to maintain the loop
-  if (winner.verificationId && seoMode && seoMode !== 'home') {
-      shareUrl += `&type=${seoMode}`
-  }
-
-  // Viralis: Append custom context (Title & Color) to make the share more specific
-  if (winner.verificationId && theme.customTitle) {
-      shareUrl += `&title=${encodeURIComponent(theme.customTitle)}`
-  }
-  if (winner.verificationId && theme.primaryColor) {
-      shareUrl += `&color=${encodeURIComponent(theme.primaryColor)}`
-  }
-
-  // Compelling share text
-  let shareText = t("share_text", { name: winner.name })
-  if (theme.customTitle) {
-      shareText = t("share_text_custom", { name: winner.name, title: theme.customTitle })
-  }
-
-  // Pre-calculate Social URLs for SEO (Link Juice) & Accessibility
-  const { twitterUrl, facebookUrl, whatsappUrl } = useMemo(() => ({
-    twitterUrl: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
-    facebookUrl: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`,
-    whatsappUrl: `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`,
-  }), [shareText, shareUrl])
 
   const shareNative = async () => {
     if (!navigator.share) return

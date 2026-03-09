@@ -48,7 +48,11 @@ export function VerifyContent() {
     }, [result])
 
     useEffect(() => {
-        setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
+        setCanShareNative(
+            typeof navigator !== "undefined" &&
+            !!navigator.share &&
+            window.matchMedia("(pointer: coarse)").matches
+        )
 
         // Show sticky CTA on scroll if result is visible
         const handleScroll = () => {

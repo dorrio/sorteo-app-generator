@@ -37,7 +37,11 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const [isSharing, setIsSharing] = useState(false)
 
   useEffect(() => {
-    setCanShareNative(typeof navigator !== "undefined" && !!navigator.share)
+    setCanShareNative(
+      typeof navigator !== "undefined" &&
+      !!navigator.share &&
+      window.matchMedia("(pointer: coarse)").matches
+    )
 
     if (showWinnerCeremony) {
       const timer = setTimeout(() => setShowContent(true), 300)

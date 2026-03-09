@@ -21,26 +21,26 @@ _Last updated: 2026-03-09_
 | US-004 | Refactor `main-app.tsx` God Component | ✅ Done | L | [→](epics/tech-debt/US-004-refactor-main-app.md) |
 | US-005 | Consolidate `seoMode` if-chains into lookup map | ✅ Done | S | [→](epics/tech-debt/US-005-consolidate-seomode-lookup.md) |
 
-### Sprint 3 — Observability
-
 | Story | Title | Priority | Size | Doc |
 |-------|-------|----------|------|-----|
-| US-006 | Add error tracking (Sentry / Vercel) | 🟡 Medium | S | [→](epics/tech-debt/US-006-add-error-tracking.md) |
-| US-007 | Define structured logging strategy | 🟢 Low | S | _(pending)_ |
+| US-006 | Add error tracking (Sentry / Vercel) | ✅ Done | S | [→](epics/tech-debt/US-006-add-error-tracking.md) |
+| US-007 | Define structured logging strategy | 🟢 Low | S | [→](epics/tech-debt/US-007-define-structured-logging.md) |
 
 ---
 
 ## 📋 Todo (Sprint 2)
 
-_(empty)_
+- **[US-007]** Task 1: Document Logging Strategy (ADR) @unassigned
+- **[US-007]** Task 2: Install and Configure Pino Logger @unassigned
+- **[US-007]** Task 3: Instrument an API Route / Action @unassigned
 
 ---
 
 ## 👀 To Review
 
-- **[US-006]** Task 1: Initialize Vercel Error Tracking Integration — ✅ implemented
-- **[US-006]** Task 2: Update App Layout & Error Boundaries — ✅ implemented
-- **[US-006]** Task 3: Implement Test Endpoint & Validate Alerts — ✅ implemented
+_(empty)_
+
+- **[US-006]** Add error tracking (Sentry / Vercel) — ✅ merged to `develop` (2026-03-09)
 
 _(empty)_
 

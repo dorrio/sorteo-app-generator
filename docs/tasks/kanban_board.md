@@ -32,8 +32,7 @@ _Last updated: 2026-03-09_
 
 ## 📋 Todo (Sprint 1)
 
-- **[US-002]** Add Error Boundaries → [doc](epics/tech-debt/US-002-add-error-boundaries.md)
-- **[US-003]** Pin dependency versions → [doc](epics/tech-debt/US-003-pin-dependency-versions.md)
+_(empty)_
 
 ---
 
@@ -51,5 +50,7 @@ _(empty)_
 
 ## ✅ Done
 
-- **[US-001]** Extract `getBaseUrl()` helper — ✅ merged to `feature/us-001-get-base-url` (2026-03-09)
+- **[US-001]** Extract `getBaseUrl()` helper — ✅ merged to `main` (2026-03-09)
+- **[US-002]** Add Error Boundaries — ✅ merged to `main` (2026-03-09)
+- **[US-003]** Pin dependency versions — ✅ merged to `main` (2026-03-09)
 

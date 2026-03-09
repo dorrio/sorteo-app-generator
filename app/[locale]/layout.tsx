@@ -1,3 +1,4 @@
+import { getBaseUrl } from "@/lib/config"
 import type React from "react"
 import { Suspense } from "react"
 import type { Metadata, Viewport } from "next"
@@ -20,12 +21,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-display" })
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-  ? process.env.NEXT_PUBLIC_APP_URL
-  : process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'https://sorteopro.com'
-
+const baseUrl = getBaseUrl()
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }

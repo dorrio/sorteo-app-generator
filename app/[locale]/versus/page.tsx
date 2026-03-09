@@ -1,3 +1,4 @@
+import { getBaseUrl } from "@/lib/config"
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
@@ -13,7 +14,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'VersusHubPage' });
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://sorteopro.com";
+  const baseUrl = getBaseUrl();
 
   return {
     title: t('title'),

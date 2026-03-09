@@ -1,3 +1,4 @@
+import { getBaseUrl } from "@/lib/config"
 import { getTranslations } from 'next-intl/server';
 import dynamic from 'next/dynamic';
 import { safeJsonLdStringify } from '@/lib/utils';
@@ -22,12 +23,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   const { template_title, template_color, list } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'Metadata' });
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteopro.com';
-
+  const baseUrl = getBaseUrl()
   // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
@@ -103,12 +99,7 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
     start_cta: tShare('cta_start')
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteopro.com';
-
+  const baseUrl = getBaseUrl()
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

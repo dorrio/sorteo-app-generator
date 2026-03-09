@@ -1,3 +1,4 @@
+import { getBaseUrl } from "@/lib/config"
 import nextDynamic from 'next/dynamic';
 import { AppSkeleton } from '@/components/sorteo/skeletons';
 import { getTranslations } from 'next-intl/server';
@@ -21,12 +22,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'BingoPage' });
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? (process.env.VERCEL_URL.startsWith('http') ? process.env.VERCEL_URL : `https://${process.env.VERCEL_URL}`)
-      : 'https://sorteopro.com';
-
+  const baseUrl = getBaseUrl()
   return {
     title: t('title'),
     description: t('description'),
@@ -64,12 +60,7 @@ export default async function BingoNumberGeneratorPage({ params }: { params: Pro
   const tGeo = await getTranslations({ locale, namespace: 'BingoGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
   const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? (process.env.VERCEL_URL.startsWith('http') ? process.env.VERCEL_URL : `https://${process.env.VERCEL_URL}`)
-      : 'https://sorteopro.com';
-
+  const baseUrl = getBaseUrl()
   const softwareAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',

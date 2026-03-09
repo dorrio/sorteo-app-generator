@@ -1,6 +1,7 @@
 import { Suspense } from "react"
 import { Metadata } from "next"
 import { getTranslations } from "next-intl/server"
+import { getBaseUrl } from "@/lib/config"
 import { VerifyContent } from "./verify-content"
 
 type Props = {
@@ -13,20 +14,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     const { id, name, type, title: titleParam, color: colorParam } = await searchParams
     const t = await getTranslations({ locale, namespace: "Metadata" })
 
-    // Fallback URL logic:
-    // 1. NEXT_PUBLIC_APP_URL (Explicit override)
-    // 2. VERCEL_PROJECT_PRODUCTION_URL (Vercel Prod)
-    // 3. VERCEL_URL (Vercel Preview - needs https://)
-    // 4. Default to sorteopro.com
-    let baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://sorteopro.com"
-
-    if (!process.env.NEXT_PUBLIC_APP_URL) {
-        if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
-            baseUrl = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-        } else if (process.env.VERCEL_URL) {
-            baseUrl = `https://${process.env.VERCEL_URL}`
-        }
-    }
+    const baseUrl = getBaseUrl()
 
     // Viral Optimization: Dynamic Metadata
     const winnerName = typeof name === "string" ? name : null

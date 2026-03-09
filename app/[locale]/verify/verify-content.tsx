@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Link } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
+import { getBaseUrl } from "@/lib/config"
 
 export function VerifyContent() {
     const t = useTranslations("VerificationPage")
@@ -65,7 +66,7 @@ export function VerifyContent() {
     // Auto-verify if ID is in URL
     useEffect(() => {
         if (initialId) {
-             verifyId(initialId)
+            verifyId(initialId)
         }
     }, [initialId, pastWinners])
 
@@ -123,7 +124,7 @@ export function VerifyContent() {
     const handleVerify = () => verifyId(inputId)
 
     // Construct Share Data
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://sorteopro.com"
+    const baseUrl = getBaseUrl()
     const winnerName = result?.participant?.name || searchParams.get("name") || "Someone"
     // Use inputId as the verified ID source when result is present
     let shareUrl = `${baseUrl}/${locale}/verify?id=${inputId}&name=${encodeURIComponent(winnerName)}`
@@ -356,28 +357,25 @@ export function VerifyContent() {
                                 exit={{ opacity: 0, height: 0 }}
                                 className="mt-6"
                             >
-                                <Card className={`border-l-4 ${
-                                    result.status === "valid" ? "border-green-500" :
-                                    result.status === "partial" ? "border-yellow-500" : "border-red-500"
-                                } bg-card/95 backdrop-blur shadow-xl`}>
+                                <Card className={`border-l-4 ${result.status === "valid" ? "border-green-500" :
+                                        result.status === "partial" ? "border-yellow-500" : "border-red-500"
+                                    } bg-card/95 backdrop-blur shadow-xl`}>
                                     <CardContent className="pt-6">
                                         <div className="flex items-start gap-4">
-                                            <div className={`p-3 rounded-full ${
-                                                result.status === "valid" ? "bg-green-500/20 text-green-500" :
-                                                result.status === "partial" ? "bg-yellow-500/20 text-yellow-500" : "bg-red-500/20 text-red-500"
-                                            }`}>
+                                            <div className={`p-3 rounded-full ${result.status === "valid" ? "bg-green-500/20 text-green-500" :
+                                                    result.status === "partial" ? "bg-yellow-500/20 text-yellow-500" : "bg-red-500/20 text-red-500"
+                                                }`}>
                                                 {result.status === "valid" ? <Check className="w-6 h-6" /> :
-                                                 result.status === "partial" ? <ShieldCheck className="w-6 h-6" /> :
-                                                 <ShieldAlert className="w-6 h-6" />}
+                                                    result.status === "partial" ? <ShieldCheck className="w-6 h-6" /> :
+                                                        <ShieldAlert className="w-6 h-6" />}
                                             </div>
                                             <div className="flex-1 space-y-1">
-                                                <h4 className={`font-bold text-lg ${
-                                                    result.status === "valid" ? "text-green-500" :
-                                                    result.status === "partial" ? "text-yellow-500" : "text-red-500"
-                                                }`}>
+                                                <h4 className={`font-bold text-lg ${result.status === "valid" ? "text-green-500" :
+                                                        result.status === "partial" ? "text-yellow-500" : "text-red-500"
+                                                    }`}>
                                                     {result.status === "valid" ? t("result.valid_title") :
-                                                     result.status === "partial" ? "Valid Format (External)" :
-                                                     t("result.invalid_title")}
+                                                        result.status === "partial" ? "Valid Format (External)" :
+                                                            t("result.invalid_title")}
                                                 </h4>
 
                                                 {/* FULL MATCH */}
@@ -473,51 +471,51 @@ export function VerifyContent() {
                                                                 </Button>
                                                             </DropdownMenuTrigger>
                                                             <DropdownMenuContent align="center" className="w-56">
-                                                            <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
-                                                                {showCopied ? (
-                                                                    <>
-                                                                        <Check className="w-4 h-4 text-green-500" />
-                                                                        <span className="text-green-500">{t("result.copied")}</span>
-                                                                    </>
-                                                                ) : (
-                                                                    <>
-                                                                        <Copy className="w-4 h-4" />
-                                                                        Copy Link
-                                                                    </>
-                                                                )}
-                                                            </DropdownMenuItem>
+                                                                <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
+                                                                    {showCopied ? (
+                                                                        <>
+                                                                            <Check className="w-4 h-4 text-green-500" />
+                                                                            <span className="text-green-500">{t("result.copied")}</span>
+                                                                        </>
+                                                                    ) : (
+                                                                        <>
+                                                                            <Copy className="w-4 h-4" />
+                                                                            Copy Link
+                                                                        </>
+                                                                    )}
+                                                                </DropdownMenuItem>
 
-                                                            {/* Semantic Links for Social Sharing */}
-                                                            <DropdownMenuItem asChild>
-                                                                <a
-                                                                    href={twitterUrl}
-                                                                    target="_blank"
-                                                                    rel="noopener noreferrer"
-                                                                    className="gap-2 cursor-pointer flex w-full items-center"
-                                                                    aria-label="Share on Twitter"
-                                                                >
-                                                                    <Twitter className="w-4 h-4" />
-                                                                    Twitter / X
-                                                                </a>
-                                                            </DropdownMenuItem>
+                                                                {/* Semantic Links for Social Sharing */}
+                                                                <DropdownMenuItem asChild>
+                                                                    <a
+                                                                        href={twitterUrl}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="gap-2 cursor-pointer flex w-full items-center"
+                                                                        aria-label="Share on Twitter"
+                                                                    >
+                                                                        <Twitter className="w-4 h-4" />
+                                                                        Twitter / X
+                                                                    </a>
+                                                                </DropdownMenuItem>
 
-                                                            <DropdownMenuItem onClick={shareInstagram} className="gap-2 cursor-pointer">
-                                                                <Instagram className="w-4 h-4" />
-                                                                Instagram
-                                                            </DropdownMenuItem>
+                                                                <DropdownMenuItem onClick={shareInstagram} className="gap-2 cursor-pointer">
+                                                                    <Instagram className="w-4 h-4" />
+                                                                    Instagram
+                                                                </DropdownMenuItem>
 
-                                                            <DropdownMenuItem asChild>
-                                                                <a
-                                                                    href={facebookUrl}
-                                                                    target="_blank"
-                                                                    rel="noopener noreferrer"
-                                                                    className="gap-2 cursor-pointer flex w-full items-center"
-                                                                    aria-label="Share on Facebook"
-                                                                >
-                                                                    <Facebook className="w-4 h-4" />
-                                                                    Facebook
-                                                                </a>
-                                                            </DropdownMenuItem>
+                                                                <DropdownMenuItem asChild>
+                                                                    <a
+                                                                        href={facebookUrl}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="gap-2 cursor-pointer flex w-full items-center"
+                                                                        aria-label="Share on Facebook"
+                                                                    >
+                                                                        <Facebook className="w-4 h-4" />
+                                                                        Facebook
+                                                                    </a>
+                                                                </DropdownMenuItem>
 
                                                                 <DropdownMenuItem asChild>
                                                                     <a

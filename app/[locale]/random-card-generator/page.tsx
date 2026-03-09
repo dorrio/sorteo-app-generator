@@ -1,3 +1,4 @@
+import { getBaseUrl } from "@/lib/config"
 import nextDynamic from 'next/dynamic';
 import { AppSkeleton } from '@/components/sorteo/skeletons';
 import { getTranslations } from 'next-intl/server';
@@ -28,12 +29,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   const { template_title, template_color } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'CardPage' });
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? (process.env.VERCEL_URL.startsWith('http') ? process.env.VERCEL_URL : `https://${process.env.VERCEL_URL}`)
-      : 'https://sorteopro.com';
-
+  const baseUrl = getBaseUrl()
   // Viralis: Dynamic Metadata for Custom Giveaways
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
@@ -91,12 +87,7 @@ export default async function CardPage({ params }: { params: Promise<{ locale: s
   const tGeo = await getTranslations({ locale, namespace: 'CardGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
   const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? (process.env.VERCEL_URL.startsWith('http') ? process.env.VERCEL_URL : `https://${process.env.VERCEL_URL}`)
-      : 'https://sorteopro.com';
-
+  const baseUrl = getBaseUrl()
   const softwareAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',

@@ -1,3 +1,4 @@
+import { getBaseUrl } from "@/lib/config"
 import { ComparisonTable } from '@/components/versus/ComparisonTable';
 import { VersusFAQ } from '@/components/versus/FAQ';
 import { SiteFooter } from '@/components/sorteo/site-footer';
@@ -31,7 +32,7 @@ export default function VersusPage() {
   const t = useTranslations('Versus');
   const tSchema = useTranslations('Schema');
   const locale = useLocale();
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://sorteo-app-generator.vercel.app";
+  const baseUrl = getBaseUrl();
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",

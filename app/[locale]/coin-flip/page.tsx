@@ -1,3 +1,4 @@
+import { getBaseUrl } from "@/lib/config"
 import { getTranslations } from 'next-intl/server';
 import dynamic from 'next/dynamic';
 import { safeJsonLdStringify } from '@/lib/utils';
@@ -26,12 +27,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   const { template_title, template_color } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'CoinPage' });
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteopro.com';
-
+  const baseUrl = getBaseUrl()
   const customTitle = typeof template_title === 'string' ? template_title : undefined;
   const customColor = typeof template_color === 'string' ? template_color : undefined;
 
@@ -87,12 +83,7 @@ export default async function CoinPage({ params }: { params: Promise<{ locale: s
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
   const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://sorteopro.com';
-
+  const baseUrl = getBaseUrl()
   const softwareAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',

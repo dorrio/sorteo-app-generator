@@ -29,6 +29,26 @@ interface WinnerCeremonyProps {
   seoMode?: SeoMode
 }
 
+/**
+ * Extracts the date from a verification ID string (format: ID-UUID-TIMESTAMP_HEX)
+ * Returns current Date as fallback if parsing fails.
+ */
+function extractDateFromVerificationId(verificationId: string | undefined): Date {
+  if (!verificationId) return new Date()
+  try {
+    const parts = verificationId.split("-")
+    if (parts.length >= 3) {
+      const timestampHex = parts[parts.length - 1]
+      const timestamp = parseInt(timestampHex, 16)
+      const d = new Date(timestamp)
+      if (!isNaN(d.getTime())) return d
+    }
+  } catch (e) {
+    // Intentionally ignoring parsing errors to use current date as fallback
+  }
+  return new Date()
+}
+
 export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremonyProps) {
   const { winner, theme, showWinnerCeremony } = useSorteoStore()
   const t = useTranslations("WinnerCeremony")
@@ -58,18 +78,18 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     if (!winner) return { url: "", text: "", twitterUrl: "", facebookUrl: "", whatsappUrl: "" }
 
     const baseUrl = typeof window !== "undefined" ? window.location.origin : ""
-    let url = winner.verificationId
-      ? `${baseUrl}/${locale}/verify?id=${winner.verificationId}&name=${encodeURIComponent(winner.name)}`
-      : typeof window !== "undefined" ? window.location.href : ""
+    let shareUrl = typeof window !== "undefined" ? window.location.href : ""
 
-    if (winner.verificationId && seoMode && seoMode !== 'home') {
-      url += `&type=${seoMode}`
-    }
-    if (winner.verificationId && theme.customTitle) {
-      url += `&title=${encodeURIComponent(theme.customTitle)}`
-    }
-    if (winner.verificationId && theme.primaryColor) {
-      url += `&color=${encodeURIComponent(theme.primaryColor)}`
+    if (winner.verificationId) {
+      const params = new URLSearchParams()
+      params.set("id", winner.verificationId)
+      params.set("name", winner.name)
+
+      if (seoMode && seoMode !== "home") params.set("type", seoMode)
+      if (theme.customTitle) params.set("title", theme.customTitle)
+      if (theme.primaryColor) params.set("color", theme.primaryColor)
+
+      shareUrl = `${baseUrl}/${locale}/verify?${params.toString()}`
     }
 
     let text = t("share_text", { name: winner.name })
@@ -78,11 +98,11 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     }
 
     return {
-      url,
+      url: shareUrl,
       text,
-      twitterUrl: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
-      facebookUrl: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`,
-      whatsappUrl: `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + url)}`,
+      twitterUrl: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`,
+      facebookUrl: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(text)}`,
+      whatsappUrl: `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + shareUrl)}`,
     }
   }, [winner, locale, seoMode, theme.customTitle, theme.primaryColor, t])
 
@@ -102,18 +122,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
         const ogParams = new URLSearchParams()
         ogParams.set("name", winner.name)
 
-        let dateToUse = new Date()
-        if (winner.verificationId) {
-          try {
-            const parts = winner.verificationId.split('-')
-            if (parts.length >= 3) {
-              const timestampHex = parts[parts.length - 1]
-              const timestamp = parseInt(timestampHex, 16)
-              const d = new Date(timestamp)
-              if (!isNaN(d.getTime())) dateToUse = d
-            }
-          } catch (e) { }
-        }
+        const dateToUse = extractDateFromVerificationId(winner.verificationId)
         ogParams.set("date", dateToUse.toISOString())
         if (seoMode && seoMode !== 'home') ogParams.set("type", seoMode)
         if (theme.customTitle) ogParams.set("title", theme.customTitle)
@@ -162,18 +171,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     const ogParams = new URLSearchParams()
     ogParams.set("name", winner.name)
 
-    let dateToUse = new Date()
-    if (winner.verificationId) {
-      try {
-        const parts = winner.verificationId.split('-')
-        if (parts.length >= 3) {
-          const timestampHex = parts[parts.length - 1]
-          const timestamp = parseInt(timestampHex, 16)
-          const d = new Date(timestamp)
-          if (!isNaN(d.getTime())) dateToUse = d
-        }
-      } catch (e) { }
-    }
+    const dateToUse = extractDateFromVerificationId(winner.verificationId)
     ogParams.set("date", dateToUse.toISOString())
 
     if (seoMode && seoMode !== 'home') ogParams.set("type", seoMode)

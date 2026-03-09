@@ -23,7 +23,7 @@ function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
                 {process.env.NODE_ENV === "development" && (
                     <details className="mt-4 text-left text-xs text-muted-foreground bg-muted rounded p-3">
                         <summary className="cursor-pointer font-medium mb-1">Error details</summary>
-                        <pre className="whitespace-pre-wrap break-words">{error.message}</pre>
+                        <pre className="whitespace-pre-wrap break-words">{(error as Error).message || String(error)}</pre>
                     </details>
                 )}
             </div>

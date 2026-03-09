@@ -18,7 +18,7 @@ _Last updated: 2026-03-09_
 
 | Story | Title | Priority | Size | Doc |
 |-------|-------|----------|------|-----|
-| US-004 | Refactor `main-app.tsx` God Component | 🔴 High | L | _(pending)_ |
+| US-004 | Refactor `main-app.tsx` God Component | 🔴 High | L | [→](epics/tech-debt/US-004-refactor-main-app.md) |
 | US-005 | Consolidate `seoMode` if-chains into lookup map | 🟡 Medium | S | _(pending)_ |
 
 ### Sprint 3 — Observability
@@ -36,15 +36,13 @@ _(empty)_
 
 ---
 
-## 🚧 In Progress
-
-_(empty)_
-
----
-
 ## 👀 To Review
 
-_(empty)_
+- **[US-004-T1]** Extract `MainApp` state into custom hooks
+- **[US-004-T2]** Extract `WheelMode` component
+- **[US-004-T3]** Extract `ListMode` component
+- **[US-004-T4]** Extract `NumberMode` component
+- **[US-004-T5]** Extract `MiscModes` and complete refactor
 
 ---
 

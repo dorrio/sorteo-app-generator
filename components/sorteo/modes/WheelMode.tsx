@@ -1,0 +1,29 @@
+import { WheelGeo } from "@/components/sorteo/wheel-geo"
+import { Glossary } from "@/components/sorteo/glossary"
+import { SeoContent } from "@/components/sorteo/seo-content"
+import { InstagramGeo } from "@/components/sorteo/instagram-geo"
+
+interface WheelModeProps {
+    seoMode: string;
+}
+
+export function WheelMode({ seoMode }: WheelModeProps) {
+    if (seoMode === 'instagram') {
+        return (
+            <>
+                <InstagramGeo />
+                <Glossary seoMode={seoMode} />
+            </>
+        )
+    }
+
+    // Covers 'wheel', 'home' and any other generic fallback 
+    return (
+        <>
+            <WheelGeo />
+            <Glossary seoMode={seoMode} />
+            {seoMode === 'home' && <SeoContent />}
+            {seoMode !== 'home' && seoMode !== 'wheel' && seoMode !== 'instagram' && <SeoContent />}
+        </>
+    )
+}

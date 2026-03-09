@@ -4,7 +4,7 @@ import { Link } from "@/i18n/routing"
 import { safeJsonLdStringify } from "@/lib/utils"
 
 interface GlossaryProps {
-  seoMode?: 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
+  seoMode?: string;
 }
 
 export function Glossary({ seoMode }: GlossaryProps) {

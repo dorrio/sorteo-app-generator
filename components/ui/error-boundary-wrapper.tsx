@@ -1,5 +1,7 @@
 "use client"
 
+import * as Sentry from "@sentry/nextjs";
+
 import { ErrorBoundary, type FallbackProps } from "react-error-boundary"
 import { RefreshCw, AlertTriangle } from "lucide-react"
 
@@ -55,7 +57,9 @@ export function ErrorBoundaryWrapper({ children }: ErrorBoundaryWrapperProps) {
         <ErrorBoundary
             FallbackComponent={ErrorFallback}
             onError={(error, info) => {
-                // In production, forward to monitoring (Sentry / Vercel) here.
+                // In production, forward to monitoring (Sentry / Vercel)
+                Sentry.captureException(error, { extra: info as never });
+
                 // For now, log to console in dev only.
                 if (process.env.NODE_ENV === "development") {
                     console.error("[ErrorBoundary] caught:", error, info)

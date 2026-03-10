@@ -24,15 +24,15 @@ _Last updated: 2026-03-09_
 | Story | Title | Priority | Size | Doc |
 |-------|-------|----------|------|-----|
 | US-006 | Add error tracking (Sentry / Vercel) | ✅ Done | S | [→](epics/tech-debt/US-006-add-error-tracking.md) |
-| US-007 | Define structured logging strategy | 🟢 Low | S | [→](epics/tech-debt/US-007-define-structured-logging.md) |
+| US-007 | Define structured logging strategy | ✅ Done | S | [→](epics/tech-debt/US-007-define-structured-logging.md) |
 
 ---
 
 ## 📋 Todo (Sprint 2)
 
-- **[US-007]** Task 1: Document Logging Strategy (ADR) @unassigned
-- **[US-007]** Task 2: Install and Configure Pino Logger @unassigned
-- **[US-007]** Task 3: Instrument an API Route / Action @unassigned
+- **[US-007]** Task 1: Document Logging Strategy (ADR) ✅
+- **[US-007]** Task 2: Install and Configure Pino Logger ✅
+- **[US-007]** Task 3: Instrument an API Route / Action ✅
 
 ---
 
@@ -40,6 +40,7 @@ _Last updated: 2026-03-09_
 
 _(empty)_
 
+- **[US-007]** Define structured logging strategy — ✅ implemented (2026-03-10)
 - **[US-006]** Add error tracking (Sentry / Vercel) — ✅ merged to `develop` (2026-03-09)
 
 _(empty)_

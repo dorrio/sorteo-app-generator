@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 // Note: This page is intentionally Spanish-only for internal testing and should not be localized
-export default function SentryTestPage() {
+export default function SentryTestPage(): React.JSX.Element {
     const [shouldThrow, setShouldThrow] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     if (shouldThrow) {
         throw new Error("Sentry Example Frontend Error - this is expected during US-006 testing");
@@ -23,19 +26,28 @@ export default function SentryTestPage() {
                 Lanzar Error Frontend
             </Button>
 
-            <Button variant="secondary" onClick={async () => {
+            <Button variant="secondary" disabled={isLoading} onClick={async () => {
+                setIsLoading(true);
+                toast.loading("Calling API...");
+
                 try {
                     const response = await fetch("/api/sentry-example-api");
                     if (!response.ok) {
                         throw new Error(`API returned ${response.status} ${response.statusText}`);
                     }
+                    toast.dismiss();
+                    toast.success("API Call completed.");
                 } catch (error) {
+                    toast.dismiss();
+                    toast.error("Fetch to API failed");
                     // Log or handle the error so that the unhandled promise tracker / Sentry can capture it
                     console.error("Fetch to API failed", error);
                     throw error;
+                } finally {
+                    setIsLoading(false);
                 }
             }}>
-                Lanzar Error Backend (API)
+                {isLoading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Cargando...</> : "Lanzar Error Backend (API)"}
             </Button>
         </div>
     );

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
+// Note: This page is intentionally Spanish-only for internal testing and should not be localized
 export default function SentryTestPage() {
     const [shouldThrow, setShouldThrow] = useState(false);
 
@@ -22,7 +23,18 @@ export default function SentryTestPage() {
                 Lanzar Error Frontend
             </Button>
 
-            <Button variant="secondary" onClick={() => fetch("/api/sentry-example-api")}>
+            <Button variant="secondary" onClick={async () => {
+                try {
+                    const response = await fetch("/api/sentry-example-api");
+                    if (!response.ok) {
+                        throw new Error(`API returned ${response.status} ${response.statusText}`);
+                    }
+                } catch (error) {
+                    // Log or handle the error so that the unhandled promise tracker / Sentry can capture it
+                    console.error("Fetch to API failed", error);
+                    throw error;
+                }
+            }}>
                 Lanzar Error Backend (API)
             </Button>
         </div>

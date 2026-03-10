@@ -42,8 +42,6 @@ _(empty)_
 - **[US-006]** Task 2: Update App Layout & Error Boundaries — ✅ implemented
 - **[US-006]** Task 3: Implement Test Endpoint & Validate Alerts — ✅ implemented
 
-_(empty)_
-
 - **[US-005]** Consolidate `seoMode` if-chains into lookup map — ✅ implemented
 - **[US-004]** Refactor `main-app.tsx` God Component — ✅ implemented
 - **[US-001]** Extract `getBaseUrl()` helper — ✅ merged to `main` (2026-03-09)

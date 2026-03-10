@@ -58,7 +58,7 @@ export function ErrorBoundaryWrapper({ children }: ErrorBoundaryWrapperProps) {
             FallbackComponent={ErrorFallback}
             onError={(error, info) => {
                 // In production, forward to monitoring (Sentry / Vercel)
-                Sentry.captureException(error, { extra: info as never });
+                Sentry.captureException(error, { extra: info as Record<string, unknown> });
 
                 // For now, log to console in dev only.
                 if (process.env.NODE_ENV === "development") {

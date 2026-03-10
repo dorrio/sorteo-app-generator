@@ -5,6 +5,7 @@ module.exports = {
     sitemapSize: 5000,
     priority: 0.7, // Default priority
     changefreq: 'weekly', // Default changefreq
+    exclude: ['/*/sentry-example-page*', '/api/sentry-example-api*'],
 
     // Apex Strategy: Prioritize Core Landing Pages
     transform: async (config, path) => {

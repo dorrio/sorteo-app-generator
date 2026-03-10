@@ -2,7 +2,7 @@
 
 ## 📖 Story Outline
 **Epic**: tech-debt
-**Status**: Todo
+**Status**: Done
 **Priority**: 🟡 Medium
 **Size**: S
 
@@ -22,15 +22,15 @@
 
 ## 🛠️ Implementation Tasks (IDEAL Plan)
 
-- **[ ] Task 1: Initialize Vercel Error Tracking Integration**
+- **[x] Task 1: Initialize Vercel Error Tracking Integration**
   - **Description**: Add the required Vercel SDK/integration (e.g., configuring `@sentry/nextjs` or `@vercel/functions` tracing if Vercel native) and configure the client/server files (`sentry.client.config.ts`, `sentry.server.config.ts` if using Sentry by Vercel's pattern). Ensure the configuration accounts for all environments.
   - **Verify**: `inspect` the generated config files or Vercel dashboard integrations page.
 
-- **[ ] Task 2: Update App Layout & Error Boundaries**
+- **[x] Task 2: Update App Layout & Error Boundaries**
   - **Description**: Integrate the error capture logic directly into the global Error Boundary components. Make sure we report captured but handled exceptions to the tracking tool explicitly if needed.
   - **Verify**: `test` that the global Error Boundary invokes the tracking reporter when catching an error.
 
-- **[ ] Task 3: Implement Test Endpoint & Validate Alerts**
+- **[x] Task 3: Implement Test Endpoint & Validate Alerts**
   - **Description**: Create a secure or temporary endpoint/component button that deliberately causes a runtime exception to manually test the end-to-end flow. Confirm that email alerts (configured from Vercel dashboard) are fired properly.
   - **Verify**: `inspect` email inbox for Vercel/Sentry error alert.
 
@@ -39,3 +39,4 @@
 ## 💬 Technical Notes
 - Vercel recently promoted deeply integrated Error Tracking. We might just need to enable Sentry via Vercel Integrations or install the specific telemetry packages.
 - Need to verify if the Next.js `instrumentation.ts` file needs configuration.
+- Note: Tasks 1-3 were successfully completed during implementation, with configurations reflecting environment gating and sitemap updates mapping properly.

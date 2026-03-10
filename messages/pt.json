@@ -706,7 +706,7 @@
         "card_title": "Gerador de Cartas Aleatórias | Sorteio Pro",
         "card_text": "🃏 Acabei de tirar uma carta aleatória! Justo e Grátis. 👇",
         "bingo_title": "Gerador de Bingo | Sorteio Pro",
-            "bingo_text": "🎱 Acabei de gerar números de Bingo aleatórios! Grátis e Justo. 👇",
+        "bingo_text": "🎱 Acabei de gerar números de Bingo aleatórios! Grátis e Justo. 👇",
         "cta_share": "Compartilhar",
         "cta_start": "Começar"
     },
@@ -1057,5 +1057,10 @@
         "faq_1_a": "Sim! Vá em configurações 'Personalizar' e ative 'Remover vencedor' para garantir que cada número saia apenas uma vez por jogo.",
         "faq_2_q": "É justo?",
         "faq_2_a": "Sim, usamos um RNG criptograficamente seguro para garantir a justiça."
+    },
+    "ErrorPage": {
+        "title": "Ocorreu um erro",
+        "description": "Desculpe, algo não funcionou como esperado. Fomos notificados.",
+        "retry": "Tentar novamente"
     }
 }

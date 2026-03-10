@@ -25,7 +25,7 @@ _Last updated: 2026-03-09_
 
 | Story | Title | Priority | Size | Doc |
 |-------|-------|----------|------|-----|
-| US-006 | Add error tracking (Sentry / Vercel) | 🟡 Medium | S | _(pending)_ |
+| US-006 | Add error tracking (Sentry / Vercel) | 🟡 Medium | S | [→](epics/tech-debt/US-006-add-error-tracking.md) |
 | US-007 | Define structured logging strategy | 🟢 Low | S | _(pending)_ |
 
 ---
@@ -38,7 +38,9 @@ _(empty)_
 
 ## 👀 To Review
 
-_(empty)_
+- **[US-006]** Task 1: Initialize Vercel Error Tracking Integration — ✅ implemented
+- **[US-006]** Task 2: Update App Layout & Error Boundaries — ✅ implemented
+- **[US-006]** Task 3: Implement Test Endpoint & Validate Alerts — ✅ implemented
 
 - **[US-005]** Consolidate `seoMode` if-chains into lookup map — ✅ implemented
 - **[US-004]** Refactor `main-app.tsx` God Component — ✅ implemented

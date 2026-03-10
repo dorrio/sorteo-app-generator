@@ -762,8 +762,8 @@
         "month_text": "📅 ¡Acabo de elegir un mes al azar! Justo y Gratis. 👇",
         "card_title": "Generador de Cartas Aleatorias | Sorteo Pro",
         "card_text": "🃏 ¡Acabo de sacar una carta al azar! Justo y Gratis. 👇",
-            "bingo_title": "Generador de Bingo | Sorteo Pro",
-            "bingo_text": "🎱 ¡Acabo de generar números de Bingo al azar! Gratis y Justo. 👇",
+        "bingo_title": "Generador de Bingo | Sorteo Pro",
+        "bingo_text": "🎱 ¡Acabo de generar números de Bingo al azar! Gratis y Justo. 👇",
         "cta_share": "Compartir",
         "cta_start": "Start Giveaway"
     },
@@ -1056,5 +1056,10 @@
         "faq_1_a": "¡Sí! Ve a la configuración 'Personalizar' y activa 'Eliminar ganador' para asegurar que cada número salga solo una vez por juego.",
         "faq_2_q": "¿Es justo?",
         "faq_2_a": "Sí, usamos un RNG criptográficamente seguro para garantizar la equidad."
+    },
+    "ErrorPage": {
+        "title": "Un error ha ocurrido",
+        "description": "Lo sentimos, algo no funcionó como se esperaba. Hemos sido notificados.",
+        "retry": "Intentar de nuevo"
     }
 }

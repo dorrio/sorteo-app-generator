@@ -769,8 +769,8 @@
         "month_text": "📅 I just picked a random month! Fair & Free. 👇",
         "card_title": "Random Card Generator | Sorteo Pro",
         "card_text": "🃏 I just drew a random card! Fair & Free. 👇",
-            "bingo_title": "Bingo Number Generator | Sorteo Pro",
-            "bingo_text": "🎱 I just generated random Bingo numbers! Free & Fair. 👇",
+        "bingo_title": "Bingo Number Generator | Sorteo Pro",
+        "bingo_text": "🎱 I just generated random Bingo numbers! Free & Fair. 👇",
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway"
     },
@@ -1063,5 +1063,10 @@
         "faq_1_a": "Yes! Go to 'Customize' settings and enable 'Remove Winner' to ensure each number is called only once per game.",
         "faq_2_q": "Is it fair?",
         "faq_2_a": "Yes, we use a cryptographically secure RNG to ensure fairness."
+    },
+    "ErrorPage": {
+        "title": "An error occurred",
+        "description": "Sorry, something went wrong. We have been notified.",
+        "retry": "Try again"
     }
 }

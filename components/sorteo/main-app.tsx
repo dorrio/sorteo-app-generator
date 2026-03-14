@@ -134,7 +134,7 @@ export function MainApp({
   initialSubtitle,
   shareTitle = "Sorteo Pro",
   shareText = "Sorteo Pro",
-  customShareTextTemplate = "🔥 Join my giveaway: *{title}*! Created with Sorteo Pro. Free & Unlimited. 👇",
+  customShareTextTemplate,
   footer,
   shareTranslations = {
     share: "Share...",

@@ -43,6 +43,7 @@ export function ShareButton({
 }: ShareButtonProps) {
   const [canShareNative, setCanShareNative] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
 
   useEffect(() => {
     setCanShareNative(
@@ -66,7 +67,8 @@ export function ShareButton({
         }
       } catch (err) {
         // Fallback to dropdown if user cancels or error
-        // But typically we don't need to do anything if user cancels
+        setCanShareNative(false)
+        setDropdownOpen(true)
       }
     }
   }
@@ -112,7 +114,7 @@ export function ShareButton({
   }
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
       <DropdownMenuTrigger asChild>
         {TriggerButton}
       </DropdownMenuTrigger>

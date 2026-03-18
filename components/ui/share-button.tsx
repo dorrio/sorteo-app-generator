@@ -65,10 +65,15 @@ export function ShareButton({
             url: url,
           })
         }
-      } catch (err) {
-        // Fallback to dropdown if user cancels or error
-        setCanShareNative(false)
-        setDropdownOpen(true)
+      } catch (err: any) {
+        if (err?.name === 'AbortError') {
+          // User cancelled the share dialog. Just open the dropdown menu, don't disable native share permanently.
+          setDropdownOpen(true)
+        } else {
+          // Genuine failure. Fallback to dropdown and disable native share.
+          setCanShareNative(false)
+          setDropdownOpen(true)
+        }
       }
     }
   }
@@ -76,17 +81,26 @@ export function ShareButton({
   const copyToClipboard = async () => {
     // Viralis Optimization: Copy full text + url to preserve the hook
     const clipboardText = text ? `${text} ${url}` : url
-    await navigator.clipboard.writeText(clipboardText)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      await navigator.clipboard.writeText(clipboardText)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error("Failed to copy text:", err)
+      // Provide fallback or notification logic here if needed
+    }
   }
 
   const shareInstagram = async () => {
       // Instagram doesn't have a direct share URL for text/links easily on web
       // Best practice is to copy to clipboard and open instagram
-      await navigator.clipboard.writeText(text + " " + url)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      try {
+        await navigator.clipboard.writeText(text + " " + url)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      } catch (err) {
+        console.error("Failed to copy text for Instagram:", err)
+      }
   }
 
   // Pre-calculate Social URLs

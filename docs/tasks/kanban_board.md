@@ -26,7 +26,7 @@ _Last updated: 2026-03-09_
 | Story | Title | Priority | Size | Doc |
 |-------|-------|----------|------|-----|
 | US-006 | Add error tracking (Sentry / Vercel) | 🟡 Medium | S | [→](epics/tech-debt/US-006-add-error-tracking.md) |
-| US-007 | Define structured logging strategy | 🟢 Low | S | _(pending)_ |
+| US-007 | Define structured logging strategy | 🟢 Low | S | [→](epics/tech-debt/US-007-structured-logging-strategy.md) |
 
 ---
 

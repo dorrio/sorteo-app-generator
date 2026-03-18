@@ -8,12 +8,12 @@ export function useShareContent(
     shareTitle: string = "Sorteo Pro",
     shareText: string = "Sorteo Pro",
     initialTitle?: string,
-    customShareTextTemplate: string = "🔥 Join my giveaway: *{title}*! Created with Sorteo Pro. Free & Unlimited. 👇"
+    customShareTextTemplate?: string
 ) {
     const { theme, participants } = useSorteoStore()
     const tShare = useTranslations("ShareContent")
-
     const shareContent = useMemo(() => {
+        const defaultTemplate = customShareTextTemplate || tShare("custom_share_text")
         let finalShareText = shareText
         let finalShareTitle = shareTitle
         let url = typeof window !== "undefined" ? window.location.href : ""
@@ -53,7 +53,7 @@ export function useShareContent(
 
                 // 1. Branding: Custom Title & Color
                 if (isCustomTitle && theme.customTitle) {
-                    finalShareText = customShareTextTemplate.replace('{title}', theme.customTitle)
+                    finalShareText = defaultTemplate.replace('{title}', theme.customTitle)
 
                     urlObj.searchParams.set('template_title', theme.customTitle)
                     if (theme.primaryColor) {

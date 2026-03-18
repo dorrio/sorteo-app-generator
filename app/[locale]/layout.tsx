@@ -16,6 +16,8 @@ import { notFound } from 'next/navigation';
 import { safeJsonLdStringify } from '@/lib/utils';
 import { routing } from '../../i18n/routing';
 import { ErrorBoundaryWrapper } from '@/components/ui/error-boundary-wrapper';
+import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 import "../globals.css"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -193,9 +195,12 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
         />
         <NextIntlClientProvider messages={messages}>
-          <ErrorBoundaryWrapper>
-            {children}
-          </ErrorBoundaryWrapper>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+            <ErrorBoundaryWrapper>
+              {children}
+            </ErrorBoundaryWrapper>
+            <Toaster />
+          </ThemeProvider>
         </NextIntlClientProvider>
         <Analytics />
         <SpeedInsights />

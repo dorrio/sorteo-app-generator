@@ -115,6 +115,11 @@ export function SiteFooter() {
                   {t("links.bingo")}
                 </Link>
               </li>
+              <li>
+                 <Link href="/truth-or-dare-generator" className="hover:text-primary transition-colors">
+                  {t("links.truth")}
+                </Link>
+              </li>
             </ul>
 
             {/* Resources */}

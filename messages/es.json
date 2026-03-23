@@ -51,7 +51,8 @@
             "glossary": "Glosario",
             "month": "Generador de Mes Aleatorio",
             "card": "Generador de Cartas Aleatorias",
-            "bingo": "Generador de Bingo"
+            "bingo": "Generador de Bingo",
+            "truth": "Verdad o Reto Generator"
         }
     },
     "QuickSpecs": {
@@ -350,7 +351,9 @@
         "term_15": "Generador de Cartas Aleatorias",
         "def_15": "Herramienta digital que simula sacar una carta de una baraja estándar de 52 cartas. Usada para juegos, trucos de magia y experimentos de probabilidad.",
         "term_16": "Generador de Cartones de Bingo",
-        "def_16": "Herramienta digital que crea cartones de bingo aleatorios con números del 1 al 75. Ideal para jugar al bingo en casa o en eventos."
+        "def_16": "Herramienta digital que crea cartones de bingo aleatorios con números del 1 al 75. Ideal para jugar al bingo en casa o en eventos.",
+        "term_17": "Verdad o Reto",
+        "def_17": "Un juego de fiesta clásico que requiere que los jugadores respondan a una pregunta personal con sinceridad o realicen un desafío. El generador proporciona prompts aleatorios para el juego."
     },
     "InstagramPicker": {
         "title": "Selector de Comentarios de Instagram Gratis | Ilimitado",
@@ -765,7 +768,9 @@
         "bingo_title": "Generador de Bingo | Sorteo Pro",
         "bingo_text": "🎱 ¡Acabo de generar números de Bingo al azar! Gratis y Justo. 👇",
         "cta_share": "Compartir",
-        "cta_start": "Start Giveaway"
+        "cta_start": "Start Giveaway",
+        "truth_title": "Generador de Verdad o Reto | Sorteo Pro",
+        "truth_text": "🤫 ¡Acabo de jugar Verdad o Reto online! Es gratis y muy divertido. Juega aquí 👇"
     },
     "CountryPage": {
         "title": "Generador de Países Aleatorios | Elegir País al Azar",
@@ -1061,5 +1066,75 @@
         "title": "Un error ha ocurrido",
         "description": "Lo sentimos, algo no funcionó como se esperaba. Hemos sido notificados.",
         "retry": "Intentar de nuevo"
+    },
+    "TruthPage": {
+        "title": "Generador de Verdad o Reto | Preguntas Aleatorias",
+        "description": "Genera preguntas aleatorias de Verdad o Reto al instante. Gratis, sin registro. Perfecto para fiestas, amigos y parejas.",
+        "h1": "Verdad o Reto Generator",
+        "subtitle": "Gira para obtener una pregunta aleatoria de Verdad o Reto.",
+        "truth_0": "¿Cuál es tu mayor miedo?",
+        "truth_1": "¿Qué es lo más vergonzoso que has hecho?",
+        "truth_2": "¿Cuál es tu peor hábito?",
+        "truth_3": "¿Alguna vez has mentido para salir de una mala cita?",
+        "truth_4": "¿En qué ha sido el mayor problema en el que te has metido?",
+        "truth_5": "¿Quién es tu amor platónico secreto?",
+        "truth_6": "¿Cuál es la peor mentira que has dicho?",
+        "truth_7": "¿Alguna vez has roto la ley?",
+        "truth_8": "¿Cuál es tu mayor arrepentimiento?",
+        "truth_9": "¿Qué es lo más asqueroso que has comido?",
+        "truth_10": "¿Alguna vez has hecho trampa en un examen?",
+        "truth_11": "¿Cuál es el mensaje de texto más incómodo que has enviado por accidente?",
+        "truth_12": "¿Alguna vez has practicado besar en el espejo?",
+        "truth_13": "¿Cuál es tu mayor inseguridad?",
+        "truth_14": "¿A quién le mandas más mensajes?",
+        "truth_15": "¿Cuál es el sueño más raro que has tenido?",
+        "truth_16": "¿Alguna vez has orinado en la piscina?",
+        "truth_17": "¿Qué es lo más infantil que aún haces?",
+        "truth_18": "¿Alguna vez has robado algo?",
+        "truth_19": "¿Cuál es tu apodo más vergonzoso?",
+        "dare_0": "Haz 10 flexiones.",
+        "dare_1": "Deja que alguien te dibuje en la cara con un bolígrafo.",
+        "dare_2": "Come un diente de ajo crudo.",
+        "dare_3": "Haz tu mejor baile del pollo afuera.",
+        "dare_4": "Habla con un acento gracioso durante las próximas 3 rondas.",
+        "dare_5": "Llama a un contacto aleatorio y cántale feliz cumpleaños.",
+        "dare_6": "Deja que el grupo mire tu teléfono por 1 minuto.",
+        "dare_7": "Cómete una cucharada de salsa picante.",
+        "dare_8": "Haz una plancha durante un minuto completo.",
+        "dare_9": "Intenta hacer malabares con 3 objetos elegidos por el grupo.",
+        "dare_10": "Deja que alguien te peine.",
+        "dare_11": "Publica una foto vergonzosa en tus redes sociales.",
+        "dare_12": "Actúa como un mono hasta tu próximo turno.",
+        "dare_13": "Intenta hacer breakdance.",
+        "dare_14": "Deja que la persona a tu derecha tuitee algo desde tu cuenta.",
+        "dare_15": "Intenta lamerte el codo.",
+        "dare_16": "Haz una cara graciosa y mantenla durante 2 minutos.",
+        "dare_17": "Habla en un idioma falso durante 1 minuto.",
+        "dare_18": "Haz una imitación de otro jugador.",
+        "dare_19": "Deja que el grupo prepare un brebaje de 3 cosas comestibles para que te lo comas."
+    },
+    "TruthGeo": {
+        "direct_answer_title": "¿Qué es un Generador de Verdad o Reto?",
+        "direct_answer_text": "Un <tool>Generador de Verdad o Reto</tool> es una herramienta digital que proporciona preguntas o desafíos aleatorios para el clásico juego de fiesta. Es perfecto para <strong>fiestas</strong>, <strong>romper el hielo</strong> y divertirse con amigos. <brand>Sorteo Pro</brand> ofrece una lista cuidadosamente seleccionada de prompts divertidos y desafiantes.",
+        "cta_button": "Jugar Verdad o Reto",
+        "feature_1_title": "Cientos de Prompts",
+        "feature_1_desc": "Preguntas y retos cuidadosamente seleccionados.",
+        "feature_2_title": "Selección Justa",
+        "feature_2_desc": "Prompts verdaderamente aleatorios siempre.",
+        "feature_3_title": "Juego Instantáneo",
+        "feature_3_desc": "Obtén un prompt al instante, sin esperas.",
+        "feature_4_title": "Adaptado a Móviles",
+        "feature_4_desc": "Perfecto para pasar el teléfono.",
+        "how_to_title": "Cómo jugar Verdad o Reto online",
+        "how_to_step_1": "Reúne a tus amigos o juega con tu pareja.",
+        "how_to_step_2": "Haz clic en \"Iniciar Sorteo\" para generar un prompt.",
+        "how_to_step_3": "Lee la verdad o completa el reto.",
+        "how_to_step_4": "¡Pasa el dispositivo al siguiente jugador!",
+        "faq_title": "Preguntas Frecuentes",
+        "features_title": "Características Principales",
+        "faq_1_q": "¿Son las preguntas seguras para todas las edades?",
+        "faq_1_a": "Nuestra lista predeterminada está diseñada para ser divertida y mayormente limpia, adecuada para el público general.",
+        "faq_2_q": "¿Puedo añadir mis propias preguntas?",
+        "faq_2_a": "¡Sí! Puedes personalizar la lista usando el editor visual para añadir tus propias bromas internas."
     }
 }

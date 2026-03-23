@@ -24,4 +24,5 @@ export const MODE_COMPONENTS: Record<SeoMode, React.ComponentType<{ seoMode: Seo
     month: MiscModes,
     card: MiscModes,
     bingo: MiscModes,
+    'truth-or-dare': MiscModes,
 }

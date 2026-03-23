@@ -147,7 +147,7 @@ export default async function InstagramPickerPage({ params }: { params: Promise<
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('instagram_title')}
         shareText={tShare('instagram_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

@@ -23,5 +23,6 @@
 *   **Raw `<img>`:** Using standard image tags without explicit dimensions.
 *   **Layout Shift:** Missing skeleton states for dynamic content.
 *   **LCP Blocking:** Using entrance animations (e.g., `initial={{ opacity: 0 }}`) on LCP elements (Header, H1, Hero Image).
+*   **Static Layout Shifts:** Using `framer-motion` or continuous CSS animations (like `animate-pulse`) on purely static, non-interactive GEO components. Use standard HTML elements for these.
 *   **Unnecessary Client Components:** Using `"use client"` on large components just because they contain one interactive button, animation, or `Link`. Split it up!
 *   **Unoptimized Listeners:** Attaching raw `scroll` or `resize` listeners without throttling or debouncing.

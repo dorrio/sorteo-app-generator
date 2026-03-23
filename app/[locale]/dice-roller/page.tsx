@@ -146,7 +146,7 @@ export default async function DiceRollerPage({ params }: { params: Promise<{ loc
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('dice_title')}
         shareText={tShare('dice_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

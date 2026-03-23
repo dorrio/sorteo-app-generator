@@ -1,7 +1,6 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { motion } from "framer-motion"
 import { Disc, Check, X, ShieldCheck, Play, CheckCircle, HelpCircle, BookOpen, ToggleLeft } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
@@ -189,10 +188,9 @@ export function YesNoGeo() {
              onClick={handleTryWheel}
              aria-label={t('cta_button')}
            >
-                <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 rounded-full border-t-4 border-primary"
+                <div
+                    className="absolute inset-0 rounded-full border-t-4 border-primary animate-spin"
+                    style={{ animationDuration: '20s' }}
                 />
                 <ToggleLeft className="w-24 h-24 text-primary/50" />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-background/50 rounded-full">

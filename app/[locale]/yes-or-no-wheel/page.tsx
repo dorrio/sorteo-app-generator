@@ -153,7 +153,7 @@ export default async function YesNoPage({ params }: { params: Promise<{ locale: 
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('yes_no_title')}
         shareText={tShare('yes_no_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         initialOptions={initialOptions}

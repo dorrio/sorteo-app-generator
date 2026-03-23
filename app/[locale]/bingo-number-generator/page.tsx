@@ -122,7 +122,7 @@ export default async function BingoNumberGeneratorPage({ params }: { params: Pro
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('bingo_title')}
         shareText={tShare('bingo_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

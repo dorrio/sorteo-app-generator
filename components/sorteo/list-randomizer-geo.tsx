@@ -26,7 +26,9 @@ export function ListRandomizerGeo() {
     },
     {
       question: tFaq("faq_3_q"),
-      answer: tFaq("faq_3_a"),
+      answer: tFaq.rich("faq_3_a", {
+        strong: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>
+      }),
     },
   ]
 
@@ -46,7 +48,8 @@ export function ListRandomizerGeo() {
         name: faq.question,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: faq.answer,
+          // Use raw translation string for SEO to avoid ReactNode objects
+          text: faq.question === tFaq("faq_3_q") ? (tFaq.raw("faq_3_a") as string).replace(/<[^>]*>?/gm, '') : faq.answer,
         },
       })),
     },
@@ -190,8 +193,8 @@ export function ListRandomizerGeo() {
 
       {/* Decorative background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl delay-1000" />
       </div>
     </section>
   )

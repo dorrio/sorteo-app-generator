@@ -39,6 +39,23 @@ const POPULATION_MAPPERS: Partial<Record<SeoMode, (ctx: PopulationContext) => { 
     'country': () => COUNTRIES.map(c => ({ name: c })),
     'bingo': () => BINGO_NUMBERS.map(n => ({ name: n })),
     'card': () => CARD_DECK.map(c => ({ name: c })),
+    'truth-or-dare': ({ opt }) => {
+        let items: string[] = []
+        try {
+            const truths = JSON.parse(opt?.truths || '[]')
+            const dares = JSON.parse(opt?.dares || '[]')
+            items = [...truths, ...dares]
+        } catch {
+            // fallback if not provided or parsing fails
+            items = ["Truth?", "Dare?"]
+        }
+        // Fisher-Yates shuffle
+        for (let i = items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [items[i], items[j]] = [items[j], items[i]];
+        }
+        return items.map(n => ({ name: n }))
+    },
 }
 
 const PRESET_TOOLS: SeoMode[] = Object.keys(POPULATION_MAPPERS) as SeoMode[]

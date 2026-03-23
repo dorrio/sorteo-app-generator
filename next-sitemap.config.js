@@ -31,6 +31,7 @@ module.exports = {
             'random-month-generator',
             'random-card-generator',
             'bingo-number-generator',
+            'truth-or-dare-generator',
             'versus'
         ];
 

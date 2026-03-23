@@ -115,13 +115,15 @@ interface MainAppProps {
   };
   // Translations for initial population (options)
   initialOptions?: {
-    yes: string;
-    no: string;
-    heads: string;
-    tails: string;
-    rock: string;
-    paper: string;
-    scissors: string;
+    yes?: string;
+    no?: string;
+    heads?: string;
+    tails?: string;
+    rock?: string;
+    paper?: string;
+    scissors?: string;
+    truths?: string;
+    dares?: string;
     // Generators that might simply get passed translated strings or just use defaults
   };
 }

@@ -67,8 +67,14 @@ export function ShareButton({
         }
       } catch (err: any) {
         if (err?.name === 'AbortError') {
-          // User cancelled the share dialog. Just open the dropdown menu, don't disable native share permanently.
+          // User cancelled the share dialog.
+          // Temporarily disable native share so the dropdown renders, then open it.
+          // We restore native share after a delay so subsequent clicks use native share again.
+          setCanShareNative(false)
           setDropdownOpen(true)
+          setTimeout(() => {
+            setCanShareNative(true)
+          }, 500) // Restore after dropdown is likely closed/unmounted or next interaction
         } else {
           // Genuine failure. Fallback to dropdown and disable native share.
           setCanShareNative(false)

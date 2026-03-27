@@ -1,7 +1,6 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Check, X, ArrowRight, Zap, ShieldCheck, Palette, Monitor, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
@@ -55,10 +54,7 @@ export function VersusGeo({ namespace = "VersusWheel" }: VersusGeoProps) {
       <div className="max-w-5xl mx-auto px-4 relative z-10">
 
         {/* Comparison Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
           className="bg-card/30 backdrop-blur-xl border border-primary/20 rounded-3xl p-6 md:p-10 shadow-2xl mb-16"
         >
           <div className="text-center mb-10">
@@ -150,7 +146,7 @@ export function VersusGeo({ namespace = "VersusWheel" }: VersusGeoProps) {
                 </tbody>
             </table>
           </div>
-        </motion.div>
+        </div>
 
         {/* Deep Dive Content (GEO) */}
         <div className="grid md:grid-cols-2 gap-12 items-center mb-20">

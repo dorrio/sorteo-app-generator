@@ -153,7 +153,7 @@ export default async function SecretSantaPage({ params }: { params: Promise<{ lo
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('secret_santa_title')}
         shareText={tShare('secret_santa_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

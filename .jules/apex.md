@@ -45,6 +45,10 @@
 **Action:** Refactored `BingoGeo`, `DiceGeo`, and `RpsGeo` to remove motion libraries and background animations. Refactored `CoinGeo` to use `t.rich()` and `safeJsonLdStringify`. Deleted misplaced `ours_bingo_geo.tsx`.
 **GEO Impact:** Reduced First Input Delay (FID) and improved Cumulative Layout Shift (CLS) for these high-traffic tools, ensuring GoogleBot parses the "Direct Answer" content instantly.
 
+## 2026-06-15 - [Technical/Performance]
+**Gap:** Remaining GEO components (`country-geo.tsx`, `versus-geo.tsx`, `yes-no-geo.tsx`, `list-randomizer-geo.tsx`, `rng-geo.tsx`, `secret-santa-geo.tsx`, `team-geo.tsx`) were using `framer-motion` and `animate-pulse`, causing bundle bloat and pointless background repaints, which degrades LCP.
+**Action:** Removed `framer-motion` entirely from these components. Replaced `motion.div` with standard `div` elements, and removed `animate-pulse` from decorative backgrounds. Used CSS keyframe animations instead when necessary.
+**GEO Impact:** Improved Core Web Vitals (LCP/FCP) by reducing main thread blocking during hydration, ensuring faster time-to-interactive for SEO-critical content blocks.
 ## 2025-06-02 - [Strategy/Cluster Content]
 **Gap:** Missing "Truth or Dare" generator which has high search volume.
 **Action:** Created dedicated `/truth-or-dare-generator` landing page with `TruthGeo` component, specialized Schema, and targeted Metadata. Added translation strings and updated sitemap priorities.

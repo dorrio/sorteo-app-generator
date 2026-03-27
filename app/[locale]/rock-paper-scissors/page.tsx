@@ -172,7 +172,7 @@ export default async function RpsPage({ params }: { params: Promise<{ locale: st
         initialSubtitle={t('subtitle')}
         shareTitle={tShare('rps_title')}
         shareText={tShare('rps_text')}
-        customShareTextTemplate={tShare('custom_share_text')}
+        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         initialOptions={initialOptions}

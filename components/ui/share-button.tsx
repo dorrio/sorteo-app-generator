@@ -43,6 +43,7 @@ export function ShareButton({
 }: ShareButtonProps) {
   const [canShareNative, setCanShareNative] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
 
   useEffect(() => {
     setCanShareNative(
@@ -64,9 +65,21 @@ export function ShareButton({
             url: url,
           })
         }
-      } catch (err) {
-        // Fallback to dropdown if user cancels or error
-        // But typically we don't need to do anything if user cancels
+      } catch (err: any) {
+        if (err?.name === 'AbortError') {
+          // User cancelled the share dialog.
+          // Temporarily disable native share so the dropdown renders, then open it.
+          // We restore native share after a delay so subsequent clicks use native share again.
+          setCanShareNative(false)
+          setDropdownOpen(true)
+          setTimeout(() => {
+            setCanShareNative(true)
+          }, 500) // Restore after dropdown is likely closed/unmounted or next interaction
+        } else {
+          // Genuine failure. Fallback to dropdown and disable native share.
+          setCanShareNative(false)
+          setDropdownOpen(true)
+        }
       }
     }
   }
@@ -74,17 +87,26 @@ export function ShareButton({
   const copyToClipboard = async () => {
     // Viralis Optimization: Copy full text + url to preserve the hook
     const clipboardText = text ? `${text} ${url}` : url
-    await navigator.clipboard.writeText(clipboardText)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      await navigator.clipboard.writeText(clipboardText)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error("Failed to copy text:", err)
+      // Provide fallback or notification logic here if needed
+    }
   }
 
   const shareInstagram = async () => {
       // Instagram doesn't have a direct share URL for text/links easily on web
       // Best practice is to copy to clipboard and open instagram
-      await navigator.clipboard.writeText(text + " " + url)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      try {
+        await navigator.clipboard.writeText(text + " " + url)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      } catch (err) {
+        console.error("Failed to copy text for Instagram:", err)
+      }
   }
 
   // Pre-calculate Social URLs
@@ -112,7 +134,7 @@ export function ShareButton({
   }
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
       <DropdownMenuTrigger asChild>
         {TriggerButton}
       </DropdownMenuTrigger>

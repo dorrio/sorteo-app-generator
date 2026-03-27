@@ -49,3 +49,7 @@
 **Gap:** Remaining GEO components (`country-geo.tsx`, `versus-geo.tsx`, `yes-no-geo.tsx`, `list-randomizer-geo.tsx`, `rng-geo.tsx`, `secret-santa-geo.tsx`, `team-geo.tsx`) were using `framer-motion` and `animate-pulse`, causing bundle bloat and pointless background repaints, which degrades LCP.
 **Action:** Removed `framer-motion` entirely from these components. Replaced `motion.div` with standard `div` elements, and removed `animate-pulse` from decorative backgrounds. Used CSS keyframe animations instead when necessary.
 **GEO Impact:** Improved Core Web Vitals (LCP/FCP) by reducing main thread blocking during hydration, ensuring faster time-to-interactive for SEO-critical content blocks.
+## 2025-06-02 - [Strategy/Cluster Content]
+**Gap:** Missing "Truth or Dare" generator which has high search volume.
+**Action:** Created dedicated `/truth-or-dare-generator` landing page with `TruthGeo` component, specialized Schema, and targeted Metadata. Added translation strings and updated sitemap priorities.
+**GEO Impact:** Optimized for "Truth or Dare Generator", "Random Truth or Dare questions", and similar queries with Direct Answer blocks.

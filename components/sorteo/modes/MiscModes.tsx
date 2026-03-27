@@ -8,6 +8,7 @@ import { CountryGeo } from "@/components/sorteo/country-geo"
 import { MonthGeo } from "@/components/sorteo/month-geo"
 import { CardGeo } from "@/components/sorteo/card-geo"
 import { BingoGeo } from "@/components/sorteo/bingo-geo"
+import { TruthGeo } from "@/components/sorteo/truth-geo"
 import { Glossary, type SeoMode } from "@/components/sorteo/glossary"
 
 export function MiscModes({ seoMode }: { seoMode: SeoMode }): React.JSX.Element | null {
@@ -30,6 +31,8 @@ export function MiscModes({ seoMode }: { seoMode: SeoMode }): React.JSX.Element 
             return <><CardGeo /><Glossary seoMode="card" /></>
         case 'bingo':
             return <><BingoGeo /><Glossary seoMode={seoMode} /></>
+        case 'truth-or-dare':
+            return <><TruthGeo /><Glossary seoMode={seoMode} /></>
         default:
             return null
     }

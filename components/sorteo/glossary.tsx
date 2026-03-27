@@ -3,7 +3,7 @@ import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
 import { safeJsonLdStringify } from "@/lib/utils"
 
-export type SeoMode = 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month';
+export type SeoMode = 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'truth-or-dare';
 
 interface GlossaryProps {
   seoMode?: SeoMode;
@@ -25,6 +25,7 @@ const GLOSSARY_MAPPING: Record<string, string[]> = {
   team: ['team'],
   country: ['country'],
   month: ['month'],
+  'truth-or-dare': ['truth-or-dare'],
 }
 
 export function Glossary({ seoMode }: GlossaryProps) {
@@ -80,6 +81,11 @@ export function Glossary({ seoMode }: GlossaryProps) {
       id: "bingo",
       term: t("term_16"),
       definition: t("def_16"),
+    },
+    {
+      id: "truth-or-dare",
+      term: t("term_17"),
+      definition: t("def_17"),
     },
     {
       id: "dice",

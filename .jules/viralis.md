@@ -24,3 +24,11 @@
 **Hypothesis:** If we restrict the Native Web Share API (`navigator.share`) to only trigger on touch-enabled devices (`(pointer: coarse)`), we will reduce friction for desktop users who currently see unhelpful native OS share dialogs, while preserving the seamless one-click sharing experience for mobile users. The custom dropdown menu is superior on desktop.
 **Implementation:** Updated `canShareNative` logic in `ShareButton`, `WinnerCeremony`, and `VerifyContent` components to evaluate `window.matchMedia('(pointer: coarse)').matches` alongside the existence of `navigator.share`.
 **Outcome:** Expect increased successful link copies and higher share completion rates on desktop environments without negative impact on mobile sharing.
+
+## 2026-02-01 - [ShareButton & WinnerCeremony/Sharing Context]
+**Hypothesis:** Expanding share platform choices beyond Twitter, Facebook, and WhatsApp to include Telegram and LinkedIn will cater to a broader range of professional and private networks, thus increasing the K-Factor (virality). Concurrently, updating the "Copy Link" functionality to copy *only* the URL instead of `text + url` will reduce the "404 Not Found" drop-off rate caused by users pasting the entire string directly into their browser address bar.
+**Implementation:**
+1. Added `Send` (Telegram) and `Linkedin` icons from `lucide-react` to both `components/ui/share-button.tsx` and `components/sorteo/winner-ceremony.tsx`.
+2. Created dynamic URI structures for Telegram (`t.me/share/url`) and LinkedIn (`linkedin.com/sharing/share-offsite`).
+3. Refactored `copyToClipboard` in both components to strictly copy the canonical URL, wrapping the invocation in a `try/catch` block for resilient error handling on devices with strict clipboard API permissions.
+**Outcome:** Expect a marked decrease in 404 referral errors and a lift in sharing events across Telegram and LinkedIn audiences.

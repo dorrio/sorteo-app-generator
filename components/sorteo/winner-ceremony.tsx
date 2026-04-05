@@ -20,6 +20,8 @@ import {
   Instagram,
   Download,
   Loader2,
+  Send,
+  Linkedin,
 } from "lucide-react"
 import { type SeoMode } from "@/components/sorteo/glossary"
 
@@ -103,10 +105,12 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
       twitterUrl: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`,
       facebookUrl: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(text)}`,
       whatsappUrl: `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + shareUrl)}`,
+      telegramUrl: `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(text)}`,
+      linkedinUrl: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
     }
   }, [winner, locale, seoMode, theme.customTitle, theme.primaryColor, t])
 
-  const { url: shareUrl, text: shareText, twitterUrl, facebookUrl, whatsappUrl } = shareData
+  const { url: shareUrl, text: shareText, twitterUrl, facebookUrl, whatsappUrl, telegramUrl, linkedinUrl } = shareData
 
   // Early return MUST happen after all hooks
   if (!showWinnerCeremony || !winner) return null
@@ -372,6 +376,18 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
                     <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
                       <MessageCircle className="w-4 h-4" />
                       WhatsApp
+                    </a>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <a href={telegramUrl} target="_blank" rel="noopener noreferrer">
+                      <Send className="w-4 h-4" />
+                      Telegram
+                    </a>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">
+                      <Linkedin className="w-4 h-4" />
+                      LinkedIn
                     </a>
                   </DropdownMenuItem>
                 </DropdownMenuContent>

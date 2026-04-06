@@ -53,3 +53,8 @@
 **Gap:** Missing "Truth or Dare" generator which has high search volume.
 **Action:** Created dedicated `/truth-or-dare-generator` landing page with `TruthGeo` component, specialized Schema, and targeted Metadata. Added translation strings and updated sitemap priorities.
 **GEO Impact:** Optimized for "Truth or Dare Generator", "Random Truth or Dare questions", and similar queries with Direct Answer blocks.
+
+## 2026-04-06 - [Technical/Performance]
+**Gap:** Homepage GEO component (`SeoContent`) was using `framer-motion`, violating the "Performance Constraint".
+**Action:** Removed `framer-motion` and replaced `<motion.li>` with standard `<li>`.
+**GEO Impact:** Improved Core Web Vitals (LCP/FCP) for the homepage.

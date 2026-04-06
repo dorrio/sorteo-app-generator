@@ -1,7 +1,6 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { motion } from "framer-motion"
 import { Shield, Wand2, Zap, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
 
@@ -129,12 +128,8 @@ export function SeoContent() {
           <h2 className="text-2xl font-bold">{t("features_title")}</h2>
           <ul className="grid md:grid-cols-3 gap-8" role="list">
             {features.map((feature, idx) => (
-              <motion.li
+              <li
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
                 className="p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-colors list-none"
               >
                 <div className="mb-4 p-3 bg-primary/10 rounded-xl w-fit">
@@ -142,7 +137,7 @@ export function SeoContent() {
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.desc}</p>
-              </motion.li>
+              </li>
             ))}
           </ul>
         </div>

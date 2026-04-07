@@ -157,9 +157,9 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     }
   }
 
-  const copyToClipboard = async () => {
+  const handleCopy = async (textToCopy: string) => {
     try {
-      await navigator.clipboard.writeText(shareUrl)
+      await navigator.clipboard.writeText(textToCopy)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (e) {
@@ -167,11 +167,9 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     }
   }
 
-  const shareInstagram = async () => {
-    await navigator.clipboard.writeText(shareText)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+  const copyToClipboard = () => handleCopy(shareUrl)
+
+  const shareInstagram = () => handleCopy(shareText)
 
   const handleDownload = async () => {
     if (!winner) return
@@ -288,11 +286,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
               <button
                 type="button"
                 className="flex items-center gap-2 px-3 py-1 rounded-md bg-muted/50 cursor-pointer hover:bg-muted transition-colors border-none outline-none"
-                onClick={() => {
-                  navigator.clipboard.writeText(winner.verificationId!)
-                  setCopied(true)
-                  setTimeout(() => setCopied(false), 2000)
-                }}
+                onClick={() => handleCopy(winner.verificationId!)}
               >
                 <code className="text-sm font-mono text-primary">{winner.verificationId}</code>
                 {copied ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3 text-muted-foreground" />}

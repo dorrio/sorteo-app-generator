@@ -5,6 +5,7 @@ import { Disc, Check, X, ShieldCheck, Play, CheckCircle, HelpCircle, BookOpen, T
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/routing"
+import { safeJsonLdStringify } from "@/lib/utils"
 
 export function YesNoGeo() {
   const t = useTranslations("YesNoGeo")
@@ -69,6 +70,8 @@ export function YesNoGeo() {
           name: faq.question,
           acceptedAnswer: {
             '@type': 'Answer',
+            // manual strip of HTML from faq.answer for content cleanliness before schema output,
+            // not for XSS protection (which is handled by safeJsonLdStringify)
             text: faq.answer.replace(/<[^>]*>?/gm, ''),
           },
         }))
@@ -90,7 +93,7 @@ export function YesNoGeo() {
     <section className="w-full py-12 px-4 border-t border-border/30 bg-card/20">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-start">
 

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Users, Grid, Share2, HelpCircle, CheckCircle, GraduationCap, Gamepad2, Briefcase } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Link } from "@/i18n/routing"
+import { safeJsonLdStringify } from "@/lib/utils"
 
 export function TeamGeo() {
   const t = useTranslations("TeamGeo")
@@ -47,7 +48,7 @@ export function TeamGeo() {
     <section className="py-16 md:py-24 relative overflow-hidden">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
       <div className="max-w-4xl mx-auto px-4 relative z-10">
         <div

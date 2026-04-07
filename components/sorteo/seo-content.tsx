@@ -1,13 +1,14 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { motion } from "framer-motion"
 import { Shield, Wand2, Zap, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
+import { safeJsonLdStringify } from "@/lib/utils"
 
 export function SeoContent() {
   const t = useTranslations("SEOContent")
   const tSpecs = useTranslations("QuickSpecs")
+  const tGlobal = useTranslations("GlobalSchema")
 
   const features = [
     {
@@ -63,15 +64,41 @@ export function SeoContent() {
     })),
   }
 
+  const softwareLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: String(tGlobal('appName')),
+    applicationCategory: tGlobal('applicationCategory'),
+    applicationSubCategory: tGlobal('applicationSubCategory'),
+    description: tGlobal('description'),
+    operatingSystem: 'Web',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD'
+    },
+    featureList: [
+      tGlobal('feature_1'),
+      tGlobal('feature_2'),
+      tGlobal('feature_3'),
+      tGlobal('feature_4'),
+      tGlobal('feature_5')
+    ]
+  }
+
   return (
     <section className="w-full py-16 px-4 bg-card/30 backdrop-blur-sm border-t border-border/50">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(softwareLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(howToLd) }}
       />
       <div className="max-w-5xl mx-auto space-y-16">
 
@@ -129,12 +156,8 @@ export function SeoContent() {
           <h2 className="text-2xl font-bold">{t("features_title")}</h2>
           <ul className="grid md:grid-cols-3 gap-8" role="list">
             {features.map((feature, idx) => (
-              <motion.li
+              <li
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
                 className="p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-colors list-none"
               >
                 <div className="mb-4 p-3 bg-primary/10 rounded-xl w-fit">
@@ -142,7 +165,7 @@ export function SeoContent() {
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.desc}</p>
-              </motion.li>
+              </li>
             ))}
           </ul>
         </div>

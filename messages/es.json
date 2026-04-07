@@ -80,6 +80,7 @@
         "verify_description": "¡Mira quién ganó! 100% Auténtico y Verificado por Sorteo Pro. Clic para ver el certificado oficial."
     },
     "GlobalSchema": {
+        "appName": "Sorteo Pro",
         "applicationCategory": "MultimediaApplication",
         "applicationSubCategory": "Herramienta de Redes Sociales",
         "description": "La herramienta definitiva para sorteos virales.",

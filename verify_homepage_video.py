@@ -1,14 +1,24 @@
 import time
 import sys
+import os
+from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 def run():
+    # Configure directories from environment variables with sensible defaults
+    video_dir = Path(os.environ.get("VIDEO_DIR", "./verification/videos")).expanduser().resolve()
+    screenshot_dir = Path(os.environ.get("SCREENSHOT_DIR", "./verification/screenshots")).expanduser().resolve()
+
+    # Create directories if they don't exist
+    os.makedirs(video_dir, exist_ok=True)
+    os.makedirs(screenshot_dir, exist_ok=True)
+
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         # Grant clipboard permissions for copy tests if needed
         context = browser.new_context(
             permissions=['clipboard-read', 'clipboard-write'],
-            record_video_dir="/home/jules/verification/videos"
+            record_video_dir=str(video_dir)
         )
         page = context.new_page()
 
@@ -39,7 +49,7 @@ def run():
         page.wait_for_timeout(1000)
 
         # Screenshot
-        page.screenshot(path="/home/jules/verification/screenshots/verification_homepage.png", full_page=True)
+        page.screenshot(path=str(screenshot_dir / "verification_homepage.png"), full_page=True)
 
         page.wait_for_timeout(1000)
         context.close()

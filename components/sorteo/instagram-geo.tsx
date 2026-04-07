@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl"
 import { Check, Shield, Users, HelpCircle, Instagram } from "lucide-react"
+import { safeJsonLdStringify } from "@/lib/utils"
 
 export function InstagramGeo() {
   const t = useTranslations("InstagramPicker")
@@ -47,11 +48,11 @@ export function InstagramGeo() {
     <div className="w-full">
         <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
         />
         <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }}
+            dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(howToLd) }}
         />
 
       {/* Direct Answer Block (GEO) */}

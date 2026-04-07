@@ -53,3 +53,8 @@
 **Gap:** Missing "Truth or Dare" generator which has high search volume.
 **Action:** Created dedicated `/truth-or-dare-generator` landing page with `TruthGeo` component, specialized Schema, and targeted Metadata. Added translation strings and updated sitemap priorities.
 **GEO Impact:** Optimized for "Truth or Dare Generator", "Random Truth or Dare questions", and similar queries with Direct Answer blocks.
+
+## 2025-06-16 - [Technical/Performance & Strategy/Schema]
+**Gap:** Homepage `seo-content.tsx` was missing `SoftwareApplication` schema and still used `framer-motion`, violating performance constraints. Several GEO components used unescaped `JSON.stringify` for JSON-LD which can break when containing HTML tags.
+**Action:** Injected `SoftwareApplication` schema into `seo-content.tsx`, removed `framer-motion` from it, and refactored all GEO components to use `safeJsonLdStringify`.
+**GEO Impact:** Improved Core Web Vitals (LCP) for the homepage by removing main thread blocking animations. Solidified entity understanding for AI bots via robust `SoftwareApplication` schema, and prevented potential JSON-LD parsing errors across all tools.

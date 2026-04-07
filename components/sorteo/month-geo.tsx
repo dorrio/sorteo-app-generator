@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 import { Calendar, Check, Zap, Globe, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
 import { Button } from "@/components/ui/button"
+import { safeJsonLdStringify } from "@/lib/utils"
 
 export function MonthGeo() {
   const t = useTranslations("MonthGeo")
@@ -54,11 +55,11 @@ export function MonthGeo() {
     <div className="w-full">
         <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
         />
         <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }}
+                dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(howToLd) }}
         />
 
       {/* Direct Answer Block (GEO) */}

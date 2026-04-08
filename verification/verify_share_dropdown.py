@@ -50,6 +50,7 @@ def verify_share_dropdown():
         browser = p.chromium.launch()
         context = browser.new_context(viewport={"width": 375, "height": 812}, has_touch=True)
         context.add_init_script("""
+            window._nativeShareTriggered = false;
             navigator.share = async function(data) {
                 console.log('navigator.share called', data);
                 window._nativeShareTriggered = true;

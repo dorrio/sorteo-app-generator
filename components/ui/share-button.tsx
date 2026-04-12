@@ -85,10 +85,8 @@ export function ShareButton({
   }
 
   const copyToClipboard = async () => {
-    // Viralis Optimization: Copy full text + url to preserve the hook
-    const clipboardText = text ? `${text} ${url}` : url
     try {
-      await navigator.clipboard.writeText(clipboardText)
+      await navigator.clipboard.writeText(url)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {

@@ -158,7 +158,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   }
 
   const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
+    await navigator.clipboard.writeText(shareUrl)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }

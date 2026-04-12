@@ -200,7 +200,7 @@ export function VerifyContent() {
     }
 
     const copyToClipboard = async () => {
-        await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
+        await navigator.clipboard.writeText(shareUrl)
         setShowCopied(true)
         setTimeout(() => setShowCopied(false), 2000)
     }

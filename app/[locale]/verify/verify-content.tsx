@@ -200,9 +200,14 @@ export function VerifyContent() {
     }
 
     const copyToClipboard = async () => {
-        await navigator.clipboard.writeText(shareUrl)
-        setShowCopied(true)
-        setTimeout(() => setShowCopied(false), 2000)
+        try {
+            await navigator.clipboard.writeText(shareUrl)
+            setShowCopied(true)
+            setTimeout(() => setShowCopied(false), 2000)
+        } catch (error) {
+            console.error(error)
+            setShowCopied(false)
+        }
     }
 
     const shareInstagram = async () => {

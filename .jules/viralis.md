@@ -30,7 +30,7 @@
 **Implementation:** Updated `components/ui/share-button.tsx` and `components/sorteo/winner-ceremony.tsx` to include `telegramUrl` (`https://t.me/share/url?url={url}&text={text}`) and `linkedinUrl` (`https://www.linkedin.com/sharing/share-offsite/?url={url}`) computations, and added `DropdownMenuItem` entries for both platforms.
 **Outcome:** Expect increased sharing across professional circles and encrypted messaging, leading to a higher conversion rate.
 
-## 2026-05-24 - [Share/CopyLink]
+## 2026-04-14 - [Share/CopyLink]
 **Hypothesis:** If we change the "Copy Link" action to copy *only* the URL instead of prefixing it with descriptive text (`${text} ${url}`), we will prevent "404 Not Found" or invalid URL errors that occur when users paste the copied text directly into their browser's address bar.
 **Implementation:** Updated `copyToClipboard` in `components/ui/share-button.tsx`, `components/sorteo/winner-ceremony.tsx`, and `app/[locale]/verify/verify-content.tsx` to copy `url` or `shareUrl` strictly without any preceding text.
 **Outcome:** Expect a reduction in broken links and higher conversion rate from direct link sharing via copy-paste.

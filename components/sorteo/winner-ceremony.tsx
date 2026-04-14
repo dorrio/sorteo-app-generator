@@ -158,9 +158,29 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   }
 
   const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(shareUrl)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      } else {
+        // Fallback for browsers without clipboard API
+        const textarea = document.createElement('textarea')
+        textarea.value = shareUrl
+        textarea.style.position = 'fixed'
+        textarea.style.opacity = '0'
+        document.body.appendChild(textarea)
+        textarea.select()
+        const success = document.execCommand('copy')
+        document.body.removeChild(textarea)
+        if (success) {
+          setCopied(true)
+          setTimeout(() => setCopied(false), 2000)
+        }
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const shareInstagram = async () => {

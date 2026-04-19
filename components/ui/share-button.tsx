@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Share2, Copy, Twitter, Facebook, MessageCircle, Check, Instagram } from "lucide-react"
+import { Share2, Copy, Twitter, Facebook, MessageCircle, Check, Instagram, Send, Linkedin } from "lucide-react"
 
 interface ShareButtonProps {
   title: string
@@ -85,10 +85,10 @@ export function ShareButton({
   }
 
   const copyToClipboard = async () => {
-    // Viralis Optimization: Copy full text + url to preserve the hook
-    const clipboardText = text ? `${text} ${url}` : url
+    // Viralis Optimization: Copy only URL to prevent 404 errors when pasted into address bars
+    const clipboardText = url
     try {
-      await navigator.clipboard.writeText(clipboardText)
+      await navigator.clipboard.writeText(url)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
@@ -114,6 +114,8 @@ export function ShareButton({
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`
   // WhatsApp: Use api.whatsapp.com for better cross-device support
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + url)}`
+  const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`
+  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
 
 
   const TriggerButton = (
@@ -174,6 +176,20 @@ export function ShareButton({
            </a>
         </DropdownMenuItem>
 
+        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+           <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label={translations.shareOn ? `${translations.shareOn} Telegram` : "Share on Telegram"}>
+            <Send className="w-4 h-4" />
+            Telegram
+           </a>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+           <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={translations.shareOn ? `${translations.shareOn} LinkedIn` : "Share on LinkedIn"}>
+            <Linkedin className="w-4 h-4" />
+            LinkedIn
+           </a>
+        </DropdownMenuItem>
+
          <DropdownMenuItem asChild className="gap-2 cursor-pointer">
             <a
               href="https://www.instagram.com/"
@@ -185,6 +201,20 @@ export function ShareButton({
               <Instagram className="w-4 h-4" />
               Instagram
             </a>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+           <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Telegram">
+            <Send className="w-4 h-4" />
+            Telegram
+           </a>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+           <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+            <Linkedin className="w-4 h-4" />
+            LinkedIn
+           </a>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

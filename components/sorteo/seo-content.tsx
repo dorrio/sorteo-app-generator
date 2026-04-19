@@ -3,10 +3,12 @@
 import { useTranslations } from "next-intl"
 import { Shield, Wand2, Zap, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
+import { safeJsonLdStringify } from "@/lib/utils"
 
 export function SeoContent() {
   const t = useTranslations("SEOContent")
   const tSpecs = useTranslations("QuickSpecs")
+  const tGlobal = useTranslations("GlobalSchema")
 
   const features = [
     {
@@ -62,15 +64,41 @@ export function SeoContent() {
     })),
   }
 
+  const softwareLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Sorteo Pro',
+    applicationCategory: tGlobal('applicationCategory'),
+    applicationSubCategory: tGlobal('applicationSubCategory'),
+    description: tGlobal('description'),
+    operatingSystem: 'Web',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD'
+    },
+    featureList: [
+      tGlobal('feature_1'),
+      tGlobal('feature_2'),
+      tGlobal('feature_3'),
+      tGlobal('feature_4'),
+      tGlobal('feature_5')
+    ]
+  }
+
   return (
     <section className="w-full py-16 px-4 bg-card/30 backdrop-blur-sm border-t border-border/50">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(softwareLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(howToLd) }}
       />
       <div className="max-w-5xl mx-auto space-y-16">
 

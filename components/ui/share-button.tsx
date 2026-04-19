@@ -85,6 +85,8 @@ export function ShareButton({
   }
 
   const copyToClipboard = async () => {
+    // Viralis Optimization: Copy only URL to prevent 404 errors when pasted into address bars
+    const clipboardText = url
     try {
       await navigator.clipboard.writeText(url)
       setCopied(true)
@@ -171,6 +173,20 @@ export function ShareButton({
            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
             <MessageCircle className="w-4 h-4" />
             WhatsApp
+           </a>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+           <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label={translations.shareOn ? `${translations.shareOn} Telegram` : "Share on Telegram"}>
+            <Send className="w-4 h-4" />
+            Telegram
+           </a>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+           <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={translations.shareOn ? `${translations.shareOn} LinkedIn` : "Share on LinkedIn"}>
+            <Linkedin className="w-4 h-4" />
+            LinkedIn
            </a>
         </DropdownMenuItem>
 

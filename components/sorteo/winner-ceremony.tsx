@@ -21,8 +21,8 @@ import {
   Download,
   Loader2,
   Send,
-  Linkedin,
-} from "lucide-react"
+  Linkedin
+}from "lucide-react"
 import { type SeoMode } from "@/components/sorteo/glossary"
 
 interface WinnerCeremonyProps {
@@ -77,7 +77,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
   // Viral Optimization: Create a deep link to the verification page
   const shareData = useMemo(() => {
-    if (!winner) return { url: "", text: "", twitterUrl: "", facebookUrl: "", whatsappUrl: "" }
+    if (!winner) return { url: "", text: "", twitterUrl: "", facebookUrl: "", whatsappUrl: "", telegramUrl: "", linkedinUrl: "" }
 
     const baseUrl = typeof window !== "undefined" ? window.location.origin : ""
     let shareUrl = typeof window !== "undefined" ? window.location.href : ""
@@ -157,16 +157,16 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     }
   }
 
-  const copyToClipboard = async () => {
+  const handleCopy = async (textToCopy: string) => {
     try {
       if (navigator.clipboard) {
-        await navigator.clipboard.writeText(shareUrl)
+        await navigator.clipboard.writeText(textToCopy)
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
       } else {
         // Fallback for browsers without clipboard API
         const textarea = document.createElement('textarea')
-        textarea.value = shareUrl
+        textarea.value = textToCopy
         textarea.style.position = 'fixed'
         textarea.style.opacity = '0'
         document.body.appendChild(textarea)
@@ -178,16 +178,14 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
           setTimeout(() => setCopied(false), 2000)
         }
       }
-    } catch (error) {
-      console.error(error)
+    } catch (e) {
+      console.error("Failed to copy text:", e)
     }
   }
 
-  const shareInstagram = async () => {
-    await navigator.clipboard.writeText(shareText)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+  const copyToClipboard = () => handleCopy(shareUrl)
+
+  const shareInstagram = () => handleCopy(shareText)
 
   const handleDownload = async () => {
     if (!winner) return
@@ -304,11 +302,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
               <button
                 type="button"
                 className="flex items-center gap-2 px-3 py-1 rounded-md bg-muted/50 cursor-pointer hover:bg-muted transition-colors border-none outline-none"
-                onClick={() => {
-                  navigator.clipboard.writeText(winner.verificationId!)
-                  setCopied(true)
-                  setTimeout(() => setCopied(false), 2000)
-                }}
+                onClick={() => handleCopy(winner.verificationId!)}
               >
                 <code className="text-sm font-mono text-primary">{winner.verificationId}</code>
                 {copied ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3 text-muted-foreground" />}

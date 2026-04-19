@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Share2, Copy, Twitter, Facebook, MessageCircle, Check, Instagram, Linkedin, Send } from "lucide-react"
+import { Share2, Copy, Twitter, Facebook, MessageCircle, Check, Instagram, Send, Linkedin } from "lucide-react"
 
 interface ShareButtonProps {
   title: string
@@ -88,7 +88,7 @@ export function ShareButton({
     // Viralis Optimization: Copy only URL to prevent 404 errors when pasted into address bars
     const clipboardText = url
     try {
-      await navigator.clipboard.writeText(clipboardText)
+      await navigator.clipboard.writeText(url)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
@@ -201,6 +201,20 @@ export function ShareButton({
               <Instagram className="w-4 h-4" />
               Instagram
             </a>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+           <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Telegram">
+            <Send className="w-4 h-4" />
+            Telegram
+           </a>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+           <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+            <Linkedin className="w-4 h-4" />
+            LinkedIn
+           </a>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

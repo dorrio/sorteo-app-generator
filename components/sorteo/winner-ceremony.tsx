@@ -22,7 +22,7 @@ import {
   Loader2,
   Send,
   Linkedin
-} from "lucide-react"
+}from "lucide-react"
 import { type SeoMode } from "@/components/sorteo/glossary"
 
 interface WinnerCeremonyProps {
@@ -159,9 +159,25 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
   const handleCopy = async (textToCopy: string) => {
     try {
-      await navigator.clipboard.writeText(textToCopy)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(textToCopy)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      } else {
+        // Fallback for browsers without clipboard API
+        const textarea = document.createElement('textarea')
+        textarea.value = textToCopy
+        textarea.style.position = 'fixed'
+        textarea.style.opacity = '0'
+        document.body.appendChild(textarea)
+        textarea.select()
+        const success = document.execCommand('copy')
+        document.body.removeChild(textarea)
+        if (success) {
+          setCopied(true)
+          setTimeout(() => setCopied(false), 2000)
+        }
+      }
     } catch (e) {
       console.error("Failed to copy text:", e)
     }

@@ -12,4 +12,5 @@ test('Random Card Generator loads correctly', async ({ page }) => {
 test('Bingo Number Generator loads correctly', async ({ page }) => {
   await page.goto(`${BASE_URL}/es/bingo-number-generator`);
   await expect(page.locator('h1')).toContainText('Generador de Números de Bingo');
+  await expect(page.locator('body')).toContainText('cantador');
 });

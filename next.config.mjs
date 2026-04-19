@@ -42,6 +42,7 @@ const nextConfig = {
       '@radix-ui/react-toggle-group',
       '@radix-ui/react-tooltip',
     ],
+    turbopackUseSystemTlsCerts: true,
   },
   images: {
     formats: ['image/avif', 'image/webp'],

@@ -25,10 +25,12 @@
 **Implementation:** Updated `canShareNative` logic in `ShareButton`, `WinnerCeremony`, and `VerifyContent` components to evaluate `window.matchMedia('(pointer: coarse)').matches` alongside the existence of `navigator.share`.
 **Outcome:** Expect increased successful link copies and higher share completion rates on desktop environments without negative impact on mobile sharing.
 
-## 2026-02-01 - [ShareButton & WinnerCeremony/Sharing Context]
-**Hypothesis:** Expanding share platform choices beyond Twitter, Facebook, and WhatsApp to include Telegram and LinkedIn will cater to a broader range of professional and private networks, thus increasing the K-Factor (virality). Concurrently, updating the "Copy Link" functionality to copy *only* the URL instead of `text + url` will reduce the "404 Not Found" drop-off rate caused by users pasting the entire string directly into their browser address bar.
-**Implementation:**
-1. Added `Send` (Telegram) and `Linkedin` icons from `lucide-react` to both `components/ui/share-button.tsx` and `components/sorteo/winner-ceremony.tsx`.
-2. Created dynamic URI structures for Telegram (`t.me/share/url`) and LinkedIn (`linkedin.com/sharing/share-offsite`).
-3. Refactored `copyToClipboard` in both components to strictly copy the canonical URL, wrapping the invocation in a `try/catch` block for resilient error handling on devices with strict clipboard API permissions.
-**Outcome:** Expect a marked decrease in 404 referral errors and a lift in sharing events across Telegram and LinkedIn audiences.
+## 2026-01-30 - [Share/Dropdowns]
+**Hypothesis:** If we add Telegram and LinkedIn sharing options to the fallback DropdownMenu components (`ShareButton` and `WinnerCeremony`), we will tap into professional networks and private messaging clusters, increasing the K-Factor and overall visibility of the sweepstakes.
+**Implementation:** Updated `components/ui/share-button.tsx` and `components/sorteo/winner-ceremony.tsx` to include `telegramUrl` (`https://t.me/share/url?url={url}&text={text}`) and `linkedinUrl` (`https://www.linkedin.com/sharing/share-offsite/?url={url}`) computations, and added `DropdownMenuItem` entries for both platforms.
+**Outcome:** Expect increased sharing across professional circles and encrypted messaging, leading to a higher conversion rate.
+
+## 2026-04-14 - [Share/CopyLink]
+**Hypothesis:** If we change the "Copy Link" action to copy *only* the URL instead of prefixing it with descriptive text (`${text} ${url}`), we will prevent "404 Not Found" or invalid URL errors that occur when users paste the copied text directly into their browser's address bar.
+**Implementation:** Updated `copyToClipboard` in `components/ui/share-button.tsx`, `components/sorteo/winner-ceremony.tsx`, and `app/[locale]/verify/verify-content.tsx` to copy `url` or `shareUrl` strictly without any preceding text.
+**Outcome:** Expect a reduction in broken links and higher conversion rate from direct link sharing via copy-paste.

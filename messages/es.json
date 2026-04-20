@@ -20,8 +20,7 @@
         "footer_versus_link": "Alternativa a AppSorteos",
         "footer_versus_wheel_link": "Alternativa a Wheel of Names",
         "footer_glossary": "Glosario",
-        "customize_hint": "🎨 Personalizar Sorteo",
-        "loading_delay_message": "Esto está tardando un poco más de lo habitual..."
+        "customize_hint": "🎨 Personalizar Sorteo"
     },
     "Footer": {
         "text": "Creado para influencers y creadores de contenido",
@@ -88,6 +87,10 @@
         "feature_3": "Herramienta de Sorteos de Instagram",
         "feature_4": "Verificación Instantánea",
         "feature_5": "RNG Probablemente Justo"
+    },
+    "WheelPage": {
+        "title": "Ruleta de Nombres | Selector Aleatorio (Gratis y sin Anuncios)",
+        "description": "Gira la Ruleta de Nombres para elegir un ganador al azar. Gratis, personalizable y justa. La mejor ruleta aleatoria para profesores, rifas y sorteos."
     },
     "LanguageSwitcher": {
         "switchLanguage": "Cambiar idioma"
@@ -183,7 +186,7 @@
             "typography": "Tipografía"
         },
         "effects": {
-            "style_label": "Estilo del Sorteio",
+            "style_label": "Estilo del Sorteo",
             "confetti": "Confetti",
             "confetti_desc": "Lluvia de confeti al ganar",
             "dynamic_bg": "Fondo Dinámico",
@@ -208,20 +211,20 @@
     },
     "WinnerCeremony": {
         "winner_label": "Ganador",
-        "share_text": "🏆 *{name}* WON! 🎉 Official result verified by Sorteo Pro. 👇",
-        "share_text_custom": "🔥 *{name}* won *{title}*! 🎉 Official result verified by Sorteo Pro. 👇",
+        "share_text": "🏆 ¡*{name}* HA GANADO! 🎉 Resultado oficial verificado por Sorteo Pro. 👇",
+        "share_text_custom": "🔥 ¡*{name}* ganó *{title}*! 🎉 Resultado oficial verificado por Sorteo Pro. 👇",
         "share_title": "¡Tenemos Ganador! 🏆",
         "congratulations": "¡Felicidades! 🎉",
         "share_button": "Compartir Resultado",
         "share_menu": "Compartir...",
         "copied": "¡Copiado!",
         "copy_text": "Copiar Enlace",
-        "copy_image": "Copy Image",
-        "image_copied": "Image Copied!",
+        "copy_image": "Copiar Imagen",
+        "image_copied": "¡Imagen Copiada!",
         "download_certificate": "Descargar Certificado",
         "new_giveaway": "Nuevo Sorteo",
-        "close": "Close",
-        "share_on": "Share on"
+        "close": "Cerrar",
+        "share_on": "Compartir en"
     },
     "HistoryPanel": {
         "title": "Historial",
@@ -263,8 +266,8 @@
         "create_your_own": "🚀 Crear Sorteo Gratis",
         "share_button": "Compartir Prueba",
         "download_certificate": "Descargar Certificado",
-        "copy_image": "Copy Image",
-        "image_copied": "Image Copied!",
+        "copy_image": "Copiar Imagen",
+        "image_copied": "¡Imagen Copiada!",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* es el GANADOR!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* ganó *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "result": {
@@ -398,6 +401,8 @@
     "GlossaryPage": {
         "title": "Glosario de Sorteos y Azar | Sorteo Pro",
         "description": "Glosario completo de términos relacionados con sorteos, generación de números aleatorios y concursos en redes sociales.",
+        "direct_answer_title": "¿Qué es un Glosario de Sorteos?",
+        "direct_answer_text": "Un <strong>Glosario de Sorteos</strong> es una colección de definiciones de términos técnicos usados en concursos online, como <strong>RNG</strong>, <strong>Provably Fair</strong> y <strong>Seed</strong>. Ayuda a los usuarios a entender la tecnología detrás de la selección aleatoria justa y garantiza la transparencia en las rifas digitales.",
         "tagline": "Base de Conocimiento",
         "h1": "Glosario de Sorteos",
         "subtitle": "Todo lo que necesitas saber sobre sorteos justos y tecnología de selección aleatoria.",
@@ -632,6 +637,8 @@
             "direct_answer_text": "Sorteo Pro es mejor que <strong>Wheel of Names</strong> porque ofrece una <strong>experiencia premium sin anuncios</strong> con visuales modernos. También incluye <strong>verificación instantánea</strong> para probar la imparcialidad a tu audiencia, algo que le falta a Wheel of Names."
         },
         "cta": {
+            "title": "Mejora tus sorteos.",
+            "subtitle": "Cámbiate a Sorteo Pro hoy.",
             "button": "Girar la Mejor Ruleta"
         },
         "faq": {
@@ -768,7 +775,7 @@
         "bingo_title": "Generador de Bingo | Sorteo Pro",
         "bingo_text": "🎱 ¡Acabo de generar números de Bingo al azar! Gratis y Justo. 👇",
         "cta_share": "Compartir",
-        "cta_start": "Start Giveaway",
+        "cta_start": "Iniciar Sorteo",
         "truth_title": "Generador de Verdad o Reto | Sorteo Pro",
         "truth_text": "🤫 ¡Acabo de jugar Verdad o Reto online! Es gratis y muy divertido. Juega aquí 👇"
     },

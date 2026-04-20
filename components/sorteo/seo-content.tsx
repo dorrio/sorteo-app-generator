@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl"
 import { Shield, Wand2, Zap, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
-import { safeJsonLdStringify } from "@/lib/utils"
+import { JsonLd } from "@/components/seo/json-ld"
 
 export function SeoContent() {
   const t = useTranslations("SEOContent")
@@ -86,18 +86,9 @@ export function SeoContent() {
 
   return (
     <section className="w-full py-16 px-4 bg-card/30 backdrop-blur-sm border-t border-border/50">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(softwareLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(howToLd) }}
-      />
+      <JsonLd data={softwareLd} />
+      <JsonLd data={jsonLd} />
+      <JsonLd data={howToLd} />
       <div className="max-w-5xl mx-auto space-y-16">
 
         {/* Direct Answer Block (ChatGPT Bait) */}

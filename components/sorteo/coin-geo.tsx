@@ -2,8 +2,7 @@ import { useTranslations } from "next-intl"
 import { Coins, ShieldCheck, Zap, Smartphone, HelpCircle, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/routing"
-import { safeJsonLdStringify } from "@/lib/utils"
-
+import { JsonLd } from '@/components/seo/json-ld'
 export function CoinGeo() {
   const t = useTranslations("CoinGeo")
   const tFaq = useTranslations("CoinPage")
@@ -73,11 +72,7 @@ export function CoinGeo() {
 
   return (
     <section className="w-full py-12 px-4 border-t border-border/30 bg-card/20">
-      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
-      />
+<JsonLd data={jsonLd} />
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-start">
         <div className="space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">

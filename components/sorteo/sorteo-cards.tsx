@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
+import { cryptoShuffle } from "@/lib/utils"
 
 interface SorteoCardsProps {
   onWinnerSelected: () => void
@@ -30,7 +31,7 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
     if (!winner) return
 
     // Shuffle cards
-    const shuffled = [...participants].sort(() => Math.random() - 0.5)
+    const shuffled = cryptoShuffle(participants)
     setShuffledCards(shuffled)
     setCurrentCardIndex(0)
     setShowFinal(false)

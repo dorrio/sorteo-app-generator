@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl"
 import { Check, Shield, Gamepad2, Zap, HelpCircle, Type } from "lucide-react"
-import { safeJsonLdStringify } from "@/lib/utils"
-
+import { JsonLd } from '@/components/seo/json-ld'
 export function LetterGeo() {
   const t = useTranslations("LetterGeo")
 
@@ -44,14 +43,8 @@ export function LetterGeo() {
 
   return (
     <div className="w-full">
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
-        />
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(howToLd) }}
-        />
+<JsonLd data={jsonLd} />
+<JsonLd data={howToLd} />
 
       {/* Direct Answer Block (GEO) */}
       <section className="py-12 px-4 bg-card/20 border-t border-border/30">

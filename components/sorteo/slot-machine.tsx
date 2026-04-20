@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
+import { cryptoShuffle } from "@/lib/utils"
 
 interface SlotMachineProps {
   onWinnerSelected: () => void
@@ -32,7 +33,7 @@ export function SlotMachine({ onWinnerSelected }: SlotMachineProps) {
     const startTime = Date.now()
 
     // Create shuffled names for animation
-    const shuffled = [...participants].sort(() => Math.random() - 0.5)
+    const shuffled = cryptoShuffle(participants)
     setDisplayedNames(shuffled.map((p) => p.name))
 
     const animate = () => {

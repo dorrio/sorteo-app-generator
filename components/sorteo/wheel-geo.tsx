@@ -4,8 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/routing"
 import { TryToolButton } from "./try-tool-button"
 import { WheelVisual } from "./wheel-visual"
-import { safeJsonLdStringify } from "@/lib/utils"
-
+import { JsonLd } from '@/components/seo/json-ld'
 export function WheelGeo() {
   const t = useTranslations("WheelGeo")
   const tSpecs = useTranslations("QuickSpecs")
@@ -88,10 +87,7 @@ export function WheelGeo() {
 
   return (
     <section className="w-full py-12 px-4 border-t border-border/30 bg-card/20">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
-      />
+<JsonLd data={jsonLd} />
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-start">
 
         {/* Left: Content & SEO Text */}

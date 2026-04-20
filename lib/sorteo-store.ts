@@ -2,6 +2,7 @@
 
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
+import { randomIndex } from "@/lib/utils"
 
 export interface Participant {
   id: string
@@ -15,11 +16,8 @@ export interface Participant {
 export const selectSecureWinner = (participants: Participant[]): Participant | null => {
   if (participants.length === 0) return null
 
-  const randomBuffer = new Uint32Array(1)
-  crypto.getRandomValues(randomBuffer)
-
-  // Use modulo for uniform distribution
-  const index = randomBuffer[0] % participants.length
+  // Use unbiased random index selection
+  const index = randomIndex(participants.length)
   const winner = participants[index]
 
   // Generate verifiable ID: PREFIX-UUID_PART-TIMESTAMP_HEX

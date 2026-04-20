@@ -1,17 +1,14 @@
 import { getTranslations } from "next-intl/server"
-import { useTranslations } from "next-intl"
 import { getBaseUrl } from "@/lib/config"
 import { routing } from "@/i18n/routing"
 import { safeJsonLdStringify } from "@/lib/utils"
-import nextDynamic from 'next/dynamic'
+import dynamic from 'next/dynamic'
 import { AppSkeleton } from "@/components/sorteo/skeletons"
 
-const MainApp = nextDynamic(
+const MainApp = dynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
-  { loading: () => <AppSkeleton /> }
+  { loading: () => <AppSkeleton />, ssr: false }
 )
-
-export const dynamic = 'force-static';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

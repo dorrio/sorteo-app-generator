@@ -26,4 +26,4 @@
 *   **Static Layout Shifts:** Using `framer-motion` or continuous CSS animations (like `animate-pulse`) on purely static, non-interactive GEO components. Use standard HTML elements for these.
 *   **Unnecessary Client Components:** Using `"use client"` on large components just because they contain one interactive button, animation, or `Link`. Split it up!
 *   **Unoptimized Listeners:** Attaching raw `scroll` or `resize` listeners without throttling or debouncing.
--   **Next.js Dynamic Import Aliasing:** When using `next/dynamic` in page files that also contain route segment configurations like `export const dynamic = 'force-static'`, import the module as `import nextDynamic from 'next/dynamic'` to prevent variable shadowing and build-time syntax errors.
+-   **Next.js Dynamic Import Aliasing:** Do NOT add `export const dynamic = 'force-static'` to tool pages (it blocks `searchParams` in `generateMetadata` and breaks dynamic OG image rendering) — remove that export instead, and you can import `next/dynamic` normally without aliasing.

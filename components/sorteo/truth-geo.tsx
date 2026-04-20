@@ -1,9 +1,8 @@
-"use client"
-
 import { useTranslations } from "next-intl"
 import { Shield, Zap, RefreshCw, Monitor, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
 import { safeJsonLdStringify } from "@/lib/utils"
+import { TryToolButton } from "./try-tool-button"
 
 export function TruthGeo() {
   const t = useTranslations("TruthGeo")
@@ -97,9 +96,9 @@ export function TruthGeo() {
             </p>
           </div>
           <div className="pt-4">
-            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="inline-flex items-center justify-center bg-primary text-primary-foreground font-bold py-2 px-6 rounded-full hover:scale-105 transition-transform">
+            <TryToolButton sorteoStyle="cards" className="inline-flex items-center justify-center bg-primary text-primary-foreground font-bold py-2 px-6 rounded-full hover:scale-105 transition-transform">
               {t("cta_button")}
-            </button>
+            </TryToolButton>
           </div>
         </div>
 

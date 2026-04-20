@@ -1,20 +1,13 @@
-"use client"
-
 import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Gift, Users, CheckCircle, HelpCircle, Smartphone, ShieldCheck } from "lucide-react"
-import { useSorteoStore } from "@/lib/sorteo-store"
 import { Link } from "@/i18n/routing"
 import { safeJsonLdStringify } from "@/lib/utils"
+import { TryToolButton } from "./try-tool-button"
 
 export function SecretSantaGeo() {
   const t = useTranslations("SecretSantaGeo")
   const tFaq = useTranslations("SecretSantaPage")
-  const { updateTheme } = useSorteoStore()
-
-  const handleTryIt = () => {
-    updateTheme({ sorteoStyle: 'grid' }) // Secret Santa works best with Grid (List is not a valid style type)
-  }
 
   const faqs = [
     {
@@ -84,10 +77,10 @@ export function SecretSantaGeo() {
                 })}
               </p>
             </div>
-            <Button asChild size="lg" className="mt-4 gap-2 text-lg font-bold shadow-lg shadow-primary/20" onClick={handleTryIt}>
-              <a href="#sorteo-section">
+            <Button asChild size="lg" className="mt-4 gap-2 text-lg font-bold shadow-lg shadow-primary/20">
+              <TryToolButton sorteoStyle="grid">
                 {t("cta_button")} <ArrowRight className="w-5 h-5" />
-              </a>
+              </TryToolButton>
             </Button>
           </div>
 

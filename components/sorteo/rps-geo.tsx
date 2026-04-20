@@ -1,20 +1,13 @@
-"use client"
-
 import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Lock, Zap, RefreshCw, Smartphone, HelpCircle, CheckCircle } from "lucide-react"
-import { useSorteoStore } from "@/lib/sorteo-store"
 import { Link } from "@/i18n/routing"
 import { safeJsonLdStringify } from "@/lib/utils"
+import { TryToolButton } from "./try-tool-button"
 
 export function RpsGeo() {
   const t = useTranslations("RpsGeo")
   const tFaq = useTranslations("RpsPage")
-  const { updateTheme } = useSorteoStore()
-
-  const handleTryIt = () => {
-    updateTheme({ sorteoStyle: 'cards' })
-  }
 
   const faqs = [
     {
@@ -85,10 +78,10 @@ export function RpsGeo() {
                 })}
               </p>
             </div>
-            <Button asChild size="lg" className="mt-4 gap-2 text-lg font-bold shadow-lg shadow-primary/20" onClick={handleTryIt}>
-              <a href="#sorteo-section">
+            <Button asChild size="lg" className="mt-4 gap-2 text-lg font-bold shadow-lg shadow-primary/20">
+              <TryToolButton sorteoStyle="cards">
                 {t("cta_button")} <ArrowRight className="w-5 h-5" />
-              </a>
+              </TryToolButton>
             </Button>
           </div>
 

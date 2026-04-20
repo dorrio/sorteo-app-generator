@@ -1,5 +1,3 @@
-"use client"
-
 import { useTranslations } from "next-intl"
 import { Coins, ShieldCheck, Zap, Smartphone, HelpCircle, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"

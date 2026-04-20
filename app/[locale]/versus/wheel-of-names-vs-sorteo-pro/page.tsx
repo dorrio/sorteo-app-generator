@@ -131,7 +131,7 @@ export default async function WheelVersusPage({ params }: { params: Promise<{ lo
       >
         <WheelGeo />
         {/* We place VersusGeo inside so it's part of the layout */}
-        <VersusGeo />
+        <VersusGeo sorteoStyle="roulette" />
       </MainApp>
     </>
   );

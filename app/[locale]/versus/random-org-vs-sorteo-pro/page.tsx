@@ -132,7 +132,7 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
         footer={<SiteFooter />}
       >
         <RngGeo />
-        <VersusGeo namespace="VersusRandom" />
+        <VersusGeo namespace="VersusRandom" sorteoStyle="slot-machine" />
       </MainApp>
     </>
   );

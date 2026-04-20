@@ -10,6 +10,30 @@ Disallow: /private/
 User-agent: GPTBot
 Allow: /
 
+# PerplexityBot
+User-agent: PerplexityBot
+Allow: /
+
+# ClaudeBot
+User-agent: ClaudeBot
+Allow: /
+
+# Google-Extended
+User-agent: Google-Extended
+Allow: /
+
+# anthropic-ai
+User-agent: anthropic-ai
+Allow: /
+
+# Omgilibot
+User-agent: Omgilibot
+Allow: /
+
+# Omgili
+User-agent: Omgili
+Allow: /
+
 # Host
 Host: https://sorteo-app-generator.vercel.app
 

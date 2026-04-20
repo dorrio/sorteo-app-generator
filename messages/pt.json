@@ -79,7 +79,7 @@
         "verify_description": "Veja quem ganhou! 100% Auténtico e Verificado por Sorteio Pro. Clique para ver o certificado oficial."
     },
     "GlobalSchema": {
-        "applicationCategory": "MultimediaApplication",
+        "applicationCategory": "UtilitiesApplication",
         "applicationSubCategory": "Ferramenta de Redes Sociais",
         "description": "A ferramenta definitiva para sorteios virais.",
         "feature_1": "Seletor de Vencedores Aleatórios",

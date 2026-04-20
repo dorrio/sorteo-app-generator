@@ -6,6 +6,8 @@ import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { CountryGeo } from "@/components/sorteo/country-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+import { safeJsonLdStringify } from "@/lib/utils";
+
 
 const MainApp = dynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
@@ -89,7 +91,7 @@ export default async function CountryGeneratorPage({ params }: { params: Promise
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'Random Country Generator by Sorteo Pro',
-    applicationCategory: 'UtilityApplication',
+    applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Web, iOS, Android',
     offers: {
       '@type': 'Offer',
@@ -137,7 +139,7 @@ export default async function CountryGeneratorPage({ params }: { params: Promise
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
         initialStyle="roulette"

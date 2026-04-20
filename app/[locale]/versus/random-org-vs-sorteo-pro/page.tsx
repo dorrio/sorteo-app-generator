@@ -6,6 +6,8 @@ import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { VersusGeo } from "@/components/sorteo/versus-geo";
 import { RngGeo } from "@/components/sorteo/rng-geo";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+import { safeJsonLdStringify } from "@/lib/utils";
+
 
 const MainApp = nextDynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
@@ -115,7 +117,7 @@ export default async function RandomVersusPage({ params }: { params: Promise<{ l
       {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, faqSchema]) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([articleSchema, faqSchema]) }}
       />
       <MainApp
         initialStyle="slot-machine"

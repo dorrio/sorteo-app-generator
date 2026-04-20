@@ -6,6 +6,8 @@ import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { MonthGeo } from "@/components/sorteo/month-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+import { safeJsonLdStringify } from "@/lib/utils";
+
 
 const MainApp = dynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
@@ -86,7 +88,7 @@ export default async function MonthPage({ params }: { params: Promise<{ locale: 
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'Random Month Generator by Sorteo Pro',
-    applicationCategory: 'UtilityApplication',
+    applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Web, iOS, Android',
     offers: {
       '@type': 'Offer',
@@ -134,7 +136,7 @@ export default async function MonthPage({ params }: { params: Promise<{ locale: 
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
         initialStyle="roulette"

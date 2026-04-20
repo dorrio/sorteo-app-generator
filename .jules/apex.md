@@ -58,3 +58,8 @@
 **Gap:** Homepage `seo-content.tsx` was missing `SoftwareApplication` schema and still used `framer-motion`, violating performance constraints. Several GEO components used unescaped `JSON.stringify` for JSON-LD which can break when containing HTML tags.
 **Action:** Injected `SoftwareApplication` schema into `seo-content.tsx`, removed `framer-motion` from it, and refactored all GEO components to use `safeJsonLdStringify`.
 **GEO Impact:** Improved Core Web Vitals (LCP) for the homepage by removing main thread blocking animations. Solidified entity understanding for AI bots via robust `SoftwareApplication` schema, and prevented potential JSON-LD parsing errors across all tools.
+
+## 2025-06-17 - [Technical/SEO & Strategy/Schema]
+**Gap:** The SoftwareApplication Schema defined `applicationCategory` globally as `MultimediaApplication`, which is inaccurate for a utility tool. Also, `robots.txt` and `next-sitemap.config.js` only whitelisted `GPTBot`, blocking other major AI search crawlers.
+**Action:** Changed `applicationCategory` in translation strings to `UtilitiesApplication`. Whitelisted `PerplexityBot`, `ClaudeBot`, `Google-Extended`, `anthropic-ai`, `Omgilibot`, and `Omgili` in `robots.txt` and `next-sitemap.config.js`.
+**GEO Impact:** Fixed schema validity to accurately describe the application type. Ensured complete crawlability by all major LLM bots for inclusion in Generative AI results.

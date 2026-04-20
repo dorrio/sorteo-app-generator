@@ -134,8 +134,14 @@ module.exports = {
         policies: [
             { userAgent: "*", allow: "/" },
             { userAgent: "*", disallow: "/private/" },
-            // Explicitly allow GPTBot for GEO
-            { userAgent: "GPTBot", allow: "/" }
+            // Explicitly allow AI and GEO Bots
+            { userAgent: "GPTBot", allow: "/" },
+            { userAgent: "PerplexityBot", allow: "/" },
+            { userAgent: "ClaudeBot", allow: "/" },
+            { userAgent: "Google-Extended", allow: "/" },
+            { userAgent: "anthropic-ai", allow: "/" },
+            { userAgent: "Omgilibot", allow: "/" },
+            { userAgent: "Omgili", allow: "/" }
         ],
     },
 };

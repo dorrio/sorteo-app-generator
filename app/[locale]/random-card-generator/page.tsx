@@ -92,7 +92,7 @@ export default async function CardPage({ params }: { params: Promise<{ locale: s
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'Random Card Generator by Sorteo Pro',
-    applicationCategory: 'UtilityApplication',
+    applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Web, iOS, Android',
     offers: {
       '@type': 'Offer',

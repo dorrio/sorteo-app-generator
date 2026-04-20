@@ -79,7 +79,7 @@
         "verify_description": "Check who won! 100% Authentic and Verified by Sorteo Pro. Click to see the official certificate."
     },
     "GlobalSchema": {
-        "applicationCategory": "MultimediaApplication",
+        "applicationCategory": "UtilitiesApplication",
         "applicationSubCategory": "Social Media Tool",
         "description": "The ultimate tool for viral giveaways.",
         "feature_1": "Random Winner Picker",

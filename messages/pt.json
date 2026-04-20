@@ -83,10 +83,14 @@
         "applicationSubCategory": "Ferramenta de Redes Sociais",
         "description": "A ferramenta definitiva para sorteios virais.",
         "feature_1": "Seletor de Vencedores Aleatórios",
-        "feature_2": "Roleta de Nombres",
+        "feature_2": "Roleta de Nomes",
         "feature_3": "Ferramenta de Sorteio do Instagram",
         "feature_4": "Verificação Instantânea",
         "feature_5": "RNG Provavelmente Justo"
+    },
+    "WheelPage": {
+        "title": "Roleta de Nomes | Seletor Aleatório (Grátis e sem Anúncios)",
+        "description": "Gire a Roleta de Nomes para escolher um vencedor ao acaso. Grátis, personalizável e justa. A melhor roleta aleatória para professores, rifas e sorteios."
     },
     "LanguageSwitcher": {
         "switchLanguage": "Mudar idioma"
@@ -397,6 +401,8 @@
     "GlossaryPage": {
         "title": "Glossário de Sorteios e Azar | Sorteo Pro",
         "description": "Glossário completo de termos relacionados a sorteios, geração de números aleatórios e concursos em redes sociais.",
+        "direct_answer_title": "O que é um Glossário de Sorteios?",
+        "direct_answer_text": "Um <strong>Glossário de Sorteios</strong> é uma coleção de definições de termos técnicos usados em concursos online, como <strong>RNG</strong>, <strong>Provably Fair</strong> e <strong>Seed</strong>. Ele ajuda os usuários a entender a tecnologia por trás da seleção aleatória justa e garante transparência nas rifas digitais.",
         "tagline": "Base de Conhecimento",
         "h1": "Glossário de Sorteios",
         "subtitle": "Tudo o que você precisa saber sobre sorteios justos e tecnologia de seleção aleatória.",
@@ -681,7 +687,7 @@
     "ShareContent": {
         "home_title": "Sorteio Pro | Sorteios Premium para Influencers",
         "home_text": "🔥 Acabei de descobrir o Sorteio Pro! A melhor ferramenta grátis para sorteios. Sem anúncios. 👇",
-        "wheel_title": "Roleta de Nombres | Sorteio Pro",
+        "wheel_title": "Roleta de Nomes | Sorteio Pro",
         "wheel_text": "🎡 Gire a Roleta! Encontrei esta Roleta de Nomes grátis e sem anúncios. Teste aqui! 👇",
         "instagram_title": "Sorteio Instagram | Sorteio Pro",
         "instagram_text": "📸 Escolhendo um ganhador no Instagram? Eu uso esta ferramenta grátis com comentários ilimitados. 👇",

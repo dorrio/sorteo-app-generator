@@ -59,7 +59,7 @@ export async function generateMetadata({
       description: t('og_description'),
       url: `${baseUrl}/${locale}`,
       siteName: "Sorteo Pro",
-      locale: locale === 'es' ? 'es_ES' : locale === 'pt' ? 'pt_PT' : locale === 'pt' ? 'pt_BR' : 'en_US',
+      locale: locale === 'es' ? 'es_ES' : locale === 'pt' ? 'pt_BR' : 'en_US',
       type: "website",
       images: [
         {

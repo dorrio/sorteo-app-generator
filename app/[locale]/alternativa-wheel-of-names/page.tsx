@@ -5,8 +5,7 @@ import { SiteFooter } from '@/components/sorteo/site-footer';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { useLocale } from 'next-intl';
-import Link from 'next/link';
-import { routing } from '@/i18n/routing';
+import { Link, routing } from '@/i18n/routing';
 import { HelpCircle } from 'lucide-react';
 import { safeJsonLdStringify } from "@/lib/utils";
 

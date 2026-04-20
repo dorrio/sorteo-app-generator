@@ -1,27 +1,12 @@
-"use client"
-
 import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Users, Grid, Share2, HelpCircle, CheckCircle, GraduationCap, Gamepad2, Briefcase } from "lucide-react"
-import { useSorteoStore } from "@/lib/sorteo-store"
 import { Link } from "@/i18n/routing"
 import { safeJsonLdStringify } from "@/lib/utils"
+import { TryToolButton } from "./try-tool-button"
 
 export function TeamGeo() {
   const t = useTranslations("TeamGeo")
-  // We can reuse FAQ from ListRandomizer as it is similar, or create new ones.
-  // For now let's reuse generic ones if needed or just use TeamGeo specific strings if I added them (which I did not add separate FAQ keys for TeamPage, only TeamGeneratorPage metadata)
-  // Actually I added TeamGeneratorPage namespace but it only had title/desc/h1/subtitle.
-  // I should use generic FAQs or hardcode/translate specific ones if I had added them.
-  // Wait, I didn't add FAQs to TeamGeneratorPage in my JSON update.
-  // I will use "ListRandomizerPage" FAQs as fallback since they are relevant, or better, skip FAQs here and rely on the Direct Answer + Features + How To + Use Cases which are the strong GEO signals.
-  // Or I can use t.rich for FAQs if I added them to TeamGeo... I didn't add FAQ array to TeamGeo.
-  // I'll stick to what I added in TeamGeo: features, how_to, uses, direct_answer.
-  const { updateTheme } = useSorteoStore()
-
-  const handleTryIt = () => {
-    updateTheme({ sorteoStyle: 'grid' })
-  }
 
   const howToSteps = [
     { name: t('how_to_step_1') },
@@ -68,10 +53,10 @@ export function TeamGeo() {
                 })}
               </p>
             </div>
-            <Button asChild size="lg" className="mt-4 gap-2 text-lg font-bold shadow-lg shadow-primary/20" onClick={handleTryIt}>
-              <a href="#sorteo-section">
+            <Button asChild size="lg" className="mt-4 gap-2 text-lg font-bold shadow-lg shadow-primary/20">
+              <TryToolButton sorteoStyle="grid">
                 {t("cta_button")} <ArrowRight className="w-5 h-5" />
-              </a>
+              </TryToolButton>
             </Button>
           </div>
 

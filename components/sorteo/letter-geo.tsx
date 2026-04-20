@@ -1,5 +1,3 @@
-"use client"
-
 import { useTranslations } from "next-intl"
 import { Check, Shield, Gamepad2, Zap, HelpCircle, Type } from "lucide-react"
 import { safeJsonLdStringify } from "@/lib/utils"

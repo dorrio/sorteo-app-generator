@@ -1,20 +1,12 @@
-"use client"
-
 import { useTranslations } from "next-intl"
 import { Disc, Check, X, ShieldCheck, Play, CheckCircle, HelpCircle, BookOpen, ToggleLeft } from "lucide-react"
-import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/routing"
 import { safeJsonLdStringify } from "@/lib/utils"
+import { TryToolButton } from "./try-tool-button"
 
 export function YesNoGeo() {
   const t = useTranslations("YesNoGeo")
-  const { updateTheme } = useSorteoStore()
-
-  const handleTryWheel = () => {
-    updateTheme({ sorteoStyle: "roulette" })
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
 
   const features = [
     {
@@ -137,11 +129,13 @@ export function YesNoGeo() {
 
               <div className="pt-4">
                   <Button
-                    onClick={handleTryWheel}
+                    asChild
                     className="gap-2 font-bold text-lg h-12 px-6 rounded-full shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
                   >
-                    <Play className="w-5 h-5 fill-current" />
-                    {t('cta_button')}
+                    <TryToolButton sorteoStyle="roulette">
+                      <Play className="w-5 h-5 fill-current" />
+                      {t('cta_button')}
+                    </TryToolButton>
                   </Button>
               </div>
            </div>
@@ -183,10 +177,9 @@ export function YesNoGeo() {
 
         {/* Right: Visual Abstract */}
         <div className="hidden md:flex justify-center items-center sticky top-24">
-           <button
-             type="button"
+           <TryToolButton
+             sorteoStyle="roulette"
              className="relative w-64 h-64 rounded-full border-4 border-primary/20 flex items-center justify-center bg-card/50 backdrop-blur-sm cursor-pointer hover:scale-105 transition-transform"
-             onClick={handleTryWheel}
              aria-label={t('cta_button')}
            >
                 <div
@@ -197,7 +190,7 @@ export function YesNoGeo() {
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-background/50 rounded-full">
                     <Play className="w-12 h-12 text-primary fill-current" />
                 </div>
-           </button>
+           </TryToolButton>
         </div>
 
       </div>

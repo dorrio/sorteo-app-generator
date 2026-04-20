@@ -1,10 +1,9 @@
-"use client"
-
 import { useTranslations } from "next-intl"
 import { HelpCircle, Zap, ShieldCheck, Gamepad2, Layers } from "lucide-react"
 import { Link } from "@/i18n/routing"
 import { Button } from "@/components/ui/button"
 import { safeJsonLdStringify } from "@/lib/utils"
+import { TryToolButton } from "./try-tool-button"
 
 export function CardGeo() {
   const t = useTranslations("CardGeo")
@@ -46,11 +45,6 @@ export function CardGeo() {
     })),
   }
 
-  const handleTryIt = () => {
-    // Scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   return (
     <div className="w-full">
       <script
@@ -81,8 +75,10 @@ export function CardGeo() {
           </div>
 
           <div className="mt-8 flex justify-center">
-            <Button size="lg" className="gap-2 font-bold shadow-lg shadow-primary/20" onClick={handleTryIt}>
-              {t("cta_button")} <Zap className="w-4 h-4" />
+            <Button asChild size="lg" className="gap-2 font-bold shadow-lg shadow-primary/20">
+              <TryToolButton sorteoStyle="cards">
+                {t("cta_button")} <Zap className="w-4 h-4" />
+              </TryToolButton>
             </Button>
           </div>
         </div>

@@ -1,23 +1,19 @@
-"use client"
-
 import { useTranslations } from "next-intl"
 import DOMPurify from "isomorphic-dompurify"
+import type { ThemeConfig } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 import { Check, X, ArrowRight, Zap, ShieldCheck, Palette, Monitor, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
 import { safeJsonLdStringify } from "@/lib/utils"
+import { TryToolButton } from "./try-tool-button"
 
 interface VersusGeoProps {
   namespace?: string;
+  sorteoStyle?: ThemeConfig["sorteoStyle"];
 }
 
-export function VersusGeo({ namespace = "VersusWheel" }: VersusGeoProps) {
+export function VersusGeo({ namespace = "VersusWheel", sorteoStyle = "roulette" }: VersusGeoProps) {
   const t = useTranslations(namespace)
-
-  const handleTryIt = () => {
-    // Scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
 
   const faqs = [
     {
@@ -182,10 +178,10 @@ export function VersusGeo({ namespace = "VersusWheel" }: VersusGeoProps) {
                     </p>
                  </div>
                  <div className="mt-8 flex justify-center">
-                    <Button asChild size="lg" className="gap-2 text-lg font-bold shadow-lg shadow-primary/20 w-full md:w-auto" onClick={handleTryIt}>
-                        <a href="#sorteo-section">
+                    <Button asChild size="lg" className="gap-2 text-lg font-bold shadow-lg shadow-primary/20 w-full md:w-auto">
+                        <TryToolButton sorteoStyle={sorteoStyle}>
                             {t("cta.button")} <ArrowRight className="w-5 h-5" />
-                        </a>
+                        </TryToolButton>
                     </Button>
                  </div>
             </div>

@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { useTranslations, useLocale } from "next-intl"
 import { COUNTRIES } from "@/lib/countries"
+import { cryptoShuffle } from "@/lib/utils"
 import { type SeoMode } from "@/components/sorteo/glossary"
 
 const CARD_SUITS = ['♠', '♥', '♦', '♣']
@@ -49,12 +50,7 @@ const POPULATION_MAPPERS: Partial<Record<SeoMode, (ctx: PopulationContext) => { 
             // fallback if not provided or parsing fails
             items = ["Truth?", "Dare?"]
         }
-        // Fisher-Yates shuffle
-        for (let i = items.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [items[i], items[j]] = [items[j], items[i]];
-        }
-        return items.map(n => ({ name: n }))
+        return cryptoShuffle(items).map(n => ({ name: n }))
     },
 }
 

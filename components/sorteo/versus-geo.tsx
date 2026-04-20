@@ -4,7 +4,7 @@ import type { ThemeConfig } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 import { Check, X, ArrowRight, Zap, ShieldCheck, Palette, Monitor, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
-import { safeJsonLdStringify } from "@/lib/utils"
+import { JsonLd } from '@/components/seo/json-ld'
 import { TryToolButton } from "./try-tool-button"
 
 interface VersusGeoProps {
@@ -45,10 +45,7 @@ export function VersusGeo({ namespace = "VersusWheel", sorteoStyle = "roulette" 
 
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
-      />
+<JsonLd data={jsonLd} />
       <div className="max-w-5xl mx-auto px-4 relative z-10">
 
         {/* Comparison Table */}

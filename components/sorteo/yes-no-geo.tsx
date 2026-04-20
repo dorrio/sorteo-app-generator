@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl"
 import { Disc, Check, X, ShieldCheck, Play, CheckCircle, HelpCircle, BookOpen, ToggleLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/routing"
-import { safeJsonLdStringify } from "@/lib/utils"
+import { JsonLd } from '@/components/seo/json-ld'
 import { TryToolButton } from "./try-tool-button"
 
 export function YesNoGeo() {
@@ -81,10 +81,7 @@ export function YesNoGeo() {
 
   return (
     <section className="w-full py-12 px-4 border-t border-border/30 bg-card/20">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
-      />
+<JsonLd data={jsonLd} />
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-start">
 
         {/* Left: Content & SEO Text */}

@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl"
 import { HelpCircle, Zap, ShieldCheck, Gamepad2, Layers } from "lucide-react"
 import { Link } from "@/i18n/routing"
 import { Button } from "@/components/ui/button"
-import { safeJsonLdStringify } from "@/lib/utils"
+import { JsonLd } from '@/components/seo/json-ld'
 import { TryToolButton } from "./try-tool-button"
 
 export function CardGeo() {
@@ -47,14 +47,8 @@ export function CardGeo() {
 
   return (
     <div className="w-full">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(howToLd) }}
-      />
+<JsonLd data={jsonLd} />
+<JsonLd data={howToLd} />
 
       {/* Direct Answer Block (GEO) */}
       <section className="py-12 px-4 bg-card/20 border-t border-border/30">

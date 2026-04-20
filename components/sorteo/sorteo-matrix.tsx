@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
+import { cryptoShuffle } from "@/lib/utils"
 
 interface SorteoMatrixProps {
   onWinnerSelected: () => void
@@ -44,7 +45,7 @@ export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
     const newColumns: MatrixColumn[] = Array.from({ length: numColumns }, (_, i) => ({
       id: `col-${i}`,
       x: (i / numColumns) * 100 + 5,
-      names: [...participants].sort(() => Math.random() - 0.5).map((p) => p.name),
+      names: cryptoShuffle(participants).map((p) => p.name),
       speed: 1 + Math.random() * 2,
       offset: Math.random() * 100,
     }))

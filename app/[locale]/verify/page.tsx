@@ -66,25 +66,34 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 
     const ogImageUrl = `${baseUrl}/api/og?${ogParams.toString()}`
 
-    // Viralis Fix: Ensure og:url includes query params to prevent social cache collisions
-    // If we don't include params, FB/Twitter will treat all winners as the same page
-    const canonicalParams = new URLSearchParams()
-    if (verificationId) canonicalParams.set("id", verificationId)
-    if (winnerName) canonicalParams.set("name", winnerName)
-    // Viralis: Persist context in canonical URL
-    if (typeof type === "string" && type) canonicalParams.set("type", type)
-    if (customTitle) canonicalParams.set("title", customTitle)
-    if (typeof colorParam === "string" && colorParam) canonicalParams.set("color", colorParam)
+    // Viralis: og:url keeps the query params so FB/Twitter cache a distinct
+    // preview per winner instead of collapsing every verification to one card.
+    // The search-engine canonical (below) stays bare so Google indexes one
+    // verify page instead of treating each winner as a new URL.
+    const ogParamsUrl = new URLSearchParams()
+    if (verificationId) ogParamsUrl.set("id", verificationId)
+    if (winnerName) ogParamsUrl.set("name", winnerName)
+    if (typeof type === "string" && type) ogParamsUrl.set("type", type)
+    if (customTitle) ogParamsUrl.set("title", customTitle)
+    if (typeof colorParam === "string" && colorParam) ogParamsUrl.set("color", colorParam)
 
-    const canonicalUrl = `${baseUrl}/${locale}/verify${canonicalParams.toString() ? `?${canonicalParams.toString()}` : ""}`
+    const ogUrl = `${baseUrl}/${locale}/verify${ogParamsUrl.toString() ? `?${ogParamsUrl.toString()}` : ""}`
 
     return {
         title: title,
         description: description,
+        alternates: {
+            canonical: `/${locale}/verify`,
+            languages: {
+                en: `/en/verify`,
+                es: `/es/verify`,
+                pt: `/pt/verify`,
+            },
+        },
         openGraph: {
             title: title,
             description: description,
-            url: canonicalUrl,
+            url: ogUrl,
             images: [
                 {
                     url: ogImageUrl,

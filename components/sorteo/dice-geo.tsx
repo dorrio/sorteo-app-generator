@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Lock, Zap, RefreshCw, Smartphone, HelpCircle, CheckCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
-import { safeJsonLdStringify } from "@/lib/utils"
+import { JsonLd } from '@/components/seo/json-ld'
 import { TryToolButton } from "./try-tool-button"
 
 export function DiceGeo() {
@@ -55,11 +55,7 @@ export function DiceGeo() {
 
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
-      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
-      />
+<JsonLd data={jsonLd} />
       <div className="max-w-4xl mx-auto px-4 relative z-10">
         <div
           className="bg-card/30 backdrop-blur-xl border border-primary/20 rounded-3xl p-8 md:p-12 shadow-2xl"

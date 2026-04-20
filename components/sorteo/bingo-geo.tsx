@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl"
 import { Shield, Zap, RefreshCw, Monitor, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
-import { safeJsonLdStringify } from "@/lib/utils"
+import { JsonLd } from '@/components/seo/json-ld'
 import { TryToolButton } from "./try-tool-button"
 
 export function BingoGeo() {
@@ -68,16 +68,8 @@ export function BingoGeo() {
 
   return (
     <section className="w-full py-16 px-4 bg-card/30 backdrop-blur-sm border-t border-border/50">
-      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
-      />
-      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(howToLd) }}
-      />
+<JsonLd data={jsonLd} />
+<JsonLd data={howToLd} />
       <div className="max-w-5xl mx-auto space-y-16">
 
         {/* Direct Answer Block (ChatGPT Bait) */}

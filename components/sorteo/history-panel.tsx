@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
-import { useSorteoStore, type Participant } from "@/lib/sorteo-store"
+import { useSorteoStore, type Participant, type ThemeConfig } from "@/lib/sorteo-store"
 import { HistoryListSkeleton } from "@/components/sorteo/skeletons"
 import { Trophy, Clock, Trash2, Check, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -18,7 +18,7 @@ function HistoryItem({
   winner: Participant
   index: number
   totalCount: number
-  theme: any
+  theme: ThemeConfig
 }) {
   const t = useTranslations("HistoryPanel")
   const [copied, setCopied] = useState(false)

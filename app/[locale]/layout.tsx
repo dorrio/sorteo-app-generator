@@ -1,12 +1,7 @@
 import { getBaseUrl } from "@/lib/config"
 import type React from "react"
-import { Suspense } from "react"
 import type { Metadata, Viewport } from "next"
-import {
-  Inter,
-  Space_Grotesk,
-  Geist_Mono
-} from "next/font/google"
+import { Inter, Space_Grotesk, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { GoogleTagManager } from "@next/third-parties/google"
@@ -109,7 +104,7 @@ export default async function RootLayout({
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!(routing.locales as readonly string[]).includes(locale)) {
     notFound();
   }
 

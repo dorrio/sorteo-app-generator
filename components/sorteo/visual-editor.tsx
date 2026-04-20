@@ -308,13 +308,9 @@ export function VisualEditor() {
                         // Lightness: 40-60% for middle ground
                         const light = 40 + Math.floor(Math.random() * 20)
 
-                        // Primary color
-                        const primary = `hsl(${hue}, ${sat}%, ${light}%)`
-
                         // Secondary color: Complementary (180deg) or Analogous (30deg)
                         const isComplementary = Math.random() > 0.5
                         const secHue = (hue + (isComplementary ? 180 : 30)) % 360
-                        const secondary = `hsl(${secHue}, ${sat}%, ${light + 20}%)` // Lighter for contrast
 
                         // Convert HSL to Hex for the input (basic approximation or simple assignment)
                         // Note: For actual hex inputs we might need a converter, but let's try setting HSL directly if supported,

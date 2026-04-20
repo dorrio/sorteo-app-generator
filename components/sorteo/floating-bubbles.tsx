@@ -41,6 +41,7 @@ export function FloatingBubbles() {
   // Generate bubbles from participants
   useEffect(() => {
     if (participants.length === 0 || dimensions.width === 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- derived bubbles reset whenever participants or viewport size change; not a render cascade
       setBubbles([])
       return
     }

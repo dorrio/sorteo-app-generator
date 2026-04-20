@@ -34,6 +34,7 @@ export function SlotMachine({ onWinnerSelected }: SlotMachineProps) {
 
     // Create shuffled names for animation
     const shuffled = cryptoShuffle(participants)
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- each spin regenerates the visible reel; this is the animation's initial frame, not a render cascade
     setDisplayedNames(shuffled.map((p) => p.name))
 
     const animate = () => {

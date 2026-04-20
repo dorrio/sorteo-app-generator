@@ -37,6 +37,7 @@ export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
     const winner = selectWinner()
     if (!winner) return
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- animation reset on each new spin; not a render cascade
     setShowWinner(false)
     setFinalWinner(null)
 

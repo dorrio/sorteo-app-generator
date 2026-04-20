@@ -16,7 +16,6 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
   const tCommon = useTranslations("SorteoComponents")
   const [shuffledCards, setShuffledCards] = useState<typeof participants>([])
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
-  const [isFlipping, setIsFlipping] = useState(false)
   const [finalWinner, setFinalWinner] = useState<string | null>(null)
   const [showFinal, setShowFinal] = useState(false)
 
@@ -42,10 +41,8 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
     const maxFlips = Math.min(participants.length * 2, 20)
 
     const flipInterval = setInterval(() => {
-      setIsFlipping(true)
       setTimeout(() => {
         setCurrentCardIndex((prev) => (prev + 1) % shuffled.length)
-        setIsFlipping(false)
       }, 150)
       flipCount++
 

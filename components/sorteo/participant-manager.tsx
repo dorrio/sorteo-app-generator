@@ -46,13 +46,11 @@ function DuplicateItem({
   index,
   onApply,
   onRemove,
-  theme,
 }: {
   dup: DuplicateInfo
   index: number
   onApply: (index: number, newName: string) => void
   onRemove: (index: number) => void
-  theme: { primaryColor: string }
 }) {
   const [localValue, setLocalValue] = useState(dup.editedName)
   const [isApplied, setIsApplied] = useState(false)
@@ -154,6 +152,7 @@ const ParticipantItem = memo(function ParticipantItem({
 
   useEffect(() => {
     if (isEditing) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reseed the input buffer with the canonical name each time edit mode opens, so the user starts from the stored value
       setLocalName(participant.name)
     }
   }, [isEditing, participant.name])
@@ -450,7 +449,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
     }
   }
 
-  const DuplicateModal = () => (
+  const duplicateModal = (
     <AnimatePresence>
       {showDuplicateModal && (
         <motion.div
@@ -491,7 +490,6 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
                   index={index}
                   onApply={handleApplyDuplicateEdit}
                   onRemove={handleRemoveDuplicate}
-                  theme={theme}
                 />
               ))}
             </div>
@@ -531,7 +529,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
   if (showOnlyInput) {
     return (
       <>
-        <DuplicateModal />
+        {duplicateModal}
         <div className="space-y-3">
           {/* Input mode tabs */}
           <div className="flex gap-2 p-1 bg-secondary/50 rounded-lg" role="tablist" aria-label="Input mode">
@@ -670,7 +668,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
 
   return (
     <>
-      <DuplicateModal />
+      {duplicateModal}
       <div className="space-y-6">
         {/* Input mode tabs */}
         <div className="flex gap-2 p-1 bg-secondary/50 rounded-lg" role="tablist" aria-label="Input mode">

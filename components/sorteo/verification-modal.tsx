@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, ShieldCheck, ShieldAlert, Calendar, User, X, Check } from "lucide-react"
+import { Search, ShieldCheck, ShieldAlert, Calendar, User, Check } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -66,7 +66,7 @@ export function VerificationModal({ isOpen, onClose }: VerificationModalProps) {
                     valid: false,
                     error: t("result.not_found_message"),
                 })
-            } catch (e) {
+            } catch {
                 setResult({
                     valid: false,
                     error: t("result.invalid_format_message"),

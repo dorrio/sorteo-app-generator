@@ -46,6 +46,7 @@ export function ShareButton({
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- browser capability detection runs once on mount; SSR-safe defaults keep the initial render stable
     setCanShareNative(
       typeof navigator !== "undefined" &&
       !!navigator.share &&
@@ -65,8 +66,8 @@ export function ShareButton({
             url: url,
           })
         }
-      } catch (err: any) {
-        if (err?.name === 'AbortError') {
+      } catch (err) {
+        if (err instanceof DOMException && err.name === 'AbortError') {
           // User cancelled the share dialog.
           // Temporarily disable native share so the dropdown renders, then open it.
           // We restore native share after a delay so subsequent clicks use native share again.
@@ -86,7 +87,6 @@ export function ShareButton({
 
   const copyToClipboard = async () => {
     // Viralis Optimization: Copy only URL to prevent 404 errors when pasted into address bars
-    const clipboardText = url
     try {
       await navigator.clipboard.writeText(url)
       setCopied(true)

@@ -46,9 +46,8 @@ export function useThemeInitialization(
             const ns = MODE_NAMESPACES[seoMode]
             if (ns) {
                 try {
-                    // @ts-ignore
                     update.customTitle = tRoot(`${ns}.h1`)
-                } catch (e) {
+                } catch {
                     // Fallback to existing or SORTEO
                 }
             }
@@ -60,9 +59,8 @@ export function useThemeInitialization(
             const ns = MODE_NAMESPACES[seoMode]
             if (ns) {
                 try {
-                    // @ts-ignore
                     update.customSubtitle = tRoot(`${ns}.subtitle`)
-                } catch (e) {
+                } catch {
                     // Fallback
                 }
             }
@@ -82,11 +80,9 @@ export function useThemeInitialization(
         const ns = MODE_NAMESPACES[seoMode]
         if (ns) {
             try {
-                // @ts-ignore
                 displayTitle = tRoot(`${ns}.h1`)
-                // @ts-ignore
                 displaySubtitle = tRoot(`${ns}.subtitle`)
-            } catch (e) {
+            } catch {
                 // Stick to current displayTitle/Subtitle
             }
         }

@@ -10,12 +10,14 @@ const CARD_RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q',
 export const CARD_DECK = CARD_SUITS.flatMap(suit => CARD_RANKS.map(rank => `${rank}${suit}`))
 export const BINGO_NUMBERS = Array.from({ length: 75 }, (_, i) => (i + 1).toString())
 
+type Translator = (key: string) => string;
+
 interface PopulationContext {
     opt?: Record<string, string>;
     locale: string;
-    tYesNo: any;
-    tCoin: any;
-    tRps: any;
+    tYesNo: Translator;
+    tCoin: Translator;
+    tRps: Translator;
 }
 
 const POPULATION_MAPPERS: Partial<Record<SeoMode, (ctx: PopulationContext) => { name: string }[]>> = {
@@ -116,5 +118,6 @@ export function usePopulationLogic(
             setActiveTool(seoMode)
         }
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally ignoring participants.length so population only runs on mode change, not on every participant add/remove
     }, [mounted, hasHydrated, seoMode, initialOptions, activeTool, setActiveTool, locale, addParticipants, clearParticipants, tYesNo, tCoin, tRps])
 }

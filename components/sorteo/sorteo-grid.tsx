@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useState, useCallback, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useEffect, useState, useCallback } from "react"
+import { motion } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
 
@@ -11,7 +11,6 @@ interface SorteoGridProps {
 
 export function SorteoGrid({ onWinnerSelected }: SorteoGridProps) {
     const { participants, isSpinning, setIsSpinning, setWinner, addToPastWinners, theme } = useSorteoStore()
-    const t = useTranslations("SorteoMatrix") // Reusing Matrix translations or generic ones
     const tCommon = useTranslations("SorteoComponents")
     const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null)
     const [finalWinnerIndex, setFinalWinnerIndex] = useState<number | null>(null)
@@ -26,15 +25,15 @@ export function SorteoGrid({ onWinnerSelected }: SorteoGridProps) {
     useEffect(() => {
         if (!isSpinning || participants.length === 0) return
 
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- animation setup resets the visible grid state each time a spin starts
         setHighlightedIndex(null)
         setFinalWinnerIndex(null)
 
         const spinDuration = theme.spinDuration * 1000
         const startTime = Date.now()
-        let interval: NodeJS.Timeout
 
         // Start random flashing
-        interval = setInterval(() => {
+        const interval: NodeJS.Timeout = setInterval(() => {
             const elapsed = Date.now() - startTime
 
             if (elapsed >= spinDuration) {

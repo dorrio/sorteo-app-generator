@@ -1,5 +1,11 @@
 import { useTranslations } from 'next-intl';
+import DOMPurify from 'isomorphic-dompurify';
 import { safeJsonLdStringify } from '@/lib/utils';
+
+const INLINE_HTML_CONFIG = {
+  ALLOWED_TAGS: ['strong', 'em', 'br', 'a'],
+  ALLOWED_ATTR: ['href', 'target', 'rel'],
+};
 
 interface VersusFAQProps {
   namespace?: string;
@@ -48,10 +54,15 @@ export const VersusFAQ = ({ namespace = 'Versus.faq' }: VersusFAQProps) => {
         {faqData.map((item, index) => (
           <div key={index} className="bg-card p-6 rounded-lg shadow-sm border border-border">
             <dt className="text-xl font-bold text-foreground mb-2">{item.question}</dt>
-            {/* Dangerously setting inner HTML to allow bolding from translation strings if needed,
-                though in this specific case simple text would suffice.
-                Using a safe render method is preferred usually. */}
-            <dd className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: item.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }}></dd>
+            <dd
+              className="text-muted-foreground"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(
+                  item.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'),
+                  INLINE_HTML_CONFIG,
+                ),
+              }}
+            />
           </div>
         ))}
       </dl>

@@ -12,7 +12,8 @@ export async function GET(request: Request) {
     const name = searchParams.get('name')?.slice(0, 50);
     const dateParam = searchParams.get('date');
     const customTitle = searchParams.get('title')?.slice(0, 60);
-    const customColor = searchParams.get('color');
+    const rawColor = searchParams.get('color');
+    const customColor = rawColor && /^#[0-9A-Fa-f]{6}$/.test(rawColor) ? rawColor : null;
 
     // --- THEME CONFIGURATION ---
     // Default: Golden Ticket (Generic)

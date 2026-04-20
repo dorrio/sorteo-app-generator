@@ -8,6 +8,8 @@ import { useLocale } from 'next-intl';
 import Link from 'next/link';
 import { routing } from '@/i18n/routing';
 import { HelpCircle } from 'lucide-react';
+import { safeJsonLdStringify } from "@/lib/utils";
+
 
 export const dynamic = 'force-static';
 
@@ -74,11 +76,11 @@ export default function VersusPage() {
     <main className="min-h-screen bg-background text-foreground">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(softwareApplicationJsonLd) }}
       />
       {/* Pattern 2: The SEO Header Injection */}
       <header className="bg-background border-b border-border/50 py-20 px-4 text-center">

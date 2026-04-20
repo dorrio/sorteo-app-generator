@@ -6,6 +6,8 @@ import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { SecretSantaGeo } from "@/components/sorteo/secret-santa-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
+import { safeJsonLdStringify } from "@/lib/utils";
+
 
 const MainApp = dynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
@@ -144,7 +146,7 @@ export default async function SecretSantaPage({ params }: { params: Promise<{ lo
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([softwareAppSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
       />
       <MainApp
         initialStyle="grid"

@@ -1,6 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { useTranslations } from 'next-intl';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import DOMPurify from 'isomorphic-dompurify';
 import { routing } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
@@ -37,9 +36,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default function GlossaryPage() {
-  const t = useTranslations('GlossaryPage');
-  const tGlossary = useTranslations('Glossary'); // Reuse existing glossary strings
+export default async function GlossaryPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'GlossaryPage' });
+  const tGlossary = await getTranslations({ locale, namespace: 'Glossary' }); // Reuse existing glossary strings
 
   const terms = [
     {

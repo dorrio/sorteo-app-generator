@@ -2,9 +2,7 @@ import { getBaseUrl } from "@/lib/config"
 import { ComparisonTable } from '@/components/versus/ComparisonTable';
 import { VersusFAQ } from '@/components/versus/FAQ';
 import { SiteFooter } from '@/components/sorteo/site-footer';
-import { useTranslations } from 'next-intl';
-import { getTranslations } from 'next-intl/server';
-import { useLocale } from 'next-intl';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link, routing } from '@/i18n/routing';
 import { HelpCircle } from 'lucide-react';
 import { JsonLd } from '@/components/seo/json-ld';
@@ -32,10 +30,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default function VersusPage() {
-  const t = useTranslations('Versus');
-  const tSchema = useTranslations('Schema');
-  const locale = useLocale();
+export default async function VersusPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'Versus' });
+  const tSchema = await getTranslations({ locale, namespace: 'Schema' });
   const baseUrl = getBaseUrl();
 
   const breadcrumbJsonLd = {

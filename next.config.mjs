@@ -5,8 +5,60 @@ const withNextIntl = createNextIntlPlugin(
   './i18n/request.ts'
 );
 
+const isDev = process.env.NODE_ENV === 'development';
+
+// Content-Security-Policy baseline.
+// - 'unsafe-inline' on script-src is required because we embed JSON-LD via
+//   dangerouslySetInnerHTML (see components/seo/json-ld.tsx) and Next.js
+//   emits inline hydration scripts. Every JSON-LD payload already flows
+//   through safeJsonLdStringify, which escapes < > &, and DOMPurify gates
+//   the handful of translation HTML sites — so the residual risk window is
+//   small and CSP is defence-in-depth rather than the primary control.
+// - Sentry errors go through the same-origin tunnelRoute '/monitoring',
+//   so 'ingest.sentry.io' does NOT need to be in connect-src.
+// - Vercel Analytics and Speed Insights use va.vercel-scripts.com (script)
+//   and vitals.vercel-insights.com (beacon).
+// - Google Tag Manager and Google Fonts are conditional on env config but
+//   included unconditionally for the production policy so enabling them
+//   later does not silently break.
+const cspDirectives = [
+  "default-src 'self'",
+  [
+    "script-src 'self' 'unsafe-inline'",
+    isDev && "'unsafe-eval'",
+    'https://va.vercel-scripts.com',
+    'https://www.googletagmanager.com',
+    'https://www.google-analytics.com',
+  ]
+    .filter(Boolean)
+    .join(' '),
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "img-src 'self' data: blob: https:",
+  "font-src 'self' data: https://fonts.gstatic.com",
+  "connect-src 'self' https://vitals.vercel-insights.com https://*.google-analytics.com https://analytics.google.com",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "object-src 'none'",
+].join('; ');
+
+const securityHeaders = [
+  { key: 'Content-Security-Policy', value: cspDirectives },
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()' },
+];
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: securityHeaders,
+      },
+    ];
+  },
   experimental: {
     optimizePackageImports: [
       'lucide-react',

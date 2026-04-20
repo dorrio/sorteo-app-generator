@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, ShieldCheck, ShieldAlert, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download, Loader2 } from "lucide-react"
+import { Search, ShieldCheck, ShieldAlert, Info, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download, Loader2 } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ConfettiEffect } from "@/components/sorteo/confetti-effect"
 import { Button } from "@/components/ui/button"
@@ -368,23 +368,23 @@ export function VerifyContent() {
                                 className="mt-6"
                             >
                                 <Card className={`border-l-4 ${result.status === "valid" ? "border-green-500" :
-                                        result.status === "partial" ? "border-yellow-500" : "border-red-500"
+                                        result.status === "partial" ? "border-muted-foreground/40" : "border-red-500"
                                     } bg-card/95 backdrop-blur shadow-xl`}>
                                     <CardContent className="pt-6">
                                         <div className="flex items-start gap-4">
                                             <div className={`p-3 rounded-full ${result.status === "valid" ? "bg-green-500/20 text-green-500" :
-                                                    result.status === "partial" ? "bg-yellow-500/20 text-yellow-500" : "bg-red-500/20 text-red-500"
+                                                    result.status === "partial" ? "bg-muted text-muted-foreground" : "bg-red-500/20 text-red-500"
                                                 }`}>
                                                 {result.status === "valid" ? <Check className="w-6 h-6" /> :
-                                                    result.status === "partial" ? <ShieldCheck className="w-6 h-6" /> :
+                                                    result.status === "partial" ? <Info className="w-6 h-6" /> :
                                                         <ShieldAlert className="w-6 h-6" />}
                                             </div>
                                             <div className="flex-1 space-y-1">
                                                 <h4 className={`font-bold text-lg ${result.status === "valid" ? "text-green-500" :
-                                                        result.status === "partial" ? "text-yellow-500" : "text-red-500"
+                                                        result.status === "partial" ? "text-foreground" : "text-red-500"
                                                     }`}>
                                                     {result.status === "valid" ? t("result.valid_title") :
-                                                        result.status === "partial" ? "Valid Format (External)" :
+                                                        result.status === "partial" ? t("result.partial_title") :
                                                             t("result.invalid_title")}
                                                 </h4>
 
@@ -414,24 +414,24 @@ export function VerifyContent() {
                                                     </div>
                                                 )}
 
-                                                {/* PARTIAL MATCH */}
+                                                {/* PARTIAL MATCH — format-valid but unverifiable on this device */}
                                                 {result.status === "partial" && result.date && (
                                                     <div className="mt-4 space-y-3">
                                                         <p className="text-sm text-muted-foreground mb-2">
-                                                            This ID has a valid format and was generated on:
+                                                            {t("result.partial_description")}
                                                         </p>
-                                                        <div className="flex items-center gap-3 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
-                                                            <Calendar className="w-5 h-5 text-yellow-500" />
+                                                        <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 border border-border/60">
+                                                            <Calendar className="w-5 h-5 text-muted-foreground" />
                                                             <div>
                                                                 <p className="text-xs text-muted-foreground uppercase">{t("result.date_label")}</p>
-                                                                <p className="font-medium text-yellow-500">
+                                                                <p className="font-medium text-foreground">
                                                                     {result.date.toLocaleString()}
                                                                 </p>
                                                             </div>
                                                         </div>
-                                                        <div className="flex items-start gap-2 text-xs text-muted-foreground mt-2 bg-muted/50 p-2 rounded">
-                                                            <AlertTriangle className="w-3 h-3 mt-0.5 shrink-0" />
-                                                            <span>Winner details are only available on the device that ran the giveaway.</span>
+                                                        <div className="flex items-start gap-2 text-xs text-muted-foreground mt-2 bg-amber-500/10 border border-amber-500/20 p-3 rounded">
+                                                            <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0 text-amber-500" />
+                                                            <span>{t("result.partial_disclaimer")}</span>
                                                         </div>
                                                     </div>
                                                 )}

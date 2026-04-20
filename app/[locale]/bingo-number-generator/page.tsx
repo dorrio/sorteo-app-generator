@@ -1,7 +1,7 @@
 import { getBaseUrl } from "@/lib/config"
 import nextDynamic from 'next/dynamic';
 import { AppSkeleton } from '@/components/sorteo/skeletons';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing';
 import { SiteFooter } from '@/components/sorteo/site-footer';
 import { BingoGeo } from '@/components/sorteo/bingo-geo';
@@ -27,7 +27,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t('title'),
     description: t('description'),
     alternates: {
-      canonical: `/${locale}/bingo-number-generator`
+      canonical: `/${locale}/bingo-number-generator`,
+      languages: {
+        en: `/en/bingo-number-generator`,
+        es: `/es/bingo-number-generator`,
+        pt: `/pt/bingo-number-generator`,
+      },
     },
     openGraph: {
       title: t('title'),
@@ -56,6 +61,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function BingoNumberGeneratorPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'BingoPage' });
   const tGeo = await getTranslations({ locale, namespace: 'BingoGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });

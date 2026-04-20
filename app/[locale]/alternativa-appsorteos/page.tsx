@@ -24,7 +24,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t('title'),
     description: t('description'),
     alternates: {
-        canonical: `/alternativa-appsorteos`
+        canonical: `/alternativa-appsorteos`,
+        languages: {
+          en: `/en/alternativa-appsorteos`,
+          es: `/es/alternativa-appsorteos`,
+          pt: `/pt/alternativa-appsorteos`,
+        },
     }
   };
 }

@@ -1,5 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing';
 import dynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
@@ -52,7 +52,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
     description: displayDescription,
     keywords: ["dice roller", "roll a dice", "online dice", "virtual dice", "dado virtual", "lanzar dados", "rolar dados", "random dice", "d6", "d20"],
     alternates: {
-      canonical: `/${locale}/dice-roller`
+      canonical: `/${locale}/dice-roller`,
+      languages: {
+        en: `/en/dice-roller`,
+        es: `/es/dice-roller`,
+        pt: `/pt/dice-roller`,
+      },
     },
     openGraph: {
       title: displayTitle,
@@ -81,6 +86,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function DiceRollerPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'DicePage' });
   const tGeo = await getTranslations({ locale, namespace: 'DiceGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });

@@ -1,5 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing';
 import nextDynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
@@ -30,7 +30,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: t('description'),
     keywords: ["random.org alternative", "better random number generator", "free rng", "true randomness", "sorteo pro vs random.org", "generador de numeros aleatorios sin anuncios"],
     alternates: {
-      canonical: `/${locale}/versus/random-org-vs-sorteo-pro`
+      canonical: `/${locale}/versus/random-org-vs-sorteo-pro`,
+      languages: {
+        en: `/en/versus/random-org-vs-sorteo-pro`,
+        es: `/es/versus/random-org-vs-sorteo-pro`,
+        pt: `/pt/versus/random-org-vs-sorteo-pro`,
+      },
     },
     openGraph: {
       title: t('title'),
@@ -53,6 +58,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function RandomVersusPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'VersusRandom' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
   const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });

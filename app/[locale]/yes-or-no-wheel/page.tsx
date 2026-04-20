@@ -1,5 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing';
 import dynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
@@ -49,7 +49,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
     description: displayDescription,
     keywords: ["yes or no wheel", "yes no picker", "decision wheel", "spin the wheel yes or no", "ruleta si o no", "roleta sim ou nao", "decision maker", "flip a coin", "heads or tails", "cara o cruz", "flip coin online"],
     alternates: {
-      canonical: `/${locale}/yes-or-no-wheel`
+      canonical: `/${locale}/yes-or-no-wheel`,
+      languages: {
+        en: `/en/yes-or-no-wheel`,
+        es: `/es/yes-or-no-wheel`,
+        pt: `/pt/yes-or-no-wheel`,
+      },
     },
     openGraph: {
       title: displayTitle,
@@ -78,6 +83,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function YesNoPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'YesNoPage' });
   const tGeo = await getTranslations({ locale, namespace: 'YesNoGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });

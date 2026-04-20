@@ -1,5 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing';
 import dynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
@@ -58,7 +58,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
     description: displayDescription,
     keywords: ["list randomizer", "list shuffler", "randomize list", "random picker", "shuffle names", "aleatorizar lista", "barajar lista", "embaralhar lista", "random team generator", "team maker", "split into teams", "generador de equipos aleatorios", "creador de equipos", "gerador de times aleatorios", "scrum randomizer", "student grouper", "random order generator", "team splitter", "pair generator", "secret santa generator", "tournament bracket generator", "random pairing"],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        en: `/en/list-randomizer`,
+        es: `/es/list-randomizer`,
+        pt: `/pt/list-randomizer`,
+      },
     },
     openGraph: {
       title: displayTitle,
@@ -87,6 +92,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function ListRandomizerPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'ListRandomizerPage' });
   const tGeo = await getTranslations({ locale, namespace: 'ListRandomizerGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });

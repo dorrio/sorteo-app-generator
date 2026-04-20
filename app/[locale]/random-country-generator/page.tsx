@@ -1,5 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing';
 import dynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
@@ -52,7 +52,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
     description: displayDescription,
     keywords: ["random country generator", "random country picker", "country wheel", "random nation", "geography game", "generador de paises", "pais aleatorio", "gerador de paises"],
     alternates: {
-      canonical: `/${locale}/random-country-generator`
+      canonical: `/${locale}/random-country-generator`,
+      languages: {
+        en: `/en/random-country-generator`,
+        es: `/es/random-country-generator`,
+        pt: `/pt/random-country-generator`,
+      },
     },
     openGraph: {
       title: displayTitle,
@@ -81,6 +86,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function CountryGeneratorPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'CountryPage' });
   const tGeo = await getTranslations({ locale, namespace: 'CountryGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });

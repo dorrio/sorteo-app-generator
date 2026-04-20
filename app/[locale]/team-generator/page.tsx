@@ -1,5 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing';
 import dynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
@@ -59,7 +59,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
     description: displayDescription,
     keywords: ["random team generator", "team maker", "random group generator", "split teams", "group randomizer", "classroom group generator", "team picker"],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        en: `/en/team-generator`,
+        es: `/es/team-generator`,
+        pt: `/pt/team-generator`,
+      },
     },
     openGraph: {
       title: displayTitle,
@@ -88,6 +93,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function TeamGeneratorPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'TeamGeneratorPage' });
   const tGeo = await getTranslations({ locale, namespace: 'TeamGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });

@@ -1,5 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing';
 import dynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
@@ -52,7 +52,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
     description: displayDescription,
     keywords: ["rock paper scissors", "piedra papel tijeras", "roshambo", "online rps", "pedra papel tesoura", "ppt online", "random decision"],
     alternates: {
-      canonical: `/${locale}/rock-paper-scissors`
+      canonical: `/${locale}/rock-paper-scissors`,
+      languages: {
+        en: `/en/rock-paper-scissors`,
+        es: `/es/rock-paper-scissors`,
+        pt: `/pt/rock-paper-scissors`,
+      },
     },
     openGraph: {
       title: displayTitle,
@@ -81,6 +86,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function RpsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'RpsPage' });
   const tGeo = await getTranslations({ locale, namespace: 'RpsGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });

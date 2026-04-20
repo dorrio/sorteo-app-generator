@@ -1,5 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import dynamic from 'next/dynamic';
 import { safeJsonLdStringify } from '@/lib/utils';
 import { routing } from '@/i18n/routing';
@@ -49,7 +49,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
     description: displayDescription,
     keywords: ["flip a coin", "coin flip online", "heads or tails", "cara o cruz", "cara ou coroa", "virtual coin toss", "simulate coin flip", "online coin flipper"],
     alternates: {
-      canonical: `/${locale}/coin-flip`
+      canonical: `/${locale}/coin-flip`,
+      languages: {
+        en: `/en/coin-flip`,
+        es: `/es/coin-flip`,
+        pt: `/pt/coin-flip`,
+      },
     },
     openGraph: {
       title: displayTitle,
@@ -78,6 +83,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function CoinPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'CoinPage' });
   const tGeo = await getTranslations({ locale, namespace: 'CoinGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });

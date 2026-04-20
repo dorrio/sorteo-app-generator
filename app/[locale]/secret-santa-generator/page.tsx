@@ -1,5 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing';
 import dynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
@@ -59,7 +59,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
     description: displayDescription,
     keywords: ["secret santa generator", "secret santa online", "amigo invisible online", "amigo secreto", "gift exchange generator", "christmas name picker", "secret santa maker", "free secret santa", "no email secret santa"],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        en: `/en/secret-santa-generator`,
+        es: `/es/secret-santa-generator`,
+        pt: `/pt/secret-santa-generator`,
+      },
     },
     openGraph: {
       title: displayTitle,
@@ -88,6 +93,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function SecretSantaPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'SecretSantaPage' });
   const tGeo = await getTranslations({ locale, namespace: 'SecretSantaGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });

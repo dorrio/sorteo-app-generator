@@ -8,7 +8,13 @@
     "postbuild": "next-sitemap",
     "dev": "next dev",
     "lint": "eslint .",
-    "start": "next start"
+    "lint:fix": "eslint . --fix",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:install": "playwright install --with-deps chromium",
+    "verify": "pnpm lint && pnpm typecheck"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "1.4.0",

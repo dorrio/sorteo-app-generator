@@ -97,7 +97,7 @@ export default async function RngPage({ params }: { params: Promise<{ locale: st
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'Random Number Generator by Sorteo Pro',
-    applicationCategory: 'UtilityApplication',
+    applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Web, iOS, Android',
     offers: {
       '@type': 'Offer',

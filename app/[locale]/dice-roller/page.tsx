@@ -91,7 +91,7 @@ export default async function DiceRollerPage({ params }: { params: Promise<{ loc
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'Dice Roller by Sorteo Pro',
-    applicationCategory: 'UtilityApplication',
+    applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Web, iOS, Android',
     offers: {
       '@type': 'Offer',

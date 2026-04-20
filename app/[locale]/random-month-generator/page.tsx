@@ -88,7 +88,7 @@ export default async function MonthPage({ params }: { params: Promise<{ locale: 
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'Random Month Generator by Sorteo Pro',
-    applicationCategory: 'UtilityApplication',
+    applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Web, iOS, Android',
     offers: {
       '@type': 'Offer',

@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { safeJsonLdStringify } from '@/lib/utils';
 
 interface VersusFAQProps {
   namespace?: string;
@@ -40,7 +41,7 @@ export const VersusFAQ = ({ namespace = 'Versus.faq' }: VersusFAQProps) => {
     <section className="max-w-3xl mx-auto my-12 px-4">
        <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
       <h2 className="text-3xl font-bold text-center text-foreground mb-8">{t('title')}</h2>
       <dl className="space-y-6">

@@ -91,7 +91,7 @@ export default async function CountryGeneratorPage({ params }: { params: Promise
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'Random Country Generator by Sorteo Pro',
-    applicationCategory: 'UtilityApplication',
+    applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Web, iOS, Android',
     offers: {
       '@type': 'Offer',

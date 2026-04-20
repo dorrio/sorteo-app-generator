@@ -1,6 +1,7 @@
 "use client"
 
 import { useTranslations } from "next-intl"
+import DOMPurify from "isomorphic-dompurify"
 import { Button } from "@/components/ui/button"
 import { Check, X, ArrowRight, Zap, ShieldCheck, Palette, Monitor, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
@@ -202,7 +203,12 @@ export function VersusGeo({ namespace = "VersusWheel" }: VersusGeoProps) {
                       <dt className="font-bold text-lg text-foreground">{faq.question}</dt>
                       <dd
                         className="text-muted-foreground leading-relaxed"
-                        dangerouslySetInnerHTML={{ __html: faq.answer }}
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(faq.answer, {
+                            ALLOWED_TAGS: ['strong', 'em', 'br', 'a'],
+                            ALLOWED_ATTR: ['href', 'target', 'rel'],
+                          }),
+                        }}
                       />
                   </div>
               ))}

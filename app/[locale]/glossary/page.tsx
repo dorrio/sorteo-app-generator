@@ -1,6 +1,7 @@
 import { getBaseUrl } from "@/lib/config"
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
+import DOMPurify from 'isomorphic-dompurify';
 import { routing } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
 import { BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered, GraduationCap, Type, Gift, Coins, Scissors, Users, Globe, Calendar, Layers, Flame } from 'lucide-react';
@@ -233,8 +234,14 @@ export default function GlossaryPage() {
             <GraduationCap className="w-6 h-6 text-primary" />
             {t('direct_answer_title')}
           </h2>
-          <div className="prose prose-invert max-w-none text-muted-foreground leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: t.raw('direct_answer_text') }}
+          <div
+            className="prose prose-invert max-w-none text-muted-foreground leading-relaxed"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(t.raw('direct_answer_text') as string, {
+                ALLOWED_TAGS: ['strong', 'em', 'br', 'a'],
+                ALLOWED_ATTR: ['href', 'target', 'rel'],
+              }),
+            }}
           />
         </div>
       </section>

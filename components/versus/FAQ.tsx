@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 import DOMPurify from 'isomorphic-dompurify';
-import { safeJsonLdStringify } from '@/lib/utils';
-
+import { JsonLd } from '@/components/seo/json-ld';
 const INLINE_HTML_CONFIG = {
   ALLOWED_TAGS: ['strong', 'em', 'br', 'a'],
   ALLOWED_ATTR: ['href', 'target', 'rel'],
@@ -45,10 +44,7 @@ export const VersusFAQ = ({ namespace = 'Versus.faq' }: VersusFAQProps) => {
 
   return (
     <section className="max-w-3xl mx-auto my-12 px-4">
-       <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <h2 className="text-3xl font-bold text-center text-foreground mb-8">{t('title')}</h2>
       <dl className="space-y-6">
         {faqData.map((item, index) => (

@@ -5,8 +5,7 @@ import DOMPurify from 'isomorphic-dompurify';
 import { routing } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
 import { BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered, GraduationCap, Type, Gift, Coins, Scissors, Users, Globe, Calendar, Layers, Flame } from 'lucide-react';
-import { safeJsonLdStringify } from '@/lib/utils';
-
+import { JsonLd } from '@/components/seo/json-ld';
 export const dynamic = 'force-static';
 
 export function generateStaticParams() {
@@ -205,10 +204,7 @@ export default function GlossaryPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([collectionSchema, breadcrumbSchema, faqSchema]) }}
-      />
+      <JsonLd data={[collectionSchema, breadcrumbSchema, faqSchema]} />
 
       <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-blue-900/10 to-transparent -z-10" />
 

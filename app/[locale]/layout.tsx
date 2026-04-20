@@ -13,7 +13,7 @@ import { GoogleTagManager } from "@next/third-parties/google"
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { safeJsonLdStringify } from '@/lib/utils';
+import { JsonLd } from '@/components/seo/json-ld';
 import { routing } from '../../i18n/routing';
 import { ErrorBoundaryWrapper } from '@/components/ui/error-boundary-wrapper';
 import { Toaster } from "@/components/ui/sonner";
@@ -189,11 +189,7 @@ export default async function RootLayout({
         <a href="#sorteo-section" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:p-4 focus:bg-background focus:text-foreground focus:rounded-lg focus:shadow-xl focus:border focus:border-primary">
           {tHome('skip_to_content')}
         </a>
-        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
-        />
+      <JsonLd data={jsonLd} />
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
             <ErrorBoundaryWrapper>

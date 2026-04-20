@@ -11,8 +11,7 @@ const MainApp = nextDynamic(
   () => import('@/components/sorteo/main-app').then((mod) => mod.MainApp),
   { loading: () => <AppSkeleton /> }
 );
-import { safeJsonLdStringify } from '@/lib/utils';
-
+import { JsonLd } from '@/components/seo/json-ld';
 export const dynamic = 'force-static';
 
 export function generateStaticParams() {
@@ -111,10 +110,7 @@ export default async function BingoNumberGeneratorPage({ params }: { params: Pro
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
-      />
+      <JsonLd data={[softwareAppSchema, breadcrumbSchema]} />
       <MainApp
         seoMode="bingo"
         initialStyle="slot-machine"

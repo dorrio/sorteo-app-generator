@@ -6,9 +6,7 @@ import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { DiceGeo } from "@/components/sorteo/dice-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
-import { safeJsonLdStringify } from "@/lib/utils";
-
-
+import { JsonLd } from '@/components/seo/json-ld';
 const MainApp = dynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
   { loading: () => <AppSkeleton /> }
@@ -143,10 +141,7 @@ export default async function DiceRollerPage({ params }: { params: Promise<{ loc
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
-      />
+      <JsonLd data={[softwareAppSchema, breadcrumbSchema]} />
       <MainApp
         initialStyle="grid"
         seoMode="dice"

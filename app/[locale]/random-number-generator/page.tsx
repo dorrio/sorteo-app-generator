@@ -6,9 +6,7 @@ import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { RngGeo } from "@/components/sorteo/rng-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
-import { safeJsonLdStringify } from "@/lib/utils";
-
-
+import { JsonLd } from '@/components/seo/json-ld';
 const MainApp = dynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
   { loading: () => <AppSkeleton /> }
@@ -149,10 +147,7 @@ export default async function RngPage({ params }: { params: Promise<{ locale: st
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
-      />
+      <JsonLd data={[softwareAppSchema, breadcrumbSchema]} />
       <MainApp
         initialStyle="slot-machine"
         seoMode="rng"

@@ -1,7 +1,7 @@
 import { getBaseUrl } from "@/lib/config"
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import dynamic from 'next/dynamic';
-import { safeJsonLdStringify } from '@/lib/utils';
+import { JsonLd } from '@/components/seo/json-ld';
 import { routing } from '@/i18n/routing';
 import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { CoinGeo } from "@/components/sorteo/coin-geo";
@@ -150,11 +150,7 @@ export default async function CoinPage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted schema data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
-      />
+      <JsonLd data={[softwareAppSchema, breadcrumbSchema]} />
       <MainApp
         initialStyle="cards"
         seoMode="coin"

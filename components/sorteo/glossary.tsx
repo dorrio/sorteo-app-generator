@@ -1,8 +1,7 @@
 import { useTranslations } from "next-intl"
 import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
-import { safeJsonLdStringify } from "@/lib/utils"
-
+import { JsonLd } from '@/components/seo/json-ld';
 export type SeoMode = 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'truth-or-dare';
 
 interface GlossaryProps {
@@ -146,10 +145,7 @@ export function Glossary({ seoMode }: GlossaryProps) {
 
   return (
     <section className="w-full py-12 px-4 border-t border-border/30 bg-background">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <div className="max-w-5xl mx-auto space-y-8">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">

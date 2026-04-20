@@ -6,9 +6,7 @@ import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { RpsGeo } from "@/components/sorteo/rps-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
-import { safeJsonLdStringify } from "@/lib/utils";
-
-
+import { JsonLd } from '@/components/seo/json-ld';
 const MainApp = dynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
   { loading: () => <AppSkeleton /> }
@@ -169,10 +167,7 @@ export default async function RpsPage({ params }: { params: Promise<{ locale: st
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
-      />
+      <JsonLd data={[softwareAppSchema, breadcrumbSchema]} />
       <MainApp
         initialStyle="cards"
         seoMode="rps"

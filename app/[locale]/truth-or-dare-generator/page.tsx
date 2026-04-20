@@ -2,7 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 import { useTranslations } from "next-intl"
 import { getBaseUrl } from "@/lib/config"
 import { routing } from "@/i18n/routing"
-import { safeJsonLdStringify } from "@/lib/utils"
+import { JsonLd } from '@/components/seo/json-ld';
 import nextDynamic from 'next/dynamic'
 import { AppSkeleton } from "@/components/sorteo/skeletons"
 
@@ -72,11 +72,7 @@ export default async function TruthOrDarePage({ params }: { params: Promise<{ lo
 
   return (
     <>
-      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is safe and necessary for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(schema) }}
-      />
+      <JsonLd data={schema} />
       <MainApp
         initialStyle="cards"
         seoMode="truth-or-dare"

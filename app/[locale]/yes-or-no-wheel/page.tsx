@@ -6,9 +6,7 @@ import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { YesNoGeo } from "@/components/sorteo/yes-no-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
-import { safeJsonLdStringify } from "@/lib/utils";
-
-
+import { JsonLd } from '@/components/seo/json-ld';
 const MainApp = dynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
   { loading: () => <AppSkeleton /> }
@@ -150,10 +148,7 @@ export default async function YesNoPage({ params }: { params: Promise<{ locale: 
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([softwareAppSchema, breadcrumbSchema]) }}
-      />
+      <JsonLd data={[softwareAppSchema, breadcrumbSchema]} />
       <MainApp
         initialStyle="roulette"
         seoMode="yes-no"

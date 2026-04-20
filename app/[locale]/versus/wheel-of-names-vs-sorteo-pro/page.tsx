@@ -6,9 +6,7 @@ import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { VersusGeo } from "@/components/sorteo/versus-geo";
 import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { SiteFooter } from "@/components/sorteo/site-footer";
-import { safeJsonLdStringify } from "@/lib/utils";
-
-
+import { JsonLd } from '@/components/seo/json-ld';
 const MainApp = nextDynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
   { loading: () => <AppSkeleton /> }
@@ -119,10 +117,7 @@ export default async function WheelVersusPage({ params }: { params: Promise<{ lo
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify([articleSchema, faqSchema]) }}
-      />
+      <JsonLd data={[articleSchema, faqSchema]} />
       <MainApp
         initialStyle="roulette"
         seoMode="wheel"

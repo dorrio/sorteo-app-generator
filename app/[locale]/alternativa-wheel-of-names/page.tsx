@@ -24,7 +24,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t('title'),
     description: t('description'),
     alternates: {
-        canonical: `/alternativa-wheel-of-names`
+        canonical: `/alternativa-wheel-of-names`,
+        languages: {
+          en: `/en/alternativa-wheel-of-names`,
+          es: `/es/alternativa-wheel-of-names`,
+          pt: `/pt/alternativa-wheel-of-names`,
+        },
     }
   };
 }

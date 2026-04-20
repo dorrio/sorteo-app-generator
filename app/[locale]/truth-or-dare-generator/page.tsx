@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server"
+import { getTranslations, setRequestLocale } from "next-intl/server"
 import { useTranslations } from "next-intl"
 import { getBaseUrl } from "@/lib/config"
 import { routing } from "@/i18n/routing"
@@ -26,7 +26,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t("title"),
     description: t("description"),
     alternates: {
-      canonical: `/${locale}/truth-or-dare-generator`
+      canonical: `/${locale}/truth-or-dare-generator`,
+      languages: {
+        en: `/en/truth-or-dare-generator`,
+        es: `/es/truth-or-dare-generator`,
+        pt: `/pt/truth-or-dare-generator`,
+      },
     },
     openGraph: {
       title: t("title"),
@@ -38,6 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function TruthOrDarePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
 
   // We fetch translations server-side for metadata and initial render
   const t = await getTranslations({ locale, namespace: 'TruthPage' });

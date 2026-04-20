@@ -1,7 +1,7 @@
 import { getBaseUrl } from "@/lib/config"
 import nextDynamic from 'next/dynamic';
 import { AppSkeleton } from '@/components/sorteo/skeletons';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing';
 import { SiteFooter } from '@/components/sorteo/site-footer';
 import { CardGeo } from '@/components/sorteo/card-geo';
@@ -54,7 +54,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
     description: displayDescription,
     keywords: ["random card generator", "pick a card", "draw a card", "playing cards online", "card generator", "random card", "spanish deck", "poker cards"],
     alternates: {
-      canonical: `/${locale}/random-card-generator`
+      canonical: `/${locale}/random-card-generator`,
+      languages: {
+        en: `/en/random-card-generator`,
+        es: `/es/random-card-generator`,
+        pt: `/pt/random-card-generator`,
+      },
     },
     openGraph: {
       title: displayTitle,
@@ -83,6 +88,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function CardPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'CardPage' });
   const tGeo = await getTranslations({ locale, namespace: 'CardGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });

@@ -1,5 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import dynamic from 'next/dynamic';
 import { safeJsonLdStringify } from '@/lib/utils';
 import { AppSkeleton } from "@/components/sorteo/skeletons";
@@ -56,7 +56,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
     title: displayTitle,
     description: displayDescription,
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        en: `/en`,
+        es: `/es`,
+        pt: `/pt`,
+      },
     },
     openGraph: {
       title: displayTitle,
@@ -82,6 +87,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function SorteoApp({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
 
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
   const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });

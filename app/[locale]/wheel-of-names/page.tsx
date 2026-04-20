@@ -1,5 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing';
 import dynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
@@ -52,7 +52,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
     description: displayDescription,
     keywords: ["wheel of names", "random picker wheel", "spin the wheel", "wheel decider", "ruleta aleatoria", "ruleta de nombres", "roleta de nomes", "random name picker", "wheel generator"],
     alternates: {
-      canonical: `/${locale}/wheel-of-names`
+      canonical: `/${locale}/wheel-of-names`,
+      languages: {
+        en: `/en/wheel-of-names`,
+        es: `/es/wheel-of-names`,
+        pt: `/pt/wheel-of-names`,
+      },
     },
     openGraph: {
       title: displayTitle,
@@ -81,6 +86,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function WheelOfNamesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'WheelGeoPage' });
   const tGeo = await getTranslations({ locale, namespace: 'WheelGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });

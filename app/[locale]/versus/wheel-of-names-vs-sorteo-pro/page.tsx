@@ -1,5 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing';
 import nextDynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
@@ -30,7 +30,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: t('description'),
     keywords: ["wheel of names alternative", "better wheel of names", "free wheel spinner", "ad-free wheel", "sorteo pro vs wheel of names", "ruleta aleatoria sin anuncios", "mejor que wheel of names"],
     alternates: {
-      canonical: `/${locale}/versus/wheel-of-names-vs-sorteo-pro`
+      canonical: `/${locale}/versus/wheel-of-names-vs-sorteo-pro`,
+      languages: {
+        en: `/en/versus/wheel-of-names-vs-sorteo-pro`,
+        es: `/es/versus/wheel-of-names-vs-sorteo-pro`,
+        pt: `/pt/versus/wheel-of-names-vs-sorteo-pro`,
+      },
     },
     openGraph: {
       title: t('title'),
@@ -53,6 +58,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function WheelVersusPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'VersusWheel' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
   const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });

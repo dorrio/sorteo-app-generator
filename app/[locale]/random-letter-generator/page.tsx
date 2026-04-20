@@ -1,5 +1,5 @@
 import { getBaseUrl } from "@/lib/config"
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing';
 import dynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
@@ -49,7 +49,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
     description: displayDescription,
     keywords: ["random letter generator", "letter picker", "alphabet spinner", "random letter wheel", "scattergories generator", "stop game letter"],
     alternates: {
-        canonical: `/${locale}/random-letter-generator`
+        canonical: `/${locale}/random-letter-generator`,
+        languages: {
+          en: `/en/random-letter-generator`,
+          es: `/es/random-letter-generator`,
+          pt: `/pt/random-letter-generator`,
+        },
     },
     openGraph: {
       title: displayTitle,
@@ -78,6 +83,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
 
 export default async function LetterGeneratorPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'LetterGeneratorPage' });
   const tGeo = await getTranslations({ locale, namespace: 'LetterGeo' });
   const tShare = await getTranslations({ locale, namespace: 'ShareContent' });

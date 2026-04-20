@@ -1,10 +1,5 @@
 import { useTranslations } from 'next-intl';
-import DOMPurify from 'isomorphic-dompurify';
 import { JsonLd } from '@/components/seo/json-ld';
-const INLINE_HTML_CONFIG = {
-  ALLOWED_TAGS: ['strong', 'em', 'br', 'a'],
-  ALLOWED_ATTR: ['href', 'target', 'rel'],
-};
 
 interface VersusFAQProps {
   namespace?: string;
@@ -13,33 +8,23 @@ interface VersusFAQProps {
 export const VersusFAQ = ({ namespace = 'Versus.faq' }: VersusFAQProps) => {
   const t = useTranslations(namespace);
 
-  const faqData = [
-    {
-      question: t('q1'),
-      answer: t('a1')
-    },
-    {
-      question: t('q2'),
-      answer: t('a2')
-    },
-    {
-      question: t('q3'),
-      answer: t('a3')
-    }
-  ];
+  const keys = ['1', '2', '3'] as const;
 
-  // Prepare Schema.org JSON-LD
+  // JSON-LD requires plain text. Answers may embed <strong> for emphasis,
+  // so read via t.raw (which doesn't try to parse tags) and strip them.
+  const stripTags = (s: string) => s.replace(/<\/?strong>/g, '');
+
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqData.map(item => ({
-      "@type": "Question",
-      "name": item.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": item.answer.replace(/\*\*(.*?)\*\*/g, '$1')
-      }
-    }))
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: keys.map((k) => ({
+      '@type': 'Question',
+      name: t(`q${k}`),
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: stripTags(t.raw(`a${k}`) as string),
+      },
+    })),
   };
 
   return (
@@ -47,18 +32,14 @@ export const VersusFAQ = ({ namespace = 'Versus.faq' }: VersusFAQProps) => {
       <JsonLd data={jsonLd} />
       <h2 className="text-3xl font-bold text-center text-foreground mb-8">{t('title')}</h2>
       <dl className="space-y-6">
-        {faqData.map((item, index) => (
-          <div key={index} className="bg-card p-6 rounded-lg shadow-sm border border-border">
-            <dt className="text-xl font-bold text-foreground mb-2">{item.question}</dt>
-            <dd
-              className="text-muted-foreground"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(
-                  item.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'),
-                  INLINE_HTML_CONFIG,
-                ),
-              }}
-            />
+        {keys.map((k) => (
+          <div key={k} className="bg-card p-6 rounded-lg shadow-sm border border-border">
+            <dt className="text-xl font-bold text-foreground mb-2">{t(`q${k}`)}</dt>
+            <dd className="text-muted-foreground">
+              {t.rich(`a${k}`, {
+                strong: (chunks) => <strong className="text-foreground">{chunks}</strong>,
+              })}
+            </dd>
           </div>
         ))}
       </dl>

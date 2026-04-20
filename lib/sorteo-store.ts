@@ -160,7 +160,7 @@ const themePresets: Record<string, Partial<ThemeConfig>> = {
 
 export const useSorteoStore = create<SorteoState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       // Participants
       participants: [],
       addParticipant: (participant) =>

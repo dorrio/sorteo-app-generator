@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl"
 import DOMPurify from "isomorphic-dompurify"
 import type { ThemeConfig } from "@/lib/sorteo-store"
 import { Button } from "@/components/ui/button"
-import { Check, X, ArrowRight, Zap, ShieldCheck, Palette, Monitor, HelpCircle } from "lucide-react"
+import { Check, X, ArrowRight, Zap, Palette, HelpCircle } from "lucide-react"
 import { Link } from "@/i18n/routing"
 import { JsonLd } from '@/components/seo/json-ld'
 import { TryToolButton } from "./try-tool-button"

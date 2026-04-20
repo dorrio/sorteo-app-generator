@@ -1,5 +1,4 @@
 import { getTranslations, setRequestLocale } from "next-intl/server"
-import { useTranslations } from "next-intl"
 import { getBaseUrl } from "@/lib/config"
 import { routing } from "@/i18n/routing"
 import { JsonLd } from '@/components/seo/json-ld';

@@ -67,7 +67,8 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current)
     }
-  }, [isSpinning]) // Simplified dependencies
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- listed deps are stable store setters + callbacks; including them would re-enter the animation every render
+  }, [isSpinning])
 
   if (participants.length === 0) {
     return (

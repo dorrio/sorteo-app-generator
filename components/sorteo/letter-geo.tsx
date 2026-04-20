@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl"
-import { Check, Shield, Gamepad2, Zap, HelpCircle, Type } from "lucide-react"
+import { Shield, Gamepad2, Zap, HelpCircle, Type } from "lucide-react"
 import { JsonLd } from '@/components/seo/json-ld'
 export function LetterGeo() {
   const t = useTranslations("LetterGeo")

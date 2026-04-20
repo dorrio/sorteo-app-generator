@@ -45,7 +45,7 @@ function extractDateFromVerificationId(verificationId: string | undefined): Date
       const d = new Date(timestamp)
       if (!isNaN(d.getTime())) return d
     }
-  } catch (e) {
+  } catch {
     // Intentionally ignoring parsing errors to use current date as fallback
   }
   return new Date()
@@ -54,7 +54,6 @@ function extractDateFromVerificationId(verificationId: string | undefined): Date
 export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremonyProps) {
   const { winner, theme, showWinnerCeremony } = useSorteoStore()
   const t = useTranslations("WinnerCeremony")
-  const [showContent, setShowContent] = useState(false)
   const [copied, setCopied] = useState(false)
   const [canShareNative, setCanShareNative] = useState(false)
   const [isSharing, setIsSharing] = useState(false)
@@ -67,12 +66,6 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
       window.matchMedia("(pointer: coarse)").matches
     )
 
-    if (showWinnerCeremony) {
-      const timer = setTimeout(() => setShowContent(true), 300)
-      return () => clearTimeout(timer)
-    } else {
-      setShowContent(false)
-    }
   }, [showWinnerCeremony])
 
   // Viral Optimization: Create a deep link to the verification page
@@ -215,7 +208,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
       link.click()
       document.body.removeChild(link)
       window.URL.revokeObjectURL(blobUrl)
-    } catch (e) {
+    } catch {
       window.open(imageUrl, '_blank')
     }
   }

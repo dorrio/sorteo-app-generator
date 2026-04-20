@@ -72,6 +72,7 @@ export function VerifyContent() {
         if (initialId) {
             verifyId(initialId)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- verifyId is stable within this component; adding it would require useCallback + recompute on every render
     }, [initialId, pastWinners])
 
     const verifyId = (idToVerify: string) => {
@@ -116,7 +117,7 @@ export function VerifyContent() {
                     status: "partial",
                     date: date,
                 })
-            } catch (e) {
+            } catch {
                 setResult({
                     status: "invalid",
                     error: t("result.invalid_format_message"),
@@ -254,7 +255,7 @@ export function VerifyContent() {
             link.click()
             document.body.removeChild(link)
             window.URL.revokeObjectURL(blobUrl)
-        } catch (e) {
+        } catch {
             // Fallback: just open in new tab
             window.open(imageUrl, '_blank')
         }

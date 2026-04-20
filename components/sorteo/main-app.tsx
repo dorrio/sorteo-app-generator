@@ -157,10 +157,6 @@ export function MainApp({
 
   const {
     participants,
-    addParticipants,
-    clearParticipants,
-    activeTool,
-    setActiveTool,
     theme,
     isSpinning,
     setIsSpinning,
@@ -171,7 +167,6 @@ export function MainApp({
     setWinner,
     isEditorOpen,
     setIsEditorOpen,
-    hasHydrated,
     updateTheme
   } = useSorteoStore()
 
@@ -197,6 +192,7 @@ export function MainApp({
   }, [isOverlayOpen])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- classic post-hydration flag to gate client-only rendering paths
     setMounted(true)
   }, [])
 

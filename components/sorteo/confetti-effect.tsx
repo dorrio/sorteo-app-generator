@@ -11,6 +11,7 @@ interface ConfettiPiece {
   duration: number
   rotation: number
   size: number
+  isCircle: boolean
 }
 
 interface ConfettiEffectProps {
@@ -27,20 +28,21 @@ export function ConfettiEffect({
   const [confetti, setConfetti] = useState<ConfettiPiece[]>([])
 
   useEffect(() => {
-    if (isActive) {
-      const pieces: ConfettiPiece[] = Array.from({ length: count }, (_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        delay: Math.random() * 2,
-        duration: 3 + Math.random() * 3,
-        rotation: Math.random() * 720,
-        size: 8 + Math.random() * 12,
-      }))
-      setConfetti(pieces)
-    } else {
-      setConfetti([])
-    }
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- generating a fresh random pieces batch each time isActive flips on is the point of this effect
+    setConfetti(
+      isActive
+        ? Array.from({ length: count }, (_, i) => ({
+            id: i,
+            x: Math.random() * 100,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            delay: Math.random() * 2,
+            duration: 3 + Math.random() * 3,
+            rotation: Math.random() * 720,
+            size: 8 + Math.random() * 12,
+            isCircle: Math.random() > 0.5,
+          }))
+        : [],
+    )
   }, [isActive, colors, count])
 
   return (
@@ -56,7 +58,7 @@ export function ConfettiEffect({
                 width: piece.size,
                 height: piece.size,
                 backgroundColor: piece.color,
-                borderRadius: Math.random() > 0.5 ? "50%" : "0%",
+                borderRadius: piece.isCircle ? "50%" : "0%",
               }}
               initial={{
                 y: -50,

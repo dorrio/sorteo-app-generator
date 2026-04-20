@@ -36,7 +36,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
                     dateStr = date.toISOString()
                 }
             }
-        } catch (e) {
+        } catch {
             // Ignore parsing errors for metadata
         }
     }

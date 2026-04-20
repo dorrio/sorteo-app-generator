@@ -16,7 +16,7 @@ export function useShareContent(
         const defaultTemplate = customShareTextTemplate || tShare("custom_share_text")
         let finalShareText = shareText
         let finalShareTitle = shareTitle
-        let url = typeof window !== "undefined" ? window.location.href : ""
+        const url = typeof window !== "undefined" ? window.location.href : ""
 
         // Fallback logic if shareTitle/Text are defaults and we're in a specific mode without props passed
         if (shareTitle === "Sorteo Pro" && seoMode) {

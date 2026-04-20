@@ -16,6 +16,7 @@ export function CountdownAnimation({ onComplete }: CountdownAnimationProps) {
 
   useEffect(() => {
     if (!showCountdown) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- resetting the visible counter when the parent closes the countdown overlay is the intended sync
       setCount(theme.countdownDuration)
       return
     }

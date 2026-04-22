@@ -12,7 +12,7 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:ui": "PLAYWRIGHT_WEBSERVER=dev playwright test --ui",
     "test:e2e:install": "playwright install --with-deps chromium",
     "verify": "pnpm lint && pnpm typecheck"
   },

@@ -1,9 +1,15 @@
 import { withSentryConfig } from '@sentry/nextjs';
 import createNextIntlPlugin from 'next-intl/plugin';
+import createBundleAnalyzer from '@next/bundle-analyzer';
 
 const withNextIntl = createNextIntlPlugin(
   './i18n/request.ts'
 );
+
+const withBundleAnalyzer = createBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+  openAnalyzer: false,
+});
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -62,7 +68,6 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: [
       'lucide-react',
-      'date-fns',
       'framer-motion',
       'clsx',
       'tailwind-merge',
@@ -89,7 +94,6 @@ const nextConfig = {
       '@radix-ui/react-slot',
       '@radix-ui/react-switch',
       '@radix-ui/react-tabs',
-      '@radix-ui/react-toast',
       '@radix-ui/react-toggle',
       '@radix-ui/react-toggle-group',
       '@radix-ui/react-tooltip',
@@ -102,7 +106,7 @@ const nextConfig = {
 };
 
 export default withSentryConfig(
-  withNextIntl(nextConfig),
+  withBundleAnalyzer(withNextIntl(nextConfig)),
   {
     // For all available options, see:
     // https://github.com/getsentry/sentry-webpack-plugin#options

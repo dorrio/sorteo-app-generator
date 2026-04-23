@@ -13,7 +13,7 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:ui": "cross-env PLAYWRIGHT_WEBSERVER=dev playwright test --ui",
     "test:e2e:install": "playwright install --with-deps chromium",
     "verify": "pnpm lint && pnpm typecheck"
   },
@@ -72,6 +72,7 @@
     "@types/node": "^22.19.7",
     "@types/react": "^19.2.8",
     "@types/react-dom": "^19",
+    "cross-env": "^7.0.3",
     "eslint": "^9.39.2",
     "eslint-config-next": "16.1.6",
     "next-sitemap": "^4.2.3",

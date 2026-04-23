@@ -101,8 +101,11 @@ const nextConfig = {
   },
 };
 
-// Only apply Sentry config if SENTRY_ORG is set to avoid Turbopack issues
-const finalConfig = process.env.SENTRY_ORG
+// Only apply Sentry config if SENTRY_ORG and a DSN are both set
+// This ensures tunnelRoute/hideSourceMaps/transpileClientSDK are applied
+// whenever the client SDK can initialize (via SENTRY_DSN or NEXT_PUBLIC_SENTRY_DSN)
+const isSentryEnabled = process.env.SENTRY_ORG && (process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN);
+const finalConfig = isSentryEnabled
   ? withSentryConfig(
       withNextIntl(nextConfig),
       {

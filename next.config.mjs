@@ -101,23 +101,31 @@ const nextConfig = {
   },
 };
 
-export default withSentryConfig(
-  withNextIntl(nextConfig),
-  {
-    // For all available options, see:
-    // https://github.com/getsentry/sentry-webpack-plugin#options
-    silent: true,
-    org: process.env.SENTRY_ORG,
-    project: process.env.SENTRY_PROJECT,
-  },
-  {
-    // For all available options, see:
-    // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+// Only apply Sentry config if SENTRY_ORG and a DSN are both set
+// This ensures tunnelRoute/hideSourceMaps/transpileClientSDK are applied
+// whenever the client SDK can initialize (via SENTRY_DSN or NEXT_PUBLIC_SENTRY_DSN)
+const isSentryEnabled = process.env.SENTRY_ORG && (process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN);
+const finalConfig = isSentryEnabled
+  ? withSentryConfig(
+      withNextIntl(nextConfig),
+      {
+        // For all available options, see:
+        // https://github.com/getsentry/sentry-webpack-plugin#options
+        silent: true,
+        org: process.env.SENTRY_ORG,
+        project: process.env.SENTRY_PROJECT,
+      },
+      {
+        // For all available options, see:
+        // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 
-    widenClientFileUpload: true,
-    transpileClientSDK: true,
-    tunnelRoute: "/monitoring",
-    hideSourceMaps: true,
-    disableLogger: true,
-  }
-);
+        widenClientFileUpload: true,
+        transpileClientSDK: true,
+        tunnelRoute: "/monitoring",
+        hideSourceMaps: true,
+        disableLogger: true,
+      }
+    )
+  : withNextIntl(nextConfig);
+
+export default finalConfig;

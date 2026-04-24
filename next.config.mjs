@@ -95,6 +95,7 @@ const nextConfig = {
       '@radix-ui/react-tooltip',
     ],
     turbopackUseSystemTlsCerts: true,
+    turbo: false,
   },
   images: {
     formats: ['image/avif', 'image/webp'],

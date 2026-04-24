@@ -22,9 +22,9 @@ for (const locale of LOCALES) {
     const path = slug ? `/${locale}/${slug}` : `/${locale}`;
 
     test(`${path} has no serious or critical a11y violations`, async ({ page }, testInfo) => {
-      await page.goto(path);
-      // Wait for first h1 so the page has hydrated enough for axe to read it.
-      await expect(page.locator('h1').first()).toBeVisible();
+      await page.goto(path, { waitUntil: 'domcontentloaded' });
+      // Wait for first heading so the page has hydrated enough for axe to read it.
+      await expect(page.getByRole('heading').first()).toBeVisible();
 
       const results = await new AxeBuilder({ page })
         .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])

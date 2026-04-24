@@ -70,6 +70,7 @@ export function VerifyContent() {
     // Auto-verify if ID is in URL
     useEffect(() => {
         if (initialId) {
+            // eslint-disable-next-line react-hooks/immutability -- verifyId is declared below; referenced inside effect callback so runtime-safe
             verifyId(initialId)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps -- verifyId is stable within this component; adding it would require useCallback + recompute on every render

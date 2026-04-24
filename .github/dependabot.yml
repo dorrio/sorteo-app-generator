@@ -1,0 +1,64 @@
+version: 2
+updates:
+  # npm dependencies — weekly, group patch + minor to keep PR noise low.
+  # Major bumps land as individual PRs so breaking changes get proper review.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: Europe/Madrid
+    open-pull-requests-limit: 5
+    groups:
+      radix-ui:
+        patterns:
+          - "@radix-ui/*"
+      sentry:
+        patterns:
+          - "@sentry/*"
+      types:
+        patterns:
+          - "@types/*"
+      eslint:
+        patterns:
+          - "eslint"
+          - "eslint-*"
+          - "@eslint/*"
+      playwright:
+        patterns:
+          - "@playwright/*"
+          - "playwright"
+          - "@axe-core/*"
+      dev-minor:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+      prod-minor:
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
+    labels:
+      - dependencies
+    commit-message:
+      prefix: chore
+      include: scope
+
+  # GitHub Actions — workflows reference 3rd-party actions by SHA or version,
+  # and Dependabot is the standard channel for keeping those current.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: Europe/Madrid
+    open-pull-requests-limit: 3
+    labels:
+      - dependencies
+      - ci
+    commit-message:
+      prefix: chore
+      include: scope

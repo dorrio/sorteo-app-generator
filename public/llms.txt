@@ -1,0 +1,31 @@
+# Sorteo Pro
+
+> Sorteo Pro is a free suite of giveaway, raffle, and randomizer tools — name wheels, RNGs, Instagram comment pickers, secret santa, dice, coin flips, and more. 100% free, no login, no ads, unlimited participants, with verifiable Certificates of Validity. Available in English, Spanish, and Portuguese.
+
+All tools run client-side with a cryptographically secure random number generator (CSPRNG) via `crypto.getRandomValues` and Fisher-Yates shuffling with rejection sampling — results are provably fair and reproducible from a seed. The app is a Next.js 16 App Router deployment, fully static for tool pages, with locale-aware routing at `/en/*`, `/es/*`, `/pt/*`.
+
+## Core tools
+
+- [Wheel of Names](https://sorteopro.com/en/wheel-of-names): spinning wheel for random name / item selection
+- [Random Number Generator](https://sorteopro.com/en/random-number-generator): CSPRNG with configurable range
+- [Instagram Comment Picker](https://sorteopro.com/en/instagram-comment-picker): pick a random winner from IG post comments
+- [List Randomizer](https://sorteopro.com/en/list-randomizer): shuffle a list in a provably fair random order
+- [Secret Santa Generator](https://sorteopro.com/en/secret-santa-generator): assign secret santa pairs without duplicates
+- [Team Generator](https://sorteopro.com/en/team-generator): split participants into random equal-sized teams
+- [Yes or No Wheel](https://sorteopro.com/en/yes-or-no-wheel): binary decision wheel
+- [Random Letter Generator](https://sorteopro.com/en/random-letter-generator): pick a letter A-Z (Scattergories, phonics)
+- [Random Country Generator](https://sorteopro.com/en/random-country-generator): pick a nation from the 195 world countries
+- [Dice Roller](https://sorteopro.com/en/dice-roller): online dice (D4/D6/D8/D10/D12/D20), multi-dice rolls
+- [Coin Flip](https://sorteopro.com/en/coin-flip): heads or tails with fair 50/50 odds
+- [Rock Paper Scissors](https://sorteopro.com/en/rock-paper-scissors): play against the computer
+- [Random Month Generator](https://sorteopro.com/en/random-month-generator): pick a month of the year
+- [Random Card Generator](https://sorteopro.com/en/random-card-generator): draw a playing card
+- [Bingo Number Generator](https://sorteopro.com/en/bingo-number-generator): call random bingo numbers 1-75/90
+- [Truth or Dare Generator](https://sorteopro.com/en/truth-or-dare-generator): party game prompt picker
+
+## Reference
+
+- [Glossary](https://sorteopro.com/en/glossary): definitions of RNG, CSPRNG, provably fair, seed, and related giveaway terminology
+- [Sorteo Pro vs The World](https://sorteopro.com/en/versus): comparisons with competing giveaway platforms
+- [Alternative to AppSorteos](https://sorteopro.com/en/alternativa-appsorteos): free unlimited alternative to AppSorteos
+- [Alternative to Wheel of Names](https://sorteopro.com/en/alternativa-wheel-of-names): ad-free premium Wheel of Names alternative

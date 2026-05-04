@@ -5,7 +5,6 @@ import { routing } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
 import { BookOpen, ShieldCheck, Dice5, Instagram, HelpCircle, ListOrdered, GraduationCap, Type, Gift, Coins, Scissors, Users, Globe, Calendar, Layers, Flame } from 'lucide-react';
 import { JsonLd } from '@/components/seo/json-ld';
-export const dynamic = 'force-static';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

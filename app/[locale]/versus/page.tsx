@@ -4,7 +4,6 @@ import { routing } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
 import { Swords, Trophy, Zap, ShieldCheck } from 'lucide-react';
 import { JsonLd } from '@/components/seo/json-ld';
-export const dynamic = 'force-static';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

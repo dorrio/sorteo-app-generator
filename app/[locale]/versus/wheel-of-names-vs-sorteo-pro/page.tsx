@@ -12,7 +12,6 @@ const MainApp = nextDynamic(
   { loading: () => <AppSkeleton /> }
 );
 
-export const dynamic = 'force-static';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

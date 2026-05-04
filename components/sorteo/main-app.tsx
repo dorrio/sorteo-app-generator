@@ -403,7 +403,7 @@ export function MainApp({
 
             {/* Sidebar */}
             <motion.aside
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 1, x: 0 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
               className="space-y-6"

@@ -6,7 +6,6 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link, routing } from '@/i18n/routing';
 import { HelpCircle } from 'lucide-react';
 import { JsonLd } from '@/components/seo/json-ld';
-export const dynamic = 'force-static';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

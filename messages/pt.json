@@ -269,7 +269,7 @@
         "copy_image": "Copiar Imagem",
         "image_copied": "Imagem Copiada!",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou o sorteio!\n\n✅ Verificado por Sorteio Pro.\n\nVeja o certificado e crie o seu aqui 👇",
-        "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nVeja o certificado e crie o seu aqui 👇",
+        "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou *{title}*!\n\n✅ Verificado por Sorteio Pro.\n\nVeja o certificado e crie o seu aqui 👇",
         "share": {
             "telegram": "Telegram",
             "linkedin": "LinkedIn",

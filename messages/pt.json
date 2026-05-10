@@ -269,6 +269,13 @@
         "copy_image": "Copiar Imagem",
         "image_copied": "Imagem Copiada!",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou o sorteio!\n\n✅ Verificado por Sorteio Pro.\n\nVeja o certificado e crie o seu aqui 👇",
+        "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nVeja o certificado e crie o seu aqui 👇",
+        "share": {
+            "telegram": "Telegram",
+            "linkedin": "LinkedIn",
+            "telegram_aria": "Compartilhar no Telegram",
+            "linkedin_aria": "Compartilhar no LinkedIn"
+        },
         "result": {
             "valid_title": "ID Válido",
             "copied": "Copiado!",
@@ -282,8 +289,7 @@
             "local_record": "Registro Local Encontrado",
             "not_found_message": "Este ID não corresponde a nenhum sorteio registrado neste dispositivo.",
             "invalid_format_message": "O formato do ID é inválido."
-        },
-        "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nVeja o certificado e crie o seu aqui 👇"
+        }
     },
     "SEOContent": {
         "what_is_title": "O que é o Sorteio Pro?",

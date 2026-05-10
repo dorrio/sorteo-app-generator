@@ -549,10 +549,10 @@ export function VerifyContent() {
                                                                         target="_blank"
                                                                         rel="noopener noreferrer"
                                                                         className="gap-2 cursor-pointer flex w-full items-center"
-                                                                        aria-label="Share on Telegram"
+                                                                        aria-label={t("share.telegram_aria")}
                                                                     >
                                                                         <Send className="w-4 h-4" />
-                                                                        Telegram
+                                                                        {t("share.telegram")}
                                                                     </a>
                                                                 </DropdownMenuItem>
 
@@ -562,10 +562,10 @@ export function VerifyContent() {
                                                                         target="_blank"
                                                                         rel="noopener noreferrer"
                                                                         className="gap-2 cursor-pointer flex w-full items-center"
-                                                                        aria-label="Share on LinkedIn"
+                                                                        aria-label={t("share.linkedin_aria")}
                                                                     >
                                                                         <Linkedin className="w-4 h-4" />
-                                                                        LinkedIn
+                                                                        {t("share.linkedin")}
                                                                     </a>
                                                                 </DropdownMenuItem>
                                                             </DropdownMenuContent>

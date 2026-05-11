@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, ShieldCheck, ShieldAlert, Info, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download, Loader2, Send, Linkedin } from "lucide-react"
+import { Search, ShieldCheck, ShieldAlert, Info, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download, Loader2 } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { ConfettiEffect } from "@/components/sorteo/confetti-effect"
 import { Button } from "@/components/ui/button"
@@ -149,8 +149,6 @@ export function VerifyContent() {
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`
     const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
-    const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
-    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`
 
     const shareNative = async () => {
         if (!navigator.share) return
@@ -540,32 +538,6 @@ export function VerifyContent() {
                                                                     >
                                                                         <MessageCircle className="w-4 h-4" />
                                                                         WhatsApp
-                                                                    </a>
-                                                                </DropdownMenuItem>
-
-                                                                <DropdownMenuItem asChild>
-                                                                    <a
-                                                                        href={telegramUrl}
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        className="gap-2 cursor-pointer flex w-full items-center"
-                                                                        aria-label={t("share.telegram_aria")}
-                                                                    >
-                                                                        <Send className="w-4 h-4" />
-                                                                        {t("share.telegram")}
-                                                                    </a>
-                                                                </DropdownMenuItem>
-
-                                                                <DropdownMenuItem asChild>
-                                                                    <a
-                                                                        href={linkedinUrl}
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        className="gap-2 cursor-pointer flex w-full items-center"
-                                                                        aria-label={t("share.linkedin_aria")}
-                                                                    >
-                                                                        <Linkedin className="w-4 h-4" />
-                                                                        {t("share.linkedin")}
                                                                     </a>
                                                                 </DropdownMenuItem>
                                                             </DropdownMenuContent>

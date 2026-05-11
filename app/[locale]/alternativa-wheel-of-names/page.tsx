@@ -38,6 +38,7 @@ export default async function VersusWheelPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'VersusWheel' });
   const tSchema = await getTranslations({ locale, namespace: 'Schema' });
+  const tGlobal = await getTranslations({ locale, namespace: 'GlobalSchema' });
   const baseUrl = getBaseUrl();
 
   const breadcrumbJsonLd = {
@@ -60,7 +61,8 @@ export default async function VersusWheelPage({
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Sorteo Pro - Better Wheel of Names Alternative",
-    "applicationCategory": "GameApplication",
+    "applicationCategory": tGlobal('applicationCategory'),
+    "applicationSubCategory": tGlobal('applicationSubCategory'),
     "operatingSystem": "Web, iOS, Android",
     "offers": {
       "@type": "Offer",

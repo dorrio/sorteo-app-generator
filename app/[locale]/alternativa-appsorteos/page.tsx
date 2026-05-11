@@ -38,6 +38,7 @@ export default async function VersusPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'Versus' });
   const tSchema = await getTranslations({ locale, namespace: 'Schema' });
+  const tGlobal = await getTranslations({ locale, namespace: 'GlobalSchema' });
   const baseUrl = getBaseUrl();
 
   const breadcrumbJsonLd = {
@@ -60,7 +61,8 @@ export default async function VersusPage({
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Sorteo Pro - Free AppSorteos Alternative",
-    "applicationCategory": "SocialNetworkingApplication",
+    "applicationCategory": tGlobal('applicationCategory'),
+    "applicationSubCategory": tGlobal('applicationSubCategory'),
     "operatingSystem": "Web, iOS, Android",
     "offers": {
       "@type": "Offer",

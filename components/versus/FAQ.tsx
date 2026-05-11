@@ -12,7 +12,7 @@ export const VersusFAQ = ({ namespace = 'Versus.faq' }: VersusFAQProps) => {
 
   // JSON-LD requires plain text. Answers may embed <strong> for emphasis,
   // so read via t.raw (which doesn't try to parse tags) and strip them.
-  const stripTags = (s: string) => s.replace(/<\/?strong>/g, '');
+  const stripTags = (s: string) => s.replace(/<\/?[^>]+>/g, '');
 
   const jsonLd = {
     '@context': 'https://schema.org',

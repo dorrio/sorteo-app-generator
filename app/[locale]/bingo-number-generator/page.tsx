@@ -12,7 +12,6 @@ const MainApp = nextDynamic(
   { loading: () => <AppSkeleton /> }
 );
 import { JsonLd } from '@/components/seo/json-ld';
-export const dynamic = 'force-static';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

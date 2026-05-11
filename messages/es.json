@@ -270,12 +270,6 @@
         "image_copied": "¡Imagen Copiada!",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* es el GANADOR!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
         "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n¡*{name}* ganó *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nCrea tu propio sorteo gratis aquí 👇",
-        "share": {
-            "telegram": "Telegram",
-            "linkedin": "LinkedIn",
-            "telegram_aria": "Compartir en Telegram",
-            "linkedin_aria": "Compartir en LinkedIn"
-        },
         "result": {
             "valid_title": "ID Válido",
             "copied": "¡Copiado!",

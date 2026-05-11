@@ -217,7 +217,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     <AnimatePresence>
       <motion.div
         className="fixed inset-0 z-50 flex items-center justify-center"
-        initial={{ opacity: 0 }}
+        initial={false}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         role="dialog"
@@ -227,7 +227,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
       >
         <motion.div
           className="absolute inset-0 bg-background/98 backdrop-blur-xl"
-          initial={{ opacity: 0 }}
+          initial={false}
           animate={{ opacity: 1 }}
         />
 
@@ -286,7 +286,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
           {winner.verificationId && (
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={false}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
               className="mb-8 flex flex-col items-center gap-2"
@@ -304,7 +304,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
           )}
 
           <motion.p
-            initial={{ opacity: 0 }}
+            initial={false}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
             className="text-2xl text-muted-foreground mb-12"

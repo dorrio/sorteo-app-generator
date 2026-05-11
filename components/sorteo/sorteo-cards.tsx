@@ -148,7 +148,7 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
               </motion.p>
               {showFinal && (
                 <motion.p
-                  initial={{ opacity: 0 }}
+                  initial={false}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
                   className="text-sm text-muted-foreground mt-2"

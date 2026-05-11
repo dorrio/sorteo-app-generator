@@ -142,7 +142,7 @@ export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
         <AnimatePresence>
           {showWinner && finalWinner && (
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={false}
               animate={{ opacity: 1 }}
               className="absolute inset-0 flex items-center justify-center"
               style={{ backgroundColor: `${theme.backgroundColor}f5` }}
@@ -156,7 +156,7 @@ export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
                 <motion.div
                   className="text-xs font-mono mb-2 tracking-widest"
                   style={{ color: theme.primaryColor }}
-                  initial={{ opacity: 0 }}
+                  initial={false}
                   animate={{ opacity: [0, 1, 1, 0.5, 1] }}
                   transition={{ duration: 0.5 }}
                 >
@@ -182,7 +182,7 @@ export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
                 <motion.div
                   className="mt-2 text-xs font-mono"
                   style={{ color: `${theme.primaryColor}80` }}
-                  initial={{ opacity: 0 }}
+                  initial={false}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
                 >

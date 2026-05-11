@@ -35,7 +35,7 @@ export function CountdownAnimation({ onComplete }: CountdownAnimationProps) {
   return (
     <motion.div
       className="fixed inset-0 z-40 flex items-center justify-center bg-background/95 backdrop-blur-xl"
-      initial={{ opacity: 0 }}
+      initial={false}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >

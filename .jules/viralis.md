@@ -34,3 +34,8 @@
 **Hypothesis:** If we change the "Copy Link" action to copy *only* the URL instead of prefixing it with descriptive text (`${text} ${url}`), we will prevent "404 Not Found" or invalid URL errors that occur when users paste the copied text directly into their browser's address bar.
 **Implementation:** Updated `copyToClipboard` in `components/ui/share-button.tsx`, `components/sorteo/winner-ceremony.tsx`, and `app/[locale]/verify/verify-content.tsx` to copy `url` or `shareUrl` strictly without any preceding text.
 **Outcome:** Expect a reduction in broken links and higher conversion rate from direct link sharing via copy-paste.
+
+## 2026-05-24 - [VerifyPage/Dropdowns]
+**Hypothesis:** If we add Telegram and LinkedIn sharing options to the fallback DropdownMenu component in `VerifyContent`, we will tap into professional networks and private messaging clusters directly from the verification page, matching the K-Factor potential of the core application.
+**Implementation:** Updated `app/[locale]/verify/verify-content.tsx` to include `telegramUrl` and `linkedinUrl` computations, and added `DropdownMenuItem` entries for both platforms, bringing it to feature parity with `ShareButton` and `WinnerCeremony`.
+**Outcome:** Expect increased sharing across professional circles and encrypted messaging from verified winners, leading to a higher conversion rate for new users checking verification results.

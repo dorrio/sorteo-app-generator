@@ -9,7 +9,7 @@ import { SiteFooter } from "@/components/sorteo/site-footer";
 import { JsonLd } from '@/components/seo/json-ld';
 const MainApp = nextDynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
-  { loading: () => <AppSkeleton /> }
+  { loading: () => <AppSkeleton visualization="roulette" /> }
 );
 
 

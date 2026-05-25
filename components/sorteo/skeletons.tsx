@@ -100,7 +100,16 @@ export function BoxSkeleton() {
     )
 }
 
-export function AppSkeleton() {
+export function AppSkeleton({ visualization = "slot-machine" }: { visualization?: string }) {
+    const VisualizationSkeleton = {
+        "roulette": WheelSkeleton,
+        "grid": GridSkeleton,
+        "cards": CardsSkeleton,
+        "slot-machine": SlotSkeleton,
+        "cascade": BoxSkeleton,
+        "matrix": BoxSkeleton,
+    }[visualization] || SlotSkeleton;
+
     return (
         <div className="min-h-screen bg-background relative overflow-hidden flex flex-col">
             {/* Header Skeleton */}
@@ -132,7 +141,7 @@ export function AppSkeleton() {
 
                         {/* Visualization Placeholder */}
                         <div className="w-full max-w-2xl h-[300px] flex items-center justify-center">
-                           <SlotSkeleton />
+                           <VisualizationSkeleton />
                         </div>
 
                         {/* Button Placeholder */}

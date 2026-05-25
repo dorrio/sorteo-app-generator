@@ -81,6 +81,26 @@ export function SeoContent() {
       tGlobal('feature_3'),
       tGlobal('feature_4'),
       tGlobal('feature_5')
+    ],
+    about: {
+      '@type': 'Thing',
+      name: 'Giveaway Tool',
+      description: 'A tool for managing and executing random giveaways and contests.'
+    },
+    mentions: [
+      {
+        '@type': 'Thing',
+        name: 'Random Number Generation',
+        sameAs: 'https://en.wikipedia.org/wiki/Random_number_generation'
+      },
+      {
+        '@type': 'Thing',
+        name: 'Social Media Giveaways'
+      }
+    ],
+    sameAs: [
+      'https://github.com/sorteopro',
+      'https://twitter.com/sorteopro'
     ]
   }
 

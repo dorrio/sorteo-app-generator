@@ -63,3 +63,8 @@
 **Gap:** The SoftwareApplication Schema defined `applicationCategory` globally as `MultimediaApplication`, which is inaccurate for a utility tool. Also, `robots.txt` and `next-sitemap.config.js` only whitelisted `GPTBot`, blocking other major AI search crawlers.
 **Action:** Changed `applicationCategory` in translation strings to `UtilitiesApplication`. Whitelisted `PerplexityBot`, `ClaudeBot`, `Google-Extended`, `anthropic-ai`, `Omgilibot`, and `Omgili` in `robots.txt` and `next-sitemap.config.js`.
 **GEO Impact:** Fixed schema validity to accurately describe the application type. Ensured complete crawlability by all major LLM bots for inclusion in Generative AI results.
+
+## 2025-06-18 - [Strategy/Schema]
+**Gap:** Missing Knowledge Graph linkages (`about`, `mentions`, `sameAs`) in the global `SoftwareApplication` schema, reducing the application's E-E-A-T score and entity recognition for LLMs.
+**Action:** Injected `about`, `mentions`, and `sameAs` properties to `SoftwareApplication` in `seo-content.tsx` to connect to recognized entities like "Random number generation".
+**GEO Impact:** Solidified entity recognition for AI bots, establishing Sorteo Pro as a recognized brand in the Knowledge Graph and enhancing AI citations.

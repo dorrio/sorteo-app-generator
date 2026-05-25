@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test';
 
 // Core Web Vitals budget — local production build, one locale is enough
-// since all pages share the same layout/CSS/JS critical path. The budgets
-// use Google's "good" thresholds, which we should comfortably clear on
-// localhost; this catches regressions that would push real users over the
-// threshold, not performance improvements.
+// since all pages share the same layout/CSS/JS critical path. FCP is set to
+// an aggressive 1000ms target (Google's "good" threshold is 1800ms) to enforce
+// excellent performance. LCP (2500ms) aligns with Google's "good" threshold.
+// CLS and TTFB are set to catch regressions, not measure improvements.
 type Budget = {
   /** Largest Contentful Paint — largest above-the-fold element painted. */
   lcp: number;

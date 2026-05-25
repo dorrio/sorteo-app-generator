@@ -7,6 +7,7 @@ export function SeoContent() {
   const t = useTranslations("SEOContent")
   const tSpecs = useTranslations("QuickSpecs")
   const tGlobal = useTranslations("GlobalSchema")
+  const tSorteoSeo = useTranslations("SorteoSeo")
 
   const features = [
     {
@@ -84,18 +85,18 @@ export function SeoContent() {
     ],
     about: {
       '@type': 'Thing',
-      name: 'Giveaway Tool',
-      description: 'A tool for managing and executing random giveaways and contests.'
+      name: tSorteoSeo('about.name'),
+      description: tSorteoSeo('about.description')
     },
     mentions: [
       {
         '@type': 'Thing',
-        name: 'Random Number Generation',
+        name: tSorteoSeo('mentions.randomNumber.name'),
         sameAs: 'https://en.wikipedia.org/wiki/Random_number_generation'
       },
       {
         '@type': 'Thing',
-        name: 'Social Media Giveaways'
+        name: tSorteoSeo('mentions.socialMedia.name')
       }
     ],
     sameAs: [

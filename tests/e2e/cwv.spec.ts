@@ -18,7 +18,7 @@ type Budget = {
 
 const BUDGET: Budget = {
   lcp: 2500,
-  fcp: 1800,
+  fcp: 1000,
   cls: 0.1,
   ttfb: 800,
 };

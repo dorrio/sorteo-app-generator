@@ -9,7 +9,7 @@ import { Glossary } from '@/components/sorteo/glossary';
 
 const MainApp = nextDynamic(
   () => import('@/components/sorteo/main-app').then((mod) => mod.MainApp),
-  { loading: () => <AppSkeleton /> }
+  { loading: () => <AppSkeleton visualization="slot-machine" /> }
 );
 import { JsonLd } from '@/components/seo/json-ld';
 

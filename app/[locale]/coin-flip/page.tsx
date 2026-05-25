@@ -10,7 +10,7 @@ import { SiteFooter } from "@/components/sorteo/site-footer";
 
 const MainApp = dynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
-  { loading: () => <AppSkeleton /> }
+  { loading: () => <AppSkeleton visualization="cards" /> }
 )
 
 export function generateStaticParams() {

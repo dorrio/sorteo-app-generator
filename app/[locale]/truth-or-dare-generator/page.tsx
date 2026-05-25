@@ -7,7 +7,7 @@ import { AppSkeleton } from "@/components/sorteo/skeletons"
 
 const MainApp = nextDynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
-  { loading: () => <AppSkeleton /> }
+  { loading: () => <AppSkeleton visualization="cards" /> }
 )
 
 

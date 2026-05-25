@@ -7,6 +7,7 @@ export function SeoContent() {
   const t = useTranslations("SEOContent")
   const tSpecs = useTranslations("QuickSpecs")
   const tGlobal = useTranslations("GlobalSchema")
+  const tSorteoSeo = useTranslations("SorteoSeo")
 
   const features = [
     {
@@ -81,6 +82,26 @@ export function SeoContent() {
       tGlobal('feature_3'),
       tGlobal('feature_4'),
       tGlobal('feature_5')
+    ],
+    about: {
+      '@type': 'Thing',
+      name: tSorteoSeo('about.name'),
+      description: tSorteoSeo('about.description')
+    },
+    mentions: [
+      {
+        '@type': 'Thing',
+        name: tSorteoSeo('mentions.randomNumber.name'),
+        sameAs: 'https://en.wikipedia.org/wiki/Random_number_generation'
+      },
+      {
+        '@type': 'Thing',
+        name: tSorteoSeo('mentions.socialMedia.name')
+      }
+    ],
+    sameAs: [
+      'https://github.com/sorteopro',
+      'https://twitter.com/sorteopro'
     ]
   }
 

@@ -88,6 +88,20 @@
         "feature_4": "Instant Verification",
         "feature_5": "Provably Fair RNG"
     },
+    "SorteoSeo": {
+        "about": {
+            "name": "Giveaway Tool",
+            "description": "A tool for managing and executing random giveaways and contests."
+        },
+        "mentions": {
+            "randomNumber": {
+                "name": "Random Number Generation"
+            },
+            "socialMedia": {
+                "name": "Social Media Giveaways"
+            }
+        }
+    },
     "WheelPage": {
         "title": "Wheel of Names | Random Picker Wheel (Free & No Ads)",
         "description": "Spin the Wheel of Names to pick a random winner. Free, customizable, and fair. The best random picker wheel for teachers, raffles, and giveaways."

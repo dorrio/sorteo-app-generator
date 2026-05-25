@@ -88,6 +88,20 @@
         "feature_4": "Verificación Instantánea",
         "feature_5": "RNG Probablemente Justo"
     },
+    "SorteoSeo": {
+        "about": {
+            "name": "Herramienta de Sorteos",
+            "description": "Una herramienta para gestionar y ejecutar sorteos y concursos aleatorios."
+        },
+        "mentions": {
+            "randomNumber": {
+                "name": "Generación de Números Aleatorios"
+            },
+            "socialMedia": {
+                "name": "Sorteos en Redes Sociales"
+            }
+        }
+    },
     "WheelPage": {
         "title": "Ruleta de Nombres | Selector Aleatorio (Gratis y sin Anuncios)",
         "description": "Gira la Ruleta de Nombres para elegir un ganador al azar. Gratis, personalizable y justa. La mejor ruleta aleatoria para profesores, rifas y sorteos."

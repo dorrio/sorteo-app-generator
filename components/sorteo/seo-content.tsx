@@ -115,9 +115,9 @@ export function SeoContent() {
         {/* Direct Answer Block (ChatGPT Bait) */}
         <div className="space-y-6">
           <div className="space-y-4">
-            <h2 className="text-3xl font-bold tracking-tight">{t("what_is_title")}</h2>
+            <h2 className="text-3xl font-bold tracking-tight">{t("direct_answer_title")}</h2>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
-              {t.rich("what_is_text", {
+              {t.rich("direct_answer_text", {
                 b: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
                 wheel: (chunks) => <Link href="/wheel-of-names" className="font-semibold text-primary hover:underline">{chunks}</Link>,
                 insta: (chunks) => <Link href="/instagram-comment-picker" className="font-semibold text-primary hover:underline">{chunks}</Link>,

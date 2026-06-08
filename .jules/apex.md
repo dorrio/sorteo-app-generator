@@ -73,3 +73,8 @@
 **Gap:** The SEO Content block, Wheel Geo, and Yes/No Geo components were using specific keys (`what_is_wheel`, `what_is_title`) for the Direct Answer block, rather than the standardized `direct_answer_title` and `direct_answer_text`.
 **Action:** Replaced `what_is_*` keys with `direct_answer_title` and `direct_answer_text` in translation files (`en.json`, `es.json`, `pt.json`) and updated their respective components.
 **GEO Impact:** Unified semantic structure across all GEO components, reinforcing the predictability of our content structure and making it easier to parse Direct Answer blocks consistently for ChatGPT/LLMs.
+
+## 2026-06-18 - [Strategy/Schema]
+**Gap:** While `seo-content.tsx` had Knowledge Graph linkages (`about`, `mentions`, `sameAs`), the global `layout.tsx` and all 15 individual tool pages (`page.tsx`) were missing these properties in their `SoftwareApplication` schemas. This fragmented the entity recognition.
+**Action:** Injected `about`, `mentions`, and `sameAs` properties into the `SoftwareApplication` schema across `layout.tsx` and all tool pages, utilizing the `SorteoSeo` namespace.
+**GEO Impact:** Unified and solidified entity recognition for AI bots across the entire site, ensuring consistent Knowledge Graph mapping for all tools and the global application.

@@ -1,81 +1,88 @@
-import { getBaseUrl } from "@/lib/config"
-import { ComparisonTable } from '@/components/versus/ComparisonTable';
-import { VersusFAQ } from '@/components/versus/FAQ';
-import { SiteFooter } from '@/components/sorteo/site-footer';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { Link, routing } from '@/i18n/routing';
-import { HelpCircle } from 'lucide-react';
-import { JsonLd } from '@/components/seo/json-ld';
+import { getBaseUrl } from "@/lib/config";
+import { ComparisonTable } from "@/components/versus/ComparisonTable";
+import { VersusFAQ } from "@/components/versus/FAQ";
+import { SiteFooter } from "@/components/sorteo/site-footer";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link, routing } from "@/i18n/routing";
+import { HelpCircle } from "lucide-react";
+import { JsonLd } from "@/components/seo/json-ld";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'VersusWheel' });
+  const t = await getTranslations({ locale, namespace: "VersusWheel" });
 
   return {
-    title: t('title'),
-    description: t('description'),
+    title: t("title"),
+    description: t("description"),
     alternates: {
-        canonical: `/alternativa-wheel-of-names`,
-        languages: {
-          en: `/en/alternativa-wheel-of-names`,
-          es: `/es/alternativa-wheel-of-names`,
-          pt: `/pt/alternativa-wheel-of-names`,
-        },
-    }
+      canonical: `/alternativa-wheel-of-names`,
+      languages: {
+        en: `/en/alternativa-wheel-of-names`,
+        es: `/es/alternativa-wheel-of-names`,
+        pt: `/pt/alternativa-wheel-of-names`,
+      },
+    },
   };
 }
 
 export default async function VersusWheelPage({
   params,
 }: {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'VersusWheel' });
-  const tSchema = await getTranslations({ locale, namespace: 'Schema' });
-  const tGlobal = await getTranslations({ locale, namespace: 'GlobalSchema' });
+  const t = await getTranslations({ locale, namespace: "VersusWheel" });
+  const tSchema = await getTranslations({ locale, namespace: "Schema" });
+  const tGlobal = await getTranslations({ locale, namespace: "GlobalSchema" });
   const baseUrl = getBaseUrl();
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [{
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": `${baseUrl}/${locale}`
-    }, {
-      "@type": "ListItem",
-      "position": 2,
-      "name": t('header_tagline'),
-      "item": `${baseUrl}/${locale}/alternativa-wheel-of-names`
-    }]
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: `${baseUrl}/${locale}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: t("header_tagline"),
+        item: `${baseUrl}/${locale}/alternativa-wheel-of-names`,
+      },
+    ],
   };
 
   const softwareApplicationJsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Sorteo Pro - Better Wheel of Names Alternative",
-    "applicationCategory": tGlobal('applicationCategory'),
-    "applicationSubCategory": tGlobal('applicationSubCategory'),
-    "operatingSystem": "Web, iOS, Android",
-    "offers": {
+    name: "Sorteo Pro - Better Wheel of Names Alternative",
+    applicationCategory: tGlobal("applicationCategory"),
+    applicationSubCategory: tGlobal("applicationSubCategory"),
+    operatingSystem: "Web, iOS, Android",
+    offers: {
       "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
+      price: "0",
+      priceCurrency: "USD",
     },
-    "description": t('description'),
-    "featureList": [
-      tSchema('wheel_features.customizable'),
-      tSchema('wheel_features.random'),
-      tSchema('wheel_features.no_ads'),
-      tSchema('wheel_features.free')
-    ]
+    description: t("description"),
+    featureList: [
+      tSchema("wheel_features.customizable"),
+      tSchema("wheel_features.random"),
+      tSchema("wheel_features.no_ads"),
+      tSchema("wheel_features.free"),
+    ],
   };
 
   return (
@@ -85,32 +92,37 @@ export default async function VersusWheelPage({
       {/* Pattern 2: The SEO Header Injection */}
       <header className="bg-background border-b border-border/50 py-20 px-4 text-center">
         <div className="max-w-4xl mx-auto">
-            <span className="inline-block py-1 px-3 rounded-full bg-primary/20 text-primary border border-primary/40 text-xs font-bold uppercase tracking-wider mb-4">
-                {t('header_tagline')}
-            </span>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
-                {t('header_title_part1')} <span className="text-primary">{t('header_title_part2')}</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                {t('header_desc')}
-            </p>
+          <span className="inline-block py-1 px-3 rounded-full bg-primary/20 text-primary border border-primary/40 text-xs font-bold uppercase tracking-wider mb-4">
+            {t("header_tagline")}
+          </span>
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+            {t("header_title_part1")}{" "}
+            <span className="text-primary">{t("header_title_part2")}</span>
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            {t("header_desc")}
+          </p>
         </div>
       </header>
 
       {/* Direct Answer Block (GEO) */}
       <section className="bg-background relative z-20 -mt-10 mb-16 px-4">
         <div className="max-w-3xl mx-auto bg-card border border-border/50 rounded-2xl p-8 shadow-xl">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
-                <span className="bg-primary/20 p-2 rounded-lg">
-                    <HelpCircle className="w-5 h-5 text-primary" />
-                </span>
-                {t('direct_answer_title')}
-            </h2>
-            <div className="prose prose-invert prose-lg max-w-none text-muted-foreground leading-relaxed">
-                {t.rich('direct_answer_text', {
-                    strong: (chunks) => <strong className="text-foreground font-semibold bg-primary/10 px-1 rounded">{chunks}</strong>
-                })}
-            </div>
+          <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
+            <span className="bg-primary/20 p-2 rounded-lg">
+              <HelpCircle className="w-5 h-5 text-primary" />
+            </span>
+            {t("direct_answer_title")}
+          </h2>
+          <div className="prose prose-invert prose-lg max-w-none text-muted-foreground leading-relaxed">
+            {t.rich("direct_answer_text", {
+              strong: (chunks) => (
+                <strong className="text-foreground font-semibold bg-primary/10 px-1 rounded">
+                  {chunks}
+                </strong>
+              ),
+            })}
+          </div>
         </div>
       </section>
 
@@ -122,49 +134,57 @@ export default async function VersusWheelPage({
       {/* Persuasion Layer */}
       <section className="py-16 px-4 bg-muted/30">
         <div className="max-w-3xl mx-auto text-center">
-            {/* Direct Answer Block (GEO) */}
-            <div className="mb-16 bg-card/50 border border-primary/20 rounded-2xl p-8 shadow-sm">
-                <h2 className="text-2xl font-bold text-foreground mb-4">
-                   {t('why_us.direct_answer_title')}
-                </h2>
-                <div className="prose prose-invert prose-lg max-w-none text-muted-foreground leading-relaxed">
-                     {t.rich('why_us.direct_answer_text', {
-                        strong: (chunks) => <strong className="text-primary font-semibold">{chunks}</strong>
-                    })}
-                </div>
+          {/* Direct Answer Block (GEO) */}
+          <div className="mb-16 bg-card/50 border border-primary/20 rounded-2xl p-8 shadow-sm">
+            <h2 className="text-2xl font-bold text-foreground mb-4">
+              {t("why_us.direct_answer_title")}
+            </h2>
+            <div className="prose prose-invert prose-lg max-w-none text-muted-foreground leading-relaxed">
+              {t.rich("why_us.direct_answer_text", {
+                strong: (chunks) => (
+                  <strong className="text-primary font-semibold">
+                    {chunks}
+                  </strong>
+                ),
+              })}
             </div>
+          </div>
 
-            <h2 className="text-3xl font-bold text-foreground mb-6">
-                {t('why_us.title')}
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                {t('why_us.p1')}
-            </p>
-            <p className="text-lg text-muted-foreground mb-12 leading-relaxed font-medium">
-                {t('why_us.p2')}
-            </p>
+          <h2 className="text-3xl font-bold text-foreground mb-6">
+            {t("why_us.title")}
+          </h2>
+          <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            {t("why_us.p1")}
+          </p>
+          <p className="text-lg text-muted-foreground mb-12 leading-relaxed font-medium">
+            {t("why_us.p2")}
+          </p>
 
-             <h2 className="text-3xl font-bold text-foreground mb-6">
-                {t('why_us.title_2')}
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                {t('why_us.p3')}
-            </p>
+          <h2 className="text-3xl font-bold text-foreground mb-6">
+            {t("why_us.title_2")}
+          </h2>
+          <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            {t("why_us.p3")}
+          </p>
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-4 bg-gradient-to-br from-background to-secondary/50 border-t border-border text-center">
-         <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold mb-4 text-foreground">{t('cta.title')}</h2>
-            <p className="text-2xl text-muted-foreground mb-8">{t('cta.subtitle')}</p>
-            <Link
-                href="/"
-                className="inline-block bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-10 rounded-full text-xl transition-all transform hover:scale-105 shadow-lg shadow-primary/20"
-            >
-                {t('cta.button')}
-            </Link>
-         </div>
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4 text-foreground">
+            {t("cta.title")}
+          </h2>
+          <p className="text-2xl text-muted-foreground mb-8">
+            {t("cta.subtitle")}
+          </p>
+          <Link
+            href="/"
+            className="inline-block bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-10 rounded-full text-xl transition-all transform hover:scale-105 shadow-lg shadow-primary/20"
+          >
+            {t("cta.button")}
+          </Link>
+        </div>
       </section>
 
       {/* Pattern 3: The Objection Handler FAQ */}

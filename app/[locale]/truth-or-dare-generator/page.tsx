@@ -1,23 +1,26 @@
-import { getTranslations, setRequestLocale } from "next-intl/server"
-import { getBaseUrl } from "@/lib/config"
-import { routing } from "@/i18n/routing"
-import { JsonLd } from '@/components/seo/json-ld';
-import nextDynamic from 'next/dynamic'
-import { AppSkeleton } from "@/components/sorteo/skeletons"
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getBaseUrl } from "@/lib/config";
+import { routing } from "@/i18n/routing";
+import { JsonLd } from "@/components/seo/json-ld";
+import nextDynamic from "next/dynamic";
+import { AppSkeleton } from "@/components/sorteo/skeletons";
 
 const MainApp = nextDynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
-  { loading: () => <AppSkeleton visualization="cards" /> }
-)
-
+  { loading: () => <AppSkeleton visualization="cards" /> },
+);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'TruthPage' });
+  const t = await getTranslations({ locale, namespace: "TruthPage" });
   const baseUrl = getBaseUrl();
 
   return {
@@ -35,32 +38,39 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       title: t("title"),
       description: t("description"),
       url: `${baseUrl}/${locale}/truth-or-dare-generator`,
-    }
+    },
   };
 }
 
-export default async function TruthOrDarePage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function TruthOrDarePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
   setRequestLocale(locale);
 
   // We fetch translations server-side for metadata and initial render
-  const t = await getTranslations({ locale, namespace: 'TruthPage' });
-  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
-  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
+  const t = await getTranslations({ locale, namespace: "TruthPage" });
+  const tShare = await getTranslations({ locale, namespace: "ShareContent" });
+  const tWinner = await getTranslations({
+    locale,
+    namespace: "WinnerCeremony",
+  });
 
   // Schema: SoftwareApplication
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
     name: t("title"),
     description: t("description"),
-    applicationCategory: 'EntertainmentApplication',
-    operatingSystem: 'All',
+    applicationCategory: "EntertainmentApplication",
+    operatingSystem: "All",
     offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD'
-    }
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
   };
 
   // Pre-fetch all 20 truths and 20 dares from the dictionary to pass down to Client Island
@@ -78,16 +88,18 @@ export default async function TruthOrDarePage({ params }: { params: Promise<{ lo
         initialSubtitle={t("subtitle")}
         shareTitle={tShare("truth_title")}
         shareText={tShare("truth_text")}
-        customShareTextTemplate={tShare("custom_share_text", { title: "{title}" })}
+        customShareTextTemplate={tShare("custom_share_text", {
+          title: "{title}",
+        })}
         shareTranslations={{
-          share: tWinner('share_menu'),
-          copy: tWinner('copy_text'),
-          copied: tWinner('copied'),
-          shareOn: tWinner('share_on')
+          share: tWinner("share_menu"),
+          copy: tWinner("copy_text"),
+          copied: tWinner("copied"),
+          shareOn: tWinner("share_on"),
         }}
         initialOptions={{
           truths: JSON.stringify(truths),
-          dares: JSON.stringify(dares)
+          dares: JSON.stringify(dares),
         }}
       />
     </>

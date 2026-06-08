@@ -76,7 +76,10 @@
         "og_title": "Sorteo Pro | Premium Giveaways for Influencers",
         "og_description": "Create epic giveaways with cinematic animations",
         "verify_title": "🏆 OFFICIAL WINNER ANNOUNCEMENT | Verified by Sorteo Pro",
-        "verify_description": "Check who won! 100% Authentic and Verified by Sorteo Pro. Click to see the official certificate."
+        "verify_description": "Check who won! 100% Authentic and Verified by Sorteo Pro. Click to see the official certificate.",
+        "verify_winner_with_custom_title": "🏆 {winnerName} won {customTitle} | Verified by Sorteo Pro",
+        "verify_winner_announcement": "🏆 WINNER ANNOUNCEMENT: {winnerName} | Verified by Sorteo Pro",
+        "verify_description_with_id": "✅ Official Result for ID: {verificationId}. Click to verify the winner certificate."
     },
     "GlobalSchema": {
         "applicationCategory": "UtilitiesApplication",
@@ -284,6 +287,14 @@
         "image_copied": "Image Copied!",
         "share_proof_text": "*OFFICIAL RESULT* 🏆\n\n*{name}* is the WINNER!\n\n✅ Verified by Sorteo Pro.\n\nRun your own free giveaway here 👇",
         "share_proof_text_custom": "*OFFICIAL RESULT* 🏆\n\n*{name}* won *{title}*!\n\n✅ Verified by Sorteo Pro.\n\nRun your own free giveaway here 👇",
+        "fallback_name": "Someone",
+        "copy_link": "Copy Link",
+        "twitter_x": "Twitter / X",
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "whatsapp": "WhatsApp",
+        "telegram": "Telegram",
+        "linkedin": "LinkedIn",
         "result": {
             "valid_title": "Valid ID",
             "copied": "Copied!",

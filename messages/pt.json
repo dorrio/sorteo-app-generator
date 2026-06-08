@@ -76,7 +76,10 @@
         "og_title": "Sorteio Pro | Sorteios Premium para Influencers",
         "og_description": "Crie sorteios épicos com animações cinematográficas",
         "verify_title": "🏆 Resultado Oficial do Sorteio | Verificado por Sorteio Pro",
-        "verify_description": "Veja quem ganhou! 100% Auténtico e Verificado por Sorteio Pro. Clique para ver o certificado oficial."
+        "verify_description": "Veja quem ganhou! 100% Auténtico e Verificado por Sorteio Pro. Clique para ver o certificado oficial.",
+        "verify_winner_with_custom_title": "🏆 {winnerName} ganhou {customTitle} | Verificado por Sorteio Pro",
+        "verify_winner_announcement": "🏆 ANÚNCIO DO VENCEDOR: {winnerName} | Verificado por Sorteio Pro",
+        "verify_description_with_id": "✅ Resultado Oficial para ID: {verificationId}. Clique para verificar o certificado do vencedor."
     },
     "GlobalSchema": {
         "applicationCategory": "UtilitiesApplication",
@@ -283,6 +286,15 @@
         "copy_image": "Copiar Imagem",
         "image_copied": "Imagem Copiada!",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou o sorteio!\n\n✅ Verificado por Sorteio Pro.\n\nVeja o certificado e crie o seu aqui 👇",
+        "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou *{title}*!\n\n✅ Verificado por Sorteio Pro.\n\nCrie o seu próprio sorteio grátis aqui 👇",
+        "fallback_name": "Alguém",
+        "copy_link": "Copiar Link",
+        "twitter_x": "Twitter / X",
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "whatsapp": "WhatsApp",
+        "telegram": "Telegram",
+        "linkedin": "LinkedIn",
         "result": {
             "valid_title": "ID Válido",
             "copied": "Copiado!",

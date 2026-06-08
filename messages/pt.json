@@ -312,8 +312,8 @@
         "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nVeja o certificado e crie o seu aqui 👇"
     },
     "SEOContent": {
-        "what_is_title": "O que é o Sorteio Pro?",
-        "what_is_text": "O <b>Sorteio Pro</b> é a ferramenta definitiva para <b>sorteios grátis</b>. Permite escolher <b>vencedores aleatórios</b> de listas ilimitadas para concursos do <insta>Instagram</insta>, <b>YouTube</b> e <b>TikTok</b>. Com <rng>RNG criptograficamente seguro</rng>, <wheel>Roleta de Nomes</wheel> e <verify>verificação instantânea</verify>, é a alternativa segura e sem login aos serviços pagos.",
+        "direct_answer_title": "O que é o Sorteio Pro?",
+        "direct_answer_text": "O <b>Sorteio Pro</b> é a ferramenta definitiva para <b>sorteios grátis</b>. Permite escolher <b>vencedores aleatórios</b> de listas ilimitadas para concursos do <insta>Instagram</insta>, <b>YouTube</b> e <b>TikTok</b>. Com <rng>RNG criptograficamente seguro</rng>, <wheel>Roleta de Nomes</wheel> e <verify>verificação instantânea</verify>, é a alternativa segura e sem login aos serviços pagos.",
         "features_title": "Principais Recursos",
         "feature_1_title": "Justo e Transparente",
         "feature_1_desc": "Usa geração de números aleatórios criptograficamente seguros para garantir justiça.",
@@ -334,8 +334,8 @@
     "WheelGeo": {
         "title": "Roleta de Nomes Aleatória",
         "description": "Procurando por uma <b>Roleta de Nomes</b>? O Sorteio Pro inclui uma <b>Roleta de Escolha Aleatória</b> totalmente personalizável, justa e gratuita.",
-        "what_is_wheel": "O que é uma Roleta de Nomes?",
-        "what_is_wheel_answer": "Uma <b>Roleta de Nomes</b> é uma ferramenta digital que escolhe um vencedor aleatório girando uma roda virtual. É popularmente usada por professores, influenciadores e organizadores de eventos para a <rng>seleção aleatória</rng>. O Sorteio Pro melhora essa experiência com efeitos cinematográficos.",
+        "direct_answer_title": "O que é uma Roleta de Nomes?",
+        "direct_answer_text": "Uma <b>Roleta de Nomes</b> é uma ferramenta digital que escolhe um vencedor aleatório girando uma roda virtual. É popularmente usada por professores, influenciadores e organizadores de eventos para a <rng>seleção aleatória</rng>. O Sorteio Pro melhora essa experiência com efeitos cinematográficos.",
         "features_list": "Recursos da Roleta",
         "feature_1": "100% Aleatório e Justo",
         "feature_2": "Cores e Temas Personalizados",
@@ -602,8 +602,8 @@
     },
     "YesNoGeo": {
         "title": "Roleta Sim ou Não",
-        "what_is_title": "O que é uma Roleta Sim ou Não?",
-        "what_is_answer": "Uma <b>Roleta Sim ou Não</b> é uma ferramenta simples para tomar decisões. Funciona como jogar uma moeda, mas com uma roda visual. <b>Sorteo Pro</b> oferece uma chance justa de 50/50 em cada giro usando RNG seguro.",
+        "direct_answer_title": "O que é uma Roleta Sim ou Não?",
+        "direct_answer_text": "Uma <b>Roleta Sim ou Não</b> é uma ferramenta simples para tomar decisões. Funciona como jogar uma moeda, mas com uma roda visual. <b>Sorteo Pro</b> oferece uma chance justa de 50/50 em cada giro usando RNG seguro.",
         "features_list": "Recursos da Roleta",
         "feature_1": "Sim/Não Simples",
         "feature_2": "Sem Anúncios",

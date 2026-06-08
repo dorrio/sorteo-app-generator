@@ -33,8 +33,8 @@ export function YesNoGeo() {
 
   const faqs = [
     {
-      question: t('what_is_title'),
-      answer: t('what_is_answer'),
+      question: t('direct_answer_title'),
+      answer: t('direct_answer_text'),
     },
     {
       question: t('faq_1_q'),
@@ -92,11 +92,11 @@ export function YesNoGeo() {
            </div>
 
            <h2 className="text-3xl font-bold tracking-tight text-foreground">
-             {t('what_is_title')}
+             {t('direct_answer_title')}
            </h2>
 
            <p className="text-lg text-muted-foreground leading-relaxed">
-             {t.rich("what_is_answer", {
+             {t.rich("direct_answer_text", {
                 b: (chunks) => <strong className="text-foreground font-semibold">{chunks}</strong>
              })}
            </p>

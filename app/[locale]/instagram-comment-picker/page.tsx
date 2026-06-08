@@ -127,6 +127,23 @@ export default async function InstagramPickerPage({
       ratingValue: "4.8",
       ratingCount: "8300",
     },
+    about: {
+      "@type": "Thing",
+      name: tSorteoSeo("about.name"),
+      description: tSorteoSeo("about.description"),
+    },
+    mentions: [
+      {
+        "@type": "Thing",
+        name: tSorteoSeo("mentions.randomNumber.name"),
+        sameAs: "https://en.wikipedia.org/wiki/Random_number_generation",
+      },
+      {
+        "@type": "Thing",
+        name: tSorteoSeo("mentions.socialMedia.name"),
+      },
+    ],
+    sameAs: ["https://github.com/sorteopro", "https://twitter.com/sorteopro"],
   };
 
   const breadcrumbSchema = {
@@ -146,23 +163,6 @@ export default async function InstagramPickerPage({
         item: `${baseUrl}/${locale}/instagram-comment-picker`,
       },
     ],
-    about: {
-      "@type": "Thing",
-      name: tSorteoSeo("about.name"),
-      description: tSorteoSeo("about.description"),
-    },
-    mentions: [
-      {
-        "@type": "Thing",
-        name: tSorteoSeo("mentions.randomNumber.name"),
-        sameAs: "https://en.wikipedia.org/wiki/Random_number_generation",
-      },
-      {
-        "@type": "Thing",
-        name: tSorteoSeo("mentions.socialMedia.name"),
-      },
-    ],
-    sameAs: ["https://github.com/sorteopro", "https://twitter.com/sorteopro"],
   };
 
   const shareTranslations = {

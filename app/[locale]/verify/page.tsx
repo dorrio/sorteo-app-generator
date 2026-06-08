@@ -53,14 +53,17 @@ export async function generateMetadata({
   let title = t("verify_title");
   if (winnerName) {
     if (customTitle) {
-      title = `🏆 ${winnerName} won ${customTitle} | Verified by Sorteo Pro`;
+      title = t("verify_winner_with_custom_title", {
+        winnerName,
+        customTitle,
+      });
     } else {
-      title = `🏆 WINNER ANNOUNCEMENT: ${winnerName} | Verified by Sorteo Pro`;
+      title = t("verify_winner_announcement", { winnerName });
     }
   }
 
   const description = verificationId
-    ? `✅ Official Result for ID: ${verificationId}. Click to verify the winner certificate.`
+    ? t("verify_description_with_id", { verificationId })
     : t("verify_description");
 
   // Generate dynamic OG image URL
@@ -125,7 +128,12 @@ export async function generateMetadata({
   };
 }
 
-export default function VerifyPage() {
+export default async function VerifyPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   return (
     <Suspense
       fallback={

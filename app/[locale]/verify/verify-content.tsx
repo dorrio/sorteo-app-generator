@@ -87,16 +87,30 @@ export function VerifyContent() {
     );
 
     // Show sticky CTA on scroll if result is visible
+    let ticking = false;
+    let rafId: number | null = null;
+
     const handleScroll = () => {
-      if (result && window.scrollY > 150) {
-        setIsStickyVisible(true);
-      } else {
-        setIsStickyVisible(false);
+      if (!ticking) {
+        rafId = requestAnimationFrame(() => {
+          if (result && window.scrollY > 150) {
+            setIsStickyVisible(true);
+          } else {
+            setIsStickyVisible(false);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+    };
   }, [result]);
 
   // Auto-verify if ID is in URL
@@ -164,7 +178,9 @@ export function VerifyContent() {
   // Construct Share Data
   const baseUrl = getBaseUrl();
   const winnerName =
-    result?.participant?.name || searchParams.get("name") || "Someone";
+    result?.participant?.name ||
+    searchParams.get("name") ||
+    t("fallback_name");
   // Use inputId as the verified ID source when result is present
   let shareUrl = `${baseUrl}/${locale}/verify?id=${inputId}&name=${encodeURIComponent(winnerName)}`;
 
@@ -603,7 +619,7 @@ export function VerifyContent() {
                                   ) : (
                                     <>
                                       <Copy className="w-4 h-4" />
-                                      Copy Link
+                                      {t("copy_link")}
                                     </>
                                   )}
                                 </DropdownMenuItem>
@@ -618,7 +634,7 @@ export function VerifyContent() {
                                     aria-label="Share on Twitter"
                                   >
                                     <Twitter className="w-4 h-4" />
-                                    Twitter / X
+                                    {t("twitter_x")}
                                   </a>
                                 </DropdownMenuItem>
 
@@ -627,7 +643,7 @@ export function VerifyContent() {
                                   className="gap-2 cursor-pointer"
                                 >
                                   <Instagram className="w-4 h-4" />
-                                  Instagram
+                                  {t("instagram")}
                                 </DropdownMenuItem>
 
                                 <DropdownMenuItem asChild>
@@ -639,7 +655,7 @@ export function VerifyContent() {
                                     aria-label="Share on Facebook"
                                   >
                                     <Facebook className="w-4 h-4" />
-                                    Facebook
+                                    {t("facebook")}
                                   </a>
                                 </DropdownMenuItem>
 
@@ -652,7 +668,7 @@ export function VerifyContent() {
                                     aria-label="Share on WhatsApp"
                                   >
                                     <MessageCircle className="w-4 h-4" />
-                                    WhatsApp
+                                    {t("whatsapp")}
                                   </a>
                                 </DropdownMenuItem>
 
@@ -665,7 +681,7 @@ export function VerifyContent() {
                                     aria-label="Share on Telegram"
                                   >
                                     <Send className="w-4 h-4" />
-                                    Telegram
+                                    {t("telegram")}
                                   </a>
                                 </DropdownMenuItem>
 
@@ -678,7 +694,7 @@ export function VerifyContent() {
                                     aria-label="Share on LinkedIn"
                                   >
                                     <Linkedin className="w-4 h-4" />
-                                    LinkedIn
+                                    {t("linkedin")}
                                   </a>
                                 </DropdownMenuItem>
                               </DropdownMenuContent>

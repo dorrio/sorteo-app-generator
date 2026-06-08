@@ -128,6 +128,23 @@ export default async function LetterGeneratorPage({
       ratingValue: "4.8",
       ratingCount: "1200",
     },
+    about: {
+      "@type": "Thing",
+      name: tSorteoSeo("about.name"),
+      description: tSorteoSeo("about.description"),
+    },
+    mentions: [
+      {
+        "@type": "Thing",
+        name: tSorteoSeo("mentions.randomNumber.name"),
+        sameAs: "https://en.wikipedia.org/wiki/Random_number_generation",
+      },
+      {
+        "@type": "Thing",
+        name: tSorteoSeo("mentions.socialMedia.name"),
+      },
+    ],
+    sameAs: ["https://github.com/sorteopro", "https://twitter.com/sorteopro"],
   };
 
   const breadcrumbSchema = {
@@ -147,23 +164,6 @@ export default async function LetterGeneratorPage({
         item: `${baseUrl}/${locale}/random-letter-generator`,
       },
     ],
-    about: {
-      "@type": "Thing",
-      name: tSorteoSeo("about.name"),
-      description: tSorteoSeo("about.description"),
-    },
-    mentions: [
-      {
-        "@type": "Thing",
-        name: tSorteoSeo("mentions.randomNumber.name"),
-        sameAs: "https://en.wikipedia.org/wiki/Random_number_generation",
-      },
-      {
-        "@type": "Thing",
-        name: tSorteoSeo("mentions.socialMedia.name"),
-      },
-    ],
-    sameAs: ["https://github.com/sorteopro", "https://twitter.com/sorteopro"],
   };
 
   const shareTranslations = {

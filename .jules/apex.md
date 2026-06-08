@@ -69,7 +69,7 @@
 **Action:** Injected `about`, `mentions`, and `sameAs` properties to `SoftwareApplication` in `seo-content.tsx` to connect to recognized entities like "Random number generation".
 **GEO Impact:** Solidified entity recognition for AI bots, establishing Sorteo Pro as a recognized brand in the Knowledge Graph and enhancing AI citations.
 
-## 2026-06-18 - [Strategy/Semantics]
+## 2026-06-01 - [Strategy/Semantics]
 **Gap:** The SEO Content block, Wheel Geo, and Yes/No Geo components were using specific keys (`what_is_wheel`, `what_is_title`) for the Direct Answer block, rather than the standardized `direct_answer_title` and `direct_answer_text`.
 **Action:** Replaced `what_is_*` keys with `direct_answer_title` and `direct_answer_text` in translation files (`en.json`, `es.json`, `pt.json`) and updated their respective components.
 **GEO Impact:** Unified semantic structure across all GEO components, reinforcing the predictability of our content structure and making it easier to parse Direct Answer blocks consistently for ChatGPT/LLMs.

@@ -75,9 +75,15 @@ export function SorteoCascade({ onWinnerSelected }: SorteoCascadeProps) {
 
   // Reset winner display when starting new spin
   useEffect(() => {
+    let rafId: number;
     if (isSpinning) {
-      setShowWinner(false)
-      setFinalWinner(null)
+      rafId = requestAnimationFrame(() => {
+        setShowWinner(false)
+        setFinalWinner(null)
+      })
+    }
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId)
     }
   }, [isSpinning])
 

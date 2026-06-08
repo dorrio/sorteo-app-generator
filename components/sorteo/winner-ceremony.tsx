@@ -60,12 +60,14 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const locale = useLocale()
 
   useEffect(() => {
-    setCanShareNative(
-      typeof navigator !== "undefined" &&
-      !!navigator.share &&
-      window.matchMedia("(pointer: coarse)").matches
-    )
-
+    const rafId = requestAnimationFrame(() => {
+      setCanShareNative(
+        typeof navigator !== "undefined" &&
+        !!navigator.share &&
+        window.matchMedia("(pointer: coarse)").matches
+      )
+    })
+    return () => cancelAnimationFrame(rafId)
   }, [showWinnerCeremony])
 
   // Viral Optimization: Create a deep link to the verification page

@@ -300,8 +300,8 @@
         }
     },
     "SEOContent": {
-        "what_is_title": "What is Sorteo Pro?",
-        "what_is_text": "<b>Sorteo Pro</b> is the ultimate <b>free giveaway tool</b> for influencers and brands. It allows you to select <b>random winners</b> from unlimited lists for <insta>Instagram</insta>, <b>YouTube</b>, and <b>TikTok</b> contests. Featuring a <rng>cryptographically secure RNG</rng>, <wheel>Wheel of Names</wheel>, and <verify>instant certificate verification</verify>, it is the secure, no-login alternative to paid services.",
+        "direct_answer_title": "What is Sorteo Pro?",
+        "direct_answer_text": "<b>Sorteo Pro</b> is the ultimate <b>free giveaway tool</b> for influencers and brands. It allows you to select <b>random winners</b> from unlimited lists for <insta>Instagram</insta>, <b>YouTube</b>, and <b>TikTok</b> contests. Featuring a <rng>cryptographically secure RNG</rng>, <wheel>Wheel of Names</wheel>, and <verify>instant certificate verification</verify>, it is the secure, no-login alternative to paid services.",
         "features_title": "Key Features",
         "feature_1_title": "Fair & Transparent",
         "feature_1_desc": "Uses cryptographically secure random number generation to ensure fairness.",
@@ -322,8 +322,8 @@
     "WheelGeo": {
         "title": "Wheel of Names & Random Picker",
         "description": "Looking for a <b>Wheel of Names</b>? Sorteo Pro includes a fully customizable <b>Random Name Picker Wheel</b> that is fair, free, and fun.",
-        "what_is_wheel": "What is a Wheel of Names?",
-        "what_is_wheel_answer": "A <b>Wheel of Names</b> is a digital tool that picks a random winner by spinning a virtual wheel. It is popularly used by teachers, influencers, and event organizers for <rng>random selection</rng>. Sorteo Pro upgrades this experience with cinematic effects.",
+        "direct_answer_title": "What is a Wheel of Names?",
+        "direct_answer_text": "A <b>Wheel of Names</b> is a digital tool that picks a random winner by spinning a virtual wheel. It is popularly used by teachers, influencers, and event organizers for <rng>random selection</rng>. Sorteo Pro upgrades this experience with cinematic effects.",
         "features_list": "Advanced Wheel Features",
         "feature_1": "100% Random & Fair",
         "feature_2": "Custom Colors & Themes",
@@ -590,8 +590,8 @@
     },
     "YesNoGeo": {
         "title": "Yes or No Wheel",
-        "what_is_title": "What is a Yes or No Wheel?",
-        "what_is_answer": "A <b>Yes or No Wheel</b> is a simple random decision tool. It works exactly like <b>flipping a coin</b> (Heads or Tails) but with a visual spinning wheel. <b>Sorteo Pro</b> provides a fair, 50/50 chance for every spin using secure RNG, making it the perfect online coin flipper.",
+        "direct_answer_title": "What is a Yes or No Wheel?",
+        "direct_answer_text": "A <b>Yes or No Wheel</b> is a simple random decision tool. It works exactly like <b>flipping a coin</b> (Heads or Tails) but with a visual spinning wheel. <b>Sorteo Pro</b> provides a fair, 50/50 chance for every spin using secure RNG, making it the perfect online coin flipper.",
         "features_list": "Wheel Features",
         "feature_1": "Flip a Coin Style",
         "feature_2": "No Ads",

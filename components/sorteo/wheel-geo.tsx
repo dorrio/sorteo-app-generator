@@ -36,8 +36,8 @@ export function WheelGeo() {
   // Consolidate all FAQs into one list
   const faqs = [
     {
-      question: t('what_is_wheel'),
-      answer: t.raw('what_is_wheel_answer') as string,
+      question: t('direct_answer_title'),
+      answer: t.raw('direct_answer_text') as string,
     },
     {
       question: tFaq('faq_1_q'),
@@ -98,11 +98,11 @@ export function WheelGeo() {
           </div>
 
           <h2 className="text-3xl font-bold tracking-tight text-foreground">
-            {t('what_is_wheel')}
+            {t('direct_answer_title')}
           </h2>
 
           <p className="text-lg text-muted-foreground leading-relaxed">
-            {t.rich("what_is_wheel_answer", {
+            {t.rich("direct_answer_text", {
               b: (chunks) => <strong className="text-foreground font-semibold">{chunks}</strong>,
               rng: (chunks) => <Link href="/random-number-generator" className="font-semibold text-primary hover:underline">{chunks}</Link>
             })}

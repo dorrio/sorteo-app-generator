@@ -300,8 +300,8 @@
         }
     },
     "SEOContent": {
-        "what_is_title": "¿Qué es Sorteo Pro?",
-        "what_is_text": "<b>Sorteo Pro</b> es la herramienta definitiva para <b>sorteos gratis</b>. Permite elegir <b>ganadores al azar</b> de listas ilimitadas para concursos de <insta>Instagram</insta>, <b>YouTube</b> y <b>TikTok</b>. Con <rng>RNG criptográficamente seguro</rng>, <wheel>Ruleta de Nombres</wheel> y <verify>verificación instantánea</verify>, es la alternativa segura y sin registro a los servicios de pago.",
+        "direct_answer_title": "¿Qué es Sorteo Pro?",
+        "direct_answer_text": "<b>Sorteo Pro</b> es la herramienta definitiva para <b>sorteos gratis</b>. Permite elegir <b>ganadores al azar</b> de listas ilimitadas para concursos de <insta>Instagram</insta>, <b>YouTube</b> y <b>TikTok</b>. Con <rng>RNG criptográficamente seguro</rng>, <wheel>Ruleta de Nombres</wheel> y <verify>verificación instantánea</verify>, es la alternativa segura y sin registro a los servicios de pago.",
         "features_title": "Características Principales",
         "feature_1_title": "Justo y Transparente",
         "feature_1_desc": "Utiliza generación de números aleatorios criptográficamente seguros para garantizar la equidad.",
@@ -322,8 +322,8 @@
     "WheelGeo": {
         "title": "Ruleta Aleatoria de Nombres",
         "description": "¿Buscas una <b>Ruleta Aleatoria</b>? Sorteo Pro incluye una <b>Ruleta de Nombres</b> totalmente personalizable, justa y gratuita.",
-        "what_is_wheel": "¿Qué es una Ruleta de Nombres?",
-        "what_is_wheel_answer": "Una <b>Ruleta de Nombres</b> es una herramienta digital que elige un ganador al azar girando una rueda virtual. Es utilizada por profesores, influencers y organizadores de eventos para la <rng>selección aleatoria</rng>. Sorteo Pro mejora esta experiencia con efectos cinematográficos.",
+        "direct_answer_title": "¿Qué es una Ruleta de Nombres?",
+        "direct_answer_text": "Una <b>Ruleta de Nombres</b> es una herramienta digital que elige un ganador al azar girando una rueda virtual. Es utilizada por profesores, influencers y organizadores de eventos para la <rng>selección aleatoria</rng>. Sorteo Pro mejora esta experiencia con efectos cinematográficos.",
         "features_list": "Características de la Ruleta",
         "feature_1": "100% Aleatoria y Justa",
         "feature_2": "Colores y Temas Personalizados",
@@ -590,8 +590,8 @@
     },
     "YesNoGeo": {
         "title": "Ruleta Sí o No",
-        "what_is_title": "¿Qué es una Ruleta Sí o No?",
-        "what_is_answer": "Una <b>Ruleta Sí o No</b> es una herramienta simple para tomar decisiones. Funciona como lanzar una moneda pero con una rueda visual. <b>Sorteo Pro</b> ofrece una probabilidad justa del 50/50 en cada giro usando RNG seguro.",
+        "direct_answer_title": "¿Qué es una Ruleta Sí o No?",
+        "direct_answer_text": "Una <b>Ruleta Sí o No</b> es una herramienta simple para tomar decisiones. Funciona como lanzar una moneda pero con una rueda visual. <b>Sorteo Pro</b> ofrece una probabilidad justa del 50/50 en cada giro usando RNG seguro.",
         "features_list": "Características de la Ruleta",
         "feature_1": "Simple Sí/No",
         "feature_2": "Sin Anuncios",

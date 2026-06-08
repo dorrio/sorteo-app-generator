@@ -31,9 +31,11 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
 
     // Shuffle cards
     const shuffled = cryptoShuffle(participants)
-    setShuffledCards(shuffled)
-    setCurrentCardIndex(0)
-    setShowFinal(false)
+    const rafId = requestAnimationFrame(() => {
+      setShuffledCards(shuffled)
+      setCurrentCardIndex(0)
+      setShowFinal(false)
+    })
 
     const spinDuration = theme.spinDuration * 1000
     const cardFlipInterval = spinDuration / Math.min(participants.length * 2, 20)
@@ -60,7 +62,10 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
       }
     }, cardFlipInterval)
 
-    return () => clearInterval(flipInterval)
+    return () => {
+      clearInterval(flipInterval)
+      cancelAnimationFrame(rafId)
+    }
   }, [
     isSpinning,
     participants,

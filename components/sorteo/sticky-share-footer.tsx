@@ -100,12 +100,16 @@ export function StickyShareFooter({ shareContent, translations, seoMode }: Stick
     }
 
     // Check immediately on mount (in case of anchor link or refresh)
-    const show = window.scrollY > 100
-    setIsVisible(show)
+    const initialRafId = requestAnimationFrame(() => {
+      if (!mounted) return
+      const show = window.scrollY > 100
+      setIsVisible(show)
+    })
 
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => {
       mounted = false
+      cancelAnimationFrame(initialRafId)
       if (rafId !== null) {
         window.cancelAnimationFrame(rafId)
       }

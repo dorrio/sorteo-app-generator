@@ -73,18 +73,26 @@ export function VerifyContent() {
 
   useEffect(() => {
     if (result?.status === "valid") {
-      setShowConfetti(true);
-      const timer = setTimeout(() => setShowConfetti(false), 5000);
-      return () => clearTimeout(timer);
+      let timer: NodeJS.Timeout;
+      let rafId = requestAnimationFrame(() => {
+        setShowConfetti(true);
+        timer = setTimeout(() => setShowConfetti(false), 5000);
+      });
+      return () => {
+        cancelAnimationFrame(rafId);
+        if (timer) clearTimeout(timer);
+      };
     }
   }, [result]);
 
   useEffect(() => {
-    setCanShareNative(
-      typeof navigator !== "undefined" &&
-        !!navigator.share &&
-        window.matchMedia("(pointer: coarse)").matches,
-    );
+    const animationFrameId = requestAnimationFrame(() => {
+      setCanShareNative(
+        typeof navigator !== "undefined" &&
+          !!navigator.share &&
+          window.matchMedia("(pointer: coarse)").matches,
+      );
+    });
 
     // Show sticky CTA on scroll if result is visible
     let ticking = false;
@@ -106,6 +114,7 @@ export function VerifyContent() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener("scroll", handleScroll);
       if (rafId !== null) {
         cancelAnimationFrame(rafId);

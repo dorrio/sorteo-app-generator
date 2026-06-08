@@ -1,7 +1,7 @@
-import { getBaseUrl } from "@/lib/config"
-import { getTranslations, setRequestLocale } from 'next-intl/server'
-import dynamic from 'next/dynamic';
-import { JsonLd } from '@/components/seo/json-ld';
+import { getBaseUrl } from "@/lib/config";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import dynamic from "next/dynamic";
+import { JsonLd } from "@/components/seo/json-ld";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { Glossary } from "@/components/sorteo/glossary";
@@ -10,42 +10,44 @@ import { SiteFooter } from "@/components/sorteo/site-footer";
 
 const MainApp = dynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
-  { loading: () => <AppSkeleton visualization="slot-machine" /> }
-)
+  { loading: () => <AppSkeleton visualization="slot-machine" /> },
+);
 
 type Props = {
-  params: Promise<{ locale: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
   const { template_title, template_color, list } = await searchParams;
-  const t = await getTranslations({ locale, namespace: 'Metadata' });
+  const t = await getTranslations({ locale, namespace: "Metadata" });
 
-  const baseUrl = getBaseUrl()
+  const baseUrl = getBaseUrl();
   // Viralis: Dynamic Metadata for Custom Giveaways
-  const customTitle = typeof template_title === 'string' ? template_title : undefined;
-  const customColor = typeof template_color === 'string' ? template_color : undefined;
-  const customList = typeof list === 'string' ? list : undefined;
+  const customTitle =
+    typeof template_title === "string" ? template_title : undefined;
+  const customColor =
+    typeof template_color === "string" ? template_color : undefined;
+  const customList = typeof list === "string" ? list : undefined;
 
-  const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : t('title');
-  const displayDescription = t('description');
+  const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : t("title");
+  const displayDescription = t("description");
 
   const ogImageUrl = new URL(`${baseUrl}/api/og`);
   // Default type for home is undefined, which defaults to generic in api/og
-  if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
-  if (customColor) ogImageUrl.searchParams.set('color', customColor);
+  if (customTitle) ogImageUrl.searchParams.set("title", customTitle);
+  if (customColor) ogImageUrl.searchParams.set("color", customColor);
   if (customList) {
-    ogImageUrl.searchParams.set('list', customList);
+    ogImageUrl.searchParams.set("list", customList);
     // Explicitly set type to 'list' so the OG image renders the list content theme
-    ogImageUrl.searchParams.set('type', 'list');
+    ogImageUrl.searchParams.set("type", "list");
   }
 
   const shareUrl = new URL(`${baseUrl}/${locale}`);
-  if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
-  if (customColor) shareUrl.searchParams.set('template_color', customColor);
-  if (customList) shareUrl.searchParams.set('list', customList);
+  if (customTitle) shareUrl.searchParams.set("template_title", customTitle);
+  if (customColor) shareUrl.searchParams.set("template_color", customColor);
+  if (customList) shareUrl.searchParams.set("list", customList);
 
   const canonicalUrl =
     customTitle || customColor || customList
@@ -77,7 +79,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: displayTitle,
       description: displayDescription,
       images: [ogImageUrl.toString()],
@@ -85,36 +87,45 @@ export async function generateMetadata({ params, searchParams }: Props) {
   };
 }
 
-export default async function SorteoApp({ params }: { params: Promise<{ locale: string }> }) {
+export default async function SorteoApp({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
-  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
+  const tShare = await getTranslations({ locale, namespace: "ShareContent" });
+  const tWinner = await getTranslations({
+    locale,
+    namespace: "WinnerCeremony",
+  });
 
   // Reuse existing share logic (Home has generic share content)
   const shareTranslations = {
-    share: tWinner('share_menu'),
-    copy: tWinner('copy_text'),
-    copied: tWinner('copied'),
-    shareOn: tWinner('share_on')
-  }
+    share: tWinner("share_menu"),
+    copy: tWinner("copy_text"),
+    copied: tWinner("copied"),
+    shareOn: tWinner("share_on"),
+  };
 
   const stickyTranslations = {
-    share_cta: tShare('cta_share'),
-    start_cta: tShare('cta_start')
-  }
+    share_cta: tShare("cta_share"),
+    start_cta: tShare("cta_start"),
+  };
 
-  const baseUrl = getBaseUrl()
+  const baseUrl = getBaseUrl();
   const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    "itemListElement": [{
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Sorteo Pro",
-      "item": `${baseUrl}/${locale}`
-    }]
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Sorteo Pro",
+        item: `${baseUrl}/${locale}`,
+      },
+    ],
   };
 
   return (
@@ -124,9 +135,11 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
         seoMode="home"
         initialTitle="Sorteo Pro"
         initialSubtitle="The Premium Giveaway Tool"
-        shareTitle={tShare('home_title')}
-        shareText={tShare('home_text')}
-        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
+        shareTitle={tShare("home_title")}
+        shareText={tShare("home_text")}
+        customShareTextTemplate={tShare("custom_share_text", {
+          title: "{title}",
+        })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}
@@ -136,5 +149,5 @@ export default async function SorteoApp({ params }: { params: Promise<{ locale: 
         <SeoContent />
       </MainApp>
     </>
-  )
+  );
 }

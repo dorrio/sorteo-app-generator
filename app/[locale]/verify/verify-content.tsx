@@ -1,662 +1,779 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { useTranslations, useLocale } from "next-intl"
-import { motion, AnimatePresence } from "framer-motion"
-import { Search, ShieldCheck, ShieldAlert, Info, Calendar, User, ArrowLeft, Check, AlertTriangle, Sparkles, Share2, Twitter, Facebook, MessageCircle, Instagram, Copy, Download, Loader2, Send, Linkedin } from "lucide-react"
-import { useSorteoStore } from "@/lib/sorteo-store"
-import { ConfettiEffect } from "@/components/sorteo/confetti-effect"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Link } from "@/i18n/routing"
-import { useSearchParams } from "next/navigation"
-import { getBaseUrl } from "@/lib/config"
+import { useState, useEffect } from "react";
+import { useTranslations, useLocale } from "next-intl";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Search,
+  ShieldCheck,
+  ShieldAlert,
+  Info,
+  Calendar,
+  User,
+  ArrowLeft,
+  Check,
+  AlertTriangle,
+  Sparkles,
+  Share2,
+  Twitter,
+  Facebook,
+  MessageCircle,
+  Instagram,
+  Copy,
+  Download,
+  Loader2,
+  Send,
+  Linkedin,
+} from "lucide-react";
+import { useSorteoStore } from "@/lib/sorteo-store";
+import { ConfettiEffect } from "@/components/sorteo/confetti-effect";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Link } from "@/i18n/routing";
+import { useSearchParams } from "next/navigation";
+import { getBaseUrl } from "@/lib/config";
 
 export function VerifyContent() {
-    const t = useTranslations("VerificationPage")
-    const locale = useLocale()
-    const { theme, pastWinners } = useSorteoStore()
-    const searchParams = useSearchParams()
-    const initialId = searchParams.get("id") || ""
-    const type = searchParams.get("type")
-    const title = searchParams.get("title")
-    const color = searchParams.get("color")
+  const t = useTranslations("VerificationPage");
+  const locale = useLocale();
+  const { theme, pastWinners } = useSorteoStore();
+  const searchParams = useSearchParams();
+  const initialId = searchParams.get("id") || "";
+  const type = searchParams.get("type");
+  const title = searchParams.get("title");
+  const color = searchParams.get("color");
 
-    const [inputId, setInputId] = useState(initialId)
-    const [result, setResult] = useState<{
-        status: "valid" | "partial" | "invalid"
-        participant?: { name: string; timestamp: Date }
-        date?: Date
-        error?: string
-    } | null>(null)
-    const [showCopied, setShowCopied] = useState(false)
-    // Initialize to true (Mobile/Lite) to minimize server HTML size and avoid Mobile CLS.
-    // Desktop will hydrate and switch to Dropdown (Heavy) if needed.
-    const [canShareNative, setCanShareNative] = useState(true)
-    const [isStickyVisible, setIsStickyVisible] = useState(false)
-    const [showConfetti, setShowConfetti] = useState(false)
-    const [isSharing, setIsSharing] = useState(false)
+  const [inputId, setInputId] = useState(initialId);
+  const [result, setResult] = useState<{
+    status: "valid" | "partial" | "invalid";
+    participant?: { name: string; timestamp: Date };
+    date?: Date;
+    error?: string;
+  } | null>(null);
+  const [showCopied, setShowCopied] = useState(false);
+  // Initialize to true (Mobile/Lite) to minimize server HTML size and avoid Mobile CLS.
+  // Desktop will hydrate and switch to Dropdown (Heavy) if needed.
+  const [canShareNative, setCanShareNative] = useState(true);
+  const [isStickyVisible, setIsStickyVisible] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [isSharing, setIsSharing] = useState(false);
 
-    useEffect(() => {
-        if (result?.status === "valid") {
-            setShowConfetti(true)
-            const timer = setTimeout(() => setShowConfetti(false), 5000)
-            return () => clearTimeout(timer)
-        }
-    }, [result])
+  useEffect(() => {
+    if (result?.status === "valid") {
+      setShowConfetti(true);
+      const timer = setTimeout(() => setShowConfetti(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [result]);
 
-    useEffect(() => {
-        setCanShareNative(
-            typeof navigator !== "undefined" &&
-            !!navigator.share &&
-            window.matchMedia("(pointer: coarse)").matches
-        )
+  useEffect(() => {
+    setCanShareNative(
+      typeof navigator !== "undefined" &&
+        !!navigator.share &&
+        window.matchMedia("(pointer: coarse)").matches,
+    );
 
-        // Show sticky CTA on scroll if result is visible
-        const handleScroll = () => {
-            if (result && window.scrollY > 150) {
-                setIsStickyVisible(true)
-            } else {
-                setIsStickyVisible(false)
-            }
-        }
+    // Show sticky CTA on scroll if result is visible
+    const handleScroll = () => {
+      if (result && window.scrollY > 150) {
+        setIsStickyVisible(true);
+      } else {
+        setIsStickyVisible(false);
+      }
+    };
 
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [result])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [result]);
 
-    // Auto-verify if ID is in URL
-    useEffect(() => {
-        if (initialId) {
-            // eslint-disable-next-line react-hooks/immutability -- verifyId is declared below; referenced inside effect callback so runtime-safe
-            verifyId(initialId)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps -- verifyId is stable within this component; adding it would require useCallback + recompute on every render
-    }, [initialId, pastWinners])
+  // Auto-verify if ID is in URL
+  useEffect(() => {
+    if (initialId) {
+      // eslint-disable-next-line react-hooks/immutability -- verifyId is declared below; referenced inside effect callback so runtime-safe
+      verifyId(initialId);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- verifyId is stable within this component; adding it would require useCallback + recompute on every render
+  }, [initialId, pastWinners]);
 
-    const verifyId = (idToVerify: string) => {
-        const id = idToVerify.trim().toUpperCase()
-        if (!id) return
+  const verifyId = (idToVerify: string) => {
+    const id = idToVerify.trim().toUpperCase();
+    if (!id) return;
 
-        // Format: ID-{UUID}-{TIMESTAMP_HEX}
-        const idRegex = /^ID-[A-F0-9]{8}-[A-F0-9]+$/
+    // Format: ID-{UUID}-{TIMESTAMP_HEX}
+    const idRegex = /^ID-[A-F0-9]{8}-[A-F0-9]+$/;
 
-        if (!idRegex.test(id)) {
-            setResult({
-                status: "invalid",
-                error: t("result.invalid_format_message"),
-            })
-            return
-        }
-
-        // Check local storage for match
-        const foundWinner = pastWinners.find((w) => w.verificationId === id)
-
-        if (foundWinner) {
-            setResult({
-                status: "valid",
-                participant: {
-                    name: foundWinner.name,
-                    timestamp: foundWinner.timestamp,
-                },
-            })
-        } else {
-            // Partial Verification Logic
-            try {
-                const parts = id.split('-')
-                const timestampHex = parts[2]
-                const timestamp = parseInt(timestampHex, 16)
-                const date = new Date(timestamp)
-
-                if (isNaN(date.getTime())) {
-                    throw new Error("Invalid date")
-                }
-
-                setResult({
-                    status: "partial",
-                    date: date,
-                })
-            } catch {
-                setResult({
-                    status: "invalid",
-                    error: t("result.invalid_format_message"),
-                })
-            }
-        }
+    if (!idRegex.test(id)) {
+      setResult({
+        status: "invalid",
+        error: t("result.invalid_format_message"),
+      });
+      return;
     }
 
-    const handleVerify = () => verifyId(inputId)
+    // Check local storage for match
+    const foundWinner = pastWinners.find((w) => w.verificationId === id);
 
-    // Construct Share Data
-    const baseUrl = getBaseUrl()
-    const winnerName = result?.participant?.name || searchParams.get("name") || "Someone"
-    // Use inputId as the verified ID source when result is present
-    let shareUrl = `${baseUrl}/${locale}/verify?id=${inputId}&name=${encodeURIComponent(winnerName)}`
+    if (foundWinner) {
+      setResult({
+        status: "valid",
+        participant: {
+          name: foundWinner.name,
+          timestamp: foundWinner.timestamp,
+        },
+      });
+    } else {
+      // Partial Verification Logic
+      try {
+        const parts = id.split("-");
+        const timestampHex = parts[2];
+        const timestamp = parseInt(timestampHex, 16);
+        const date = new Date(timestamp);
 
-    // Viralis Fix: Persist tool context in shared link
-    if (type) {
-        shareUrl += `&type=${encodeURIComponent(type)}`
-    }
-
-    let shareText = t("share_proof_text", { name: winnerName })
-    if (title) {
-        shareText = t("share_proof_text_custom", { name: winnerName, title: title })
-    }
-
-    // Pre-calculate intent URLs for semantic <a> tags
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`
-    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
-    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`
-    const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
-    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`
-
-    const shareNative = async () => {
-        if (!navigator.share) return
-
-        setIsSharing(true)
-        try {
-            // Viralis: Attempt to fetch the certificate image to share it natively
-            let filesArray: File[] = []
-
-            try {
-                // Reuse OG params logic (simplified for shared context)
-                const ogParams = new URLSearchParams()
-                ogParams.set("name", winnerName)
-
-                let dateToUse = new Date()
-                if (result?.participant?.timestamp) {
-                    dateToUse = new Date(result.participant.timestamp)
-                } else if (result?.date) {
-                    dateToUse = new Date(result.date)
-                }
-                ogParams.set("date", dateToUse.toISOString())
-
-                if (type) ogParams.set("type", type)
-                if (title) ogParams.set("title", title)
-                if (color) ogParams.set("color", color)
-
-                const imageUrl = `/api/og?${ogParams.toString()}`
-
-                const response = await fetch(imageUrl)
-                const blob = await response.blob()
-                const file = new File([blob], 'certificate.png', { type: 'image/png' })
-
-                if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                    filesArray = [file]
-                }
-            } catch (e) {
-                console.error("Image generation failed, falling back to text share", e)
-            }
-
-            await navigator.share({
-                files: filesArray.length > 0 ? filesArray : undefined,
-                title: t("title"),
-                text: shareText,
-                url: shareUrl,
-            })
-        } catch {
-            // User cancelled
-        } finally {
-            setIsSharing(false)
+        if (isNaN(date.getTime())) {
+          throw new Error("Invalid date");
         }
+
+        setResult({
+          status: "partial",
+          date: date,
+        });
+      } catch {
+        setResult({
+          status: "invalid",
+          error: t("result.invalid_format_message"),
+        });
+      }
     }
+  };
 
-    const copyToClipboard = async () => {
-        try {
-            await navigator.clipboard.writeText(shareUrl)
-            setShowCopied(true)
-            setTimeout(() => setShowCopied(false), 2000)
-        } catch (error) {
-            console.error(error)
-            setShowCopied(false)
-        }
-    }
+  const handleVerify = () => verifyId(inputId);
 
-    const shareInstagram = async () => {
-        await navigator.clipboard.writeText(shareText)
-        setShowCopied(true)
-        setTimeout(() => setShowCopied(false), 2000)
-        window.open("https://www.instagram.com/", "_blank")
-    }
+  // Construct Share Data
+  const baseUrl = getBaseUrl();
+  const winnerName =
+    result?.participant?.name || searchParams.get("name") || "Someone";
+  // Use inputId as the verified ID source when result is present
+  let shareUrl = `${baseUrl}/${locale}/verify?id=${inputId}&name=${encodeURIComponent(winnerName)}`;
 
-    const handleDownload = async () => {
-        if (!winnerName) return
+  // Viralis Fix: Persist tool context in shared link
+  if (type) {
+    shareUrl += `&type=${encodeURIComponent(type)}`;
+  }
 
-        // Construct OG Image URL
-        const ogParams = new URLSearchParams()
-        ogParams.set("name", winnerName)
+  let shareText = t("share_proof_text", { name: winnerName });
+  if (title) {
+    shareText = t("share_proof_text_custom", {
+      name: winnerName,
+      title: title,
+    });
+  }
 
-        // Logic to extract date from result
-        let dateToUse = new Date()
+  // Pre-calculate intent URLs for semantic <a> tags
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`;
+  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`;
+  const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
+  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+
+  const shareNative = async () => {
+    if (!navigator.share) return;
+
+    setIsSharing(true);
+    try {
+      // Viralis: Attempt to fetch the certificate image to share it natively
+      let filesArray: File[] = [];
+
+      try {
+        // Reuse OG params logic (simplified for shared context)
+        const ogParams = new URLSearchParams();
+        ogParams.set("name", winnerName);
+
+        let dateToUse = new Date();
         if (result?.participant?.timestamp) {
-            dateToUse = new Date(result.participant.timestamp)
+          dateToUse = new Date(result.participant.timestamp);
         } else if (result?.date) {
-            dateToUse = new Date(result.date)
+          dateToUse = new Date(result.date);
         }
-        ogParams.set("date", dateToUse.toISOString())
+        ogParams.set("date", dateToUse.toISOString());
 
-        // Viralis: Apply branding context to the image
-        if (type) ogParams.set("type", type)
-        if (title) ogParams.set("title", title)
-        if (color) ogParams.set("color", color)
+        if (type) ogParams.set("type", type);
+        if (title) ogParams.set("title", title);
+        if (color) ogParams.set("color", color);
 
-        const imageUrl = `/api/og?${ogParams.toString()}`
+        const imageUrl = `/api/og?${ogParams.toString()}`;
 
-        try {
-            const response = await fetch(imageUrl)
-            const blob = await response.blob()
-            const blobUrl = window.URL.createObjectURL(blob)
-            const link = document.createElement('a')
-            link.href = blobUrl
-            // Filename: Certificate-{Name}-{Date}.png
-            const cleanName = winnerName.replace(/[^a-z0-9]/gi, '_').toLowerCase()
-            const dateStr = dateToUse.toISOString().split('T')[0]
-            link.download = `Certificate-${cleanName}-${dateStr}.png`
-            document.body.appendChild(link)
-            link.click()
-            document.body.removeChild(link)
-            window.URL.revokeObjectURL(blobUrl)
-        } catch {
-            // Fallback: just open in new tab
-            window.open(imageUrl, '_blank')
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        const file = new File([blob], "certificate.png", { type: "image/png" });
+
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          filesArray = [file];
         }
+      } catch (e) {
+        console.error("Image generation failed, falling back to text share", e);
+      }
+
+      await navigator.share({
+        files: filesArray.length > 0 ? filesArray : undefined,
+        title: t("title"),
+        text: shareText,
+        url: shareUrl,
+      });
+    } catch {
+      // User cancelled
+    } finally {
+      setIsSharing(false);
     }
+  };
 
-    // Viralis: Dynamic return URL to close the viral loop contextually
-    let returnUrl = "/"
-    if (type === 'wheel') returnUrl = "/wheel-of-names"
-    else if (type === 'instagram') returnUrl = "/instagram-comment-picker"
-    else if (type === 'rng') returnUrl = "/random-number-generator"
-    else if (type === 'list-randomizer') returnUrl = "/list-randomizer"
-    else if (type === 'yes-no') returnUrl = "/yes-or-no-wheel"
-    else if (type === 'letter') returnUrl = "/random-letter-generator"
-
-    // Viralis: Pass the template context to the new tool
-    if (returnUrl !== "/" && (title || color)) {
-        const params = new URLSearchParams()
-        if (title) params.set("template_title", title)
-        if (color) params.set("template_color", color)
-        returnUrl += `?${params.toString()}`
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setShowCopied(true);
+      setTimeout(() => setShowCopied(false), 2000);
+    } catch (error) {
+      console.error(error);
+      setShowCopied(false);
     }
+  };
 
-    return (
-        <main
-            className="min-h-screen flex flex-col items-center justify-center p-4 pb-24 relative overflow-hidden"
-            style={{
-                backgroundColor: theme.backgroundColor,
-                color: theme.textColor,
-                fontFamily: theme.fontFamily,
-            }}
+  const shareInstagram = async () => {
+    await navigator.clipboard.writeText(shareText);
+    setShowCopied(true);
+    setTimeout(() => setShowCopied(false), 2000);
+    window.open("https://www.instagram.com/", "_blank");
+  };
+
+  const handleDownload = async () => {
+    if (!winnerName) return;
+
+    // Construct OG Image URL
+    const ogParams = new URLSearchParams();
+    ogParams.set("name", winnerName);
+
+    // Logic to extract date from result
+    let dateToUse = new Date();
+    if (result?.participant?.timestamp) {
+      dateToUse = new Date(result.participant.timestamp);
+    } else if (result?.date) {
+      dateToUse = new Date(result.date);
+    }
+    ogParams.set("date", dateToUse.toISOString());
+
+    // Viralis: Apply branding context to the image
+    if (type) ogParams.set("type", type);
+    if (title) ogParams.set("title", title);
+    if (color) ogParams.set("color", color);
+
+    const imageUrl = `/api/og?${ogParams.toString()}`;
+
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      // Filename: Certificate-{Name}-{Date}.png
+      const cleanName = winnerName.replace(/[^a-z0-9]/gi, "_").toLowerCase();
+      const dateStr = dateToUse.toISOString().split("T")[0];
+      link.download = `Certificate-${cleanName}-${dateStr}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
+    } catch {
+      // Fallback: just open in new tab
+      window.open(imageUrl, "_blank");
+    }
+  };
+
+  // Viralis: Dynamic return URL to close the viral loop contextually
+  let returnUrl = "/";
+  if (type === "wheel") returnUrl = "/wheel-of-names";
+  else if (type === "instagram") returnUrl = "/instagram-comment-picker";
+  else if (type === "rng") returnUrl = "/random-number-generator";
+  else if (type === "list-randomizer") returnUrl = "/list-randomizer";
+  else if (type === "yes-no") returnUrl = "/yes-or-no-wheel";
+  else if (type === "letter") returnUrl = "/random-letter-generator";
+
+  // Viralis: Pass the template context to the new tool
+  if (returnUrl !== "/" && (title || color)) {
+    const params = new URLSearchParams();
+    if (title) params.set("template_title", title);
+    if (color) params.set("template_color", color);
+    returnUrl += `?${params.toString()}`;
+  }
+
+  return (
+    <main
+      className="min-h-screen flex flex-col items-center justify-center p-4 pb-24 relative overflow-hidden"
+      style={{
+        backgroundColor: theme.backgroundColor,
+        color: theme.textColor,
+        fontFamily: theme.fontFamily,
+      }}
+    >
+      {/* Background Ambience */}
+      <div
+        className="absolute inset-0 opacity-30 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at 50% 50%, ${theme.primaryColor}20 0%, transparent 70%)`,
+        }}
+      />
+
+      <ConfettiEffect
+        isActive={showConfetti}
+        colors={[
+          theme.primaryColor,
+          theme.secondaryColor,
+          "#FFD700",
+          "#FF6B6B",
+          "#4ECDC4",
+        ]}
+      />
+
+      <div className="w-full max-w-md z-10">
+        <Button
+          variant="ghost"
+          className="mb-8 hover:bg-white/10"
+          style={{ color: theme.textColor }}
+          asChild
         >
-            {/* Background Ambience */}
-            <div
-                className="absolute inset-0 opacity-30 pointer-events-none"
-                style={{
-                    background: `radial-gradient(circle at 50% 50%, ${theme.primaryColor}20 0%, transparent 70%)`,
-                }}
-            />
+          <Link href="/">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            {t("back_button")}
+          </Link>
+        </Button>
 
-            <ConfettiEffect
-                isActive={showConfetti}
-                colors={[theme.primaryColor, theme.secondaryColor, "#FFD700", "#FF6B6B", "#4ECDC4"]}
-            />
-
-            <div className="w-full max-w-md z-10">
-                <Button variant="ghost" className="mb-8 hover:bg-white/10" style={{ color: theme.textColor }} asChild>
-                    <Link href="/">
-                        <ArrowLeft className="mr-2 h-4 w-4" />
-                        {t("back_button")}
-                    </Link>
-                </Button>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Card
+            className="border-0 shadow-2xl backdrop-blur-md bg-opacity-90 dark:bg-opacity-90"
+            style={{
+              backgroundColor: `${theme.backgroundColor}90`,
+              borderColor: `${theme.primaryColor}40`,
+              borderWidth: 1,
+            }}
+          >
+            <CardHeader className="text-center pb-2">
+              <div
+                className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center"
+                style={{ backgroundColor: `${theme.primaryColor}20` }}
+              >
+                <ShieldCheck
+                  className="w-8 h-8"
+                  style={{ color: theme.primaryColor }}
+                />
+              </div>
+              <CardTitle
+                className="text-2xl font-bold"
+                style={{ color: theme.primaryColor }}
+              >
+                {t("title")}
+              </CardTitle>
+              <CardDescription className="text-muted-foreground">
+                {t("subtitle")}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4 pt-4">
+              <div className="space-y-2">
+                <label
+                  className="text-sm font-medium ml-1"
+                  style={{ color: theme.textColor }}
                 >
-                    <Card className="border-0 shadow-2xl backdrop-blur-md bg-opacity-90 dark:bg-opacity-90" style={{ backgroundColor: `${theme.backgroundColor}90`, borderColor: `${theme.primaryColor}40`, borderWidth: 1 }}>
-                        <CardHeader className="text-center pb-2">
-                            <div
-                                className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center"
-                                style={{ backgroundColor: `${theme.primaryColor}20` }}
-                            >
-                                <ShieldCheck className="w-8 h-8" style={{ color: theme.primaryColor }} />
-                            </div>
-                            <CardTitle className="text-2xl font-bold" style={{ color: theme.primaryColor }}>
-                                {t("title")}
-                            </CardTitle>
-                            <CardDescription className="text-muted-foreground">
-                                {t("subtitle")}
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-4 pt-4">
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium ml-1" style={{ color: theme.textColor }}>
-                                    {t("input_label")}
-                                </label>
-                                <div className="relative">
-                                    <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                                    <Input
-                                        placeholder={t("input_placeholder")}
-                                        className="pl-9 bg-background/50 border-input/50 focus-visible:ring-1"
-                                        value={inputId}
-                                        onChange={(e) => setInputId(e.target.value.toUpperCase())}
-                                        style={{ borderColor: `${theme.primaryColor}40` }}
-                                    />
-                                </div>
-                            </div>
-                            <Button
-                                className="w-full font-bold shadow-lg transition-all hover:scale-[1.02]"
-                                size="lg"
-                                onClick={handleVerify}
-                                style={{
-                                    backgroundColor: theme.primaryColor,
-                                    color: theme.backgroundColor,
-                                    boxShadow: `0 4px 20px ${theme.primaryColor}40`
-                                }}
-                            >
-                                {t("verify_button")}
-                            </Button>
-                        </CardContent>
-                    </Card>
+                  {t("input_label")}
+                </label>
+                <div className="relative">
+                  <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder={t("input_placeholder")}
+                    className="pl-9 bg-background/50 border-input/50 focus-visible:ring-1"
+                    value={inputId}
+                    onChange={(e) => setInputId(e.target.value.toUpperCase())}
+                    style={{ borderColor: `${theme.primaryColor}40` }}
+                  />
+                </div>
+              </div>
+              <Button
+                className="w-full font-bold shadow-lg transition-all hover:scale-[1.02]"
+                size="lg"
+                onClick={handleVerify}
+                style={{
+                  backgroundColor: theme.primaryColor,
+                  color: theme.backgroundColor,
+                  boxShadow: `0 4px 20px ${theme.primaryColor}40`,
+                }}
+              >
+                {t("verify_button")}
+              </Button>
+            </CardContent>
+          </Card>
 
-                    <AnimatePresence mode="wait">
-                        {result && (
-                            <motion.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: "auto" }}
-                                exit={{ opacity: 0, height: 0 }}
-                                className="mt-6"
-                            >
-                                <Card className={`border-l-4 ${result.status === "valid" ? "border-green-500" :
-                                        result.status === "partial" ? "border-muted-foreground/40" : "border-red-500"
-                                    } bg-card/95 backdrop-blur shadow-xl`}>
-                                    <CardContent className="pt-6">
-                                        <div className="flex items-start gap-4">
-                                            <div className={`p-3 rounded-full ${result.status === "valid" ? "bg-green-500/20 text-green-500" :
-                                                    result.status === "partial" ? "bg-muted text-muted-foreground" : "bg-red-500/20 text-red-500"
-                                                }`}>
-                                                {result.status === "valid" ? <Check className="w-6 h-6" /> :
-                                                    result.status === "partial" ? <Info className="w-6 h-6" /> :
-                                                        <ShieldAlert className="w-6 h-6" />}
-                                            </div>
-                                            <div className="flex-1 space-y-1">
-                                                <h4 className={`font-bold text-lg ${result.status === "valid" ? "text-green-500" :
-                                                        result.status === "partial" ? "text-foreground" : "text-red-500"
-                                                    }`}>
-                                                    {result.status === "valid" ? t("result.valid_title") :
-                                                        result.status === "partial" ? t("result.partial_title") :
-                                                            t("result.invalid_title")}
-                                                </h4>
-
-                                                {/* FULL MATCH */}
-                                                {result.status === "valid" && result.participant && (
-                                                    <div className="mt-4 space-y-3">
-                                                        <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30">
-                                                            <User className="w-5 h-5 opacity-70" />
-                                                            <div>
-                                                                <p className="text-xs text-muted-foreground uppercase">{t("result.winner_label")}</p>
-                                                                <p className="font-medium text-lg">{result.participant.name}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30">
-                                                            <Calendar className="w-5 h-5 opacity-70" />
-                                                            <div>
-                                                                <p className="text-xs text-muted-foreground uppercase">{t("result.date_label")}</p>
-                                                                <p className="font-medium">
-                                                                    {new Date(result.participant.timestamp).toLocaleString()}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex items-center gap-2 text-xs text-green-500 mt-2">
-                                                            <ShieldCheck className="w-3 h-3" />
-                                                            {t("result.local_record")}
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                {/* PARTIAL MATCH — format-valid but unverifiable on this device */}
-                                                {result.status === "partial" && result.date && (
-                                                    <div className="mt-4 space-y-3">
-                                                        <p className="text-sm text-muted-foreground mb-2">
-                                                            {t("result.partial_description")}
-                                                        </p>
-                                                        <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 border border-border/60">
-                                                            <Calendar className="w-5 h-5 text-muted-foreground" />
-                                                            <div>
-                                                                <p className="text-xs text-muted-foreground uppercase">{t("result.date_label")}</p>
-                                                                <p className="font-medium text-foreground">
-                                                                    {result.date.toLocaleString()}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex items-start gap-2 text-xs text-muted-foreground mt-2 bg-amber-500/10 border border-amber-500/20 p-3 rounded">
-                                                            <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0 text-amber-500" />
-                                                            <span>{t("result.partial_disclaimer")}</span>
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                {/* INVALID */}
-                                                {result.status === "invalid" && (
-                                                    <p className="text-muted-foreground text-sm mt-2">
-                                                        {result.error}
-                                                    </p>
-                                                )}
-                                            </div>
-                                        </div>
-
-                                        {/* VIRAL LOOP CTA - MAIN */}
-                                        {(result.status === "valid" || result.status === "partial") && (
-                                            <div className="mt-6 pt-4 border-t border-border/50 space-y-3">
-                                                <div className="flex gap-2">
-                                                    {canShareNative ? (
-                                                        <Button
-                                                            className="flex-1 gap-2 font-bold"
-                                                            size="lg"
-                                                            variant="outline"
-                                                            onClick={shareNative}
-                                                            disabled={isSharing}
-                                                            style={{
-                                                                borderColor: theme.primaryColor,
-                                                                color: theme.primaryColor
-                                                            }}
-                                                        >
-                                                            {isSharing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Share2 className="w-4 h-4" />}
-                                                            {t("share_button")}
-                                                        </Button>
-                                                    ) : (
-                                                        <DropdownMenu>
-                                                            <DropdownMenuTrigger asChild>
-                                                                <Button
-                                                                    className="flex-1 gap-2 font-bold"
-                                                                    size="lg"
-                                                                    variant="outline"
-                                                                    style={{
-                                                                        borderColor: theme.primaryColor,
-                                                                        color: theme.primaryColor
-                                                                    }}
-                                                                >
-                                                                    <Share2 className="w-4 h-4" />
-                                                                    {t("share_button")}
-                                                                </Button>
-                                                            </DropdownMenuTrigger>
-                                                            <DropdownMenuContent align="center" className="w-56">
-                                                                <DropdownMenuItem onClick={copyToClipboard} className="gap-2 cursor-pointer">
-                                                                    {showCopied ? (
-                                                                        <>
-                                                                            <Check className="w-4 h-4 text-green-500" />
-                                                                            <span className="text-green-500">{t("result.copied")}</span>
-                                                                        </>
-                                                                    ) : (
-                                                                        <>
-                                                                            <Copy className="w-4 h-4" />
-                                                                            Copy Link
-                                                                        </>
-                                                                    )}
-                                                                </DropdownMenuItem>
-
-                                                                {/* Semantic Links for Social Sharing */}
-                                                                <DropdownMenuItem asChild>
-                                                                    <a
-                                                                        href={twitterUrl}
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        className="gap-2 cursor-pointer flex w-full items-center"
-                                                                        aria-label="Share on Twitter"
-                                                                    >
-                                                                        <Twitter className="w-4 h-4" />
-                                                                        Twitter / X
-                                                                    </a>
-                                                                </DropdownMenuItem>
-
-                                                                <DropdownMenuItem onClick={shareInstagram} className="gap-2 cursor-pointer">
-                                                                    <Instagram className="w-4 h-4" />
-                                                                    Instagram
-                                                                </DropdownMenuItem>
-
-                                                                <DropdownMenuItem asChild>
-                                                                    <a
-                                                                        href={facebookUrl}
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        className="gap-2 cursor-pointer flex w-full items-center"
-                                                                        aria-label="Share on Facebook"
-                                                                    >
-                                                                        <Facebook className="w-4 h-4" />
-                                                                        Facebook
-                                                                    </a>
-                                                                </DropdownMenuItem>
-
-                                                                <DropdownMenuItem asChild>
-                                                                    <a
-                                                                        href={whatsappUrl}
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        className="gap-2 cursor-pointer flex w-full items-center"
-                                                                        aria-label="Share on WhatsApp"
-                                                                    >
-                                                                        <MessageCircle className="w-4 h-4" />
-                                                                        WhatsApp
-                                                                    </a>
-                                                                </DropdownMenuItem>
-
-                                                                <DropdownMenuItem asChild>
-                                                                    <a
-                                                                        href={telegramUrl}
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        className="gap-2 cursor-pointer flex w-full items-center"
-                                                                        aria-label="Share on Telegram"
-                                                                    >
-                                                                        <Send className="w-4 h-4" />
-                                                                        Telegram
-                                                                    </a>
-                                                                </DropdownMenuItem>
-
-                                                                <DropdownMenuItem asChild>
-                                                                    <a
-                                                                        href={linkedinUrl}
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        className="gap-2 cursor-pointer flex w-full items-center"
-                                                                        aria-label="Share on LinkedIn"
-                                                                    >
-                                                                        <Linkedin className="w-4 h-4" />
-                                                                        LinkedIn
-                                                                    </a>
-                                                                </DropdownMenuItem>
-                                                            </DropdownMenuContent>
-                                                        </DropdownMenu>
-                                                    )}
-
-                                                    {/* Download Certificate Button */}
-                                                    <Button
-                                                        className="flex-1 gap-2 font-bold"
-                                                        size="lg"
-                                                        variant="outline"
-                                                        onClick={handleDownload}
-                                                        style={{
-                                                            borderColor: theme.primaryColor,
-                                                            color: theme.primaryColor
-                                                        }}
-                                                    >
-                                                        <Download className="w-4 h-4" />
-                                                        {t("download_certificate")}
-                                                    </Button>
-                                                </div>
-
-                                                <Button
-                                                    asChild
-                                                    className="w-full gap-2 font-bold shadow-lg hover:scale-[1.02] transition-transform animate-pulse"
-                                                    size="lg"
-                                                    style={{
-                                                        backgroundColor: theme.primaryColor,
-                                                        color: theme.backgroundColor,
-                                                        boxShadow: `0 4px 15px ${theme.primaryColor}30`
-                                                    }}
-                                                >
-                                                    <Link href={returnUrl}>
-                                                        <Sparkles className="w-4 h-4" />
-                                                        {t("create_your_own")}
-                                                    </Link>
-                                                </Button>
-                                            </div>
-                                        )}
-                                    </CardContent>
-                                </Card>
-                            </motion.div>
+          <AnimatePresence mode="wait">
+            {result && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="mt-6"
+              >
+                <Card
+                  className={`border-l-4 ${
+                    result.status === "valid"
+                      ? "border-green-500"
+                      : result.status === "partial"
+                        ? "border-muted-foreground/40"
+                        : "border-red-500"
+                  } bg-card/95 backdrop-blur shadow-xl`}
+                >
+                  <CardContent className="pt-6">
+                    <div className="flex items-start gap-4">
+                      <div
+                        className={`p-3 rounded-full ${
+                          result.status === "valid"
+                            ? "bg-green-500/20 text-green-500"
+                            : result.status === "partial"
+                              ? "bg-muted text-muted-foreground"
+                              : "bg-red-500/20 text-red-500"
+                        }`}
+                      >
+                        {result.status === "valid" ? (
+                          <Check className="w-6 h-6" />
+                        ) : result.status === "partial" ? (
+                          <Info className="w-6 h-6" />
+                        ) : (
+                          <ShieldAlert className="w-6 h-6" />
                         )}
-                    </AnimatePresence>
-                </motion.div>
-            </div>
+                      </div>
+                      <div className="flex-1 space-y-1">
+                        <h4
+                          className={`font-bold text-lg ${
+                            result.status === "valid"
+                              ? "text-green-500"
+                              : result.status === "partial"
+                                ? "text-foreground"
+                                : "text-red-500"
+                          }`}
+                        >
+                          {result.status === "valid"
+                            ? t("result.valid_title")
+                            : result.status === "partial"
+                              ? t("result.partial_title")
+                              : t("result.invalid_title")}
+                        </h4>
 
-            {/* Viralis: Sticky CTA for Mobile */}
-            <AnimatePresence>
-                {isStickyVisible && (
-                    <motion.div
-                        initial={{ y: 100 }}
-                        animate={{ y: 0 }}
-                        exit={{ y: 100 }}
-                        className="fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur border-t border-border z-50 flex gap-2 shadow-2xl"
-                        style={{ borderTopColor: `${theme.primaryColor}40` }}
-                    >
-                        {canShareNative && (
+                        {/* FULL MATCH */}
+                        {result.status === "valid" && result.participant && (
+                          <div className="mt-4 space-y-3">
+                            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30">
+                              <User className="w-5 h-5 opacity-70" />
+                              <div>
+                                <p className="text-xs text-muted-foreground uppercase">
+                                  {t("result.winner_label")}
+                                </p>
+                                <p className="font-medium text-lg">
+                                  {result.participant.name}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30">
+                              <Calendar className="w-5 h-5 opacity-70" />
+                              <div>
+                                <p className="text-xs text-muted-foreground uppercase">
+                                  {t("result.date_label")}
+                                </p>
+                                <p className="font-medium">
+                                  {new Date(
+                                    result.participant.timestamp,
+                                  ).toLocaleString()}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2 text-xs text-green-500 mt-2">
+                              <ShieldCheck className="w-3 h-3" />
+                              {t("result.local_record")}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* PARTIAL MATCH — format-valid but unverifiable on this device */}
+                        {result.status === "partial" && result.date && (
+                          <div className="mt-4 space-y-3">
+                            <p className="text-sm text-muted-foreground mb-2">
+                              {t("result.partial_description")}
+                            </p>
+                            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 border border-border/60">
+                              <Calendar className="w-5 h-5 text-muted-foreground" />
+                              <div>
+                                <p className="text-xs text-muted-foreground uppercase">
+                                  {t("result.date_label")}
+                                </p>
+                                <p className="font-medium text-foreground">
+                                  {result.date.toLocaleString()}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="flex items-start gap-2 text-xs text-muted-foreground mt-2 bg-amber-500/10 border border-amber-500/20 p-3 rounded">
+                              <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0 text-amber-500" />
+                              <span>{t("result.partial_disclaimer")}</span>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* INVALID */}
+                        {result.status === "invalid" && (
+                          <p className="text-muted-foreground text-sm mt-2">
+                            {result.error}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* VIRAL LOOP CTA - MAIN */}
+                    {(result.status === "valid" ||
+                      result.status === "partial") && (
+                      <div className="mt-6 pt-4 border-t border-border/50 space-y-3">
+                        <div className="flex gap-2">
+                          {canShareNative ? (
                             <Button
-                                className="flex-1 font-bold shadow-lg"
-                                size="lg"
-                                variant="outline"
-                                onClick={shareNative}
-                                disabled={isSharing}
-                                style={{
+                              className="flex-1 gap-2 font-bold"
+                              size="lg"
+                              variant="outline"
+                              onClick={shareNative}
+                              disabled={isSharing}
+                              style={{
+                                borderColor: theme.primaryColor,
+                                color: theme.primaryColor,
+                              }}
+                            >
+                              {isSharing ? (
+                                <Loader2 className="w-4 h-4 animate-spin" />
+                              ) : (
+                                <Share2 className="w-4 h-4" />
+                              )}
+                              {t("share_button")}
+                            </Button>
+                          ) : (
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button
+                                  className="flex-1 gap-2 font-bold"
+                                  size="lg"
+                                  variant="outline"
+                                  style={{
                                     borderColor: theme.primaryColor,
-                                    color: theme.primaryColor
-                                }}
-                            >
-                                {isSharing ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Share2 className="w-4 h-4 mr-2" />}
-                                {t("share_button")}
-                            </Button>
-                        )}
+                                    color: theme.primaryColor,
+                                  }}
+                                >
+                                  <Share2 className="w-4 h-4" />
+                                  {t("share_button")}
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent
+                                align="center"
+                                className="w-56"
+                              >
+                                <DropdownMenuItem
+                                  onClick={copyToClipboard}
+                                  className="gap-2 cursor-pointer"
+                                >
+                                  {showCopied ? (
+                                    <>
+                                      <Check className="w-4 h-4 text-green-500" />
+                                      <span className="text-green-500">
+                                        {t("result.copied")}
+                                      </span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Copy className="w-4 h-4" />
+                                      Copy Link
+                                    </>
+                                  )}
+                                </DropdownMenuItem>
+
+                                {/* Semantic Links for Social Sharing */}
+                                <DropdownMenuItem asChild>
+                                  <a
+                                    href={twitterUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="gap-2 cursor-pointer flex w-full items-center"
+                                    aria-label="Share on Twitter"
+                                  >
+                                    <Twitter className="w-4 h-4" />
+                                    Twitter / X
+                                  </a>
+                                </DropdownMenuItem>
+
+                                <DropdownMenuItem
+                                  onClick={shareInstagram}
+                                  className="gap-2 cursor-pointer"
+                                >
+                                  <Instagram className="w-4 h-4" />
+                                  Instagram
+                                </DropdownMenuItem>
+
+                                <DropdownMenuItem asChild>
+                                  <a
+                                    href={facebookUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="gap-2 cursor-pointer flex w-full items-center"
+                                    aria-label="Share on Facebook"
+                                  >
+                                    <Facebook className="w-4 h-4" />
+                                    Facebook
+                                  </a>
+                                </DropdownMenuItem>
+
+                                <DropdownMenuItem asChild>
+                                  <a
+                                    href={whatsappUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="gap-2 cursor-pointer flex w-full items-center"
+                                    aria-label="Share on WhatsApp"
+                                  >
+                                    <MessageCircle className="w-4 h-4" />
+                                    WhatsApp
+                                  </a>
+                                </DropdownMenuItem>
+
+                                <DropdownMenuItem asChild>
+                                  <a
+                                    href={telegramUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="gap-2 cursor-pointer flex w-full items-center"
+                                    aria-label="Share on Telegram"
+                                  >
+                                    <Send className="w-4 h-4" />
+                                    Telegram
+                                  </a>
+                                </DropdownMenuItem>
+
+                                <DropdownMenuItem asChild>
+                                  <a
+                                    href={linkedinUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="gap-2 cursor-pointer flex w-full items-center"
+                                    aria-label="Share on LinkedIn"
+                                  >
+                                    <Linkedin className="w-4 h-4" />
+                                    LinkedIn
+                                  </a>
+                                </DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                          )}
+
+                          {/* Download Certificate Button */}
+                          <Button
+                            className="flex-1 gap-2 font-bold"
+                            size="lg"
+                            variant="outline"
+                            onClick={handleDownload}
+                            style={{
+                              borderColor: theme.primaryColor,
+                              color: theme.primaryColor,
+                            }}
+                          >
+                            <Download className="w-4 h-4" />
+                            {t("download_certificate")}
+                          </Button>
+                        </div>
 
                         <Button
-                            asChild
-                            className="flex-[2] font-bold shadow-lg"
-                            size="lg"
-                            style={{
-                                backgroundColor: theme.primaryColor,
-                                color: theme.backgroundColor
-                            }}
+                          asChild
+                          className="w-full gap-2 font-bold shadow-lg hover:scale-[1.02] transition-transform animate-pulse"
+                          size="lg"
+                          style={{
+                            backgroundColor: theme.primaryColor,
+                            color: theme.backgroundColor,
+                            boxShadow: `0 4px 15px ${theme.primaryColor}30`,
+                          }}
                         >
-                            <Link href={returnUrl}>
-                                <Sparkles className="w-4 h-4 mr-2" />
-                                {t("create_your_own")}
-                            </Link>
+                          <Link href={returnUrl}>
+                            <Sparkles className="w-4 h-4" />
+                            {t("create_your_own")}
+                          </Link>
                         </Button>
-                    </motion.div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </div>
+
+      {/* Viralis: Sticky CTA for Mobile */}
+      <AnimatePresence>
+        {isStickyVisible && (
+          <motion.div
+            initial={{ y: 100 }}
+            animate={{ y: 0 }}
+            exit={{ y: 100 }}
+            className="fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur border-t border-border z-50 flex gap-2 shadow-2xl"
+            style={{ borderTopColor: `${theme.primaryColor}40` }}
+          >
+            {canShareNative && (
+              <Button
+                className="flex-1 font-bold shadow-lg"
+                size="lg"
+                variant="outline"
+                onClick={shareNative}
+                disabled={isSharing}
+                style={{
+                  borderColor: theme.primaryColor,
+                  color: theme.primaryColor,
+                }}
+              >
+                {isSharing ? (
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                ) : (
+                  <Share2 className="w-4 h-4 mr-2" />
                 )}
-            </AnimatePresence>
-        </main>
-    )
+                {t("share_button")}
+              </Button>
+            )}
+
+            <Button
+              asChild
+              className="flex-[2] font-bold shadow-lg"
+              size="lg"
+              style={{
+                backgroundColor: theme.primaryColor,
+                color: theme.backgroundColor,
+              }}
+            >
+              <Link href={returnUrl}>
+                <Sparkles className="w-4 h-4 mr-2" />
+                {t("create_your_own")}
+              </Link>
+            </Button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </main>
+  );
 }

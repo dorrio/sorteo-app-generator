@@ -68,3 +68,8 @@
 **Gap:** Missing Knowledge Graph linkages (`about`, `mentions`, `sameAs`) in the global `SoftwareApplication` schema, reducing the application's E-E-A-T score and entity recognition for LLMs.
 **Action:** Injected `about`, `mentions`, and `sameAs` properties to `SoftwareApplication` in `seo-content.tsx` to connect to recognized entities like "Random number generation".
 **GEO Impact:** Solidified entity recognition for AI bots, establishing Sorteo Pro as a recognized brand in the Knowledge Graph and enhancing AI citations.
+
+## 2026-06-18 - [Strategy/Schema]
+**Gap:** While `seo-content.tsx` had Knowledge Graph linkages (`about`, `mentions`, `sameAs`), the global `layout.tsx` and all 15 individual tool pages (`page.tsx`) were missing these properties in their `SoftwareApplication` schemas. This fragmented the entity recognition.
+**Action:** Injected `about`, `mentions`, and `sameAs` properties into the `SoftwareApplication` schema across `layout.tsx` and all tool pages, utilizing the `SorteoSeo` namespace.
+**GEO Impact:** Unified and solidified entity recognition for AI bots across the entire site, ensuring consistent Knowledge Graph mapping for all tools and the global application.

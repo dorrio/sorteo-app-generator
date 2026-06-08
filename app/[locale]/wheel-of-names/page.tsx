@@ -1,15 +1,15 @@
-import { getBaseUrl } from "@/lib/config"
-import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { routing } from '@/i18n/routing';
+import { getBaseUrl } from "@/lib/config";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
 import dynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { Glossary } from "@/components/sorteo/glossary";
 import { SiteFooter } from "@/components/sorteo/site-footer";
-import { JsonLd } from '@/components/seo/json-ld';
+import { JsonLd } from "@/components/seo/json-ld";
 const MainApp = dynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
-  { loading: () => <AppSkeleton visualization="roulette" /> }
+  { loading: () => <AppSkeleton visualization="roulette" /> },
 );
 
 export function generateStaticParams() {
@@ -17,38 +17,50 @@ export function generateStaticParams() {
 }
 
 type Props = {
-  params: Promise<{ locale: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
   const { template_title, template_color, list } = await searchParams;
-  const t = await getTranslations({ locale, namespace: 'WheelGeoPage' });
+  const t = await getTranslations({ locale, namespace: "WheelGeoPage" });
 
-  const baseUrl = getBaseUrl()
-  const customTitle = typeof template_title === 'string' ? template_title : undefined;
-  const customColor = typeof template_color === 'string' ? template_color : undefined;
-  const customList = typeof list === 'string' ? list : undefined;
+  const baseUrl = getBaseUrl();
+  const customTitle =
+    typeof template_title === "string" ? template_title : undefined;
+  const customColor =
+    typeof template_color === "string" ? template_color : undefined;
+  const customList = typeof list === "string" ? list : undefined;
 
-  const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : t('title');
-  const displayDescription = t('description');
+  const displayTitle = customTitle ? `${customTitle} | Sorteo Pro` : t("title");
+  const displayDescription = t("description");
 
   const ogImageUrl = new URL(`${baseUrl}/api/og`);
-  ogImageUrl.searchParams.set('type', 'wheel');
-  if (customTitle) ogImageUrl.searchParams.set('title', customTitle);
-  if (customColor) ogImageUrl.searchParams.set('color', customColor);
-  if (customList) ogImageUrl.searchParams.set('list', customList);
+  ogImageUrl.searchParams.set("type", "wheel");
+  if (customTitle) ogImageUrl.searchParams.set("title", customTitle);
+  if (customColor) ogImageUrl.searchParams.set("color", customColor);
+  if (customList) ogImageUrl.searchParams.set("list", customList);
 
   const shareUrl = new URL(`${baseUrl}/${locale}/wheel-of-names`);
-  if (customTitle) shareUrl.searchParams.set('template_title', customTitle);
-  if (customColor) shareUrl.searchParams.set('template_color', customColor);
-  if (customList) shareUrl.searchParams.set('list', customList);
+  if (customTitle) shareUrl.searchParams.set("template_title", customTitle);
+  if (customColor) shareUrl.searchParams.set("template_color", customColor);
+  if (customList) shareUrl.searchParams.set("list", customList);
 
   return {
     title: displayTitle,
     description: displayDescription,
-    keywords: ["wheel of names", "random picker wheel", "spin the wheel", "wheel decider", "ruleta aleatoria", "ruleta de nombres", "roleta de nomes", "random name picker", "wheel generator"],
+    keywords: [
+      "wheel of names",
+      "random picker wheel",
+      "spin the wheel",
+      "wheel decider",
+      "ruleta aleatoria",
+      "ruleta de nombres",
+      "roleta de nomes",
+      "random name picker",
+      "wheel generator",
+    ],
     alternates: {
       canonical: `/${locale}/wheel-of-names`,
       languages: {
@@ -63,7 +75,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       url: shareUrl.toString(),
       type: "website",
       siteName: "Sorteo Pro",
-      locale: locale === 'es' ? 'es_ES' : locale === 'pt' ? 'pt_PT' : 'en_US',
+      locale: locale === "es" ? "es_ES" : locale === "pt" ? "pt_PT" : "en_US",
       images: [
         {
           url: ogImageUrl.toString(),
@@ -74,7 +86,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: displayTitle,
       description: displayDescription,
       images: [ogImageUrl.toString()],
@@ -82,62 +94,90 @@ export async function generateMetadata({ params, searchParams }: Props) {
   };
 }
 
-export default async function WheelOfNamesPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function WheelOfNamesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'WheelGeoPage' });
-  const tGeo = await getTranslations({ locale, namespace: 'WheelGeo' });
-  const tShare = await getTranslations({ locale, namespace: 'ShareContent' });
-  const tWinner = await getTranslations({ locale, namespace: 'WinnerCeremony' });
+  const t = await getTranslations({ locale, namespace: "WheelGeoPage" });
+  const tSorteoSeo = await getTranslations({ locale, namespace: "SorteoSeo" });
+  const tGeo = await getTranslations({ locale, namespace: "WheelGeo" });
+  const tShare = await getTranslations({ locale, namespace: "ShareContent" });
+  const tWinner = await getTranslations({
+    locale,
+    namespace: "WinnerCeremony",
+  });
 
-  const baseUrl = getBaseUrl()
+  const baseUrl = getBaseUrl();
   const softwareAppSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: 'Wheel of Names by Sorteo Pro',
-    applicationCategory: 'GameApplication',
-    operatingSystem: 'Web, iOS, Android',
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Wheel of Names by Sorteo Pro",
+    applicationCategory: "GameApplication",
+    operatingSystem: "Web, iOS, Android",
     offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
     },
-    description: t('description'),
+    description: t("description"),
     featureList: [
-      tGeo('feature_1'),
-      tGeo('feature_2'),
-      tGeo('feature_3'),
-      tGeo('feature_4')
-    ]
+      tGeo("feature_1"),
+      tGeo("feature_2"),
+      tGeo("feature_3"),
+      tGeo("feature_4"),
+    ],
+    about: {
+      "@type": "Thing",
+      name: tSorteoSeo("about.name"),
+      description: tSorteoSeo("about.description"),
+    },
+    mentions: [
+      {
+        "@type": "Thing",
+        name: tSorteoSeo("mentions.randomNumber.name"),
+        sameAs: "https://en.wikipedia.org/wiki/Random_number_generation",
+      },
+      {
+        "@type": "Thing",
+        name: tSorteoSeo("mentions.socialMedia.name"),
+      },
+    ],
+    sameAs: ["https://github.com/sorteopro", "https://twitter.com/sorteopro"],
   };
 
   const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    "itemListElement": [{
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Sorteo Pro",
-      "item": `${baseUrl}/${locale}`
-    }, {
-      "@type": "ListItem",
-      "position": 2,
-      "name": t('h1'),
-      "item": `${baseUrl}/${locale}/wheel-of-names`
-    }]
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Sorteo Pro",
+        item: `${baseUrl}/${locale}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: t("h1"),
+        item: `${baseUrl}/${locale}/wheel-of-names`,
+      },
+    ],
   };
 
   const shareTranslations = {
-    share: tWinner('share_menu'),
-    copy: tWinner('copy_text'),
-    copied: tWinner('copied'),
-    shareOn: tWinner('share_on')
-  }
+    share: tWinner("share_menu"),
+    copy: tWinner("copy_text"),
+    copied: tWinner("copied"),
+    shareOn: tWinner("share_on"),
+  };
 
   const stickyTranslations = {
-    share_cta: tShare('cta_share'),
-    start_cta: tShare('cta_start')
-  }
+    share_cta: tShare("cta_share"),
+    start_cta: tShare("cta_start"),
+  };
 
   return (
     <>
@@ -145,11 +185,13 @@ export default async function WheelOfNamesPage({ params }: { params: Promise<{ l
       <MainApp
         initialStyle="roulette"
         seoMode="wheel"
-        initialTitle={t('h1')}
-        initialSubtitle={t('subtitle')}
-        shareTitle={tShare('wheel_title')}
-        shareText={tShare('wheel_text')}
-        customShareTextTemplate={tShare('custom_share_text', { title: '{title}' })}
+        initialTitle={t("h1")}
+        initialSubtitle={t("subtitle")}
+        shareTitle={tShare("wheel_title")}
+        shareText={tShare("wheel_text")}
+        customShareTextTemplate={tShare("custom_share_text", {
+          title: "{title}",
+        })}
         shareTranslations={shareTranslations}
         stickyTranslations={stickyTranslations}
         footer={<SiteFooter />}

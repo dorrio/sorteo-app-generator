@@ -43,6 +43,7 @@ export default async function VersusPage({
   const t = await getTranslations({ locale, namespace: "Versus" });
   const tSchema = await getTranslations({ locale, namespace: "Schema" });
   const tGlobal = await getTranslations({ locale, namespace: "GlobalSchema" });
+  const tSorteoSeo = await getTranslations({ locale, namespace: "SorteoSeo" });
   const baseUrl = getBaseUrl();
 
   const breadcrumbJsonLd = {
@@ -83,6 +84,23 @@ export default async function VersusPage({
       tSchema("versus_features.free"),
       tSchema("versus_features.fair_rng"),
     ],
+    about: {
+      "@type": "Thing",
+      name: tSorteoSeo("about.name"),
+      description: tSorteoSeo("about.description"),
+    },
+    mentions: [
+      {
+        "@type": "Thing",
+        name: tSorteoSeo("mentions.randomNumber.name"),
+        sameAs: "https://en.wikipedia.org/wiki/Random_number_generation",
+      },
+      {
+        "@type": "Thing",
+        name: tSorteoSeo("mentions.socialMedia.name"),
+      },
+    ],
+    sameAs: ["https://github.com/sorteopro", "https://twitter.com/sorteopro"],
   };
 
   return (

@@ -52,6 +52,7 @@ export default async function TruthOrDarePage({
 
   // We fetch translations server-side for metadata and initial render
   const t = await getTranslations({ locale, namespace: "TruthPage" });
+  const tSorteoSeo = await getTranslations({ locale, namespace: "SorteoSeo" });
   const tShare = await getTranslations({ locale, namespace: "ShareContent" });
   const tWinner = await getTranslations({
     locale,
@@ -71,6 +72,23 @@ export default async function TruthOrDarePage({
       price: "0",
       priceCurrency: "USD",
     },
+    about: {
+      "@type": "Thing",
+      name: tSorteoSeo("about.name"),
+      description: tSorteoSeo("about.description"),
+    },
+    mentions: [
+      {
+        "@type": "Thing",
+        name: tSorteoSeo("mentions.randomNumber.name"),
+        sameAs: "https://en.wikipedia.org/wiki/Random_number_generation",
+      },
+      {
+        "@type": "Thing",
+        name: tSorteoSeo("mentions.socialMedia.name"),
+      },
+    ],
+    sameAs: ["https://github.com/sorteopro", "https://twitter.com/sorteopro"],
   };
 
   // Pre-fetch all 20 truths and 20 dares from the dictionary to pass down to Client Island

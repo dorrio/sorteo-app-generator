@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link, routing } from "@/i18n/routing";
 import { HelpCircle } from "lucide-react";
 import { JsonLd } from "@/components/seo/json-ld";
+import { buildKnowledgeGraphFields } from "@/lib/seo-utils";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -43,6 +44,7 @@ export default async function VersusWheelPage({
   const t = await getTranslations({ locale, namespace: "VersusWheel" });
   const tSchema = await getTranslations({ locale, namespace: "Schema" });
   const tGlobal = await getTranslations({ locale, namespace: "GlobalSchema" });
+  const tSorteoSeo = await getTranslations({ locale, namespace: "SorteoSeo" });
   const baseUrl = getBaseUrl();
 
   const breadcrumbJsonLd = {
@@ -83,6 +85,7 @@ export default async function VersusWheelPage({
       tSchema("wheel_features.no_ads"),
       tSchema("wheel_features.free"),
     ],
+    ...buildKnowledgeGraphFields(tSorteoSeo),
   };
 
   return (

@@ -39,3 +39,8 @@
 **Hypothesis:** If we add Telegram and LinkedIn sharing options to the fallback DropdownMenu component in `VerifyContent`, we will tap into professional networks and private messaging clusters directly from the verification page, matching the K-Factor potential of the core application.
 **Implementation:** Updated `app/[locale]/verify/verify-content.tsx` to include `telegramUrl` and `linkedinUrl` computations, and added `DropdownMenuItem` entries for both platforms, bringing it to feature parity with `ShareButton` and `WinnerCeremony`.
 **Outcome:** Expect increased sharing across professional circles and encrypted messaging from verified winners, leading to a higher conversion rate for new users checking verification results.
+
+## 2026-06-15 - [ShareButton/Dropdown]
+**Hypothesis:** If we remove duplicate Telegram and LinkedIn buttons from the Share Dropdown, we will reduce choice paralysis and cognitive load for desktop users, improving the overall share completion rate.
+**Implementation:** Removed the redundant `<DropdownMenuItem>` blocks for Telegram and LinkedIn at the bottom of the dropdown in `components/ui/share-button.tsx`.
+**Outcome:** Expect a cleaner UI on desktop share fallbacks, leading to a higher conversion rate for link sharing.

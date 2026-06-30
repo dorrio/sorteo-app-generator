@@ -1,5 +1,7 @@
 import { getBaseUrl } from "@/lib/config";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
+
 import dynamic from "next/dynamic";
 import { JsonLd } from "@/components/seo/json-ld";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
@@ -12,6 +14,10 @@ const MainApp = dynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
   { loading: () => <AppSkeleton visualization="slot-machine" /> },
 );
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 
 type Props = {
   params: Promise<{ locale: string }>;

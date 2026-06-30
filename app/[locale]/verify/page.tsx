@@ -1,8 +1,13 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { routing } from "@/i18n/routing";
 import { getBaseUrl } from "@/lib/config";
 import { VerifyContent } from "./verify-content";
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 type Props = {
   params: Promise<{ locale: string }>;

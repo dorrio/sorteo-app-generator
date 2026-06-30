@@ -78,3 +78,8 @@
 **Gap:** While `seo-content.tsx` had Knowledge Graph linkages (`about`, `mentions`, `sameAs`), the global `layout.tsx` and all 15 individual tool pages (`page.tsx`) were missing these properties in their `SoftwareApplication` schemas. This fragmented the entity recognition.
 **Action:** Injected `about`, `mentions`, and `sameAs` properties into the `SoftwareApplication` schema across `layout.tsx` and all tool pages, utilizing the `SorteoSeo` namespace.
 **GEO Impact:** Unified and solidified entity recognition for AI bots across the entire site, ensuring consistent Knowledge Graph mapping for all tools and the global application.
+
+## 2026-06-19 - [Strategy/Schema]
+**Gap:** Following the global rollout of Knowledge Graph linkages (`about`, `mentions`, `sameAs`) across tool pages, a few newly created pages (Truth or Dare Generator, Alternativa AppSorteos, and Alternativa Wheel of Names) were missing these entity properties in their `SoftwareApplication` JSON-LD schemas.
+**Action:** Injected `about`, `mentions`, and `sameAs` properties into the `SoftwareApplication` schema for `/truth-or-dare-generator`, `/alternativa-appsorteos`, and `/alternativa-wheel-of-names` using the `SorteoSeo` translation namespace.
+**GEO Impact:** Completed the unification of entity recognition for AI bots across 100% of the site's tool and comparison landing pages, maximizing consistent Knowledge Graph mapping and AI citation potential.

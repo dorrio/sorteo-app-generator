@@ -74,7 +74,7 @@ export function VerifyContent() {
   useEffect(() => {
     if (result?.status === "valid") {
       let timer: NodeJS.Timeout;
-      let rafId = requestAnimationFrame(() => {
+      const rafId = requestAnimationFrame(() => {
         setShowConfetti(true);
         timer = setTimeout(() => setShowConfetti(false), 5000);
       });

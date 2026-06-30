@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link, routing } from "@/i18n/routing";
 import { HelpCircle } from "lucide-react";
 import { JsonLd } from "@/components/seo/json-ld";
+import { buildKnowledgeGraphFields } from "@/lib/seo-utils";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -84,23 +85,7 @@ export default async function VersusWheelPage({
       tSchema("wheel_features.no_ads"),
       tSchema("wheel_features.free"),
     ],
-    about: {
-      "@type": "Thing",
-      name: tSorteoSeo("about.name"),
-      description: tSorteoSeo("about.description"),
-    },
-    mentions: [
-      {
-        "@type": "Thing",
-        name: tSorteoSeo("mentions.randomNumber.name"),
-        sameAs: "https://en.wikipedia.org/wiki/Random_number_generation",
-      },
-      {
-        "@type": "Thing",
-        name: tSorteoSeo("mentions.socialMedia.name"),
-      },
-    ],
-    sameAs: ["https://github.com/sorteopro", "https://twitter.com/sorteopro"],
+    ...buildKnowledgeGraphFields(tSorteoSeo),
   };
 
   return (

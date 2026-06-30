@@ -4,6 +4,7 @@ import { routing } from "@/i18n/routing";
 import { JsonLd } from "@/components/seo/json-ld";
 import nextDynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
+import { buildKnowledgeGraphFields } from "@/lib/seo-utils";
 
 const MainApp = nextDynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
@@ -52,8 +53,8 @@ export default async function TruthOrDarePage({
 
   // We fetch translations server-side for metadata and initial render
   const t = await getTranslations({ locale, namespace: "TruthPage" });
-  const tSorteoSeo = await getTranslations({ locale, namespace: "SorteoSeo" });
   const tShare = await getTranslations({ locale, namespace: "ShareContent" });
+  const tSorteoSeo = await getTranslations({ locale, namespace: "SorteoSeo" });
   const tWinner = await getTranslations({
     locale,
     namespace: "WinnerCeremony",
@@ -72,23 +73,7 @@ export default async function TruthOrDarePage({
       price: "0",
       priceCurrency: "USD",
     },
-    about: {
-      "@type": "Thing",
-      name: tSorteoSeo("about.name"),
-      description: tSorteoSeo("about.description"),
-    },
-    mentions: [
-      {
-        "@type": "Thing",
-        name: tSorteoSeo("mentions.randomNumber.name"),
-        sameAs: "https://en.wikipedia.org/wiki/Random_number_generation",
-      },
-      {
-        "@type": "Thing",
-        name: tSorteoSeo("mentions.socialMedia.name"),
-      },
-    ],
-    sameAs: ["https://github.com/sorteopro", "https://twitter.com/sorteopro"],
+    ...buildKnowledgeGraphFields(tSorteoSeo),
   };
 
   // Pre-fetch all 20 truths and 20 dares from the dictionary to pass down to Client Island

@@ -203,19 +203,6 @@ export function ShareButton({
             </a>
         </DropdownMenuItem>
 
-        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-           <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Telegram">
-            <Send className="w-4 h-4" />
-            Telegram
-           </a>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem asChild className="gap-2 cursor-pointer">
-           <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
-            <Linkedin className="w-4 h-4" />
-            LinkedIn
-           </a>
-        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

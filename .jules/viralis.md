@@ -44,3 +44,8 @@
 **Hypothesis:** If we remove duplicate Telegram and LinkedIn buttons from the Share Dropdown, we will reduce choice paralysis and cognitive load for desktop users, improving the overall share completion rate.
 **Implementation:** Removed the redundant `<DropdownMenuItem>` blocks for Telegram and LinkedIn at the bottom of the dropdown in `components/ui/share-button.tsx`.
 **Outcome:** Expect a cleaner UI on desktop share fallbacks, leading to a higher conversion rate for link sharing.
+
+## 2026-06-25 - [All Sub-Tools/Metadata]
+**Hypothesis:** If we provide specific branded themes (titles, colors, icons) in the Open Graph API route (`app/api/og/route.tsx`) for secondary sub-tools like `dice`, `rps` (Rock Paper Scissors), and `month`, users sharing these links will see custom previews rather than the default "Sorteo Pro" generic image. This contextual relevance will increase the Click-Through-Rate (CTR) on shared links by making them visually distinct and engaging.
+**Implementation:** Added dedicated theme blocks in `app/api/og/route.tsx` mapping the `type` parameter (`dice`, `rps`, `month`) to new color gradients, SVG icons, and text configurations.
+**Outcome:** Expect increased link preview engagement and CTR for these specific tools due to improved visual fidelity.

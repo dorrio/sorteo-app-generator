@@ -162,6 +162,85 @@ export async function GET(request: Request) {
                     <span>A</span><span style={{opacity:0.5}}>B</span><span style={{opacity:0.25}}>C</span>
                 </div>
             )
+        }
+    } else if (type === 'dice') {
+        theme = {
+            title: "Dice Roller",
+            subtitle: "Roll Virtual Dice • Random Results",
+            bgGradient: "radial-gradient(circle at center, #9f1239 0%, #4c0519 100%)", // Rose Dark
+            accentColor: "#f43f5e", // Rose 500
+            textColor: "white",
+            subTextColor: "#fb7185", // Rose 400
+            icon: (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                    <path d="M8 8h.01"/>
+                    <path d="M16 8h.01"/>
+                    <path d="M8 16h.01"/>
+                    <path d="M16 16h.01"/>
+                    <path d="M12 12h.01"/>
+                </svg>
+            ),
+            largeIcon: (
+                <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                    <path d="M8 8h.01"/>
+                    <path d="M16 8h.01"/>
+                    <path d="M8 16h.01"/>
+                    <path d="M16 16h.01"/>
+                    <path d="M12 12h.01"/>
+                </svg>
+            )
+        };
+    } else if (type === 'rps') {
+        theme = {
+            title: "Rock Paper Scissors",
+            subtitle: "Play Online • Fair & Random",
+            bgGradient: "radial-gradient(circle at center, #5b21b6 0%, #2e1065 100%)", // Violet Dark
+            accentColor: "#8b5cf6", // Violet 500
+            textColor: "white",
+            subTextColor: "#a78bfa", // Violet 400
+            icon: (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/>
+                    <path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/>
+                    <path d="M10 10.5V5a2 2 0 0 0-2-2a2 2 0 0 0-2 2v6"/>
+                    <path d="M18 11v5a8 8 0 0 1-8 8h-2c-2.8 0-4.5-1.5-5.8-3.3L2 17l6-4.5V11a2 2 0 0 1 2-2z"/>
+                </svg>
+            ),
+            largeIcon: (
+                <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/>
+                    <path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/>
+                    <path d="M10 10.5V5a2 2 0 0 0-2-2a2 2 0 0 0-2 2v6"/>
+                    <path d="M18 11v5a8 8 0 0 1-8 8h-2c-2.8 0-4.5-1.5-5.8-3.3L2 17l6-4.5V11a2 2 0 0 1 2-2z"/>
+                </svg>
+            )
+        };
+    } else if (type === 'month') {
+        theme = {
+            title: "Random Month Generator",
+            subtitle: "Pick a Month • Random Date",
+            bgGradient: "radial-gradient(circle at center, #9d174d 0%, #4a044e 100%)", // Fuchsia Dark
+            accentColor: "#d946ef", // Fuchsia 500
+            textColor: "white",
+            subTextColor: "#e879f9", // Fuchsia 400
+            icon: (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d946ef" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                    <line x1="16" x2="16" y1="2" y2="6"/>
+                    <line x1="8" x2="8" y1="2" y2="6"/>
+                    <line x1="3" x2="21" y1="10" y2="10"/>
+                </svg>
+            ),
+            largeIcon: (
+                <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="#d946ef" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                    <line x1="16" x2="16" y1="2" y2="6"/>
+                    <line x1="8" x2="8" y1="2" y2="6"/>
+                    <line x1="3" x2="21" y1="10" y2="10"/>
+                </svg>
+            )
         };
     }
 

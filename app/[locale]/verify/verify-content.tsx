@@ -276,7 +276,7 @@ export function VerifyContent() {
   };
 
   const shareInstagram = async () => {
-    await navigator.clipboard.writeText(shareText);
+    await navigator.clipboard.writeText(shareText + " " + shareUrl);
     setShowCopied(true);
     setTimeout(() => setShowCopied(false), 2000);
     window.open("https://www.instagram.com/", "_blank");

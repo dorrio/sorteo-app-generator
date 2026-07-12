@@ -44,3 +44,8 @@
 **Hypothesis:** If we remove duplicate Telegram and LinkedIn buttons from the Share Dropdown, we will reduce choice paralysis and cognitive load for desktop users, improving the overall share completion rate.
 **Implementation:** Removed the redundant `<DropdownMenuItem>` blocks for Telegram and LinkedIn at the bottom of the dropdown in `components/ui/share-button.tsx`.
 **Outcome:** Expect a cleaner UI on desktop share fallbacks, leading to a higher conversion rate for link sharing.
+
+## 2026-06-20 - [Share/Instagram Link]
+**Hypothesis:** If we append the referral URL (`shareUrl`) to the text copied when a user clicks the "Instagram" share button, we will prevent users from accidentally pasting a text-only message without the crucial link, increasing the CTR from Instagram interactions.
+**Implementation:** Updated `shareInstagram` functions in `components/sorteo/winner-ceremony.tsx` and `app/[locale]/verify/verify-content.tsx` to copy `shareText + " " + shareUrl` instead of just `shareText`.
+**Outcome:** Expect a reduction in broken sharing flows and an increased conversion rate from users sharing their results on Instagram.

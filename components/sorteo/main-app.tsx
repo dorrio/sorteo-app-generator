@@ -192,8 +192,10 @@ export function MainApp({
   }, [isOverlayOpen])
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- classic post-hydration flag to gate client-only rendering paths
-    setMounted(true)
+    const rafId = requestAnimationFrame(() => {
+      setMounted(true)
+    })
+    return () => cancelAnimationFrame(rafId)
   }, [])
 
   const { displayTitle, displaySubtitle } = useThemeInitialization(initialStyle, initialTitle, initialSubtitle, seoMode)

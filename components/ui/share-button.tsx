@@ -46,12 +46,15 @@ export function ShareButton({
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- browser capability detection runs once on mount; SSR-safe defaults keep the initial render stable
-    setCanShareNative(
-      typeof navigator !== "undefined" &&
-      !!navigator.share &&
-      window.matchMedia("(pointer: coarse)").matches
-    )
+    const rafId = requestAnimationFrame(() => {
+      setCanShareNative(
+        typeof navigator !== "undefined" &&
+        !!navigator.share &&
+        window.matchMedia("(pointer: coarse)").matches
+      )
+    })
+
+    return () => cancelAnimationFrame(rafId)
   }, [])
 
   const handleShare = async () => {

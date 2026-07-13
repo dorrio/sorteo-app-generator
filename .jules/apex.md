@@ -83,3 +83,8 @@
 **Gap:** Following the global rollout of Knowledge Graph linkages (`about`, `mentions`, `sameAs`) across tool pages, a few newly created pages (Truth or Dare Generator, Alternativa AppSorteos, and Alternativa Wheel of Names) were missing these entity properties in their `SoftwareApplication` JSON-LD schemas.
 **Action:** Injected `about`, `mentions`, and `sameAs` properties into the `SoftwareApplication` schema for `/truth-or-dare-generator`, `/alternativa-appsorteos`, and `/alternativa-wheel-of-names` using the `SorteoSeo` translation namespace.
 **GEO Impact:** Completed the unification of entity recognition for AI bots across 100% of the site's tool and comparison landing pages, maximizing consistent Knowledge Graph mapping and AI citation potential.
+
+## 2026-06-20 - [Strategy/Schema]
+**Gap:** The alternative comparison page for Random.org vs Sorteo Pro (`/versus/random-org-vs-sorteo-pro`) was missing the `SoftwareApplication` JSON-LD schema completely, leading to a missed opportunity to reinforce brand entity and AI Knowledge Graph linkages (`about`, `mentions`, `sameAs`) in Generative AI results.
+**Action:** Injected `SoftwareApplication` schema into `/versus/random-org-vs-sorteo-pro` utilizing the `SorteoSeo` translation namespace and `buildKnowledgeGraphFields` to map entity relationships.
+**GEO Impact:** Solidified entity recognition for AI bots on the Random.org comparison landing page, maximizing consistent Knowledge Graph mapping and potential citations when LLMs compare random number generators.

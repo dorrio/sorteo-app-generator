@@ -1,6 +1,7 @@
 import { getBaseUrl } from "@/lib/config";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { buildKnowledgeGraphFields } from "@/lib/seo-utils";
 import nextDynamic from "next/dynamic";
 import { AppSkeleton } from "@/components/sorteo/skeletons";
 import { VersusGeo } from "@/components/sorteo/versus-geo";
@@ -77,6 +78,10 @@ export default async function RandomVersusPage({
     namespace: "WinnerCeremony",
   });
   const tRng = await getTranslations({ locale, namespace: "RngPage" });
+  const tSorteoSeo = await getTranslations({ locale, namespace: "SorteoSeo" });
+  const tGlobal = await getTranslations({ locale, namespace: "GlobalSchema" });
+
+  const baseUrl = getBaseUrl();
 
   // Schema: Article + FAQ
   const articleSchema = {
@@ -120,6 +125,28 @@ export default async function RandomVersusPage({
     ],
   };
 
+  const softwareApplicationSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Sorteo Pro - Random.org Alternative",
+    applicationCategory: tGlobal("applicationCategory"),
+    applicationSubCategory: tGlobal("applicationSubCategory"),
+    operatingSystem: "Web, iOS, Android",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    description: t("description"),
+    featureList: [
+      t("table.row_price_us"),
+      t("table.row_design_us"),
+      t("table.row_login_us"),
+      t("table.row_limits_us"),
+    ],
+    ...buildKnowledgeGraphFields(tSorteoSeo),
+  };
+
   const shareTranslations = {
     share: tWinner("share_menu"),
     copy: tWinner("copy_text"),
@@ -134,7 +161,7 @@ export default async function RandomVersusPage({
 
   return (
     <>
-      <JsonLd data={[articleSchema, faqSchema]} />
+      <JsonLd data={[articleSchema, faqSchema, softwareApplicationSchema]} />
       <MainApp
         initialStyle="slot-machine"
         seoMode="rng"

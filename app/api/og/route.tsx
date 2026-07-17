@@ -17,29 +17,39 @@ export async function GET(request: Request) {
 
     // --- THEME CONFIGURATION ---
     // Default: Golden Ticket (Generic)
-    let theme = {
+    type Theme = {
+        title: string;
+        subtitle: string;
+        bgGradient: string;
+        accentColor: string;
+        textColor: string;
+        subTextColor: string;
+        icon: React.ReactNode;
+        largeIcon: React.ReactNode;
+    };
+
+    const defaultTheme: Theme = {
         title: "Sorteo Pro",
         subtitle: "The Ultimate Giveaway Tool",
-        bgGradient: "radial-gradient(circle at 50% 0%, #423506 0%, #09090b 70%)", // Gold/Dark
-        accentColor: "#FFD700", // Gold
+        bgGradient: "radial-gradient(circle at 50% 0%, #423506 0%, #09090b 70%)",
+        accentColor: "#FFD700",
         textColor: "white",
-        subTextColor: "#a1a1aa", // zinc-400
+        subTextColor: "#a1a1aa",
         icon: (
              <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFD700">
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
              </svg>
         ),
-        largeIcon: null as React.ReactNode
+        largeIcon: null
     };
 
-    if (type === 'wheel') {
-        theme = {
+    const THEMES: Record<string, Partial<Theme>> = {
+        'wheel': {
             title: "Wheel of Names",
             subtitle: "Spin the Wheel • Pick a Winner",
-            bgGradient: "radial-gradient(circle at center, #2e1065 0%, #000000 100%)", // Purple/Black
-            accentColor: "#a855f7", // Purple 500
-            textColor: "white",
-            subTextColor: "#d8b4fe", // Purple 200
+            bgGradient: "radial-gradient(circle at center, #2e1065 0%, #000000 100%)",
+            accentColor: "#a855f7",
+            subTextColor: "#d8b4fe",
             icon: (
                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="10"/>
@@ -54,14 +64,12 @@ export async function GET(request: Request) {
                     <circle cx="12" cy="12" r="2" fill="#a855f7" fillOpacity="0.5"/>
                  </svg>
             )
-        };
-    } else if (type === 'instagram') {
-        theme = {
+        },
+        'instagram': {
             title: "Instagram Comment Picker",
             subtitle: "Free & Unlimited • No Login",
-            bgGradient: "linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D)", // Insta Gradient
+            bgGradient: "linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D)",
             accentColor: "#FFFFFF",
-            textColor: "white",
             subTextColor: "rgba(255,255,255,0.9)",
             icon: (
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -77,15 +85,13 @@ export async function GET(request: Request) {
                     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
                 </svg>
             )
-        };
-    } else if (type === 'rng') {
-        theme = {
+        },
+        'rng': {
             title: "Random Number Generator",
             subtitle: "Secure • Fair • Instant",
-            bgGradient: "radial-gradient(circle at center, #064e3b 0%, #022c22 100%)", // Emerald/Dark
-            accentColor: "#34d399", // Emerald 400
-            textColor: "white",
-            subTextColor: "#6ee7b7", // Emerald 300
+            bgGradient: "radial-gradient(circle at center, #064e3b 0%, #022c22 100%)",
+            accentColor: "#34d399",
+            subTextColor: "#6ee7b7",
             icon: (
                 <div style={{ display: 'flex', gap: '2px', fontSize: 20, fontWeight: 900, color: "#34d399", fontFamily: 'monospace' }}>
                     <span>7</span>
@@ -96,15 +102,13 @@ export async function GET(request: Request) {
                     <span>7</span><span>7</span><span>7</span>
                 </div>
             )
-        };
-    } else if (type === 'list') {
-        theme = {
+        },
+        'list': {
             title: "List Randomizer",
             subtitle: "Shuffle Lists • Team Generator",
-            bgGradient: "radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%)", // Blue/Dark
-            accentColor: "#60a5fa", // Blue 400
-            textColor: "white",
-            subTextColor: "#93c5fd", // Blue 300
+            bgGradient: "radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%)",
+            accentColor: "#60a5fa",
+            subTextColor: "#93c5fd",
             icon: (
                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="21" x2="3" y1="6" y2="6"/>
@@ -121,15 +125,13 @@ export async function GET(request: Request) {
                     <line x1="3" x2="3.01" y1="18" y2="18"/>
                 </svg>
             )
-        };
-    } else if (type === 'yes-no') {
-        theme = {
+        },
+        'yes-no': {
             title: "Yes or No Wheel",
             subtitle: "Spin for Answer • 50/50 Chance",
-            bgGradient: "radial-gradient(circle at center, #172554 0%, #020617 100%)", // Blue Dark
-            accentColor: "#60a5fa", // Blue 400
-            textColor: "white",
-            subTextColor: "#93c5fd", // Blue 300
+            bgGradient: "radial-gradient(circle at center, #172554 0%, #020617 100%)",
+            accentColor: "#60a5fa",
+            subTextColor: "#93c5fd",
             icon: (
                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="10"/>
@@ -143,15 +145,13 @@ export async function GET(request: Request) {
                     <path d="M12 17h.01"/>
                 </svg>
             )
-        };
-    } else if (type === 'letter') {
-        theme = {
+        },
+        'letter': {
             title: "Random Letter Generator",
             subtitle: "A-Z Random Picker • Alphabet Wheel",
-            bgGradient: "radial-gradient(circle at center, #be123c 0%, #4c0519 100%)", // Rose/Dark
-            accentColor: "#fb7185", // Rose 400
-            textColor: "white",
-            subTextColor: "#fda4af", // Rose 300
+            bgGradient: "radial-gradient(circle at center, #be123c 0%, #4c0519 100%)",
+            accentColor: "#fb7185",
+            subTextColor: "#fda4af",
             icon: (
                  <div style={{ display: 'flex', gap: '2px', fontSize: 20, fontWeight: 900, color: "#fb7185", fontFamily: 'serif' }}>
                     <span>A</span>
@@ -162,7 +162,85 @@ export async function GET(request: Request) {
                     <span>A</span><span style={{opacity:0.5}}>B</span><span style={{opacity:0.25}}>C</span>
                 </div>
             )
-        };
+        },
+        'dice': {
+            title: searchParams.get('title') || "Dice Roller",
+            subtitle: "Roll Virtual Dice • Random Results",
+            bgGradient: "radial-gradient(circle at center, #9f1239 0%, #4c0519 100%)",
+            accentColor: "#f43f5e",
+            subTextColor: "#fb7185",
+            icon: (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                    <path d="M8 8h.01"/>
+                    <path d="M16 8h.01"/>
+                    <path d="M8 16h.01"/>
+                    <path d="M16 16h.01"/>
+                    <path d="M12 12h.01"/>
+                </svg>
+            ),
+            largeIcon: (
+                <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                    <path d="M8 8h.01"/>
+                    <path d="M16 8h.01"/>
+                    <path d="M8 16h.01"/>
+                    <path d="M16 16h.01"/>
+                    <path d="M12 12h.01"/>
+                </svg>
+            )
+        },
+        'rps': {
+            title: searchParams.get('title') || "Rock Paper Scissors",
+            subtitle: "Play Online • Fair & Random",
+            bgGradient: "radial-gradient(circle at center, #5b21b6 0%, #2e1065 100%)",
+            accentColor: "#8b5cf6",
+            subTextColor: "#a78bfa",
+            icon: (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/>
+                    <path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/>
+                    <path d="M10 10.5V5a2 2 0 0 0-2-2a2 2 0 0 0-2 2v6"/>
+                    <path d="M18 11v5a8 8 0 0 1-8 8h-2c-2.8 0-4.5-1.5-5.8-3.3L2 17l6-4.5V11a2 2 0 0 1 2-2z"/>
+                </svg>
+            ),
+            largeIcon: (
+                <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/>
+                    <path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/>
+                    <path d="M10 10.5V5a2 2 0 0 0-2-2a2 2 0 0 0-2 2v6"/>
+                    <path d="M18 11v5a8 8 0 0 1-8 8h-2c-2.8 0-4.5-1.5-5.8-3.3L2 17l6-4.5V11a2 2 0 0 1 2-2z"/>
+                </svg>
+            )
+        },
+        'month': {
+            title: searchParams.get('title') || "Random Month Generator",
+            subtitle: "Pick a Month • Random Date",
+            bgGradient: "radial-gradient(circle at center, #9d174d 0%, #4a044e 100%)",
+            accentColor: "#d946ef",
+            subTextColor: "#e879f9",
+            icon: (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d946ef" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                    <line x1="16" x2="16" y1="2" y2="6"/>
+                    <line x1="8" x2="8" y1="2" y2="6"/>
+                    <line x1="3" x2="21" y1="10" y2="10"/>
+                </svg>
+            ),
+            largeIcon: (
+                <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="#d946ef" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                    <line x1="16" x2="16" y1="2" y2="6"/>
+                    <line x1="8" x2="8" y1="2" y2="6"/>
+                    <line x1="3" x2="21" y1="10" y2="10"/>
+                </svg>
+            )
+        }
+    };
+
+    let theme = { ...defaultTheme };
+    if (type && THEMES[type]) {
+        theme = { ...defaultTheme, ...THEMES[type] };
     }
 
     // VIRALIS: Apply custom color override if present

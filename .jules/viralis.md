@@ -44,3 +44,12 @@
 **Hypothesis:** If we remove duplicate Telegram and LinkedIn buttons from the Share Dropdown, we will reduce choice paralysis and cognitive load for desktop users, improving the overall share completion rate.
 **Implementation:** Removed the redundant `<DropdownMenuItem>` blocks for Telegram and LinkedIn at the bottom of the dropdown in `components/ui/share-button.tsx`.
 **Outcome:** Expect a cleaner UI on desktop share fallbacks, leading to a higher conversion rate for link sharing.
+
+## 2026-06-20 - [Share/Instagram Link]
+**Hypothesis:** If we append the referral URL (`shareUrl`) to the text copied when a user clicks the "Instagram" share button, we will prevent users from accidentally pasting a text-only message without the crucial link, increasing the CTR from Instagram interactions.
+**Implementation:** Updated `shareInstagram` functions in `components/sorteo/winner-ceremony.tsx` and `app/[locale]/verify/verify-content.tsx` to copy `shareText + " " + shareUrl` instead of just `shareText`.
+**Outcome:** Expect a reduction in broken sharing flows and an increased conversion rate from users sharing their results on Instagram.
+## 2026-06-25 - [All Sub-Tools/Metadata]
+**Hypothesis:** If we provide specific branded themes (titles, colors, icons) in the Open Graph API route (`app/api/og/route.tsx`) for secondary sub-tools like `dice`, `rps` (Rock Paper Scissors), and `month`, users sharing these links will see custom previews rather than the default "Sorteo Pro" generic image. This contextual relevance will increase the Click-Through-Rate (CTR) on shared links by making them visually distinct and engaging.
+**Implementation:** Added dedicated theme blocks in `app/api/og/route.tsx` mapping the `type` parameter (`dice`, `rps`, `month`) to new color gradients, SVG icons, and text configurations.
+**Outcome:** Expect increased link preview engagement and CTR for these specific tools due to improved visual fidelity.

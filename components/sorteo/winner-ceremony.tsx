@@ -180,7 +180,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
   const copyToClipboard = () => handleCopy(shareUrl)
 
-  const shareInstagram = () => handleCopy(shareText)
+  const shareInstagram = () => handleCopy(shareText + " " + shareUrl)
 
   const handleDownload = async () => {
     if (!winner) return

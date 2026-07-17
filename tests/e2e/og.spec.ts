@@ -16,6 +16,10 @@ const VARIANTS: Variant[] = [
   { name: 'list type with list param', query: 'type=list&list=Alice%2CBob%2CCharlie' },
   { name: 'rng type', query: 'type=rng' },
   { name: 'instagram type', query: 'type=instagram' },
+  { name: 'dice type', query: 'type=dice' },
+  { name: 'rps type', query: 'type=rps' },
+  { name: 'month type', query: 'type=month' },
+
   {
     name: 'full combo (name + title + date + color)',
     query:

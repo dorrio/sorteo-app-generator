@@ -51,7 +51,8 @@
             "month": "Gerador de Mês Aleatório",
             "card": "Gerador de Cartas Aleatórias",
             "bingo": "Gerador de Bingo",
-            "truth": "Verdade ou Desafio Generator"
+            "truth": "Verdade ou Desafio Generator",
+            "password": "Gerador de Senhas"
         }
     },
     "QuickSpecs": {
@@ -286,7 +287,7 @@
         "copy_image": "Copiar Imagem",
         "image_copied": "Imagem Copiada!",
         "share_proof_text": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou o sorteio!\n\n✅ Verificado por Sorteio Pro.\n\nVeja o certificado e crie o seu aqui 👇",
-        "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou *{title}*!\n\n✅ Verificado por Sorteio Pro.\n\nCrie o seu próprio sorteio grátis aqui 👇",
+        "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nVeja o certificado e crie o seu aqui 👇",
         "fallback_name": "Alguém",
         "copy_link": "Copiar Link",
         "twitter_x": "Twitter / X",
@@ -308,8 +309,7 @@
             "local_record": "Registro Local Encontrado",
             "not_found_message": "Este ID não corresponde a nenhum sorteio registrado neste dispositivo.",
             "invalid_format_message": "O formato do ID é inválido."
-        },
-        "share_proof_text_custom": "*RESULTADO OFICIAL* 🏆\n\n*{name}* ganhou *{title}*!\n\n✅ Verificado por Sorteo Pro.\n\nVeja o certificado e crie o seu aqui 👇"
+        }
     },
     "SEOContent": {
         "direct_answer_title": "O que é o Sorteio Pro?",
@@ -385,7 +385,9 @@
         "term_16": "Gerador de Números de Bingo",
         "def_16": "Uma ferramenta clássica de sorte onde números são tirados aleatoriamente e jogadores os marcam em cartelas. O Sorteio Pro gera números de Bingo aleatórios de 1 a 75.",
         "term_17": "Verdade ou Desafio",
-        "def_17": "Um jogo de festa clássico que exige que os jogadores respondam a uma pergunta pessoal com sinceridade ou realizem um desafio. O gerador fornece opções aleatórias para o jogo."
+        "def_17": "Um jogo de festa clássico que exige que os jogadores respondam a uma pergunta pessoal com sinceridade ou realizem um desafio. O gerador fornece opções aleatórias para o jogo.",
+        "term_18": "Gerador de Senhas",
+        "def_18": "Uma ferramenta que gera senhas fortes e seguras usando aleatoriedade criptográfica."
     },
     "InstagramPicker": {
         "title": "Sorteador de Comentários do Instagram Grátis | Ilimitado",
@@ -748,7 +750,9 @@
         "cta_share": "Compartilhar",
         "cta_start": "Começar",
         "truth_title": "Gerador de Verdade ou Desafio | Sorteo Pro",
-        "truth_text": "🤫 Acabei de jogar Verdade ou Desafio online! É grátis e muito divertido. Jogue aqui 👇"
+        "truth_text": "🤫 Acabei de jogar Verdade ou Desafio online! É grátis e muito divertido. Jogue aqui 👇",
+        "password_title": "Gerador de Senhas",
+        "password_text": "Acabei de gerar uma senha segura usando o Sorteo Pro! Tente aqui:"
     },
     "CountryPage": {
         "title": "Gerador de Países Aleatórios | Escolher País ao Acaso",
@@ -1172,5 +1176,34 @@
         "faq_1_a": "Nossa lista padrão foi criada para ser divertida e na maior parte limpa, adequada para o público em geral.",
         "faq_2_q": "Posso adicionar minhas próprias perguntas?",
         "faq_2_a": "Sim! Você pode personalizar a lista usando o editor visual para adicionar suas próprias piadas internas."
+    },
+    "PasswordPage": {
+        "title": "Gerador de Senhas Seguras | Sorteo Pro",
+        "description": "Crie senhas seguras, fortes e altamente aleatórias instantaneamente. Proteja suas contas online com nosso gerador gratuito.",
+        "h1": "Gerador de Senhas",
+        "subtitle": "Gere senhas fortes e seguras instantaneamente"
+    },
+    "PasswordGeo": {
+        "direct_answer_title": "O que é um Gerador de Senhas?",
+        "direct_answer_text": "Um <tool>Gerador de Senhas</tool> é um utilitário que cria senhas seguras e imprevisíveis combinando letras, números e símbolos. Usar o <brand>Sorteo Pro</brand> garante que suas senhas <strong>fortes</strong> sejam criptograficamente seguras.",
+        "features_title": "Principais Recursos",
+        "feature_1_title": "Criptograficamente Seguro",
+        "feature_1_desc": "Usa algoritmos robustos de alta entropia.",
+        "feature_2_title": "Altamente Personalizável",
+        "feature_2_desc": "Inclui números, símbolos e maiúsculas.",
+        "feature_3_title": "Geração Instantânea",
+        "feature_3_desc": "Obtenha uma senha forte em milissegundos.",
+        "feature_4_title": "Privacidade Total",
+        "feature_4_desc": "Nenhuma senha é salva ou rastreada.",
+        "how_to_title": "Como gerar uma senha segura",
+        "how_to_step_1": "O gerador vem pré-carregado com senhas fortes.",
+        "how_to_step_2": "Gire a roleta ou use o modo para selecionar uma.",
+        "how_to_step_3": "Clique em 'Começar' para revelar sua nova senha.",
+        "how_to_step_4": "Copie com segurança e salve no seu gerenciador.",
+        "faq_title": "FAQ do Gerador de Senhas",
+        "faq_1_q": "As senhas geradas são seguras?",
+        "faq_1_a": "Sim, elas usam uma seleção verdadeiramente aleatória combinando maiúsculas, minúsculas, números e símbolos.",
+        "faq_2_q": "Vocês armazenam minhas senhas geradas?",
+        "faq_2_a": "Não. Toda a geração acontece localmente no seu navegador. Nunca armazenamos ou transmitimos suas senhas."
     }
 }

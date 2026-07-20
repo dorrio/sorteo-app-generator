@@ -118,6 +118,11 @@ export function SiteFooter() {
                   {t("links.truth")}
                 </Link>
               </li>
+              <li>
+                 <Link href="/random-password-generator" className="hover:text-primary transition-colors">
+                  {t("links.password")}
+                </Link>
+              </li>
             </ul>
 
             {/* Resources */}

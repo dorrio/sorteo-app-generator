@@ -51,7 +51,8 @@
             "month": "Generador de Mes Aleatorio",
             "card": "Generador de Cartas Aleatorias",
             "bingo": "Generador de Bingo",
-            "truth": "Verdad o Reto Generator"
+            "truth": "Verdad o Reto Generator",
+            "password": "Generador de Contraseñas"
         }
     },
     "QuickSpecs": {
@@ -384,7 +385,9 @@
         "term_16": "Generador de Cartones de Bingo",
         "def_16": "Herramienta digital que crea cartones de bingo aleatorios con números del 1 al 75. Ideal para jugar al bingo en casa o en eventos.",
         "term_17": "Verdad o Reto",
-        "def_17": "Un juego de fiesta clásico que requiere que los jugadores respondan a una pregunta personal con sinceridad o realicen un desafío. El generador proporciona prompts aleatorios para el juego."
+        "def_17": "Un juego de fiesta clásico que requiere que los jugadores respondan a una pregunta personal con sinceridad o realicen un desafío. El generador proporciona prompts aleatorios para el juego.",
+        "term_18": "Generador de Contraseñas",
+        "def_18": "Una herramienta que genera contraseñas fuertes y seguras usando aleatoriedad criptográfica."
     },
     "InstagramPicker": {
         "title": "Selector de Comentarios de Instagram Gratis | Ilimitado",
@@ -805,7 +808,9 @@
         "cta_share": "Compartir",
         "cta_start": "Iniciar Sorteo",
         "truth_title": "Generador de Verdad o Reto | Sorteo Pro",
-        "truth_text": "🤫 ¡Acabo de jugar Verdad o Reto online! Es gratis y muy divertido. Juega aquí 👇"
+        "truth_text": "🤫 ¡Acabo de jugar Verdad o Reto online! Es gratis y muy divertido. Juega aquí 👇",
+        "password_title": "Generador de Contraseñas",
+        "password_text": "¡Acabo de generar una contraseña segura usando Sorteo Pro! Pruébalo aquí:"
     },
     "CountryPage": {
         "title": "Generador de Países Aleatorios | Elegir País al Azar",
@@ -1171,5 +1176,34 @@
         "faq_1_a": "Nuestra lista predeterminada está diseñada para ser divertida y mayormente limpia, adecuada para el público general.",
         "faq_2_q": "¿Puedo añadir mis propias preguntas?",
         "faq_2_a": "¡Sí! Puedes personalizar la lista usando el editor visual para añadir tus propias bromas internas."
+    },
+    "PasswordPage": {
+        "title": "Generador de Contraseñas Seguras | Sorteo Pro",
+        "description": "Crea contraseñas seguras, fuertes y altamente aleatorias al instante. Protege tus cuentas online con nuestro generador gratuito.",
+        "h1": "Generador de Contraseñas",
+        "subtitle": "Genera contraseñas fuertes y seguras al instante"
+    },
+    "PasswordGeo": {
+        "direct_answer_title": "¿Qué es un Generador de Contraseñas?",
+        "direct_answer_text": "Un <tool>Generador de Contraseñas</tool> es una utilidad que crea contraseñas seguras e impredecibles combinando letras, números y símbolos. Utilizar <brand>Sorteo Pro</brand> garantiza que tus contraseñas <strong>fuertes</strong> sean criptográficamente seguras y resistentes a ataques.",
+        "features_title": "Características Principales",
+        "feature_1_title": "Criptográficamente Seguro",
+        "feature_1_desc": "Utiliza algoritmos robustos de alta entropía.",
+        "feature_2_title": "Altamente Personalizable",
+        "feature_2_desc": "Incluye números, símbolos y mayúsculas.",
+        "feature_3_title": "Generación Instantánea",
+        "feature_3_desc": "Obtén una contraseña fuerte en milisegundos.",
+        "feature_4_title": "Privacidad Total",
+        "feature_4_desc": "Ninguna contraseña es guardada o rastreada.",
+        "how_to_title": "Cómo generar una contraseña segura",
+        "how_to_step_1": "El generador viene precargado con contraseñas fuertes.",
+        "how_to_step_2": "Gira la ruleta o usa el modo para seleccionar una.",
+        "how_to_step_3": "Haz clic en 'Empezar' para revelar tu nueva contraseña.",
+        "how_to_step_4": "Cóplala de forma segura y guárdala en tu gestor.",
+        "faq_title": "FAQ del Generador de Contraseñas",
+        "faq_1_q": "¿Son seguras las contraseñas generadas?",
+        "faq_1_a": "Sí, utilizan una selección verdaderamente aleatoria combinando mayúsculas, minúsculas, números y símbolos para asegurar la máxima entropía.",
+        "faq_2_q": "¿Guardáis mis contraseñas generadas?",
+        "faq_2_a": "No. Toda la generación ocurre localmente en tu navegador. Nunca almacenamos ni transmitimos tus contraseñas."
     }
 }

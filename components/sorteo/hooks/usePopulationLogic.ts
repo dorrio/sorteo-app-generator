@@ -54,6 +54,42 @@ const POPULATION_MAPPERS: Partial<Record<SeoMode, (ctx: PopulationContext) => { 
         }
         return cryptoShuffle(items).map(n => ({ name: n }))
     },
+    'password': () => {
+        // Generate 12 strong passwords using Web Crypto API
+        const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+
+        const getRandomChar = (charset: string) => {
+            const array = new Uint32Array(1);
+            window.crypto.getRandomValues(array);
+            return charset[array[0] % charset.length];
+        };
+
+        const cryptoShuffleStr = (str: string) => {
+            const arr = str.split('');
+            for (let i = arr.length - 1; i > 0; i--) {
+                const array = new Uint32Array(1);
+                window.crypto.getRandomValues(array);
+                const j = array[0] % (i + 1);
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr.join('');
+        };
+
+        return Array.from({ length: 12 }, () => {
+            let password = "";
+            // Ensure at least one lowercase, one uppercase, one number, one symbol
+            password += getRandomChar("abcdefghijklmnopqrstuvwxyz");
+            password += getRandomChar("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            password += getRandomChar("0123456789");
+            password += getRandomChar("!@#$%^&*()_+~`|}{[]:;?><,./-=");
+            // Fill the rest to reach 16 characters
+            for (let i = 0; i < 12; i++) {
+                password += getRandomChar(chars);
+            }
+            // Shuffle the password characters using Fisher-Yates and Crypto
+            return { name: cryptoShuffleStr(password) };
+        });
+    },
 }
 
 const PRESET_TOOLS: SeoMode[] = Object.keys(POPULATION_MAPPERS) as SeoMode[]

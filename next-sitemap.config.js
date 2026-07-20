@@ -31,6 +31,7 @@ module.exports = {
             'random-card-generator',
             'bingo-number-generator',
             'truth-or-dare-generator',
+            'random-password-generator',
             'versus'
         ];
 
@@ -102,6 +103,7 @@ module.exports = {
             'random-card-generator',
             'bingo-number-generator',
             'truth-or-dare-generator',
+            'random-password-generator',
             'versus',
             'alternativa-appsorteos',
             'alternativa-wheel-of-names'

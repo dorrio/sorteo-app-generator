@@ -51,7 +51,8 @@
             "month": "Random Month Generator",
             "card": "Random Card Generator",
             "bingo": "Bingo Number Generator",
-            "truth": "Truth or Dare Generator"
+            "truth": "Truth or Dare Generator",
+            "password": "Random Password Generator"
         }
     },
     "QuickSpecs": {
@@ -384,7 +385,9 @@
         "term_16": "Bingo Number Generator",
         "def_16": "A classic game of chance where numbers are drawn randomly and players match them on cards. Sorteo Pro generates random Bingo numbers 1-75.",
         "term_17": "Truth or Dare",
-        "def_17": "A classic party game requiring players to either answer a personal question truthfully or perform a dare. The generator provides random prompts for the game."
+        "def_17": "A classic party game requiring players to either answer a personal question truthfully or perform a dare. The generator provides random prompts for the game.",
+        "term_18": "Random Password Generator",
+        "def_18": "A tool that generates strong, secure passwords using cryptographic randomness."
     },
     "InstagramPicker": {
         "title": "Free Instagram Comment Picker | Unlimited & No Login",
@@ -805,7 +808,9 @@
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway",
         "truth_title": "Truth or Dare Generator | Sorteo Pro",
-        "truth_text": "🤫 I just played Truth or Dare online! It's free and so much fun. Play here 👇"
+        "truth_text": "🤫 I just played Truth or Dare online! It's free and so much fun. Play here 👇",
+        "password_title": "Random Password Generator",
+        "password_text": "I just generated a secure random password using Sorteo Pro! Try it here:"
     },
     "CountryPage": {
         "title": "Random Country Generator | Pick a Country Randomly",
@@ -1171,5 +1176,34 @@
         "faq_1_a": "Our default list is designed to be fun and mostly clean, suitable for general audiences.",
         "faq_2_q": "Can I add my own questions?",
         "faq_2_a": "Yes! You can customize the list using the visual editor to add your own personal inside jokes."
+    },
+    "PasswordPage": {
+        "title": "Random Password Generator | Sorteo Pro",
+        "description": "Create secure, strong, and highly randomized passwords instantly. Protect your online accounts with our free random password generator.",
+        "h1": "Random Password Generator",
+        "subtitle": "Generate strong and secure passwords instantly"
+    },
+    "PasswordGeo": {
+        "direct_answer_title": "What is a Random Password Generator?",
+        "direct_answer_text": "A <tool>Random Password Generator</tool> is a utility that creates secure, unpredictable passwords combining letters, numbers, and symbols. Using <brand>Sorteo Pro</brand> ensures your <strong>strong</strong> passwords are cryptographically secure and resistant to brute-force attacks.",
+        "features_title": "Key Features",
+        "feature_1_title": "Cryptographically Secure",
+        "feature_1_desc": "Uses robust algorithms for high entropy.",
+        "feature_2_title": "Highly Customizable",
+        "feature_2_desc": "Include numbers, symbols, and varied cases.",
+        "feature_3_title": "Instant Generation",
+        "feature_3_desc": "Get a strong password in milliseconds.",
+        "feature_4_title": "Privacy First",
+        "feature_4_desc": "No passwords are saved or tracked.",
+        "how_to_title": "How to generate a secure password",
+        "how_to_step_1": "The generator is pre-loaded with strong passwords.",
+        "how_to_step_2": "Spin the wheel or use the slot machine to pick one.",
+        "how_to_step_3": "Click 'Start' to reveal your new password.",
+        "how_to_step_4": "Copy it securely and save it to your password manager.",
+        "faq_title": "Random Password Generator FAQ",
+        "faq_1_q": "Are the generated passwords secure?",
+        "faq_1_a": "Yes, they use true random character selection combining uppercase, lowercase, numbers, and symbols to ensure maximum entropy.",
+        "faq_2_q": "Do you store my generated passwords?",
+        "faq_2_a": "No. All generation happens locally in your browser. We never store or transmit your generated passwords."
     }
 }

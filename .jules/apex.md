@@ -83,3 +83,8 @@
 **Gap:** Following the global rollout of Knowledge Graph linkages (`about`, `mentions`, `sameAs`) across tool pages, a few newly created pages (Truth or Dare Generator, Alternativa AppSorteos, and Alternativa Wheel of Names) were missing these entity properties in their `SoftwareApplication` JSON-LD schemas.
 **Action:** Injected `about`, `mentions`, and `sameAs` properties into the `SoftwareApplication` schema for `/truth-or-dare-generator`, `/alternativa-appsorteos`, and `/alternativa-wheel-of-names` using the `SorteoSeo` translation namespace.
 **GEO Impact:** Completed the unification of entity recognition for AI bots across 100% of the site's tool and comparison landing pages, maximizing consistent Knowledge Graph mapping and AI citation potential.
+
+## 2026-06-20 - [Strategy/Cluster Content]
+**Gap:** High search volume for "Random Password Generator" and "Secure Password Generator" terms were completely missed. Competitors offer dedicated tools with strong security claims.
+**Action:** Created dedicated `/random-password-generator` landing page using `PasswordGeo` component. Implemented cryptographically secure generation logic using `window.crypto` to back up security claims. Injected robust `SoftwareApplication`, `FAQPage`, and `HowTo` Schemas. Added related terms to the Glossary.
+**GEO Impact:** Optimized for ChatGPT/LLM citations by answering "What is a Random Password Generator?" and establishing E-E-A-T through proper cryptographic methods and explicit privacy reassurances (no storage).

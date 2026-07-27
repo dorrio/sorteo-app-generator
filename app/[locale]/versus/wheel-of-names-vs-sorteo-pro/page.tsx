@@ -7,6 +7,7 @@ import { VersusGeo } from "@/components/sorteo/versus-geo";
 import { WheelGeo } from "@/components/sorteo/wheel-geo";
 import { SiteFooter } from "@/components/sorteo/site-footer";
 import { JsonLd } from "@/components/seo/json-ld";
+import { buildKnowledgeGraphFields } from "@/lib/seo-utils";
 const MainApp = nextDynamic(
   () => import("@/components/sorteo/main-app").then((mod) => mod.MainApp),
   { loading: () => <AppSkeleton visualization="roulette" /> },
@@ -78,6 +79,8 @@ export default async function WheelVersusPage({
     namespace: "WinnerCeremony",
   });
   const tWheel = await getTranslations({ locale, namespace: "WheelGeoPage" });
+  const tSorteoSeo = await getTranslations({ locale, namespace: "SorteoSeo" });
+  const tGlobal = await getTranslations({ locale, namespace: "GlobalSchema" });
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -120,6 +123,28 @@ export default async function WheelVersusPage({
     ],
   };
 
+  const softwareAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Sorteo Pro - Better Wheel of Names Alternative",
+    applicationCategory: tGlobal("applicationCategory"),
+    applicationSubCategory: tGlobal("applicationSubCategory"),
+    operatingSystem: "Web, iOS, Android",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    description: t("description"),
+    featureList: [
+      tGlobal("feature_1"),
+      tGlobal("feature_2"),
+      tGlobal("feature_3"),
+      tGlobal("feature_4"),
+    ],
+    ...buildKnowledgeGraphFields(tSorteoSeo),
+  };
+
   const shareTranslations = {
     share: tWinner("share_menu"),
     copy: tWinner("copy_text"),
@@ -134,7 +159,7 @@ export default async function WheelVersusPage({
 
   return (
     <>
-      <JsonLd data={[articleSchema, faqSchema]} />
+      <JsonLd data={[articleSchema, faqSchema, softwareAppSchema]} />
       <MainApp
         initialStyle="roulette"
         seoMode="wheel"

@@ -217,6 +217,7 @@ export default async function RootLayout({
     <html lang={locale} className="dark" suppressHydrationWarning>
       <head>
         <script defer src="https://umami.vunit.duckdns.org/script.js" data-website-id="9e9a4fb6-ba28-4c2f-9986-db65c616d9a4"></script>
+        <script defer src="https://umami.vunit.duckdns.org/recorder.js" data-website-id="9e9a4fb6-ba28-4c2f-9986-db65c616d9a4"></script>
       </head>
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} ${geistMono.variable} font-sans antialiased`}

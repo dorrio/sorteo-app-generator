@@ -42,7 +42,7 @@ const cspDirectives = [
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data: https://fonts.gstatic.com",
-  "connect-src 'self' https://vitals.vercel-insights.com https://*.google-analytics.com https://analytics.google.com",
+  "connect-src 'self' https://vitals.vercel-insights.com https://*.google-analytics.com https://analytics.google.com https://umami.vunit.duckdns.org",
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",

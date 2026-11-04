@@ -35,6 +35,7 @@ const cspDirectives = [
     'https://va.vercel-scripts.com',
     'https://www.googletagmanager.com',
     'https://www.google-analytics.com',
+    'https://umami.vunit.duckdns.org',
   ]
     .filter(Boolean)
     .join(' '),

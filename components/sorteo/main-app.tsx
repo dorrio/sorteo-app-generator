@@ -295,7 +295,6 @@ export function MainApp({
               <Link
                 href="/"
                 className="flex items-center gap-3"
-                aria-label="Sorteo Pro Home"
               >
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center"

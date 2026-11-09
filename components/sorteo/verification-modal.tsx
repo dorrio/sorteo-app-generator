@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { Search, ShieldCheck, ShieldAlert, Calendar, User, Check } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
@@ -17,7 +18,9 @@ interface VerificationModalProps {
 
 export function VerificationModal({ isOpen, onClose }: VerificationModalProps) {
     const t = useTranslations("VerificationPage")
-    const { theme, pastWinners } = useSorteoStore()
+    const { theme, pastWinners } = useSorteoStore(
+    useShallow((state) => ({ theme: state.theme, pastWinners: state.pastWinners })),
+  )
     const [inputId, setInputId] = useState("")
     const [result, setResult] = useState<{
         valid: boolean

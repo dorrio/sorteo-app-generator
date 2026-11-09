@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 import { ConfettiEffect } from "./confetti-effect"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -52,7 +53,13 @@ function extractDateFromVerificationId(verificationId: string | undefined): Date
 }
 
 export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremonyProps) {
-  const { winner, theme, showWinnerCeremony } = useSorteoStore()
+  const { winner, theme, showWinnerCeremony } = useSorteoStore(
+    useShallow((state) => ({
+      winner: state.winner,
+      theme: state.theme,
+      showWinnerCeremony: state.showWinnerCeremony,
+    })),
+  )
   const t = useTranslations("WinnerCeremony")
   const [copied, setCopied] = useState(false)
   const [canShareNative, setCanShareNative] = useState(false)

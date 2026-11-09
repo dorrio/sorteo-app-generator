@@ -4,11 +4,16 @@ import { useEffect, useState, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 import { cryptoShuffle } from "@/lib/utils"
 
 interface SorteoMatrixProps {
   onWinnerSelected: () => void
 }
+
+// The column travels 1,000px, so ~30 names fill it; rendering every participant in all 8 columns
+// meant 8 × N glowing spans animating at once
+const MAX_NAMES_PER_COLUMN = 30
 
 interface MatrixColumn {
   id: string
@@ -19,7 +24,16 @@ interface MatrixColumn {
 }
 
 export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
-  const { participants, isSpinning, setIsSpinning, setWinner, addToPastWinners, theme } = useSorteoStore()
+  const { participants, isSpinning, setIsSpinning, setWinner, addToPastWinners, theme } = useSorteoStore(
+    useShallow((state) => ({
+      participants: state.participants,
+      isSpinning: state.isSpinning,
+      setIsSpinning: state.setIsSpinning,
+      setWinner: state.setWinner,
+      addToPastWinners: state.addToPastWinners,
+      theme: state.theme,
+    })),
+  )
   const t = useTranslations("SorteoMatrix")
   const tCommon = useTranslations("SorteoComponents")
   const [columns, setColumns] = useState<MatrixColumn[]>([])
@@ -46,7 +60,7 @@ export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
     const newColumns: MatrixColumn[] = Array.from({ length: numColumns }, (_, i) => ({
       id: `col-${i}`,
       x: (i / numColumns) * 100 + 5,
-      names: cryptoShuffle(participants).map((p) => p.name),
+      names: cryptoShuffle(participants).slice(0, MAX_NAMES_PER_COLUMN).map((p) => p.name),
       speed: 1 + Math.random() * 2,
       offset: Math.random() * 100,
     }))

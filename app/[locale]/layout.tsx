@@ -5,6 +5,7 @@ import { Inter, Space_Grotesk, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleTagManager } from "@next/third-parties/google";
+import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import {
   getMessages,
@@ -211,11 +212,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} className="dark" suppressHydrationWarning>
       <head>
-        <script defer src="https://umami.vunit.duckdns.org/script.js" data-website-id="9e9a4fb6-ba28-4c2f-9986-db65c616d9a4" data-domains="sorteo-app-generator.vercel.app"></script>
-        {/* recorder.js ignores data-domains, so only production builds load it. */}
-        {process.env.VERCEL_ENV === "production" && (
-          <script defer src="https://umami.vunit.duckdns.org/recorder.js" data-website-id="9e9a4fb6-ba28-4c2f-9986-db65c616d9a4"></script>
-        )}
+        <link rel="preconnect" href="https://umami.vunit.duckdns.org" />
       </head>
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} ${geistMono.variable} font-sans antialiased`}
@@ -242,6 +239,21 @@ export default async function RootLayout({
 
         {process.env.NEXT_PUBLIC_GTM_ID && (
           <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+        )}
+        {/* Analytics load after hydration so they don't compete with first paint and the draw animations */}
+        <Script
+          src="https://umami.vunit.duckdns.org/script.js"
+          data-website-id="9e9a4fb6-ba28-4c2f-9986-db65c616d9a4"
+          data-domains="sorteo-app-generator.vercel.app"
+          strategy="afterInteractive"
+        />
+        {/* recorder.js ignores data-domains, so only production builds load it. */}
+        {process.env.VERCEL_ENV === "production" && (
+          <Script
+            src="https://umami.vunit.duckdns.org/recorder.js"
+            data-website-id="9e9a4fb6-ba28-4c2f-9986-db65c616d9a4"
+            strategy="lazyOnload"
+          />
         )}
       </body>
     </html>

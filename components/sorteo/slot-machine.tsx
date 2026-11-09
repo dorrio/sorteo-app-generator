@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 import { cryptoShuffle } from "@/lib/utils"
 
 interface SlotMachineProps {
@@ -11,7 +12,16 @@ interface SlotMachineProps {
 }
 
 export function SlotMachine({ onWinnerSelected }: SlotMachineProps) {
-  const { participants, isSpinning, setIsSpinning, setWinner, addToPastWinners, theme } = useSorteoStore()
+  const { participants, isSpinning, setIsSpinning, setWinner, addToPastWinners, theme } = useSorteoStore(
+    useShallow((state) => ({
+      participants: state.participants,
+      isSpinning: state.isSpinning,
+      setIsSpinning: state.setIsSpinning,
+      setWinner: state.setWinner,
+      addToPastWinners: state.addToPastWinners,
+      theme: state.theme,
+    })),
+  )
   const tCommon = useTranslations("SorteoComponents")
 
   const [displayedNames, setDisplayedNames] = useState<string[]>([])

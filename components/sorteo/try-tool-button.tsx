@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useSorteoStore, type ThemeConfig } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 
 interface TryToolButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   sorteoStyle: ThemeConfig["sorteoStyle"]
@@ -9,7 +10,9 @@ interface TryToolButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElemen
 }
 
 export function TryToolButton({ sorteoStyle, children, onClick, ...props }: TryToolButtonProps) {
-  const { updateTheme } = useSorteoStore()
+  const { updateTheme } = useSorteoStore(
+    useShallow((state) => ({ updateTheme: state.updateTheme })),
+  )
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     updateTheme({ sorteoStyle })

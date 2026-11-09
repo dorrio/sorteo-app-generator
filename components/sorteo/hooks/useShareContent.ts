@@ -1,5 +1,6 @@
 import { useMemo } from "react"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 import { useTranslations } from "next-intl"
 import { type SeoMode } from "@/components/sorteo/glossary"
 
@@ -10,7 +11,9 @@ export function useShareContent(
     initialTitle?: string,
     customShareTextTemplate?: string
 ) {
-    const { theme, participants } = useSorteoStore()
+    const { theme, participants } = useSorteoStore(
+    useShallow((state) => ({ theme: state.theme, participants: state.participants })),
+  )
     const tShare = useTranslations("ShareContent")
     const shareContent = useMemo(() => {
         const defaultTemplate = customShareTextTemplate || tShare("custom_share_text")

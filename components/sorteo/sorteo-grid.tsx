@@ -4,13 +4,23 @@ import { useEffect, useState, useCallback } from "react"
 import { motion } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 
 interface SorteoGridProps {
     onWinnerSelected: () => void
 }
 
 export function SorteoGrid({ onWinnerSelected }: SorteoGridProps) {
-    const { participants, isSpinning, setIsSpinning, setWinner, addToPastWinners, theme } = useSorteoStore()
+    const { participants, isSpinning, setIsSpinning, setWinner, addToPastWinners, theme } = useSorteoStore(
+    useShallow((state) => ({
+      participants: state.participants,
+      isSpinning: state.isSpinning,
+      setIsSpinning: state.setIsSpinning,
+      setWinner: state.setWinner,
+      addToPastWinners: state.addToPastWinners,
+      theme: state.theme,
+    })),
+  )
     const tCommon = useTranslations("SorteoComponents")
     const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null)
     const [finalWinnerIndex, setFinalWinnerIndex] = useState<number | null>(null)

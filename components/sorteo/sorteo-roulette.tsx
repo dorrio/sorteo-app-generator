@@ -4,15 +4,27 @@ import { useEffect, useState, useCallback, useRef } from "react"
 import { motion } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 
 interface SorteoRouletteProps {
   onWinnerSelected: () => void
 }
 
 export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
-  const { participants, isSpinning, setIsSpinning, setWinner, addToPastWinners, theme } = useSorteoStore()
+  const { participants, isSpinning, setIsSpinning, setWinner, addToPastWinners, theme } = useSorteoStore(
+    useShallow((state) => ({
+      participants: state.participants,
+      isSpinning: state.isSpinning,
+      setIsSpinning: state.setIsSpinning,
+      setWinner: state.setWinner,
+      addToPastWinners: state.addToPastWinners,
+      theme: state.theme,
+    })),
+  )
   const t = useTranslations("Roulette")
   const [rotation, setRotation] = useState(0)
+  const rotationRef = useRef(0)
+  const wheelRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<number | null>(null)
 
   const selectWinner = useCallback(() => {
@@ -31,7 +43,7 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
 
     const spinDuration = theme.spinDuration * 1000
     const startTime = Date.now()
-    const startRotation = rotation
+    const startRotation = rotationRef.current
     const segmentAngle = 360 / participants.length
 
     // The pointer is at the TOP (0 degrees visual position)
@@ -49,12 +61,15 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
       const easeOut = 1 - Math.pow(1 - progress, 4)
       const currentRotation = startRotation + (targetRotation - startRotation) * easeOut
 
-      setRotation(currentRotation)
+      // Write straight to the DOM each frame: a state update here re-rendered every segment ~60 times per second
+      rotationRef.current = currentRotation
+      if (wheelRef.current) wheelRef.current.style.transform = `rotate(${currentRotation}deg)`
 
       if (progress < 1) {
         animationRef.current = requestAnimationFrame(animate)
       } else {
-        setRotation(targetRotation % 360)
+        rotationRef.current = targetRotation % 360
+        setRotation(rotationRef.current)
         setWinner(result.participant)
         addToPastWinners(result.participant)
         setIsSpinning(false)
@@ -113,7 +128,8 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
       />
 
       {/* Roulette wheel */}
-      <motion.div
+      <div
+        ref={wheelRef}
         className="relative w-[320px] h-[320px] rounded-full border-4 mt-2"
         style={{
           borderColor: theme.primaryColor,
@@ -190,7 +206,7 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
             </div>
           )
         })}
-      </motion.div>
+      </div>
 
       <motion.div className="mt-4 text-center text-muted-foreground" animate={{ opacity: isSpinning ? 0.5 : 1 }}>
         <span className="text-sm">{t("participants_count", { count: participants.length })}</span>

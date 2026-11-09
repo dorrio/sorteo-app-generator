@@ -26,6 +26,7 @@ import {
   Linkedin,
 } from "lucide-react";
 import { useSorteoStore } from "@/lib/sorteo-store";
+import { useShallow } from "zustand/react/shallow"
 import { ConfettiEffect } from "@/components/sorteo/confetti-effect";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -49,7 +50,9 @@ import { getBaseUrl } from "@/lib/config";
 export function VerifyContent() {
   const t = useTranslations("VerificationPage");
   const locale = useLocale();
-  const { theme, pastWinners } = useSorteoStore();
+  const { theme, pastWinners } = useSorteoStore(
+    useShallow((state) => ({ theme: state.theme, pastWinners: state.pastWinners })),
+  );
   const searchParams = useSearchParams();
   const initialId = searchParams.get("id") || "";
   const type = searchParams.get("type");

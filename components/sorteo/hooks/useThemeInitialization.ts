@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useSorteoStore, type ThemeConfig } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 import { useTranslations } from "next-intl"
 import { type SeoMode } from "@/components/sorteo/glossary"
 
@@ -27,7 +28,13 @@ export function useThemeInitialization(
     initialSubtitle?: string,
     seoMode?: SeoMode
 ) {
-    const { updateTheme, theme, hasHydrated } = useSorteoStore()
+    const { updateTheme, theme, hasHydrated } = useSorteoStore(
+    useShallow((state) => ({
+      updateTheme: state.updateTheme,
+      theme: state.theme,
+      hasHydrated: state.hasHydrated,
+    })),
+  )
     const tRoot = useTranslations()
 
     useEffect(() => {

@@ -3,6 +3,7 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import { randomIndex } from "@/lib/utils"
+import { trackEvent } from "@/lib/analytics"
 
 export interface Participant {
   id: string
@@ -160,7 +161,7 @@ const themePresets: Record<string, Partial<ThemeConfig>> = {
 
 export const useSorteoStore = create<SorteoState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       // Participants
       participants: [],
       addParticipant: (participant) =>
@@ -207,10 +208,13 @@ export const useSorteoStore = create<SorteoState>()(
 
       // History
       pastWinners: [],
-      addToPastWinners: (winner) =>
+      addToPastWinners: (winner) => {
         set((state) => ({
           pastWinners: [...state.pastWinners, winner],
-        })),
+        }))
+        const { theme, participants } = get()
+        trackEvent("draw_completed", { mode: theme.sorteoStyle, participants: participants.length })
+      },
       clearHistory: () => set({ pastWinners: [] }),
 
       // Theme

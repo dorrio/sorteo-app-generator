@@ -48,22 +48,39 @@ const FloatingBubbles = dynamic(
 
 
 
-function ThemeParamsHandler({ updateTheme }: { updateTheme: (config: Partial<ThemeConfig>) => void }) {
+// Matches what useShareContent emits (at most 100 names); also bounds hand-crafted links
+const MAX_SHARED_NAMES = 100
+const MAX_SHARED_NAME_LENGTH = 100
+const MAX_TEMPLATE_TITLE_LENGTH = 60
+const HEX_COLOR_PATTERN = /^#[0-9A-Fa-f]{6}$/
+
+function parseSharedList(listParam: string): string[] {
+  const parsed: unknown = JSON.parse(decodeURIComponent(listParam))
+  if (!Array.isArray(parsed)) return []
+  return parsed
+    .filter((value): value is string => typeof value === "string")
+    .map((name) => name.trim().slice(0, MAX_SHARED_NAME_LENGTH))
+    .filter((name) => name.length > 0)
+    .slice(0, MAX_SHARED_NAMES)
+}
+
+function ThemeParamsHandler() {
   const searchParams = useSearchParams()
+  const applyTemplateOverrides = useSorteoStore((state) => state.applyTemplateOverrides)
 
   useEffect(() => {
     // Viralis: Apply template overrides if present (Context Injection)
-    const templateTitle = searchParams.get('template_title')
+    const templateTitle = searchParams.get('template_title')?.trim().slice(0, MAX_TEMPLATE_TITLE_LENGTH)
     const templateColor = searchParams.get('template_color')
 
     const update: Partial<ThemeConfig> = {}
     if (templateTitle) update.customTitle = templateTitle
-    if (templateColor) update.primaryColor = templateColor
+    if (templateColor && HEX_COLOR_PATTERN.test(templateColor)) update.primaryColor = templateColor
 
     if (Object.keys(update).length > 0) {
-      updateTheme(update)
+      applyTemplateOverrides(update)
     }
-  }, [searchParams, updateTheme])
+  }, [searchParams, applyTemplateOverrides])
 
   return null
 }
@@ -79,9 +96,9 @@ function ListParamsHandler() {
       const listParam = searchParams.get('list')
       if (listParam) {
         try {
-          const names = JSON.parse(decodeURIComponent(listParam))
-          if (Array.isArray(names) && names.length > 0) {
-            addParticipants(names.map((n: string) => ({ name: n })))
+          const names = parseSharedList(listParam)
+          if (names.length > 0) {
+            addParticipants(names.map((name) => ({ name })))
           }
         } catch (e) {
           console.error("Failed to parse shared list", e)
@@ -167,7 +184,7 @@ export function MainApp({
     setWinner,
     isEditorOpen,
     setIsEditorOpen,
-    updateTheme
+    resetDrawState
   } = useSorteoStore()
 
   const contentRef = useRef<HTMLDivElement>(null)
@@ -195,6 +212,9 @@ export function MainApp({
     // eslint-disable-next-line react-hooks/set-state-in-effect -- classic post-hydration flag to gate client-only rendering paths
     setMounted(true)
   }, [])
+
+  // Draw flags live in the global store; leaving the page mid-draw must not start one on the next page
+  useEffect(() => resetDrawState, [resetDrawState])
 
   const { displayTitle, displaySubtitle } = useThemeInitialization(initialStyle, initialTitle, initialSubtitle, seoMode)
   usePopulationLogic(mounted, seoMode, initialOptions)
@@ -257,7 +277,7 @@ export function MainApp({
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       <Suspense fallback={null}>
-        <ThemeParamsHandler updateTheme={updateTheme} />
+        <ThemeParamsHandler />
         <ListParamsHandler />
       </Suspense>
 

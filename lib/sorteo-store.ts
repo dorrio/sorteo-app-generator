@@ -72,6 +72,7 @@ export interface SorteoState {
   setShowCountdown: (show: boolean) => void
   showWinnerCeremony: boolean
   setShowWinnerCeremony: (show: boolean) => void
+  resetDrawState: () => void
 
   // History
   pastWinners: Participant[]
@@ -81,6 +82,9 @@ export interface SorteoState {
   // Theme
   theme: ThemeConfig
   updateTheme: (config: Partial<ThemeConfig>) => void
+  // Shared-link overrides (template_title / template_color): shown in this session, never persisted
+  applyTemplateOverrides: (config: Partial<ThemeConfig>) => void
+  themeBeforeTemplate: Partial<ThemeConfig>
   setPresetTheme: (
     preset: "luxury-gold" | "neon-creator" | "minimal-elegance" | "rose-gold" | "ocean-depth" | "forest-mist",
   ) => void
@@ -116,6 +120,30 @@ const defaultTheme: ThemeConfig = {
   backgroundBlur: 0,
   participantDisplay: "list",
   sorteoStyle: "grid",
+}
+
+const PERSIST_VERSION = 1
+
+function isPersistedParticipant(value: unknown): value is Participant {
+  if (typeof value !== "object" || value === null) return false
+  const candidate = value as Record<string, unknown>
+  return typeof candidate.id === "string" && typeof candidate.name === "string"
+}
+
+// localStorage is user-editable and survives app upgrades: keep only well-formed participants
+// and revive `timestamp`, which JSON round-trips as a string.
+function sanitizeParticipants(value: unknown): Participant[] {
+  if (!Array.isArray(value)) return []
+  return value.filter(isPersistedParticipant).map((participant) => ({
+    ...participant,
+    timestamp: participant.timestamp ? new Date(participant.timestamp) : new Date(),
+  }))
+}
+
+function withoutKeys<T extends object>(source: T, keys: string[]): T {
+  const result = { ...source }
+  for (const key of keys) delete result[key as keyof T]
+  return result
 }
 
 const themePresets: Record<string, Partial<ThemeConfig>> = {
@@ -212,6 +240,7 @@ export const useSorteoStore = create<SorteoState>()(
       setShowCountdown: (showCountdown) => set({ showCountdown }),
       showWinnerCeremony: false,
       setShowWinnerCeremony: (showWinnerCeremony) => set({ showWinnerCeremony }),
+      resetDrawState: () => set({ isSpinning: false, showCountdown: false, showWinnerCeremony: false }),
 
       // History
       pastWinners: [],
@@ -226,13 +255,27 @@ export const useSorteoStore = create<SorteoState>()(
 
       // Theme
       theme: defaultTheme,
+      // An explicit change by the user wins over a shared-link override, so it is persisted
       updateTheme: (config) =>
         set((state) => ({
           theme: { ...state.theme, ...config },
+          themeBeforeTemplate: withoutKeys(state.themeBeforeTemplate, Object.keys(config)),
         })),
+      themeBeforeTemplate: {},
+      applyTemplateOverrides: (config) =>
+        set((state) => {
+          const originals: Partial<ThemeConfig> = { ...state.themeBeforeTemplate }
+          for (const key of Object.keys(config) as (keyof ThemeConfig)[]) {
+            if (!(key in originals)) {
+              Object.assign(originals, { [key]: state.theme[key] })
+            }
+          }
+          return { theme: { ...state.theme, ...config }, themeBeforeTemplate: originals }
+        }),
       setPresetTheme: (preset) =>
         set((state) => ({
           theme: { ...state.theme, ...themePresets[preset] },
+          themeBeforeTemplate: withoutKeys(state.themeBeforeTemplate, Object.keys(themePresets[preset])),
         })),
 
       // Editor
@@ -247,13 +290,32 @@ export const useSorteoStore = create<SorteoState>()(
     }),
     {
       name: "sorteo-storage",
+      version: PERSIST_VERSION,
+      // v0 (unversioned) and v1 share the same shape; `merge` below fills any missing fields
+      migrate: (persistedState) => persistedState as SorteoState,
       partialize: (state) => ({
         participants: state.participants,
         customParticipants: state.customParticipants,
         pastWinners: state.pastWinners,
-        theme: state.theme,
+        theme: { ...state.theme, ...state.themeBeforeTemplate },
         activeTool: state.activeTool,
       }),
+      merge: (persistedState, currentState) => {
+        const persisted = (typeof persistedState === "object" && persistedState !== null
+          ? persistedState
+          : {}) as Partial<Record<keyof SorteoState, unknown>>
+        const persistedTheme =
+          typeof persisted.theme === "object" && persisted.theme !== null ? (persisted.theme as Partial<ThemeConfig>) : {}
+        return {
+          ...currentState,
+          participants: sanitizeParticipants(persisted.participants),
+          customParticipants: sanitizeParticipants(persisted.customParticipants),
+          pastWinners: sanitizeParticipants(persisted.pastWinners),
+          // Defaults first so fields added to ThemeConfig after a user's last visit are never undefined
+          theme: { ...defaultTheme, ...persistedTheme },
+          activeTool: typeof persisted.activeTool === "string" ? persisted.activeTool : null,
+        }
+      },
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true)
       },

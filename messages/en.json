@@ -51,7 +51,8 @@
             "month": "Random Month Generator",
             "card": "Random Card Generator",
             "bingo": "Bingo Number Generator",
-            "truth": "Truth or Dare Generator"
+            "truth": "Truth or Dare Generator",
+            "password": "Random Password Generator"
         }
     },
     "QuickSpecs": {
@@ -384,7 +385,9 @@
         "term_16": "Bingo Number Generator",
         "def_16": "A classic game of chance where numbers are drawn randomly and players match them on cards. Sorteo Pro generates random Bingo numbers 1-75.",
         "term_17": "Truth or Dare",
-        "def_17": "A classic party game requiring players to either answer a personal question truthfully or perform a dare. The generator provides random prompts for the game."
+        "def_17": "A classic party game requiring players to either answer a personal question truthfully or perform a dare. The generator provides random prompts for the game.",
+        "term_18": "Entropy (Passwords)",
+        "def_18": "A measure of unpredictability or randomness in a password. Higher entropy means it's harder to crack."
     },
     "InstagramPicker": {
         "title": "Free Instagram Comment Picker | Unlimited & No Login",
@@ -805,7 +808,9 @@
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway",
         "truth_title": "Truth or Dare Generator | Sorteo Pro",
-        "truth_text": "🤫 I just played Truth or Dare online! It's free and so much fun. Play here 👇"
+        "truth_text": "🤫 I just played Truth or Dare online! It's free and so much fun. Play here 👇",
+        "password_title": "Random Password Generator",
+        "password_text": "I just generated a secure password on Sorteo Pro"
     },
     "CountryPage": {
         "title": "Random Country Generator | Pick a Country Randomly",
@@ -1171,5 +1176,29 @@
         "faq_1_a": "Our default list is designed to be fun and mostly clean, suitable for general audiences.",
         "faq_2_q": "Can I add my own questions?",
         "faq_2_a": "Yes! You can customize the list using the visual editor to add your own personal inside jokes."
+    },
+    "PasswordGenerator": {
+        "title": "Random Password Generator | Free & Secure Passwords",
+        "description": "Generate secure, random passwords instantly. Protect your accounts with our free, cryptographically secure password generator.",
+        "h1": "Random Password Generator",
+        "subtitle": "Generate strong and secure passwords instantly.",
+        "direct_answer_title": "What is a Random Password Generator?",
+        "direct_answer_text": "A <strong>Random Password Generator</strong> is a tool that creates complex, unpredictable strings of characters (letters, numbers, and symbols) to secure accounts. <strong>Sorteo Pro</strong> uses cryptographically secure algorithms to ensure maximum entropy and safety.",
+        "features_title": "Why use our Password Generator?",
+        "feature_1_title": "Cryptographically Secure",
+        "feature_1_desc": "We use the Web Crypto API to ensure your passwords are truly random and secure.",
+        "feature_2_title": "Client-Side Only",
+        "feature_2_desc": "Passwords are generated in your browser and never sent to our servers.",
+        "feature_3_title": "Highly Customizable",
+        "feature_3_desc": "Choose the length and character types to meet any password requirement.",
+        "how_to_title": "How to generate a secure password",
+        "step_1": "Select the desired password length.",
+        "step_2": "Choose character types (uppercase, numbers, symbols).",
+        "step_3": "Click 'Generate Password' to instantly create a secure string.",
+        "faq_title": "Password Generator FAQ",
+        "faq_1_q": "Is this password generator secure?",
+        "faq_1_a": "Yes, we use a cryptographically secure random number generator (CSPRNG) which is the industry standard for creating unbreakable passwords.",
+        "faq_2_q": "Do you store my generated passwords?",
+        "faq_2_a": "No. Everything runs locally in your browser. We have no access to the passwords you generate."
     }
 }

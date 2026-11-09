@@ -5,6 +5,7 @@ import dynamic from "next/dynamic"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { useSorteoStore, type ThemeConfig } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 import { SorteoSelector } from "@/components/sorteo/sorteo-selector"
 import { ParticipantManager } from "@/components/sorteo/participant-manager"
 import { HistoryPanel } from "@/components/sorteo/history-panel"
@@ -87,7 +88,13 @@ function ThemeParamsHandler() {
 
 function ListParamsHandler() {
   const searchParams = useSearchParams()
-  const { participants, addParticipants, hasHydrated } = useSorteoStore()
+  const { participants, addParticipants, hasHydrated } = useSorteoStore(
+    useShallow((state) => ({
+      participants: state.participants,
+      addParticipants: state.addParticipants,
+      hasHydrated: state.hasHydrated,
+    })),
+  )
 
   useEffect(() => {
     // Viralis: Check for shared list in URL (Deep Linking)
@@ -184,8 +191,23 @@ export function MainApp({
     setWinner,
     isEditorOpen,
     setIsEditorOpen,
-    resetDrawState
-  } = useSorteoStore()
+    resetDrawState,
+  } = useSorteoStore(
+    useShallow((state) => ({
+      participants: state.participants,
+      theme: state.theme,
+      isSpinning: state.isSpinning,
+      setIsSpinning: state.setIsSpinning,
+      showCountdown: state.showCountdown,
+      setShowCountdown: state.setShowCountdown,
+      showWinnerCeremony: state.showWinnerCeremony,
+      setShowWinnerCeremony: state.setShowWinnerCeremony,
+      setWinner: state.setWinner,
+      isEditorOpen: state.isEditorOpen,
+      setIsEditorOpen: state.setIsEditorOpen,
+      resetDrawState: state.resetDrawState,
+    })),
+  )
 
   const contentRef = useRef<HTMLDivElement>(null)
 

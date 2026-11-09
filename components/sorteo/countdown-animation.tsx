@@ -4,13 +4,16 @@ import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 
 interface CountdownAnimationProps {
   onComplete: () => void
 }
 
 export function CountdownAnimation({ onComplete }: CountdownAnimationProps) {
-  const { theme, showCountdown } = useSorteoStore()
+  const { theme, showCountdown } = useSorteoStore(
+    useShallow((state) => ({ theme: state.theme, showCountdown: state.showCountdown })),
+  )
   const t = useTranslations("Countdown")
   const [count, setCount] = useState(theme.countdownDuration)
 

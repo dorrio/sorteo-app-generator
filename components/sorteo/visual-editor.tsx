@@ -7,6 +7,7 @@ import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -38,7 +39,15 @@ import {
 } from "lucide-react"
 
 export function VisualEditor() {
-  const { theme, updateTheme, setPresetTheme, isEditorOpen, setIsEditorOpen } = useSorteoStore()
+  const { theme, updateTheme, setPresetTheme, isEditorOpen, setIsEditorOpen } = useSorteoStore(
+    useShallow((state) => ({
+      theme: state.theme,
+      updateTheme: state.updateTheme,
+      setPresetTheme: state.setPresetTheme,
+      isEditorOpen: state.isEditorOpen,
+      setIsEditorOpen: state.setIsEditorOpen,
+    })),
+  )
   const t = useTranslations("VisualEditor")
   const [activeTab, setActiveTab] = useState<"presets" | "colors" | "text" | "effects" | "background">("presets")
   const [imageUrlInput, setImageUrlInput] = useState("")

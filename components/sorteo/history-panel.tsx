@@ -4,6 +4,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useSorteoStore, type Participant, type ThemeConfig } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 import { HistoryListSkeleton } from "@/components/sorteo/skeletons"
 import { Trophy, Clock, Trash2, Check, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -80,7 +81,14 @@ function HistoryItem({
 }
 
 export function HistoryPanel() {
-  const { pastWinners, clearHistory, theme, hasHydrated } = useSorteoStore()
+  const { pastWinners, clearHistory, theme, hasHydrated } = useSorteoStore(
+    useShallow((state) => ({
+      pastWinners: state.pastWinners,
+      clearHistory: state.clearHistory,
+      theme: state.theme,
+      hasHydrated: state.hasHydrated,
+    })),
+  )
   const t = useTranslations("HistoryPanel")
 
   if (!hasHydrated) {

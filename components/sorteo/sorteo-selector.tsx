@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 import {
     WheelSkeleton,
     SlotSkeleton,
@@ -41,7 +42,9 @@ interface SorteoSelectorProps {
 }
 
 export function SorteoSelector({ onWinnerSelected, forcedStyle }: SorteoSelectorProps) {
-  const { theme } = useSorteoStore()
+  const { theme } = useSorteoStore(
+    useShallow((state) => ({ theme: state.theme })),
+  )
   // Prioritize forcedStyle (SSR/Nav) > Store state (User Pref) > Default
   const sorteoStyle = forcedStyle || theme.sorteoStyle || "slot-machine"
 

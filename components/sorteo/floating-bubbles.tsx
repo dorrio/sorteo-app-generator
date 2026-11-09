@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 
 interface Bubble {
   id: string
@@ -17,7 +18,9 @@ interface Bubble {
 }
 
 export function FloatingBubbles() {
-  const { participants, theme } = useSorteoStore()
+  const { participants, theme } = useSorteoStore(
+    useShallow((state) => ({ participants: state.participants, theme: state.theme })),
+  )
   const t = useTranslations("FloatingBubbles")
   const [bubbles, setBubbles] = useState<Bubble[]>([])
   const containerRef = useRef<HTMLDivElement>(null)

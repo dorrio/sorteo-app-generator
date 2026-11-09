@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl"
 import { useState, useRef, memo, useCallback, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore, type Participant, type ThemeConfig } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 import { ParticipantListSkeleton } from "@/components/sorteo/skeletons"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -120,6 +121,8 @@ function DuplicateItem({
   )
 }
 
+const MAX_STAGGERED_ITEMS = 10
+
 /**
  * ⚡ Performance Optimization:
  * ParticipantItem is memoized to prevent unnecessary re-renders of the entire list
@@ -169,12 +172,13 @@ const ParticipantItem = memo(function ParticipantItem({
   }
 
   return (
+    // No `layout` and a capped stagger: bulk imports of hundreds of names measured every row and
+    // revealed the last one only after index * 20ms (20s for 1,000 names)
     <motion.li
-      layout
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 20 }}
-      transition={{ delay: index * 0.02 }}
+      transition={{ delay: Math.min(index, MAX_STAGGERED_ITEMS) * 0.02 }}
       className="group flex items-center gap-3 p-3 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors"
     >
       <span
@@ -271,7 +275,18 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
     clearParticipants,
     theme,
     hasHydrated,
-  } = useSorteoStore()
+  } = useSorteoStore(
+    useShallow((state) => ({
+      participants: state.participants,
+      addParticipant: state.addParticipant,
+      addParticipants: state.addParticipants,
+      removeParticipant: state.removeParticipant,
+      updateParticipant: state.updateParticipant,
+      clearParticipants: state.clearParticipants,
+      theme: state.theme,
+      hasHydrated: state.hasHydrated,
+    })),
+  )
 
   const t = useTranslations("ParticipantManager")
   const [inputMode, setInputMode] = useState<InputMode>("single")

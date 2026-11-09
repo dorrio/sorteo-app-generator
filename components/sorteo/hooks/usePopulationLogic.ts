@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { useShallow } from "zustand/react/shallow"
 import { useTranslations, useLocale } from "next-intl"
 import { COUNTRIES } from "@/lib/countries"
 import { cryptoShuffle } from "@/lib/utils"
@@ -64,16 +65,28 @@ export function usePopulationLogic(
     initialOptions?: Record<string, string>
 ) {
     const {
-        participants,
-        addParticipants,
-        clearParticipants,
-        setParticipants,
-        customParticipants,
-        setCustomParticipants,
-        activeTool,
-        setActiveTool,
-        hasHydrated
-    } = useSorteoStore()
+      participants,
+      addParticipants,
+      clearParticipants,
+      setParticipants,
+      customParticipants,
+      setCustomParticipants,
+      activeTool,
+      setActiveTool,
+      hasHydrated,
+    } = useSorteoStore(
+    useShallow((state) => ({
+      participants: state.participants,
+      addParticipants: state.addParticipants,
+      clearParticipants: state.clearParticipants,
+      setParticipants: state.setParticipants,
+      customParticipants: state.customParticipants,
+      setCustomParticipants: state.setCustomParticipants,
+      activeTool: state.activeTool,
+      setActiveTool: state.setActiveTool,
+      hasHydrated: state.hasHydrated,
+    })),
+  )
 
     const locale = useLocale()
 

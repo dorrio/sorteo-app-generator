@@ -122,11 +122,6 @@ export default async function InstagramPickerPage({
       t("feature_3_title"),
       t("secure_rng"),
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      ratingCount: "8300",
-    },
     about: {
       "@type": "Thing",
       name: tSorteoSeo("about.name"),

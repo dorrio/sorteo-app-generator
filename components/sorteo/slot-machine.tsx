@@ -37,6 +37,9 @@ export function SlotMachine({ onWinnerSelected }: SlotMachineProps) {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- each spin regenerates the visible reel; this is the animation's initial frame, not a render cascade
     setDisplayedNames(shuffled.map((p) => p.name))
 
+    let timeoutId: ReturnType<typeof setTimeout> | undefined
+    let rafId: number | undefined
+
     const animate = () => {
       const elapsed = Date.now() - startTime
       const progress = elapsed / spinDuration
@@ -45,7 +48,9 @@ export function SlotMachine({ onWinnerSelected }: SlotMachineProps) {
         // Slow down as we approach the end
         const speed = Math.max(50, 300 * (1 - progress * progress))
         setCurrentIndex((prev) => (prev + 1) % shuffled.length)
-        setTimeout(() => requestAnimationFrame(animate), speed)
+        timeoutId = setTimeout(() => {
+          rafId = requestAnimationFrame(animate)
+        }, speed)
       } else {
         // Animation complete - show winner
         setFinalWinner(winner.name)
@@ -53,13 +58,19 @@ export function SlotMachine({ onWinnerSelected }: SlotMachineProps) {
         addToPastWinners(winner)
         setIsSpinning(false)
 
+        // Not cleared on cleanup: setIsSpinning(false) re-runs this effect and the ceremony must still open
         setTimeout(() => {
           onWinnerSelected()
         }, 500)
       }
     }
 
-    requestAnimationFrame(animate)
+    rafId = requestAnimationFrame(animate)
+
+    return () => {
+      if (timeoutId !== undefined) clearTimeout(timeoutId)
+      if (rafId !== undefined) cancelAnimationFrame(rafId)
+    }
   }, [
     isSpinning,
     participants,

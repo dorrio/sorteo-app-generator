@@ -134,11 +134,6 @@ export default async function TeamGeneratorPage({
       tGeo("feature_3_title"),
       tGeo("feature_4_title"),
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      ratingCount: "2100",
-    },
   };
 
   const breadcrumbSchema = {

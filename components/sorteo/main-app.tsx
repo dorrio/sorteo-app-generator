@@ -324,7 +324,7 @@ export function MainApp({
               <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title="Verificar Sorteo" aria-label={t("verify_sorteo")}>
                 <ShieldCheck className="w-5 h-5" />
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setIsEditorOpen(true)} className="gap-2" aria-label={t("customize")}>
+              <Button variant="outline" size="sm" onClick={() => setIsEditorOpen(true)} disabled={isSpinning} className="gap-2" aria-label={t("customize")}>
                 <Settings2 className="w-4 h-4" />
                 <span className="hidden sm:inline">{t("customize")}</span>
               </Button>
@@ -350,7 +350,8 @@ export function MainApp({
                 </h1>
                 <p className="text-muted-foreground text-lg">{displaySubtitle}</p>
                 <button
-                  className="inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-full text-sm font-medium transition-all hover:scale-105"
+                  className="inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-full text-sm font-medium transition-all hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
+                  disabled={isSpinning}
                   style={{
                     backgroundColor: `${theme.primaryColor}20`,
                     color: theme.primaryColor,
@@ -400,8 +401,10 @@ export function MainApp({
               )}
             </section>
 
-            {/* Sidebar */}
+            {/* Sidebar — locked while spinning so the draw runs on the list it started with */}
             <motion.aside
+              inert={isSpinning}
+              aria-busy={isSpinning}
               initial={false}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}

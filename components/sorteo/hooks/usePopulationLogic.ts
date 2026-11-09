@@ -67,6 +67,9 @@ export function usePopulationLogic(
         participants,
         addParticipants,
         clearParticipants,
+        setParticipants,
+        customParticipants,
+        setCustomParticipants,
         activeTool,
         setActiveTool,
         hasHydrated
@@ -84,8 +87,26 @@ export function usePopulationLogic(
 
         // Detect if we just navigated to a new mode
         const modeChanged = activeTool !== seoMode
-        const isEmpty = participants.length === 0
         const isPresetTool = PRESET_TOOLS.includes(seoMode)
+        const cameFromPresetTool = activeTool !== null && PRESET_TOOLS.includes(activeTool as SeoMode)
+        const hasListParam = typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('list')
+
+        let isEmpty = participants.length === 0
+
+        // The user's own list is set aside while a preset tool replaces it, and restored when they leave the preset tools.
+        if (modeChanged && isPresetTool && !cameFromPresetTool && !isEmpty) {
+            setCustomParticipants(participants)
+        }
+        if (modeChanged && !isPresetTool && cameFromPresetTool) {
+            if (customParticipants.length > 0 && !hasListParam) {
+                setParticipants(customParticipants)
+                setCustomParticipants([])
+                isEmpty = false
+            } else {
+                clearParticipants()
+                isEmpty = true
+            }
+        }
 
         // We populate if:
         // 1. The list is empty (standard behavior)
@@ -101,7 +122,6 @@ export function usePopulationLogic(
             if (populateFn) {
                 addParticipants(populateFn({ opt: initialOptions, locale, tYesNo, tCoin, tRps }))
             } else if (isEmpty && !isPresetTool) {
-                const hasListParam = typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('list')
                 if (!hasListParam) {
                     addParticipants([
                         { name: "Option 1" },
@@ -119,5 +139,5 @@ export function usePopulationLogic(
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally ignoring participants.length so population only runs on mode change, not on every participant add/remove
-    }, [mounted, hasHydrated, seoMode, initialOptions, activeTool, setActiveTool, locale, addParticipants, clearParticipants, tYesNo, tCoin, tRps])
+    }, [mounted, hasHydrated, seoMode, initialOptions, activeTool, setActiveTool, locale, addParticipants, clearParticipants, setParticipants, setCustomParticipants, tYesNo, tCoin, tRps])
 }

@@ -183,11 +183,6 @@ export default async function RootLayout({
         },
       ],
       sameAs: ["https://github.com/sorteopro", "https://twitter.com/sorteopro"],
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "4.9",
-        ratingCount: "12500",
-      },
     },
     {
       "@context": "https://schema.org",

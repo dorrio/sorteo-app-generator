@@ -50,7 +50,7 @@ export function SorteoCascade({ onWinnerSelected }: SorteoCascadeProps) {
     }, 150)
 
     // End animation
-    setTimeout(() => {
+    const endTimeout = setTimeout(() => {
       clearInterval(interval)
       setFallingNames([])
       setFinalWinner(winner.name)
@@ -58,10 +58,14 @@ export function SorteoCascade({ onWinnerSelected }: SorteoCascadeProps) {
       setWinner(winner)
       addToPastWinners(winner)
       setIsSpinning(false)
+      // Not cleared on cleanup: setIsSpinning(false) re-runs this effect and the ceremony must still open
       setTimeout(() => onWinnerSelected(), 500)
     }, spinDuration)
 
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+      clearTimeout(endTimeout)
+    }
   }, [
     isSpinning,
     participants,

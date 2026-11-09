@@ -51,7 +51,7 @@
             "month": "Generador de Mes Aleatorio",
             "card": "Generador de Cartas Aleatorias",
             "bingo": "Generador de Bingo",
-            "truth": "Verdad o Reto Generator"
+            "truth": "Verdad o Reto"
         }
     },
     "QuickSpecs": {
@@ -1105,7 +1105,7 @@
     "TruthPage": {
         "title": "Generador de Verdad o Reto | Preguntas Aleatorias",
         "description": "Genera preguntas aleatorias de Verdad o Reto al instante. Gratis, sin registro. Perfecto para fiestas, amigos y parejas.",
-        "h1": "Verdad o Reto Generator",
+        "h1": "Verdad o Reto",
         "subtitle": "Gira para obtener una pregunta aleatoria de Verdad o Reto.",
         "truth_0": "¿Cuál es tu mayor miedo?",
         "truth_1": "¿Qué es lo más vergonzoso que has hecho?",

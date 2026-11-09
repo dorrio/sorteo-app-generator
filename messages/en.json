@@ -51,7 +51,7 @@
             "month": "Random Month Generator",
             "card": "Random Card Generator",
             "bingo": "Bingo Number Generator",
-            "truth": "Truth or Dare Generator"
+            "truth": "Truth or Dare"
         }
     },
     "QuickSpecs": {
@@ -804,7 +804,7 @@
         "bingo_text": "🎱 I just generated random Bingo numbers! Free & Fair. 👇",
         "cta_share": "Share Tool",
         "cta_start": "Start Giveaway",
-        "truth_title": "Truth or Dare Generator | Sorteo Pro",
+        "truth_title": "Truth or Dare | Sorteo Pro",
         "truth_text": "🤫 I just played Truth or Dare online! It's free and so much fun. Play here 👇"
     },
     "CountryPage": {
@@ -1103,9 +1103,9 @@
         "retry": "Try again"
     },
     "TruthPage": {
-        "title": "Truth or Dare Generator | Random Questions (Free)",
+        "title": "Truth or Dare | Random Questions (Free)",
         "description": "Generate random Truth or Dare questions instantly. Free, no login required. Perfect for parties, friends, and couples.",
-        "h1": "Truth or Dare Generator",
+        "h1": "Truth or Dare",
         "subtitle": "Spin to get a random Truth or Dare question.",
         "truth_0": "What is your biggest fear?",
         "truth_1": "What is the most embarrassing thing you have ever done?",
@@ -1149,8 +1149,8 @@
         "dare_19": "Let the group mix a concoction of 3 edible things for you to eat."
     },
     "TruthGeo": {
-        "direct_answer_title": "What is a Truth or Dare Generator?",
-        "direct_answer_text": "A <tool>Truth or Dare Generator</tool> is a digital tool that provides random questions or challenges for the classic party game. It is perfect for <strong>parties</strong>, <strong>icebreakers</strong>, and having fun with friends. <brand>Sorteo Pro</brand> offers a curated list of fun and challenging prompts.",
+        "direct_answer_title": "What is a Truth or Dare?",
+        "direct_answer_text": "A <tool>Truth or Dare</tool> is a digital tool that provides random questions or challenges for the classic party game. It is perfect for <strong>parties</strong>, <strong>icebreakers</strong>, and having fun with friends. <brand>Sorteo Pro</brand> offers a curated list of fun and challenging prompts.",
         "cta_button": "Play Truth or Dare",
         "feature_1_title": "Hundreds of Prompts",
         "feature_1_desc": "Carefully curated questions and dares.",
@@ -1165,7 +1165,7 @@
         "how_to_step_2": "Click \"Start Giveaway\" to generate a prompt.",
         "how_to_step_3": "Read the truth or complete the dare.",
         "how_to_step_4": "Pass the device to the next player!",
-        "faq_title": "Truth or Dare Generator FAQ",
+        "faq_title": "Truth or Dare FAQ",
         "features_title": "Key Features",
         "faq_1_q": "Are the questions safe for work?",
         "faq_1_a": "Our default list is designed to be fun and mostly clean, suitable for general audiences.",

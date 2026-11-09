@@ -51,7 +51,7 @@
             "month": "Gerador de Mês Aleatório",
             "card": "Gerador de Cartas Aleatórias",
             "bingo": "Gerador de Bingo",
-            "truth": "Verdade ou Desafio Generator"
+            "truth": "Verdade ou Desafio"
         }
     },
     "QuickSpecs": {
@@ -1106,7 +1106,7 @@
     "TruthPage": {
         "title": "Gerador de Verdade ou Desafio | Perguntas Aleatórias",
         "description": "Gere perguntas de Verdade ou Desafio aleatórias instantaneamente. Grátis, sem login. Perfeito para festas, amigos e casais.",
-        "h1": "Verdade ou Desafio Generator",
+        "h1": "Verdade ou Desafio",
         "subtitle": "Gire para obter uma pergunta de Verdade ou Desafio.",
         "truth_0": "Qual é o seu maior medo?",
         "truth_1": "Qual é a coisa mais embaraçosa que você já fez?",

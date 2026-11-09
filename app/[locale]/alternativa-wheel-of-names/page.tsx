@@ -24,7 +24,7 @@ export async function generateMetadata({
     title: t("title"),
     description: t("description"),
     alternates: {
-      canonical: `/alternativa-wheel-of-names`,
+      canonical: `/${locale}/alternativa-wheel-of-names`,
       languages: {
         en: `/en/alternativa-wheel-of-names`,
         es: `/es/alternativa-wheel-of-names`,

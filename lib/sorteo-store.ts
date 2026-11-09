@@ -58,6 +58,10 @@ export interface SorteoState {
   removeParticipant: (id: string) => void
   updateParticipant: (id: string, name: string) => void
   clearParticipants: () => void
+  // The user's own list, set aside while a preset tool (dice, coin, …) temporarily replaces it
+  customParticipants: Participant[]
+  setCustomParticipants: (participants: Participant[]) => void
+  setParticipants: (participants: Participant[]) => void
 
   // Sorteo state
   winner: Participant | null
@@ -195,6 +199,9 @@ export const useSorteoStore = create<SorteoState>()(
           participants: state.participants.map((p) => (p.id === id ? { ...p, name } : p)),
         })),
       clearParticipants: () => set({ participants: [] }),
+      customParticipants: [],
+      setCustomParticipants: (customParticipants) => set({ customParticipants }),
+      setParticipants: (participants) => set({ participants }),
 
       // Sorteo state
       winner: null,
@@ -242,6 +249,7 @@ export const useSorteoStore = create<SorteoState>()(
       name: "sorteo-storage",
       partialize: (state) => ({
         participants: state.participants,
+        customParticipants: state.customParticipants,
         pastWinners: state.pastWinners,
         theme: state.theme,
         activeTool: state.activeTool,

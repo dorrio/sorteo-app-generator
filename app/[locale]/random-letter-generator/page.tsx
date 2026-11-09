@@ -123,11 +123,6 @@ export default async function LetterGeneratorPage({
       tGeo("feature_3_title"),
       tGeo("feature_4_title"),
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      ratingCount: "1200",
-    },
     about: {
       "@type": "Thing",
       name: tSorteoSeo("about.name"),

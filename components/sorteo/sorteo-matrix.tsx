@@ -54,15 +54,18 @@ export function SorteoMatrix({ onWinnerSelected }: SorteoMatrixProps) {
 
     const spinDuration = theme.spinDuration * 1000
 
-    setTimeout(() => {
+    const endTimeout = setTimeout(() => {
       setColumns([])
       setFinalWinner(winner.name)
       setShowWinner(true)
       setWinner(winner)
       addToPastWinners(winner)
       setIsSpinning(false)
+      // Not cleared on cleanup: setIsSpinning(false) re-runs this effect and the ceremony must still open
       setTimeout(() => onWinnerSelected(), 500)
     }, spinDuration)
+
+    return () => clearTimeout(endTimeout)
   }, [
     isSpinning,
     participants,

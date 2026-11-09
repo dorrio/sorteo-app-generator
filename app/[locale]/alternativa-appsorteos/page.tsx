@@ -24,7 +24,7 @@ export async function generateMetadata({
     title: t("title"),
     description: t("description"),
     alternates: {
-      canonical: `/alternativa-appsorteos`,
+      canonical: `/${locale}/alternativa-appsorteos`,
       languages: {
         en: `/en/alternativa-appsorteos`,
         es: `/es/alternativa-appsorteos`,

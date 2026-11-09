@@ -41,6 +41,7 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
     const cardFlipInterval = spinDuration / Math.min(participants.length * 2, 20)
     let flipCount = 0
     const maxFlips = Math.min(participants.length * 2, 20)
+    let revealTimeout: ReturnType<typeof setTimeout> | undefined
 
     const flipInterval = setInterval(() => {
       setTimeout(() => {
@@ -51,12 +52,13 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
       if (flipCount >= maxFlips) {
         clearInterval(flipInterval)
         // Final reveal
-        setTimeout(() => {
+        revealTimeout = setTimeout(() => {
           setFinalWinner(winner.name)
           setShowFinal(true)
           setWinner(winner)
           addToPastWinners(winner)
           setIsSpinning(false)
+          // Not cleared on cleanup: setIsSpinning(false) re-runs this effect and the ceremony must still open
           setTimeout(() => onWinnerSelected(), 500)
         }, 300)
       }
@@ -64,6 +66,7 @@ export function SorteoCards({ onWinnerSelected }: SorteoCardsProps) {
 
     return () => {
       clearInterval(flipInterval)
+      if (revealTimeout !== undefined) clearTimeout(revealTimeout)
       cancelAnimationFrame(rafId)
     }
   }, [

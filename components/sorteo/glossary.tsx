@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl"
 import { Book, CheckCircle2, ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/routing"
 import { JsonLd } from '@/components/seo/json-ld';
-export type SeoMode = 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'truth-or-dare';
+export type SeoMode = 'home' | 'wheel' | 'instagram' | 'rng' | 'list-randomizer' | 'yes-no' | 'letter' | 'secret-santa' | 'card' | 'bingo' | 'team' | 'dice' | 'coin' | 'rps' | 'country' | 'month' | 'truth-or-dare' | 'password';
 
 interface GlossaryProps {
   seoMode?: SeoMode;
@@ -25,6 +25,7 @@ const GLOSSARY_MAPPING: Record<string, string[]> = {
   country: ['country'],
   month: ['month'],
   'truth-or-dare': ['truth-or-dare'],
+  'password': ['rng', 'entropy'],
 }
 
 export function Glossary({ seoMode }: GlossaryProps) {
@@ -115,6 +116,11 @@ export function Glossary({ seoMode }: GlossaryProps) {
       id: "month",
       term: t("term_14"),
       definition: t("def_14"),
+    },
+    {
+      id: "entropy",
+      term: t("term_18"),
+      definition: t("def_18"),
     },
   ]
 

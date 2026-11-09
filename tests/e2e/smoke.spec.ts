@@ -90,6 +90,10 @@ const PAGES: Page[] = [
     h1: { en: 'Truth or Dare', es: 'Verdad o Reto', pt: 'Verdade ou Desafio' },
   },
   {
+    slug: 'random-password-generator',
+    h1: { en: 'Random Password Generator', es: 'Generador de Contraseñas Seguras', pt: 'Gerador de Senhas Seguras' },
+  },
+  {
     slug: 'glossary',
     h1: { en: 'Giveaway Glossary', es: 'Glosario de Sorteos', pt: 'Glossário de Sorteios' },
   },

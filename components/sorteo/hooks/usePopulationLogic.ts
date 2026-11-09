@@ -21,6 +21,26 @@ interface PopulationContext {
 }
 
 const POPULATION_MAPPERS: Partial<Record<SeoMode, (ctx: PopulationContext) => { name: string }[]>> = {
+
+    'password': () => {
+        const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
+        const length = 16;
+        let password = '';
+        if (typeof window !== 'undefined' && window.crypto) {
+            const array = new Uint32Array(length);
+            window.crypto.getRandomValues(array);
+            for (let i = 0; i < length; i++) {
+                password += charset[array[i] % charset.length];
+            }
+        } else {
+            // Fallback for SSR or environments without crypto
+            for (let i = 0; i < length; i++) {
+                password += charset[Math.floor(Math.random() * charset.length)];
+            }
+        }
+        return [{ name: password }];
+    },
+
     'yes-no': ({ opt, tYesNo }) => [
         { name: opt?.yes || tYesNo('option_yes') },
         { name: opt?.no || tYesNo('option_no') }

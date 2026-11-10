@@ -105,6 +105,7 @@ export async function generateMetadata({
       canonical: `/${locale}/verify`,
       languages: {
         en: `/en/verify`,
+        "x-default": `/en/verify`,
         es: `/es/verify`,
         pt: `/pt/verify`,
       },

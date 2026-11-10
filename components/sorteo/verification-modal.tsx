@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useTranslations } from "next-intl"
+import { useTranslations, useFormatter } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { Search, ShieldCheck, ShieldAlert, Calendar, User, Check } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
@@ -18,6 +18,7 @@ interface VerificationModalProps {
 
 export function VerificationModal({ isOpen, onClose }: VerificationModalProps) {
     const t = useTranslations("VerificationPage")
+    const format = useFormatter()
     const { theme, pastWinners } = useSorteoStore(
     useShallow((state) => ({ theme: state.theme, pastWinners: state.pastWinners })),
   )
@@ -156,7 +157,7 @@ export function VerificationModal({ isOpen, onClose }: VerificationModalProps) {
                                                         </div>
                                                         <div className="flex items-center gap-2 text-sm">
                                                             <Calendar className="w-4 h-4 opacity-50" />
-                                                            <span>{new Date(result.participant.timestamp).toLocaleString()}</span>
+                                                            <span>{format.dateTime(new Date(result.participant.timestamp), { dateStyle: "medium", timeStyle: "short" })}</span>
                                                         </div>
                                                         <div className="flex items-center gap-2 text-xs text-green-500 mt-2">
                                                             <ShieldCheck className="w-3 h-3" />

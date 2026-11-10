@@ -72,6 +72,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: canonicalUrl,
       languages: {
         en: `/en/random-number-generator`,
+        "x-default": `/en/random-number-generator`,
         es: `/es/random-number-generator`,
         pt: `/pt/random-number-generator`,
       },

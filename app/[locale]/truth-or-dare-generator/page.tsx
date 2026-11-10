@@ -31,6 +31,7 @@ export async function generateMetadata({
       canonical: `/${locale}/truth-or-dare-generator`,
       languages: {
         en: `/en/truth-or-dare-generator`,
+        "x-default": `/en/truth-or-dare-generator`,
         es: `/es/truth-or-dare-generator`,
         pt: `/pt/truth-or-dare-generator`,
       },

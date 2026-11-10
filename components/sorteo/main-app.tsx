@@ -308,7 +308,7 @@ export function MainApp({
         <div className="fixed inset-0 z-0">
           <Image
             src={theme.backgroundImage}
-            alt="Custom Background"
+            alt=""
             fill
             priority
             className="object-cover"
@@ -363,7 +363,7 @@ export function MainApp({
                 translations={shareTranslations}
               />
 
-              <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title="Verificar Sorteo" aria-label={t("verify_sorteo")}>
+              <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title={t("verify_sorteo")} aria-label={t("verify_sorteo")}>
                 <ShieldCheck className="w-5 h-5" />
               </Button>
               <Button variant="outline" size="sm" onClick={() => setIsEditorOpen(true)} disabled={isSpinning} className="gap-2" aria-label={t("customize")}>
@@ -380,7 +380,7 @@ export function MainApp({
             {/* Sorteo area */}
             <section
               className="space-y-8"
-              aria-label="Main Tool Area"
+              aria-label={t("tool_area_label")}
             >
               {/* Title */}
               <div className="text-center space-y-2">

@@ -27,6 +27,7 @@ export async function generateMetadata({
       canonical: `/${locale}/alternativa-appsorteos`,
       languages: {
         en: `/en/alternativa-appsorteos`,
+        "x-default": `/en/alternativa-appsorteos`,
         es: `/es/alternativa-appsorteos`,
         pt: `/pt/alternativa-appsorteos`,
       },

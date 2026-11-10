@@ -66,6 +66,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: `/${locale}/random-card-generator`,
       languages: {
         en: `/en/random-card-generator`,
+        "x-default": `/en/random-card-generator`,
         es: `/es/random-card-generator`,
         pt: `/pt/random-card-generator`,
       },

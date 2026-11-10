@@ -25,6 +25,7 @@ export async function generateMetadata({
       canonical: `/${locale}/versus`,
       languages: {
         en: `/en/versus`,
+        "x-default": `/en/versus`,
         es: `/es/versus`,
         pt: `/pt/versus`,
       },
@@ -44,6 +45,7 @@ export default async function VersusHubPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const baseUrl = getBaseUrl();
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "VersusHubPage" });
 
@@ -74,14 +76,14 @@ export default async function VersusHubPage({
     "@type": "CollectionPage",
     name: t("title"),
     description: t("description"),
-    url: "https://sorteopro.com/versus",
+    url: `${baseUrl}/${locale}/versus`,
     mainEntity: {
       "@type": "ItemList",
       itemListElement: comparisons.map((comp, index) => ({
         "@type": "ListItem",
         position: index + 1,
         name: comp.title,
-        url: `https://sorteopro.com${comp.link}`,
+        url: `${baseUrl}/${locale}${comp.link}`,
       })),
     },
   };

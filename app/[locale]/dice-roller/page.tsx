@@ -66,6 +66,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: `/${locale}/dice-roller`,
       languages: {
         en: `/en/dice-roller`,
+        "x-default": `/en/dice-roller`,
         es: `/es/dice-roller`,
         pt: `/pt/dice-roller`,
       },

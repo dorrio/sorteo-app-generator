@@ -63,6 +63,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: `/${locale}/coin-flip`,
       languages: {
         en: `/en/coin-flip`,
+        "x-default": `/en/coin-flip`,
         es: `/es/coin-flip`,
         pt: `/pt/coin-flip`,
       },

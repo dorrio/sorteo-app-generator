@@ -65,6 +65,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: `/${locale}/wheel-of-names`,
       languages: {
         en: `/en/wheel-of-names`,
+        "x-default": `/en/wheel-of-names`,
         es: `/es/wheel-of-names`,
         pt: `/pt/wheel-of-names`,
       },

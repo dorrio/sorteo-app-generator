@@ -64,6 +64,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: `/${locale}/yes-or-no-wheel`,
       languages: {
         en: `/en/yes-or-no-wheel`,
+        "x-default": `/en/yes-or-no-wheel`,
         es: `/es/yes-or-no-wheel`,
         pt: `/pt/yes-or-no-wheel`,
       },

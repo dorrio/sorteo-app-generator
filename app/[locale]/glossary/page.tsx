@@ -43,6 +43,7 @@ export async function generateMetadata({
       canonical: `/${locale}/glossary`,
       languages: {
         en: `/en/glossary`,
+        "x-default": `/en/glossary`,
         es: `/es/glossary`,
         pt: `/pt/glossary`,
       },
@@ -62,6 +63,7 @@ export default async function GlossaryPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const baseUrl = getBaseUrl();
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "GlossaryPage" });
   const tGlossary = await getTranslations({ locale, namespace: "Glossary" }); // Reuse existing glossary strings
@@ -187,7 +189,7 @@ export default async function GlossaryPage({
     "@type": "CollectionPage",
     name: t("title"),
     description: t("description"),
-    url: "https://sorteopro.com/glossary",
+    url: `${baseUrl}/${locale}/glossary`,
     mainEntity: {
       "@type": "DefinedTermSet",
       name: t("title"),
@@ -209,13 +211,13 @@ export default async function GlossaryPage({
         "@type": "ListItem",
         position: 1,
         name: "Sorteo Pro",
-        item: "https://sorteopro.com",
+        item: `${baseUrl}/${locale}`,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: t("h1"),
-        item: "https://sorteopro.com/glossary",
+        item: `${baseUrl}/${locale}/glossary`,
       },
     ],
   };

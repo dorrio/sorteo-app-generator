@@ -59,6 +59,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: `/${locale}/random-letter-generator`,
       languages: {
         en: `/en/random-letter-generator`,
+        "x-default": `/en/random-letter-generator`,
         es: `/es/random-letter-generator`,
         pt: `/pt/random-letter-generator`,
       },

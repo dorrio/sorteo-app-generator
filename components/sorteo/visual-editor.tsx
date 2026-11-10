@@ -617,7 +617,7 @@ export function VisualEditor() {
                         <div className="relative rounded-xl overflow-hidden border border-border aspect-video">
                           <Image
                             src={theme.backgroundImage || "/placeholder.svg"}
-                            alt="Background preview"
+                            alt={t("background.preview")}
                             fill
                             unoptimized
                             className="object-cover"

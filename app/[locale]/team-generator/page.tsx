@@ -70,6 +70,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: canonicalUrl,
       languages: {
         en: `/en/team-generator`,
+        "x-default": `/en/team-generator`,
         es: `/es/team-generator`,
         pt: `/pt/team-generator`,
       },

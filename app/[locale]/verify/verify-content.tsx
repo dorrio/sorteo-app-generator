@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations, useLocale, useFormatter } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
@@ -50,6 +50,7 @@ import { getBaseUrl } from "@/lib/config";
 export function VerifyContent() {
   const t = useTranslations("VerificationPage");
   const locale = useLocale();
+  const format = useFormatter();
   const { theme, pastWinners } = useSorteoStore(
     useShallow((state) => ({ theme: state.theme, pastWinners: state.pastWinners })),
   );
@@ -527,9 +528,10 @@ export function VerifyContent() {
                                   {t("result.date_label")}
                                 </p>
                                 <p className="font-medium">
-                                  {new Date(
-                                    result.participant.timestamp,
-                                  ).toLocaleString()}
+                                  {format.dateTime(new Date(result.participant.timestamp), {
+                                    dateStyle: "medium",
+                                    timeStyle: "short",
+                                  })}
                                 </p>
                               </div>
                             </div>
@@ -553,7 +555,7 @@ export function VerifyContent() {
                                   {t("result.date_label")}
                                 </p>
                                 <p className="font-medium text-foreground">
-                                  {result.date.toLocaleString()}
+                                  {format.dateTime(result.date, { dateStyle: "medium", timeStyle: "short" })}
                                 </p>
                               </div>
                             </div>
@@ -643,7 +645,6 @@ export function VerifyContent() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="gap-2 cursor-pointer flex w-full items-center"
-                                    aria-label="Share on Twitter"
                                   >
                                     <Twitter className="w-4 h-4" />
                                     {t("twitter_x")}
@@ -664,7 +665,6 @@ export function VerifyContent() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="gap-2 cursor-pointer flex w-full items-center"
-                                    aria-label="Share on Facebook"
                                   >
                                     <Facebook className="w-4 h-4" />
                                     {t("facebook")}
@@ -677,7 +677,6 @@ export function VerifyContent() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="gap-2 cursor-pointer flex w-full items-center"
-                                    aria-label="Share on WhatsApp"
                                   >
                                     <MessageCircle className="w-4 h-4" />
                                     {t("whatsapp")}
@@ -690,7 +689,6 @@ export function VerifyContent() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="gap-2 cursor-pointer flex w-full items-center"
-                                    aria-label="Share on Telegram"
                                   >
                                     <Send className="w-4 h-4" />
                                     {t("telegram")}
@@ -703,7 +701,6 @@ export function VerifyContent() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="gap-2 cursor-pointer flex w-full items-center"
-                                    aria-label="Share on LinkedIn"
                                   >
                                     <Linkedin className="w-4 h-4" />
                                     {t("linkedin")}

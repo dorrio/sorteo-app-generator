@@ -61,6 +61,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: `/${locale}/random-month-generator`,
       languages: {
         en: `/en/random-month-generator`,
+        "x-default": `/en/random-month-generator`,
         es: `/es/random-month-generator`,
         pt: `/pt/random-month-generator`,
       },

@@ -67,6 +67,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: canonicalUrl,
       languages: {
         en: `/en`,
+        "x-default": `/en`,
         es: `/es`,
         pt: `/pt`,
       },
@@ -102,6 +103,7 @@ export default async function SorteoApp({
   setRequestLocale(locale);
 
   const tShare = await getTranslations({ locale, namespace: "ShareContent" });
+  const tHome = await getTranslations({ locale, namespace: "HomePage" });
   const tWinner = await getTranslations({
     locale,
     namespace: "WinnerCeremony",
@@ -140,7 +142,7 @@ export default async function SorteoApp({
       <MainApp
         seoMode="home"
         initialTitle="Sorteo Pro"
-        initialSubtitle="The Premium Giveaway Tool"
+        initialSubtitle={tHome("hero_subtitle")}
         shareTitle={tShare("home_title")}
         shareText={tShare("home_text")}
         customShareTextTemplate={tShare("custom_share_text", {

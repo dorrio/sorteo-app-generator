@@ -547,7 +547,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
         {duplicateModal}
         <div className="space-y-3">
           {/* Input mode tabs */}
-          <div className="flex gap-2 p-1 bg-secondary/50 rounded-lg" role="tablist" aria-label="Input mode">
+          <div className="flex gap-2 p-1 bg-secondary/50 rounded-lg" role="tablist" aria-label={t("input_mode_label")}>
             {[
               { mode: "single" as InputMode, label: t("input_mode.single"), icon: Plus },
               { mode: "bulk" as InputMode, label: t("input_mode.bulk"), icon: Copy },
@@ -686,7 +686,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
       {duplicateModal}
       <div className="space-y-6">
         {/* Input mode tabs */}
-        <div className="flex gap-2 p-1 bg-secondary/50 rounded-lg" role="tablist" aria-label="Input mode">
+        <div className="flex gap-2 p-1 bg-secondary/50 rounded-lg" role="tablist" aria-label={t("input_mode_label")}>
           {[
             { mode: "single" as InputMode, label: t("input_mode.single"), icon: Plus },
             { mode: "bulk" as InputMode, label: t("input_mode.bulk"), icon: Copy },

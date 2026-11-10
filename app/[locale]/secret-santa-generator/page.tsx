@@ -72,6 +72,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: canonicalUrl,
       languages: {
         en: `/en/secret-santa-generator`,
+        "x-default": `/en/secret-santa-generator`,
         es: `/es/secret-santa-generator`,
         pt: `/pt/secret-santa-generator`,
       },

@@ -72,6 +72,12 @@ module.exports = {
                 href: `${config.siteUrl}/${locale}${pathSuffix}`,
                 hrefIsAbsolute: true
             }));
+            // English is the default locale: point unmatched languages at it
+            alternateRefs.push({
+                hreflang: 'x-default',
+                href: `${config.siteUrl}/en${pathSuffix}`,
+                hrefIsAbsolute: true
+            });
         }
 
         return {
@@ -108,22 +114,32 @@ module.exports = {
         ];
         const locales = ['en', 'es', 'pt'];
 
+        const alternateRefsFor = (suffix) => [
+            ...locales.map(altLocale => ({
+                hreflang: altLocale,
+                href: `${config.siteUrl}/${altLocale}${suffix}`,
+                hrefIsAbsolute: true
+            })),
+            { hreflang: 'x-default', href: `${config.siteUrl}/en${suffix}`, hrefIsAbsolute: true }
+        ];
+
         for (const locale of locales) {
+            // Locale homepages are dynamic (they read searchParams), so next-sitemap doesn't discover them
+            result.push({
+                loc: `/${locale}`,
+                changefreq: 'daily',
+                priority: 1.0,
+                lastmod: new Date().toISOString(),
+                alternateRefs: alternateRefsFor('')
+            });
+
             for (const tool of CORE_TOOLS) {
-                const path = `/${locale}/${tool}`;
-
-                const alternateRefs = locales.map(altLocale => ({
-                    hreflang: altLocale,
-                    href: `${config.siteUrl}/${altLocale}/${tool}`,
-                    hrefIsAbsolute: true
-                }));
-
                 result.push({
-                    loc: path,
+                    loc: `/${locale}/${tool}`,
                     changefreq: 'weekly',
                     priority: 0.9,
                     lastmod: new Date().toISOString(),
-                    alternateRefs: alternateRefs
+                    alternateRefs: alternateRefsFor(`/${tool}`)
                 });
             }
         }

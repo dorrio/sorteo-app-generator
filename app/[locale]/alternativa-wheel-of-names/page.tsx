@@ -27,6 +27,7 @@ export async function generateMetadata({
       canonical: `/${locale}/alternativa-wheel-of-names`,
       languages: {
         en: `/en/alternativa-wheel-of-names`,
+        "x-default": `/en/alternativa-wheel-of-names`,
         es: `/es/alternativa-wheel-of-names`,
         pt: `/pt/alternativa-wheel-of-names`,
       },

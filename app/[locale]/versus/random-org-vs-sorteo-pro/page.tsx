@@ -40,6 +40,7 @@ export async function generateMetadata({
       canonical: `/${locale}/versus/random-org-vs-sorteo-pro`,
       languages: {
         en: `/en/versus/random-org-vs-sorteo-pro`,
+        "x-default": `/en/versus/random-org-vs-sorteo-pro`,
         es: `/es/versus/random-org-vs-sorteo-pro`,
         pt: `/pt/versus/random-org-vs-sorteo-pro`,
       },
@@ -69,6 +70,7 @@ export default async function RandomVersusPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const baseUrl = getBaseUrl();
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "VersusRandom" });
   const tShare = await getTranslations({ locale, namespace: "ShareContent" });
@@ -84,18 +86,9 @@ export default async function RandomVersusPage({
     "@type": "Article",
     headline: t("title"),
     description: t("description"),
-    author: {
-      "@type": "Organization",
-      name: "Sorteo Pro",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Sorteo Pro",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://sorteopro.com/logo.png",
-      },
-    },
+    // Defined once in the root layout's Organization schema
+    author: { "@id": `${baseUrl}/#organization` },
+    publisher: { "@id": `${baseUrl}/#organization` },
   };
 
   const faqSchema = {

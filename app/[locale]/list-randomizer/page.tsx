@@ -84,6 +84,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: canonicalUrl,
       languages: {
         en: `/en/list-randomizer`,
+        "x-default": `/en/list-randomizer`,
         es: `/es/list-randomizer`,
         pt: `/pt/list-randomizer`,
       },

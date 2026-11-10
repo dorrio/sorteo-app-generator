@@ -41,6 +41,7 @@ export async function generateMetadata({
       canonical: `/${locale}/versus/wheel-of-names-vs-sorteo-pro`,
       languages: {
         en: `/en/versus/wheel-of-names-vs-sorteo-pro`,
+        "x-default": `/en/versus/wheel-of-names-vs-sorteo-pro`,
         es: `/es/versus/wheel-of-names-vs-sorteo-pro`,
         pt: `/pt/versus/wheel-of-names-vs-sorteo-pro`,
       },
@@ -70,6 +71,7 @@ export default async function WheelVersusPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const baseUrl = getBaseUrl();
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "VersusWheel" });
   const tShare = await getTranslations({ locale, namespace: "ShareContent" });
@@ -84,18 +86,9 @@ export default async function WheelVersusPage({
     "@type": "Article",
     headline: t("title"),
     description: t("description"),
-    author: {
-      "@type": "Organization",
-      name: "Sorteo Pro",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Sorteo Pro",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://sorteopro.com/logo.png",
-      },
-    },
+    // Defined once in the root layout's Organization schema
+    author: { "@id": `${baseUrl}/#organization` },
+    publisher: { "@id": `${baseUrl}/#organization` },
   };
 
   const faqSchema = {

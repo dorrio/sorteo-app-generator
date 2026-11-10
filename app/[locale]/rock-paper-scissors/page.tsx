@@ -63,6 +63,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: `/${locale}/rock-paper-scissors`,
       languages: {
         en: `/en/rock-paper-scissors`,
+        "x-default": `/en/rock-paper-scissors`,
         es: `/es/rock-paper-scissors`,
         pt: `/pt/rock-paper-scissors`,
       },

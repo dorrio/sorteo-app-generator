@@ -32,6 +32,7 @@ export async function generateMetadata({
       canonical: `/${locale}/bingo-number-generator`,
       languages: {
         en: `/en/bingo-number-generator`,
+        "x-default": `/en/bingo-number-generator`,
         es: `/es/bingo-number-generator`,
         pt: `/pt/bingo-number-generator`,
       },

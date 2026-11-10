@@ -67,6 +67,7 @@ export async function generateMetadata({
       languages: {
         es: "/es",
         en: "/en",
+        "x-default": "/en",
         pt: "/pt",
       },
     },
@@ -82,7 +83,7 @@ export async function generateMetadata({
           url: "/og-image.jpg",
           width: 1200,
           height: 630,
-          alt: "Sorteo Pro Preview",
+          alt: t("og_image_alt"),
         },
       ],
     },
@@ -153,11 +154,7 @@ export default async function RootLayout({
         priceCurrency: "EUR",
       },
       description: t("description"),
-      author: {
-        "@type": "Organization",
-        name: "Sorteo Pro",
-        url: baseUrl,
-      },
+      author: { "@id": `${baseUrl}/#organization` },
       inLanguage: locale,
       screenshot: `${baseUrl}/og-image.jpg`,
       featureList: [
@@ -188,6 +185,7 @@ export default async function RootLayout({
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": `${baseUrl}/#organization`,
       name: "Sorteo Pro",
       url: baseUrl,
       logo: `${baseUrl}/favicon.ico`,
@@ -196,16 +194,10 @@ export default async function RootLayout({
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
+      "@id": `${baseUrl}/#website`,
       name: "Sorteo Pro",
       url: baseUrl,
-      potentialAction: {
-        "@type": "SearchAction",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate: `${baseUrl}/?q={search_term_string}`,
-        },
-        "query-input": "required name=search_term_string",
-      },
+      publisher: { "@id": `${baseUrl}/#organization` },
     },
   ];
 

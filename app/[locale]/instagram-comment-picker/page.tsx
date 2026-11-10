@@ -59,6 +59,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
       canonical: `/${locale}/instagram-comment-picker`,
       languages: {
         en: `/en/instagram-comment-picker`,
+        "x-default": `/en/instagram-comment-picker`,
         es: `/es/instagram-comment-picker`,
         pt: `/pt/instagram-comment-picker`,
       },

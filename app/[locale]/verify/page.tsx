@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { getBaseUrl } from "@/lib/config";
+import { getDrawDateFromVerificationId } from "@/lib/verification-id";
 import { VerifyContent } from "./verify-content";
 
 export function generateStaticParams() {
@@ -36,24 +37,7 @@ export async function generateMetadata({
   const customTitle = typeof titleParam === "string" ? titleParam : null;
 
   // Parse date from verification ID for metadata
-  let dateStr: string | null = null;
-  if (verificationId) {
-    try {
-      // Format: ID-{UUID}-{TIMESTAMP_HEX}
-      const parts = verificationId.split("-");
-      if (parts.length >= 3) {
-        // The timestamp is always the last part
-        const timestampHex = parts[parts.length - 1];
-        const timestamp = parseInt(timestampHex, 16);
-        const date = new Date(timestamp);
-        if (!isNaN(date.getTime())) {
-          dateStr = date.toISOString();
-        }
-      }
-    } catch {
-      // Ignore parsing errors for metadata
-    }
-  }
+  const dateStr = verificationId ? getDrawDateFromVerificationId(verificationId)?.toISOString() ?? null : null;
 
   let title = t("verify_title");
   if (winnerName) {

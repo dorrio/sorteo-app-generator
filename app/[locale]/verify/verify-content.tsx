@@ -46,6 +46,7 @@ import {
 import { Link } from "@/i18n/routing";
 import { useSearchParams } from "next/navigation";
 import { getBaseUrl } from "@/lib/config";
+import { getDrawDateFromVerificationId } from "@/lib/verification-id";
 
 export function VerifyContent() {
   const t = useTranslations("VerificationPage");
@@ -150,39 +151,32 @@ export function VerifyContent() {
       return;
     }
 
+    const drawDate = getDrawDateFromVerificationId(id);
+    if (!drawDate) {
+      setResult({
+        status: "invalid",
+        error: t("result.invalid_format_message"),
+      });
+      return;
+    }
+
     // Check local storage for match
     const foundWinner = pastWinners.find((w) => w.verificationId === id);
 
     if (foundWinner) {
+      // The participant's own timestamp is when they were added to the list, not when the draw happened
       setResult({
         status: "valid",
         participant: {
           name: foundWinner.name,
-          timestamp: foundWinner.timestamp,
+          timestamp: drawDate,
         },
       });
     } else {
-      // Partial Verification Logic
-      try {
-        const parts = id.split("-");
-        const timestampHex = parts[2];
-        const timestamp = parseInt(timestampHex, 16);
-        const date = new Date(timestamp);
-
-        if (isNaN(date.getTime())) {
-          throw new Error("Invalid date");
-        }
-
-        setResult({
-          status: "partial",
-          date: date,
-        });
-      } catch {
-        setResult({
-          status: "invalid",
-          error: t("result.invalid_format_message"),
-        });
-      }
+      setResult({
+        status: "partial",
+        date: drawDate,
+      });
     }
   };
 

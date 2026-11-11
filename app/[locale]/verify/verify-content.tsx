@@ -423,6 +423,7 @@ export function VerifyContent() {
             <CardContent className="space-y-4 pt-4">
               <div className="space-y-2">
                 <label
+                  htmlFor="verification-id-input"
                   className="text-sm font-medium ml-1"
                   style={{ color: theme.textColor }}
                 >
@@ -431,6 +432,7 @@ export function VerifyContent() {
                 <div className="relative">
                   <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
+                    id="verification-id-input"
                     placeholder={t("input_placeholder")}
                     className="pl-9 bg-background/50 border-input/50 focus-visible:ring-1"
                     value={inputId}

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import { useSorteoStore } from "@/lib/sorteo-store"
+import { useReducedMotion } from "framer-motion"
 
 export function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -10,7 +11,8 @@ export function ParticleBackground() {
   const showDynamicBackground = useSorteoStore((state) => state.theme.showDynamicBackground)
   const primaryColor = useSorteoStore((state) => state.theme.primaryColor)
 
-  const isEnabled = showParticles && (showDynamicBackground ?? true)
+  const prefersReducedMotion = useReducedMotion()
+  const isEnabled = showParticles && (showDynamicBackground ?? true) && !prefersReducedMotion
 
   useEffect(() => {
     if (!isEnabled) return

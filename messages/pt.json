@@ -245,7 +245,9 @@
         "download_certificate": "Baixar Certificado",
         "new_giveaway": "Novo Sorteio",
         "close": "Fechar",
-        "share_on": "Compartilhar no"
+        "share_on": "Compartilhar no",
+        "verification_id_label": "ID verificável",
+        "copy_verification_id": "Copiar ID de verificação {id}"
     },
     "HistoryPanel": {
         "title": "Histórico",

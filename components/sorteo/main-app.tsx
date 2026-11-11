@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState, Suspense, useRef } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { motion, MotionConfig } from "framer-motion"
 import { useSorteoStore, type ThemeConfig } from "@/lib/sorteo-store"
 import { useShallow } from "zustand/react/shallow"
 import { SorteoSelector } from "@/components/sorteo/sorteo-selector"
@@ -230,6 +230,17 @@ export function MainApp({
     }
   }, [isOverlayOpen])
 
+  // When the ceremony closes, return focus to the control that starts the next draw.
+  // Runs after the inert effect above, so the button is focusable again.
+  const startButtonRef = useRef<HTMLButtonElement>(null)
+  const wasCeremonyOpen = useRef(false)
+  useEffect(() => {
+    if (wasCeremonyOpen.current && !showWinnerCeremony) {
+      startButtonRef.current?.focus()
+    }
+    wasCeremonyOpen.current = showWinnerCeremony
+  }, [showWinnerCeremony])
+
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- classic post-hydration flag to gate client-only rendering paths
     setMounted(true)
@@ -297,210 +308,214 @@ export function MainApp({
   }, [theme.fontFamily])
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      <Suspense fallback={null}>
-        <ThemeParamsHandler />
-        <ListParamsHandler />
-      </Suspense>
+    // reducedMotion="user": Framer skips transform/layout animations when the OS asks for reduced motion
+    <MotionConfig reducedMotion="user">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <Suspense fallback={null}>
+          <ThemeParamsHandler />
+          <ListParamsHandler />
+        </Suspense>
 
-      {/* Background image */}
-      {theme.backgroundImage && (
-        <div className="fixed inset-0 z-0">
-          <Image
-            src={theme.backgroundImage}
-            alt=""
-            fill
-            priority
-            className="object-cover"
-            unoptimized
-            style={{
-              opacity: bgOpacity / 100,
-              filter: `blur(${bgBlur}px)`,
-            }}
-          />
-        </div>
-      )}
-
-      {/* Particle background */}
-      <ParticleBackground />
-
-      {/* Main content */}
-      <div
-        ref={contentRef}
-        className={`relative z-10${fontClassName ? ` ${fontClassName}` : ""}`}
-        style={fontStyle}
-      >
-        {/* Header */}
-        <header className="border-b border-border/50 backdrop-blur-sm bg-background/50">
-          <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-            <div>
-              <Link
-                href="/"
-                className="flex items-center gap-3"
-              >
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{
-                    background: `linear-gradient(135deg, ${theme.primaryColor}, ${theme.secondaryColor})`,
-                  }}
-                >
-                  <Trophy className="w-5 h-5 text-background" />
-                </div>
-                <div>
-                  <div className="font-bold text-xl tracking-tight">{displayTitle}</div>
-                </div>
-              </Link>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <LanguageSwitcher />
-
-              {/* Viralis: Added Share Button in Header */}
-              <ShareButton
-                title={shareContent.title}
-                text={shareContent.text}
-                url={shareContent.url}
-                translations={shareTranslations}
-              />
-
-              <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title={t("verify_sorteo")} aria-label={t("verify_sorteo")}>
-                <ShieldCheck className="w-5 h-5" />
-              </Button>
-              <Button variant="outline" size="sm" onClick={() => setIsEditorOpen(true)} disabled={isSpinning} className="gap-2" aria-label={t("customize")}>
-                <Settings2 className="w-4 h-4" />
-                <span className="hidden sm:inline">{t("customize")}</span>
-              </Button>
-            </div>
+        {/* Background image */}
+        {theme.backgroundImage && (
+          <div className="fixed inset-0 z-0">
+            <Image
+              src={theme.backgroundImage}
+              alt=""
+              fill
+              priority
+              className="object-cover"
+              unoptimized
+              style={{
+                opacity: bgOpacity / 100,
+                filter: `blur(${bgBlur}px)`,
+              }}
+            />
           </div>
-        </header>
+        )}
 
-        {/* Main grid */}
-        <main id="sorteo-section" className="max-w-7xl mx-auto px-4 py-8">
-          <div className="grid lg:grid-cols-[1fr,400px] gap-8">
-            {/* Sorteo area */}
-            <section
-              className="space-y-8"
-              aria-label={t("tool_area_label")}
-            >
-              {/* Title */}
-              <div className="text-center space-y-2">
-                <h1
-                  className="text-4xl md:text-6xl font-bold tracking-tight"
-                  style={{ color: theme.primaryColor }}
+        {/* Particle background */}
+        <ParticleBackground />
+
+        {/* Main content */}
+        <div
+          ref={contentRef}
+          className={`relative z-10${fontClassName ? ` ${fontClassName}` : ""}`}
+          style={fontStyle}
+        >
+          {/* Header */}
+          <header className="border-b border-border/50 backdrop-blur-sm bg-background/50">
+            <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+              <div>
+                <Link
+                  href="/"
+                  className="flex items-center gap-3"
                 >
-                  {displayTitle}
-                </h1>
-                <p className="text-muted-foreground text-lg">{displaySubtitle}</p>
-                <button
-                  className="inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-full text-sm font-medium transition-all hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
-                  disabled={isSpinning}
-                  style={{
-                    backgroundColor: `${theme.primaryColor}20`,
-                    color: theme.primaryColor,
-                    border: `1px solid ${theme.primaryColor}40`
-                  }}
-                  onClick={() => setIsEditorOpen(true)}
-                >
-                  <Settings2 className="w-4 h-4" />
-                  {t("customize")}
-                </button>
-              </div>
-
-              {/* Slot machine */}
-              <SorteoSelector onWinnerSelected={handleWinnerSelected} forcedStyle={initialStyle} />
-
-              {/* Start button */}
-              <div className="flex justify-center">
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Button
-                    size="lg"
-                    onClick={startSorteo}
-                    disabled={participants.length < 2 || isSpinning}
-                    className="h-16 px-12 text-xl font-bold gap-3 rounded-2xl transition-all"
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center"
                     style={{
-                      backgroundColor: theme.primaryColor,
-                      color: theme.backgroundColor,
-                      boxShadow: `0 0 40px ${theme.primaryColor}40`,
+                      background: `linear-gradient(135deg, ${theme.primaryColor}, ${theme.secondaryColor})`,
                     }}
                   >
-                    {isSpinning ? (
-                      <>
-                        <Sparkles className="w-6 h-6 animate-spin" />
-                        {t("spinning")}
-                      </>
-                    ) : (
-                      <>
-                        <Play className="w-6 h-6" />
-                        {t("start_button")}
-                      </>
-                    )}
-                  </Button>
-                </motion.div>
+                    <Trophy className="w-5 h-5 text-background" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-xl tracking-tight">{displayTitle}</div>
+                  </div>
+                </Link>
               </div>
 
-              {participants.length < 2 && participants.length > 0 && (
-                <p className="text-center text-sm text-muted-foreground">{t("min_participants_warning")}</p>
-              )}
-            </section>
+              <div className="flex items-center gap-2">
+                <LanguageSwitcher />
 
-            {/* Sidebar — locked while spinning so the draw runs on the list it started with */}
-            <motion.aside
-              inert={isSpinning}
-              aria-busy={isSpinning}
-              initial={false}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="space-y-6"
-            >
-              {/* Participants card */}
+                {/* Viralis: Added Share Button in Header */}
+                <ShareButton
+                  title={shareContent.title}
+                  text={shareContent.text}
+                  url={shareContent.url}
+                  translations={shareTranslations}
+                />
+
+                <Button variant="ghost" size="icon" onClick={() => setIsVerifyModalOpen(true)} title={t("verify_sorteo")} aria-label={t("verify_sorteo")}>
+                  <ShieldCheck className="w-5 h-5" />
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => setIsEditorOpen(true)} disabled={isSpinning} className="gap-2" aria-label={t("customize")}>
+                  <Settings2 className="w-4 h-4" />
+                  <span className="hidden sm:inline">{t("customize")}</span>
+                </Button>
+              </div>
+            </div>
+          </header>
+
+          {/* Main grid */}
+          <main id="sorteo-section" className="max-w-7xl mx-auto px-4 py-8">
+            <div className="grid lg:grid-cols-[1fr,400px] gap-8">
+              {/* Sorteo area */}
               <section
-                className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-6"
-                aria-labelledby="participants-title"
+                className="space-y-8"
+                aria-label={t("tool_area_label")}
               >
-                <h2
-                  id="participants-title"
-                  className="font-bold text-lg mb-4 flex items-center gap-2"
-                >
-                  <Sparkles className="w-5 h-5" style={{ color: theme.primaryColor }} />
-                  {t("participants_title")}
-                </h2>
+                {/* Title */}
+                <div className="text-center space-y-2">
+                  <h1
+                    className="text-4xl md:text-6xl font-bold tracking-tight"
+                    style={{ color: theme.primaryColor }}
+                  >
+                    {displayTitle}
+                  </h1>
+                  <p className="text-muted-foreground text-lg">{displaySubtitle}</p>
+                  <button
+                    className="inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-full text-sm font-medium transition-all hover:scale-105 disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    disabled={isSpinning}
+                    style={{
+                      backgroundColor: `${theme.primaryColor}20`,
+                      color: theme.primaryColor,
+                      border: `1px solid ${theme.primaryColor}40`
+                    }}
+                    onClick={() => setIsEditorOpen(true)}
+                  >
+                    <Settings2 className="w-4 h-4" />
+                    {t("customize")}
+                  </button>
+                </div>
 
-                {participantDisplay === "bubbles" ? <FloatingBubbles /> : <ParticipantManager />}
+                {/* Slot machine */}
+                <SorteoSelector onWinnerSelected={handleWinnerSelected} forcedStyle={initialStyle} />
 
-                {participantDisplay === "bubbles" && (
-                  <div className="mt-4 pt-4 border-t border-border">
-                    <ParticipantManager showOnlyInput />
-                  </div>
+                {/* Start button */}
+                <div className="flex justify-center">
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button
+                      ref={startButtonRef}
+                      size="lg"
+                      onClick={startSorteo}
+                      disabled={participants.length < 2 || isSpinning}
+                      className="h-16 px-12 text-xl font-bold gap-3 rounded-2xl transition-all"
+                      style={{
+                        backgroundColor: theme.primaryColor,
+                        color: theme.backgroundColor,
+                        boxShadow: `0 0 40px ${theme.primaryColor}40`,
+                      }}
+                    >
+                      {isSpinning ? (
+                        <>
+                          <Sparkles className="w-6 h-6 animate-spin" />
+                          {t("spinning")}
+                        </>
+                      ) : (
+                        <>
+                          <Play className="w-6 h-6" />
+                          {t("start_button")}
+                        </>
+                      )}
+                    </Button>
+                  </motion.div>
+                </div>
+
+                {participants.length < 2 && participants.length > 0 && (
+                  <p className="text-center text-sm text-muted-foreground">{t("min_participants_warning")}</p>
                 )}
               </section>
 
-              {/* History card */}
-              <div className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-6">
-                <HistoryPanel />
-              </div>
-            </motion.aside>
-          </div>
-        </main>
+              {/* Sidebar — locked while spinning so the draw runs on the list it started with */}
+              <motion.aside
+                inert={isSpinning}
+                aria-busy={isSpinning}
+                initial={false}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                className="space-y-6"
+              >
+                {/* Participants card */}
+                <section
+                  className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-6"
+                  aria-labelledby="participants-title"
+                >
+                  <h2
+                    id="participants-title"
+                    className="font-bold text-lg mb-4 flex items-center gap-2"
+                  >
+                    <Sparkles className="w-5 h-5" style={{ color: theme.primaryColor }} />
+                    {t("participants_title")}
+                  </h2>
 
-        {/* SEO Content / Footer Children */}
-        {children ? children : (
-          /* Fallback for Legacy Pages that don't pass children yet */
-          (() => {
-            const ModeComponent = (seoMode && MODE_COMPONENTS[seoMode]) || WheelMode
-            return <ModeComponent seoMode={seoMode || 'home'} />
-          })()
-        )}
+                  {participantDisplay === "bubbles" ? <FloatingBubbles /> : <ParticipantManager />}
 
-        {/* Footer */}
-        {footer}
-        <StickyShareFooter shareContent={shareContent} translations={fullStickyTranslations} seoMode={seoMode} />
+                  {participantDisplay === "bubbles" && (
+                    <div className="mt-4 pt-4 border-t border-border">
+                      <ParticipantManager showOnlyInput />
+                    </div>
+                  )}
+                </section>
+
+                {/* History card */}
+                <div className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-6">
+                  <HistoryPanel />
+                </div>
+              </motion.aside>
+            </div>
+          </main>
+
+          {/* SEO Content / Footer Children */}
+          {children ? children : (
+            /* Fallback for Legacy Pages that don't pass children yet */
+            (() => {
+              const ModeComponent = (seoMode && MODE_COMPONENTS[seoMode]) || WheelMode
+              return <ModeComponent seoMode={seoMode || 'home'} />
+            })()
+          )}
+
+          {/* Footer */}
+          {footer}
+          <StickyShareFooter shareContent={shareContent} translations={fullStickyTranslations} seoMode={seoMode} />
+        </div >
+
+        {/* Overlays */}
+        <CountdownAnimation onComplete={handleCountdownComplete} />
+        <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} seoMode={seoMode} />
+        <VisualEditor />
+        <VerificationModal isOpen={isVerifyModalOpen} onClose={() => setIsVerifyModalOpen(false)} />
       </div >
-
-      {/* Overlays */}
-      <CountdownAnimation onComplete={handleCountdownComplete} />
-      <WinnerCeremony onClose={handleCloseCeremony} onNewSorteo={handleNewSorteo} seoMode={seoMode} />
-      <VisualEditor />
-      <VerificationModal isOpen={isVerifyModalOpen} onClose={() => setIsVerifyModalOpen(false)} />
-    </div >
+    </MotionConfig>
   )
 }

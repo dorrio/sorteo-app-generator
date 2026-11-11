@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 
 interface ConfettiPiece {
   id: number
@@ -26,6 +26,7 @@ export function ConfettiEffect({
   count = 150,
 }: ConfettiEffectProps) {
   const [confetti, setConfetti] = useState<ConfettiPiece[]>([])
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- generating a fresh random pieces batch each time isActive flips on is the point of this effect
@@ -44,6 +45,9 @@ export function ConfettiEffect({
         : [],
     )
   }, [isActive, colors, count])
+
+  // 150 falling, spinning pieces are purely decorative
+  if (prefersReducedMotion) return null
 
   return (
     <AnimatePresence>

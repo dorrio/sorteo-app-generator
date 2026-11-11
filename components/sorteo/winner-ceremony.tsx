@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { useSorteoStore } from "@/lib/sorteo-store"
@@ -115,6 +115,24 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   const { url: shareUrl, text: shareText, twitterUrl, facebookUrl, whatsappUrl, telegramUrl, linkedinUrl } = shareData
 
   // Early return MUST happen after all hooks
+  const dialogRef = useRef<HTMLDivElement>(null)
+
+  // Move focus into the dialog so screen readers announce it (label + winner via aria-describedby).
+  // The rest of the page is `inert` while it is open, which keeps focus inside.
+  useEffect(() => {
+    if (!showWinnerCeremony || !winner) return
+    const rafId = requestAnimationFrame(() => dialogRef.current?.focus())
+    return () => cancelAnimationFrame(rafId)
+  }, [showWinnerCeremony, winner])
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    // Escape inside a portaled share menu belongs to that menu, which is not a DOM descendant
+    if (event.key === "Escape" && dialogRef.current?.contains(event.target as Node)) {
+      event.preventDefault()
+      onClose()
+    }
+  }
+
   if (!showWinnerCeremony || !winner) return null
 
   const shareNative = async () => {
@@ -225,10 +243,13 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-50 flex items-center justify-center"
+        className="fixed inset-0 z-50 flex items-center justify-center outline-none"
         initial={false}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        ref={dialogRef}
+        tabIndex={-1}
+        onKeyDown={handleKeyDown}
         role="dialog"
         aria-modal="true"
         aria-labelledby="ceremony-title"
@@ -300,11 +321,12 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
               transition={{ delay: 0.7 }}
               className="mb-8 flex flex-col items-center gap-2"
             >
-              <span className="text-xs uppercase tracking-widest text-muted-foreground">ID Verificable</span>
+              <span id="ceremony-verification-label" className="text-xs uppercase tracking-widest text-muted-foreground">{t("verification_id_label")}</span>
               <button
                 type="button"
-                className="flex items-center gap-2 px-3 py-1 rounded-md bg-muted/50 cursor-pointer hover:bg-muted transition-colors border-none outline-none"
+                className="flex items-center gap-2 px-3 py-1 rounded-md bg-muted/50 cursor-pointer hover:bg-muted transition-colors border-none outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 onClick={() => handleCopy(winner.verificationId!)}
+                aria-label={t("copy_verification_id", { id: winner.verificationId! })}
               >
                 <code className="text-sm font-mono text-primary">{winner.verificationId}</code>
                 {copied ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3 text-muted-foreground" />}

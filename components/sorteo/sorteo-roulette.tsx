@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useCallback, useRef } from "react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useSorteoStore, selectSecureWinner } from "@/lib/sorteo-store"
 import { useShallow } from "zustand/react/shallow"
@@ -26,6 +26,7 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
   const rotationRef = useRef(0)
   const wheelRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<number | null>(null)
+  const prefersReducedMotion = useReducedMotion()
 
   const selectWinner = useCallback(() => {
     const winner = selectSecureWinner(participants)
@@ -52,8 +53,12 @@ export function SorteoRoulette({ onWinnerSelected }: SorteoRouletteProps) {
     // So to align winner to top, we rotate wheel by: -(winner_visual_angle)
 
     const winnerVisualAngle = result.index * segmentAngle + segmentAngle / 2
+    // The rotation is driven by rAF, outside MotionConfig: with reduced motion, turn forward less than
+    // one revolution straight to the winner instead of five extra spins
     const fullSpins = 360 * 5
-    const targetRotation = fullSpins - winnerVisualAngle
+    const targetRotation = prefersReducedMotion
+      ? startRotation + ((((360 - winnerVisualAngle - startRotation) % 360) + 360) % 360)
+      : fullSpins - winnerVisualAngle
 
     const animate = () => {
       const elapsed = Date.now() - startTime

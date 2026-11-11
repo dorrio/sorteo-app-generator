@@ -75,6 +75,7 @@ function DuplicateItem({
             }}
             className={`bg-background border-border flex-1 ${isApplied ? "border-green-500/50" : ""}`}
             placeholder={t("duplicates.edit_placeholder")}
+            aria-label={t("duplicates.edit_placeholder")}
           />
           <Tooltip>
             <TooltipTrigger asChild>
@@ -195,6 +196,7 @@ const ParticipantItem = memo(function ParticipantItem({
             onChange={(e) => setLocalName(e.target.value)}
             onKeyDown={handleKeyDown}
             autoFocus
+            aria-label={t("duplicates.edit_placeholder")}
             className="flex-1 h-8 bg-background"
           />
           <Button
@@ -618,6 +620,7 @@ export function ParticipantManager({ showOnlyInput = false }: ParticipantManager
               >
                 <Textarea
                   placeholder={t("bulk_placeholder")}
+                  aria-label={t("bulk_placeholder")}
                   value={bulkText}
                   onChange={(e) => setBulkText(e.target.value)}
                   className="min-h-[80px] bg-card border-border font-mono text-xs"

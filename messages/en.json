@@ -245,7 +245,9 @@
         "download_certificate": "Download Certificate",
         "new_giveaway": "New Giveaway",
         "close": "Close",
-        "share_on": "Share on"
+        "share_on": "Share on",
+        "verification_id_label": "Verifiable ID",
+        "copy_verification_id": "Copy verification ID {id}"
     },
     "HistoryPanel": {
         "title": "History",

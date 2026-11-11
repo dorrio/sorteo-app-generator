@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Search, ShieldCheck, ShieldAlert, Calendar, User, Check } from "lucide-react"
 import { useSorteoStore } from "@/lib/sorteo-store"
 import { useShallow } from "zustand/react/shallow"
+import { getDrawDateFromVerificationId } from "@/lib/verification-id"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
@@ -44,38 +45,33 @@ export function VerificationModal({ isOpen, onClose }: VerificationModalProps) {
             return
         }
 
+        const normalizedId = inputId.trim().toUpperCase()
+        const drawDate = getDrawDateFromVerificationId(normalizedId)
+        if (!drawDate) {
+            setResult({
+                valid: false,
+                error: t("result.invalid_format_message"),
+            })
+            return
+        }
+
         // Check local storage for match
-        const foundWinner = pastWinners.find((w) => w.verificationId === inputId.trim().toUpperCase())
+        const foundWinner = pastWinners.find((w) => w.verificationId === normalizedId)
 
         if (foundWinner) {
+            // The participant's own timestamp is when they were added to the list, not when the draw happened
             setResult({
                 valid: true,
                 participant: {
                     name: foundWinner.name,
-                    timestamp: foundWinner.timestamp,
+                    timestamp: drawDate,
                 },
             })
         } else {
-            try {
-                const parts = inputId.trim().split('-')
-                const timestampHex = parts[2]
-                const timestamp = parseInt(timestampHex, 16)
-                const date = new Date(timestamp)
-
-                if (isNaN(date.getTime())) {
-                    throw new Error("Invalid date")
-                }
-
-                setResult({
-                    valid: false,
-                    error: t("result.not_found_message"),
-                })
-            } catch {
-                setResult({
-                    valid: false,
-                    error: t("result.invalid_format_message"),
-                })
-            }
+            setResult({
+                valid: false,
+                error: t("result.not_found_message"),
+            })
         }
     }
 

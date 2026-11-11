@@ -25,31 +25,12 @@ import {
   Linkedin
 }from "lucide-react"
 import { type SeoMode } from "@/components/sorteo/glossary"
+import { getDrawDateFromVerificationId } from "@/lib/verification-id"
 
 interface WinnerCeremonyProps {
   onClose: () => void
   onNewSorteo: () => void
   seoMode?: SeoMode
-}
-
-/**
- * Extracts the date from a verification ID string (format: ID-UUID-TIMESTAMP_HEX)
- * Returns current Date as fallback if parsing fails.
- */
-function extractDateFromVerificationId(verificationId: string | undefined): Date {
-  if (!verificationId) return new Date()
-  try {
-    const parts = verificationId.split("-")
-    if (parts.length >= 3) {
-      const timestampHex = parts[parts.length - 1]
-      const timestamp = parseInt(timestampHex, 16)
-      const d = new Date(timestamp)
-      if (!isNaN(d.getTime())) return d
-    }
-  } catch {
-    // Intentionally ignoring parsing errors to use current date as fallback
-  }
-  return new Date()
 }
 
 export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremonyProps) {
@@ -146,7 +127,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
         const ogParams = new URLSearchParams()
         ogParams.set("name", winner.name)
 
-        const dateToUse = extractDateFromVerificationId(winner.verificationId)
+        const dateToUse = (winner.verificationId && getDrawDateFromVerificationId(winner.verificationId)) || new Date()
         ogParams.set("date", dateToUse.toISOString())
         if (seoMode && seoMode !== 'home') ogParams.set("type", seoMode)
         if (theme.customTitle) ogParams.set("title", theme.customTitle)
@@ -213,7 +194,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
     const ogParams = new URLSearchParams()
     ogParams.set("name", winner.name)
 
-    const dateToUse = extractDateFromVerificationId(winner.verificationId)
+    const dateToUse = (winner.verificationId && getDrawDateFromVerificationId(winner.verificationId)) || new Date()
     ogParams.set("date", dateToUse.toISOString())
 
     if (seoMode && seoMode !== 'home') ogParams.set("type", seoMode)

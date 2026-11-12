@@ -37,6 +37,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   const displayDescription = t("description");
 
   const ogImageUrl = new URL(`${baseUrl}/api/og`);
+  ogImageUrl.searchParams.set("locale", locale);
   // If customList is present, switch to 'list' type to render the list content theme
   ogImageUrl.searchParams.set("type", customList ? "list" : "rng");
   if (customTitle) ogImageUrl.searchParams.set("title", customTitle);

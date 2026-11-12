@@ -37,6 +37,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   const displayDescription = t("description");
 
   const ogImageUrl = new URL(`${baseUrl}/api/og`);
+  ogImageUrl.searchParams.set("locale", locale);
   // Using yes-no for now as it maps closely to 50/50 mechanics
   ogImageUrl.searchParams.set("type", "yes-no");
   if (customTitle) ogImageUrl.searchParams.set("title", customTitle);

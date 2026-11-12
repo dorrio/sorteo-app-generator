@@ -41,6 +41,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   const displayDescription = t("description");
 
   const ogImageUrl = new URL(`${baseUrl}/api/og`);
+  ogImageUrl.searchParams.set("locale", locale);
   // Default type for home is undefined, which defaults to generic in api/og
   if (customTitle) ogImageUrl.searchParams.set("title", customTitle);
   if (customColor) ogImageUrl.searchParams.set("color", customColor);

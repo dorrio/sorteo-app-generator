@@ -223,6 +223,7 @@ export function VerifyContent() {
         // Reuse OG params logic (simplified for shared context)
         const ogParams = new URLSearchParams();
         ogParams.set("name", winnerName);
+        ogParams.set("locale", locale);
 
         let dateToUse = new Date();
         if (result?.participant?.timestamp) {
@@ -286,6 +287,7 @@ export function VerifyContent() {
     // Construct OG Image URL
     const ogParams = new URLSearchParams();
     ogParams.set("name", winnerName);
+    ogParams.set("locale", locale);
 
     // Logic to extract date from result
     let dateToUse = new Date();

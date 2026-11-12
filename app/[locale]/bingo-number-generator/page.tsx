@@ -46,7 +46,7 @@ export async function generateMetadata({
       locale: locale,
       images: [
         {
-          url: `${baseUrl}/api/og?type=bingo`,
+          url: `${baseUrl}/api/og?type=bingo&locale=${locale}`,
           width: 1200,
           height: 630,
           alt: t("title"),
@@ -57,7 +57,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: t("title"),
       description: t("description"),
-      images: [`${baseUrl}/api/og?type=bingo`],
+      images: [`${baseUrl}/api/og?type=bingo&locale=${locale}`],
     },
   };
 }

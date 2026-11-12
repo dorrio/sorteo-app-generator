@@ -38,6 +38,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
   const displayDescription = t("description");
 
   const ogImageUrl = new URL(`${baseUrl}/api/og`);
+  ogImageUrl.searchParams.set("locale", locale);
   // For now, fallback to generic as 'card' might not be in og API yet, or use generic
   // But let's set type=card if supported or fallback to generic text
   ogImageUrl.searchParams.set("type", "generic");

@@ -55,7 +55,7 @@ export async function generateMetadata({
       locale: locale === "es" ? "es_ES" : locale === "pt" ? "pt_PT" : "en_US",
       images: [
         {
-          url: `${baseUrl}/api/og?type=wheel`, // Reuse Wheel OG
+          url: `${baseUrl}/api/og?type=wheel&locale=${locale}`, // Reuse Wheel OG
           width: 1200,
           height: 630,
           alt: t("title"),

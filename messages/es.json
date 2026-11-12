@@ -1177,5 +1177,52 @@
         "faq_1_a": "Nuestra lista predeterminada está diseñada para ser divertida y mayormente limpia, adecuada para el público general.",
         "faq_2_q": "¿Puedo añadir mis propias preguntas?",
         "faq_2_a": "¡Sí! Puedes personalizar la lista usando el editor visual para añadir tus propias bromas internas."
+    },
+    "OgImage": {
+        "default_subtitle": "La herramienta definitiva para sorteos",
+        "verified_badge": "Resultado oficial verificado",
+        "winner_subtitle": "ha ganado el sorteo aleatorio",
+        "cta": "Crea tu propio sorteo en SorteoPro.com",
+        "verified_stamp": "Verificado",
+        "participants": "Participantes",
+        "more_participants": "... y {count} más",
+        "tools": {
+            "wheel": {
+                "title": "Ruleta de Nombres",
+                "subtitle": "Gira la ruleta • Elige un ganador"
+            },
+            "instagram": {
+                "title": "Sorteo de Comentarios de Instagram",
+                "subtitle": "Gratis e ilimitado • Sin iniciar sesión"
+            },
+            "rng": {
+                "title": "Generador de Números Aleatorios",
+                "subtitle": "Seguro • Justo • Instantáneo"
+            },
+            "list": {
+                "title": "Aleatorizar Lista",
+                "subtitle": "Mezcla listas • Generador de equipos"
+            },
+            "yes_no": {
+                "title": "Ruleta Sí o No",
+                "subtitle": "Gira para responder • 50/50"
+            },
+            "letter": {
+                "title": "Generador de Letras Aleatorias",
+                "subtitle": "Letra al azar de la A a la Z"
+            },
+            "dice": {
+                "title": "Lanzar Dados Online",
+                "subtitle": "Dados virtuales • Resultados al azar"
+            },
+            "rps": {
+                "title": "Piedra, Papel o Tijera",
+                "subtitle": "Juega online • Justo y aleatorio"
+            },
+            "month": {
+                "title": "Generador de Mes Aleatorio",
+                "subtitle": "Elige un mes • Fecha al azar"
+            }
+        }
     }
 }

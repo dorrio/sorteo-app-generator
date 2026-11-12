@@ -1177,5 +1177,52 @@
         "faq_1_a": "Our default list is designed to be fun and mostly clean, suitable for general audiences.",
         "faq_2_q": "Can I add my own questions?",
         "faq_2_a": "Yes! You can customize the list using the visual editor to add your own personal inside jokes."
+    },
+    "OgImage": {
+        "default_subtitle": "The Ultimate Giveaway Tool",
+        "verified_badge": "Official Verified Result",
+        "winner_subtitle": "has been randomly selected as the winner",
+        "cta": "Create Your Own Giveaway at SorteoPro.com",
+        "verified_stamp": "Verified",
+        "participants": "Participants",
+        "more_participants": "... and {count} more",
+        "tools": {
+            "wheel": {
+                "title": "Wheel of Names",
+                "subtitle": "Spin the Wheel • Pick a Winner"
+            },
+            "instagram": {
+                "title": "Instagram Comment Picker",
+                "subtitle": "Free & Unlimited • No Login"
+            },
+            "rng": {
+                "title": "Random Number Generator",
+                "subtitle": "Secure • Fair • Instant"
+            },
+            "list": {
+                "title": "List Randomizer",
+                "subtitle": "Shuffle Lists • Team Generator"
+            },
+            "yes_no": {
+                "title": "Yes or No Wheel",
+                "subtitle": "Spin for Answer • 50/50 Chance"
+            },
+            "letter": {
+                "title": "Random Letter Generator",
+                "subtitle": "A-Z Random Picker • Alphabet Wheel"
+            },
+            "dice": {
+                "title": "Dice Roller",
+                "subtitle": "Roll Virtual Dice • Random Results"
+            },
+            "rps": {
+                "title": "Rock Paper Scissors",
+                "subtitle": "Play Online • Fair & Random"
+            },
+            "month": {
+                "title": "Random Month Generator",
+                "subtitle": "Pick a Month • Random Date"
+            }
+        }
     }
 }

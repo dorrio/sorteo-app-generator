@@ -1,4 +1,6 @@
 import { ImageResponse } from 'next/og';
+import { createTranslator } from 'next-intl';
+import { routing } from '@/i18n/routing';
 
 export const runtime = 'edge';
 
@@ -14,6 +16,10 @@ export async function GET(request: Request) {
     const customTitle = searchParams.get('title')?.slice(0, 60);
     const rawColor = searchParams.get('color');
     const customColor = rawColor && /^#[0-9A-Fa-f]{6}$/.test(rawColor) ? rawColor : null;
+    const rawLocale = searchParams.get('locale');
+    const locale = rawLocale && (routing.locales as readonly string[]).includes(rawLocale) ? rawLocale : routing.defaultLocale;
+    const messages = (await import(`../../../messages/${locale}.json`)).default;
+    const t = createTranslator({ locale, messages, namespace: 'OgImage' });
 
     // --- THEME CONFIGURATION ---
     // Default: Golden Ticket (Generic)
@@ -30,7 +36,7 @@ export async function GET(request: Request) {
 
     const defaultTheme: Theme = {
         title: "Sorteo Pro",
-        subtitle: "The Ultimate Giveaway Tool",
+        subtitle: t('default_subtitle'),
         bgGradient: "radial-gradient(circle at 50% 0%, #423506 0%, #09090b 70%)",
         accentColor: "#FFD700",
         textColor: "white",
@@ -45,8 +51,8 @@ export async function GET(request: Request) {
 
     const THEMES: Record<string, Partial<Theme>> = {
         'wheel': {
-            title: "Wheel of Names",
-            subtitle: "Spin the Wheel • Pick a Winner",
+            title: t('tools.wheel.title'),
+            subtitle: t('tools.wheel.subtitle'),
             bgGradient: "radial-gradient(circle at center, #2e1065 0%, #000000 100%)",
             accentColor: "#a855f7",
             subTextColor: "#d8b4fe",
@@ -66,8 +72,8 @@ export async function GET(request: Request) {
             )
         },
         'instagram': {
-            title: "Instagram Comment Picker",
-            subtitle: "Free & Unlimited • No Login",
+            title: t('tools.instagram.title'),
+            subtitle: t('tools.instagram.subtitle'),
             bgGradient: "linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D)",
             accentColor: "#FFFFFF",
             subTextColor: "rgba(255,255,255,0.9)",
@@ -87,8 +93,8 @@ export async function GET(request: Request) {
             )
         },
         'rng': {
-            title: "Random Number Generator",
-            subtitle: "Secure • Fair • Instant",
+            title: t('tools.rng.title'),
+            subtitle: t('tools.rng.subtitle'),
             bgGradient: "radial-gradient(circle at center, #064e3b 0%, #022c22 100%)",
             accentColor: "#34d399",
             subTextColor: "#6ee7b7",
@@ -104,8 +110,8 @@ export async function GET(request: Request) {
             )
         },
         'list': {
-            title: "List Randomizer",
-            subtitle: "Shuffle Lists • Team Generator",
+            title: t('tools.list.title'),
+            subtitle: t('tools.list.subtitle'),
             bgGradient: "radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%)",
             accentColor: "#60a5fa",
             subTextColor: "#93c5fd",
@@ -127,8 +133,8 @@ export async function GET(request: Request) {
             )
         },
         'yes-no': {
-            title: "Yes or No Wheel",
-            subtitle: "Spin for Answer • 50/50 Chance",
+            title: t('tools.yes_no.title'),
+            subtitle: t('tools.yes_no.subtitle'),
             bgGradient: "radial-gradient(circle at center, #172554 0%, #020617 100%)",
             accentColor: "#60a5fa",
             subTextColor: "#93c5fd",
@@ -147,8 +153,8 @@ export async function GET(request: Request) {
             )
         },
         'letter': {
-            title: "Random Letter Generator",
-            subtitle: "A-Z Random Picker • Alphabet Wheel",
+            title: t('tools.letter.title'),
+            subtitle: t('tools.letter.subtitle'),
             bgGradient: "radial-gradient(circle at center, #be123c 0%, #4c0519 100%)",
             accentColor: "#fb7185",
             subTextColor: "#fda4af",
@@ -164,8 +170,8 @@ export async function GET(request: Request) {
             )
         },
         'dice': {
-            title: searchParams.get('title') || "Dice Roller",
-            subtitle: "Roll Virtual Dice • Random Results",
+            title: customTitle || t('tools.dice.title'),
+            subtitle: t('tools.dice.subtitle'),
             bgGradient: "radial-gradient(circle at center, #9f1239 0%, #4c0519 100%)",
             accentColor: "#f43f5e",
             subTextColor: "#fb7185",
@@ -191,8 +197,8 @@ export async function GET(request: Request) {
             )
         },
         'rps': {
-            title: searchParams.get('title') || "Rock Paper Scissors",
-            subtitle: "Play Online • Fair & Random",
+            title: customTitle || t('tools.rps.title'),
+            subtitle: t('tools.rps.subtitle'),
             bgGradient: "radial-gradient(circle at center, #5b21b6 0%, #2e1065 100%)",
             accentColor: "#8b5cf6",
             subTextColor: "#a78bfa",
@@ -214,8 +220,8 @@ export async function GET(request: Request) {
             )
         },
         'month': {
-            title: searchParams.get('title') || "Random Month Generator",
-            subtitle: "Pick a Month • Random Date",
+            title: customTitle || t('tools.month.title'),
+            subtitle: t('tools.month.subtitle'),
             bgGradient: "radial-gradient(circle at center, #9d174d 0%, #4a044e 100%)",
             accentColor: "#d946ef",
             subTextColor: "#e879f9",
@@ -267,13 +273,9 @@ export async function GET(request: Request) {
     // MODE 1: VERIFICATION (Name is present)
     if (name) {
         const winnerName = name;
-        let dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        if (dateParam) {
-            const d = new Date(dateParam);
-            if (!isNaN(d.getTime())) {
-                dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-            }
-        }
+        const parsedDate = dateParam ? new Date(dateParam) : null;
+        const drawDate = parsedDate && !isNaN(parsedDate.getTime()) ? parsedDate : new Date();
+        const dateStr = drawDate.toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' });
 
         return new ImageResponse(
             (
@@ -323,7 +325,7 @@ export async function GET(request: Request) {
                                 fontWeight: 700,
                                 letterSpacing: '2px',
                                 textTransform: 'uppercase',
-                            }}>Official Verified Result</span>
+                            }}>{t('verified_badge')}</span>
                         </div>
 
                         {/* Viral Context: Custom Giveaway Title */}
@@ -374,7 +376,7 @@ export async function GET(request: Request) {
                             marginBottom: '40px',
                             textAlign: 'center',
                         }}>
-                            has been randomly selected as the winner
+                            {t('winner_subtitle')}
                         </div>
 
                         {/* Footer Bar */}
@@ -398,7 +400,7 @@ export async function GET(request: Request) {
                                  marginBottom: '15px',
                                  letterSpacing: '0.5px',
                              }}>
-                                Create Your Own Giveaway at SorteoPro.com
+                                {t('cta')}
                              </div>
 
                              <div style={{
@@ -441,7 +443,7 @@ export async function GET(request: Request) {
                         opacity: 0.8,
                         letterSpacing: '2px',
                     }}>
-                        VERIFIED
+                        {t('verified_stamp')}
                     </div>
 
                 </div>
@@ -476,8 +478,8 @@ export async function GET(request: Request) {
             // Force list theme/type for rendering if we have participants
             // This ensures consistent styling even if the type param was different
             theme = {
-                title: "List Randomizer",
-                subtitle: "Shuffle Lists • Team Generator",
+                title: t('tools.list.title'),
+                subtitle: t('tools.list.subtitle'),
                 bgGradient: "radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%)", // Blue/Dark
                 accentColor: "#60a5fa", // Blue 400
                 textColor: "white",
@@ -576,7 +578,7 @@ export async function GET(request: Request) {
                                     borderBottom: `1px solid ${theme.accentColor}40`,
                                     paddingBottom: 10,
                                 }}>
-                                    <span>Participants</span>
+                                    <span>{t('participants')}</span>
                                     <span style={{ backgroundColor: theme.accentColor, color: 'black', padding: '2px 8px', borderRadius: 4, fontSize: 14 }}>{participants.length}</span>
                                 </div>
 
@@ -602,7 +604,7 @@ export async function GET(request: Request) {
                                         fontStyle: 'italic',
                                         fontWeight: 500,
                                     }}>
-                                        ... and {remaining} more
+                                        {t('more_participants', { count: remaining })}
                                     </div>
                                 )}
                             </div>
@@ -630,6 +632,7 @@ export async function GET(request: Request) {
     }
 
     // MODE 2: TOOL PROMO (No Name)
+    const promoTitle = customTitle || theme.title;
     return new ImageResponse(
       (
         <div
@@ -657,7 +660,8 @@ export async function GET(request: Request) {
 
                 {/* Title */}
                 <h1 style={{
-                    fontSize: 80,
+                    // Spanish and Portuguese tool names run longer than English; keep them on one line
+                    fontSize: promoTitle.length > 32 ? 56 : promoTitle.length > 24 ? 64 : 80,
                     fontWeight: 900,
                     margin: 0,
                     marginBottom: 20,
@@ -668,7 +672,7 @@ export async function GET(request: Request) {
                     backgroundClip: 'text',
                     color: 'transparent',
                 }}>
-                    {customTitle || theme.title}
+                    {promoTitle}
                 </h1>
 
                 {/* Subtitle */}

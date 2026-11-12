@@ -54,7 +54,7 @@ export async function generateMetadata({
       locale: locale === "es" ? "es_ES" : locale === "pt" ? "pt_PT" : "en_US",
       images: [
         {
-          url: `${baseUrl}/api/og?type=rng`, // Use RNG OG
+          url: `${baseUrl}/api/og?type=rng&locale=${locale}`, // Use RNG OG
           width: 1200,
           height: 630,
           alt: t("title"),

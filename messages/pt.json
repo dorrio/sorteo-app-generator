@@ -1177,5 +1177,52 @@
         "faq_1_a": "Nossa lista padrão foi criada para ser divertida e na maior parte limpa, adequada para o público em geral.",
         "faq_2_q": "Posso adicionar minhas próprias perguntas?",
         "faq_2_a": "Sim! Você pode personalizar a lista usando o editor visual para adicionar suas próprias piadas internas."
+    },
+    "OgImage": {
+        "default_subtitle": "A ferramenta definitiva para sorteios",
+        "verified_badge": "Resultado oficial verificado",
+        "winner_subtitle": "ganhou o sorteio aleatório",
+        "cta": "Crie seu próprio sorteio em SorteoPro.com",
+        "verified_stamp": "Verificado",
+        "participants": "Participantes",
+        "more_participants": "... e mais {count}",
+        "tools": {
+            "wheel": {
+                "title": "Roleta de Nomes",
+                "subtitle": "Gire a roleta • Escolha um vencedor"
+            },
+            "instagram": {
+                "title": "Sorteio de Comentários do Instagram",
+                "subtitle": "Grátis e ilimitado • Sem login"
+            },
+            "rng": {
+                "title": "Gerador de Números Aleatórios",
+                "subtitle": "Seguro • Justo • Instantâneo"
+            },
+            "list": {
+                "title": "Aleatorizar Lista",
+                "subtitle": "Embaralhe listas • Gerador de equipes"
+            },
+            "yes_no": {
+                "title": "Roleta Sim ou Não",
+                "subtitle": "Gire para responder • 50/50"
+            },
+            "letter": {
+                "title": "Gerador de Letras Aleatórias",
+                "subtitle": "Letra aleatória de A a Z"
+            },
+            "dice": {
+                "title": "Rolar Dados Online",
+                "subtitle": "Dados virtuais • Resultados aleatórios"
+            },
+            "rps": {
+                "title": "Pedra, Papel e Tesoura",
+                "subtitle": "Jogue online • Justo e aleatório"
+            },
+            "month": {
+                "title": "Gerador de Mês Aleatório",
+                "subtitle": "Escolha um mês • Data aleatória"
+            }
+        }
     }
 }

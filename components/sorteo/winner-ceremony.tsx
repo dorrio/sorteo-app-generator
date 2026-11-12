@@ -126,6 +126,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
       try {
         const ogParams = new URLSearchParams()
         ogParams.set("name", winner.name)
+        ogParams.set("locale", locale)
 
         const dateToUse = (winner.verificationId && getDrawDateFromVerificationId(winner.verificationId)) || new Date()
         ogParams.set("date", dateToUse.toISOString())
@@ -193,6 +194,7 @@ export function WinnerCeremony({ onClose, onNewSorteo, seoMode }: WinnerCeremony
 
     const ogParams = new URLSearchParams()
     ogParams.set("name", winner.name)
+    ogParams.set("locale", locale)
 
     const dateToUse = (winner.verificationId && getDrawDateFromVerificationId(winner.verificationId)) || new Date()
     ogParams.set("date", dateToUse.toISOString())

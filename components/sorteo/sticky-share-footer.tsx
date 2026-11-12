@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useLocale } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { ShareButton } from "@/components/ui/share-button"
 import { Play, Share2, Loader2 } from "lucide-react"
@@ -27,6 +28,7 @@ interface StickyShareFooterProps {
 }
 
 export function StickyShareFooter({ shareContent, translations, seoMode }: StickyShareFooterProps) {
+  const locale = useLocale()
   const [isVisible, setIsVisible] = useState(false)
   const [isSharing, setIsSharing] = useState(false)
 
@@ -47,6 +49,7 @@ export function StickyShareFooter({ shareContent, translations, seoMode }: Stick
 
         // Construct the dynamic OG URL based on current context
         const ogUrl = new URL(window.location.origin + '/api/og')
+        ogUrl.searchParams.set('locale', locale)
         if (seoMode) ogUrl.searchParams.set('type', seoMode)
         if (customTitle) ogUrl.searchParams.set('title', customTitle)
         if (customColor) ogUrl.searchParams.set('color', customColor)

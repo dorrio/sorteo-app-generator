@@ -58,7 +58,7 @@ export async function generateMetadata({
   // Generate dynamic OG image URL
   // We append a timestamp to prevent caching if the name changes for some reason,
   // but primarily we need 'name' and 'date'
-  const ogParams = new URLSearchParams();
+  const ogParams = new URLSearchParams({ locale });
   if (winnerName) ogParams.set("name", winnerName);
   if (dateStr) ogParams.set("date", dateStr);
   if (typeof type === "string" && type) ogParams.set("type", type);
